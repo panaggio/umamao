@@ -2,7 +2,7 @@
 
 %span.fn.nickname
   -unless user.nil?
-    =link_to h(user.login), user_path(user), :class => "user-link"
+    =link_to h(user.name), user_path(user), :class => "user-link"
     -if user.owner_of?(current_group)
       %span.ownerflair{:title => "admin"}
         &#x2747;

@@ -17,6 +17,6 @@
 
   -@close_requests.each do |request|
     %tr
-      %td= link_to h(request.user.login), user_path(request.user)
+      %td= link_to h(request.user.name), user_path(request.user)
       %td= t(request.reason, :scope=>"close_requests.form")
       %td= h(request.comment)

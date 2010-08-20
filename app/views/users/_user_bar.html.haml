@@ -1,7 +1,7 @@
 - if logged_in?
   #user-bar-greeting
     Logged in as
-    = link_to_current_user :content_method => :login
+    = link_to_current_user :content_method => :name
   #user-bar-action
     (
     = link_to "Log out", destroy_user_session_path, { :title => "Log out" }

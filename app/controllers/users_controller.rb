@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     @user = User.find_by_login_or_id(params[:id])
     raise Goalie::NotFound unless @user
 
-    set_page_title(t("users.show.title", :user => @user.login))
+    set_page_title(t("users.show.title", :user => @user.name))
 
     @q_sort, order = active_subtab(:q_sort)
     @questions = @user.questions.paginate(:page=>params[:questions_page],
@@ -164,7 +164,7 @@ class UsersController < ApplicationController
     @user = User.find_by_login_or_id(params[:id])
     current_user.add_friend(@user)
 
-    flash[:notice] = t("flash_notice", :scope => "users.follow", :user => @user.login)
+    flash[:notice] = t("flash_notice", :scope => "users.follow", :user => @user.name)
 
     if @user.notification_opts.activities
       Notifier.deliver_follow(current_user, @user)
@@ -187,7 +187,7 @@ class UsersController < ApplicationController
     @user = User.find_by_login_or_id(params[:id])
     current_user.remove_friend(@user)
 
-    flash[:notice] = t("flash_notice", :scope => "users.unfollow", :user => @user.login)
+    flash[:notice] = t("flash_notice", :scope => "users.unfollow", :user => @user.name)
 
     Magent.push("actors.judge", :on_unfollow, current_user.id, @user.id, current_group.id)
 
