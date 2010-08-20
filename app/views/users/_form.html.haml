@@ -44,10 +44,6 @@
 -else
   = f.hidden_field :language, :value => (current_group.language || AppConfig.default_language)
 
-.group
-  = f.label :hide_country, t(:hide_country, :scope => "activerecord.attributes.user"), :class => "label"
-  = f.check_box :hide_country, :class => "checkbox"
-
 -if AppConfig.enable_i18n
   .group
     = f.label :preferred_languages, t(:preferred_languages, :scope => "activerecord.attributes.user"), :class => "label"
