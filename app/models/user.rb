@@ -3,7 +3,7 @@ require 'digest/sha1'
 class User
   include MongoMapper::Document
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-         :lockable, :token_authenticatable
+         :lockable, :token_authenticatable, :validatable
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
@@ -72,16 +72,6 @@ class User
   validates_inclusion_of :role,  :within => ROLES
 
   validates_length_of       :name,     :maximum => 100
-
-  validates_presence_of     :email
-  validates_uniqueness_of   :email
-  validates_length_of       :email, :within => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
-
-  with_options :if => :password_required? do |v|
-    v.validates_presence_of     :password
-    v.validates_confirmation_of :password
-    v.validates_length_of       :password, :within => 6..20, :allow_blank => true
-  end
 
   before_save :update_languages
   before_create :logged!
