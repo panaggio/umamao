@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module WillPaginate
   # = Will Paginate view helpers
   #
@@ -232,7 +233,7 @@ module WillPaginate
       links.push    page_link_or_span(@collection.next_page,     'disabled next_page', @options[:next_label])
 
       html = links.join(@options[:separator])
-      @options[:container] ? @template.content_tag(:div, html, html_attributes) : html
+      @options[:container] ? @template.content_tag(:div, html, html_attributes, false) : html
     end
 
     # Returns the subset of +options+ this instance was initialized with that
@@ -305,7 +306,7 @@ module WillPaginate
     end
 
     def page_span(page, text, attributes = {})
-      @template.content_tag :span, text, attributes
+      @template.content_tag :span, text, attributes, false
     end
 
     # Returns URL params for +page_link_or_span+, taking the current GET params

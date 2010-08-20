@@ -71,16 +71,11 @@ class User
   validates_inclusion_of :language, :within => AVAILABLE_LOCALES
   validates_inclusion_of :role,  :within => ROLES
 
-  validates_presence_of     :login
-  validates_length_of       :login,    :within => 3..40
-  validates_uniqueness_of   :login
-  validates_format_of       :login,    :with => /\w+/
-
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :email,    :if => lambda { |e| !e.openid_login? && !e.twitter_login? }
-  validates_uniqueness_of   :email,    :if => lambda { |e| !e.openid_login? && !e.twitter_login? }
-  validates_length_of       :email,    :within => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
+  validates_presence_of     :email
+  validates_uniqueness_of   :email
+  validates_length_of       :email, :within => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
 
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
@@ -241,14 +236,6 @@ Time.zone.now ? 1 : 0)
 
   def main_language
     @main_language ||= self.language.split("-").first
-  end
-
-  def openid_login?
-    !identity_url.blank? || (AppConfig.enable_facebook_auth && !facebook_id.blank?)
-  end
-
-  def twitter_login?
-    !twitter_token.blank? && !twitter_secret.blank?
   end
 
   def has_voted?(voteable)
@@ -470,8 +457,6 @@ Time.zone.now ? 1 : 0)
   end
 
   def password_required?
-    return false if openid_login?
-    return false if twitter_login?
     (encrypted_password.blank? || !password.blank?)
   end
 
