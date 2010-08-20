@@ -138,6 +138,7 @@ Shapado::Application.routes.draw do
   scope '/manage', :name_prefix => 'manage' do
     controller 'admin/manage' do
       match 'properties' => :properties
+      match 'content' => :content
       match 'theme' => :theme
       match 'actions' => :actions
       match 'stats' => :stats
