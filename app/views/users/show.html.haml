@@ -1,7 +1,7 @@
 
 -content_for :subtabs do
   .navtitle
-    &= @user.login
+    &= @user.name
 
 #users_show
   .follow-info
@@ -72,13 +72,13 @@
       =t(:questions, :scope => "activerecord.models")
     %ul
       %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, params.merge(:q_sort=>"newest")), :rel => "nofollow"
+        = link_to t("questions.index.newest"), user_path(@user, :q_sort=>"newest"), :rel => "nofollow"
       %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, params.merge(:q_sort=>"oldest")), :rel => "nofollow"
+        = link_to t("questions.index.oldest"), user_path(@user, :q_sort=>"oldest"), :rel => "nofollow"
       %li.views
-        = link_to t("activerecord.attributes.question.views"), user_path(@user, params.merge(:q_sort=>"views")), :rel => "nofollow"
+        = link_to t("activerecord.attributes.question.views"), user_path(@user, :q_sort=>"views"), :rel => "nofollow"
       %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, params.merge(:q_sort=>"votes")), :rel => "nofollow"
+        = link_to t("questions.index.votes"), user_path(@user, :q_sort=>"votes"), :rel => "nofollow"
     .clear
   .block
     %ul.items#questions
@@ -96,13 +96,13 @@
       =t(:favorites, :scope => "activerecord.models")
     %ul
       %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, params.merge(:f_sort=>"newest")), :rel => "nofollow"
+        = link_to t("questions.index.newest"), user_path(@user, :f_sort=>"newest"), :rel => "nofollow"
       %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, params.merge(:f_sort=>"oldest")), :rel => "nofollow"
+        = link_to t("questions.index.oldest"), user_path(@user, :f_sort=>"oldest"), :rel => "nofollow"
       %li.views
-        = link_to t("activerecord.attributes.question.views"), user_path(@user, params.merge(:f_sort=>"views")), :rel => "nofollow"
+        = link_to t("activerecord.attributes.question.views"), user_path(@user, :f_sort=>"views"), :rel => "nofollow"
       %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, params.merge(:f_sort=>"votes")), :rel => "nofollow"
+        = link_to t("questions.index.votes"), user_path(@user, :f_sort=>"votes"), :rel => "nofollow"
     .clear
   .block
 
@@ -122,11 +122,11 @@
 
     %ul
       %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, params.merge(:a_sort=>"newest")), :rel => "nofollow"
+        = link_to t("questions.index.newest"), user_path(@user, :a_sort=>"newest"), :rel => "nofollow"
       %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, params.merge(:a_sort=>"oldest")), :rel => "nofollow"
+        = link_to t("questions.index.oldest"), user_path(@user, :a_sort=>"oldest"), :rel => "nofollow"
       %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, params.merge(:a_sort=>"votes")), :rel => "nofollow"
+        = link_to t("questions.index.votes"), user_path(@user, :a_sort=>"votes"), :rel => "nofollow"
     .clear
   .block
 

@@ -130,14 +130,6 @@ class User
     u ? u : []
   end
 
-  def to_param
-    if self.login.blank? || !self.login.match(/^\w[\w\s]*$/)
-      self.id
-    else
-      self.login
-    end
-  end
-
   def add_preferred_tags(t, group)
     if t.kind_of?(String)
       t = t.split(",").join(" ").split(" ")
