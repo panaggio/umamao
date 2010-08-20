@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new
-    @user.safe_update(%w[login email name password_confirmation password preferred_languages website
+    @user.safe_update(%w[login email academic_email name password_confirmation password preferred_languages website
                          language timezone identity_url bio hide_country], params[:user])
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")

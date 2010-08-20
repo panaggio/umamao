@@ -70,7 +70,7 @@ namespace :setup do
                                         :email => "shapado@example.com",
                                         :role => "admin")
 
-    admin.save!
+    admin.save(:validate => false)
   end
 
   desc "Create user"

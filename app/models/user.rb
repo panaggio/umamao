@@ -12,6 +12,7 @@ class User
   key :_id,                       String
   key :login,                     String, :limit => 40, :index => true
   key :name,                      String, :limit => 100, :default => '', :null => true
+  key :academic_email,            String, :limit => 40
 
   key :bio,                       String, :limit => 200
   key :website,                   String, :limit => 200
@@ -76,6 +77,11 @@ class User
   validates_presence_of     :email
   validates_uniqueness_of   :email
   validates_length_of       :email, :within => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
+
+  validates_presence_of     :academic_email
+  validates_uniqueness_of   :academic_email
+  validates_format_of       :academic_email, :with => /[.@]unicamp.br/
+  # TODO: validate using an email regex
 
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
