@@ -74,10 +74,6 @@ class User
 
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :email
-  validates_uniqueness_of   :email
-  validates_length_of       :email, :within => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
-
   validates_presence_of     :academic_email
   validates_uniqueness_of   :academic_email
   validates_format_of       :academic_email, :with => /[.@]unicamp.br/
