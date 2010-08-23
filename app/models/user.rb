@@ -79,12 +79,6 @@ class User
   validates_format_of       :academic_email, :with => /[.@]unicamp.br/
   # TODO: validate using an email regex
 
-  with_options :if => :password_required? do |v|
-    v.validates_presence_of     :password
-    v.validates_confirmation_of :password
-    v.validates_length_of       :password, :within => 6..20, :allow_blank => true
-  end
-
   before_save :update_languages
   before_create :logged!
 
