@@ -14,11 +14,6 @@
         =format_number(member.answers.count)
       .text
         = t(:answers, :scope => "activerecord.models")
-    .box.views
-      .counter{:class => class_for_number(member.reputation_on(current_group)) }
-        =format_number(member.reputation_on(current_group))
-      .text
-        = t(:reputation, :scope => "activerecord.attributes.user")
   / Member Summary
   .summary
     %h3

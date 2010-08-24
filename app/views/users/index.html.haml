@@ -5,8 +5,6 @@
       == (#{format_number(@users.total_entries)})
 
   %ul
-    %li.reputation
-      = link_to t(".reputation"), users_path(:sort=>"reputation"), :title => t(".reputation_tooltip")
     %li.newest
       = link_to t(".newest"), users_path(:sort=>"newest"), :title => t(".newest_tooltip")
     %li.oldest

@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:edit, :update, :follow]
   tabs :default => :users
 
-  subtabs :index => [[:reputation, "reputation"],
-                     [:newest, "created_at desc"],
+  subtabs :index => [[:newest, "created_at desc"],
                      [:oldest, "created_at asc"],
                      [:name, "login asc"]]
 
@@ -13,10 +12,6 @@ class UsersController < ApplicationController
                :order => current_order,
                :page => params[:page] || 1}
     options[:login] = /^#{Regexp.escape(params[:q])}/ if params[:q]
-
-    if options[:order] == "reputation"
-      options[:order] = "membership_list.#{current_group.id}.reputation desc"
-    end
 
     @users = current_group.paginate_users(options)
 

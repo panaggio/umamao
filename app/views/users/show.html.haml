@@ -10,12 +10,6 @@
   .general-info
     .avatar
       = gravatar @user.email.to_s, :size => 128
-      .reputation
-        =format_number(@user.reputation_on(current_group))
-      .text
-        = t(:reputation, :scope => "activerecord.attributes.user")
-      =format_number(@user.config_for(current_group).views_count.to_i)
-      = t(".views")
     .user-info
       %table
         %tr
@@ -157,8 +151,3 @@
       .data
         -if @user.last_logged_at
           = t("time.ago", :time => time_ago_in_words(@user.last_logged_at))
-    .entry
-      .text
-        = t(:reputation, :scope => "activerecord.attributes.user")
-      .data
-        = @user.reputation_on(current_group)

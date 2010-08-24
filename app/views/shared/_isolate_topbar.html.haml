@@ -29,8 +29,6 @@
             %span.gravatar
               = gravatar current_user.email.to_s, :size => 22
               = link_to h(current_user.name), user_path(current_user)
-              %span{:style => "font-size: 12px; font-weight: bold"}
-                == (#{current_user.reputation_on(current_group)})
         %li
           =link_to t("layouts.application.settings"), settings_path
         %li
