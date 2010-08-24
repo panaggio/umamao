@@ -146,7 +146,7 @@ class ApplicationController < ActionController::Base
       when /^es/
         'es-419'
       when /^pt/
-        'pt-PT'
+        'pt-BR'
       when "fr"
         'fr'
       when "ja"
