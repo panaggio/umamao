@@ -1,8 +1,13 @@
 %p
-  Welcome
+  Bem-vindo(a)
   = @resource.email
   \!
 %p
-  You can confirm your account through the link below:
+  Você recebeu esta mensagem para confirmar seu endereço de email acadêmico no
+  = link_to 'Umamão', welcome_url
+  . Clique no link abaixo para concluir seu registro: 
 %p
-  = link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+  = link_to 'Confirmar meu endereço', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token
+%p
+  Caso não tenha cadastrado seu endereço no site, favor desconsiderar essa mensagem.
+
