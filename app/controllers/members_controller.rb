@@ -7,9 +7,13 @@ class MembersController < ApplicationController
 
   def index
     @group = current_group
-    @members = @group.users(:page => params[:page] || 1,
-                            :per_page => params[:per_page] || 25,
-                            :order => "membership_list.#{@group.id}.reputation desc, membership_list.#{@group.id}.role asc")
+    options = {
+      :page => params[:page] || 1,
+      :per_page => params[:per_page] || 25,
+      :order => "membership_list.#{@group.id}.reputation desc, " <<
+                "membership_list.#{@group.id}.role asc"
+    }
+    @members = @group.paginate_users(options)
     @member = User.new
     @membership = Membership.new
   end
@@ -26,8 +30,8 @@ class MembersController < ApplicationController
       @member = User.new(:login => params[:user_id])
     end
 
-    @members = @group.users(:page => params[:page] || 1,
-                            :per_page => params[:per_page] || 25)
+    @members = @group.paginate_users(:page => params[:page] || 1,
+                                     :per_page => params[:per_page] || 25)
     render :index
   end
 

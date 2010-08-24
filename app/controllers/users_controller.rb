@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       options[:order] = "membership_list.#{current_group.id}.reputation desc"
     end
 
-    @users = current_group.users(options)
+    @users = current_group.paginate_users(options)
 
     respond_to do |format|
       format.html

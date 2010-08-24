@@ -11,7 +11,10 @@ class ImportsController < ApplicationController
 
     case @active_subtab.to_s
     when 'need_confirmation'
-      @users = current_group.users(:needs_confirmation => true, :order => "created_at desc", :select => [:name, :login, :email])
+      @users = current_group.users(
+                                   :needs_confirmation => true,
+                                   :order => "created_at desc",
+                                   :select => [:name, :login, :email])
     end
   end
 

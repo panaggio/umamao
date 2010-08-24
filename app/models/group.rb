@@ -190,6 +190,10 @@ class Group
   end
   alias_method :members, :users
 
+  def paginate_users(conditions = {})
+    User.paginate(conditions.merge("membership_list.#{self.id}.reputation" => {:$exists => true}))
+  end
+
   def pending?
     state == "pending"
   end
