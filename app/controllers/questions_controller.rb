@@ -51,7 +51,6 @@ class QuestionsController < ApplicationController
       add_feeds_url(url_for({:format => "atom", :tags => params[:tags]}.merge(feed_params)),
                     "#{t("feeds.tag")} #{params[:tags].inspect}")
     end
-    @tag_cloud = Question.tag_cloud(scoped_conditions, 25)
 
     respond_to do |format|
       format.html # index.html.erb
