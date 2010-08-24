@@ -12,7 +12,7 @@ class User
   key :_id,                       String
   key :login,                     String, :limit => 40, :index => true
   key :name,                      String, :limit => 100, :default => '', :null => true
-  key :academic_email,            String, :limit => 40
+  key :academic_email,            String, :limit => 40, :default => nil
 
   key :bio,                       String, :limit => 200
   key :website,                   String, :limit => 200
@@ -74,10 +74,10 @@ class User
 
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :academic_email
-  validates_uniqueness_of   :academic_email
-  validates_format_of       :academic_email, :with => /[.@]unicamp.br/
-  # TODO: validate using an email regex
+  validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? }
+  validates_uniqueness_of   :academic_email, :allow_blank => true
+  validates_format_of       :academic_email, :with => /[.@]unicamp.br/,
+                            :allow_blank => true
 
   before_save :update_languages
   before_create :logged!
