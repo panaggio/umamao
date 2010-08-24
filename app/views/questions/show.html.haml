@@ -11,7 +11,7 @@
 -if show_close_request_form
   -@close_request = @question.close_requests.detect{ |rq| rq.user_id == current_user.id } || CloseRequest.new(:reason => "dupe")
 
--question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : @question.title)))
+-question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
 
 -content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question.tags.dup, @question.title)}
