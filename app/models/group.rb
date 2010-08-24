@@ -186,7 +186,7 @@ class Group
   end
 
   def users(conditions = {})
-    User.paginate(conditions.merge("membership_list.#{self.id}.reputation" => {:$exists => true}))
+    User.all(conditions.merge("membership_list.#{self.id}.reputation" => {:$exists => true}))
   end
   alias_method :members, :users
 
