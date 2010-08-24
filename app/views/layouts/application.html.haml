@@ -67,19 +67,6 @@
 
           = render :partial => "shared/ads/context_panel_ads"
 
-          -unless feed_urls.empty?
-            .block
-              %h3
-                = t(".subscribe")
-              .sidebar-block
-                .feeds
-                  -feed_urls.each do |title, url|
-                    .feed_entry
-                      %a{:href => url}
-                        %span
-                          =image_tag "atom.png", :width => 20
-                        =h(title)
-                  .clear
         .clear
         = render :partial => "shared/ads/footer_ads"
 
