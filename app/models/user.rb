@@ -3,7 +3,16 @@ require 'digest/sha1'
 class User
   include MongoMapper::Document
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-         :lockable, :token_authenticatable, :validatable
+         :token_authenticatable, :validatable, :confirmable
+
+  # Hack to make devise confirm :academic_email, not :email.
+  def send_confirmation_instructions_with_academic_email
+    email = self.email
+    self.email = self.academic_email
+    self.send_confirmation_instructions_without_academic_email
+    self.email = email
+  end
+  alias_method_chain :send_confirmation_instructions, :academic_email
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
@@ -84,14 +93,6 @@ class User
 
   def self.find_for_authentication(conditions={})
     first(conditions) || first(:login => conditions["email"])
-  end
-
-  def login=(value)
-    write_attribute :login, (value ? value.downcase : nil)
-  end
-
-  def email=(value)
-    write_attribute :email, (value ? value.downcase : nil)
   end
 
   def self.find_by_login_or_id(login)
