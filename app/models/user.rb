@@ -69,7 +69,7 @@ class User
 
   timestamps!
 
-  validates_inclusion_of :language, :within => AVAILABLE_LOCALES
+  validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
 
   validates_length_of       :name,     :maximum => 100
