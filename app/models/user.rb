@@ -27,7 +27,7 @@ class User
 
   key :notification_opts,         NotificationConfig
 
-  key :language,                  String, :default => "en"
+  key :language,                  String, :default => "pt"
   key :timezone,                  String, :default => "America/Sao_Paulo"
   key :language_filter,           String, :default => "user", :in => LANGUAGE_FILTERS
 
