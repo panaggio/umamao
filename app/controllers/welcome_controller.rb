@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
         order = "activity_at desc"
       when "hot"
         order = "hotness desc"
-        conditions[:updated_at] = {:$gt => 5.days.ago}
+        conditions[:activity_at] = {:$gt => 5.days.ago}
     end
 
     @langs_conds = conditions[:language][:$in]
