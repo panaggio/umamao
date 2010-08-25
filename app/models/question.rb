@@ -76,7 +76,6 @@ class Question
   language :language
 
   before_save :update_activity_at
-  before_validation_on_create :update_language
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -301,10 +300,5 @@ class Question
 
     self.votes_count = self.votes.count
   end
-
-  def update_language
-    self.language = self.language.split("-").first
-  end
-
 end
 

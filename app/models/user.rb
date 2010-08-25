@@ -96,7 +96,6 @@ class User
   validates_format_of       :academic_email, :with => /[.@]unicamp.br/,
                             :allow_blank => true
 
-  before_save :update_languages
   before_create :logged!
 
   def self.find_for_authentication(conditions={})
@@ -449,10 +448,6 @@ Time.zone.now ? 1 : 0)
   end
 
   protected
-  def update_languages
-    self.preferred_languages = self.preferred_languages.map { |e| e.split("-").first }
-  end
-
   def password_required?
     (encrypted_password.blank? || !password.blank?)
   end

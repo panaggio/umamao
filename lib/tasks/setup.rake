@@ -86,7 +86,7 @@ namespace :setup do
   task :create_pages => [:environment] do
     Dir.glob(Rails.root+"db/fixtures/pages/*.markdown") do |page_path|
       basename = File.basename(page_path, ".markdown")
-      title = basename.gsub(/\.(\w\w)/, "").titleize
+      title = basename.gsub(/\.(.*)/, "").titleize
       language = $1
 
       body = File.read(page_path)

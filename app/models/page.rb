@@ -40,6 +40,6 @@ class Page
 
   private
   def self.current_language
-    @current_language ||= I18n.locale.to_s.split("-",2).first
+    @current_language ||= I18n.locale.to_s
   end
 end
