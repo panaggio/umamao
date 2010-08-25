@@ -5,7 +5,7 @@ class Answer < Comment
   key :_id, String
 
   key :body, String, :required => true
-  key :language, String, :default => "en"
+  key :language, String, :default => 'pt-BR'
   key :flags_count, Integer, :default => 0
   key :banned, Boolean, :default => false
   key :wiki, Boolean, :default => false

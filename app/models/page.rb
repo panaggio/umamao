@@ -12,7 +12,7 @@ class Page
   key :title, String
   key :body, String
   key :wiki, Boolean, :default => false
-  key :language, String
+  key :language, String, :default => 'pt-BR'
   key :adult_content, Boolean, :default => false
 
   key :user_id, String

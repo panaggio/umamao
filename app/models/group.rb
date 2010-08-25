@@ -28,7 +28,7 @@ class Group
   key :analytics_id, String
   key :analytics_vendor, String
   key :has_custom_analytics, Boolean, :default => true
-  key :language, String
+  key :language, String, :default => 'pt-BR'
   key :activity_rate, Float, :default => 0.0
   key :openid_only, Boolean, :default => false
   key :registered_only, Boolean, :default => false

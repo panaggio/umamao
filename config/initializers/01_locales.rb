@@ -41,4 +41,4 @@ Rails.logger.debug "* Loaded locales: #{AVAILABLE_LOCALES.inspect}"
 
 require "i18n/backend/fallbacks"
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
-I18n.default_locale = :"en"
+I18n.default_locale = :"pt-BR"
