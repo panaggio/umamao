@@ -2,7 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Hamilton Abreu
-pt-PT:
+pt-BR:
   activerecord:
     attributes:
       question:
@@ -35,7 +35,7 @@ pt-PT:
       title: Reportar pergunta
     form:
       adult_content: Esta pergunta envolve conteúdo para adultos.
-      body_tip: Qual é ahhh a sua pergunta? Seja descritivo.
+      body_tip: Qual aaaaaahhhhhhhh é a sua pergunta? Seja descritivo.
       language_tip: Seleccione a língua da pergunta.
       tags_tip: Use categorias para fornecer mais informação sobre a sua pergunta.
     index:
