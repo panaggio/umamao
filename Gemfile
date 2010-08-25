@@ -2,7 +2,7 @@
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'bson_ext', '~> 1.0.1', :require => 'bson'
 gem 'BadMinus-devise', '~> 1.2.0', :require => 'devise'
@@ -32,5 +32,6 @@ gem 'whatlanguage', '1.0.0'
 gem 'warden', '0.10.7'
 
 group :development do
+  gem 'RedCloth', '~> 4.1.1'
   gem 'ruby-debug'
 end
