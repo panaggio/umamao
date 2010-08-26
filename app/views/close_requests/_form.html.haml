@@ -6,7 +6,7 @@
     %br
 
 .group
-  = form.label :comment, t(:comment, :scope=>"models"), :class => "label"
+  = form.label :comment, t(:comment, :scope=>"close_requests.model.attributes"), :class => "label"
   = form.text_field :comment, :class => "text_field"
 
 -if current_user.mod_of?(current_group)
