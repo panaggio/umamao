@@ -1,7 +1,7 @@
 
 class CloseRequest
   include MongoMapper::EmbeddedDocument
-  REASONS = %w{dupe ot no_question not_relevant spam}
+  REASONS = %w{dupe no_question not_relevant spam}
 
   key :_id, String
   key :reason, String, :in => REASONS
