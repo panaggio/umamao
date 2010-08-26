@@ -11,7 +11,7 @@
     = render :partial => "shared/layout/javascript"
 
     %script{:type => "text/javascript", :charset => "utf-8"}
-      wmd_options = {autostart:false};
+      wmd_options = {autostart:false, output:"markdown"};
     = javascript_include_merged "wmd/wmd.js"
     = javascript_include_merged "setup-wmd.js"
 
