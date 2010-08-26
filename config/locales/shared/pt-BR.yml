@@ -1,8 +1,8 @@
 pt-BR:
   shared:
     topbar:
-      logged_as: "Logged in as %{login}"
+      logged_as: "%{login}"
       admin: Admin
-      user_page: My page
+      user_page: Sua página
     current_tags:
-      title: Selected tags
+      title: Tópicos selecionados

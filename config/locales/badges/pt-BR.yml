@@ -1,127 +1,127 @@
 pt-BR:
   badges:
     index:
-      title: badges
-      description: "All badges that you can earn. Share your knowledge earn badges."
+      title: Medalhas
+      description: "Ajude os outros e ganhe medalhas!"
     show:
-      title: Badge %{type}
-      description: "Users who earned this badge. Recently awarded to:"
-      for_tag_bronze: 200 votes in tag %{tag}
-      for_tag_silver: 400 votes in tag %{tag}
-      for_tag_gold: 1000 votes in tag %{tag}
-      earned: earned
+      title: Medalha %{type}
+      description: "Usuários que ganharam esta medalha recentemente:"
+      for_tag_bronze: 200 votos no tópico %{tag}
+      for_tag_silver: 400 votos no tópico %{tag}
+      for_tag_gold: 1000 votos no tópico %{tag}
+      earned: ganhou
     shared:
       rockstar:
-        description: 1000 positive votes, 10 negative votes maximum
+        description: 1000 votos positivos, no máximo 10 votos negativos
       popstar:
-        description: 500 positive votes, 10 negative votes maximum
+        description: 500 votos positivos, no máximo 10 votos negativos
       fanatic:
-        description: Visited the site each day for 100 consecutive days
+        description: Visitou o site todo dia por 100 dias consecutivos
       service_medal:
-        description: 300 positive votes
+        description: 300 votos positivos
       famous_question:
-        description: Asked a question with 10000 views
+        description: Fez uma pergunta com 10000 visitas
       notable_question:
-        description: Asked a question with 2500 views
+        description: Fez uma pergunta com 2500 visitas
       popular_question:
-        description: Asked a question with 1000 views
+        description: Fez uma pergunta com 1000 visitas
       popular_person:
-        description: Your profile is visited 10000 times
+        description: Perfil visitado 10000 vezes
       guru:
-        description: Gave a solution to a question with an average of more than 40 votes
+        description: Resposta com mais de 40 votos positivos
       favorite_question:
-        description: Question favorited by 25 users
+        description: Pergunta marcada como favorita por 25 usuários
       tutor:
-        description: Gave a solution to a question with an average of more than 2 votes
+        description: Resposta com mais de 2 votos
       addict:
-        description: Visited the site each day for 20 consecutive days
+        description: Visitou o site todo dia por 20 dias consecutivos
       good_question:
-        description: Having a question that reaches an average of more than 25 votes
+        description: Pergunta com mais de 25 votos
       good_answer:
-        description: Having an answer that reaches an average of more than 25 votes
+        description: Resposta com mais de 25 votos
       pioneer:
-        description: Be one of the first users to register
+        description: Um dos primeiros usuários a se cadastrarem
       supporter:
-        description: Voted positively for the first time
+        description: Deu primeiro voto positivo
       critic:
-        description: Voted negatively for the first time
+        description: Deu primeiro voto negativo
       inquirer:
-        description: Asked for the first time
+        description: Perguntou pela primeira vez
       troubleshooter:
-        description: Answered for the first time
+        description: Respondeu pela primeira vez
       commentator:
-        description: Left 10 comments
+        description: Fez 10 comentários
       merit_medal:
-        description: Got 200 positive votes
+        description: Recebeu 200 votos positivos
       effort_medal:
-        description: Got 100 positive votes
+        description: Recebeu 100 votos positivos
       student:
-        description: Asked first question with at least one up vote
+        description: Fez primeira pergunta com pelo menos um voto
       shapado:
-        description: Visited the site each day for 8 consecutive days
+        description: Visitou o site todo dia por 8 dias consecutivos
       editor:
-        description: First edited post
+        description: Primeira edição
       friendly:
-        name: Friendly
-        description: Following someone for the first time
+        name: Amigável
+        description: Seguindo alguém pela primeira vez
       interesting_person:
-        name: Interesting person
-        description: Getting more than 10 followers
+        name: Interessante
+        description: Mais de 10 seguidores
       popular_person:
-        name: Popular person
-        description: Getting more than 50 followers
+        name: Popular
+        description: Mais de 50 seguidores
       celebrity:
-        name: Celebrity
-        description: Getting more than 100 followers
+        name: Celebridade
+        description: Mais de 100 seguidores
       necromancer:
         name: Necromancer
-        description: Answered a question more than 60 days later with at least 5 votes
+        description: Respondeu uma pergunta mais de 60 dias depois com pelo menos 5 votos
       stellar_question:
-        name: Stellar question
-        description: Question added to favorites by 100 users
+        name: Pergunta Estelar
+        description: Pergunta marcada favorita por 100 usuários
       nice_question:
-        name: Nice question
-        description: Question voted up 10 times
+        name: Boa Pergunta
+        description: Pergunta com 10 votos
       nice_answer:
-        name: Nice answer
-        description: Answer voted up 10 times
+        name: Boa Resposta
+        description: Resposta com 10 votos
       great_question:
-        name: Great question
-        description: Question voted up 100 times
+        name: Ótima Pergunta
+        description: Pergunta com 100 votos
       great_answer:
-        name: Great answer
-        description: Answer voted up 100 times
+        name: Ótima Resposta
+        description: Resposta com 100 votos
       peer_pressure:
-        name: Peer pressure
-        description: Deleted own post with score of -3 or lower
+        name: Pressão de Grupo
+        description: Deletou própria entrada com pontuação -3 ou inferior
       enlightened:
-        name: Enlightened
-        description: First answer was accepted with at least 10 up votes
+        name: Iluminado
+        description: Primeira resposta com pelo menos 10 votos
       disciplined:
-        name: Disciplined
-        description: Deleted own post with score of 3 or higher
+        name: Disciplinado
+        description: Removeu própria entrada com pontuação 3 ou superior
       cleanup:
-        name: Cleanup
-        description: First rollback
+        name: Limpeza
+        description: Primeira reversão
       civic_duty:
-        name: Civic duty
-        description: Voted 300 times
+        name: Dever Cívico
+        description: Votou 300 vezes
       citizen_patrol:
-        name: Citizen patrol
-        description: First flagged post
+        name: Patrulha Cidadã
+        description: Reportou primeira entrada
       self-learner:
-        name: Self learner
-        description: Answered your own question with at least 3 up votes
+        name: Autodidata
+        description: Respondeu a própria pergunta com pelo menos 3 votos
       scholar:
-        name: Scholar
-        description: First accepted answer on your own question
+        name: Acadêmico
+        description: Primeira resposta aceita na própria pergunta
       autobiographer:
-        name: Autobiographer
-        description: Completed all user profile fields
+        name: Autobiógrafo
+        description: Completou todos os campos do perfil
       organizer:
-        name: Organizer
-        description: First retag
+        name: Organizador
+        description: Primeira alteração de tópicos
   activerecord:
     models:
-      badge: Badge
-      badges: Badges
+      badge: Medalha
+      badges: Medalhas

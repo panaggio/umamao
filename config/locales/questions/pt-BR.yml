@@ -1,21 +1,17 @@
-# Messages for Portuguese (Português)
-# Exported from translatewiki.net
-# Export driver: syck
-# Author: Hamilton Abreu
 pt-BR:
   activerecord:
     attributes:
       question:
         answers: Respostas
         asked_by: Feita por
-        body: Conteúdo
+        body: Detalhes
         closed: Fechada
         created_at: Feita
-        language: Língua
-        tags: Categorias
+        language: Idioma
+        tags: Tópico
         title: Título
-        updated_at: actualizada
-        updated_by: actualizada por
+        updated_at: atualizada
+        updated_by: atualizada por
         views: Visitas
         votes: Votos
     models:
@@ -23,29 +19,29 @@ pt-BR:
       questions: Perguntas
   questions:
     answer:
-      add_comment: Adicionar comentário...
+      add_comment: Adicionar comentário
       flag: Reportar
-      pick_answer: Escolher como solução
-      unset_answer: Retirar como solução?
+      pick_answer: Marcar como aceita
+      unset_answer: Desmarcar como aceita?
     create:
       flash_notice: A pergunta foi criada.
     edit:
-      title: A editar pergunta
+      title: Editando pergunta
     flag:
       title: Reportar pergunta
     form:
-      adult_content: Esta pergunta envolve conteúdo para adultos.
-      body_tip: Qual aaaaaahhhhhhhh é a sua pergunta? Seja descritivo.
-      language_tip: Seleccione a língua da pergunta.
-      tags_tip: Use categorias para fornecer mais informação sobre a sua pergunta.
+      adult_content: Esta pergunta envolve conteúdo adulto.
+      body_tip: Qual é a sua pergunta?
+      language_tip: Selecione o idioma da pergunta.
+      tags_tip: Use tópicos para fornecer mais informação sobre a sua pergunta.
     index:
-      active: Activas
-      active_tooltip: Perguntas actualizadas recentemente
+      active: Ativas
+      active_tooltip: Perguntas atualizadas recentemente
       ask_question: Fazer pergunta
-      empty: Ainda ninguém fez nenhuma pergunta. Seja o primeiro!
+      empty: Ninguém perguntou ainda. Seja o primeiro!
       help_to_answer: Ajude-nos a responder
       hot: Populares
-      hot_tooltip: Perguntas com maior actividade dos últimos 5 dias
+      hot_tooltip: Perguntas com maior atividade nos últimos 5 dias
       newest: Mais recentes
       newest_tooltip: Perguntas mais recentes
       oldest: Mais antigas
@@ -55,82 +51,82 @@ pt-BR:
       votes_tooltip: Perguntas com mais votos
     model:
       messages:
-        empty_tags: Desculpe, tem de usar pelo menos uma categoria.
-        title_too_long: O título é demasiado longo. Não pode conter mais do que 100 caracteres.
-        too_many_tags: Desculpe, mas só pode introduzir até 9 categorias.
-        too_short: Parece demasiado curta. Use mais do que %{count} palavras para ser mais específico.
+        empty_tags: A pergunta precisa ter pelo menos um tópico.
+        title_too_long: A pergunta é comprida demais. Não pode ter mais que 280 caracteres.
+        too_many_tags: A pergunta pode ter no máximo 9 tópicos.
+        too_short: Muito curta. Use mais que %{count} palavras para ser mais específico.
     move:
-      group_label: "Mover para o grupo:"
+      group_label: "Mover para o site:"
       submit: Mover!
       title: "Mover a pergunta: %{title}"
     move_to:
-      group_dont_exists: O grupo %{group} não existe
-      success: Pergunta movida para o grupo %{group}
+      group_dont_exists: O site %{group} não existe
+      success: Pergunta movida para o site %{group}
     new:
       how_to_ask: Como perguntar
       title: Fazer pergunta
     question:
-      accepted_tooltip: Esta pergunta tem uma resposta que foi aceite
+      accepted_tooltip: Esta pergunta tem uma resposta aceita
     retag:
-      title: Recategorizar
+      title: Editar tópicos
     retag_form:
       cancel: Cancelar
-      submit: Actualizar categorias!
-      title: Actualizar categorias
+      submit: Atualizar tópicos
+      title: Atualizar tópicos
     retag_to:
-      failure: Desculpe, não foi possível actualizar as categorias.
-      success: As categorias foram actualizadas.
+      failure: Não foi possível atualizar os tópicos.
+      success: Tópicos atualizados.
     revert:
       title: Reverter a pergunta
     shared:
       flag: Reportar
     show:
-      accepted_tooltip: Uma das respostas foi aceite como sendo a resposta correcta.
+      accepted_tooltip: Uma das respostas foi aceita
       another_answers: Outras respostas
       answers: Respostas
       answers_title:
         one: "%{count} resposta"
         other: "%{count} respostas"
-      asked_on: colocada a
-      ban: Banir
+      asked_on: feita em
+      ban: Remover
       close: Fechar
       close_reason: "A pergunta foi fechada pelo seguinte motivo:"
       favorite_tooltip: Adicionar esta pergunta às suas favoritas
       flag: Reportar
       flagged_as: Reportada como
       flags: Reportada como
-      last_activity: Actividade mais recente
+      last_activity: Atividade mais recente
       related_questions: Perguntas relacionadas
-      request_closing: Pedir encerramento
+      request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
-      retag: Recategorizar
+      retag: Editar tópicos
       retract_request: Já colocou um pedido. Quer retirá-lo?
-      share: Partilhar esta pergunta em
-      share_on: Partilhar esta pergunta em %{site}
-      solution: Solução
+      share: Compartilhar esta pergunta em
+      share_on: Compartilhar esta pergunta em %{site}
+      solution: Resposta aceita
       to_answer_question: para responder a esta pergunta
-      unauthenticated_retag: Precisa de uma conta para recategorizar perguntas
+      unauthenticated_retag: Você precisa de uma conta para editar tópicos
       unfavorite_tooltip: Remover esta pergunta das suas favoritas
-      unwatch_tooltip: Deixar de vigiar esta pergunta
+      unwatch_tooltip: Parar de seguir esta pergunta
       viewed: visitada
-      watch_tooltip: Vigiar esta pergunta
+      watch_tooltip: Seguir esta pergunta
     solve:
-      flash_notice: A pergunta foi resolvida.
+      flash_notice: Resposta aceita.
     tags:
-      filter: Pesquisar categorias
-      title: Categorias
-      tooltip: Mostrar perguntas na categoria %{tag}
+      filter: Pesquisar tópicos
+      title: Tópicos
+      tooltip: Mostrar perguntas no tópico %{tag}
     unanswered:
-      empty: Este grupo não contém perguntas sem resposta.
-      expert: Peritos
-      my_tags: As minhas categorias
-      tags: Categorias sem respostas
+      empty: Não há perguntas sem resposta.
+      expert: Especialistas
+      my_tags: Meus tópicos
+      tags: Tópicos sem respostas
       title: Perguntas sem resposta
     unsolve:
-      flash_notice: A pergunta deixou de estar resolvida.
+      flash_notice: Resposta marcada como não aceita.
     unwatch:
-      success: Deixará de receber notificações por correio electrónico por cada nova resposta a esta pergunta.
+      success: Você não será mais avisado de novidades nesta pergunta.
     update:
-      flash_notice: A pergunta foi actualizada.
+      flash_notice: Pergunta atualizada.
     watch:
-      success: Passará a receber notificações por correio electrónico a cada nova resposta a esta pergunta.
+      success: Você será avisado de novidades nesta pergunta.

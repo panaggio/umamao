@@ -1,27 +1,27 @@
 pt-BR:
   close_requests:
     index:
-      title: List of close requests
+      title: Lista de pedidos de fechamento
     form:
-      dupe: Duplicate
-      ot: Off topic
-      no_question: Not a question
-      not_relevant: Not relevant
-      spam: spam
+      dupe: Duplicada
+      ot: Fora do assunto
+      no_question: Não é uma pergunta
+      not_relevant: Sem relevância
+      spam: Spam
       request_closing_details: Request to close this question
-      close_with_reason: Close this question using this reason
+      close_with_reason: Fechar direto sem votaćão (como moderador)
     create:
-      flash_notice: Close request created successfully
+      flash_notice: Pedido de fechamento criado.
     update:
-      flash_notice: Close request updated successfully
+      flash_notice: Pedido de fechamento atualizado.
     destroy:
-      flash_notice: Close request deleted successfully
+      flash_notice: Pedido de fechamento removido.
     model:
-      name: Close request
-      prural_name: Close requests
+      name: Pedido de fechamento
+      prural_name: Pedidos de fechamento
       messages:
-        already_requested: "You have already requested to close this question"
+        already_requested: "Você já pediu para fechar esta pergunta"
       attributes:
-        user: User
-        reason: Reason
-        comment: Comment
+        user: Usuário
+        reason: Motivo
+        comment: Explicaćão

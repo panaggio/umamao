@@ -2,27 +2,27 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Luckas Blade
-pt-BR: 
-  activerecord: 
-    attributes: 
-      page: 
-        js: Javascript
-    models: 
+pt-BR:
+  activerecord:
+    attributes:
+      page: Página
+      js: Javascript
+    models:
       page: Página
       pages: Páginas
-  pages: 
-    actions: 
+  pages:
+    actions:
       create_page: Criar nova página
       edit_page: Editar página
-    create: 
-      success: A página foi criada com sucesso.
-    edit: 
+    create:
+      success: Página criada.
+    edit:
       title: Editando página
-    form: 
+    form:
       language_tip: Língua da página
-    index: 
+    index:
       title: Lista de páginas
-    new: 
+    new:
       title: Nova página
-    update: 
-      success: A página foi atualizada com sucesso.
+    update:
+      success: Página atualizada.

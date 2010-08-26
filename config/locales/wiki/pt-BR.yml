@@ -1,18 +1,18 @@
 pt-BR:
   wiki:
     history:
-      title: "History (%{count})"
-      previous_versions: Previous versions
-      current_version: Current version
-      version: Version
-      version_summary: Version summary
+      title: "Histórico (%{count})"
+      previous_versions: Versão anterior
+      current_version: Versão atual
+      version: Versão
+      version_summary: Explicaćão
     diff:
-      title: Differences between %{prev} and %{curr}
+      title: Diferenćas entre %{prev} e %{curr}
     actions:
-      revert: Revert to this version
-      show_diff: Compare selected versions
-      all_history: Back to history
-      back_to_question: Back to the question
+      revert: Reverter para esta versão
+      show_diff: Comparar versões selecionadas
+      all_history: Voltar para histórico
+      back_to_question: Voltar para pergunta
     model:
       attributes:
-        message: Summary
+        message: Explicaćão

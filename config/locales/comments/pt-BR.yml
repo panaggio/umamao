@@ -1,16 +1,16 @@
 pt-BR:
   comments:
     edit:
-      title: Edit comment
+      title: Editar
     create:
-      flash_notice: Thanks for your comment
+      flash_notice:
     update:
-      flash_notice: "Comment was successfully updated."
+      flash_notice: "Comentário atualizado."
     shared:
-      add_comment: "Add comment..."
-      comment_submit: "Comment"
-      said: said
-      reply: Reply
+      add_comment: "Adicionar comentário"
+      comment_submit: "Comentar"
+      said: disse
+      reply: Responder
   models:
-    comments: Comments
-    comment: Comment
+    comments: Comentários
+    comment: Comentário

@@ -1,10 +1,10 @@
 pt-BR:
   searches:
     index:
-      empty: "Your search did not match any questions."
-      tags: within these tags
-      search_text: Questions containing
+      empty: "Não encontramos nenhuma pergunta com a sua busca."
+      tags: nestes tópicos
+      search_text: Perguntas contendo
     form:
-      clear: Clear
-      search_box_title: "Check whether your question has already been asked"
-      tags_tip: Use [tag] to specify tags.
+      clear: Limpar
+      search_box_title: "Veja se a sua pergunta já foi feita por alguém"
+      tags_tip: Use [tópico] para especificar tópicos.

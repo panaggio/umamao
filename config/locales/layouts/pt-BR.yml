@@ -1,47 +1,47 @@
 pt-BR:
   layouts:
     application:
-      title: "Questions & Answers"
-      questions: Questions
-      questions_in: Questions in
-      questions_tagged: tagged with
-      ask_question: Ask question
-      tags: Tags
-      users: Users
-      badges: Badges
-      unanswered: Unanswered
-      pages: Pages
-      logout: Log out
-      logged: Logged in as %{login}
-      search: Search
-      forgot: Forgot?
-      log_in: Login
-      signup: Sign up
-      settings: Settings
-      languages: Languages
-      moderate: Moderate
-      manage_ads: Manage ads
-      home: Home
-      subscribe: Subscribe
-      welcome_from: Welcome! You can
-      now: now!
+      title: "Perguntas e Respostas"
+      questions: Perguntas
+      questions_in: Perguntas em
+      questions_tagged: tópico(s)
+      ask_question: Fazer Pergunta
+      tags: Tópicos
+      users: Usuários
+      badges: Medalhas
+      unanswered: Sem Resposta
+      pages: Páginas
+      logout: Sair
+      logged: %{login}
+      search: Pesquisar
+      forgot: Esqueceu?
+      log_in: Entrar
+      signup: Fazer cadastro
+      settings: Configurações
+      languages: Idiomas
+      moderate: Moderar
+      manage_ads: Gerenciar anúncios
+      home: Início
+      subscribe: Assinar
+      welcome_from: Bem-vindo(a)! Você pode
+      now: !
       openid:
-        explaination: "If you would like to register or just log in, please select your OpenID provider:"
+        explaination: "Escolha uma conta que você quer usar para se cadastrar ou fazer login:"
     manage:
-      dashboard: Dashboard
-      properties: Properties
+      dashboard: Principal
+      properties: Propriedades
       widgets: Widgets
-      actions: Actions
-      stats: Stats
-      members: Members
-      reputation: Reputation
-      content: Content
-      theme: Theme
-      domain: Domain
-      pages: Pages
-      constrains: Requirements
-      rewards: Rewards
-      general: General
-      announcements: Announcements
+      actions: Ações
+      stats: Estatísticas
+      members: Membros
+      reputation: Reputação
+      content: Conteúdo
+      theme: Tema
+      domain: Domínio
+      pages: Páginas
+      constrains: Restrições
+      rewards: Recompensas
+      general: Geral
+      announcements: Avisos
     notifications:
-      message: "If you do not want to receive automatic notifications from %{domain} anymore, change your preferences in the notifications screen."
+      message: "Se você não quiser mais receber avisos de %{domain}, mude suas preferências na tela de avisos."

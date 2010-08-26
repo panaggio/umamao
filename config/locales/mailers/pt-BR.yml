@@ -2,19 +2,19 @@ pt-BR:
   mailers:
     notifications:
       new_answer:
-        subject_owner: "%{login} answered your question %{title}"
-        subject_friend: "Your friend %{login} answered the question %{title}"
-        subject_other: "%{login} answered the question %{title}"
+        subject_owner: "%{login} respondeu sua pergunta %{title}"
+        subject_friend: "%{login} respondeu a pergunta %{title}"
+        subject_other: "%{login} respondeu a pergunta %{title}"
       new_comment:
-        subject: "%{login} commented on %{group}"
+        subject: "%{login} comentou no %{group}"
       give_advice:
-        subject: "We need your advice: %{question_title}"
-        friend_subject: "Your friend needs help: %{question_title}"
+        subject: "Precisamos da sua ajuda em: %{question_title}"
+        friend_subject: "Precisamos da sua ajuda em: %{question_title}"
       follow:
-        subject: "%{login} is now following you on %{app}"
+        subject: "%{login} está te seguindo no %{app}"
       earned_badge:
-        subject: "You have earned a badge on %{group}!"
+        subject: "Você ganhou uma medalha no %{group}!"
       favorited:
-        subject: "%{login} added your question as a favorite!"
+        subject: "%{login} adicionou sua pergunta às favoritas!"
       report:
-        subject: "Report for the group %{group} of %{app}"
+        subject: "Relatório do %{app}"

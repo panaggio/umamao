@@ -1,26 +1,26 @@
 pt-BR:
   widgets:
     index:
-      title: Manage sidebar widgets
-      description: Use the arrows to move your widgets
+      title: Gerenciar widgets da barra lateral
+      description: Use as setas para mover as widgets
     badges:
-      title: Recent badges
-      description: "This widget displays recent badges earned by users or questions"
+      title: Medalhas recentes
+      description: "Esta widget exibe as medalhas recentes recebidas por usuários ou perguntas"
     groups:
-      title: Recent groups
-      description: "This widget displays the latest groups"
+      title: Sites recentes
+      description: "Esta widget exibe os últimos sites criados"
     top_groups:
-      title: Top 5 groups
-      description: "This widget displays the top five groups"
+      title: Top 5 de Sites
+      description: "Esta widget exibe os cinco maiores sites"
     top_users:
-      title: Top 5 users
-      description: "This widget displays the top five users"
+      title: Top 5 de Usuários
+      description: "Esta widget exibe os cinco melhores usuários"
     users:
-      title: Recent users
-      description: "This widget displays newly registered members"
+      title: Usuários Recentes
+      description: "Esta widget exibe usuários recentemente cadastrados"
     tag_cloud:
-      title: Tag cloud
-      description: "This widget displays a tag cloud"
+      title: Nuvem de Tópicos
+      description: "Esta widget exibe nuvem de tópicos"
     pages:
-      title: Wiki pages
-      description: "This widget displays the list of wiki pages"
+      title: Páginas wiki
+      description: "Esta widget exibe a lista de páginas wiki"
