@@ -9,7 +9,7 @@ pt-BR:
       message3: "Você pode vê-la aqui:"
     earned_badge:
       message1: "Você ganhou a medalha %{badge} no %{app}"
-      message2: "Descrićão da medalha:"
+      message2: "Descrição da medalha:"
       message3: "Você pode ver todas suas medalhas no seu %{user_page}"
     follow:
       message1: "%{user} está te seguindo no %{app}"
@@ -26,7 +26,7 @@ pt-BR:
     new_feedback:
       message1: "O usuário %{user} <%{email}> um feedback"
       message2: "Um usuário anônimo mandou feedback do IP %{ip}"
-      message3: "Enderećo de email: %{email}"
+      message3: "Endereço de email: %{email}"
       message4: "Assunto: %{subject}"
     report:
       message1: "Relatório do %{group.name}"

@@ -30,7 +30,7 @@ pt-BR:
   global:
     from: "de %{site}"
     permission_denied: Acesso negado
-    please_login: Por favor faća login
+    please_login: Por favor faça login
     group_not_found: "A página %{url} não existe"
     preview: Visualizar
     or: ou

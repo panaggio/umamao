@@ -9,7 +9,7 @@ pt-BR:
       not_relevant: Sem relevância
       spam: Spam
       request_closing_details: Request to close this question
-      close_with_reason: Fechar direto sem votaćão (como moderador)
+      close_with_reason: Fechar direto sem votação (como moderador)
     create:
       flash_notice: Pedido de fechamento criado.
     update:
@@ -24,4 +24,4 @@ pt-BR:
       attributes:
         user: Usuário
         reason: Motivo
-        comment: Explicaćão
+        comment: Explicação

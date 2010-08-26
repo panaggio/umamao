@@ -6,13 +6,13 @@ pt-BR:
       success: 'Aviso criado.'
     form:
     actions:
-      title: Aćões
+      title: Ações
       delete: Remover
 
   activerecord:
     attributes:
       announcement:
         message: Mensagem
-        starts_at: Comeća em
+        starts_at: Começa em
         ends_at: Termina em
         only_anonymous: Apenas para usuários anônimos

@@ -66,7 +66,7 @@ pt-BR:
         password_confirmation: Repetir senha
         created_at: criado em
         updated_at: atualizado em
-        activation_code: Código de ativaćão
+        activation_code: Código de ativação
         activated_at: ativado em
         language: Idioma
         asked_by: feita por
@@ -75,7 +75,7 @@ pt-BR:
         preferred_languages: Seleciona os idiomas que você sabe
         last_logged_at: último login
         created_at: entrou
-        reputation: Reputaćão
+        reputation: Reputação
         avatar: Foto
         hide_country: Não exiba meu país
         language_filter: Filtrar por idioma

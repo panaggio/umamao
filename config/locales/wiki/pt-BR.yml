@@ -5,9 +5,9 @@ pt-BR:
       previous_versions: Versão anterior
       current_version: Versão atual
       version: Versão
-      version_summary: Explicaćão
+      version_summary: Explicação
     diff:
-      title: Diferenćas entre %{prev} e %{curr}
+      title: Diferenças entre %{prev} e %{curr}
     actions:
       revert: Reverter para esta versão
       show_diff: Comparar versões selecionadas
@@ -15,4 +15,4 @@ pt-BR:
       back_to_question: Voltar para pergunta
     model:
       attributes:
-        message: Explicaćão
+        message: Explicação
