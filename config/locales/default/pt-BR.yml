@@ -41,24 +41,24 @@ pt-BR:
         other: '%{count} minutos'
 
       about_x_hours:
-        one: 'mais ou menos 1 hora'
-        other: 'mais ou menos %{count} horas'
+        one: '~1 hora'
+        other: '~%{count} horas'
 
       x_days:
         one: '1 dia'
         other: '%{count} dias'
 
       about_x_months:
-        one: 'mais ou menos 1 mês'
-        other: 'mais ou menos %{count} meses'
+        one: '~1 mês'
+        other: '~%{count} meses'
 
       x_months:
         one: '1 mês'
         other: '%{count} meses'
 
       about_x_years:
-        one: 'mais ou menos 1 ano'
-        other: 'mais ou menos %{count} anos'
+        one: '~1 ano'
+        other: '~%{count} anos'
 
       over_x_years:
         one: 'mais de 1 ano'
