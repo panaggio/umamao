@@ -113,12 +113,6 @@ class QuestionsController < ApplicationController
   end
 
   def unanswered
-    if params[:language] || request.query_string =~ /tags=/
-      params.delete(:language)
-      head :moved_permanently, :location => url_for(params)
-      return
-    end
-
     set_page_title(t("questions.unanswered.title"))
     conditions = scoped_conditions({:answered_with_id => nil, :banned => false, :closed => false})
 
