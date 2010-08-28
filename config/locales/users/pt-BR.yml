@@ -14,7 +14,7 @@ pt-BR:
       name_tooltip: Usuários em ordem alfabética
     new:
       title: Criar conta
-      submit: Criar
+      submit: Criar conta
     edit:
       title: Configurações
       submit: Salvar
@@ -29,6 +29,8 @@ pt-BR:
     unfollow:
       flash_notice: "Você parou de seguir %{user}"
     form:
+      email: Email (para login e avisos)
+      academic_email: Email acadêmico (para confirmar vínculo com a universidade)
       information: Informação
       notifications: Receber emails
       new_answer_notification: de novas respostas
@@ -60,6 +62,7 @@ pt-BR:
       user:
         login: Login
         email: Email
+        academic_email: Email acadêmico
         name: Nome e sobrenome
         current_password: Senha atual
         password: Senha

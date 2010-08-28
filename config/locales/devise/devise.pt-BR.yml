@@ -15,15 +15,29 @@ pt-BR:
       timeout: 'Sua sessão expirou, por favor faça login de novo.'
       inactive: 'Sua conta ainda não foi ativada.'
     sessions:
+      link: Fazer login
       signed_in: ''
       signed_out: ''
+      new:
+        sign_in: Entrar
+        remember_me: Continuar logado
+        submit: Entrar
     passwords:
+      link: Esqueceu a senha?
       send_instructions: 'Você vai receber um email com instruções para redefinir sua senha em alguns minutos.'
       updated: 'Sua senha foi alterada. Você está logado(a) agora.'
+      new:
+        forgot_your_password: Esqueceu a senha?
+        submit: Mande-me instruções
     confirmations:
+      link: Não recebeu o email de confirmação?
       send_instructions: 'Você vai receber um email com instruções para confirmar seu endereço acadêmico em alguns minutos.'
       confirmed: 'Seu endereço acadêmico foi confirmado. Bem-vindo(a) ao Umamão!'
+      new:
+        resend_confirmation_instructions: Reenviar instruções de confirmação
+        submit: Mande-me instruções
     registrations:
+      link: Fazer cadastro
       signed_up: 'Recebemos seu cadastro. Agora só falta confirmar seu email acadêmico. Você vai receber um email de confirmação em breve.'
       updated: 'Sua conta foi atualizada.'
       destroyed: 'Adeus! Sua conta foi cancelada. Esperamos te ver de novo!'
