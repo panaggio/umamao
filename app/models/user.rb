@@ -15,9 +15,9 @@ class User
   alias_method_chain :send_confirmation_instructions, :academic_email
 
 	def confirmation_required_with_academic_email?
-		if self.academic_email = "admin"	
+		if self.academic_email = "admin"
 			return false
-		end 
+		end
 		self.confirmation_required_without_academic_email?
 	end
 	alias_method_chain :confirmation_required?, :academic_email
@@ -92,9 +92,9 @@ class User
   validates_length_of       :name,     :maximum => 100
 
   validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? }
-  validates_uniqueness_of   :academic_email, :allow_blank => true
+  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? }
   validates_format_of       :academic_email, :with => /[.@]unicamp.br/,
-                            :allow_blank => true
+                            :if => lambda { |u| u.new_record? }
 
   before_create :logged!
 

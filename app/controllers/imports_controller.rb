@@ -20,12 +20,13 @@ class ImportsController < ApplicationController
 
   def send_confirmation
     @users = if params[:all]
-      current_group.users(:needs_confirmation => true, :select => [:email, :login, :name])
+      current_group.users(:needs_confirmation => true)
     else
-      [User.first(:_id => params[:user_id], :select => [:email, :login, :name])]
+      [User.first(:_id => params[:user_id])]
     end
 
     @users.each do |user|
+      debugger
       user.instance_variable_set("@group", current_group)
       user.send_reset_password_instructions
       user.set(:needs_confirmation => false)
