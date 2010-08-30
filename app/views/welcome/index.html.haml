@@ -78,8 +78,6 @@
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}
 
-  -if logged_in?
-    = render :partial => "shared/preferred_tags"
   -if AppConfig.enable_i18n
     = render :partial => "shared/language_filter"
 
