@@ -10,11 +10,6 @@
     <!--[if lt IE 8]><link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/ie7.css"><![endif]-->
     = render :partial => "shared/layout/javascript"
 
-    %script{:type => "text/javascript", :charset => "utf-8"}
-      wmd_options = {autostart:false, output:"markdown"};
-    = javascript_include_merged "wmd/wmd.js"
-    = javascript_include_merged "setup-wmd.js"
-
   %body
     = render :partial => "shared/analytics"
     #container{:class => @current_class}

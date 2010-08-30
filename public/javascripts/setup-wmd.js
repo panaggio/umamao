@@ -1,3 +1,8 @@
+wmd_options = {
+  autostart: false,
+  output: "markdown"
+};
+
 /*
  * This is a helper function to setup textarea's with the WMD editor.
  * It receives a base name and finds the related elements inside the

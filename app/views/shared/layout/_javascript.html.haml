@@ -1,2 +1,8 @@
 = javascript_include_merged :base
+
+%script{:type => "text/javascript", :charset => "utf-8"}
+  wmd_options = {autostart:false, output:"markdown"};
+= javascript_include_merged "wmd/wmd.js"
+= javascript_include_merged "setup-wmd.js"
+
 = yield :js
