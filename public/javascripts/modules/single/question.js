@@ -7,10 +7,10 @@ $(document).ready(function() {
           if($.trim($(this).val())!=''){
             filled = true;
           }
-        })
+        });
         if(filled) {return I18n.on_leave_page; }
         return null;
-      }
+      };
     }
   });
-})
+});
