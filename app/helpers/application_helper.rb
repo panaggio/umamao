@@ -112,7 +112,7 @@ module ApplicationHelper
   end
 
   def markdown(txt, options = {})
-    txt = RDiscount.new(render_page_links(txt.to_s, options), :smart).to_html
+    txt = RDiscount.new(render_page_links(txt.to_s, options), :strict).to_html
     if options[:sanitize] != false
       txt = Sanitize.clean(txt, SANITIZE_CONFIG)
     end
