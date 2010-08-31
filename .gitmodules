@@ -1,3 +1,6 @@
 [submodule "public/javascripts/MathJax"]
 	path = public/javascripts/MathJax
 	url = git://github.com/umamao/MathJax.git
+[submodule "public/javascripts/wmd"]
+	path = public/javascripts/wmd
+	url = http://github.com/openlibrary/wmd.git
