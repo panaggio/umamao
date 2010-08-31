@@ -21,9 +21,8 @@
   = f.text_area :body, :class => "text_area", :id => "question-form", :rows => "auto", :cols => "auto"
   #question-preview.markdown
 
-/
   %script{:type => "text/javascript", :charset => "utf-8"}
-    setupWmd("question");
+      $().ready(function() { $("#question-form").wmd({preview: "question-preview"}); });
 
 -if current_group.language.nil? && AppConfig.enable_i18n
   .group

@@ -3,4 +3,4 @@
 	url = git://github.com/umamao/MathJax.git
 [submodule "public/javascripts/wmd"]
 	path = public/javascripts/wmd
-	url = http://github.com/openlibrary/wmd.git
+	url = git://github.com/umamao/wmd.git
