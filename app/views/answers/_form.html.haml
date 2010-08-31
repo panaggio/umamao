@@ -1,10 +1,15 @@
 %label.label
   = t(".answer_label")
-= f.text_area :body, {:class => "text_area", :rows => "auto", :cols => "auto", :id => "answer-form"}
+
+%div
+  = f.text_area :body, {:class => "text_area", :rows => "auto", :cols => "auto", :id => "answer"}
 %label.label
   = t("global.preview")
-#answer-preview.markdown
 
 %script{:type => "text/javascript", :charset => "utf-8"}
-  setupWmd("answer");
+  $().ready(function() { $("#answer").wmd(); });
+
+/ 
+  %script{:type => "text/javascript", :charset => "utf-8"}
+    setupWmd("answer");
 
