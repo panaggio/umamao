@@ -582,7 +582,8 @@ jQuery(function($){
                 firstselected: false,
                 filter_case: false,
                 filter_hide: false,
-                complete_text: "Start to typing...",
+		// TODO: Internationalize this
+                complete_text: "Comece a digitar...",
                 maxshownitems: 30,
                 maxitems: 10,
                 onselect: "",
