@@ -93,7 +93,7 @@ class User
 
   validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? }
   validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? }
-  validates_format_of       :academic_email, :with => /[.@]unicamp.br/,
+  validates_format_of       :academic_email, :with => /[.@]unicamp.br$/,
                             :if => lambda { |u| u.new_record? }
 
   before_create :logged!
