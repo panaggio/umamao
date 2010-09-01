@@ -54,7 +54,3 @@ module Shapado
     config.filter_parameters += [:password]
   end
 end
-
-# needs to  be required after Rails.root/lib is added to the load path
-require "smtp_tls"
-
