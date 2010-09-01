@@ -175,7 +175,7 @@ class Group
     user.member_of?(self)
   end
 
-  def add_member(user, role)
+  def add_member(user, role = 'user')
     membership = user.config_for(self.id)
     if membership.reputation < 5
       membership.reputation = 5

@@ -45,6 +45,8 @@ class UsersController < ApplicationController
     end
     success = @user && @user.save
     if success && @user.errors.empty?
+      current_group.add_member(@user)
+
       # Protects against session fixation attacks, causes request forgery
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
