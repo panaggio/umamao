@@ -26,7 +26,6 @@ class ImportsController < ApplicationController
     end
 
     @users.each do |user|
-      debugger
       user.instance_variable_set("@group", current_group)
       user.send_reset_password_instructions
       user.set(:needs_confirmation => false)
