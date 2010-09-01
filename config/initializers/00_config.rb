@@ -88,7 +88,8 @@ if AppConfig.smtp["activate"]
     :address => AppConfig.smtp["server"],
     :port => AppConfig.smtp["port"],
     :domain => AppConfig.smtp["domain"],
-    :authentication => :login,
+    :authentication => 'plain',
+    :enable_starttls_auto => true,
     :user_name => AppConfig.smtp["login"],
     :password => AppConfig.smtp["password"]
   }
