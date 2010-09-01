@@ -22,7 +22,7 @@
   #question-preview.markdown
 
   %script{:type => "text/javascript", :charset => "utf-8"}
-      $().ready(function() { $("#question-form").wmd({preview: "question-preview"}); });
+    $().ready(function() { $("#question-form").wmdMath({preview: "question-preview"}); });
 
 -if current_group.language.nil? && AppConfig.enable_i18n
   .group

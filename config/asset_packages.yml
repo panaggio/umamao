@@ -24,6 +24,8 @@ javascripts:
   - modules/members
   - modules/move_group
   - MathJax/mathjax/MathJax
+  - wmd/jquery.wmd.min
+  - wmd/jquery.wmd.mathjax
 
 - show:
   - modules/single/question
