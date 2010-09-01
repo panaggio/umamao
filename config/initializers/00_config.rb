@@ -70,10 +70,11 @@ SANITIZE_CONFIG = {
                  }
 }
 
+config = Rails.application.config
 
-Rails.application.config.session_options[:domain] = ".#{AppConfig.domain}"
-Rails.application.config.session_options[:key] = AppConfig.session_key
-Rails.application.config.session_options[:secret] = AppConfig.session_secret
+config.session_options[:domain] = ".#{AppConfig.domain}"
+config.session_options[:key] = AppConfig.session_key
+config.session_options[:secret] = AppConfig.session_secret
 
 ActionMailer::Base.default_url_options[:host] = AppConfig.domain
 
@@ -82,7 +83,8 @@ AppConfig.enable_facebook_auth = AppConfig.facebook["activate"]
 AppConfig.version = File.read(Rails.root + "VERSION")
 
 if AppConfig.smtp["activate"]
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
     :address => AppConfig.smtp["server"],
     :port => AppConfig.smtp["port"],
     :domain => AppConfig.smtp["domain"],
