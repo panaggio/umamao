@@ -19,6 +19,7 @@ gem 'magent', '~> 0.4'
 gem 'mongo', '~> 1.0.3'
 gem 'mongo_mapper', '~>0.8.2'
 gem 'mongomapper_ext', '~>0.4.0'
+gem 'newrelic_rpm', '~>2.13.0.beta6', :require => false
 gem 'oauth2', '~>0.0.8'
 gem 'rdiscount', '~>1.6.3.1'
 gem 'ruby-stemmer', '~>0.8.2', :require => 'lingua/stemmer'

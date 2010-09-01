@@ -3,7 +3,7 @@
 *.orig
 coverage
 public/stylesheets/compiled/
-config/shapado.yml
+config/*.yml
 data/*.dat
 config/database.yml
 base_packaged.*
