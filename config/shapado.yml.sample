@@ -21,11 +21,12 @@ base: &common
 
   smtp:
     activate: false
-    server: "smtp.gmail.com"
-    port: 587
-    domain: "shapado.com"
-    login: "shapado@gmail.com"
-    password: "shapado123"
+    settings:
+      address: "smtp.gmail.com"
+      port: 587
+      domain: "shapado.com"
+      user_name: "shapado@gmail.com"
+      password: "shapado123"
 
   facebook:
     activate: false
