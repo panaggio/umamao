@@ -41,7 +41,7 @@ pt-BR:
       show_more_lang: "Mostrar mais idiomas"
     create:
       flash_notice: "Obrigado por se cadastrar!"
-      flash_error:  "Desculpe, não deu para criar sua conta. Tente de novo, ou entre em contato conosco (link acima)."
+      flash_error:  "Desculpe, não deu para criar sua conta. Tente de novo, ou entre em contato com a gente (no link de feedback na base da página)."
     messages:
       errors:
         reputation_needed: "Você precisa de pelo menos %{min_reputation} de reputação para %{action}"
