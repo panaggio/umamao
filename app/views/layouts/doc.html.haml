@@ -16,10 +16,7 @@
         = current_group.head
         #doc-main-bar
           #logo
-            -if current_group.has_logo?
-              =link_to image_tag(logo_group_path(current_group), :class => "group_logo"), domain_url(:custom => current_group.domain)
-            -else
-              = image_tag("default_logo.png", :class => "group_logo")
+            = image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"])
     #doc-wrapper
       #main-doc
         = yield

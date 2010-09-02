@@ -110,10 +110,8 @@ Shapado::Application.routes.draw do
     end
 
     member do
-      get :logo
       get :allow_custom_ads
       get :disallow_custom_ads
-      get :favicon
       get :close
       get :accept
       get :css

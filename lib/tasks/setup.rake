@@ -44,9 +44,6 @@ namespace :setup do
       default_group.owner = admin
       default_group.add_member(admin, "owner")
     end
-    default_group.logo = File.open(Rails.root+"public/images/logo.png")
-    default_group.logo.extension = "png"
-    default_group.logo.content_type = "image/png"
     default_group.save
   end
 

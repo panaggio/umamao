@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  skip_before_filter :check_group_access, :only => [:logo, :css, :favicon]
-  before_filter :login_required, :except => [:index, :show, :logo, :css, :favicon]
+  skip_before_filter :check_group_access, :only => [:css]
+  before_filter :login_required, :except => [:index, :show, :css]
   before_filter :check_permissions, :only => [:edit, :update, :close]
   before_filter :moderator_required , :only => [:accept, :destroy]
   subtabs :index => [ [:most_active, "activity_rate desc"], [:newest, "created_at desc"],
@@ -81,8 +81,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new
-    @group.safe_update(%w[name legend description default_tags subdomain logo forum
-                          custom_favicon language theme custom_css wysiwyg_editor], params[:group])
+    @group.safe_update(%w[name legend description default_tags subdomain forum
+                          language theme custom_css wysiwyg_editor], params[:group])
 
     @group.safe_update(%w[isolate domain private], params[:group]) if current_user.admin?
 
@@ -109,8 +109,8 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
-    @group.safe_update(%w[name legend description default_tags subdomain logo logo_info forum
-                          custom_favicon language theme reputation_rewards reputation_constrains
+    @group.safe_update(%w[name legend description default_tags subdomain logo_info forum
+                          language theme reputation_rewards reputation_constrains
                           has_adult_content registered_only openid_only custom_css wysiwyg_editor fb_button], params[:group])
 
     @group.safe_update(%w[isolate domain private has_custom_analytics has_custom_html has_custom_js], params[:group]) #if current_user.admin?
@@ -155,28 +155,10 @@ class GroupsController < ApplicationController
     redirect_to group_path(@group)
   end
 
-  def logo
-    @group = Group.find_by_slug_or_id(params[:id], :select => [:file_list])
-    if @group && @group.has_logo?
-      send_data(@group.logo.try(:read), :filename => "logo.#{@group.logo.extension}", :type => @group.logo.content_type,  :disposition => 'inline')
-    else
-      render :text => ""
-    end
-  end
-
   def css
     @group = Group.find_by_slug_or_id(params[:id], :select => [:file_list])
     if @group && @group.has_custom_css?
       send_data(@group.custom_css.read, :filename => "custom_theme.css", :type => "text/css")
-    else
-      render :text => ""
-    end
-  end
-
-  def favicon
-    @group = Group.find_by_slug_or_id(params[:id], :select => [:file_list])
-    if @group && @group.has_custom_favicon?
-      send_data(@group.custom_favicon.read, :filename => "favicon.ico", :type => @group.custom_favicon.content_type)
     else
       render :text => ""
     end

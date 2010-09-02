@@ -3,9 +3,6 @@
     = t(".title", :name => h(@group.name))
 
 #show_group
-  -if @group.has_logo?
-    = image_tag(logo_group_path(@group), :class => "group_logo")
-
   .markdown
     =find_and_preserve(shapado_auto_link(markdown(@group.description)))
   .clear
