@@ -67,7 +67,8 @@ namespace :setup do
     admin = User.new(:login => "admin", :password => "admins",
                                         :password_confirmation => "admins",
                                         :email => "shapado@example.com",
-                                        :role => "admin")
+                                        :role => "admin",
+					:confirmed_at => Time.now)
 
     admin.save(:validate => false)
   end
