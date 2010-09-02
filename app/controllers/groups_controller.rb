@@ -81,8 +81,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new
-    @group.safe_update(%w[name legend description default_tags subdomain forum
-                          language theme custom_css wysiwyg_editor], params[:group])
+    @group.safe_update(%w[name legend description default_tags subdomain logo forum
+                          custom_favicon language theme custom_css], params[:group])
 
     @group.safe_update(%w[isolate domain private], params[:group]) if current_user.admin?
 
@@ -109,9 +109,9 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
-    @group.safe_update(%w[name legend description default_tags subdomain logo_info forum
-                          language theme reputation_rewards reputation_constrains
-                          has_adult_content registered_only openid_only custom_css wysiwyg_editor fb_button], params[:group])
+    @group.safe_update(%w[name legend description default_tags subdomain logo logo_info forum
+                          custom_favicon language theme reputation_rewards reputation_constrains
+                          has_adult_content registered_only openid_only custom_css fb_button], params[:group])
 
     @group.safe_update(%w[isolate domain private has_custom_analytics has_custom_html has_custom_js], params[:group]) #if current_user.admin?
     @group.safe_update(%w[analytics_id analytics_vendor], params[:group]) if @group.has_custom_analytics

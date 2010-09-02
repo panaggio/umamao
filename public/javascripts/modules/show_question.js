@@ -5,30 +5,30 @@ $(document).ready(function() {
   $('.auto-link').autoVideo();
 
   $("form.vote_form button").live("click", function(event) {
-    var btn_name = $(this).attr("name")
+    var btn_name = $(this).attr("name");
     var form = $(this).parents("form");
     $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
       if(data.success){
-        form.find(".votes_average").text(data.average)
+        form.find(".votes_average").text(data.average);
         if(data.vote_state == "deleted") {
-          form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png")
-          form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png")
+          form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png");
+          form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png");
         }
         else {
           if(data.vote_type == "vote_down") {
-            form.find("button[name=vote_down] img").attr("src", "/images/vote_down.png")
-            form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png")
+            form.find("button[name=vote_down] img").attr("src", "/images/vote_down.png");
+            form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png");
           } else {
-            form.find("button[name=vote_up] img").attr("src", "/images/vote_up.png")
-            form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png")
+            form.find("button[name=vote_up] img").attr("src", "/images/vote_up.png");
+            form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png");
           }
         }
-        showMessage(data.message, "notice")
+        showMessage(data.message, "notice");
       } else {
-        showMessage(data.message, "error")
+        showMessage(data.message, "error");
         if(data.status == "unauthenticate") {
           window.onbeforeunload = null;
-          window.location="/users/login"
+          window.location="/users/login";
         }
       }
     }, "json");
@@ -36,20 +36,20 @@ $(document).ready(function() {
   });
 
   $(".comment .comment-votes form.vote-up-comment-form input[name=vote_up]").live("click", function(event) {
-    var btn = $(this)
+    var btn = $(this);
     var form = $(this).parents("form");
     btn.hide();
     $.post(form.attr("action"), form.serialize()+"&"+btn.attr("name")+"=1", function(data){
       if(data.success){
         if(data.vote_state == "deleted") {
-          btn.attr("src", "/images/dialog-ok.png" )
+          btn.attr("src", "/images/dialog-ok.png" );
         } else {
-          btn.attr("src", "/images/dialog-ok-apply.png" )
+          btn.attr("src", "/images/dialog-ok-apply.png" );
         }
         btn.parents(".comment-votes").children(".votes_average").html(data.average);
-        showMessage(data.message, "notice")
+        showMessage(data.message, "notice");
       } else {
-        showMessage(data.message, "error")
+        showMessage(data.message, "error");
       }
       btn.show();
     }, "json");
@@ -59,9 +59,9 @@ $(document).ready(function() {
   $("form.mainAnswerForm .button").live("click", function(event) {
     var form = $(this).parents("form");
     var answers = $("#answers .block");
-    var button = $(this)
+    var button = $(this);
 
-    button.attr('disabled', true)
+    button.attr('disabled', true);
     $.ajax({ url: form.attr("action"),
       data: form.serialize()+"&format=js",
       dataType: "json",
@@ -70,26 +70,27 @@ $(document).ready(function() {
                   if(data.success) {
                     window.onbeforeunload = null;
 
-                    var answer = $(data.html)
+                    var answer = $(data.html);
+                    var content = answer.find(".entry-content");
                     answer.find("form.commentForm").hide();
-                    answers.append(answer)
-                    highlightEffect(answer)
-                    showMessage(data.message, "notice")
+                    answers.append(answer);
+                    highlightEffect(answer);
+                    showMessage(data.message, "notice");
                     form.find("textarea").val("");
                     form.find("#markdown_preview").html("");
-                    $("#wysiwyg_editor").wysiwyg('clear');
                     removeFromLocalStorage(location.href, "markdown_editor");
+                    MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
                   } else {
-                    showMessage(data.message, "error")
+                    showMessage(data.message, "error");
                     if(data.status == "unauthenticate") {
                       window.onbeforeunload = null;
-                      window.location="/users/login"
+                      window.location="/users/login";
                     }
                   }
                 },
       error: manageAjaxError,
       complete: function(XMLHttpRequest, textStatus) {
-         button.attr('disabled', false)
+        button.attr('disabled', false);
       }
     });
     return false;
@@ -98,10 +99,10 @@ $(document).ready(function() {
   $("form.commentForm .button").live("click", function(event) {
     var form = $(this).parents("form");
     var commentable = $(this).parents(".commentable");
-    var comments = commentable.find(".comments")
-    var button = $(this)
+    var comments = commentable.find(".comments");
+    var button = $(this);
 
-    button.attr('disabled', true)
+    button.attr('disabled', true);
     $.ajax({ url: form.attr("action"),
              data: form.serialize()+"&format=js",
              dataType: "json",
@@ -110,35 +111,36 @@ $(document).ready(function() {
                           if(data.success) {
                             var textarea = form.find("textarea");
                             window.onbeforeunload = null;
-                            var comment = $(data.html)
-                            comments.append(comment)
-                            highlightEffect(comment)
-                            showMessage(data.message, "notice")
+                            var comment = $(data.html);
+                            comments.append(comment);
+                            highlightEffect(comment);
+                            showMessage(data.message, "notice");
                             form.hide();
                             textarea.val("");
                             removeFromLocalStorage(location.href, textarea.attr('id'));
+                            MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
                           } else {
-                            showMessage(data.message, "error")
+                            showMessage(data.message, "error");
                             if(data.status == "unauthenticate") {
                               window.onbeforeunload = null;
-                              window.location="/users/login"
+                              window.location="/users/login";
                             }
                           }
                       },
              error: manageAjaxError,
              complete: function(XMLHttpRequest, textStatus) {
-               button.attr('disabled', false)
+               button.attr('disabled', false);
              }
     });
     return false;
   });
 
   $("#request_close_question_form").submit(function() {
-    var request_button = $(this).find("input.button")
-    request_button.attr('disabled', true)
-    var close_button = $(this).find("button")
-    close_button.attr('disabled', true)
-    form = $(this)
+    var request_button = $(this).find("input.button");
+    request_button.attr('disabled', true);
+    var close_button = $(this).find("button");
+    close_button.attr('disabled', true);
+    form = $(this);
 
     $.ajax({
       url: $(this).attr("action"),
@@ -147,29 +149,29 @@ $(document).ready(function() {
       type: "POST",
       success: function(data, textStatus, XMLHttpRequest) {
         if(data.success) {
-          form.slideUp()
-          showMessage(data.message, "notice")
+          form.slideUp();
+          showMessage(data.message, "notice");
         } else {
-          showMessage(data.message, "error")
+          showMessage(data.message, "error");
           if(data.status == "unauthenticate") {
             window.onbeforeunload = null;
-            window.location="/users/login"
+            window.location="/users/login";
           }
         }
       },
       error: manageAjaxError,
       complete: function(XMLHttpRequest, textStatus) {
-        request_button.attr('disabled', false)
-        close_button.attr('disabled', false)
+        request_button.attr('disabled', false);
+        close_button.attr('disabled', false);
       }
     });
     return false;
   });
 
   $(".edit_comment").live("click", function() {
-    var comment = $(this).parents(".comment")
-    var link = $(this)
-    link.hide()
+    var comment = $(this).parents(".comment");
+    var link = $(this);
+    link.hide();
     $.ajax({
       url: $(this).attr("href"),
       dataType: "json",
@@ -177,8 +179,8 @@ $(document).ready(function() {
       data: {format: 'js'},
       success: function(data) {
         comment = comment.append(data.html);
-        link.hide()
-        var form = comment.find("form.form")
+        link.hide();
+        var form = comment.find("form.form");
         form.find(".cancel_edit_comment").click(function() {
           form.remove();
           link.show();
@@ -188,7 +190,7 @@ $(document).ready(function() {
         var button = form.find("input[type=submit]");
         var textarea = form.find('textarea');
         form.submit(function() {
-          button.attr('disabled', true)
+          button.attr('disabled', true);
           $.ajax({url: form.attr("action"),
                   dataType: "json",
                   type: "PUT",
@@ -203,24 +205,24 @@ $(document).ready(function() {
                                 removeFromLocalStorage(location.href, textarea.attr('id'));
                                 window.onbeforeunload = null;
                               } else {
-                                showMessage(data.message, "error")
+                                showMessage(data.message, "error");
                                 if(data.status == "unauthenticate") {
                                   window.onbeforeunload = null;
-                                  window.location="/users/login"
+                                  window.location="/users/login";
                                 }
                               }
                             },
                   error: manageAjaxError,
                   complete: function(XMLHttpRequest, textStatus) {
-                    button.attr('disabled', false)
+                    button.attr('disabled', false);
                   }
            });
-           return false
+           return false;
         });
       },
       error: manageAjaxError,
       complete: function(XMLHttpRequest, textStatus) {
-        link.show()
+        link.show();
       }
     });
     return false;
@@ -240,7 +242,7 @@ $(document).ready(function() {
     form.slideDown();
     if(isreply){
       textarea.focus();
-      textarea.text('@'+user+' ')
+      textarea.text('@'+user+' ');
     } else { textarea.text('').focus();  }
 
     var viewportHeight = window.innerHeight ? window.innerHeight : $(window).height();
@@ -279,7 +281,7 @@ $(document).ready(function() {
 
   $(".answer .flag-link").live("click", function() {
     var link = $(this);
-    var controls = link.parents(".controls")
+    var controls = link.parents(".controls");
     controls.find(".forms form.nestedAnswerForm").slideUp();
     controls.parents(".answer").find(".forms .flag_form").slideToggle();
 
@@ -303,7 +305,7 @@ $(document).ready(function() {
   });
 
   $("#request-close-link").click(function() {
-    var controls = $(this).parents(".controls")
+    var controls = $(this).parents(".controls");
     $("#add_comment_form").slideUp();
     $("#question_flag_form").slideUp();
     $("#close_question_form").slideUp();
