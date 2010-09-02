@@ -55,7 +55,6 @@ class WelcomeController < ApplicationController
 
     if !ok
       flash[:error] = I18n.t("welcome.feedback.captcha_error")
-      flash[:error] += ". Domo arigato, Mr. Roboto. "
       redirect_to feedback_path(:feedback => params[:feedback])
     else
       Notifier.deliver_new_feedback(current_user, params[:feedback][:title],
