@@ -84,7 +84,7 @@
                     :markdown => false}.merge(options)
         out = []
         options[:keys].each do |key|
-          next unless flash[key]
+          next unless flash[key].present?
           messages = []
           [flash[key]].flatten.compact.each do |msg|
             text = msg
