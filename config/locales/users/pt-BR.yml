@@ -40,7 +40,7 @@ pt-BR:
       avatar_tip: "Change your profile image using Gravatar"
       show_more_lang: "Mostrar mais idiomas"
     create:
-      flash_notice: "Obrigado por se cadastrar!"
+      flash_notice: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
       flash_error:  "Desculpe, não deu para criar sua conta. Tente de novo, ou entre em contato com a gente (no link de feedback na base da página)."
     messages:
       errors:

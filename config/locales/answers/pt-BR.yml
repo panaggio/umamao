@@ -8,7 +8,7 @@ pt-BR:
     edit:
       title: Editando resposta
     create:
-      flash_notice: "Valeu!"
+      flash_notice: "Resposta enviada."
       flash_error:  "Alguma coisa deu errado com a sua resposta.
   \n  Lembre-se que:
   \n - Respostas vazias ou repetidas não são permitidas;
