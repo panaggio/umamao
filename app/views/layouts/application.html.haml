@@ -49,12 +49,11 @@
           = render :partial => "shared/ads/header_ads"
           #block-text.block
             .secondary-navigation{:class => @active_subtab.to_s}
-              %p.markdown
-                = show_flash_messages(:class => "flash", :markdown => true)
-
               = yield :subtabs
               .clear
             .content
+              %p.markdown
+                = show_flash_messages(:class => "flash", :markdown => true)
               = render :partial => "shared/ads/content_ads"
               .inner
                 = yield
