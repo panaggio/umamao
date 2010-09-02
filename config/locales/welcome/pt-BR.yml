@@ -12,4 +12,7 @@ pt-BR:
       quick_question: Faça uma pergunta
       recent_questions: Perguntas recentes
       empty: Nenhuma pergunta ainda.
+      browse_all_or_by_tags: "Veja a %{full_list_of_questions} ou %{browse_by_tags}"
+      full_list_of_questions: "lista completa de perguntas"
+      browse_by_tags: "navegue por tópicos"
 
