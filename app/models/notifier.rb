@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
 
       scope = "mailers.notifications.give_advice"
 
-      from "#{group ? group.name : AppConfig.application_name} <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       recipients user.email
 
       if following
@@ -42,7 +42,7 @@ class Notifier < ActionMailer::Base
 
       recipients user.email
       domain = group ? group.domain : AppConfig.domain
-      from "#{group ? group.name : AppConfig.application_name} <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject @subject
       sent_on Time.now
       body   :user => user, :answer => answer, :question => answer.question,
@@ -55,7 +55,7 @@ class Notifier < ActionMailer::Base
   def new_comment(group, comment, user, question)
     recipients user.email
     template_for user do
-      from "Shapado <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject I18n.t("mailers.notifications.new_comment.subject", :login => comment.user.login, :group => group.name)
       sent_on Time.now
       content_type    "multipart/alternative"
@@ -66,7 +66,7 @@ class Notifier < ActionMailer::Base
 
   def new_feedback(user, subject, content, email, ip)
     recipients AppConfig.exception_notification["exception_recipients"]
-    from "Shapado[feedback] <#{AppConfig.notification_email}>"
+    from AppConfig.notification_email
     subject "feedback: #{subject}"
     sent_on Time.now
     body   :user => user, :subject => subject, :content => content, :email => email, :ip => ip
@@ -76,7 +76,7 @@ class Notifier < ActionMailer::Base
   def follow(user, followed)
     recipients followed.email
     template_for followed do
-      from "Shapado <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject I18n.t("mailers.notifications.follow.subject", :login => user.login, :app => AppConfig.application_name)
       sent_on Time.now
       body :user => user, :followed => followed
@@ -87,7 +87,7 @@ class Notifier < ActionMailer::Base
     recipients user.email
     template_for user do
 
-      from "Shapado <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject I18n.t("mailers.notifications.earned_badge.subject", :group => group.name)
       sent_on Time.now
       body :user => user, :group => group, :badge => badge
@@ -99,7 +99,7 @@ class Notifier < ActionMailer::Base
     recipients question.user.email
     template_for question.user do
 
-      from "Shapado <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject I18n.t("mailers.notifications.favorited.subject", :login => user.login)
       sent_on Time.now
       body :user => user, :group => group, :question => question
@@ -110,7 +110,7 @@ class Notifier < ActionMailer::Base
   def report(user, report)
     recipients user.email
     template_for user do
-      from "Shapado <#{AppConfig.notification_email}>"
+      from AppConfig.notification_email
       subject I18n.t("mailers.notifications.report.subject", :group => report.group.name, :app => AppConfig.application_name)
       sent_on Time.now
 
@@ -132,7 +132,6 @@ class Notifier < ActionMailer::Base
     if user && user.language
       language = user.language
     end
-    I18n.locale = language
 
     template_name = "#{@method_name}"
     if Dir.glob(Rails.root + "app/views/notifier/#{template_name}*").size == 0
@@ -142,6 +141,5 @@ class Notifier < ActionMailer::Base
     @template = template_name
 
     yield if block
-    I18n.locale = old_lang
   end
 end
