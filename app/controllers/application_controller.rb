@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
         raise Goalie::Forbidden
       end
     else
+      session["user_return_to"] = request.url
+
       respond_to do |format|
         format.json { render :json => {:message => "Permission denied" }}
         format.html { redirect_to new_user_session_path }
@@ -161,14 +163,6 @@ class ApplicationController < ActionController::Base
 
   def set_layout
     devise_controller? || (action_name == "new" && controller_name == "users") ? 'sessions' : 'application'
-  end
-
-  def after_sign_in_path_for(resource)
-    if return_to = session.delete("return_to")
-      return_to
-    else
-      super
-    end
   end
 
   def set_page_title(title)

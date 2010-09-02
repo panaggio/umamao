@@ -4,7 +4,7 @@
   .fields
     =f.hidden_field "flaggeable_type", :value => flaggeable_class_name, :id => "flaggeable_type_#{flaggeable_class_name}_#{flag.flaggeable.id}"
     =f.hidden_field "flaggeable_id", :value => flag.flaggeable.id, :id => "flaggeable_id_#{flaggeable_class_name}_#{flag.flaggeable.id}"
-    =f.hidden_field "return_to", :value => source, :id => "flaggeable_source_#{flaggeable_class_name}_#{flag.flaggeable.id}"
+    =f.hidden_field "user_return_to", :value => source, :id => "flaggeable_source_#{flaggeable_class_name}_#{flag.flaggeable.id}"
   .group
     %label.label
       =t(".label")

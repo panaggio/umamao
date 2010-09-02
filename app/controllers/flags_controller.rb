@@ -24,7 +24,7 @@ class FlagsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html{redirect_to params[:flag][:return_to]}
+      format.html{redirect_to params[:flag][:user_return_to]}
 
       format.json do
         if flagged
