@@ -14,13 +14,13 @@ class User
   end
   alias_method_chain :send_confirmation_instructions, :academic_email
 
-	def confirmation_required_with_academic_email?
-		if self.academic_email = "admin"
-			return false
-		end
-		self.confirmation_required_without_academic_email?
-	end
-	alias_method_chain :confirmation_required?, :academic_email
+  def confirmation_required_with_academic_email?
+    if self.academic_email == "admin"
+      return false
+    end
+    self.confirmation_required_without_academic_email?
+  end
+  alias_method_chain :confirmation_required?, :academic_email
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
