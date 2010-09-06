@@ -12,7 +12,8 @@ pt-BR:
       pages: Páginas
   pages:
     actions:
-      create_page: Criar nova página
+      title: Gerenciar páginas
+      create_page: Nova página
       edit_page: Editar página
     create:
       success: Página criada.

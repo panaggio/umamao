@@ -46,7 +46,7 @@ pt-BR:
       newest_tooltip: Perguntas mais recentes
       oldest: Mais antigas
       title: Todas as perguntas
-      unanswered_questions: Perguntas sem resposta
+      unanswered_questions: perguntas sem resposta
       votes: Votos
       votes_tooltip: Perguntas com mais votos
     model:
