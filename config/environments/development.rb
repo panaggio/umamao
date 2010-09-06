@@ -22,4 +22,6 @@ Shapado::Application.configure do
 
   config.action_mailer.default_url_options = {:port => 3000}
 
+  config.active_support.deprecation = :log
+
 end
