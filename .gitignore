@@ -9,5 +9,5 @@ config/database.yml
 base_packaged.*
 .directory
 .bundle
-log/*.log
+log/
 tmp/**/*
