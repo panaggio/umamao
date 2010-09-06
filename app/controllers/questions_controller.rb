@@ -141,9 +141,9 @@ class QuestionsController < ApplicationController
   def tags
     conditions = scoped_conditions({:answered_with_id => nil, :banned => false})
     if params[:q].blank?
-      @tag_cloud = Question.tag_cloud(conditions)
+      @tag_cloud = Question.tag_cloud(conditions, -1)
     else
-      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions)
+      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1)
     end
     respond_to do |format|
       format.html do
