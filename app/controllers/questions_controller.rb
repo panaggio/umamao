@@ -1,3 +1,5 @@
+require 'lib/core_ext/array'
+
 class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:create, :index, :show, :tags, :unanswered, :related_questions, :tags_for_autocomplete, :retag, :retag_to]
   before_filter :admin_required, :only => [:move, :move_to]
@@ -141,10 +143,15 @@ class QuestionsController < ApplicationController
   def tags
     conditions = scoped_conditions({:answered_with_id => nil, :banned => false})
     if params[:q].blank?
-      @tag_cloud = Question.tag_cloud(conditions, -1)
+      @tag_cloud = Question.tag_cloud(conditions, -1).paginate :per_page => 32,
+      :page => params[:page] || 1
     else
-      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1)
+      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1).paginate :per_page => 32,
+      :page => params[:page] || 1
     end
+
+    
+      
     respond_to do |format|
       format.html do
         set_page_title(t("layouts.application.tags"))

@@ -1,13 +1,13 @@
--feed_url = url_for(:format => "atom", :tags => params[:tags])
+- feed_url = url_for(:format => "atom", :tags => params[:tags])
 
--content_for :rss do
+- content_for :rss do
   %link{:rel=>"alternate", :type=>"application/atom+xml", :title => "atom", :href=> url_for(:format => "atom", :tags => params[:tags])}
   %link{:rel=>"alternate", :type=>"application/atom+xml", :title => "atom", :href=> url_for(:format => "atom")}
 
--content_for :subtabs do
+- content_for :subtabs do
   .navtitle
     = t(".title")
-    -if @questions
+    - if @questions
       == (#{@questions.total_entries})
 
   %ul
@@ -21,8 +21,8 @@
       = link_to t("questions.index.active"), questions_path(:sort=>"activity"), :title => t("questions.index.active_tooltip"), :rel => "nofollow"
 
 
--content_for :sidebar do
-  -if logged_in?
+- content_for :sidebar do
+  - if logged_in?
     = render :partial => "shared/language_filter"
 
   = render :partial => "shared/current_tags"
@@ -31,10 +31,10 @@
 
 /Questions
 %ul.items#questions
-  -if @questions.empty?
+  - if @questions.empty?
     %li.highlight
       = t(".empty")
-  -@questions.each do |question|
+  - @questions.each do |question|
     = render :partial => "question", :object => question
 
 #additional_info
@@ -42,6 +42,6 @@
 
   #help_us
     = t(".help_to_answer")
-    =link_to t(".unanswered_questions"), unanswered_questions_path
+    = link_to t(".unanswered_questions"), unanswered_questions_path
 
   .clear
