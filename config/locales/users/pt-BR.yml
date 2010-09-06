@@ -29,9 +29,10 @@ pt-BR:
     unfollow:
       flash_notice: "Você parou de seguir %{user}"
     form:
+      change_password: Trocar de senha
       email: Email (para login e avisos)
       academic_email: Email acadêmico (para confirmar vínculo com a universidade)
-      information: Informação
+      information: Informações pessoais
       notifications: Receber emails
       new_answer_notification: de novas respostas
       give_advice_notification: de perguntas nos meus tópicos de interesse

@@ -18,3 +18,22 @@
   =render :partial => "form", :locals => {:f => f}
   .group.navform
     = submit_tag t('.submit')
+
+- form_for @user, :html => {:class => "form"} do |f|
+  %h2.title
+    = t("users.form.change_password")
+  -if @user.encrypted_password.present?
+    .group
+      = label_tag :current_password, t(:current_password, :scope => "activerecord.attributes.user"), :class => "label"
+      = password_field :current_password, '', :class => 'text_field'
+
+  .group
+    = f.label :password, t(:password, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.password_field :password, :class => "text_field"
+
+  .group
+    = f.label :password_confirmation, t(:password_confirmation, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.password_field :password_confirmation, :class => "text_field"
+
+  .group.navform
+    = submit_tag t('.submit')
