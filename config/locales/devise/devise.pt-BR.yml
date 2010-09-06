@@ -29,6 +29,11 @@ pt-BR:
       new:
         forgot_your_password: Esqueceu a senha?
         submit: Mande-me instruções
+      edit:
+        reset_your_password: Redefinir senha
+        password: Nova senha
+        password_confirmation: Confirmar nova senha
+        submit: Salvar
     confirmations:
       link: Não recebeu o email de confirmação?
       send_instructions: 'Você vai receber um email com instruções para confirmar seu endereço acadêmico em alguns minutos.'
