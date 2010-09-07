@@ -7,8 +7,8 @@ pt-BR:
     destroy:
       flash_notice: "Seu voto foi retirado."
     control:
-      to_vote_up: "Votar para cima"
-      to_vote_down: "Votar para baixo"
+      to_vote_up: "Gostei"
+      to_vote_down: "Não gostei"
       have_voted_up: "Desfazer voto"
       have_voted_down: "Desfazer voto"
     model:
