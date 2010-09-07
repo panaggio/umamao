@@ -14,7 +14,6 @@ Shapado::Application.routes.draw do
   match '/moderate' => 'admin/moderate#index', :as => :moderate
   match '/moderate/ban' => 'admin/moderate#ban', :as => :ban
   match '/moderate/unban' => 'admin/moderate#unban', :as => :unban
-  match '/facts' => 'welcome#facts', :as => :facts
   match '/feedback' => 'welcome#feedback', :as => :feedback
   match '/send_feedback' => 'welcome#send_feedback', :as => :send_feedback
   match '/settings' => 'users#edit', :as => :settings

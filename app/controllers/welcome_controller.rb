@@ -50,10 +50,6 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def facts
-  end
-
-
   def change_language_filter
     if logged_in? && params[:language][:filter]
       current_user.update_language_filter(params[:language][:filter])
