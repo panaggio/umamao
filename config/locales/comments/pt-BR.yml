@@ -3,7 +3,7 @@ pt-BR:
     edit:
       title: Editar
     create:
-      flash_notice:
+      flash_notice: "Comentário enviado."
     update:
       flash_notice: "Comentário atualizado."
     shared:
