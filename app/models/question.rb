@@ -27,6 +27,9 @@ class Question
   key :closed, Boolean, :default => false
   key :closed_at, Time
 
+  key :answered, Boolean, :default => false
+  before_save :update_answered
+
   key :answered_with_id, String
   belongs_to :answered_with, :class_name => "Answer"
 
@@ -266,8 +269,14 @@ class Question
     end
   end
 
-  def answered
-    self.answered_with_id.present?
+  def update_answered
+    self.answers.each do |a|
+      if a.votes_average > 0
+        self.answered = true
+        return
+      end
+    end
+    self.answered = false
   end
 
   def self.update_last_target(question_id, target)
