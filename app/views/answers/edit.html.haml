@@ -1,9 +1,11 @@
+= javascript_include_merged :show
+
 -content_for :subtabs do
   .navtitle
     = t(".title")
 
 - form_for(:answer, :url => question_answer_path(@question, @answer), :html => {:method => :put, :class => "form"}) do |f|
-  =render :partial => "form", :locals => {:f => f, :markdown => true}
+  = render :partial => "form", :locals => {:f => f, :markdown => true}
   .group
     .group.navform
       .right

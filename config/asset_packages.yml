@@ -23,11 +23,11 @@ javascripts:
   - modules/tags_question
   - modules/members
   - modules/move_group
+
+- show:
   - MathJax/mathjax/MathJax
   - wmd/jquery.wmd.min
   - wmd/jquery.wmd.mathjax
-
-- show:
   - modules/single/question
   - jquery.autovideo
   - modules/show_question

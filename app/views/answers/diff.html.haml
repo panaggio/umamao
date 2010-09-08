@@ -1,8 +1,8 @@
--content_for :subtabs do
+- content_for :subtabs do
   .navtitle
     =t("wiki.diff.title", :prev => @prev, :curr => @curr)
 
-=render :partial => "wiki/diff", :locals => {:post => @answer, :prev => @prev, :curr => @curr, :scope => "activerecord.attributes.answer" }
+= render :partial => "wiki/diff", :locals => {:post => @answer, :prev => @prev, :curr => @curr, :scope => "activerecord.attributes.answer" }
 
 %br
 .form

@@ -1,9 +1,9 @@
--content_for :subtabs do
+- content_for :subtabs do
   .navtitle
     = t(".title")
 
--form_for(:answer, :url => question_answer_path(@question, @answer), :html => {:method => :put, :class => "form"}) do |f|
-  =render :partial => "form", :locals => {:f => f, :markdown => true}
+- form_for(:answer, :url => question_answer_path(@question, @answer), :html => {:method => :put, :class => "form"}) do |f|
+  = render :partial => "form", :locals => {:f => f, :markdown => true}
   .field-group
     .buttons
       = f.submit t("scaffold.update")
