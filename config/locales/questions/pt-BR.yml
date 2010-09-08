@@ -24,7 +24,7 @@ pt-BR:
       pick_answer: Marcar como aceita
       unset_answer: Desmarcar como aceita?
     create:
-      flash_notice: A pergunta foi criada.
+      flash_notice: "A pergunta foi criada. Clique em 'Editar' se quiser adicionar detalhes."
     edit:
       title: Editando pergunta
     flag:
