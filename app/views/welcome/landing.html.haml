@@ -1,0 +1,44 @@
+!!! Strict
+%html{ "xml:lang" => I18n.locale, :lang => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %title
+      &= page_title
+    = current_group.head_tag
+
+    %link{ :href => "/stylesheets/landing.css", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %link{:rel=>"icon", :type=>"image/png", :href=>"/favicon.ico"}
+
+  %body
+    = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
+
+    - form_tag new_user_session_path do
+      = label_tag 'user[email]', t('users.form.email')
+      = text_field_tag 'user[email]'
+      = label_tag 'user[password]', t('users.form.password')
+      = password_field_tag 'user[password]'
+      %button #{ t('layouts.application.log_in') }
+
+    %h2  #{ t('layouts.application.signup') }
+    - form_for 'user', @user, :url => new_user_registration_path(@user) do |f|
+      = f.error_messages
+
+      = f.label :email, t('users.form.email')
+      = f.text_field :email
+
+      = f.label :password, t('users.form.password')
+      = f.password_field :password
+
+      = f.label :password_confirmation, t('users.form.password_confirmation')
+      = f.password_field :password_confirmation
+
+      = f.label :name, t(:name, :scope => "activerecord.attributes.user"), :class => "label"
+      = f.text_field :name, :class => "text_field"
+
+      = f.label :academic_email, t('users.form.academic_email')
+      = f.text_field :academic_email
+
+      = f.submit t('layouts.application.signup')
+
+    = render :partial => "shared/analytics"
+

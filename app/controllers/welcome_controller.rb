@@ -3,6 +3,15 @@ class WelcomeController < ApplicationController
   tabs :default => :welcome
 
   def index
+    logged_in? ? home : landing
+  end
+
+  def landing
+    @user = User.new
+    render 'landing', :layout => false
+  end
+
+  def home
     @active_subtab = params.fetch(:tab, "activity")
 
     conditions = scoped_conditions({:banned => false})
@@ -17,18 +26,15 @@ class WelcomeController < ApplicationController
     end
 
     @langs_conds = conditions[:language][:$in]
-    if logged_in?
-      feed_params = { :feed_token => current_user.feed_token }
-    else
-      feed_params = {  :lang => I18n.locale,
-                          :mylangs => current_languages }
-    end
+    feed_params = { :feed_token => current_user.feed_token }
     add_feeds_url(url_for({:controller => 'questions', :action => 'index',
                             :format => "atom"}.merge(feed_params)), t("feeds.questions"))
     @questions = Question.paginate({:per_page => 15,
                                    :page => params[:page] || 1,
                                    :fields => (Question.keys.keys - ["_keywords", "watchers"]),
                                    :order => order}.merge(conditions))
+
+    render 'home'
   end
 
   def feedback
