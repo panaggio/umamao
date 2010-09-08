@@ -151,7 +151,7 @@ DEPENDENCIES
   goalie
   haml (~> 3.0.13)
   jnunemaker-validatable (~> 1.8.4)
-  magent (~> 0.4)
+  magent (~> 0.4.2)
   mongo (~> 1.0.3)
   mongo_mapper (~> 0.8.2)
   mongomapper_ext (~> 0.4.0)
