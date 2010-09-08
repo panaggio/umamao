@@ -1,5 +1,3 @@
-require 'lib/core_ext/array'
-
 class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:create, :index, :show, :tags, :unanswered, :related_questions, :tags_for_autocomplete, :retag, :retag_to]
   before_filter :admin_required, :only => [:move, :move_to]
@@ -150,8 +148,8 @@ class QuestionsController < ApplicationController
       :page => params[:page] || 1
     end
 
-    
-      
+
+
     respond_to do |format|
       format.html do
         set_page_title(t("layouts.application.tags"))
