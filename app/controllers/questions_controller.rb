@@ -257,24 +257,6 @@ class QuestionsController < ApplicationController
 
         flash[:notice] = t(:flash_notice, :scope => "questions.create")
 
-        # TODO: move to magent
-        users = User.find_experts(@question.tags, [@question.language],
-                                                  :except => [current_user.id],
-                                                  :group_id => current_group.id)
-        followers = @question.user.followers(:group_id => current_group.id, :languages => [@question.language])
-
-        (users - followers).each do |u|
-          if !u.email.blank?
-            Notifier.deliver_give_advice(u, current_group, @question, false)
-          end
-        end
-
-        followers.each do |u|
-          if !u.email.blank?
-            Notifier.deliver_give_advice(u, current_group, @question, true)
-          end
-        end
-
         format.html { redirect_to(question_path(@question)) }
         format.json { render :json => @question.to_json(:except => %w[_keywords watchers]), :status => :created}
       else
