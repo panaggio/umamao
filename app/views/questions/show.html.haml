@@ -89,11 +89,11 @@
     =link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
 
   %h3.ccontrol
-    %a{:href => ""}
+    %a{:href => "", :class => "ccontrol-link"}
       - if @question.comments.size == 1
-        = @question.comments.size.to_s + " " + t("models.comment") 
+        = @question.comments.size.to_s + " " + t("models.comment")
       -elsif @question.comments.size != 0
-        = @question.comments.size.to_s + " " + t("models.comments") 
+        = @question.comments.size.to_s + " " + t("models.comments")
 
   .comments
     -@question.comments.each do |comment|

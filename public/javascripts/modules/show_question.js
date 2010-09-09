@@ -3,6 +3,7 @@ $(document).ready(function() {
   $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
   $('.auto-link').autoVideo();
+  $('.comments').hide();
 
   $("form.vote_form button").live("click", function(event) {
     var btn_name = $(this).attr("name");
@@ -345,9 +346,9 @@ $(document).ready(function() {
     return false;
   });
 
-  $(".comments").hide();
-  $("h3.ccontrol").click(function(){
-    $(this).toggleClass("active").next().slideToggle("slow");
+  $(".ccontrol-link").click(function(){
+    $(this).parent().next().slideToggle("slow");
+    return false;
   });
 
 });
