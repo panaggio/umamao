@@ -16,3 +16,6 @@ pt-BR:
     internal_error:
       title: "Vixe!"
       explanation: "Alguma coisa deu errado! Mas não se preocupe! Já fomos avisados e estamos consertando!"
+    template:
+      header: ''
+      body: ''
