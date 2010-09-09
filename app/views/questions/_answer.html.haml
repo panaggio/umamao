@@ -85,7 +85,11 @@
 
     %h3.ccontrol
       %a{:href => ""}
-        Comentarios
+        - if answer.comments.size == 1
+          = answer.comments.size.to_s + " " + t("models.comment") 
+        -elsif answer.comments.size != 0
+          = answer.comments.size.to_s + " " + t("models.comments") 
+
     / Nested Answers
     .children.comments
       - answer.comments.each do |comment|
