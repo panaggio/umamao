@@ -1,13 +1,11 @@
 
-- solution = question.accepted && question.answer_id == answer.id
+- solution = false
 - source = question_path(@question)
 
 .answer.commentable{:class => "post-#{answer.id} #{solution ? "solution" : ""}" }
   %a{:name=>answer.id}
   .vote-col
     = vote_box(answer, question_path(question), question.closed)
-    - if solution
-      = image_tag "correct.png", :width => 48, :alt => "correct_answer", :title => "chose as answer by the author"
   .body-col
     .markdown.entry-content
       = find_and_preserve(shapado_auto_link(markdown(answer.body), :link_users => true))
@@ -48,15 +46,6 @@
               = t("global.from", :site => answer.user.country_name)
             = country_flag(answer.user.country_code, answer.user.country_name)
     .controls
-      - if logged_in?
-        .actions
-          - if (current_user.mod_of?(@question.group) || current_user.can_modify?(@question))
-            - unless @question.accepted
-              = link_to t(".pick_answer"), solve_question_path(@question, :answer_id => answer)
-            - if solution
-              = link_to t(".unset_answer"),  unsolve_question_path(@question)
-          - if answer.wiki || current_user.can_edit_others_posts_on?(answer.group) || current_user.can_modify?(answer)
-            = link_to t("scaffold.edit"), edit_question_answer_path(@question, answer)
       .actions
         = link_to t('activerecord.attributes.answer.link'), question_answer_path(@question.id, answer.id), :class => "bookmark"
         - if logged_in?

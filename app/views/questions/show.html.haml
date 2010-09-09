@@ -124,9 +124,6 @@
         = link_to t("questions.index.oldest"), question_path(@question, :sort=>"oldest", :anchor => "answers"), :rel => "nofollow"
     .clear
   .block
-    -if @question.accepted
-      -solution = @question.answer
-      =render :partial=> "answer", :locals=> {:question => @question, :answer => solution} unless solution.nil?
     .hentry
       -@answers.each do |answer|
         =render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
