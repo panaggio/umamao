@@ -17,7 +17,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_group_access
-    if ((!current_group.registered_only || is_bot?) && !current_group.private) || devise_controller? || (params[:controller] == "users" && (action_name == "new" || action_name == 'create') )
+    if (
+        (!current_group.registered_only || is_bot?) && !current_group.private ||
+        devise_controller? ||
+        (params[:controller] == "users" && (action_name == "new" || action_name == 'create') ) ||
+        (params[:controller] == "welcome" && (action_name == "feedback" || action_name == 'send_feedback') )
+      )
       return
     end
 
