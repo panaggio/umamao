@@ -83,6 +83,9 @@
     - if logged_in?
       = link_to t(".add_comment"), new_question_comment_path(@question, answer), :class => "addNestedAnswer add_answer_comment_link"
 
+    %h3.ccontrol
+      %a{:href => ""}
+        Comentarios
     / Nested Answers
     .children.comments
       - answer.comments.each do |comment|

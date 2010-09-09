@@ -344,6 +344,12 @@ $(document).ready(function() {
       }
     return false;
   });
+
+  $(".comments").hide();
+  $("h3.ccontrol").click(function(){
+    $(this).toggleClass("active").next().slideToggle("slow");
+  });
+
 });
 
 $(window).load(function() {

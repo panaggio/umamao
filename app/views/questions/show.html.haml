@@ -88,6 +88,10 @@
   -if logged_in?
     =link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
 
+  %h3.ccontrol
+    %a{:href => ""}
+      Comentarios
+
   .comments
     -@question.comments.each do |comment|
       = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
