@@ -22,8 +22,8 @@ module WillPaginate
     # default options that can be overridden on the global level
     @@pagination_options = {
       :class          => 'pagination',
-      :previous_label => '&laquo; Previous',
-      :next_label     => 'Next &raquo;',
+      :previous_label => nil,
+      :next_label     => nil,
       :inner_window   => 2, # links around the current page
       :outer_window   => 1, # links around beginning and end
       :separator      => ' ', # single space is friendly to spiders and non-graphic browsers
@@ -111,6 +111,9 @@ module WillPaginate
       else
         options[:renderer]
       end
+
+      options[:previous_label] ||= "« #{t("navigation.previous")}"
+      options[:next_label] ||= "#{t("navigation.next")} »"
       # render HTML for pagination
       renderer.prepare collection, options, self
       renderer.to_html
@@ -306,7 +309,7 @@ module WillPaginate
     end
 
     def page_span(page, text, attributes = {})
-      @template.content_tag :span, text, attributes, false
+      @template.content_tag :span, text, attributes
     end
 
     # Returns URL params for +page_link_or_span+, taking the current GET params

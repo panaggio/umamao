@@ -1,52 +1,52 @@
 = javascript_include_merged :show
 
--@current_class = 'question hentry entry post'
+- @current_class = 'question hentry entry post'
 
 
--show_close_request_form = !@question.closed && logged_in? && @question.can_be_requested_to_close_by?(current_user)
+- show_close_request_form = !@question.closed && logged_in? && @question.can_be_requested_to_close_by?(current_user)
 
--if logged_in? && current_user.mod_of?(current_group) && @question.closed
-  -show_close_request_form = (@question.close_reason.user_id == current_user.id)
+- if logged_in? && current_user.mod_of?(current_group) && @question.closed
+  - show_close_request_form = (@question.close_reason.user_id == current_user.id)
 
--if show_close_request_form
-  -@close_request = @question.close_requests.detect{ |rq| rq.user_id == current_user.id } || CloseRequest.new(:reason => "dupe")
+- if show_close_request_form
+  - @close_request = @question.close_requests.detect{ |rq| rq.user_id == current_user.id } || CloseRequest.new(:reason => "dupe")
 
--question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
+- question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
 
--content_for :head do
+- content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question.tags.dup, @question.title)}
   %meta{:name => "description", :content => question_body.gsub(/<\/?[^>]*>/, "")[0, 255] }
   %link{:rel => "canonical", :href => question_url(@question) }
 
--content_for :subtabs do
+- content_for :subtabs do
   %table
     %tr
       %td
-        =vote_box(@question, question_path(@question), @question.closed)
+        = vote_box(@question, question_path(@question), @question.closed)
       %td
         %h1.navtitle.title.entry-title
           &= @question.title
-          -if @question.closed
-            =" [#{t("closed", :scope => "activerecord.attributes.question").upcase}]"
+          - if @question.closed
+            = " [#{t("closed", :scope => "activerecord.attributes.question").upcase}]"
 
--source = question_path(@question)
-=error_messages_for 'answer'
+- source = question_path(@question)
+= error_messages_for 'answer'
 
 
 #question-body-col.commentable.markdown
   %a{:name => @question.id}
   #body
-    -if @question.closed && @question.close_reason
+    - if @question.closed && @question.close_reason
       #close_reason
         = t(".close_reason")
         = t(@question.close_reason.reason, :scope=>"close_requests.form")
-        -if !@question.close_reason.comment.empty?
+        - if !@question.close_reason.comment.empty?
           .comment
-            =find_and_preserve(shapado_auto_link(@question.close_reason.comment))
+            = find_and_preserve(shapado_auto_link(@question.close_reason.comment))
     .post-text.entry-content
       = question_body
   .tag-list
-    -@question.tags.each do |tag|
+    - @question.tags.each do |tag|
       %span.tag
         = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
     - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
@@ -55,54 +55,54 @@
 
   .controls
     .actions
-      -if logged_in?
+      - if logged_in?
         - if flag = current_user.has_flagged?(@question)
           %span.flagged= "#{t('.flagged_as')} #{t(flag.type, :scope=>'flags.form')}"
         - else
-          =link_to t(".flag"), flag_question_path(@question), :class => "flag-link", :id => "question_flag_link", :rel => 'nofollow'
-        -if show_close_request_form
-          -close_link_label = current_user.mod_of?(current_group) ?  t(".close") : t(".request_closing")
-          =link_to close_link_label, new_question_close_request_path(@question), :id => "request-close-link", :rel => 'nofollow', :title => t('.request_closing_details')
+          = link_to t(".flag"), flag_question_path(@question), :class => "flag-link", :id => "question_flag_link", :rel => 'nofollow'
+        - if show_close_request_form
+          - close_link_label = current_user.mod_of?(current_group) ?  t(".close") : t(".request_closing")
+          = link_to close_link_label, new_question_close_request_path(@question), :id => "request-close-link", :rel => 'nofollow', :title => t('.request_closing_details')
 
-        -if (@question.wiki && current_user.can_edit_wiki_post_on?(@question.group)) || current_user.can_edit_others_posts_on?(@question.group) || current_user.can_modify?(@question)
+        - if (@question.wiki && current_user.can_edit_wiki_post_on?(@question.group)) || current_user.can_edit_others_posts_on?(@question.group) || current_user.can_modify?(@question)
           = link_to t('scaffold.edit'), edit_question_path(@question), :class => "button"
-        -if @question.versions.count > 0
+        - if @question.versions.count > 0
           = link_to t(".history", :default => "history"), history_question_path(@question)
-        -if (current_user.can_modify?(@question) || current_user.owner_of?(@question.group))
+        - if (current_user.can_modify?(@question) || current_user.owner_of?(@question.group))
           = link_to t("scaffold.destroy"), question_path(@question.id), :confirm => "are you sure?", :method => :delete
-        -if current_user.mod_of?(@question.group)
+        - if current_user.mod_of?(@question.group)
           = link_to t(".ban"), ban_path(:question_ids => [@question.id]), :class => "button", :confirm => "are you sure?"
     .forms
-      -flag = Flag.new
+      - flag = Flag.new
       - flag.flaggeable = @question
       = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
 
-      -if !@question.closed && show_close_request_form
-        -form_for [@question, @close_request], :html => {:class => "form hide", :id => "request_close_question_form"} do |form|
-          -if !@close_request.new?
-            =link_to t(".retract_request"), question_close_request_path(:question_id => @question.slug, :id => @close_request.id), :method => :delete, :confirm => "are you sure?"
+      - if !@question.closed && show_close_request_form
+        - form_for [@question, @close_request], :html => {:class => "form hide", :id => "request_close_question_form"} do |form|
+          - if !@close_request.new?
+            = link_to t(".retract_request"), question_close_request_path(:question_id => @question.slug, :id => @close_request.id), :method => :delete, :confirm => "are you sure?"
           = render :partial => "close_requests/form", :object => form
           .group.navform
             = submit_tag t(".request_closing_details"), :class => "button"
 
-  -if logged_in?
-    =link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
+  - if logged_in?
+    = link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
 
   %h3.ccontrol
     %a{:href => "", :class => "ccontrol-link"}
       - if @question.comments.size == 1
         = @question.comments.size.to_s + " " + t("models.comment")
-      -elsif @question.comments.size != 0
+      - elsif @question.comments.size != 0
         = @question.comments.size.to_s + " " + t("models.comments")
 
   .comments
-    -@question.comments.each do |comment|
+    - @question.comments.each do |comment|
       = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
   .clear
   .forms
     .comment-form-question
-      -form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
-        -@comment = Comment.new
+      - form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
+        - @comment = Comment.new
         = render :partial => "comments/form", :locals => {:source => source, :commentable => @question}
         .group.navform
           = submit_tag t("comments.shared.comment_submit"), :class => "button"
@@ -125,13 +125,13 @@
     .clear
   .block
     .hentry
-      -@answers.each do |answer|
-        =render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
-    =will_paginate(@answers)
+      - @answers.each do |answer|
+        = render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
+    = will_paginate(@answers)
 
--unless @question.closed
+- unless @question.closed
   %a{:name=>"to_answer"}
-  -form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
+  - form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
     = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
     .group.navform
       .right
@@ -140,8 +140,8 @@
       = submit_tag t('answers.form.submit'), :class => "button"
     .clear
 
--content_for :sidebar do
-  -if AppConfig.enable_sharing
+- content_for :sidebar do
+  - if AppConfig.enable_sharing
     .block
       %h3
         = t(".share")
@@ -149,7 +149,7 @@
         %ul.share
           %li
             = render :partial => "identica"
-          -if current_group.domain != AppConfig.domain
+          - if current_group.domain != AppConfig.domain
             %li
               = render :partial => "shapado"
           %li
@@ -162,31 +162,31 @@
             = render :partial => "facebook"
       .clear
 
-  -if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
-    -unless @question.flags.count == 0
+  - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
+    - unless @question.flags.count == 0
       .block
         %h3
           = t(:flags, :scope => "activerecord.models")
         .content
           = render :partial => "flags/list", :locals => {:flaggeable => @question}
 
-    -unless @question.close_requests.size == 0
+    - unless @question.close_requests.size == 0
       .block
         %h3
           = t(:prural_name, :scope => "close_requests.model")
         .content
           = render :partial => "close_requests/list", :locals => {:question => @question}
 
-  -related_questions = Question.related_questions(@question, :language => find_languages)
-  -if !related_questions.empty?
+  - related_questions = Question.related_questions(@question, :language => find_languages)
+  - if !related_questions.empty?
     .block
       %h3
-        =t(".related_questions")
+        = t(".related_questions")
       .content
         %ul.list
-          -related_questions.each do |rq|
+          - related_questions.each do |rq|
             %li
-              =link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
+              = link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
 
   %br
 
@@ -194,14 +194,14 @@
     .user_data
       %span.asked_by
         = t('activerecord.attributes.question.asked_by')
-      =render :partial => "users/user_mini", :locals => {:user => @question.user}
+      = render :partial => "users/user_mini", :locals => {:user => @question.user}
       %span.time_ago.published{:title => @question.created_at, :class => "relativetime"}
         = t("time.ago", :time => time_ago_in_words(@question.created_at))
-        -if @question.wiki
+        - if @question.wiki
           .wiki_flag
             wiki
       %span.adr
-        -if !@question.user.hide_country
+        - if !@question.user.hide_country
           %span.country-name
             = t("global.from", :site => @question.user.country_name)
             = country_flag(@question.user.country_code, @question.user.country_name)
