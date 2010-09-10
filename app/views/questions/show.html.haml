@@ -134,9 +134,6 @@
   - form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
     = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
     .group.navform
-      .right
-        = f.label :wiki, "Wiki", :class => "radio"
-        = f.check_box :wiki, :class => "checkbox"
       = submit_tag t('answers.form.submit'), :class => "button"
     .clear
 
