@@ -42,10 +42,10 @@ class WelcomeController < ApplicationController
       flash[:error] = I18n.t("welcome.feedback.captcha_error")
       redirect_to feedback_path(:feedback => params[:feedback])
     else
-      Notifier.deliver_new_feedback(current_user, params[:feedback][:title],
+      Notifier.new_feedback(current_user, params[:feedback][:title],
                                                   params[:feedback][:description],
                                                   params[:feedback][:email],
-                                                  request.remote_ip)
+                                                  request.remote_ip).deliver
       redirect_to root_path
     end
   end

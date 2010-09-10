@@ -69,7 +69,8 @@ class Notifier < ActionMailer::Base
     from AppConfig.notification_email
     subject "feedback: #{subject}"
     sent_on Time.now
-    body   :user => user, :subject => subject, :content => content, :email => email, :ip => ip
+		msg_body = content + "\n\nEnviado por: " + email
+    body   :user => user, :subject => subject, :body => msg_body, :email => email, :ip => ip
     content_type  "text/plain"
   end
 
