@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   before_filter :check_permissions, :except => [:index]
-  
+
   def index
     redirect_to(root_path)
   end
@@ -138,12 +138,6 @@ class VotesController < ApplicationController
     if vote.voteable_type == "Answer"
       question = voteable.question
       sweep_question(question)
-
-      if vote.value == 1
-        Question.set(question.id, {:answered_with_id => voteable.id}) if !question.answered
-      elsif question.answered_with_id == voteable.id && voteable.votes_average <= 1
-        Question.set(question.id, {:answered_with_id => nil})
-      end
     end
 
     state

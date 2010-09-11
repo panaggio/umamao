@@ -13,21 +13,27 @@ module Voteable
   module InstanceMethods
     def add_vote!(v, voter)
       self.increment({:votes_count => 1, :votes_average => v.to_i})
+      self.reload
+
       if v > 0
         self.user.upvote!(self.group)
       else
         self.user.downvote!(self.group)
       end
+
       self.on_add_vote(v, voter) if self.respond_to?(:on_add_vote)
     end
 
     def remove_vote!(v, voter)
       self.increment({:votes_count => -1, :votes_average => (-v)})
+      self.reload
+
       if v > 0
         self.user.upvote!(self.group, -1)
       else
         self.user.downvote!(self.group, -1)
       end
+
       self.on_remove_vote(v, voter) if self.respond_to?(:on_remove_vote)
     end
   end
