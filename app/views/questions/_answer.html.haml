@@ -58,6 +58,7 @@
           - if true || current_user.mod_of?(@question.group)
             = link_to t('answers.ban'), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
 
+          = link_to t('scaffold.edit'), edit_question_answer_path(@question, answer)
 
         - if answer.versions.count > 0
           = link_to t(".history", :default => "history"), history_question_answer_path(@question, answer)
