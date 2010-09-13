@@ -88,7 +88,7 @@ pt-BR:
         one: "%{count} resposta"
         other: "%{count} respostas"
       asked_on: feita em
-      ban: Remover
+      ban: Esconder
       close: Fechar
       close_reason: "A pergunta foi fechada pelo seguinte motivo:"
       favorite_tooltip: Adicionar esta pergunta às suas favoritas

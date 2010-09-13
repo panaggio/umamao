@@ -3,10 +3,10 @@ pt-BR:
     moderate:
       index:
         title: Moderar
-        ban: Remover
+        ban: Esconder
         content: Conteúdo
         item_title: Título
         all: Todos
         flagged: Perguntas reportadas
-        banned: Perguntas removidas
+        banned: Perguntas escondidas
         need_tags: Editar tópicos

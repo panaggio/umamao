@@ -1,6 +1,6 @@
 pt-BR:
   scaffold:
-    sure: Certeza que você quer remover este %{model} ?
+    sure: Certeza que você quer remover este(a) %{model}?
     show: Exibir
     edit: Editar
     destroy: Remover

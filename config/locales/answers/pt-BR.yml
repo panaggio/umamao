@@ -18,6 +18,8 @@ pt-BR:
       flash_notice: "Resposta atualizada."
     revert:
       title: "Reverter resposta"
+    ban: Esconder
+    sure_ban: Certeza que você quer esconder esta resposta?
 
   activerecord:
     models:
