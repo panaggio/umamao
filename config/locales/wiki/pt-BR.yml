@@ -1,6 +1,7 @@
 pt-BR:
   wiki:
     history:
+      link: Histórico
       title: "Histórico (%{count})"
       previous_versions: Versão anterior
       current_version: Versão atual
