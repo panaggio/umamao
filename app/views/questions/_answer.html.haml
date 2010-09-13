@@ -49,18 +49,18 @@
       .actions
         = link_to t('activerecord.attributes.answer.link'), question_answer_path(@question.id, answer.id), :class => "bookmark"
         - if logged_in?
-          - if current_user.can_modify?(answer)
-            = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => "answer"), :method => :delete, :class =>"cancel"
-
           - if current_user != answer.user
             = link_to t(".flag"), flag_question_answer_path(@question,answer), :class => "flag-link"
+
+          - if current_user.can_modify?(answer) || current_user.mod_of?(@question.group)
+            = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => "answer"), :method => :delete, :class =>"cancel"
+
+          - if current_user.mod_of?(@question.group)
+            = link_to ".ban", ban_path(:answer_ids => [answer.id]), t("scaffold.sure", :model => "answer")
+
         - if answer.versions.count > 0
           = link_to t(".history", :default => "history"), history_question_answer_path(@question, answer)
-        - if logged_in?
-          - if(current_user.can_modify?(@question) || current_user.mod_of?(@question.group))
-            = link_to t("scaffold.destroy"), question_answer_path(@question.id, answer.id), :confirm => "are you sure?", :method => :delete
-          - if current_user.mod_of?(@question.group)
-            = link_to "ban", ban_path(:answer_ids => [answer.id]), :confirm => "are you sure?"
+
       .clear
       .forms
         - if current_user != answer.user
