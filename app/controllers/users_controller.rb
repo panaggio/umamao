@@ -164,7 +164,7 @@ class UsersController < ApplicationController
     flash[:notice] = t("flash_notice", :scope => "users.follow", :user => @user.name)
 
     if @user.notification_opts.activities
-      Notifier.deliver_follow(current_user, @user)
+      Notifier.follow(current_user, @user).deliver
     end
 
     Magent.push("actors.judge", :on_follow, current_user.id, @user.id, current_group.id)

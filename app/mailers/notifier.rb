@@ -1,140 +1,125 @@
 class Notifier < ActionMailer::Base
+  layout 'notification'
   default :from => AppConfig.notification_email
 
   helper :application
 
   def give_advice(user, group, question, following = false)
-    template_for user do
+    @user = user
+    @group = group
+    @question = question
+    @following = following
 
-      scope = "mailers.notifications.give_advice"
+    @domain = group.domain
 
-      recipients user.email
+    scope = "mailers.notifications.give_advice"
 
-      if following
-        subject I18n.t("friend_subject", :scope => scope, :question_title => question.title)
-      else
-        subject I18n.t("subject", :scope => scope, :question_title => question.title)
-      end
-      sent_on Time.now
-      body   :user => user, :question => question,
-             :group => group, :domain => group.domain,
-             :following => following
+    if following
+      subject = I18n.t("friend_subject", :scope => scope,
+                     :question_title => question.title)
+    else
+      subject = I18n.t("subject", :scope => scope,
+                     :question_title => question.title)
     end
+
+    mail(:to => user.email, :subject => subject)
   end
 
   def new_answer(user, group, answer, following = false)
-    self.class.layout "notification"
-    template_for user do
+    @user = user
+    @group = group
+    @answer = answer
+    @following = following
 
-      scope = "mailers.notifications.new_answer"
-      if user == answer.question.user
-        @subject = I18n.t("subject_owner", :scope => scope,
-                                           :title => answer.question.title,
-                                           :login => answer.user.login)
-      elsif following
-        @subject = I18n.t("subject_friend", :scope => scope,
-                                            :title => answer.question.title,
-                                            :login => answer.user.login)
-      else
-        @subject = I18n.t("subject_other", :scope => scope,
-                                           :title => answer.question.title,
-                                           :login => answer.user.login)
-      end
+    @domain = group.domain
+    @question = @answer.question
 
-      recipients user.email
-      domain = group ? group.domain : AppConfig.domain
-      subject @subject
-      sent_on Time.now
-      body   :user => user, :answer => answer, :question => answer.question,
-             :group => group, :domain => domain
+    scope = "mailers.notifications.new_answer"
 
-      content_type  "text/html"
+    if user == answer.question.user
+      subject = I18n.t("subject_owner", :scope => scope,
+                       :title => answer.question.title,
+                       :login => answer.user.login)
+    elsif following
+      subject = I18n.t("subject_friend", :scope => scope,
+                       :title => answer.question.title,
+                       :login => answer.user.login)
+    else
+      subject = I18n.t("subject_other", :scope => scope,
+                       :title => answer.question.title,
+                       :login => answer.user.login)
     end
+
+    mail(:to => user.email, :subject => subject)
   end
 
-  def new_comment(group, comment, user, question)
-    recipients user.email
-    template_for user do
-      subject I18n.t("mailers.notifications.new_comment.subject", :login => comment.user.login, :group => group.name)
-      sent_on Time.now
-      content_type    "multipart/alternative"
+  def new_comment(user, group, comment, question)
+    @user = user
+    @group = group
+    @comment = comment
+    @question = question
 
-      body :user => user, :comment => comment, :question => question, :group => group
-    end
+    @domain = group.domain
+
+    subject = I18n.t("mailers.notifications.new_comment.subject",
+                     :login => comment.user.login, :group => group.name)
+
+    mail(:to => user.email, :subject => subject)
   end
 
-  def new_feedback(user, subject, content, email, ip)
-    recipients AppConfig.exception_notification["exception_recipients"]
-    subject "feedback: #{subject}"
-    sent_on Time.now
-    msg_body = content + "\n\nEnviado por: " + email
-    body :user => user, :subject => subject, :body => msg_body, :email => email, :ip => ip
-    content_type  "text/plain"
+  def new_feedback(user, title, content, email, ip)
+    @user = user
+    @title = title
+    @content = content
+    @email = email
+    @ip = ip
+
+    recipients = AppConfig.exception_notification["exception_recipients"]
+    subject = "feedback: #{title}"
+
+    mail(:to => recipients, :subject => subject)
   end
 
   def follow(user, followed)
-    recipients followed.email
-    template_for followed do
-      subject I18n.t("mailers.notifications.follow.subject", :login => user.login, :app => AppConfig.application_name)
-      sent_on Time.now
-      body :user => user, :followed => followed
-    end
+    @user = user
+    @followed = followed
+
+    subject = I18n.t("mailers.notifications.follow.subject",
+                     :login => user.login, :app => AppConfig.application_name)
+
+    mail(:to => followed.email, :subject => subject)
   end
 
   def earned_badge(user, group, badge)
-    recipients user.email
-    template_for user do
+    @user = user
+    @group = group
+    @badge = badge
 
-      subject I18n.t("mailers.notifications.earned_badge.subject", :group => group.name)
-      sent_on Time.now
-      body :user => user, :group => group, :badge => badge
-      content_type    "multipart/alternative"
-    end
+    subject = I18n.t("mailers.notifications.earned_badge.subject",
+                     :group => group.name)
+
+    mail(:to => user.email, :subject => subject)
   end
 
   def favorited(user, group, question)
-    recipients question.user.email
-    template_for question.user do
+    @user = user
+    @group = group
+    @question = question
 
-      subject I18n.t("mailers.notifications.favorited.subject", :login => user.login)
-      sent_on Time.now
-      body :user => user, :group => group, :question => question
-      content_type    "multipart/alternative"
-    end
+    subject = I18n.t("mailers.notifications.favorited.subject",
+                     :login => user.login)
+
+    mail(:to => question.user.email, :subject => subject)
   end
 
   def report(user, report)
-    recipients user.email
-    template_for user do
-      subject I18n.t("mailers.notifications.report.subject", :group => report.group.name, :app => AppConfig.application_name)
-      sent_on Time.now
+    @user = user
+    @report = report
 
-      content_type    "text/plain"
-      body :user => user, :report => report
-    end
-  end
+    subject = I18n.t("mailers.notifications.report.subject",
+                     :group => report.group.name,
+                     :app => AppConfig.application_name)
 
-  private
-  def initialize_defaults(method_name)
-    super
-    @method_name = method_name
-  end
-
-  def template_for(user=nil, &block)
-    old_lang = I18n.locale
-    language = old_lang
-
-    if user && user.language
-      language = user.language
-    end
-
-    template_name = "#{@method_name}"
-    if Dir.glob(Rails.root + "app/views/notifier/#{template_name}*").size == 0
-      template_name = @method_name
-    end
-
-    @template = template_name
-
-    yield if block
+    mail(:to => user.email, :subject => subject)
   end
 end

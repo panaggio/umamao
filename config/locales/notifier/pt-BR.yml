@@ -4,7 +4,7 @@ pt-BR:
       hi: "Oi %{user},"
       user_page: "perfil"
     favorited:
-      message1: "%{user} adicionou sua pergunta às favoritas no %{group}"
+      message1: "%{user} adicionou sua pergunta as suas favoritas no %{group}"
       message2: "O texto da sua pergunta é:"
       message3: "Você pode vê-la aqui:"
     earned_badge:
@@ -21,15 +21,17 @@ pt-BR:
       message4: ""
     new_answer:
       message: "%{user} respondeu %{new_answer} à pergunta %{question}"
+      link_label: "Para ver a resposta, visite o link:"
     new_comment:
       message: "%{user} comentou %{new_comment} na pergunta %{question}"
+      link_label: "Para ver o comentário, visite a pergunta:"
     new_feedback:
-      message1: "O usuário %{user} <%{email}> um feedback"
+      message1: "O usuário '%{user}' <%{email}> deixou um feedback:"
       message2: "Um usuário anônimo mandou feedback do IP %{ip}"
       message3: "Endereço de email: %{email}"
       message4: "Assunto: %{subject}"
     report:
-      message1: "Relatório do %{group.name}"
+      message1: "Relatório do %{group}"
       message2: "Desde %{since}"
       message3: "%{questions} perguntas foram criadas"
       message4: "%{answers} respostas foram criadas"

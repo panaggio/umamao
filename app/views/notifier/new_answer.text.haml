@@ -1,0 +1,9 @@
+- new_answer = h(@answer.body)
+- question = h(@question.title)
+
+= t('notifier.global.hi', :user => h(@user.name))
+
+= t('.message', :user => h(@answer.user.name), :new_answer => new_answer, :question => question)
+
+= t('.link_label')
+= question_answer_url(@question, @answer)

@@ -1,0 +1,10 @@
+- new_comment = h(@comment.body)
+- question = @question.title
+
+= t('notifier.global.hi', :user => h(@user.name))
+
+
+= t('.message', :user => h(@comment.user.name), :new_comment => new_comment, :question => question)
+
+= t('.link_label')
+= question_url(@question)

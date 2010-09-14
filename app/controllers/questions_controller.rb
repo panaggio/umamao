@@ -419,7 +419,7 @@ class QuestionsController < ApplicationController
     @question.add_watcher(current_user)
 
     if (@question.user_id != current_user.id) && current_user.notification_opts.activities
-      Notifier.deliver_favorited(current_user, @question.group, @question)
+      Notifier.favorited(current_user, @question.group, @question).deliver
     end
 
     respond_to do |format|
