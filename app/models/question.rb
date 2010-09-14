@@ -293,7 +293,7 @@ class Question
 
   protected
   def update_answer_count
-    self.answers_count = self.answers.count
+    self.answers_count = self.answers.where(:banned => false).count
     votes_average = 0
     self.votes.each {|e| votes_average+=e.value }
     self.votes_average = votes_average
