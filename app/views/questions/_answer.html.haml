@@ -13,22 +13,6 @@
       %h3
         = t(:flags, :scope => "activerecord.models")
       = render :partial => "flags/list", :locals => {:flaggeable => answer}
-    - if !answer.updated_by.nil?
-      .author.vcard.user_data
-        .time_ago
-          = t('activerecord.attributes.answer.updated_at', :default => "updated")
-          %strong.updated{:title => answer.updated_at, :class => "relativetime"}
-            = t("time.ago", :time => time_ago_in_words(answer.updated_at))
-        .avatar.logo
-          = gravatar(answer.updated_by.email.to_s, :size => 32)
-        .user
-          = render :partial => "users/user_mini", :locals => {:user => answer.updated_by}
-          - unless answer.updated_by.hide_country
-            .adr
-              .country-name
-                = t("global.from", :site => answer.updated_by.country_name)
-              = country_flag(answer.updated_by.country_code, answer.updated_by.country_name)
-
     .author.user_data.vcard
       .updated{:title => answer.updated_at}
         .time_ago
