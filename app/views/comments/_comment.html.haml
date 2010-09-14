@@ -57,8 +57,8 @@
         - if logged_in? && comment.can_be_deleted_by?(current_user)
           - case comment.commentable_type
             - when "Question"
-              = link_to t("scaffold.destroy"), question_comment_path(comment.commentable, comment, :source => source), :confirm => t("scaffold.sure", :model => "comment"), :method => :delete
+              = link_to t("scaffold.destroy"), question_comment_path(comment.commentable, comment, :source => source), :confirm => t(".confirm_destroy"), :method => :delete
             - when "Answer"
-              = link_to t("scaffold.destroy"), question_answer_comment_path(comment.commentable.question, comment.commentable, comment, :source => source), :confirm => t("scaffold.sure", :model => "comment"), :method => :delete
+              = link_to t("scaffold.destroy"), question_answer_comment_path(comment.commentable.question, comment.commentable, comment, :source => source), :confirm => t(".confirm_destroy"), :method => :delete
     .clear
 

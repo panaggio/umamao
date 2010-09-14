@@ -11,6 +11,8 @@ pt-BR:
       comment_submit: "Comentar"
       said: disse
       reply: Responder
+    comment:
+      confirm_destroy: "Certeza que você quer remover este comentário?"
   models:
     comments: Comentários
     comment: Comentário
