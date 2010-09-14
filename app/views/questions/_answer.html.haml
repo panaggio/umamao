@@ -39,7 +39,7 @@
           - if current_user.can_modify?(answer) || current_user.mod_of?(@question.group)
             = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => t("activerecord.models.answer").downcase), :method => :delete, :class =>"cancel"
 
-          - if true || current_user.mod_of?(@question.group)
+          - if current_user.mod_of?(@question.group)
             = link_to t('answers.ban'), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
 
         - if answer.versions.count > 0
