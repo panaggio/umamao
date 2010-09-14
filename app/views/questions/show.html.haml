@@ -198,9 +198,6 @@
       = render :partial => "users/user_mini", :locals => {:user => @question.user}
       %span.time_ago.published{:title => @question.created_at, :class => "relativetime"}
         = t("time.ago", :time => time_ago_in_words(@question.created_at))
-        - if @question.wiki
-          .wiki_flag
-            wiki
       %span.adr
         - if !@question.user.hide_country
           %span.country-name

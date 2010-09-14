@@ -33,9 +33,6 @@
 
       .time_ago
         = t("time.ago", :time => time_ago_in_words(last_target.updated_at))
-      - if question.wiki
-        %span.wiki_flag
-          wiki
     .clear
 - else
   - cache("mini_question_on_index_#{question.id}") do
