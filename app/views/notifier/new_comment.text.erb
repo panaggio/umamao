@@ -1,0 +1,14 @@
+<% question = h(@question.title) %>
+
+<%= t('notifier.global.hi', :user => h(@user.name)) %>
+
+<%= t('.author', :user => h(@comment.user.name)) %>
+
+---
+<%= h(@comment.body) %>
+---
+
+<%= t('.question', :question => question).html_safe %>
+
+<%= t('.link_label') %>
+<%= question_url(@question) %>

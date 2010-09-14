@@ -20,11 +20,13 @@ pt-BR:
       message3: "Ou se você souber de alguém que sabe responder, passe este link:"
       message4: ""
     new_answer:
-      message: "%{user} respondeu %{new_answer} à pergunta %{question}"
+      author: "%{user} respondeu:"
+      question: 'à pergunta "%{question}"'
       link_label: "Para ver a resposta, visite o link:"
     new_comment:
-      message: "%{user} comentou %{new_comment} na pergunta %{question}"
-      link_label: "Para ver o comentário, visite a pergunta:"
+      author: "%{user} comentou:"
+      question: 'na pergunta "%{question}"'
+      link_label: "Para ver o comentário, visite a pergunta em:"
     new_feedback:
       message1: "O usuário '%{user}' <%{email}> deixou um feedback:"
       message2: "Um usuário anônimo mandou feedback do IP %{ip}"

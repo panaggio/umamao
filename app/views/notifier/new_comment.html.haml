@@ -1,7 +1,10 @@
-- new_comment = find_and_preserve("<pre>"+ shapado_auto_link(markdown(@comment.body, :group => @group))+"</pre>")
 - question = link_to h(@question.title), url_for(:host => @group.domain, :controller => "questions", :action => "show", :id => @question.slug)
+
 %p
   = t('notifier.global.hi', :user => h(@user.name))
-  %br
-  %br
-  = t('.message', :user => h(@comment.user.name), :new_comment => new_comment, :question => question)
+%p
+  = t('.author', :user => h(@comment.user.name))
+%p
+  = shapado_auto_link(markdown(@comment.body, :group => @group))
+%p
+  = t('.question', :question => question)
