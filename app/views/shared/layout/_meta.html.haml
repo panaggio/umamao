@@ -1,8 +1,10 @@
+= csrf_meta_tag
+
 %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
 
-=javascript_include_tag "i18n/#{I18n.locale}"
+= javascript_include_tag "i18n/#{I18n.locale}"
 
-=yield :head
+= yield :head
 
 %link{:rel=>"icon", :type=>"image/png", :href=>"/favicon.ico"}
-=render :partial => "shared/layout/feeds"
+= render :partial => "shared/layout/feeds"
