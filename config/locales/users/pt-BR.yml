@@ -32,6 +32,7 @@ pt-BR:
       change_password: Trocar de senha
       email: "Email:"
       academic_email: "Email acadêmico:"
+      name: "Nome e sobrenome:"
       password: "Senha:"
       password_confirmation: "Repetir senha:"
       information: Informações pessoais
