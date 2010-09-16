@@ -3,46 +3,112 @@
   %head
     %title
       &= page_title
-    = render :partial => "shared/layout/css"
 
-    = current_group.head_tag
+    = stylesheet_link_merged :landing
+
     = render :partial => "shared/layout/meta"
     <!--[if lt IE 8]><link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/ie7.css"><![endif]-->
     = render :partial => "shared/layout/javascript"
 
-  %body
+  %body.bp
     #container
       #header
-        #main-bar
-          = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
+        = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
 
-      - form_tag new_user_session_path do
-        = label_tag 'user[email]', t('users.form.email')
-        = text_field_tag 'user[email]'
-        = label_tag 'user[password]', t('users.form.password')
-        = password_field_tag 'user[password]'
-        %button #{ t('layouts.application.log_in') }
+        = form_tag new_user_session_path, :id => 'login_form' do
+          #email_label.label
+            = label_tag 'user[email]', t('users.form.email')
+          #password_label.label
+            = label_tag 'user[password]', t('users.form.password')
 
-      %h2  #{ t('layouts.application.signup') }
-      - form_for 'user', @user, :url => new_user_registration_path(@user) do |f|
-        = f.error_messages
+          #email_field
+            = text_field_tag 'user[email]', nil, :tabindex => 1
+          #password_field
+            = password_field_tag 'user[password]', nil, :tabindex => 2
+          #submit_button
+            = submit_tag t('layouts.application.log_in'), :tabindex => 4
 
-        = f.label :email, t('users.form.email')
-        = f.text_field :email
+          #remember_me
+            = label_tag 'user[remember_me]', t("sessions.new.remember_me")
+            = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
 
-        = f.label :password, t('users.form.password')
-        = f.password_field :password
+      %hr#colruler
 
-        = f.label :password_confirmation, t('users.form.password_confirmation')
-        = f.password_field :password_confirmation
+      #content
+        %h3 Qualquer pergunta, não qualquer resposta.
 
-        = f.label :name, t("users.form.name"), :class => "label"
-        = f.text_field :name, :class => "text_field"
+        %p
 
-        = f.label :academic_email, t('users.form.academic_email')
-        = f.text_field :academic_email
+          O Umamão é uma base de conhecimento de alta qualidade
+          expandida e melhorada constantemente por acadêmicos e
+          profissionais.
 
-        = f.submit t('layouts.application.signup')
+        %p
+          %strong
+            Se você é curioso e gosta de compartilhar conhecimento, este
+            é o seu lugar.
+
+        %hr
+
+        %p
+
+          O Umamão está aberto, por enquanto, apenas para membros da
+          comunidade Unicamp (verificados através do email acadêmico).
+          Se você é de outra universidade (ou ex-aluno(a)), deixe seu
+          email que nós avisaremos quando você puder se cadastrar.
+
+        = form_tag 'waiting_list_path', :remote => true, :id => 'waiting_list' do
+          #email_label.label
+            = label_tag 'user[email]', t('users.form.email')
+          #university_label.label
+            = label_tag 'user[university]', 'Universidade (opcional):'
+
+          #email_field
+            = text_field_tag 'user[email]'
+          #university_field
+            = text_field_tag 'user[university]'
+          #submit_button
+            = submit_tag 'Me avise!'
+
+      #signup
+        %h3  #{ t('layouts.application.signup') }
+        = form_for @user, :url => new_user_registration_path(@user) do |f|
+          = f.error_messages
+
+          .field
+            .label
+              = f.label :email, t('users.form.email')
+            .input
+              = f.text_field :email, :tabindex => 5
+
+          .field
+            .label
+              = f.label :password, t('users.form.password')
+            .input
+              = f.password_field :password, :tabindex => 6
+
+          .field
+            .label
+              = f.label :password_confirmation, t('users.form.password_confirmation')
+            .input
+              = f.password_field :password_confirmation, :tabindex => 7
+
+          .field
+            .label
+              = f.label :name, t("users.form.name"), :class => "label"
+            .input
+              = f.text_field :name, :class => "text_field", :tabindex => 8
+
+          .field
+            .label
+              = f.label :academic_email, t('users.form.academic_email') + "\n(Apenas Unicamp por enquanto)"
+            .input
+              = f.text_field :academic_email, :tabindex => 9
+
+          .submit
+            = f.submit t('layouts.application.signup'), :tabindex => 10
+
+      #footer
 
       = render :partial => "shared/analytics"
 

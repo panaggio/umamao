@@ -1,0 +1,117 @@
+$logo-red: #da242b
+
+@import screen
+@import blueprint/buttons
+
+#container
+  +container
+
+#header, #footer
+  +column($blueprint-grid-columns)
+  padding: 20px 0
+
+#login_form
+  /* true means it's the last column in the row
+  +column(10, true)
+  +blueprint-inline-form
+  +blueprint-form-sizes(142px)
+  float: right
+  font-size: 11px
+
+  .label
+    line-height: 1
+
+  #email_label
+    +column(4)
+  #password_label
+    +append(4)
+    +column(2, true)
+
+  #email_field
+    +column(4)
+  #password_field
+    +column(4)
+  #submit_button
+    +column(2, true)
+  #remember_me
+    +append(4)
+    +column(6, true)
+    line-height: 1
+
+hr#colruler
+  +colruler(#EEEEEE)
+
+#content
+  +column(13)
+  +colborder
+
+#signup
+  $signup-columns: 10
+  /* true means it's the last column in the row
+  +column($signup-columns, true)
+
+  form
+    +blueprint-form-sizes(258px)
+  .label
+    +column(floor($signup-columns / 3))
+    text-align: right
+    line-height: 1
+    height: 39px
+
+    label
+      height: 39px
+      vertical-align: middle
+
+    label[for=user_email]
+      padding: 20px 0 0
+    label[for=user_password]
+      padding: 20px 0 0
+    label[for=user_password_confirmation]
+      padding: 20px 0 0
+    label[for=user_name]
+      padding: 7px 0 0
+  .input
+    +column(ceil(2* $signup-columns / 3), true)
+
+  .field
+    +column($signup-columns, true)
+
+  .submit
+    +prepend(floor($signup-columns / 3))
+    +column(ceil(2* $signup-columns / 3), true)
+
+    #user_submit
+      width: 133px
+
+input[type=submit]
+  // The +button-button mixin is just like the +anchor-button mixin, but for <button> elements.
+  +button-button
+  +button-colors
+  +button-hover-colors(#fff, $logo-red + 30, $logo-red + 30)
+  +button-active-colors(#fff, $logo-red - 50, $logo-red - 50)
+
+form#waiting_list
+  /* true means it's the last column in the row
+  +column(14, true)
+  +blueprint-inline-form
+  +blueprint-form-sizes(142px)
+  font-size: 11px
+
+  .label
+    line-height: 1
+
+  #email_label
+    +column(5)
+  #university_label
+    +append(5)
+    +column(4, true)
+
+  #email_field
+    +column(5)
+  #university_field
+    +column(5)
+  #submit_button
+    +column(4, true)
+
+form
+  +blueprint-form
