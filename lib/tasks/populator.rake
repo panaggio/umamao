@@ -1,3 +1,14 @@
+desc "Imports mongodb dump from dump/ to DB shapado-development"
+task :import do
+  `mongo --eval 'db.getSisterDB("shapado-production").dropDatabase(); db.getSisterDB("shapado-development").dropDatabase()'`
+  `mongorestore dump`
+  `mongo --eval 'db.copyDatabase("shapado-production", "shapado-development")'`
+  Rake::Task['environment'].execute
+  umamao = Group.first
+  umamao.domain = "localhost.lan"
+  umamao.save!
+end
+
 
 namespace :populator do
   task :populator_env => :environment do

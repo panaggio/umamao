@@ -11,3 +11,4 @@ base_packaged.*
 .bundle
 log/
 tmp/**/*
+dump
