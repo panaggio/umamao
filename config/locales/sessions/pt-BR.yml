@@ -2,7 +2,7 @@ pt-BR:
   sessions:
     create:
       flash_notice: "Entrou!"
-      flash_error: "Não deu para você entrar como '%{login}'"
+      flash_error: "Não foi possível fazer login como '%{login}'"
     destroy:
       flash_notice: "Saiu!"
     new:
