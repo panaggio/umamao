@@ -80,7 +80,7 @@
 
       #signup
         %h3  #{ t('layouts.application.signup') }
-        = form_for @user, :url => new_user_registration_path(@user) do |f|
+        = form_for @user, :url => registration_path('user') do |f|
           = f.error_messages
 
           .field
