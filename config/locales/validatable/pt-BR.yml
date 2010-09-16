@@ -1,0 +1,10 @@
+pt-BR:
+  validatable:
+    "can't be empty": "não pode ser vazio"
+    "has already been taken": "já foi cadastrado"
+    "is not in the list": "não está na lista"
+    "must be accepted": "deve ser aceito"
+    "is invalid": "é inválido"
+    "is reserved": "é reservado"
+    "must be a number": "deve ser um número"
+    "doesn't match confirmation": "é diferente da confirmação"
