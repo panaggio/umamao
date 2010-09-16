@@ -39,36 +39,44 @@
 
         %p
 
-          O Umamão é uma base de conhecimento de alta qualidade
-          expandida e melhorada constantemente por acadêmicos e
-          profissionais.
+          O Umamão é uma base de conhecimento em língua portuguesa de
+          alta qualidade expandida e melhorada constantemente por
+          acadêmicos e profissionais.
 
         %p
           %strong
-            Se você é curioso e gosta de compartilhar conhecimento, este
-            é o seu lugar.
+
+            Se você é curioso e gosta de compartilhar conhecimento,
+            aqui é o seu lugar.
 
         %hr
 
         %p
 
-          O Umamão está aberto, por enquanto, apenas para membros da
-          comunidade Unicamp (verificados através do email acadêmico).
-          Se você é de outra universidade (ou ex-aluno(a)), deixe seu
-          email que nós avisaremos quando você puder se cadastrar.
+          O Umamão está aberto, por enquanto, apenas para a comunidade
+          Unicamp (verificados pelo email acadêmico).  Se você é de
+          outra universidade (ou ex-aluno(a)), deixe seu email que nós
+          avisaremos quando você puder se cadastrar.
 
-        = form_tag 'waiting_list_path', :remote => true, :id => 'waiting_list' do
-          #email_label.label
-            = label_tag 'user[email]', t('users.form.email')
-          #university_label.label
-            = label_tag 'user[university]', 'Universidade (opcional):'
+        - if flash[:notice].present? && params[:saved] == 'true'
+          .success
+            = flash[:notice]
 
-          #email_field
-            = text_field_tag 'user[email]'
-          #university_field
-            = text_field_tag 'user[university]'
-          #submit_button
-            = submit_tag 'Me avise!'
+        = error_messages_for @waiting_user, :class => 'error'
+
+        - unless params[:saved] == 'true'
+          = form_tag waiting_users_path, :id => 'waiting_list' do
+            #email_label.label
+              = label_tag 'user[email]', t('users.form.email')
+            #university_label.label
+              = label_tag 'user[university]', 'Universidade (opcional):'
+
+            #email_field
+              = text_field_tag 'user[email]', @waiting_user.email
+            #university_field
+              = text_field_tag 'user[university]', @waiting_user.university
+            #submit_button
+              = submit_tag 'Eu quero entrar!'
 
       #signup
         %h3  #{ t('layouts.application.signup') }

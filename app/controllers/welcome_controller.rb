@@ -8,6 +8,7 @@ class WelcomeController < ApplicationController
 
   def landing
     @user = User.new
+    @waiting_user = WaitingUser.new
     render 'landing', :layout => false
   end
 

@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
         !current_group.registered_only && !current_group.private ||
         devise_controller? ||
         (params[:controller] == "users" && (action_name == "new" || action_name == 'create') ) ||
-        params[:controller] == "welcome"
+        params[:controller] == "welcome" ||
+        params[:controller] == "waiting_users"
       )
       return
     end

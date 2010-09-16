@@ -1,4 +1,6 @@
 Shapado::Application.routes.draw do
+  resources :waiting_users, :only => :create
+
   match '/oauth/start' => 'oauth#start', :as => :oauth_authorize
   match '/oauth/callback' => 'oauth#callback', :as => :oauth_callback
   match '/twitter/start' => 'twitter#start', :as => :twitter_authorize
