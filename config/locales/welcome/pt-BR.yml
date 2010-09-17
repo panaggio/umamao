@@ -6,7 +6,7 @@ pt-BR:
       feedback_description: Descrição
       feedback_title: Título
       title: Enviar o seu comentário
-    index:
+    home:
       active: Ativo
       hot: Popular
       quick_question: Faça uma pergunta
