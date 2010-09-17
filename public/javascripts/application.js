@@ -79,6 +79,8 @@ $(document).ready(function() {
       $('.langbox.jshide').toggle();
       return false;
   });
+
+  $('#login_form > #email_field > input').focus();
 });
 
 function initAutocomplete(){
