@@ -39,7 +39,5 @@ stylesheets:
   - compiled/application
   - prettify
 - landing:
-  - compiled/screen
-  - compiled/buttons
   - compiled/landing
 
