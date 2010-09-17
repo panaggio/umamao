@@ -11,12 +11,12 @@ $(document).ready(function() {
       var bool = confirm($(this).attr('data-confirm'));
       if(bool==false) return false;
 
-  })
-  $("#feedbackform").dialog({ title: "Feedback", autoOpen: false, modal: true, width:"420px" })
+  });
+  $("#feedbackform").dialog({ title: "Feedback", autoOpen: false, modal: true, width:"420px" });
   $('#feedbackform .cancel-feedback').click(function(){
     $("#feedbackform").dialog('close');
     return false;
-  })
+  });
   $('#feedback').click(function(){
     var isOpen = $("#feedbackform").dialog('isOpen');
     if (isOpen){
@@ -25,7 +25,7 @@ $(document).ready(function() {
       $("#feedbackform").dialog('open');
     }
     return false;
-  })
+  });
 
   initAutocomplete();
 
@@ -34,18 +34,18 @@ $(document).ready(function() {
     btn.hide();
     var src = btn.attr('src');
     if (src.indexOf('/images/dialog-ok.png') == 0){
-      var btn_name = $(this).attr("name")
+      var btn_name = $(this).attr("name");
       var form = $(this).parents("form");
       $.post(form.attr("action"), form.serialize()+"&"+btn_name+"=1", function(data){
         if(data.success){
           btn.parents('.item').find('.votes .counter').text(data.average);
           btn.attr('src', '/images/dialog-ok-apply.png');
-          showMessage(data.message, "notice")
+          showMessage(data.message, "notice");
         } else {
-          showMessage(data.message, "error")
+          showMessage(data.message, "error");
           if(data.status == "unauthenticate") {
             window.onbeforeunload = null;
-            window.location="/users/login"
+            window.location="/users/login";
           }
         }
         btn.show();
@@ -64,7 +64,7 @@ $(document).ready(function() {
       var value = $(this).val();
       var id = $(this).attr('id');
       addToLocalStorage(location.href, id, value);
-  })
+  });
 
   initStorageMethods();
   fillTextareas();
@@ -78,21 +78,21 @@ $(document).ready(function() {
   $('.show-more-lang').click(function(){
       $('.langbox.jshide').toggle();
       return false;
-  })
-})
+  });
+});
 
 function initAutocomplete(){
-  var select = $('<select size="100px" name="question[tags]" id="question_tags" class="autocomplete_for_tags" ></select>')
+  var select = $('<select size="100px" name="question[tags]" id="question_tags" class="autocomplete_for_tags" ></select>');
   var tagInput = $('.autocomplete_for_tags');
   var width = tagInput.width();
   tagInput.after(select);
   if(typeof(tagInput)!='undefined' && $.trim(tagInput.val())!=''){
-    var tags = tagInput.val().split(',')
+    var tags = tagInput.val().split(',');
     if( tags.length > 0){
       $.each(tags, function(i,n){
         if($.trim(n)!='')
-        select.append('<option value="'+n+'" selected="selected" class="selected">'+n+'</option>')
-      })
+          select.append('<option value="'+n+'" selected="selected" class="selected">'+n+'</option>');
+      });
     }
   }
   tagInput.remove();
@@ -131,11 +131,11 @@ function initStorageMethods(){
   if(hasStorage()){
     Storage.prototype.setObject = function(key, value) {
         this.setItem(key, JSON.stringify(value));
-    }
+    };
 
     Storage.prototype.getObject = function(key) {
         return JSON.parse(this.getItem(key));
-    }
+    };
   }
 }
 
@@ -146,7 +146,7 @@ function fillTextareas(){
            $("#"+n.id).val(n.value);
            $("#"+n.id).parents('form.commentForm').show();
            $("#"+n.id).parents('form.nestedAnswerForm').show();
-       })
+       });
     }
 }
 
@@ -165,7 +165,7 @@ function addToLocalStorage(key, id, value){
                 isIn = true;
               }
           return n;
-        })
+          });
       if(!isIn)
         storageArr = $.merge(storageArr, [{id: id, value: value}]);
       localStorage.setObject(key, storageArr);
@@ -186,7 +186,7 @@ function removeFromLocalStorage(key, id){
           } else {
               return n;
           }
-      })
+      });
       localStorage.setObject(key, storageArr);
     }
   }
@@ -210,7 +210,7 @@ function sortValues(selectID, keepers){
 function highlightEffect(object) {
   if(typeof object != "undefined") {
     object.fadeOut(400, function() {
-      object.fadeIn(400)
+      object.fadeIn(400);
     });
   }
 }
