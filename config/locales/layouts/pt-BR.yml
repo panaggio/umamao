@@ -1,7 +1,7 @@
 pt-BR:
   layouts:
     application:
-      title: "Perguntas e Respostas"
+      title: "Respostas maduras"
       questions: Perguntas
       questions_in: Perguntas em
       questions_tagged: tópico(s)
