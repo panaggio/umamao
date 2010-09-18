@@ -11,11 +11,11 @@
         = t("time.ago", :time => time_ago_in_words(user.created_at))
         \|
         / User Stats
-        - count = user.questions.count(:group_id => current_group.id)
+        - count = user.questions.count(:group_id => current_group.id, :banned => false)
         = format_number(count)
         = t(:question_count, :scope => "activerecord.models", :count => count)
         \|
-        - count = user.answers.count(:group_id => current_group.id)
+        - count = user.answers.count(:group_id => current_group.id, :banned => false)
         = format_number(count)
         = t(:answer_count, :scope => "activerecord.models", :count => count)
     .clear
