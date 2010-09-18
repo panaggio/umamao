@@ -23,10 +23,11 @@ pt-BR:
 
   activerecord:
     models:
-      answers:
-        one: Resposta
-        other: Respostas
+      answers: Respostas
       answer: Resposta
+      answer_count:
+        one: resposta
+        other: respostas
     attributes:
       answer:
         link: Link

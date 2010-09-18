@@ -13,9 +13,9 @@
         / User Stats
         - count = user.questions.count(:group_id => current_group.id)
         = format_number(count)
-        = t(:questions, :scope => "activerecord.models", :count => count).downcase
+        = t(:question_count, :scope => "activerecord.models", :count => count)
         \|
         - count = user.answers.count(:group_id => current_group.id)
         = format_number(count)
-        = t(:answers, :scope => "activerecord.models", :count => count).downcase
+        = t(:answer_count, :scope => "activerecord.models", :count => count)
     .clear

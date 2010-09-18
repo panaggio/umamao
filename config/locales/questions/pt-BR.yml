@@ -17,10 +17,11 @@ pt-BR:
         views: Visitas
         votes: Votos
     models:
-      questions:
-        one: Pergunta
-        other: Perguntas
+      questions: Perguntas
       question: Pergunta
+      question_count:
+        one: pergunta
+        other: perguntas
   questions:
     answer:
       add_comment: Adicionar comentário

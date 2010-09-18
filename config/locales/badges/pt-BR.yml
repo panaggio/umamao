@@ -125,3 +125,6 @@ pt-BR:
     models:
       badge: Medalha
       badges: Medalhas
+      badge_count:
+        one: medalha
+        other: medalha

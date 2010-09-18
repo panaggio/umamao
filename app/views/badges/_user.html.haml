@@ -1,22 +1,21 @@
 %li.item
-  / User Stats
-  .stats
-    .box.votes
-      .counter{:class => class_for_number(user.questions.count) }
-        =format_number(user.questions.count)
-      .text
-        = t(:questions, :scope => "activerecord.models")
-    .box.answers
-      .counter
-        =format_number(user.badges_on(current_group).count)
-      .text
-        = t(:badges, :scope => "activerecord.models")
   / User Summary
   .summary
     %h3
       = link_to h(user.name), user_path(user)
-    = auto_link(h(user.bio))
-    .metadata
-      = t(:created_at, :scope => "activerecord.attributes.user")
-      = t("time.ago", :time => time_ago_in_words(user.created_at))
-  .clear
+    .info
+      .bio
+        = auto_link(truncate_words(h(user.bio), 60, link_to('…', user_path(user))))
+      .metadata
+        = t(:created_at, :scope => "activerecord.attributes.user")
+        = t("time.ago", :time => time_ago_in_words(user.created_at))
+        \|
+        / User Stats
+        - count = user.questions.count(:group_id => current_group.id)
+        = format_number(count)
+        = t(:question_count, :scope => "activerecord.models", :count => count)
+        \|
+        - count = user.badges_on(current_group).count
+        = format_number(count)
+        = t(:badge_count, :scope => "activerecord.models", :count => count)
+    .clear
