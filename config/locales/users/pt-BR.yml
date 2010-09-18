@@ -24,6 +24,8 @@ pt-BR:
       follow: Seguir
       unfollow: Não seguir
       views: visitas
+      badges:
+        link: "O que são medalhas?"
     follow:
       flash_notice: "Você está seguindo %{user}"
     unfollow:

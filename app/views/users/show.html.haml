@@ -130,6 +130,8 @@
       = number_with_delimiter(@badges.total_entries)
     = t(:badges, :scope => "activerecord.models", :default => "Badges")
 
+  %p= link_to t('.badges.link'), badges_path
+  %br
   %ul.list#badges
     -@badges.each do |badge|
       %li
