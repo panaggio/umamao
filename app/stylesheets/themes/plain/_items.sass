@@ -5,6 +5,7 @@ ul.items
     border-bottom: 1px dotted #ddd
     padding-bottom: 10px
     padding-top: 10px
+    margin: 0 10px
 
     h3
       margin-top: 0
@@ -57,13 +58,9 @@ ul.items
       color: #898989
 
     .stats
-      width: 8%
       float: left
 
     .summary
-      width: 92%
-      float: left
-
       a:link, a:active, a:visited
         color: #444444
         font-weight: bold
@@ -80,10 +77,20 @@ ul.items
           font-weight: bold
           color: #666
 
-      .time_ago
+      .time_ago, .metadata
         color: #797979
         float: right
         padding-top: 4px
+
+      .info
+        .bio
+          line-height: inherit
+          float: left
+          width: 55%
+
+        .metadata
+          font-size: 80%
+          vertical-align: text-bottom
 
     .actions
       padding: 5px

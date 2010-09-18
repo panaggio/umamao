@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
@@ -288,6 +289,20 @@ module ApplicationHelper
     top_bar.split("\n").map do |line|
       render_page_links(line.strip)
     end
+  end
+
+  def truncate_words(text, length = 140, more_string = '…')
+    words = text.to_s.split
+    ''.tap { |result|
+      chars_left = length
+
+      while chars_left > 0 && words.size > 0 && words.first.size < chars_left
+        chars_left -= words.first.size + 1
+        result << " #{words.shift}"
+      end
+
+      result << more_string unless words.empty?
+    }
   end
 end
 

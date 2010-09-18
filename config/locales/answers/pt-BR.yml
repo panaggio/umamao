@@ -23,7 +23,9 @@ pt-BR:
 
   activerecord:
     models:
-      answers: Respostas
+      answers:
+        one: Resposta
+        other: Respostas
       answer: Resposta
     attributes:
       answer:

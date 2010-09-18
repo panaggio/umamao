@@ -15,9 +15,8 @@
   .summary
     %h3
       = link_to h(user.name), user_path(user)
-    =find_and_preserve(auto_link(user.bio))
-    .owner-data
-      %strong
-        = t(:created_at, :scope => "activerecord.attributes.user")
-        = t("time.ago", :time => time_ago_in_words(user.created_at))
+    = auto_link(h(user.bio))
+    .metadata
+      = t(:created_at, :scope => "activerecord.attributes.user")
+      = t("time.ago", :time => time_ago_in_words(user.created_at))
   .clear

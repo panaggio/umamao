@@ -15,13 +15,6 @@
     - owner = question.user
 
   %li.entry.item{:class => class_for_question(question)}
-    / Question Stats
-    .stats
-      .box.answers{:class => class_for_question(question), :title => question.accepted ? t(".accepted_tooltip") : "" }
-        .counter
-          = format_number(question.answers_count)
-        .text
-          = t(:answers, :scope => "activerecord.attributes.question")
     / Question Summary
     .summary
       - cache("question_on_index_#{question.id}") do
@@ -31,8 +24,13 @@
             %span.tag{:class => "tag_#{h(tag)}"}
               = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag", :title => t("questions.tags.tooltip", :tag => tag)
 
-      .time_ago
-        = t("time.ago", :time => time_ago_in_words(last_target.updated_at))
+      / Question Stats
+      .info
+        .metadata
+          = t("time.ago", :time => time_ago_in_words(last_target.updated_at))
+          \|
+          = format_number(question.answers_count)
+          = t(:answers, :scope => "activerecord.attributes.question", :count => question.answers_count).downcase
     .clear
 - else
   - cache("mini_question_on_index_#{question.id}") do

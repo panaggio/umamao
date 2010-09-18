@@ -2,7 +2,9 @@ pt-BR:
   activerecord:
     attributes:
       question:
-        answers: Respostas
+        answers:
+          one: Resposta
+          other: Respostas
         asked_by: Feita por
         body: Detalhes
         closed: Fechada
@@ -15,8 +17,10 @@ pt-BR:
         views: Visitas
         votes: Votos
     models:
+      questions:
+        one: Pergunta
+        other: Perguntas
       question: Pergunta
-      questions: Perguntas
   questions:
     answer:
       add_comment: Adicionar comentário
