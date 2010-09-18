@@ -139,7 +139,7 @@ class QuestionsController < ApplicationController
   end
 
   def tags
-    conditions = scoped_conditions({:answered_with_id => nil, :banned => false})
+    conditions = scoped_conditions(:banned => false)
     if params[:q].blank?
       @tag_cloud = Question.tag_cloud(conditions, -1).paginate :per_page => 32,
       :page => params[:page] || 1
