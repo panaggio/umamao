@@ -1,11 +1,14 @@
 %li.item
   / User Summary
   .summary
-    %h3
-      = link_to h(user.name), user_path(user)
+    .avatar
+      = gravatar user.email.to_s, :size => 96
+
+      %p
+        = link_to h(user.name), user_path(user)
     .info
       .bio
-        = auto_link(truncate_words(h(user.bio), 60, link_to('…', user_path(user))))
+        = auto_link(truncate_words(h(user.bio), 200, link_to('…', user_path(user))))
       .metadata
         = t(:created_at, :scope => "activerecord.attributes.user")
         = t("time.ago", :time => time_ago_in_words(user.created_at))
