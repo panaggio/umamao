@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   subtabs :index => [[:newest, "created_at desc"],
                      [:oldest, "created_at asc"],
-                     [:name, "login asc"]]
+                     [:name, "name asc"]]
 
   def index
     set_page_title(t("users.index.title"))
