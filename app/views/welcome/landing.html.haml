@@ -12,112 +12,137 @@
 
   %body.bp
     #container
-      #header
-        = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
+      #wrapper
+        #header
+          = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
 
-        = form_tag new_user_session_path, :id => 'login_form' do
-          #email_label.label
-            = label_tag 'user[email]', t('users.form.email')
-          #password_label.label
-            = label_tag 'user[password]', t('users.form.password')
-
-          #email_field
-            = text_field_tag 'user[email]', nil, :tabindex => 1
-          #password_field
-            = password_field_tag 'user[password]', nil, :tabindex => 2
-          #submit_button
-            = submit_tag t('layouts.application.log_in'), :tabindex => 4
-
-          #remember_me
-            = label_tag 'user[remember_me]', t("sessions.new.remember_me")
-            = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
-
-      %hr#colruler
-
-      #content
-        %h3 Qualquer pergunta, não qualquer resposta.
-
-        %p
-
-          O Umamão é uma base de conhecimento em língua portuguesa
-          expandida e melhorada constantemente por acadêmicos e
-          profissionais. Temos orgulho de produzir conteúdo de
-          qualidade.
-
-        %p
-          %strong
-
-            Se você é curioso e gosta de compartilhar conhecimento, o
-            Umamão é para você.
-
-        %hr
-
-        %p
-
-          O Umamão está aberto, por enquanto, apenas para a comunidade
-          Unicamp (através do email acadêmico).  Se você é de outra
-          universidade (ou ex-aluno(a)), deixe seu email que nós
-          avisaremos quando você puder se cadastrar.
-
-        - if flash[:notice].present? && params[:saved] == 'true'
-          .success
-            = flash[:notice]
-
-        = error_messages_for @waiting_user, :class => 'error'
-
-        - unless params[:saved] == 'true'
-          = form_tag waiting_users_path, :id => 'waiting_list' do
+          = form_tag new_user_session_path, :id => 'login_form' do
             #email_label.label
               = label_tag 'user[email]', t('users.form.email')
-            #university_label.label
-              = label_tag 'user[university]', 'Universidade (opcional):'
+            #password_label.label
+              = label_tag 'user[password]', t('users.form.password')
 
             #email_field
-              = text_field_tag 'user[email]', @waiting_user.email
-            #university_field
-              = text_field_tag 'user[university]', @waiting_user.university
+              = text_field_tag 'user[email]', nil, :tabindex => 1
+            #password_field
+              = password_field_tag 'user[password]', nil, :tabindex => 2
             #submit_button
-              = submit_tag 'Eu quero entrar!'
+              = submit_tag t('layouts.application.log_in'), :tabindex => 4
 
-      #signup
-        %h3  #{ t('layouts.application.signup') }
-        = form_for @user, :url => registration_path('user') do |f|
-          = f.error_messages
+            #remember_me
+              = label_tag 'user[remember_me]', t("sessions.new.remember_me")
+              = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
 
-          .field
-            .label
-              = f.label :email, t('users.form.email')
-            .input
-              = f.text_field :email, :tabindex => 5
+        %hr#colruler
 
-          .field
-            .label
-              = f.label :password, t('users.form.password')
-            .input
-              = f.password_field :password, :tabindex => 6
+        #content
+          %h3 Qualquer pergunta, não qualquer resposta.
 
-          .field
-            .label
-              = f.label :password_confirmation, t('users.form.password_confirmation')
-            .input
-              = f.password_field :password_confirmation, :tabindex => 7
+          %p
 
-          .field
-            .label
-              = f.label :name, t("users.form.name"), :class => "label"
-            .input
-              = f.text_field :name, :class => "text_field", :tabindex => 8
+            O Umamão é uma base de conhecimento em língua portuguesa
+            expandida e melhorada constantemente por acadêmicos e
+            profissionais. Temos orgulho de produzir conteúdo de
+            qualidade.
 
-          .field
-            .label
-              = f.label :academic_email, t('users.form.academic_email') + "\n(Apenas da Unicamp por enquanto)"
-            .input
-              = f.text_field :academic_email, :tabindex => 9
+          %p
+            %strong
 
-          .submit
-            = f.submit t('layouts.application.signup'), :tabindex => 10
+              Se você é curioso e gosta de compartilhar conhecimento, o
+              Umamão é para você.
+
+          %hr
+
+          %p
+
+            O Umamão está aberto, por enquanto, apenas para as
+            comunidades Unicamp e USP (através do email acadêmico).  Se
+            você é de outra universidade (ou ex-aluno(a)), deixe seu
+            email que nós avisaremos quando você puder se cadastrar.
+
+          - if flash[:notice].present? && params[:saved] == 'true'
+            .success
+              = flash[:notice]
+
+          = error_messages_for @waiting_user, :class => 'error'
+
+          - unless params[:saved] == 'true'
+            = form_tag waiting_users_path, :id => 'waiting_list' do
+              #email_label.label
+                = label_tag 'user[email]', t('users.form.email')
+              #university_label.label
+                = label_tag 'user[university]', 'Universidade (opcional):'
+
+              #email_field
+                = text_field_tag 'user[email]', @waiting_user.email
+              #university_field
+                = text_field_tag 'user[university]', @waiting_user.university
+              #submit_button
+                = submit_tag 'Eu quero entrar!'
+
+        #signup
+          %h3  #{ t('layouts.application.signup') }
+          = form_for @user, :url => registration_path('user') do |f|
+            = f.error_messages
+
+            .field
+              .label
+                = f.label :email, t('users.form.email')
+              .input
+                = f.text_field :email, :tabindex => 5
+
+            .field
+              .label
+                = f.label :password, t('users.form.password')
+              .input
+                = f.password_field :password, :tabindex => 6
+
+            .field
+              .label
+                = f.label :password_confirmation, t('users.form.password_confirmation')
+              .input
+                = f.password_field :password_confirmation, :tabindex => 7
+
+            .field
+              .label
+                = f.label :name, t("users.form.name"), :class => "label"
+              .input
+                = f.text_field :name, :class => "text_field", :tabindex => 8
+
+            .field
+              .label
+                = f.label :academic_email, t('users.form.academic_email') + "\n(Apenas da Unicamp e da USP por enquanto)"
+              .input
+                = f.text_field :academic_email, :tabindex => 9
+
+            .submit
+              = f.submit t('layouts.application.signup'), :tabindex => 10
+
+        .push
 
       #footer
+        %hr
+        %ul
+          %li
+            Quem somos
+            \|
+          %li
+            = link_to 'Feedback', feedback_url
+            \|
+          %li
+            = link_to 'Twitter', 'http://twitter.com/umamao', :target => '_blank'
+            \|
+          %li= link_to 'Facebook', 'http://www.facebook.com/#!/pages/Umamao/110957438924904', :target => '_blank'
+        %p.center
+          %a{:rel => "license", :href => "http://creativecommons.org/licenses/by-sa/2.5/br/"}
+            %img{:alt => "Licença Creative Commons", :style => "border-width:0",
+                 :src => "http://i.creativecommons.org/l/by-sa/2.5/br/88x31.png"}
+          %br
+          Todo o conteúdo gerado por usuários está sob uma
+          #{link_to "licença Creative Commons", "http://creativecommons.org/licenses/by-sa/2.5/br/", :rel => "license"},
+          com
+          #{link_to "atribuição obrigatória", "atribuição"}.
 
-      = render :partial => "shared/analytics"
+
+        = render :partial => "shared/analytics"
 

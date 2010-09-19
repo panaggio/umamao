@@ -2,13 +2,41 @@ $logo-red: #da242b
 
 @import screen
 @import blueprint/buttons
-
+@import compass/utilities/lists/horizontal-list
 #container
   +container
 
 #header, #footer
   +column($blueprint-grid-columns)
   padding: 20px 0
+
+/* Sticky Footer by Ryan Fait
+/* http://ryanfait.com/
+*
+  margin: 0
+
+html, body, #container
+  height: 100%
+
+#wrapper
+  min-height: 100%
+  height: auto !important
+  height: 100%
+  /* the bottom margin is the negative value of the footer's height
+  margin: 0 auto -120px
+#footer, .push
+  /* .push must be the same height as .footer
+  height: 120px
+  padding: 0
+  clear: both
+
+/* Sticky Footer by Ryan Fait
+/* http://ryanfait.com/
+
+#footer
+  text-align: center
+  ul
+    +horizontal-list
 
 #login_form
   /* true means it's the last column in the row
