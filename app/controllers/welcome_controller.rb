@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   helper :questions
   tabs :default => :welcome
+  layout 'application'
 
   def index
     logged_in? ? home : landing
@@ -9,7 +10,7 @@ class WelcomeController < ApplicationController
   def landing
     @user = User.new
     @waiting_user = WaitingUser.new
-    render 'landing', :layout => false
+    render 'landing', :layout => 'welcome'
   end
 
   def home
