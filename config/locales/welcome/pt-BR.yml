@@ -1,11 +1,11 @@
 pt-BR:
   welcome:
     feedback:
-      captcha_error: Resolva um cálculo matemático simples, por favor
-      email_description: Forneça o seu endereço de email para podermos responder à sua mensagem
-      feedback_description: Descrição
-      feedback_title: Título
-      title: Enviar o seu comentário
+      captcha_error: Resolva um cálculo matemático simples, por favor.
+      feedback_description: "Detalhes:"
+      feedback_title: "Assunto:"
+      title: Críticas, sugestões, elogios?
+      feedback_email: "Email (opcional):"
     home:
       active: Ativo
       hot: Popular

@@ -40,6 +40,7 @@ class WelcomeController < ApplicationController
   end
 
   def feedback
+    render 'feedback', :layout => 'welcome'
   end
 
   def send_feedback
