@@ -39,6 +39,11 @@ class WelcomeController < ApplicationController
     render 'home'
   end
 
+  def about
+    @users = AppConfig.about['users']
+    render 'about', :layout => 'welcome'
+  end
+
   def feedback
     render 'feedback', :layout => 'welcome'
   end
