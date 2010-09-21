@@ -78,8 +78,7 @@ $(document).ready(function() {
                     highlightEffect(answer);
                     showMessage(data.message, "notice");
                     form.find("textarea").val("");
-                    form.find("#markdown_preview").html("");
-                    removeFromLocalStorage(location.href, "markdown_editor");
+                    removeFromLocalStorage(location.href, "answer-input");
                     MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
                   } else {
                     showMessage(data.message, "error");
