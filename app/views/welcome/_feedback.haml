@@ -1,7 +1,7 @@
 #content
   %h2= t('.title')
   -feedback = params[:feedback] || {}
-  = form_tag send_feedback_path, :class => "form", :method => "post" do
+  = form_tag send_feedback_path, :method => "post" do
     .field
       .label
         = label_tag "feedback[title]", t(".feedback_title"), :class => "label"
