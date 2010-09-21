@@ -18,13 +18,13 @@
 
 .group
   = f.label :body, t(:body, :scope => "activerecord.attributes.question"), :class => "label"
-  = f.text_area :body, :class => "text_area", :id => "wmd-input", :rows => "auto", :cols => "auto"
+  = f.text_area :body, :class => "wmd-input", :id => "question-input", :rows => "auto", :cols => "auto"
   %label.label
     = t("global.preview")
   #question-preview.markdown
 
   %script{:type => "text/javascript", :charset => "utf-8"}
-    $().ready(function() { $("#wmd-input").wmdMath({preview: "question-preview"}); });
+    $().ready(function() { $("#question-input").wmdMath({preview: "question-preview"}); });
 
 -if current_group.language.nil? && AppConfig.enable_i18n
   .group
