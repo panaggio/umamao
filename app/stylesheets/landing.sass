@@ -1,4 +1,10 @@
 $logo-color: #da242b
+$link-color: #0077cc
+
+@mixin link-color
+  a
+    color: $link-color
+    text-decoration: none
 
 @import screen
 @import blueprint/buttons
@@ -8,6 +14,7 @@ $logo-color: #da242b
 #container
   +container
   +sticky-footer-container
+  +link-color
 
 #header
   +column($blueprint-grid-columns)
