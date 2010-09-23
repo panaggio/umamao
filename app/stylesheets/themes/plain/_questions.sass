@@ -63,13 +63,18 @@
     a
       font-size: 12px
       margin-right: 2px
-      color: #222
+      color: $controls-color
+  a#add_comment_link
+    color: $controls-color
 
 .ccontrol
-  color: #666
+  padding-bottom: 10px
   text-decoration: none
   display: block
   font-size: 12px
+
+  a
+    color: $link-color
 
 .comments
   clear: both
@@ -124,11 +129,12 @@
     #body-col, .body-col
       float: left
       width: 90%
+      margin-bottom: 10px
       .actions
         float: left
-        padding: 10px 4px
+        padding-top: 10px
         a
-          color: #222
+          color: $controls-color
           margin: 2px 5px
           font-size: 12px
 

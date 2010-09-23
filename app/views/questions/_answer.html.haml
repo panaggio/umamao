@@ -58,7 +58,7 @@
     - if logged_in?
       = link_to t(".add_comment"), new_question_comment_path(@question, answer), :class => "addNestedAnswer add_answer_comment_link"
 
-    %h3.ccontrol
+    .ccontrol
       %a{:href => "", :class => "ccontrol-link"}
         - if answer.comments.size == 1
           = answer.comments.size.to_s + " " + t("models.comment")

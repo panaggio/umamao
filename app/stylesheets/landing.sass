@@ -1,4 +1,4 @@
-$logo-red: #da242b
+$logo-color: #da242b
 
 @import screen
 @import blueprint/buttons
@@ -96,8 +96,8 @@ input[type=submit]
   // The +button-button mixin is just like the +anchor-button mixin, but for <button> elements.
   +button-button
   +button-colors
-  +button-hover-colors(#fff, $logo-red + 30, $logo-red + 30)
-  +button-active-colors(#fff, $logo-red - 50, $logo-red - 50)
+  +button-hover-colors(#fff, $logo-color + 30, $logo-color + 30)
+  +button-active-colors(#fff, $logo-color - 50, $logo-color - 50)
 
 form#waiting_list
   /* true means it's the last column in the row

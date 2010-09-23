@@ -89,10 +89,7 @@
           .group.navform
             = submit_tag t(".request_closing_details"), :class => "button"
 
-  - if logged_in?
-    = link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
-
-  %h3.ccontrol
+  .ccontrol
     %a{:href => "", :class => "ccontrol-link"}
       - if @question.comments.size == 1
         = @question.comments.size.to_s + " " + t("models.comment")
@@ -103,6 +100,8 @@
     - @question.comments.each do |comment|
       = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
   .clear
+  - if logged_in?
+    = link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
   .forms
     .comment-form-question
       - form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
