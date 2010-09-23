@@ -1,29 +1,41 @@
 @import "compass/utilities/general/reset"
 
 .markdown
-  font-size: 14px
   color: #222
+  margin: 0 5px
 
-  p + p
-    margin: 1.25em 0
+  a
+    color: #444444
+    text-decoration: none
+
+  p
+    +reset-font
+    margin: 0
+    font-size: 13.80px
+    font-family: Helvetica,Arial,"Liberation Sans","DejaVu Sans",sans-serif
+
+  p + p, ul + p, ol + p
+    margin-top: 1.1em
+
+  p + ul
+    margin-top: 1em
 
   strong
     font-weight: bold
   em
     font-style: italic
+
   ul
-    list-style: disc outside
-    padding: 4px
+    list-style: disc
 
   ol
-    list-style: decimal outside
-    padding: 4px
+    list-style: decimal
 
-  li
-    margin-left: 1.3em
-    padding-left: 0.5em
-    font-weight: normal
-    font-size: 14px
+  ul, ol
+    list-style-position: inside
+
+  li + li
+    margin-top: 0.9em
 
   h1,h2,h3,h4,h5,h6
     +reset-font
