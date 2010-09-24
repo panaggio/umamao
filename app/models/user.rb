@@ -123,6 +123,11 @@ class User
     u ? u : []
   end
 
+  def first_name
+    return nil unless self.name
+    self.name.split(/\s+/).first
+  end
+
   def accept_invitation
     invitation = Invitation.find_by_recipient_email(self.email)
     if invitation

@@ -1,6 +1,6 @@
 <% question = h(@question.title) %>
 
-<%= t('notifier.global.hi', :user => h(@user.name)) %>
+<%= t('notifier.global.hi', :user => h(@user.first_name)) %>
 
 <%= t('.author', :user => h(@comment.user.name)) %>
 
