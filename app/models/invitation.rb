@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Invitation
   include MongoMapper::Document
 
@@ -16,6 +17,8 @@ class Invitation
 
   before_create :generate_invitation_token
   after_create :send_invitation
+
+  validate :recipient_is_not_user
 
   timestamps!
 
@@ -42,6 +45,13 @@ class Invitation
   def send_invitation
     generate_invitation_token! if self.invitation_token.nil?
     Inviter.invitation(self).deliver
+  end
+
+  private
+  def recipient_is_not_user
+    if User.find_by_email(self.recipient_email)
+      self.errors.add(:email, "já está cadastrado no Umamão!")
+    end
   end
 
 end
