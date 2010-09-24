@@ -52,7 +52,7 @@
               = yield :subtabs
               .clear
             .content
-              %p.markdown
+              %p
                 = show_flash_messages(:class => "flash", :markdown => true)
               = render :partial => "shared/ads/content_ads"
               .inner

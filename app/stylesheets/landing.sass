@@ -1,21 +1,19 @@
 $logo-color: #da242b
 $link-color: #0077cc
 
-@mixin link-color
-  a
-    color: $link-color
-    text-decoration: none
-
 @import screen
 @import blueprint/buttons
 @import compass/utilities/lists/horizontal-list
 @import footer
 
+body.bp
+  a, a:visited, a:hover
+    color: $logo-color
+    text-decoration: none
+
 #container
   +container
   +sticky-footer-container
-  +link-color
-
 #header
   +column($blueprint-grid-columns)
   padding: 20px 0
