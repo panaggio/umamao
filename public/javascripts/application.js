@@ -80,6 +80,12 @@ $(document).ready(function() {
       return false;
   });
 
+  if($('#new_user #user_email').val() == ""){
+    $('#new_user #user_email').focus();
+  } else {
+    $('#new_user #user_password').focus();
+  };
+
   $('#login_form > #email_field > input').focus();
 });
 

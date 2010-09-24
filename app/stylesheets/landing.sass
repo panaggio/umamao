@@ -124,7 +124,10 @@ form#waiting_list
 
 form
   +blueprint-form
-  +blueprint-form-sizes(390px)
+  +blueprint-form-sizes(379px)
+
+  textarea
+    width: 379px
 
 body.bp
   a:hover
@@ -143,3 +146,24 @@ ul#team
 
   .avatar
     margin-right: 20px
+
+/* users#new and stuff
+#main
+  +prepend(6)
+  +column(10, true)
+  +append(8)
+
+.inviter_avatar
+  margin-right: 10px
+  /* float: left
+
+#invitation_introduction
+  margin-bottom: 5px
+
+#invitation_message
+  width: 305px
+  text-align: justify
+  float: right
+
+.inviter_name
+  font-weight: bold

@@ -1,0 +1,15 @@
+pt-BR:
+  invitations:
+    form:
+      title: Convidar por email
+      labels:
+        recipient_email: "Email da pessoa:"
+        message: "Mensagem pessoal (opcional):"
+    model:
+      attributes:
+        sent_at: enviado
+        accepted_at: aceito
+    index:
+      titles:
+        pending: Convites pendentes
+        accepted: Convites aceitos

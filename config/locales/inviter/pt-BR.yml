@@ -1,0 +1,18 @@
+pt-BR:
+  inviter:
+    invitation:
+      subject: "%{inviter} te convidou para entrar no Umamão!"
+      greeting: Olá!
+      sender: "%{user} acha que você deveria se juntar ao Umamão:"
+      site_description: |
+        O Umamão é uma base de conhecimento em língua portuguesa expandida e melhorada constantemente por acadêmicos e profissionais.
+
+        Se você é curioso e gosta de ensinar, o Umamão é para você.
+      text_link_label: "Para aceitar o convite, siga este link:"
+      html_link_label: "Para aceitar o convite, %{link}, ou digite esta URL no seu navegador:"
+      click_here: clique aqui
+      goodbye: |
+        Esperamos te ver em breve!
+
+        Abraço,
+        Equipe Umamão

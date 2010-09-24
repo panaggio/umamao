@@ -1,0 +1,61 @@
+- @invitation_types.each do |type, invitations|
+  %h2.title= t(type, :scope => "invitations.index.titles") if invitations.present?
+
+  %ul.items.invitations
+    - invitations.each do |invitation|
+      %li.item
+        / User Summary
+        .summary
+          - email = h(invitation.recipient_email)
+          .avatar
+            = gravatar(email, :size => 72)
+          = type == :pending ? "#{email}:" : link_to(h(invitation.recipient.name), user_path(invitation.recipient))
+          .info
+            #bio
+              = h(invitation.message)
+            .metadata
+              - method = type == :pending ? :sent_at : :accepted_at
+              = t(method, :scope => "invitations.model.attributes")
+              = t("time.ago", :time => time_ago_in_words(invitation.send(method)))
+          .clear
+
+
+- content_for :sidebar do
+  .invitation_form
+    %h3= t('invitations.form.title')
+
+    - if current_user.can_invite_without_confirmation?
+      .tip
+        %p
+          Tente convidar pessoas que atendem a pelo menos um dos três critérios:
+          %ul
+            %li São curiosas e gostam de ensinar
+            %li Sabem mais do que você
+            %li São de áreas diferentes da sua
+
+    - else
+      .tip
+        %p
+          <strong>Lembre-se</strong>: Você pode enviar o convite para
+          o email particular, mas a pessoa ainda terá que confirmar um
+          email acadêmico da Unicamp ou da USP.
+
+    = error_messages_for @invitation, :class => 'error'
+
+    = form_for @invitation do |f|
+      = f.error_messages
+
+      .field
+        .label
+          = f.label :recipient_email, t('invitations.form.labels.recipient_email')
+        .input
+          = f.text_field :recipient_email
+
+      .field
+        .label
+          = f.label :message, t('invitations.form.labels.message')
+        .input
+          = f.text_area :message
+
+      .submit
+        = f.submit 'Enviar convite'

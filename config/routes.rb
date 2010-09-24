@@ -1,4 +1,6 @@
 Shapado::Application.routes.draw do
+  resources :invitations, :only => [:index, :create]
+
   resources :waiting_users, :only => :create
 
   match '/oauth/start' => 'oauth#start', :as => :oauth_authorize

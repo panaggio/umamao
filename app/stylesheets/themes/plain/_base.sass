@@ -1,6 +1,7 @@
 $logo-red: #da242b
 
 @import ../../footer
+@import ../../screen
 
 a
   color: #0077cc
@@ -300,6 +301,28 @@ input.checkbox
 
     input
       font-size: 14px
+
+.invitation_form
+  .tip
+    color: #666
+    margin: 0 0 10px 0
+    font-size: 90%
+
+    p
+      line-height: 1em
+      margin: 0 0 5px 0
+    ul
+      list-style-position: inside
+
+  h3
+    color: #444
+    padding-top: 14px
+  form
+    color: #444
+    +blueprint-form
+    +blueprint-form-sizes(95%)
+    textarea
+      width: 95%
 
 
 .description

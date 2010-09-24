@@ -1,0 +1,14 @@
+<%= t('.greeting') %>
+
+<%= t('.sender', :user => h(@sender.name)) %>
+
+---
+<%= h(@message) %>
+---
+
+<%= t('.site_description') %>
+
+<%= t('.text_link_label') %>
+<%= new_user_url(:invitation_token => @invitation_token) %>
+
+<%= t('.goodbye') %>

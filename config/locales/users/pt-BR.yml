@@ -15,6 +15,8 @@ pt-BR:
     new:
       title: Criar conta
       submit: Criar conta
+      invitation:
+          title: "Você veio a convite de %{user}:"
     edit:
       title: Configurações
       submit: Salvar
@@ -33,7 +35,7 @@ pt-BR:
     form:
       change_password: Trocar de senha
       email: "Email:"
-      academic_email: "Email acadêmico:"
+      academic_email: "Email acadêmico (Apenas da Unicamp e da USP por enquanto):"
       name: "Nome e sobrenome:"
       password: "Senha:"
       password_confirmation: "Repetir senha:"
@@ -48,6 +50,7 @@ pt-BR:
     create:
       flash_notice: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
       flash_error:  "Desculpe, não foi possível criar sua conta. Tente de novo, ou entre em contato conosco (no link de feedback na base da página)."
+      welcome_new_invited_user: "Convite aceito. Bem-vindo(a) ao Umamão!"
     messages:
       errors:
         reputation_needed: "Você precisa de pelo menos %{min_reputation} de reputação para %{action}"

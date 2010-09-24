@@ -30,16 +30,26 @@ class UsersController < ApplicationController
 
   end
 
-  # render new.rhtml
   def new
     @user = User.new
+
+    @invitation = Invitation.
+      find_by_invitation_token(params[:invitation_token])
+
+    @user.email = @invitation[:recipient_email] if @invitation
+
+    if @invitation.sender.can_invite_without_confirmation?
+      @user.confirmed_at = Time.now
+    end
+
     @user.timezone = AppConfig.default_timezone
+    render 'new', :layout => 'welcome'
   end
 
   def create
     @user = User.new
     @user.safe_update(%w[login email academic_email name password_confirmation password preferred_languages website
-                         language timezone identity_url bio hide_country], params[:user])
+                         language timezone identity_url bio hide_country confirmed_at], params[:user])
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
     end
@@ -52,7 +62,11 @@ class UsersController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset session
       @user.localize(request.remote_ip)
-      flash[:notice] = t("flash_notice", :scope => "users.create")
+      if @user.confirmed_at.present?
+        flash[:notice] = t("welcome_new_invited_user", :scope => "users.create")
+      else
+        flash[:notice] = t("flash_notice", :scope => "users.create")
+      end
       sign_in_and_redirect(:user, @user) # !! now logged in
     else
       flash[:error]  = t("flash_error", :scope => "users.create")

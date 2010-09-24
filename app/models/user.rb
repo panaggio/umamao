@@ -62,6 +62,8 @@ class User
 
   key :feed_token,                String
 
+  key :can_invite_without_confirmation, Boolean
+
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
   has_many :comments, :dependent => :destroy
@@ -83,12 +85,13 @@ class User
 
   validates_length_of       :name,     :maximum => 100
 
-  validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? }
-  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? }
+  validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
+  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
   validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
-                            :if => lambda { |u| u.new_record? }
+                            :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 
   before_create :logged!
+  after_create :accept_invitation
 
   def self.find_for_authentication(conditions={})
     first(conditions) || first(:login => conditions["email"])
@@ -118,6 +121,15 @@ class User
 
     u = User.find(user_ids, conditions.merge(:select => [:email, :login, :name, :language]))
     u ? u : []
+  end
+
+  def accept_invitation
+    invitation = Invitation.find_by_recipient_email(self.email)
+    if invitation
+      invitation.accepted_at = Time.now
+      invitation.recipient_id = self.id
+      invitation.save
+    end
   end
 
   def add_preferred_tags(t, group)

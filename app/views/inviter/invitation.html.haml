@@ -1,0 +1,17 @@
+%p= t('.greeting')
+
+%p= t('.sender', :user => h(@sender.name))
+
+\---
+%p= markdown(@message, :group => @group)
+\---
+
+%p= simple_format(t('.site_description'))
+
+- url = new_user_url(:invitation_token => @invitation_token)
+%p
+  = t('.html_link_label', :link => link_to(t('.click_here'), url))
+  %br
+  = url
+
+%p= simple_format(t('.goodbye'))

@@ -47,7 +47,6 @@
 
         - if logged_in?
           = link_to t('scaffold.edit'), edit_question_answer_path(@question, answer)
-
       .clear
       .forms
         - if current_user != answer.user
