@@ -18,7 +18,7 @@ class Invitation
   before_create :generate_invitation_token
   after_create :send_invitation
 
-  validate :recipient_is_not_user
+  validate_on_create :recipient_is_not_user
 
   timestamps!
 
