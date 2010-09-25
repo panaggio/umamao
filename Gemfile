@@ -5,6 +5,7 @@ source 'http://gemcutter.org'
 group :development do
   gem 'RedCloth', '~> 4.1.1'
   gem 'ruby-debug'
+  gem 'ruby-prof'
 end
 
 gem 'rails', '~>3.0.0'
@@ -24,7 +25,7 @@ gem 'magent', '~> 0.4.2'
 gem 'mongo', '~> 1.0.3'
 gem 'mongo_mapper', '~>0.8.2'
 gem 'mongomapper_ext', '~>0.4.0'
-gem 'newrelic_rpm', '~>2.13.0.beta6', :require => false
+gem 'newrelic_rpm', '~>2.13.1'
 gem 'oauth2', '~>0.0.8'
 gem 'rdiscount', '~>1.6.3.1'
 gem 'ruby-stemmer', '~>0.8.2', :require => 'lingua/stemmer'
