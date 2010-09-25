@@ -23,8 +23,6 @@ class InvitationsController < ApplicationController
                                              :accepted_at => nil)
     @accepted_invitations = Invitation.where(:sender_id => current_user.id,
                                              :accepted_at.ne => nil)
-    @invitation_types = [[:pending, @pending_invitations],
-                         [:accepted, @accepted_invitations]]
   end
 
 end

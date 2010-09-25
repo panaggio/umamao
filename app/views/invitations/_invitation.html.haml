@@ -1,0 +1,16 @@
+%li.item
+  / User Summary
+  .summary
+    -# The user might have signed up with a different email than the one used to invite her
+    - email = invitation.accepted_at ? h(invitation.recipient.email) : h(invitation.recipient_email)
+    .avatar
+      = gravatar(email, :size => 72)
+    = invitation.accepted_at ? link_to(h(invitation.recipient.name), user_path(invitation.recipient)) : "#{email}:"
+    .info
+      #bio
+        = h(invitation.message)
+      .metadata
+        - method = invitation.accepted_at ? :accepted_at : :sent_at
+        = t(method, :scope => "invitations.model.attributes")
+        = t("time.ago", :time => time_ago_in_words(invitation.send(method)))
+    .clear

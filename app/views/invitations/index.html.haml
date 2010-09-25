@@ -1,24 +1,16 @@
-- @invitation_types.each do |type, invitations|
-  %h2.title= t(type, :scope => "invitations.index.titles") if invitations.present?
+%h2.title= t('pending', :scope => "invitations.index.titles")
 
-  %ul.items.invitations
-    - invitations.each do |invitation|
-      %li.item
-        / User Summary
-        .summary
-          - email = h(invitation.recipient_email)
-          .avatar
-            = gravatar(email, :size => 72)
-          = type == :pending ? "#{email}:" : link_to(h(invitation.recipient.name), user_path(invitation.recipient))
-          .info
-            #bio
-              = h(invitation.message)
-            .metadata
-              - method = type == :pending ? :sent_at : :accepted_at
-              = t(method, :scope => "invitations.model.attributes")
-              = t("time.ago", :time => time_ago_in_words(invitation.send(method)))
-          .clear
+%p.tip= t('.empty.pending') if @pending_invitations.blank?
+%ul.items.invitations
+  - @pending_invitations.each do |invitation|
+    = render invitation
 
+%h2.title= t('accepted', :scope => "invitations.index.titles")
+
+%p.tip= t('.empty.accepted') if @accepted_invitations.blank?
+%ul.items.invitations
+  - @accepted_invitations.each do |invitation|
+    = render invitation
 
 - content_for :sidebar do
   .invitation_form

@@ -13,3 +13,6 @@ pt-BR:
       titles:
         pending: Convites pendentes
         accepted: Convites aceitos
+      empty:
+        pending: Nenhum convite pendente. Que tal convidar alguém?
+        accepted: "Nenhum convite aceito."

@@ -75,6 +75,8 @@ class User
   key :friend_list_id, String
   belongs_to :friend_list, :dependent => :destroy
 
+  key :invitation_token, String
+
   before_create :create_friend_list
   before_create :generate_uuid
 
@@ -129,7 +131,7 @@ class User
   end
 
   def accept_invitation
-    invitation = Invitation.find_by_recipient_email(self.email)
+    invitation = Invitation.find_by_invitation_token(self.invitation_token)
     if invitation
       invitation.accepted_at = Time.now
       invitation.recipient_id = self.id

@@ -36,10 +36,9 @@ class UsersController < ApplicationController
     @invitation = Invitation.
       find_by_invitation_token(params[:invitation_token])
 
-    @user.email = @invitation[:recipient_email] if @invitation
-
-    if @invitation.sender.can_invite_without_confirmation?
-      @user.confirmed_at = Time.now
+    if @invitation
+      @user.email = @invitation[:recipient_email]
+      @user.invitation_token = @invitation.invitation_token
     end
 
     @user.timezone = AppConfig.default_timezone
@@ -49,10 +48,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new
     @user.safe_update(%w[login email academic_email name password_confirmation password preferred_languages website
-                         language timezone identity_url bio hide_country confirmed_at], params[:user])
+                         language timezone identity_url bio hide_country invitation_token], params[:user])
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
     end
+
+    invitation = Invitation.find_by_invitation_token(@user.invitation_token)
+    if invitation && invitation.sender.can_invite_without_confirmation?
+      @user.confirmed_at = Time.now
+    end
+
     success = @user && @user.save
     if success && @user.errors.empty?
       current_group.add_member(@user)
