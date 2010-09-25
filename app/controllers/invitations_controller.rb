@@ -2,6 +2,7 @@ class InvitationsController < ApplicationController
   before_filter :fetch_invitations
 
   def index
+    set_page_title(t('invitations.index.title'))
     @invitation = Invitation.new
   end
 

@@ -10,6 +10,7 @@ pt-BR:
         sent_at: enviado
         accepted_at: aceito
     index:
+      title: Convites
       titles:
         pending: Convites pendentes
         accepted: Convites aceitos
