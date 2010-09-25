@@ -66,6 +66,10 @@
   .block.notice
     = render :partial => "shared/layout/notice"
 
+  .block
+    %h4= t('invitations.invite_title')
+    = link_to t('invitations.invite'), invitations_path
+
   -current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}
