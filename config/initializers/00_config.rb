@@ -90,3 +90,12 @@ if AppConfig.smtp["activate"]
   ActionMailer::Base.smtp_settings = options
   config.action_mailer.smtp_settings = options
 end
+
+if AppConfig.postmark['activate']
+  # Yeah, we have to set both
+  ActionMailer::Base.delivery_method = :postmark
+  config.action_mailer.delivery_method = :postmark
+  options = {:api_key => AppConfig.postmark['api_key']}
+  ActionMailer::Base.postmark_settings = options
+  config.action_mailer.postmark_settings = options
+end
