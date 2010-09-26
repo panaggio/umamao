@@ -4,11 +4,10 @@
 %p
   Bem-vindo(a), #{@resource.name.split(' ').first}!
 %p
-  Precisamos confirmar seu endereço de email acadêmico no
-  = link_to 'Umamão', domain
-  \. Para fazer isso, é só clicar no link abaixo:
+  Precisamos confirmar seu endereço de email acadêmico no #{link_to 'Umamão', domain}.
+  Para fazer isso, é só clicar no link abaixo:
 %p
-  = link_to 'Confirmar meu email', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+  = link_to 'Confirmar meu email.', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
 %p
-  Caso não tenha se cadastrado no site, desculpe, foi engano.
+  Caso não tenha se cadastrado no site, por favor, desconsidere este email.
 
