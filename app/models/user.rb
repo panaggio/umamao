@@ -135,6 +135,16 @@ class User
     end
   end
 
+  # This is used to let people in on sign up. If they're active, they
+  # are allowed in, if not, they have to do something (like confirm
+  # email) before being allowed to log in.
+  def active?
+    # FIXME We're considering dac.unicamp.br users active for now
+    # because we're experiencing problems with the emails bouncing off
+    # their server. This should be removed soon.
+    !self.new? && (self.academic_email =~ /\w\d+@dac.unicamp.br/ || super)
+  end
+
   def first_name
     return nil unless self.name
     self.name.split(/\s+/).first
