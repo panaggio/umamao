@@ -82,6 +82,8 @@ class User
 
   timestamps!
 
+  before_validation :confirm_from_invitation
+
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
 
@@ -123,6 +125,14 @@ class User
 
     u = User.find(user_ids, conditions.merge(:select => [:email, :login, :name, :language]))
     u ? u : []
+  end
+
+  def confirm_from_invitation
+    return if !self.new?
+    invitation = Invitation.find_by_invitation_token(self.invitation_token)
+    if invitation && invitation.sender.can_invite_without_confirmation?
+      self.confirmed_at = Time.now
+    end
   end
 
   def first_name

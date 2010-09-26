@@ -48,9 +48,9 @@ pt-BR:
       avatar_tip: "Change your profile image using Gravatar"
       show_more_lang: "Mostrar mais idiomas"
     create:
-      flash_notice: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
+      welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
+      confirm: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
       flash_error:  "Desculpe, não foi possível criar sua conta. Tente de novo, ou entre em contato conosco (no link de feedback na base da página)."
-      welcome_new_invited_user: "Convite aceito. Bem-vindo(a) ao Umamão!"
     messages:
       errors:
         reputation_needed: "Você precisa de pelo menos %{min_reputation} de reputação para %{action}"

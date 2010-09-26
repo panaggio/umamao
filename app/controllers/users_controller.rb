@@ -53,11 +53,6 @@ class UsersController < ApplicationController
       @user.birthday = build_date(params[:user], "birthday")
     end
 
-    invitation = Invitation.find_by_invitation_token(@user.invitation_token)
-    if invitation && invitation.sender.can_invite_without_confirmation?
-      @user.confirmed_at = Time.now
-    end
-
     success = @user && @user.save
     if success && @user.errors.empty?
       current_group.add_member(@user)
@@ -65,12 +60,12 @@ class UsersController < ApplicationController
       # Protects against session fixation attacks, causes request forgery
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
-      # reset session
+      # reset_session
       @user.localize(request.remote_ip)
-      if @user.confirmed_at.present?
-        flash[:notice] = t("welcome_new_invited_user", :scope => "users.create")
+      if @user.active?
+        flash[:notice] = t("welcome", :scope => "users.create")
       else
-        flash[:notice] = t("flash_notice", :scope => "users.create")
+        flash[:notice] = t("confirm", :scope => "users.create")
       end
       sign_in_and_redirect(:user, @user) # !! now logged in
     else
