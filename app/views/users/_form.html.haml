@@ -1,8 +1,8 @@
-.group
-  = f.label :email, t('.email'), :class => "label"
-  = f.text_field :email, :class => "text_field"
-
 - if @user.new?
+  .group
+    = f.label :email, t('.email'), :class => "label"
+    = f.text_field :email, :class => "text_field"
+
   .group
     = f.label :password, t(:password, :scope => "activerecord.attributes.user"), :class => "label"
     = f.password_field :password, :class => "text_field"
