@@ -5,6 +5,8 @@ class WaitingUser
   key :email, String
   key :university, String
 
+  timestamps!
+
   validates_presence_of :email
   validates_uniqueness_of :email
 end
