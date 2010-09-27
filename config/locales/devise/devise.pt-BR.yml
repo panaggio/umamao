@@ -51,7 +51,7 @@ pt-BR:
       unlocked: 'Sua conta foi desbloqueada. Você está logado(a) agora.'
     mailer:
       confirmation_instructions:
-        subject: 'Confirme seu email acadêmico'
+        subject: 'Por favor, confirme seu email acadêmico'
       reset_password_instructions:
         subject: 'Instruções para redefinir senha'
       unlock_instructions:
