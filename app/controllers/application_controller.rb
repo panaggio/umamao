@@ -16,6 +16,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def track_event(event, properties = {})
+    user_id = current_user ? current_user.id : properties.delete(:user_id)
+    Magent.push('actors.tracker', :track_event, event, user_id, request.ip,
+                properties)
+  end
+
+  def after_sign_in_path_for(resource)
+    track_event(:sign_in)
+    super
+  end
+
   def check_group_access
     if (
         !current_group.registered_only && !current_group.private ||

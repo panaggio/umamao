@@ -1,5 +1,7 @@
 require 'ostruct'
 
+require "#{Rails.root}/lib/tracking/mixpanel"
+
 config_file = "/etc/shapado.yml"
 if !File.exist?(config_file)
   config_file = Rails.root + "config/shapado.yml"
@@ -98,4 +100,8 @@ if AppConfig.postmark['activate']
   options = {:api_key => AppConfig.postmark['api_key']}
   ActionMailer::Base.postmark_settings = options
   config.action_mailer.postmark_settings = options
+end
+
+class Mixpanel
+  TOKEN = AppConfig.mixpanel['api_key']
 end
