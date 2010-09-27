@@ -2,10 +2,13 @@
 - domain = ActionMailer::Base.default_url_options[:host]
 
 %p
-  Bem-vindo(a), #{@resource.name.split(' ').first}!
+  Olá, #{@resource.first_name}!
 %p
-  Precisamos confirmar seu endereço de email acadêmico no #{link_to 'Umamão', domain}.
-  Para fazer isso, é só clicar no link abaixo:
+
+  Obrigado por se juntar ao #{link_to 'Umamão', domain}! Para
+  completar seu cadastro, precisamos confirmar seu endereço de email
+  acadêmico. Para fazer isso, é só clicar no link abaixo:
+
 %p
   = link_to 'Confirmar meu email.', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
 %p
