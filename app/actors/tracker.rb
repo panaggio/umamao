@@ -17,7 +17,8 @@ module Actors
           :answers_count => user.answers.count,
           :votes_count => user.votes.count,
           :invited => user.invitation_token.present?,
-          :academic_email => user.academic_email
+          :academic_email => user.academic_email,
+          :email => user.email
         })
         user_email = user.email
       end
