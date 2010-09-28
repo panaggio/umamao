@@ -45,7 +45,7 @@ pt-BR:
       give_advice_notification: de perguntas nos meus tópicos de interesse
       activities_notification: "de atividades do sistema: novos seguidores, medalhas ganhas, etc."
       reports_notification: com relatório das últimas atividades do site (apenas para admins)
-      avatar_tip: "Change your profile image using Gravatar"
+      avatar_tip: "Troque a foto do seu perfil no Gravatar"
       show_more_lang: "Mostrar mais idiomas"
     create:
       welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
