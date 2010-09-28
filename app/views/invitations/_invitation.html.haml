@@ -8,7 +8,7 @@
     = invitation.accepted_at ? link_to(h(invitation.recipient.name), user_path(invitation.recipient)) : "#{email}:"
     .info
       #bio
-        = h(invitation.message)
+        = markdown(invitation.message)
       .metadata
         - method = invitation.accepted_at ? :accepted_at : :sent_at
         = t(method, :scope => "invitations.model.attributes")
