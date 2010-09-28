@@ -16,16 +16,7 @@
   .invitation_form
     %h3= t('invitations.form.title')
 
-    - if current_user.can_invite_without_confirmation?
-      .tip
-        %p
-          Tente convidar pessoas que atendam a pelo menos um dos três critérios:
-          %ul
-            %li São curiosas e gostam de ensinar
-            %li Sabem mais do que você
-            %li São de áreas diferentes da sua
-
-    - else
+    - if !current_user.can_invite_without_confirmation?
       .tip
         %p
           <strong>Lembre-se</strong>: Você pode enviar o convite para
