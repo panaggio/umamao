@@ -76,7 +76,7 @@ class Mixpanel
   def access_api!
     if Rails.env.production?
       res = Net::HTTP.start("api.mixpanel.com", 80) {|http|
-        http.read_timeout = 3
+        http.read_timeout = 60
         http.request_post("/track/", @saved_url_params)
       }
     end
