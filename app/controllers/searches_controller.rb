@@ -3,8 +3,8 @@ class SearchesController < ApplicationController
     options = {:per_page => 25, :page => params[:page] || 1}
     unless params[:q].blank?
       pharse = params[:q].downcase
-      @search_tags = pharse.scan(/\[(\w+)\]/).flatten
-      @search_text = pharse.gsub(/\[(\w+)\]/, "")
+      @search_tags = pharse.scan(/\[(.*?)\]/).flatten
+      @search_text = pharse.gsub(/\[.*?\]/, "")
       options[:tags] = {:$all => @search_tags} unless @search_tags.empty?
       options[:group_id] = current_group.id
       options[:order] = params[:sort_by] if params[:sort_by]
