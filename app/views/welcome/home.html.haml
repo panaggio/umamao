@@ -70,6 +70,9 @@
     %h4= t('invitations.invite_title')
     = link_to t('invitations.invite'), invitations_path
 
+  .block
+    %h4= t('.looking_for', :link => link_to(t('.exercises'), tag_path('resolução-de-exercício')))
+
   -current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}

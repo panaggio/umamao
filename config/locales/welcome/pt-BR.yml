@@ -15,5 +15,7 @@ pt-BR:
       browse_all_or_by_tags: "Veja a %{full_list_of_questions} ou %{browse_by_tags}"
       full_list_of_questions: "lista completa de perguntas"
       browse_by_tags: "navegue por tópicos"
+      looking_for: "Procurando %{link}?"
+      exercises: resoluções de exercícios
     about:
       title: Quem são vocês?
