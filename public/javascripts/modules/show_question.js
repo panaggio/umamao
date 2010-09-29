@@ -4,6 +4,7 @@ $(document).ready(function() {
   $("#close_question_form").hide();
   $('.auto-link').autoVideo();
   $('.comments').hide();
+  $('input#question_title').focus();
 
   $("form.vote_form button").live("click", function(event) {
     var btn_name = $(this).attr("name");
