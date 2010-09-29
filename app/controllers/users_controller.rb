@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     if success && @user.errors.empty?
       current_group.add_member(@user)
       track_event(:sign_up, :user_id => @user.id, :confirmed => @user.confirmed?)
+      flash[:conversion] = true
 
       # Protects against session fixation attacks, causes request forgery
       # protection if visitor resubmits an earlier form using back

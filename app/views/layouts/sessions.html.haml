@@ -25,3 +25,4 @@
               .inner
                 = yield
                 .clear
+    ~ AppConfig.conversion_tracking_code if flash[:conversion]
