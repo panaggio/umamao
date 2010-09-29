@@ -16,7 +16,7 @@ class WelcomeController < ApplicationController
   def home
     @active_subtab = params.fetch(:tab, "activity")
 
-    conditions = scoped_conditions({:banned => false})
+    conditions = scoped_conditions({:banned => false, :exercise.ne => true})
 
     order = "activity_at desc"
     case @active_subtab

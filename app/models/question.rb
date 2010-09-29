@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Question
   include MongoMapper::Document
   include MongoMapperExt::Filter
@@ -26,6 +27,8 @@ class Question
   key :accepted, Boolean, :default => false
   key :closed, Boolean, :default => false
   key :closed_at, Time
+
+  key :exercise, Boolean, :default => false, :index => true
 
   key :answered_with_id, String
   belongs_to :answered_with, :class_name => "Answer"
@@ -75,7 +78,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at
+  before_save :update_activity_at, :update_exercise
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -170,6 +173,10 @@ class Question
     update_activity_at if bring_to_front
     self.collection.update({:_id => self._id}, {:$inc => {:hotness => 1}},
                                                          :upsert => true)
+  end
+
+  def update_exercise
+    self.exercise = self.tags.include?('resolução-de-exercício')
   end
 
   def update_activity_at
