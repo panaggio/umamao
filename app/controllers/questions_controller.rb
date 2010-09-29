@@ -124,8 +124,6 @@ class QuestionsController < ApplicationController
       end
     end
 
-    @tag_cloud = Question.tag_cloud(conditions, 25)
-
     @questions = Question.paginate({:order => current_order,
                                     :per_page => 25,
                                     :page => params[:page] || 1,
