@@ -78,7 +78,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise
+  before_save :update_activity_at, :update_exercise, :strip_tags
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -307,5 +307,11 @@ class Question
 
     self.votes_count = self.votes.count
   end
+
+  # ensure tag names do not contain whitespace
+  def strip_tags
+    self.tags = self.tags.map(&:strip) if self.tags_changed?
+  end
+
 end
 

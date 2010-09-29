@@ -144,11 +144,12 @@ class QuestionsController < ApplicationController
   def tags
     conditions = scoped_conditions(:banned => false)
     if params[:q].blank?
-      @tag_cloud = Question.tag_cloud(conditions, -1).paginate :per_page => 120,
-      :page => params[:page] || 1
+      @tag_cloud = Question.tag_cloud(conditions, -1).sort{|a, b| a["name"] <=> b["name"]}.
+        paginate :per_page => 120, :page => params[:page] || 1
     else
-      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1).paginate :per_page => 32,
-      :page => params[:page] || 1
+      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1).
+        sort{|a, b| a["name"] <=> b["name"]}.
+        paginate :per_page => 32, :page => params[:page] || 1
     end
 
 

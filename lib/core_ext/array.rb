@@ -17,7 +17,7 @@ class Array
     nx = current < total ? current + 1 : nil
     first = (current - 1) * options[:per_page]
 
-    paginated_array = self[first ... first + options[:per_page]]
+    paginated_array = self[first ... first + options[:per_page]] || []
     paginated_array.do_paginate(total, current, previous, nx, self.count)
     paginated_array
   end
@@ -33,11 +33,11 @@ class Array
     @previous = previous
     @nx = nx
     @total_entries = total_entries
-    
+
     def self.total_pages
       @pages
     end
-    
+
     def self.current_page
       @current
     end
