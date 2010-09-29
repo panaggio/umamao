@@ -102,6 +102,8 @@ pt-BR:
       flags: Reportada como
       last_activity: Atividade mais recente
       related_questions: Perguntas relacionadas
+      follow_up_questions: Perguntas derivadas
+      add_follow_up_question: Fazer pergunta derivada
       request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
       retag: Editar tópicos

@@ -30,6 +30,12 @@ class Question
 
   key :exercise, Boolean, :default => false, :index => true
 
+  key :parent_question_id, String, :index => true
+  belongs_to :parent_question, :class_name => 'Question'
+  scope :children_of, lambda { |question|
+    where(:parent_question_id => question.id)
+  }
+
   key :answered_with_id, String
   belongs_to :answered_with, :class_name => "Answer"
 

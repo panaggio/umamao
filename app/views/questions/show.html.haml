@@ -75,6 +75,7 @@
       - if logged_in?
         - if (@question.wiki && current_user.can_edit_wiki_post_on?(@question.group)) || current_user.can_edit_others_posts_on?(@question.group) || current_user.can_modify?(@question)
           = link_to t('scaffold.edit'), edit_question_path(@question), :class => "button"
+      = link_to t('.add_follow_up_question'), new_question_path(:question => @follow_up_question), :target => '_blank', :id => 'add_follow_up_question'
 
     .forms
       - flag = Flag.new
@@ -178,6 +179,18 @@
           = render :partial => "close_requests/list", :locals => {:question => @question}
 
   - related_questions = Question.related_questions(@question, :language => find_languages)
+  - if @follow_up_questions.present?
+    .block
+      %h3
+        = t(".follow_up_questions")
+      .content
+        %ul.list
+          - @follow_up_questions.each do |q|
+            %li
+              = link_to h(q.title), question_path(q), :title => truncate(strip_tags(q.body), :length => 200)
+
+  %br
+
   - if !related_questions.empty?
     .block
       %h3

@@ -212,6 +212,13 @@ class QuestionsController < ApplicationController
     set_page_title(@question.title)
     add_feeds_url(url_for(:format => "atom"), t("feeds.question"))
 
+    @follow_up_question = {
+      :parent_question_id => @question.id,
+      :tags => @question.tags,
+      :body => render_to_string(:file => 'questions/_new_follow_up_question.text.erb')
+    }
+    @follow_up_questions = Question.children_of(@question)
+
     respond_to do |format|
       format.html { Magent.push("actors.judge", :on_view_question, @question.id) }
       format.json  { render :json => @question.to_json(:except => %w[_keywords slug watchers]) }
@@ -237,7 +244,8 @@ class QuestionsController < ApplicationController
   # POST /questions.xml
   def create
     @question = Question.new
-    @question.safe_update(%w[title body language tags wiki], params[:question])
+    @question.safe_update(%w[title body language tags wiki parent_question_id],
+                          params[:question])
     @question.group = current_group
     @question.user = current_user
 
