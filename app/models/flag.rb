@@ -20,6 +20,8 @@ class Flag
   validate :should_be_unique
   validate :check_reputation
 
+  timestamps!
+
   protected
   def should_be_unique
     flag = Flag.first({ :flaggeable_type => self.flaggeable_type,
