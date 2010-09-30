@@ -4,3 +4,6 @@
 [submodule "public/javascripts/wmd"]
 	path = public/javascripts/wmd
 	url = git://github.com/umamao/wmd.git
+[submodule "public/javascripts/jquery-autosuggest"]
+	path = public/javascripts/jquery-autosuggest
+	url = git://github.com/wuyuntao/jquery-autosuggest.git
