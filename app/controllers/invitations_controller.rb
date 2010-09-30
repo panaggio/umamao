@@ -12,6 +12,7 @@ class InvitationsController < ApplicationController
     @invitation.group_id = current_group.id
 
     if @invitation.save
+      track_event(:sent_invitation)
       redirect_to invitations_path
     else
       render 'index'
