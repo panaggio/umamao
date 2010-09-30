@@ -108,6 +108,8 @@ class VotesController < ApplicationController
     state = :error
     if user_vote.nil?
       if vote.save
+        track_event("#{vote.value == 1 ? 'up' : 'down'}voted".to_sym,
+                    :voteable => voteable.class.name.downcase)
         vote.voteable.add_vote!(vote.value, current_user)
         flash[:notice] = t("votes.create.flash_notice")
         state = :created
@@ -121,12 +123,21 @@ class VotesController < ApplicationController
 
         user_vote.value = vote.value
         user_vote.save
+        if vote.value == 1
+          track_event(:changed_downvote_to_upvote,
+                      :voteable => voteable.class.name.downcase)
+        else
+          track_event(:changed_upvote_to_downvote,
+                      :voteable => voteable.class.name.downcase)
+        end
         flash[:notice] = t("votes.create.flash_notice")
         state = :updated
       else
         value = vote.value
         user_vote.destroy
         voteable.remove_vote!(value, current_user)
+        track_event(:removed_vote, :voteable => voteable.class.name.downcase)
+
         flash[:notice] = t("votes.destroy.flash_notice")
         state = :deleted
       end

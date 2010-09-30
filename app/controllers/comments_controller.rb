@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     if saved = @comment.save
       current_user.on_activity(:comment_question, current_group)
       Magent.push("actors.judge", :on_comment, @comment.id)
+      track_event(:commented, :commentable => scope.class.name)
 
       if question_id = @comment.question_id
         Question.update_last_target(question_id, @comment)

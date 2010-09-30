@@ -266,6 +266,8 @@ class QuestionsController < ApplicationController
         current_group.on_activity(:ask_question)
 
         Magent.push("actors.judge", :on_ask_question, @question.id)
+        track_event(:asked_question, :body_present => @question.body.present?,
+                    :topics_count => @question.tags.size)
 
         flash[:notice] = t(:flash_notice, :scope => "questions.create")
 

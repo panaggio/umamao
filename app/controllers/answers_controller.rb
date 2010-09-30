@@ -93,6 +93,10 @@ class AnswersController < ApplicationController
           users.push(@question.user) if !@question.user.nil? && @question.user != current_user
           followers = @answer.user.followers(:languages => [@question.language], :group_id => current_group.id)
 
+          track_event(:answered_question,
+                      :question_answers_count => @question.answers_count,
+                      :own_question => @question.user_id == @answer.user_id)
+
           users ||= []
           followers ||= []
           (users - followers).each do |u|
