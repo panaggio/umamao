@@ -17,5 +17,4 @@ pt-BR:
       empty:
         pending: Nenhum convite pendente. Que tal convidar alguém?
         accepted: "Nenhum convite aceito."
-    invite_title: 'Ajude a comunidade a crescer!'
-    invite: Convide outras pessoas
+    invite: 'Convidar outras pessoas'
