@@ -62,7 +62,7 @@ class User
 
   key :feed_token,                String
 
-  key :can_invite_without_confirmation, Boolean
+  key :can_invite_without_confirmation, Boolean, :default => true
 
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
@@ -154,6 +154,7 @@ class User
     invitation = Invitation.find_by_invitation_token(self.invitation_token)
     if invitation && invitation.sender.can_invite_without_confirmation?
       self.confirmed_at = Time.now
+      self.can_invite_without_confirmation = false
     end
   end
 
