@@ -56,7 +56,7 @@
                 = show_flash_messages(:class => "flash", :markdown => true)
               = render :partial => "shared/ads/content_ads"
               .inner
-                = yield
+                = content_for?(:content) ? yield(:content) : yield
                 .clear
         #sidebar
           = yield :sidebar

@@ -21,11 +21,19 @@ Shapado::Application.routes.draw do
   match '/feedback' => 'welcome#feedback', :as => :feedback
   match '/about' => 'welcome#about', :as => :about
   match '/send_feedback' => 'welcome#send_feedback', :as => :send_feedback
-  match '/settings' => 'users#edit', :as => :settings
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
 
-  resources :users do
+  namespace :settings do
+    match 'profile' => 'profile#edit', :method => :get
+    match 'profile' => 'profile#update', :method => :put
+    match 'resume' => 'resume#edit'
+    match 'notifications' => 'notifications#edit'
+    match 'password' => 'password#edit'
+    match 'account' => 'account#edit'
+  end
+
+  resources :users, :except => [:edit, :update] do
     collection do
       get :autocomplete_for_user_login
     end

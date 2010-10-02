@@ -1,24 +1,4 @@
--content_for :subtabs do
-  .navtitle
-    =t(".title")
-
--content_for :sidebar do
-  .block
-    .inner{:style => "padding-top: 10px"}
-      %ul.navigation
-        %li{:style => "text-align: center"}
-          = gravatar @user.email.to_s, :size => 128
-          =link_to t("users.form.avatar_tip"), "http://gravatar.com", :target => "_blank"
-
 - @user.password = @user.password_confirmation = nil
-= error_messages_for :user
-- form_for @user, :html => {:class => "form"} do |f|
-  %h2.title
-    = t("users.form.information")
-  =render :partial => "form", :locals => {:f => f}
-  .group.navform
-    = submit_tag t('.submit')
-
 - form_for @user, :html => {:class => "form"} do |f|
   %h2.title
     = t("users.form.change_password")
