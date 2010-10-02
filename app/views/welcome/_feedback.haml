@@ -16,7 +16,7 @@
       .label
         = label_tag "feedback[email]", t(".feedback_email"), :class => "label"
       .input
-        = text_field_tag "feedback[email]", feedback[:email], :class=> "text_field"
+        = email_field_tag "feedback[email]", feedback[:email], :class=> "text_field"
 
     - n1 = rand(10); n2 = rand(10)
     = hidden_field_tag "n1", n1

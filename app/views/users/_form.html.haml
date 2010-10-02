@@ -1,7 +1,7 @@
 - if @user.new?
   .group
     = f.label :email, t('.email'), :class => "label"
-    = f.text_field :email, :class => "text_field"
+    = f.email_field :email, :class => "text_field"
 
   .group
     = f.label :password, t(:password, :scope => "activerecord.attributes.user"), :class => "label"
@@ -17,7 +17,7 @@
 
 .group
   = f.label :academic_email, t('.academic_email'), :class => "label"
-  = f.text_field :academic_email, :class => "text_field"
+  = f.email_field :academic_email, :class => "text_field"
 
 -if AppConfig.enable_i18n
   .group

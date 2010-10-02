@@ -6,7 +6,7 @@
       = label_tag 'user[password]', t('users.form.password')
 
     #email_field
-      = text_field_tag 'user[email]', nil, :tabindex => 1
+      = email_field_tag 'user[email]', nil, :tabindex => 1
     #password_field
       = password_field_tag 'user[password]', nil, :tabindex => 2
     #submit_button
@@ -55,7 +55,7 @@
         = label_tag 'user[university]', 'Universidade (opcional):'
 
       #email_field
-        = text_field_tag 'user[email]', @waiting_user.email
+        = email_field_tag 'user[email]', @waiting_user.email
       #university_field
         = text_field_tag 'user[university]', @waiting_user.university
       #submit_button
@@ -70,7 +70,7 @@
       .label
         = f.label :email, t('users.form.email')
       .input
-        = f.text_field :email, :tabindex => 5
+        = f.email_field :email, :tabindex => 5
 
     .field
       .label
@@ -94,7 +94,7 @@
       .label
         = f.label :academic_email, t('users.form.academic_email')
       .input
-        = f.text_field :academic_email, :tabindex => 9
+        = f.email_field :academic_email, :tabindex => 9
 
     .submit
       = f.submit t('layouts.application.signup'), :tabindex => 10
