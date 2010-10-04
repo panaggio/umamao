@@ -8,7 +8,7 @@
         = gravatar(comment.user.email.to_s)
       = link_to h(comment.user.name), user_path(comment.user), :class => "clear"
     .markdown
-      = shapado_auto_link(markdown(comment.body), :link_users => true)
+      = shapado_auto_link(markdown(comment.body))
     .comment-info
       = t("time.ago", :time => time_ago_in_words(comment.created_at))
       = t("global.from", :site => comment.user.country_name)
@@ -44,7 +44,7 @@
             - else
               = image_submit_tag("dialog-ok.png", :name=>"vote_up", :value=>"1", :title => t("votes.control.to_vote_up"), :class => "comment-voteup-button")
     .comment-content.markdown
-      = shapado_auto_link(markdown(comment.body), :link_users => true)
+      = shapado_auto_link(markdown(comment.body))
 
     .controls
       .actions
