@@ -20,7 +20,7 @@ class User
 
   key :_id,                       String
   key :login,                     String, :limit => 40, :index => true
-  key :name,                      String, :limit => 100, :default => '', :null => true
+  key :name,                      String, :limit => 100, :null => false, :index => true
   key :academic_email,            String, :limit => 40, :default => nil
 
   key :bio,                       String, :limit => 200
@@ -87,7 +87,8 @@ class User
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
 
-  validates_length_of       :name, :minimum => 1, :maximum => 100, :if => lambda { |u| !u.name.empty? }
+  validates_presence_of     :name
+  validates_length_of       :name, :maximum => 100
 
   validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
   validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
