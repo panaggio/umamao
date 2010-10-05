@@ -36,10 +36,9 @@
 
   %p
 
-    O Umamão está aberto, por enquanto, apenas para as
-    comunidades Unicamp e USP (através do email acadêmico).  Se
-    você é de outra universidade (ou ex-aluno(a)), deixe seu
-    email que nós avisaremos quando você puder se cadastrar.
+    Se você <strong>NÃO</strong> é da Unicamp ou da USP (ou é
+    ex-aluno(a)), deixe seu email que nós avisaremos quando você puder
+    se cadastrar. Caso contrário, cadastre-se ao lado.
 
   - if flash[:notice].present? && params[:saved] == 'true'
     .success
@@ -59,7 +58,7 @@
       #university_field
         = text_field_tag 'user[university]', @waiting_user.university
       #submit_button
-        = submit_tag 'Eu quero entrar!'
+        = submit_tag 'Enviar'
 
 #signup
   %h3  #{ t('layouts.application.signup') }
