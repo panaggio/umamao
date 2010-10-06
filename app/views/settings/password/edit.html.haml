@@ -1,11 +1,12 @@
 - @user.password = @user.password_confirmation = nil
-- form_for @user, :html => {:class => "form"} do |f|
+= error_messages_for :user
+- form_for @user, :url => settings_password_path, :html => {:class => "form"} do |f|
   %h2.title
     = t("users.form.change_password")
   -if @user.encrypted_password.present?
     .group
-      = label_tag :current_password, t(:current_password, :scope => "activerecord.attributes.user"), :class => "label"
-      = password_field :current_password, '', :class => 'text_field'
+      = f.label :current_password, t(:current_password, :scope => "activerecord.attributes.user"), :class => "label"
+      = f.password_field :current_password, :class => 'text_field', :autofocus => (!request.put? || @user.errors.present?)
 
   .group
     = f.label :password, t(:password, :scope => "activerecord.attributes.user"), :class => "label"

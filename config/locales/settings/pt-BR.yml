@@ -1,0 +1,7 @@
+pt-BR:
+  settings:
+    password:
+      edit:
+        submit: Trocar senha
+        new_password_saved: 'Senha salva.'
+        error_changing_password: 'Erro ao salvar senha.'
