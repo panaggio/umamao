@@ -31,7 +31,8 @@ Shapado::Application.routes.draw do
     match 'notifications' => 'notifications#edit'
     match 'password' => 'password#edit', :via => :get
     match 'password' => 'password#update', :via => :put
-    match 'account' => 'account#edit'
+    match 'account' => 'account#edit', :via => :get
+    match 'account' => 'account#update', :via => :put
   end
 
   resources :users, :except => [:edit, :update] do

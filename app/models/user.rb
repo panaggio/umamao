@@ -37,7 +37,7 @@ class User
   key :notification_opts,         NotificationConfig
 
   key :language,                  String, :default => 'pt-BR'
-  key :timezone,                  String, :default => "America/Sao_Paulo"
+  key :timezone,                  String, :default => "Brasilia"
   key :language_filter,           String, :default => "user", :in => LANGUAGE_FILTERS
 
   key :ip,                        String

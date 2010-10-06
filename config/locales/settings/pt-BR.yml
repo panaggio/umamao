@@ -5,3 +5,6 @@ pt-BR:
         submit: Trocar senha
         new_password_saved: 'Senha salva.'
         error_changing_password: 'Erro ao salvar senha.'
+    account:
+      edit:
+        title: Conta

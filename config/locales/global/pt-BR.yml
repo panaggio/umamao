@@ -38,6 +38,9 @@ pt-BR:
     current: Atual
     previous: Anterior
     share: compartilhar
+    edit:
+      success: 'Alterações salvas.'
+      error: 'Erro ao salvar alterações.'
   feeds:
     question: Seguir RSS desta pergunta
     questions: Seguir RSS de todas as perguntas
