@@ -45,3 +45,10 @@ pt-BR:
       announcements: Avisos
     notifications:
       message: "Se você não quiser mais receber avisos de %{domain}, mude suas preferências na tela de avisos."
+    settings:
+      title: Configurações
+      profile_tab: Perfil
+      resume_tab: Estudos/Trabalho
+      notifications_tab: Notificações
+      password_tab: Trocar senha
+      account_tab: Conta
