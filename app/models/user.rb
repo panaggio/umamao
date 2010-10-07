@@ -92,6 +92,9 @@ class User
   validates_presence_of     :name
   validates_length_of       :name, :maximum => 100
 
+  validates_length_of       :bio, :maximum => 140
+  validates_length_of       :description, :maximum => 500
+
   validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
   validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
   validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
