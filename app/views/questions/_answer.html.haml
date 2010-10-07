@@ -61,7 +61,7 @@
       - answer.comments.each do |comment|
         = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
   .avatar
-    = link_to gravatar(answer.user.email.to_s, :size => 32).html_safe, user_path(answer.user)
+    = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
   .clear
 
   .forms.comment-form
