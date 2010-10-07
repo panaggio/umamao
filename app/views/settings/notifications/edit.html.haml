@@ -1,0 +1,14 @@
+%h2.title
+  = t(".title")
+
+%p= t('.description')
+
+= error_messages_for :notification_opts
+
+- form_for @notification_opts, :url => settings_notifications_path, :html => {:class => "form"} do |f|
+  .group
+    = f.check_box :new_answer
+    = f.label :new_answer, t('.new_answer')
+
+  .group.navform
+    = submit_tag t('.submit')

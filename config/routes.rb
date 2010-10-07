@@ -28,7 +28,8 @@ Shapado::Application.routes.draw do
     match 'profile' => 'profile#edit', :method => :get
     match 'profile' => 'profile#update', :method => :put
     match 'resume' => 'resume#edit'
-    match 'notifications' => 'notifications#edit'
+    match 'notifications' => 'notifications#edit', :via => :get
+    match 'notifications' => 'notifications#update', :via => :put
     match 'password' => 'password#edit', :via => :get
     match 'password' => 'password#update', :via => :put
     match 'account' => 'account#edit', :via => :get
