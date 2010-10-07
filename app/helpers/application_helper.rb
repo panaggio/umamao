@@ -112,12 +112,28 @@ module ApplicationHelper
     end
   end
 
+  # Modified Markdown syntax that understands LaTeX math
   def markdown(txt, options = {})
-    txt = RDiscount.new(render_page_links(txt.to_s, options), :strict).to_html
-    if options[:sanitize] != false
-      txt = Sanitize.clean(txt, SANITIZE_CONFIG)
+    escaped_math = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
+      open  = $1
+      math  = $2
+      close = $3
+      "\\\\" + open + math.gsub(/([_\*\\])/){|m| '\\' + $1} + "\\\\" + close
     end
-    txt
+
+    processed_markdown =
+      Nokogiri::HTML(RDiscount.new(render_page_links(escaped_math, options), :strict).to_html)
+    processed_markdown.css("code").each do |c|
+      c.content = c.content.gsub /\\\\([\(\[])(.*?)\\\\([\]\)])/m do |match|
+        match.gsub(/\\([_\*\\\[\]\(\)])/, '\1')
+      end
+    end
+    res = processed_markdown.to_html
+
+    if options[:sanitize] != false
+      res = Sanitize.clean(res, SANITIZE_CONFIG)
+    end
+    res
   end
 
   def render_page_links(text, options = {})
