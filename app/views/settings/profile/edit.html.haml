@@ -1,3 +1,38 @@
+%h2.title
+  = t(".title")
+= error_messages_for :user
+- form_for @user, :url => settings_profile_path, :html => {:class => "form"} do |f|
+
+  .group
+    = f.label :name, t(:name, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.text_field :name, :class => "text_field"
+
+  .group
+    = f.label :birthday, t(:birthday, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.date_select :birthday, :start_year => 1920, :include_blank => true, :end_year => Time.now.year
+
+  .group
+    = f.label :gender, t(:title, :scope => "activerecord.attributes.user.gender"), :class => 'label'
+    = f.radio_button :gender, 'm'
+    = f.label :gender_m, t(:male, :scope => "activerecord.attributes.user.gender")
+    = f.radio_button :gender, 'f'
+    = f.label :gender_f, t(:female, :scope => "activerecord.attributes.user.gender")
+
+  .group
+    = f.label :bio, t(:bio, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.text_field :bio, :class => "text_field"
+
+  .group
+    = f.label :description, t(:description, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.text_area :description, :class => "text_field"
+
+  .group
+    = f.label :location, t(:location, :scope => "activerecord.attributes.user"), :class => "label"
+    = f.text_field :location, :class => "text_field"
+
+  .group.navform
+    = submit_tag t('users.edit.submit')
+
 -content_for :sidebar do
   .block
     .inner{:style => "padding-top: 10px"}

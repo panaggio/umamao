@@ -8,6 +8,9 @@ pt-BR:
     account:
       edit:
         title: Conta
+    profile:
+      edit:
+        title: Informações do Perfil
     notifications:
       edit:
         title: Notificações

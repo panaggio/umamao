@@ -8,6 +8,22 @@ class Settings::ProfileController < ApplicationController
   end
 
   def update
+    @user = current_user
+    @user.safe_update(%w[name gender bio description location], params[:user])
+
+    if params[:user]["birthday(1i)"]
+      @user.birthday = build_date(params[:user], "birthday")
+    end
+
+    Magent.push("actors.judge", :on_update_user, @user.id, current_group.id)
+
+    if @user.save
+      flash.now[:notice] = t(:success, :scope => 'global.edit')
+    else
+      flash.now[:error] = t(:error, :scope => 'global.edit')
+    end
+
+    render :action => "edit"
   end
 
 end

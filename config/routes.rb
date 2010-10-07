@@ -25,8 +25,8 @@ Shapado::Application.routes.draw do
   match '/privacy' => 'doc#privacy', :as => :privacy
 
   namespace :settings do
-    match 'profile' => 'profile#edit', :method => :get
-    match 'profile' => 'profile#update', :method => :put
+    match 'profile' => 'profile#edit', :via => :get
+    match 'profile' => 'profile#update', :via => :put
     match 'resume' => 'resume#edit'
     match 'notifications' => 'notifications#edit', :via => :get
     match 'notifications' => 'notifications#update', :via => :put

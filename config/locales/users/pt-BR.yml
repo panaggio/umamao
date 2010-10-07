@@ -94,3 +94,11 @@ pt-BR:
         website: Website
         birthday: Aniversário
         age: Idade
+        bio: Biografia curta
+        description: Biografia longa
+        location: Localização
+        gender:
+          title: Gênero
+          male: Masculino
+          female: Feminino
+

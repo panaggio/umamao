@@ -23,10 +23,12 @@ class User
   key :name,                      String, :limit => 100, :null => false, :index => true
   key :academic_email,            String, :limit => 40, :default => nil
 
-  key :bio,                       String, :limit => 200
+  key :bio,                       String, :limit => 140
   key :website,                   String, :limit => 200
   key :location,                  String, :limit => 200
   key :birthday,                  Time
+  key :gender,                    String, :limit => 1, :in => ['m', 'f', nil]
+  key :description,               String, :limit => 500
 
   key :identity_url,              String
   key :role,                      String, :default => "user"
