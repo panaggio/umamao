@@ -8,6 +8,7 @@ pt-BR:
     actions:
       title: Ações
       delete: Remover
+    close: X
 
   activerecord:
     attributes:

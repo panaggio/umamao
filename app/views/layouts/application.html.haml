@@ -28,7 +28,7 @@
               #announcement_message
                 -announcements.each do |announcement|
                   =markdown(announcement.message)
-              =link_to "Close", hide_announcements_path, :id => "hide_announcement"
+              = link_to t('announcements.close'), hide_announcements_path, :id => "hide_announcement", :style => 'float: right'
               .clear
 
           -if !logged_in?
