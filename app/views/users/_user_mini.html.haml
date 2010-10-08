@@ -1,7 +1,7 @@
 %span
   %strong
     -unless user.nil?
-      - bio = truncate_words(h(user.bio), 65, link_to('…', user_path(user), :title => h(user.bio))).html_safe
+      - bio = truncate_words(h(user.bio), 72, link_to('…', user_path(user), :title => h(user.bio))).html_safe
       = link_to(h(user.name), user_path(user), :class => "user-link") + (bio.present? ? ", #{bio}" : '').html_safe
     -else
       = t('users.deleted')
