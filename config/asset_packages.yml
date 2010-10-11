@@ -1,7 +1,6 @@
 ---
 javascripts:
 - base:
-  - jquery
   - rails
   - jquery.tools.min
   - jquery-ui
