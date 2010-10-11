@@ -27,7 +27,7 @@ javascripts:
 
 - show:
   - MathJax/mathjax/MathJax
-  - wmd/jquery.wmd.min
+  - wmd/jquery.wmd
   - wmd/jquery.wmd.mathjax
   - modules/single/question
   - jquery.autovideo
