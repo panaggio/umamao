@@ -113,6 +113,7 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     rdiscount (1.6.3.2)
+    responders (0.6.2)
     ruby-debug (0.10.3)
       columnize (>= 0.1)
       ruby-debug-base (~> 0.10.3.0)
@@ -167,6 +168,7 @@ DEPENDENCIES
   postmark-rails (~> 0.4.0)
   rails (~> 3.0.0)
   rdiscount (~> 1.6.3.1)
+  responders
   ruby-debug
   ruby-openid
   ruby-prof
