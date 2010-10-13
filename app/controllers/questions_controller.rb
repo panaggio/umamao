@@ -170,12 +170,11 @@ class QuestionsController < ApplicationController
       format.js do
         result = []
         if q = params[:tag]
-          result = Question.find_tags(/^#{Regexp.escape(q.downcase)}/i,
-                                      :group_id => current_group.id)
+          result = Topic.all(:title => /^#{Regexp.escape(q.downcase)}/i)
         end
 
         results = result.map do |t|
-          {:caption => "#{t["name"]} (#{t["count"].to_i})", :value => t["name"]}
+          {:caption => "#{t.title} (#{t.questions_count})", :value => t.title}
         end
 
         render :json => results
@@ -539,7 +538,16 @@ class QuestionsController < ApplicationController
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 
-    @question.tags = params[:question][:tags]
+    topic_titles = params[:question][:topics].map(&:strip)
+    topics = Topic.all(:title.in => topic_titles)
+
+    if topics.size != topic_titles.size
+      new_topic_titles = topic_titles - topics.map(&:title)
+      new_topics = new_topic_titles.map {|t| Topic.create(:title => t) }
+      topics += new_topics
+    end
+
+    @question.topics = topics
     @question.updated_by = current_user
     @question.last_target = @question
 
@@ -557,7 +565,7 @@ class QuestionsController < ApplicationController
         format.html {redirect_to question_path(@question)}
         format.js {
           render(:json => {:success => true,
-                   :message => flash[:notice], :tags => @question.tags }.to_json)
+                   :message => flash[:notice], :tags => @question.topics.map(&:title) }.to_json)
         }
       end
     else

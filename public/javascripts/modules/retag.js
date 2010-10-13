@@ -12,26 +12,26 @@ $(document).ready(function() {
           $('.retag').hide();
           link.parents(".tag-list").prepend(data.html);
           initAutocomplete();
-          $('.autocomplete_for_tags')
-          var tags = $('.autocomplete_for_tags').val().split(',')
+          $('.autocomplete_for_tags');
+          var tags = $('.autocomplete_for_tags').val().split(',');
           $.each(tags, function(i,n){
             $('.autocomplete_for_tags').trigger("addItem", {"title": $.trim(n), "value": $.trim(n)});
-          })
+	  });
         } else {
             showMessage(data.message, "error");
             if(data.status == "unauthenticate") {
-              window.location="/users/login"
+              window.location = "/users/login";
             }
         }
       }
     });
     return false;
-  })
+  });
 
   $('.retag-form').live('submit', function() {
     form = $(this);
     var button = form.find('input[type=submit]');
-    button.attr('disabled', true)
+    button.attr('disabled', true);
     $.ajax({url: form.attr("action")+'.js',
             dataType: "json",
             type: "POST",
@@ -39,26 +39,26 @@ $(document).ready(function() {
             success: function(data, textStatus) {
                 if(data.success) {
                     var tags = $.map(data.tags, function(n){
-                        return '<span class="tag"><a rel="tag" href="/questions/tags/'+n+'">'+n+'</a></span>'
-                    })
+		      return '<span class="tag"><a rel="tag" href="/questions/tags/'+n+'">'+n+'</a></span>';
+		    });
                     form.parents('.tag-list').find('.tag').remove();
                     form.before(tags.join(''));
                     form.remove();
                     $('.retag').show();
-                    showMessage(data.message, "notice")
+                    showMessage(data.message, "notice");
                 } else {
-                    showMessage(data.message, "error")
-                    if(data.status == "unauthenticate") {
-                        window.location="/users/login"
+		  showMessage(data.message, "error");
+                  if(data.status == "unauthenticate") {
+                    window.location = "/users/login";
                     }
                 }
             },
             error: manageAjaxError,
             complete: function(XMLHttpRequest, textStatus) {
-                button.attr('disabled', false)
+              button.attr('disabled', false);
             }
     });
-    return false
+    return false;
   });
 
   $('.cancel-retag').live('click', function(){
@@ -67,5 +67,5 @@ $(document).ready(function() {
       link.parents('.tag-list').find('.retag').show();
       link.parents('.tag-list').find('form').remove();
       return false;
-  })
+  });
 });

@@ -15,7 +15,7 @@
 - question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
 
 - content_for :head do
-  %meta{:name => "keywords", :content => clean_seo_keywords(@question.tags.dup, @question.title)}
+  %meta{:name => "keywords", :content => clean_seo_keywords(@question.topics.map(&:title).dup, @question.title)}
   %meta{:name => "description", :content => question_body.gsub(/<\/?[^>]*>/, "")[0, 255] }
   %link{:rel => "canonical", :href => question_url(@question) }
 
@@ -47,9 +47,9 @@
     .post-text.entry-content
       = question_body
   .tag-list
-    - @question.tags.each do |tag|
+    - @question.topics.each do |topic|
       %span.tag
-        = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
+        = link_to h(topic.title), topic_path(topic)
     - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
       %span.retag
         = link_to t('.retag'), retag_question_path(@question), :id => 'retag'

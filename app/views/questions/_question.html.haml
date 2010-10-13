@@ -20,9 +20,9 @@
       - cache("question_on_index_#{question.id}") do
         %h3= link_to title, question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
         .tag-list
-          - question.first_tags.each do |tag|
-            %span.tag{:class => "tag_#{h(tag)}"}
-              = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag", :title => t("questions.tags.tooltip", :tag => tag)
+          - question.topics[0..5].each do |topic|
+            %span.tag
+              = link_to h(topic.title), topic_path(topic), :title => t("questions.tags.tooltip", :tag => h(topic.title))
 
       / Question Stats
       .info

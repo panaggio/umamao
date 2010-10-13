@@ -1,4 +1,6 @@
 Shapado::Application.routes.draw do
+  resources :topics, :except => :new
+
   resources :invitations, :only => [:index, :create]
 
   resources :waiting_users, :only => :create

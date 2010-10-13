@@ -16,6 +16,9 @@ class Question
   slug_key :title, :unique => true, :min_length => 8
   key :slugs, Array, :index => true
 
+  key :topic_ids, Array, :index => true
+  many :topics, :in => :topic_ids
+
   key :answers_count, Integer, :default => 0, :required => true
   key :views_count, Integer, :default => 0
   key :hotness, Integer, :default => 0
@@ -93,10 +96,6 @@ class Question
   validate :check_useful
 
   timestamps!
-
-  def first_tags
-    tags[0..5]
-  end
 
   def tags=(t)
     if t.kind_of?(String)
