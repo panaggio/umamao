@@ -49,8 +49,8 @@ Shapado::Application.configure do
   config.i18n.fallbacks = true
 end
 
-class Goalie::CustomErrorPages
-  def local_request?(*args)
+class ActionDispatch::Request
+  def local?
     false
   end
 end
