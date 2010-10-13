@@ -33,7 +33,8 @@ class ApplicationController < ActionController::Base
         devise_controller? ||
         (params[:controller] == "users" && (action_name == "new" || action_name == 'create') ) ||
         params[:controller] == "welcome" ||
-        params[:controller] == "waiting_users"
+        params[:controller] == "waiting_users" ||
+        params[:controller].nil? # it's nil when there's an error
       )
       return
     end
