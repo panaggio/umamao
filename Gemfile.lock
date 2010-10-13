@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/umamao/mongomapper_ext.git
-  revision: 2c8ca628170a72b632cbb1209b081718a7aa1e08
+  revision: de5c411181ab1f0f4e7db96e3a558dba2ecac5b4
   specs:
     mongomapper_ext (0.5.0)
       mongo_mapper (~> 0.8)
@@ -64,7 +64,7 @@ GEM
       addressable (>= 2.1.1)
       rack (>= 1.0.1)
     geoip (0.8.7)
-    goalie (0.0.2)
+    goalie (0.0.3)
     haml (3.0.21)
     i18n (0.4.1)
     jnunemaker-validatable (1.8.4)
