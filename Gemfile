@@ -10,7 +10,7 @@ end
 
 gem 'rails', '~>3.0.0'
 
-gem 'bson_ext', '~> 1.0.1', :require => 'bson'
+gem 'bson_ext', :require => 'bson'
 gem 'BadMinus-devise', '~> 1.2.0', :require => 'devise'
 gem 'compass', '~> 0.10.2'
 gem 'compass-colors', '~> 0.3.1'
@@ -22,7 +22,7 @@ gem 'jnunemaker-validatable', '~>1.8.4', :require => 'validatable'
 gem 'geoip'
 gem 'haml', '~> 3.0.13'
 gem 'magent', '~> 0.4.2'
-gem 'mongo', '~> 1.0.3'
+gem 'mongo'
 gem 'mongo_mapper', '~>0.8.2'
 gem 'mongomapper_ext', '~>0.4.0'
 gem 'newrelic_rpm', '~>2.13.1'
