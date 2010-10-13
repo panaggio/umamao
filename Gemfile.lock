@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/umamao/mongomapper_ext.git
+  revision: 2c8ca628170a72b632cbb1209b081718a7aa1e08
+  specs:
+    mongomapper_ext (0.5.0)
+      mongo_mapper (~> 0.8)
+      uuidtools (>= 2.0.0)
+
 GEM
   remote: http://gemcutter.org/
   specs:
@@ -77,9 +85,6 @@ GEM
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
-    mongomapper_ext (0.4.0)
-      mongo_mapper (~> 0.8)
-      uuidtools (>= 2.0.0)
     multi_json (0.0.4)
     newrelic_rpm (2.13.2)
     nokogiri (1.4.3.1)
@@ -161,7 +166,7 @@ DEPENDENCIES
   magent (~> 0.4.2)
   mongo
   mongo_mapper (~> 0.8.2)
-  mongomapper_ext (~> 0.4.0)
+  mongomapper_ext!
   newrelic_rpm (~> 2.13.1)
   oauth2 (~> 0.0.8)
   postmark (~> 0.9.0)
