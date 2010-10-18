@@ -5,6 +5,7 @@ pt-BR:
       answer_label: Responder a pergunta
       comment_submit: Comentar
       submit: Responder
+      not_logged: "É necessário <a href=\"%{link}\">se identificar</a> para responder à questão."
     edit:
       title: Editando resposta
     create:

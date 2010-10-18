@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_filter :login_required
   before_filter :fetch_invitations
 
   def index

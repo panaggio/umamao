@@ -134,13 +134,18 @@
         = render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
     = will_paginate(@answers)
 
+-# New answer form
 - unless @question.closed
-  %a{:name=>"to_answer"}
-  - form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
-    = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
-    .group.navform
-      = submit_tag t('answers.form.submit'), :class => "button"
-    .clear
+  - if logged_in?
+    %a{:name=>"to_answer"}
+    - form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
+      = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
+      .group.navform
+        = submit_tag t("answers.form.submit"), :class => "button"
+      .clear
+  - else
+    %p
+      = t("answers.form.not_logged", :link => new_user_session_path)
 
 - content_for :sidebar do
   - if AppConfig.enable_sharing
