@@ -5,20 +5,17 @@ namespace :data do
     task :tags_to_topics => :environment do
       Topic.delete_all
 
-      # Create topics
-      tags = Question.find_tags(/.*/, {}, 0)
-      tags.each do |tag|
-        topic = Topic.new(:title => tag['name'])
-        puts "Could not import tag #{tag.inspect}" unless topic.save
-      end
-
-      # Assign topics to questions
       questions = Question.query
       questions.each do |question|
         topics = question.tags.map { |tag|
           topic = Topic.find_by_title(tag)
-          topic.questions_count += 1
-          topic.save
+
+          if !topic
+            topic = Topic.create(:title => tag)
+            topic.set(:created_at => question.created_at)
+          end
+
+          topic.set(:questions_count => topic.questions_count + 1)
           topic
         }
         question.set(:topic_ids => topics.map(&:id).uniq)
@@ -26,15 +23,22 @@ namespace :data do
 
       # Text transformations on topics
       Topic.query.each do |topic|
-        title = topic.title.gsub(/-/, ' ').capitalize
-        title = title.gsub(/cao$/, 'ção')
-        title = title.gsub(/ao$/, 'ão')
-        if title =~ /\w{1,2}\d{3}/
+        title = topic.title.split('-').map { |w|
+          word = w[0..0].upcase + w[1..-1]
+          word.gsub!(/cao$/, 'ção')
+          word.gsub!(/ao$/, 'ão')
+          word
+        }.join(' ')
+
+        if title =~ /^\w{1,2}\d{3}$/
           title = title.upcase + ' (Unicamp)'
         end
-        topic.title = title
+
+        topic.set(:title => title)
+        # we want the slug to be generated from the new title
+        topic.reload
         topic.send(:generate_slug)
-        topic.save
+        topic.set(:slug => topic.slug)
       end
     end
   end
