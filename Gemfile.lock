@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/rails/exception_notification.git
-  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  revision: 192a49a
   specs:
     exception_notification (1.0.0)
 
 GIT
   remote: git://github.com/umamao/mongomapper_ext.git
-  revision: de5c411181ab1f0f4e7db96e3a558dba2ecac5b4
+  revision: de5c411
   specs:
     mongomapper_ext (0.5.0)
       mongo_mapper (~> 0.8)
