@@ -247,10 +247,11 @@ class QuestionsController < ApplicationController
   # POST /questions.xml
   def create
     @question = Question.new
-    @question.safe_update(%w[title body language tags wiki parent_question_id],
+    @question.safe_update(%w[title body language wiki parent_question_id],
                           params[:question])
     @question.group = current_group
     @question.user = current_user
+    @question.topics = Topic.from_titles!(params[:question][:topics])
 
     if !logged_in?
       draft = Draft.create!(:question => @question)
@@ -262,15 +263,12 @@ class QuestionsController < ApplicationController
       if @question.save
         sweep_question_views
 
-        current_user.stats.add_question_tags(*@question.tags)
-        current_group.tag_list.add_tags(*@question.tags)
-
         current_user.on_activity(:ask_question, current_group)
         current_group.on_activity(:ask_question)
 
         Magent.push("actors.judge", :on_ask_question, @question.id)
         track_event(:asked_question, :body_present => @question.body.present?,
-                    :topics_count => @question.tags.size)
+                    :topics_count => @question.topics.size)
 
         flash[:notice] = t(:flash_notice, :scope => "questions.create")
 
@@ -287,7 +285,8 @@ class QuestionsController < ApplicationController
   # PUT /questions/1.xml
   def update
     respond_to do |format|
-      @question.safe_update(%w[title body language tags wiki adult_content version_message], params[:question])
+      @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
+      @question.topics = Topic.from_titles!(params[:question][:topics])
       @question.updated_by = current_user
       @question.last_target = @question
 
@@ -538,16 +537,8 @@ class QuestionsController < ApplicationController
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 
-    topic_titles = params[:question][:topics].map(&:strip)
-    topics = Topic.all(:title.in => topic_titles)
+    @question.topics = Topic.from_titles!(params[:question][:topics])
 
-    if topics.size != topic_titles.size
-      new_topic_titles = topic_titles - topics.map(&:title)
-      new_topics = new_topic_titles.map {|t| Topic.create(:title => t) }
-      topics += new_topics
-    end
-
-    @question.topics = topics
     @question.updated_by = current_user
     @question.last_target = @question
 

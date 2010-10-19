@@ -95,7 +95,7 @@ function initAutocomplete(){
   var width = tagInput.width();
   tagInput.after(select);
   if(typeof(tagInput)!='undefined' && $.trim(tagInput.val())!=''){
-    var tags = tagInput.val().split(',');
+    var tags = tagInput.val().split(',,');
     if( tags.length > 0){
       $.each(tags, function(i,n){
         if($.trim(n)!='')
