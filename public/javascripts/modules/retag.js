@@ -13,10 +13,6 @@ $(document).ready(function() {
           link.parents(".tag-list").prepend(data.html);
           initAutocomplete();
           $('.autocomplete_for_tags');
-          var tags = $('.autocomplete_for_tags').val().split(',');
-          $.each(tags, function(i,n){
-            $('.autocomplete_for_tags').trigger("addItem", {"title": $.trim(n), "value": $.trim(n)});
-	  });
         } else {
             showMessage(data.message, "error");
             if(data.status == "unauthenticate") {
@@ -38,8 +34,8 @@ $(document).ready(function() {
             data: form.serialize()+"&format=js",
             success: function(data, textStatus) {
                 if(data.success) {
-                    var tags = $.map(data.tags, function(n){
-		      return '<span class="tag"><a rel="tag" href="/questions/tags/'+n+'">'+n+'</a></span>';
+                    var tags = $.map(data.topics, function(topic){
+		      return '<span class="tag"><a rel="tag" href="/topics/'+topic.slug+'">'+topic.title+'</a></span>';
 		    });
                     form.parents('.tag-list').find('.tag').remove();
                     form.before(tags.join(''));
