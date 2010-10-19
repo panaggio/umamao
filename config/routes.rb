@@ -1,5 +1,5 @@
 Shapado::Application.routes.draw do
-  resources :topics, :except => :new
+  resources :topics, :only => [:index, :show, :edit, :update]
 
   resources :invitations, :only => [:index, :create]
 

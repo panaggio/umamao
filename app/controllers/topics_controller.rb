@@ -1,6 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :only => [:create, :update, :destroy]
-  before_filter :admin_required, :only => :destroy
+  before_filter :login_required, :only => [:edit, :update]
   respond_to :html
 
   tabs :default => :topics
@@ -32,22 +31,11 @@ class TopicsController < ApplicationController
     respond_with @topic
   end
 
-  def create
-    @topic = Topic.new(params[:topic])
-    @topic.save
-    respond_with @topic
-  end
-
   def update
     @topic = Topic.find_by_slug_or_id(params[:id])
     @topic.safe_update(%w[title description], params[:topic])
     @topic.save
-    respond_with @topic
-  end
-
-  def destroy
-    @topic = Topic.find_by_slug_or_id(params[:id])
-    @topic.destroy
+    track_event(:edited_topic)
     respond_with @topic
   end
 

@@ -16,6 +16,8 @@ class Topic
 
   versionable_keys :title, :description
 
+  before_save :generate_slug
+
   # Takes array of strings and returns array of topics with matching
   # titles, creating new topics for titles that are not found.
   def self.from_titles!(titles)
