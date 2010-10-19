@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :tags, :unanswered, :related_questions]
   before_filter :admin_required, :only => [:move, :move_to]
   before_filter :moderator_required, :only => [:close]
-  before_filter :check_permissions, :only => [:solve, :unsolve, :destroy]
+  before_filter :check_permissions, :only => [:destroy]
   before_filter :check_update_permissions, :only => [:edit, :update, :revert]
   before_filter :check_favorite_permissions, :only => [:favorite, :unfavorite] #TODO remove this
   before_filter :set_active_tag
@@ -322,76 +322,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(questions_url) }
       format.json  { head :ok }
-    end
-  end
-
-  def solve
-    @answer = @question.answers.find(params[:answer_id])
-    @question.answer = @answer
-    @question.accepted = true
-    @question.answered_with = @answer if @question.answered_with.nil?
-
-    respond_to do |format|
-      if @question.save
-        sweep_question(@question)
-
-        current_user.on_activity(:close_question, current_group)
-        if current_user != @answer.user
-          @answer.user.update_reputation(:answer_picked_as_solution, current_group)
-        end
-
-        Magent.push("actors.judge", :on_question_solved, @question.id, @answer.id)
-
-        flash[:notice] = t(:flash_notice, :scope => "questions.solve")
-        format.html { redirect_to question_path(@question) }
-        format.json  { head :ok }
-      else
-        @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
-        options = {:per_page => 25, :page => params[:page] || 1,
-                   :order => current_order, :banned => false}
-        options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
-        @answers = @question.answers.paginate(options)
-        @answer = Answer.new
-
-        format.html { render :action => "show" }
-        format.json  { render :json => @question.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  def unsolve
-    @answer_id = @question.answer.id
-    @answer_owner = @question.answer.user
-
-    @question.answer = nil
-    @question.accepted = false
-    @question.answered_with = nil if @question.answered_with == @question.answer
-
-    respond_to do |format|
-      if @question.save
-        sweep_question(@question)
-
-        flash[:notice] = t(:flash_notice, :scope => "questions.unsolve")
-        current_user.on_activity(:reopen_question, current_group)
-        if current_user != @answer_owner
-          @answer_owner.update_reputation(:answer_unpicked_as_solution, current_group)
-        end
-
-        Magent.push("actors.judge", :on_question_unsolved, @question.id, @answer_id)
-
-        format.html { redirect_to question_path(@question) }
-        format.json  { head :ok }
-      else
-        @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
-        options = {:per_page => 25, :page => params[:page] || 1,
-                   :order => current_order, :banned => false}
-        options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
-        @answers = @question.answers.paginate(options)
-        @answer = Answer.new
-
-        format.html { render :action => "show" }
-        format.json  { render :json => @question.errors, :status => :unprocessable_entity }
-      end
     end
   end
 

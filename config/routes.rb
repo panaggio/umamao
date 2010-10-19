@@ -85,8 +85,6 @@ Shapado::Application.routes.draw do
     end
 
     member do
-      get :solve
-      get :unsolve
       get :flag
       get :favorite
       get :unfavorite
