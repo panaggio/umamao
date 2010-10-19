@@ -38,7 +38,7 @@ class Answer < Comment
                                :user_id => self.user_id)
 
     if !check_answer.nil? && check_answer.id != self.id
-      self.errors.add(:limitation, "Your can only post one answer by question.")
+      self.errors.add(:limitation, "Your can only post one answer per question.")
       return false
     end
   end
