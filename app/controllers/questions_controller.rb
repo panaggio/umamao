@@ -696,7 +696,7 @@ class QuestionsController < ApplicationController
       elsif params[:id] =~ /^(\d+)/ && (@question = current_group.questions.first(:se_id => $1, :select => [:_id, :slug]))
         head :moved_permanently, :location => question_url(@question)
       else
-        raise PageNotFound
+        raise Goalie::NotFound
       end
     end
 
