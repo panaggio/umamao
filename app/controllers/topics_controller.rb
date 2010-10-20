@@ -36,6 +36,11 @@ class TopicsController < ApplicationController
     @topic.safe_update(%w[title description], params[:topic])
     @topic.save
     track_event(:edited_topic)
+
+    Question.all(:topic_ids => @topic.id, :select => [:id]).each do |question|
+      sweep_question(question)
+    end
+
     respond_with @topic
   end
 
