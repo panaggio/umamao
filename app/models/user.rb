@@ -79,7 +79,7 @@ class User
 
   key :invitation_token, String
 
-  before_create :create_friend_list
+  before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
 
   timestamps!
@@ -516,6 +516,9 @@ Time.zone.now ? 1 : 0)
     if !self.friend_list.present?
       self.friend_list = FriendList.new
     end
+  end
+
+  def create_notification_opts
     if !self.notification_opts
       self.notification_opts = NotificationConfig.new
     end
