@@ -485,7 +485,10 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         format.html {redirect_to question_path(@question)}
         format.js {
-          topics = @question.topics.map{ |t| {:title => h(t.title), :slug => h(t.slug)} }
+          topics = @question.topics.map{ |t|
+            { :title => CGI.escapeHTML(t.title),
+              :slug => CGI.escapeHTML(t.slug) }
+          }
           render(:json => {:success => true,
                    :message => flash[:notice], :topics => topics}.to_json)
         }
