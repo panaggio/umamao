@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by_slug_or_id(params[:id])
+    set_page_title(@topic.title)
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
                                    :page => params[:page] || 1)
