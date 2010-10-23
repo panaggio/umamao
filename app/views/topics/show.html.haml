@@ -3,7 +3,7 @@
 
 - content_for :subtabs do
   .navtitle
-    ~ @topic.title
+    &= @topic.title
     - if @questions
       == (#{@questions.total_entries})
 
