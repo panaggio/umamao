@@ -21,8 +21,8 @@ class Topic
   # Takes array of strings and returns array of topics with matching
   # titles, creating new topics for titles that are not found.
   def self.from_titles!(titles)
-    return if titles.blank?
-    titles = titles.map(&:strip)
+    return [] if titles.blank?
+    titles = titles.map(&:strip).reject(&:blank?)
     self.all(:title.in => titles).tap { |topics|
       if topics.size != titles.size
         new_titles = titles - topics.map(&:title)
