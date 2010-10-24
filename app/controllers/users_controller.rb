@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     if params[:group_invitation]
       @group_invitation = GroupInvitation.first(:slug => params[:group_invitation])
       unless @group_invitation && @group_invitation.active?
-        redirect_to root_path
+        redirect_to(root_path) && return
       end
     end
 
