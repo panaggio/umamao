@@ -217,7 +217,7 @@ class QuestionsController < ApplicationController
 
     @follow_up_question = {
       :parent_question_id => @question.id,
-      :tags => @question.tags,
+      :topics => @question.topics,
       :body => render_to_string(:file => 'questions/_new_follow_up_question.text.erb')
     }
     @follow_up_questions = Question.children_of(@question)
@@ -232,7 +232,10 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.xml
   def new
+    topics = Topic.from_titles!(params[:question].try(:delete, :topics))
     @question = Question.new(params[:question])
+    @question.topics = topics
+
     respond_to do |format|
       format.html # new.html.erb
       format.json  { render :json => @question.to_json }
