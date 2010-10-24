@@ -160,5 +160,6 @@ Shapado::Application.routes.draw do
 
   match '/search' => 'searches#index', :as => :search
   match '/about' => 'groups#show', :as => :about
+  match '/:group_invitation' => 'users#new'
   root :to => 'welcome#index'
 end
