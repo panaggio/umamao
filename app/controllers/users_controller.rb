@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :follow]
+
   tabs :default => :users
 
   subtabs :index => [[:newest, "created_at desc"],
@@ -227,6 +229,7 @@ class UsersController < ApplicationController
     end
     [key, order]
   end
+
 end
 
 
