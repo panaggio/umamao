@@ -69,7 +69,7 @@
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
     = link_to t('invitations.invite'), invitations_path
     %hr{:style => 'margin-top: 1em'}
-    = t('.looking_for', :link => link_to(t('.exercises'), tag_path('resolução-de-exercício')))
+    = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
 
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
