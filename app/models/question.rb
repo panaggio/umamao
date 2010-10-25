@@ -111,6 +111,10 @@ class Question
     opts[:group_id] = question.group_id
     opts[:banned] = false
 
+    question.tags = (question.topics.map(&:title) << question.title).map { |title|
+        title.downcase.tr(' ', ',').split(',')
+    }.flatten
+
     Question.paginate(opts.merge(:_keywords => {:$in => question.tags}, :_id => {:$ne => question.id}))
   end
 
