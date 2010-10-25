@@ -10,6 +10,9 @@ class Topic
   key :updated_by_id, String
   belongs_to :updated_by, :class_name => "User"
 
+  key :follower_ids, Array
+  has_many :followers, :class_name => 'User', :in => :follower_ids
+
   slug_key :title, :unique => true, :min_length => 3
 
   timestamps!
