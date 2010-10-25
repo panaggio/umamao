@@ -97,7 +97,9 @@ class QuestionsController < ApplicationController
     if params[:id]
       @question = Question.find(params[:id])
     elsif params[:question]
+      topics = Topic.from_titles!(params[:question].delete(:topics))
       @question = Question.new(params[:question])
+      @question.topics = topics
       @question.group_id = current_group.id
     end
 
