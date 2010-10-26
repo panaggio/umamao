@@ -113,14 +113,16 @@ function initAutocomplete() {
   });
 
   // Dynamic search box
-  //$.gsuggest({debug: true, url: "/search/json"});
   $("#search-field").autoSuggest("/search/json", {
                                    minChars: 2,
                                    startText: "Busca",
                                    selectedItemProp: "title",
                                    searchObjProps: "title",
-                                   resultClick: function(data) {
+                                   resultClick: function (data) {
                                      location.href = data.attributes.url;
+                                   },
+                                   retrieveComplete: function (data) {
+                                     return data.concat([{ title: "Buscar", url: "http://www.google.com" }]);
                                    }
   });
 }
