@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :follow]
+
   tabs :default => :users
 
   subtabs :index => [[:newest, "created_at desc"],
@@ -31,6 +33,13 @@ class UsersController < ApplicationController
   end
 
   def new
+    if params[:group_invitation]
+      @group_invitation = GroupInvitation.first(:slug => params[:group_invitation])
+      unless @group_invitation && @group_invitation.active?
+        redirect_to(root_path) && return
+      end
+    end
+
     @user = User.new
 
     @invitation = Invitation.
@@ -53,8 +62,15 @@ class UsersController < ApplicationController
       @user.birthday = build_date(params[:user], "birthday")
     end
 
+    @group_invitation = GroupInvitation.
+      first(:slug => params[:group_invitation])
+    @user.confirmed_at = Time.now if @group_invitation
+
     success = @user && @user.save
     if success && @user.errors.empty?
+
+      @group_invitation.push(:user_ids => @user.id) if @group_invitation
+
       current_group.add_member(@user)
       track_event(:sign_up, :user_id => @user.id, :confirmed => @user.confirmed?)
       flash[:conversion] = true
@@ -213,6 +229,7 @@ class UsersController < ApplicationController
     end
     [key, order]
   end
+
 end
 
 

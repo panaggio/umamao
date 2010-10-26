@@ -1,0 +1,19 @@
+-content_for :subtabs do
+  .secondary-navigation
+    .navtitle
+      = t(".title")
+    - tabs_tag :namespace => :topics do |tab|
+      = tab.questions_count t('.questions_count_tab'), topics_path
+      = tab.title t('.title_tab'), topics_path(:sort => :title)
+      = tab.created_at t('.created_at_tab'), topics_path(:sort => :created_at)
+    .clear
+
+/Topics
+%ul.items#topics
+  -@topics.each do |topic|
+    = render :partial => "topic", :object => topic
+
+#additional_info
+  =will_paginate @topics
+  .clear
+

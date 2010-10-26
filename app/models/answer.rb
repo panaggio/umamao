@@ -38,7 +38,7 @@ class Answer < Comment
                                :user_id => self.user_id)
 
     if !check_answer.nil? && check_answer.id != self.id
-      self.errors.add(:limitation, "Your can only post one answer by question.")
+      self.errors.add(:limitation, "Your can only post one answer per question.")
       return false
     end
   end
@@ -90,7 +90,6 @@ class Answer < Comment
 
   def ban
     self.question.answer_removed!
-    unsolve_question
     self.set({:banned => true})
   end
 
@@ -125,13 +124,6 @@ class Answer < Comment
       if !valid
         self.errors.add(:body, "Your answer looks like spam.")
       end
-    end
-  end
-
-  protected
-  def unsolve_question
-    if !self.question.nil? && self.question.answer_id == self.id
-      self.question.set({:answer_id => nil, :accepted => false})
     end
   end
 end

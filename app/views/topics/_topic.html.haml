@@ -1,0 +1,11 @@
+%li.item
+  .summary
+    .title
+      = link_to h(topic.title), topic_path(topic)
+    .info
+      .metadata
+        - count = topic.questions_count
+        = format_number(count)
+        = t(:question_count, :scope => "activerecord.models", :count => count)
+    .clear
+

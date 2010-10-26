@@ -16,6 +16,9 @@ class Question
   slug_key :title, :unique => true, :min_length => 8
   key :slugs, Array, :index => true
 
+  key :topic_ids, Array, :index => true
+  many :topics, :in => :topic_ids
+
   key :answers_count, Integer, :default => 0, :required => true
   key :views_count, Integer, :default => 0
   key :hotness, Integer, :default => 0
@@ -94,10 +97,6 @@ class Question
 
   timestamps!
 
-  def first_tags
-    tags[0..5]
-  end
-
   def tags=(t)
     if t.kind_of?(String)
       t = t.downcase.split(",").join(" ").split(" ").uniq
@@ -111,6 +110,10 @@ class Question
     opts[:page]     ||= 1
     opts[:group_id] = question.group_id
     opts[:banned] = false
+
+    question.tags = (question.topics.map(&:title) << question.title).map { |title|
+        title.downcase.tr(' ', ',').split(',')
+    }.flatten
 
     Question.paginate(opts.merge(:_keywords => {:$in => question.tags}, :_id => {:$ne => question.id}))
   end

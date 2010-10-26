@@ -34,6 +34,8 @@ Disallow: /questions/unanswered
 Disallow: /questions/unanswered/
 Disallow: /questions/tags
 Disallow: /questions/tags/
+Disallow: /questions/*/answers/*
+Disallow: /questions/*/answers/*/
 Disallow: /badges
 Disallow: /badges/
 Disallow: /search

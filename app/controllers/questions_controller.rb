@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :tags, :unanswered, :related_questions]
   before_filter :admin_required, :only => [:move, :move_to]
   before_filter :moderator_required, :only => [:close]
-  before_filter :check_permissions, :only => [:solve, :unsolve, :destroy]
+  before_filter :check_permissions, :only => [:destroy]
   before_filter :check_update_permissions, :only => [:edit, :update, :revert]
   before_filter :check_favorite_permissions, :only => [:favorite, :unfavorite] #TODO remove this
   before_filter :set_active_tag
@@ -97,7 +97,9 @@ class QuestionsController < ApplicationController
     if params[:id]
       @question = Question.find(params[:id])
     elsif params[:question]
+      topics = Topic.from_titles!(params[:question].delete(:topics))
       @question = Question.new(params[:question])
+      @question.topics = topics
       @question.group_id = current_group.id
     end
 
@@ -170,12 +172,11 @@ class QuestionsController < ApplicationController
       format.js do
         result = []
         if q = params[:tag]
-          result = Question.find_tags(/^#{Regexp.escape(q.downcase)}/i,
-                                      :group_id => current_group.id)
+          result = Topic.all(:title => /^#{Regexp.escape(q.downcase)}/i)
         end
 
         results = result.map do |t|
-          {:caption => "#{t["name"]} (#{t["count"].to_i})", :value => t["name"]}
+          {:caption => "#{t.title} (#{t.questions_count})", :value => t.title}
         end
 
         render :json => results
@@ -218,7 +219,7 @@ class QuestionsController < ApplicationController
 
     @follow_up_question = {
       :parent_question_id => @question.id,
-      :tags => @question.tags,
+      :topics => @question.topics,
       :body => render_to_string(:file => 'questions/_new_follow_up_question.text.erb')
     }
     @follow_up_questions = Question.children_of(@question)
@@ -233,7 +234,10 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.xml
   def new
+    topics = Topic.from_titles!(params[:question].try(:delete, :topics))
     @question = Question.new(params[:question])
+    @question.topics = topics
+
     respond_to do |format|
       format.html # new.html.erb
       format.json  { render :json => @question.to_json }
@@ -248,10 +252,11 @@ class QuestionsController < ApplicationController
   # POST /questions.xml
   def create
     @question = Question.new
-    @question.safe_update(%w[title body language tags wiki parent_question_id],
+    @question.safe_update(%w[title body language wiki parent_question_id],
                           params[:question])
     @question.group = current_group
     @question.user = current_user
+    @question.topics = Topic.from_titles!(params[:question][:topics])
 
     if !logged_in?
       draft = Draft.create!(:question => @question)
@@ -263,15 +268,12 @@ class QuestionsController < ApplicationController
       if @question.save
         sweep_question_views
 
-        current_user.stats.add_question_tags(*@question.tags)
-        current_group.tag_list.add_tags(*@question.tags)
-
         current_user.on_activity(:ask_question, current_group)
         current_group.on_activity(:ask_question)
 
         Magent.push("actors.judge", :on_ask_question, @question.id)
         track_event(:asked_question, :body_present => @question.body.present?,
-                    :topics_count => @question.tags.size)
+                    :topics_count => @question.topics.size)
 
         flash[:notice] = t(:flash_notice, :scope => "questions.create")
 
@@ -288,7 +290,8 @@ class QuestionsController < ApplicationController
   # PUT /questions/1.xml
   def update
     respond_to do |format|
-      @question.safe_update(%w[title body language tags wiki adult_content version_message], params[:question])
+      @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
+      @question.topics = Topic.from_titles!(params[:question][:topics])
       @question.updated_by = current_user
       @question.last_target = @question
 
@@ -324,76 +327,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(questions_url) }
       format.json  { head :ok }
-    end
-  end
-
-  def solve
-    @answer = @question.answers.find(params[:answer_id])
-    @question.answer = @answer
-    @question.accepted = true
-    @question.answered_with = @answer if @question.answered_with.nil?
-
-    respond_to do |format|
-      if @question.save
-        sweep_question(@question)
-
-        current_user.on_activity(:close_question, current_group)
-        if current_user != @answer.user
-          @answer.user.update_reputation(:answer_picked_as_solution, current_group)
-        end
-
-        Magent.push("actors.judge", :on_question_solved, @question.id, @answer.id)
-
-        flash[:notice] = t(:flash_notice, :scope => "questions.solve")
-        format.html { redirect_to question_path(@question) }
-        format.json  { head :ok }
-      else
-        @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
-        options = {:per_page => 25, :page => params[:page] || 1,
-                   :order => current_order, :banned => false}
-        options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
-        @answers = @question.answers.paginate(options)
-        @answer = Answer.new
-
-        format.html { render :action => "show" }
-        format.json  { render :json => @question.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  def unsolve
-    @answer_id = @question.answer.id
-    @answer_owner = @question.answer.user
-
-    @question.answer = nil
-    @question.accepted = false
-    @question.answered_with = nil if @question.answered_with == @question.answer
-
-    respond_to do |format|
-      if @question.save
-        sweep_question(@question)
-
-        flash[:notice] = t(:flash_notice, :scope => "questions.unsolve")
-        current_user.on_activity(:reopen_question, current_group)
-        if current_user != @answer_owner
-          @answer_owner.update_reputation(:answer_unpicked_as_solution, current_group)
-        end
-
-        Magent.push("actors.judge", :on_question_unsolved, @question.id, @answer_id)
-
-        format.html { redirect_to question_path(@question) }
-        format.json  { head :ok }
-      else
-        @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
-        options = {:per_page => 25, :page => params[:page] || 1,
-                   :order => current_order, :banned => false}
-        options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
-        @answers = @question.answers.paginate(options)
-        @answer = Answer.new
-
-        format.html { render :action => "show" }
-        format.json  { render :json => @question.errors, :status => :unprocessable_entity }
-      end
     end
   end
 
@@ -539,7 +472,8 @@ class QuestionsController < ApplicationController
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 
-    @question.tags = params[:question][:tags]
+    @question.topics = Topic.from_titles!(params[:question][:topics])
+
     @question.updated_by = current_user
     @question.last_target = @question
 
@@ -556,8 +490,12 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         format.html {redirect_to question_path(@question)}
         format.js {
+          topics = @question.topics.map{ |t|
+            { :title => CGI.escapeHTML(t.title),
+              :slug => CGI.escapeHTML(t.slug) }
+          }
           render(:json => {:success => true,
-                   :message => flash[:notice], :tags => @question.tags }.to_json)
+                   :message => flash[:notice], :topics => topics}.to_json)
         }
       end
     else
@@ -688,7 +626,7 @@ class QuestionsController < ApplicationController
       elsif params[:id] =~ /^(\d+)/ && (@question = current_group.questions.first(:se_id => $1, :select => [:_id, :slug]))
         head :moved_permanently, :location => question_url(@question)
       else
-        raise PageNotFound
+        raise Goalie::NotFound
       end
     end
 

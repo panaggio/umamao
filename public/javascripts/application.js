@@ -90,12 +90,12 @@ $(document).ready(function() {
 });
 
 function initAutocomplete() {
-  var select = $('<select size="100px" name="question[tags]" id="question_tags" class="autocomplete_for_tags" ></select>');
+  var select = $('<select size="100px" name="question[topics]" id="question_topics" class="autocomplete_for_tags" ></select>');
   var tagInput = $('.autocomplete_for_tags');
   var width = tagInput.width();
   tagInput.after(select);
   if(typeof(tagInput)!='undefined' && $.trim(tagInput.val())!=''){
-    var tags = tagInput.val().split(',');
+    var tags = tagInput.val().split(',,');
     if( tags.length > 0){
       $.each(tags, function(i,n){
         if($.trim(n)!='')

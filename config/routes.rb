@@ -1,4 +1,6 @@
 Shapado::Application.routes.draw do
+  resources :topics, :only => [:index, :show, :edit, :update]
+
   resources :invitations, :only => [:index, :create]
 
   resources :waiting_users, :only => :create
@@ -83,8 +85,6 @@ Shapado::Application.routes.draw do
     end
 
     member do
-      get :solve
-      get :unsolve
       get :flag
       get :favorite
       get :unfavorite
@@ -161,5 +161,6 @@ Shapado::Application.routes.draw do
   match '/search' => 'searches#index', :as => :search
   match '/search/json' => 'searches#json'
   match '/about' => 'groups#show', :as => :about
+  match '/:group_invitation' => 'users#new'
   root :to => 'welcome#index'
 end

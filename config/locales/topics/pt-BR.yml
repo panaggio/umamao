@@ -1,0 +1,13 @@
+pt-BR:
+  topics:
+    index:
+      title: Tópicos
+      questions_count_tab: Nº de Perguntas
+      title_tab: Nome
+      created_at_tab: Recentes
+    edit:
+      title: Editar tópico
+      name: Nome
+      description: Descrição
+    show:
+      empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.

@@ -15,7 +15,7 @@
 - question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
 
 - content_for :head do
-  %meta{:name => "keywords", :content => clean_seo_keywords(@question.tags.dup, @question.title)}
+  %meta{:name => "keywords", :content => clean_seo_keywords(@question.topics.map(&:title).dup, @question.title)}
   %meta{:name => "description", :content => question_body.gsub(/<\/?[^>]*>/, "")[0, 255] }
   %link{:rel => "canonical", :href => question_url(@question) }
 
@@ -47,9 +47,9 @@
     .post-text.entry-content
       = question_body
   .tag-list
-    - @question.tags.each do |tag|
+    - @question.topics.each do |topic|
       %span.tag
-        = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
+        = link_to h(topic.title), topic_path(topic)
     - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
       %span.retag
         = link_to t('.retag'), retag_question_path(@question), :id => 'retag'
@@ -84,7 +84,7 @@
       = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
 
       - if !@question.closed && show_close_request_form
-        - form_for [@question, @close_request], :html => {:class => "form hide", :id => "request_close_question_form"} do |form|
+        = form_for [@question, @close_request], :html => {:class => "form hide", :id => "request_close_question_form"} do |form|
           - if !@close_request.new?
             = link_to t(".retract_request"), question_close_request_path(:question_id => @question.slug, :id => @close_request.id), :method => :delete, :confirm => "are you sure?"
           = render :partial => "close_requests/form", :object => form
@@ -106,7 +106,7 @@
     = link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
   .forms
     .comment-form-question
-      - form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
+      = form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
         - @comment = Comment.new
         = render :partial => "comments/form", :locals => {:source => source, :commentable => @question}
         .group.navform
@@ -138,7 +138,7 @@
 - unless @question.closed
   - if logged_in?
     %a{:name=>"to_answer"}
-    - form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
+    = form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm"} do |f|
       = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
       .group.navform
         = submit_tag t("answers.form.submit"), :class => "button"
