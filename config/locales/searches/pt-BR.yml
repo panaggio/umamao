@@ -4,6 +4,7 @@ pt-BR:
       empty: "Não encontramos nenhuma pergunta com a sua busca."
       tags: nestes tópicos
       search_text: Perguntas contendo
+      title: Buscar
     form:
       clear: Limpar
       search_box_title: "Veja se a sua pergunta já foi feita por alguém"

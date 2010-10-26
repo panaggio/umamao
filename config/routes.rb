@@ -159,6 +159,7 @@ Shapado::Application.routes.draw do
   end
 
   match '/search' => 'searches#index', :as => :search
+  match '/search/json' => 'searches#json'
   match '/about' => 'groups#show', :as => :about
   root :to => 'welcome#index'
 end

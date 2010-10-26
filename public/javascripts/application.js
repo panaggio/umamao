@@ -89,7 +89,7 @@ $(document).ready(function() {
   $('#login_form > #email_field > input').focus();
 });
 
-function initAutocomplete(){
+function initAutocomplete() {
   var select = $('<select size="100px" name="question[tags]" id="question_tags" class="autocomplete_for_tags" ></select>');
   var tagInput = $('.autocomplete_for_tags');
   var width = tagInput.width();
@@ -110,6 +110,18 @@ function initAutocomplete(){
     delay: 200,
     maxitimes: 6,
     width: width
+  });
+
+  // Dynamic search box
+  //$.gsuggest({debug: true, url: "/search/json"});
+  $("#search-field").autoSuggest("/search/json", {
+                                   minChars: 2,
+                                   startText: "Busca",
+                                   selectedItemProp: "title",
+                                   searchObjProps: "title",
+                                   resultClick: function(data) {
+                                     location.href = data.attributes.url;
+                                   }
   });
 }
 

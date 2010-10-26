@@ -8,6 +8,7 @@ javascripts:
   - jquery.autocomplete
   - jquery.fcbkcomplete
   - jquery.notifyBar
+  - jquery.teste
   - showdown
   - highlight/prettify
   - components/search
@@ -37,6 +38,7 @@ stylesheets:
   - jquery-ui
   - compiled/application
   - prettify
+  - jquery.autoSuggest
 - landing:
   - compiled/landing
 

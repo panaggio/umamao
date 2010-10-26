@@ -31,4 +31,16 @@ class SearchesController < ApplicationController
       end
     end
   end
+
+  def json
+    # Searches for question containing keywords in the search box and
+    # returns them in JSON
+
+    options = {}
+    phrase = params[:q].downcase
+    questions = Question.filter(phrase, options)[0..10].map do |q|
+      {:title => q.title, :url => question_url(q)}
+    end
+    render :json => questions.to_json
+  end
 end

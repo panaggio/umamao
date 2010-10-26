@@ -3,7 +3,7 @@ $(document).ready(function() {
   $("label#rqlabel").hide();
 
   $(".text_field#question_title").focus( function() {
-    highlightEffect($("#sidebar .help"))
+    highlightEffect($("#sidebar .help"));
   });
 
   $("#ask_question").searcher({ url : "/questions/related_questions.js",
@@ -15,12 +15,5 @@ $(document).ready(function() {
                                 $("label#rqlabel").show();
                               }
   });
-
-  /*
-  $("#ask_question").bind("keypress", function(e) {
-    if (e.keyCode == 13) {
-       return false;
-     }
-     });*/
 
 });
