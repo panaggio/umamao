@@ -38,7 +38,7 @@ stylesheets:
   - jquery-ui
   - compiled/application
   - prettify
-  - jquery.autoSuggest
+  - search
 - landing:
   - compiled/landing
 

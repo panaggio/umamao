@@ -117,7 +117,6 @@ function initAutocomplete() {
                                    minChars: 2,
                                    startText: "Busca",
                                    selectedItemProp: "title",
-                                   searchObjProps: "title",
                                    resultClick: function (data) {
                                      location.href = data.attributes.url;
                                    },
