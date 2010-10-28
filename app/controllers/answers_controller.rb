@@ -47,6 +47,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     raise Goalie::NotFound if @answer.nil?
     @question = @answer.question
+    set_page_title(@question.title)
     respond_to do |format|
       format.html
       format.json  { render :json => @answer.to_json }
