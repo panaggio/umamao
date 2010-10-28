@@ -19,7 +19,7 @@ class Question
   key :topic_ids, Array, :index => true
   many :topics, :in => :topic_ids
 
-  key :answers_count, Integer, :default => 0, :required => true
+  key :answers_count, Integer, :default => 0
   key :views_count, Integer, :default => 0
   key :hotness, Integer, :default => 0
   key :flags_count, Integer, :default => 0

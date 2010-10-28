@@ -45,12 +45,9 @@ gem 'warden', '~>0.10.7'
 group :test do
   gem "rspec"
   gem "rspec-rails", "~> 2.0.0"
-  gem "machinist"
+  gem "factory_girl"
   gem "faker"
-  gem "ZenTest"
-  gem "autotest"
   gem "autotest-rails"
-  gem "cucumber"
   gem "database_cleaner"
   gem "cucumber-rails"
   gem "capybara"

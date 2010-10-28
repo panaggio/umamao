@@ -33,6 +33,10 @@ class Answer < Comment
 
   before_destroy :unsolve_question
 
+  def topics
+    self.question.topics
+  end
+
   def check_unique_answer
     check_answer = Answer.first(:question_id => self.question_id,
                                :user_id => self.user_id)
