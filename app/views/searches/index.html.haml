@@ -2,8 +2,6 @@
   .navtitle
     = t(".title", :default => "Search")
 
-= render :partial => "form"
-
 %ul.items#questions
   - if @questions.empty?
     %li.box.highlight

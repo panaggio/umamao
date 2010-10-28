@@ -49,38 +49,33 @@
         };
         var opts = $.extend(defaults, options);
 
-        var req_string = url;
+        var reqString = url;
         return this.each(function (x) {
             if (!opts.asHtmlID) {
                 x = x+""+Math.floor(Math.random()*100); //this ensures there will be unique IDs on the page if autoSuggest() is called multiple times
-                var x_id = "as-input-"+x;
+                var xId = "as-input-"+x;
             } else {
                 x = opts.asHtmlID;
-                var x_id = x;
+                var xId = x;
             }
             opts.start.call(this);
             var input = $(this);
-            input.attr("autocomplete", "off").addClass("as-input").attr("id", x_id).val(opts.startText);
-            var input_focus = false;
+            input.attr("autocomplete", "off").addClass("as-input").attr("id", xId).val(opts.startText);
+            var inputFocus = false;
 
             // Setup basic elements and render them to the DOM
-            input.wrap('<ul class="as-selections" id="as-selections-'+x+'" />').wrap('<li class="as-original" id="as-original-'+x+'" />');
-            var selectionsHolder = $("#as-selections-"+x);
             var resultsHolder = $('<div class="as-results" id="as-results-'+x+'" />').hide();
             var resultsUl =  $('<ul class="as-list" />');
-
-            selectionsHolder.click(function () {
-                input_focus = true;
-                input.focus();
-            }).mousedown(function () {
-                input_focus = false;
+            input.click(function () {
+              inputFocus = true;
+              input.focus();
             }).after(resultsHolder);
 
             var interval = null;
             var timeout = null;
             var prev = "";
             var totalSelections = 0;
-            var tab_press = false;
+            var tabPress = false;
             var lastKeyPressCode = null;
             var request = null;
 
@@ -88,9 +83,8 @@
             input.focus(function () {
                 if ($(this).val() == opts.startText) {
                     $(this).val("");
-                } else if (input_focus) {
+                } else if (inputFocus) {
                     if ($(this).val() != "") {
-                        resultsUl.css("width",selectionsHolder.outerWidth());
                         resultsHolder.show();
                     }
                 }
@@ -98,7 +92,7 @@
                 interval = setInterval(function() {
                     if (opts.showResultList) keyChange();
                 }, opts.keyDelay);
-                input_focus = true;
+                inputFocus = true;
                 if (opts.minChars == 0){
                   processRequest($(this).val());
                 }
@@ -106,14 +100,14 @@
             }).blur(function () {
                 if ($(this).val() == "") {
                     $(this).val(opts.startText);
-                } else if(input_focus){
+                } else if (inputFocus) {
                     resultsHolder.hide();
                 }
                 if (interval) clearInterval(interval);
             }).keydown(function (e) {
                 // track last key pressed
                 lastKeyPressCode = e.keyCode;
-                first_focus = false;
+                firstFocus = false;
                 switch (e.keyCode) {
                     case 38: // up
                         e.preventDefault();
@@ -124,7 +118,7 @@
                         moveSelection("down");
                         break;
                     case 13: // return
-                        tab_press = false;
+                        tabPress = false;
                         var active = $("li.active:first", resultsHolder);
                         if (active.length > 0) {
                             active.click();
@@ -153,10 +147,8 @@
                 if (string == prev) return;
                 prev = string;
                 if (string.length >= opts.minChars) {
-                    selectionsHolder.addClass("loading");
                     processRequest(string);
                 } else {
-                    selectionsHolder.removeClass("loading");
                     resultsHolder.hide();
                 }
             }
@@ -173,7 +165,7 @@
                 // Cancel previous request when input changes
                 abortRequest();
 
-                var url = req_string+"?"+opts.queryParam+"="+encodeURIComponent(string)+limit+opts.extraParams;
+                var url = reqString+"?"+opts.queryParam+"="+encodeURIComponent(string)+limit+opts.extraParams;
                 // TODO handle aborted response
                 request = $.getJSON(url, function (data) {
                     processData(opts.retrieveComplete.call(this, data), string);
@@ -188,42 +180,39 @@
                 $.each(data, function (i, item) {
                     numCount++;
                     var formatted = $('<li class="as-result-item" id="as-result-item-'+i+'" />').click(function () {
-                        var raw_data = $(this).data("data");
-                        var number = raw_data.num;
-                        if($("#as-selection-"+number, selectionsHolder).length <= 0 && !tab_press){
-                            var data = raw_data.attributes;
-                            input.val("").focus();
-                            prev = "";
-                            opts.resultClick.call(this, raw_data);
+                        var rawData = $(this).data("data");
+                        var number = rawData.num;
+                        if(!tabPress){
+                            var data = rawData.attributes;
+                            input.focus();
+                            opts.resultClick.call(this, rawData);
                             resultsHolder.hide();
                         }
-                        tab_press = false;
+                        tabPress = false;
                     }).mousedown(function () {
-                        input_focus = false;
+                        inputFocus = false;
                     }).mouseover(function () {
                         $("li", resultsUl).removeClass("active");
                         $(this).addClass("active");
                     }).data("data", {attributes: item, num: numCount});
-                    var this_data = $.extend({}, item);
+                    var thisData = $.extend({}, item);
                     var regx = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + query + ")(?![^<>]*>)(?![^&;]+;)",
                                           opts.matchCase ? "g" : "gi");
 
                     if (opts.resultsHighlight && query.length > 0){
-                        this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<em>$1</em>");
+                        thisData[opts.selectedItemProp] = thisData[opts.selectedItemProp].replace(regx,"<em>$1</em>");
                     }
                     if (!opts.formatList) {
-                        formatted = formatted.html(this_data[opts.selectedItemProp]);
+                        formatted = formatted.html(thisData[opts.selectedItemProp]);
                     } else {
-                        formatted = opts.formatList.call(this, this_data, formatted);
+                        formatted = opts.formatList.call(input, thisData, formatted);
                     }
                     resultsUl.append(formatted);
-                    delete this_data;
+                    delete thisData;
                 });
-                selectionsHolder.removeClass("loading");
                 if (data.length <= 0) {
                     resultsUl.html('<li class="as-message">'+opts.emptyText+'</li>');
                 }
-                resultsUl.css("width", selectionsHolder.outerWidth());
                 if (data.length > 0 || !opts.showResultListWhenNoMatch) {
                     resultsHolder.show();
                 }

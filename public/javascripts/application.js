@@ -113,17 +113,32 @@ function initAutocomplete() {
   });
 
   // Dynamic search box
-  $("#search-field").autoSuggest("/search/json", {
-                                   minChars: 2,
-                                   startText: "Busca",
-                                   selectedItemProp: "title",
-                                   resultClick: function (data) {
-                                     location.href = data.attributes.url;
-                                   },
-                                   retrieveComplete: function (data) {
-                                     return data.concat([{ title: "Buscar", url: "http://www.google.com" }]);
-                                   }
-  });
+  // FIXME We should internationalize this
+  var searchField = $("#search-field");
+  var searchForm = searchField.parent();
+  searchField.autoSuggest("/search/json", {
+                            asHtmlID: "search-field",
+                            minChars: 2,
+                            startText: "Busca",
+                            selectedItemProp: "title",
+                            resultClick: function (data) {
+                              if (data.attributes.search) {
+                                searchForm.submit();
+                              } else {
+                                location.href = data.attributes.url;
+                              }
+                            },
+                            retrieveComplete: function (data) {
+                              return data.concat([{ title: "Buscar", search: true }]);
+                            },
+                            formatList: function (data, formatted) {
+                              if (data.search) {
+                                return formatted.text('Buscar por "' + this.val() + '"');
+                              } else {
+                                return formatted.html(data.title);
+                              }
+                            }
+                          });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {
