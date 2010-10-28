@@ -122,7 +122,6 @@ GEM
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
     linecache (0.43)
-    machinist (1.0.6)
     magent (0.4.2)
       mongo (>= 0.1.0)
       uuidtools (>= 2.0.0)
