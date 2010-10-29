@@ -9,7 +9,7 @@ javascripts:
   - jquery.fcbkcomplete
   - jquery.notifyBar
   - jquery.hotkeys
-  - jquery.teste
+  - jquery.autoSuggest
   - showdown
   - highlight/prettify
   - components/search
