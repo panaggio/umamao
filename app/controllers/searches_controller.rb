@@ -39,7 +39,7 @@ class SearchesController < ApplicationController
     options = {}
     phrase = params[:q].downcase
     questions = Question.filter(phrase, options)[0..10].map do |q|
-      {:title => q.title, :url => question_url(q)}
+      {:title => truncate_words(q.title, 70), :url => question_url(q)}
     end
     render :json => questions.to_json
   end
