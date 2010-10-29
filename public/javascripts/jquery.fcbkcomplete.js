@@ -313,11 +313,15 @@ jQuery(function($){
                 }
             }
 
-            function addMembers(etext, data){
+            function addMembers(etext, data) {
+                var re = new RegExp("^" + etext + "$", "i");
                 feed.html('');
-                if(typeof(data[0])=='undefined'){
-                    data = ([{"value":etext,"caption":etext+" (0)"}, data]);
+                if (!data.some(function (item) { return re.test(item.value); })) {
+                    data = data.concat([{"value":etext,"caption":etext+" (0)"}]);
                 }
+                //if(typeof(data[0])=='undefined'){
+                //    data = ([{"value":etext,"caption":etext+" (0)"}, data]);
+                //}
                 if (!options.cache && data != null) {
                     cache = new Array();
                     search_string = "";
