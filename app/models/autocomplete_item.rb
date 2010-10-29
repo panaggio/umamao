@@ -9,5 +9,5 @@ class AutocompleteItem
 
   filterable_keys :title
 
-  belongs_to :entry, :polymorphic => true
+  belongs_to :entry, :dependent => :destroy, :polymorphic => true
 end

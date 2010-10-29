@@ -41,5 +41,12 @@ namespace :data do
         topic.set(:slug => topic.slug)
       end
     end
+
+    desc "Create autocomplete index for questions, users and topics"
+    task :create_autocomplete_index => :environment do
+      Question.all.each &:update_autocomplete_item
+      Topic.all.each &:update_autocomplete_item
+      User.all.each &:update_autocomplete_item
+    end
   end
 end

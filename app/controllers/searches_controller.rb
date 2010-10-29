@@ -33,14 +33,14 @@ class SearchesController < ApplicationController
   end
 
   def json
-    # Searches for question containing keywords in the search box and
-    # returns them in JSON
+    # Searches for entries containing keywords in the search box and
+    # returns them in JSON form
 
     options = {}
     phrase = params[:q].downcase
-    questions = Question.filter(phrase, options)[0..10].map do |q|
-      {:title => q.title, :url => question_url(q)}
+    results = AutocompleteItem.filter(phrase, options)[0..10].map do |i|
+      { :title => i.title, :url => url_for(i.entry), :type => i.entry.class.to_s }
     end
-    render :json => questions.to_json
+    render :json => results.to_json
   end
 end

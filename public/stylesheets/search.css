@@ -32,6 +32,11 @@ li.as-result-item, li.as-message {
     text-overflow: ellipsis;
 }
 
+li.as-result-item .as-desc {
+    font-size: x-small;
+    color: #777;
+}
+
 li.as-message {
     margin: 0;
     cursor: default;

@@ -122,20 +122,28 @@ function initAutocomplete() {
                             startText: "Busca",
                             selectedItemProp: "title",
                             resultClick: function (data) {
-                              if (data.attributes.search) {
+                              if (data.attributes.type == "Search") {
                                 searchForm.submit();
                               } else {
                                 location.href = data.attributes.url;
                               }
                             },
                             retrieveComplete: function (data) {
-                              return data.concat([{ title: "Buscar", search: true }]);
+                              return data.concat([{ title: "Buscar", type: "Search" }]);
                             },
                             formatList: function (data, formatted) {
-                              if (data.search) {
-                                return formatted.addClass("as-search").text('Buscar por "' + this.val() + '"');
-                              } else {
+
+                              switch (data.type) {
+                              case "Question":
                                 return formatted.html(data.title);
+                              case "Topic":
+                                return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
+                              case "User":
+                                return formatted.html(data.title + ' <span class="as-desc">Usuário</span>');
+                              case "Search":
+                                return formatted.addClass("as-search").text('Buscar por perguntas com "' + this.val() + '"');
+                              default:
+                                return formatted.html(data.type);
                               }
                             }
                           });
