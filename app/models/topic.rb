@@ -2,8 +2,10 @@ class Topic
   include MongoMapper::Document
   include MongoMapperExt::Slugizer
   include Support::Versionable
+  include Support::Autocompletable
 
   key :title, String, :required => true, :index => true, :unique => true
+  autocompletable_key :title
   key :description, String
   key :questions_count, :default => 0
 
@@ -34,5 +36,7 @@ class Topic
       end
     }
   end
+
+  protected
 
 end

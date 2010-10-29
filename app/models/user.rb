@@ -2,6 +2,7 @@ require 'digest/sha1'
 
 class User
   include MongoMapper::Document
+  include Support::Autocompletable
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
          :token_authenticatable, :validatable, :confirmable
 
@@ -22,6 +23,8 @@ class User
   key :login,                     String, :limit => 40, :index => true
   key :name,                      String, :limit => 100, :null => false, :index => true
   key :academic_email,            String, :limit => 40, :default => nil
+
+  autocompletable_key :name
 
   key :bio,                       String, :limit => 140
   key :website,                   String, :limit => 200

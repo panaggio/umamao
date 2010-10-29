@@ -6,6 +6,7 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
+  include Support::Autocompletable
 
   ensure_index :tags
   ensure_index :language
@@ -15,6 +16,7 @@ class Question
   key :body, String
   slug_key :title, :unique => true, :min_length => 8
   key :slugs, Array, :index => true
+  autocompletable_key :title
 
   key :topic_ids, Array, :index => true
   many :topics, :in => :topic_ids
@@ -87,7 +89,8 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise, :strip_tags
+  before_save :update_activity_at, :update_exercise,
+    :strip_tags, :update_search_item
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
