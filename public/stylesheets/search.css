@@ -15,7 +15,7 @@ ul.as-list {
     position: absolute;
     list-style-type: none;
     font-size: 14px;
-    color: #000;
+    color: #333;
     font-family: arial, sans-serif;
     font-weight: normal;
     background-color: #fff;
@@ -54,7 +54,7 @@ li.as-search {
 li.as-result-item em {
     text-decoration: underline;
     font-weight: bold;
-    padding: 0 2px;
+    padding: 0;
 }
 
 /* Webkit Hacks  */

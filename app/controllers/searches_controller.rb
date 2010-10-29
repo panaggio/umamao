@@ -39,7 +39,15 @@ class SearchesController < ApplicationController
     options = {}
     phrase = params[:q].downcase
     results = AutocompleteItem.filter(phrase, options)[0..10].map do |i|
-      { :title => i.title, :url => url_for(i.entry), :type => i.entry.class.to_s }
+      res = {
+        :title => i.title,
+        :url => url_for(i.entry),
+        :type => i.entry.class.to_s }
+      if res[:type] == "User"
+        # This is probably uglier than necessary
+        res[:pic] = ActionView::Base.new.gravatar(i.entry.email.to_s, :size => 20)
+      end
+      res
     end
     render :json => results.to_json
   end

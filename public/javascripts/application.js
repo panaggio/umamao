@@ -139,7 +139,8 @@ function initAutocomplete() {
                               case "Topic":
                                 return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
                               case "User":
-                                return formatted.html(data.title + ' <span class="as-desc">Usuário</span>');
+                                return formatted.html(data.pic + " " + data.title +
+                                                      ' <span class="as-desc">Usuário</span>');
                               case "Search":
                                 return formatted.addClass("as-search").text('Buscar por perguntas com "' + this.val() + '"');
                               default:
