@@ -133,7 +133,7 @@ function initAutocomplete() {
                             },
                             formatList: function (data, formatted) {
                               if (data.search) {
-                                return formatted.text('Buscar por "' + this.val() + '"');
+                                return formatted.addClass("as-search").text('Buscar por "' + this.val() + '"');
                               } else {
                                 return formatted.html(data.title);
                               }
