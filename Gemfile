@@ -18,7 +18,7 @@ gem 'differ', '~>0.1.1'
 gem 'dynamic_form'
 gem 'fancy-buttons', '~>0.5.1'
 gem 'goalie'
-gem 'jnunemaker-validatable', '~>1.8.4', :require => 'validatable'
+gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
 gem 'geoip'
 gem 'haml', '~> 3.0.13'
 gem 'magent', '~> 0.4.2'
