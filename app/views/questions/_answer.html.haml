@@ -26,7 +26,7 @@
             = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => t("activerecord.models.answer").downcase), :method => :delete, :class =>"cancel"
 
           - if current_user.mod_of?(@question.group)
-            = link_to t('answers.ban'), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
+            = link_to t("answers.ban"), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
 
         - if answer.versions.count > 0
           = link_to t("wiki.history.link", :default => "history"), history_question_answer_path(@question, answer)
@@ -46,20 +46,21 @@
           = render :partial => "flags/form", :locals => {:flag => flag, :source => source }
     .clear
 
-    - if logged_in?
-      = link_to t(".add_comment"), new_question_comment_path(@question, answer), :class => "addNestedAnswer add_answer_comment_link"
-
     .ccontrol
       %a{:href => "", :class => "ccontrol-link"}
         - if answer.comments.size == 1
           = answer.comments.size.to_s + " " + t("models.comment")
-        -elsif answer.comments.size != 0
+        - elsif answer.comments.size != 0
           = answer.comments.size.to_s + " " + t("models.comments")
 
     / Nested Answers
     .children.comments
       - answer.comments.each do |comment|
         = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
+
+    - if logged_in?
+      = link_to t(".add_comment"), new_question_comment_path(@question, answer), :class => "addNestedAnswer add_answer_comment_link"
+
   .avatar
     = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
   .clear
@@ -71,4 +72,4 @@
       .group.navform
         = submit_tag t("comments.shared.comment_submit"), :class => "button"
         = t("global.or")
-        = link_to t('scaffold.cancel'), '', :class => 'cancel_comment'
+        = link_to t("scaffold.cancel"), "", :class => "cancel_comment"
