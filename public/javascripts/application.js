@@ -139,6 +139,10 @@ function initAutocomplete() {
                               }
                             }
                           });
+
+  // Keyboard shortcuts for search box
+  $(document).bind("keypress", "/", function () { searchField.focus(); });
+  $(searchField).bind("keydown", "esc", function () { searchField.blur(); });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {
@@ -240,7 +244,6 @@ function sortValues(selectID, keepers){
   $('#'+selectID).empty().html(sortedVals);
   if(keepers)
     $('#'+selectID).prepend(any);
-  //updateValueList();
 };
 
 function highlightEffect(object) {

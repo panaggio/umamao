@@ -8,6 +8,7 @@ javascripts:
   - jquery.autocomplete
   - jquery.fcbkcomplete
   - jquery.notifyBar
+  - jquery.hotkeys
   - jquery.teste
   - showdown
   - highlight/prettify
