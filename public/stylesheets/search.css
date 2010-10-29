@@ -1,0 +1,92 @@
+/* AutoSuggest CSS - Version 1.2 */
+
+form#search-form {
+    max-width: 20%;
+}
+
+input#search-field {
+    margin-right: 20px;
+}
+/*
+form#search-form .as-results {
+    border: 1px solid #000;
+    background-color: #ffffff;
+}*/
+
+ul.as-list {
+    border: 1px solid #444444;
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    font-size: 14px;
+    color: #000;
+    font-family: arial, sans-serif;
+    font-weight: normal;
+    background-color: #fff;
+    z-index: 2;
+}
+
+li.as-result-item, li.as-message {
+    margin: 0 0 0 0;
+    padding: 5px 12px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+li:first-child.as-result-item {
+    margin: 0;
+}
+
+li.as-message {
+    margin: 0;
+    cursor: default;
+}
+
+li.as-result-item.active {
+    background-color: #ebebeb;
+    color: #0077cc;
+}
+
+li.as-result-item em {
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+/* Webkit Hacks  */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ul.as-selections {
+        border-top-width: 2px;
+    }
+    ul.as-selections li.as-selection-item {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    ul.as-selections li.as-selection-item a.as-close {
+        margin-top: -1px;
+    }
+    ul.as-selections li.as-original input {
+        height: 19px;
+    }
+}
+
+/* Opera Hacks  */
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+    ul.as-list {
+        border: 1px solid #888;
+    }
+    ul.as-selections li.as-selection-item a.as-close {
+        margin-left: 4px;
+        margin-top: 0;
+    }
+}
+
+/* IE Hacks  */
+ul.as-list {
+    border: 1px solid #888\9;
+}
+ul.as-selections li.as-selection-item a.as-close {
+    margin-left: 4px\9;
+    margin-top: 0\9;
+}

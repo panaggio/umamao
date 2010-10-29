@@ -89,7 +89,7 @@ $(document).ready(function() {
   $('#login_form > #email_field > input').focus();
 });
 
-function initAutocomplete(){
+function initAutocomplete() {
   var select = $('<select size="100px" name="question[topics]" id="question_topics" class="autocomplete_for_tags" ></select>');
   var tagInput = $('.autocomplete_for_tags');
   var width = tagInput.width();
@@ -111,6 +111,34 @@ function initAutocomplete(){
     maxitimes: 6,
     width: width
   });
+
+  // Dynamic search box
+  // FIXME We should internationalize this
+  var searchField = $("#search-field");
+  var searchForm = searchField.parent();
+  searchField.autoSuggest("/search/json", {
+                            asHtmlID: "search-field",
+                            minChars: 2,
+                            startText: "Busca",
+                            selectedItemProp: "title",
+                            resultClick: function (data) {
+                              if (data.attributes.search) {
+                                searchForm.submit();
+                              } else {
+                                location.href = data.attributes.url;
+                              }
+                            },
+                            retrieveComplete: function (data) {
+                              return data.concat([{ title: "Buscar", search: true }]);
+                            },
+                            formatList: function (data, formatted) {
+                              if (data.search) {
+                                return formatted.text('Buscar por "' + this.val() + '"');
+                              } else {
+                                return formatted.html(data.title);
+                              }
+                            }
+                          });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {
