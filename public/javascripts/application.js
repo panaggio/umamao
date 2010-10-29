@@ -132,10 +132,9 @@ function initAutocomplete() {
                               return data.concat([{ title: "Buscar", type: "Search" }]);
                             },
                             formatList: function (data, formatted) {
-
                               switch (data.type) {
                               case "Question":
-                                return formatted.html(data.title);
+                                return formatted.html(data.title + ' <span class="as-desc">' + data.topics.join(', ') + '</span>');
                               case "Topic":
                                 return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
                               case "User":

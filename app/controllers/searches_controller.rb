@@ -43,7 +43,9 @@ class SearchesController < ApplicationController
         :title => i.title,
         :url => url_for(i.entry),
         :type => i.entry.class.to_s }
-      if res[:type] == "User"
+      if res[:type] == "Question"
+        res[:topics] = i.entry.topics.map &:title
+      elsif res[:type] == "User"
         # This is probably uglier than necessary
         res[:pic] = ActionView::Base.new.gravatar(i.entry.email.to_s, :size => 20)
       end
