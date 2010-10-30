@@ -89,8 +89,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise,
-    :strip_tags, :update_search_item
+  before_save :update_activity_at, :update_exercise, :strip_tags
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },

@@ -4,7 +4,7 @@ module Support::Autocompletable
   def self.included(klass)
     klass.class_eval do
       klass.extend ClassMethods
-      before_save :update_autocomplete_item
+      after_save :update_autocomplete_item
     end
   end
 
