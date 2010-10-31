@@ -166,7 +166,6 @@ class User
     invitation = Invitation.find_by_invitation_token(self.invitation_token)
     if invitation && invitation.sender.can_invite_without_confirmation?
       self.confirmed_at = Time.now
-      self.can_invite_without_confirmation = false
     end
   end
 
