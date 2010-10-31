@@ -40,6 +40,7 @@ class WelcomeController < ApplicationController
   end
 
   def about
+    set_page_title(t('.welcome.about.title'))
     @users = AppConfig.about['users']
     render 'about', :layout => 'welcome'
   end
