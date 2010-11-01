@@ -36,9 +36,9 @@ class SearchesController < ApplicationController
     # Searches for entries containing keywords in the search box and
     # returns them in JSON form
 
-    options = {}
+    options = {:per_page => 10}
     phrase = params[:q].downcase
-    results = AutocompleteItem.filter(phrase, options)[0..10].map do |i|
+    results = AutocompleteItem.filter(phrase, options).map do |i|
       res = {
         :title => i.title,
         :url => url_for(i.entry),
