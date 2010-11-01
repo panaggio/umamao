@@ -25,6 +25,12 @@ pt-BR:
       title: "%{user}"
       follow: Seguir
       unfollow: Parar de seguir
+      following:
+        one: "Seguindo (1)"
+        other: "Seguindo (%{count})"
+      followers:
+        one: "Seguidores (1)"
+        other: "Seguidores (%{count})"
       views: visitas
       badges:
         link: "O que são medalhas?"
