@@ -85,31 +85,13 @@ class AnswersController < ApplicationController
           current_group.on_activity(:answer_question)
           current_user.on_activity(:answer_question, current_group)
 
-          # TODO: use magent to do it
-          search_opts = {"notification_opts.#{current_group.id}.new_answer" => {:$in => ["1", true]},
-                          :_id => {:$ne => current_user.id},
-                          :select => ["email"]}
-
-          users = User.find(@question.watchers, search_opts)
-          users.push(@question.user) if !@question.user.nil? && @question.user != current_user
-          followers = @answer.user.followers
-
           track_event(:answered_question,
                       :question_answers_count => @question.answers_count,
                       :own_question => @question.user_id == @answer.user_id)
 
-          users ||= []
-          followers ||= []
-          (users - followers).each do |u|
-            if !u.email.blank? && u.notification_opts.new_answer
-              Notifier.new_answer(u, current_group, @answer, false).deliver
-            end
-          end
-
-          followers.each do |u|
-            if !u.email.blank? && u.notification_opts.new_answer
-              Notifier.new_answer(u, current_group, @answer, true).deliver
-            end
+          if @question.user != current_user && @question.user.notification_opts.new_answer
+            Notifier.new_answer(@question.user, current_group, @answer, false).
+              deliver
           end
 
           flash[:notice] = t(:flash_notice, :scope => "answers.create")
