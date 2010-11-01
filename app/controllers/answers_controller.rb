@@ -92,7 +92,7 @@ class AnswersController < ApplicationController
 
           users = User.find(@question.watchers, search_opts)
           users.push(@question.user) if !@question.user.nil? && @question.user != current_user
-          followers = @answer.user.followers(:languages => [@question.language], :group_id => current_group.id)
+          followers = @answer.user.followers
 
           track_event(:answered_question,
                       :question_answers_count => @question.answers_count,

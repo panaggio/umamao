@@ -420,8 +420,7 @@ Time.zone.now ? 1 : 0)
     self.badges.first(opts.merge(:token => token, :group_id => group.id))
   end
 
-  # self follows user
-  def add_friend(user)
+  def follow(user)
     return false if user == self
     FriendList.push_uniq(self.friend_list_id, :following_ids => user.id)
     FriendList.push_uniq(user.friend_list_id, :follower_ids => self.id)
@@ -431,7 +430,7 @@ Time.zone.now ? 1 : 0)
     true
   end
 
-  def remove_friend(user)
+  def unfollow(user)
     return false if user == self
     FriendList.pull(self.friend_list_id, :following_ids => user.id)
     FriendList.pull(user.friend_list_id, :follower_ids => self.id)
@@ -442,11 +441,8 @@ Time.zone.now ? 1 : 0)
     true
   end
 
-  def followers(scope = {})
-    conditions = {}
-    conditions[:preferred_languages] = {:$in => scope[:languages]}  if scope[:languages]
-    conditions["membership_list.#{scope[:group_id]}"] = {:$exists => true} if scope[:group_id]
-    self.friend_list.followers.all(conditions)
+  def followers
+    self.friend_list.followers
   end
 
   def following

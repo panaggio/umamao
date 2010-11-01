@@ -154,7 +154,7 @@ class UsersController < ApplicationController
 
   def follow
     @user = User.find_by_login_or_id(params[:id])
-    current_user.add_friend(@user)
+    current_user.follow(@user)
 
     flash[:notice] = t("flash_notice", :scope => "users.follow", :user => @user.name)
 
@@ -177,7 +177,7 @@ class UsersController < ApplicationController
 
   def unfollow
     @user = User.find_by_login_or_id(params[:id])
-    current_user.remove_friend(@user)
+    current_user.unfollow(@user)
 
     flash[:notice] = t("flash_notice", :scope => "users.unfollow", :user => @user.name)
 

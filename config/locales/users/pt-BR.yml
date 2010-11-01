@@ -24,7 +24,7 @@ pt-BR:
     show:
       title: "%{user}"
       follow: Seguir
-      unfollow: Não seguir
+      unfollow: Parar de seguir
       views: visitas
       badges:
         link: "O que são medalhas?"
