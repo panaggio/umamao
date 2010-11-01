@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  include GravatarHelper::PublicMethods
+
   def index
     options = {:per_page => 25, :page => params[:page] || 1}
     unless params[:q].blank?
@@ -46,8 +48,7 @@ class SearchesController < ApplicationController
       if res[:type] == "Question"
         res[:topics] = i.entry.topics.map &:title
       elsif res[:type] == "User"
-        # This is probably uglier than necessary
-        res[:pic] = ActionView::Base.new.gravatar(i.entry.email.to_s, :size => 20)
+        res[:pic] = gravatar(i.entry.email.to_s, :size => 20)
       end
       res
     end
