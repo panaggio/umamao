@@ -119,7 +119,7 @@ function initAutocomplete() {
   searchField.autoSuggest("/search/json", {
                             asHtmlID: "search-field",
                             minChars: 2,
-                            startText: "Busca",
+                            startText: "Buscar perguntas, tópicos e usuários",
                             selectedItemProp: "title",
                             resultClick: function (data) {
                               if (data.attributes.type == "Search") {
