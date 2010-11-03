@@ -10,9 +10,9 @@
     .follow-info
       - if current_user != @user
         - if logged_in? && current_user.following?(@user)
-          = link_to "#{t(".unfollow")}", unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t(".follow"), 'data-undo' => follow_user_path(@user)
+          = link_to "#{t("followable.unfollow")}", unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user)
         - else
-          = link_to "#{t(".follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t(".unfollow"), 'data-undo' => unfollow_user_path(@user)
+          = link_to "#{t("followable.follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
         .clear
     .inner{:style => "padding-top: 10px"}
       = gravatar @user.email.to_s, :size => 128
@@ -20,14 +20,14 @@
 
     - if @user.following.count > 0
       %h2.title
-        = t('.following', :count => @user.following.count)
+        = t('followable.following', :count => @user.following.count)
       .friend_list
         - @user.following.each do |follower|
           %span
             = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
     - if @user.followers.count > 0
       %h2.title
-        = t('.followers', :count => @user.followers.count)
+        = t('followable.followers', :count => @user.followers.count)
       .friend_list
         - @user.followers.each do |follower|
           %span

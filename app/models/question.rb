@@ -90,6 +90,7 @@ class Question
   language :language
 
   before_save :update_activity_at, :update_exercise, :strip_tags
+  after_create :create_news_update
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -322,6 +323,10 @@ class Question
   # ensure tag names do not contain whitespace
   def strip_tags
     self.tags = self.tags.map(&:strip) if self.tags_changed?
+  end
+
+  def create_news_update
+    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
   end
 
 end

@@ -5,37 +5,27 @@
 
 - content_for :subtabs do
   .navtitle
-    = t(".recent_questions", :default => "Recent Questions")
-    - if @questions
-      == (#{@questions.total_entries})
+    = t(".recent_activities", :default => "Recent Activities")
 
-  %ul{:style => "display: inline"}
-    %li.activity
-      = link_to t("questions.index.active"), root_path(:tab=>"activity"), :title => t("questions.index.active_tooltip"), :rel => "nofollow"
-    %li.hot
-      = link_to t("questions.index.hot"), root_path(:tab=>"hot"), :title => t("questions.index.hot_tooltip"), :rel => "nofollow"
+%ul.items#news_items
+  - if @news_items.empty?
+    #additional_info
+      #help_us
+        = t(".empty")
+  - else
+    - @news_items.each do |news_item|
+      = render :partial => "news_item", :object => news_item
 
-%ul.items#questions
-  - if @questions.empty?
-    .box.highlight
-      %li
-        = t(".empty", :default => :"questions.index.empty")
-  - @questions.each do |question|
-    = render :partial => "questions/question", :object => question
+    #additional_info
+      #help_us
+        = t(".browse_all_or_by_tags", :full_list_of_questions => link_to(t('.full_list_of_questions'), questions_path), :browse_by_tags => link_to(t('.browse_by_topics'), topics_path))
+        %br
+        = t("questions.index.help_to_answer")
+        = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
 
-#additional_info
-  #help_us
-    = t(".browse_all_or_by_tags", :full_list_of_questions => link_to(t('.full_list_of_questions'), questions_path), :browse_by_tags => link_to(t('.browse_by_tags'), tags_questions_path))
-    %br
-    = t("questions.index.help_to_answer")
-    = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
-
-  .clear
+      .clear
 
 - content_for :sidebar do
-  .block.notice
-    = render :partial => "shared/layout/notice"
-
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
     = link_to t('invitations.invite'), invitations_path
     %hr{:style => 'margin-top: 1em'}

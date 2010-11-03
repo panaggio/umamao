@@ -13,6 +13,10 @@ class NewsItem
   key :origin_type, :required => true
   belongs_to :origin, :polymorphic => true
 
+  ensure_index([[:recipient_id, 1], [:created_at, -1]])
+
+  timestamps!
+
   def self.from_news_update!(news_update)
     origins = [news_update.author] + news_update.entry.topics
     notified_users = []
@@ -28,5 +32,9 @@ class NewsItem
         notified_users << follower
       end
     end
+  end
+
+  def title
+    self.news_update.entry.title
   end
 end

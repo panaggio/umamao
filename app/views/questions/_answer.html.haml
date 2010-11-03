@@ -17,10 +17,10 @@
       = render :partial => "flags/list", :locals => {:flaggeable => answer}
     .controls
       .actions
-        = link_to t('activerecord.attributes.answer.link'), question_answer_path(@question.id, answer.id), :class => "bookmark"
+        = link_to t('activerecord.attributes.answer.link'), question_answer_path(@question, answer), :class => "bookmark"
         - if logged_in?
           - if current_user != answer.user
-            = link_to t(".flag"), flag_question_answer_path(@question,answer), :class => "flag-link"
+            = link_to t(".flag"), flag_question_answer_path(@question, answer), :class => "flag-link"
 
           - if current_user.can_modify?(answer) || current_user.mod_of?(@question.group)
             = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => t("activerecord.models.answer").downcase), :method => :delete, :class =>"cancel"

@@ -37,6 +37,7 @@ class Topic
     }
   end
 
-  protected
-
+  def name
+    title
+  end
 end

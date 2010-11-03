@@ -1,15 +1,17 @@
 - content_for :js do
   = javascript_include_merged :show
 
-#question
-  #question-title
-    %h2
-      = link_to h(@question.title), question_path(@question)
-  #question-body.markdown
-    = markdown(@question.body)
+- content_for :subtabs do
+  %table
+    %tr
+      %td
+        %h1.navtitle.title.entry-title
+          &= @question.title
 
-.subtitle
-  = t('activerecord.models.answer')
+#question-body.markdown
+  = markdown(@question.body)
+
+%hr
 
 #answers
   = render :partial=> "questions/answer", :locals=> {:question => @question, :answer => @answer, :comment => Answer.new}

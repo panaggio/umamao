@@ -23,21 +23,9 @@ pt-BR:
       enable_twitter: Conecte suas contas do Twitter e do Facebook
     show:
       title: "%{user}"
-      follow: Seguir
-      unfollow: Parar de seguir
-      following:
-        one: "Seguindo (1)"
-        other: "Seguindo (%{count})"
-      followers:
-        one: "Seguidores (1)"
-        other: "Seguidores (%{count})"
       views: visitas
       badges:
         link: "O que são medalhas?"
-    follow:
-      flash_notice: "Você está seguindo %{user}"
-    unfollow:
-      flash_notice: "Você parou de seguir %{user}"
     form:
       change_password: Trocar de senha
       email: "Email:"

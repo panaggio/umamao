@@ -1,12 +1,27 @@
 - content_for :js do
   = javascript_include_merged :show
 
+- content_for :sidebar do
+  .follow-info
+    - if logged_in? && @topic.followers.include?(current_user)
+      = link_to "#{t("followable.unfollow")}", unfollow_topic_path(@topic), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_topic_path(@topic)
+    - else
+      = link_to "#{t("followable.follow")}", follow_topic_path(@topic), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_topic_path(@topic)
+    .clear
+
+  - if @topic.followers.count > 0
+    %h2.title
+      = t('followable.followers', :count => @topic.followers.count)
+    .friend_list
+      - @topic.followers.each do |follower|
+        %span
+          = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+
 - content_for :subtabs do
   .navtitle
     &= @topic.title
     - if @questions
       == (#{@questions.total_entries})
-
 %br
 .markdown
   = markdown(@topic.description)

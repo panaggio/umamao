@@ -10,12 +10,23 @@ pt-BR:
       active: Ativo
       hot: Popular
       quick_question: Faça uma pergunta
-      recent_questions: Perguntas recentes
-      empty: Nenhuma pergunta ainda.
+      recent_activities: Atividades recentes
+      empty: Nenhuma atividade.
       browse_all_or_by_tags: "Veja a %{full_list_of_questions} ou %{browse_by_tags}"
       full_list_of_questions: "lista completa de perguntas"
-      browse_by_tags: "navegue por tópicos"
+      browse_by_topics: "navegue por tópicos"
       looking_for: "Procurando %{link}?"
       exercises: resoluções de exercícios
     about:
       title: Quem são vocês?
+    news_item:
+      question:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      answer:
+        user:
+          created: "%{origin} adicionou uma resposta."
+        topic:
+          created: "Resposta adicionada ao tópico %{origin}."

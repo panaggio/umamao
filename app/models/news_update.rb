@@ -11,4 +11,10 @@ class NewsUpdate
   key :action, String, :required => true, :in => %w[created upvoted]
 
   timestamps!
+
+  after_create :create_news_items
+
+  def create_news_items
+    NewsItem.from_news_update!(self)
+  end
 end
