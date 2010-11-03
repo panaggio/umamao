@@ -40,18 +40,55 @@ class SearchesController < ApplicationController
 
     options = {:per_page => 10}
     phrase = params[:q].downcase
-    results = AutocompleteItem.filter(phrase, options).map do |i|
-      res = {
-        :title => i.title,
-        :url => url_for(i.entry),
-        :type => i.entry.class.to_s }
-      if res[:type] == "Question"
-        res[:topics] = i.entry.topics.map &:title
-      elsif res[:type] == "User"
-        res[:pic] = gravatar(i.entry.email.to_s, :size => 20)
-      end
-      res
+    results = AutocompleteItem.filter(phrase, options).group_by do |i|
+      i.entry_type
     end
-    render :json => results.to_json
+    fetched = []
+    results.each do |type, entries|
+      if type == "Question"
+        Question.all(:id.in => entries.map {|e| e[:entry_id]},
+                     :select => [:title, :slug]).each do |q|
+          fetched << {
+            :title => q.title,
+            :url => url_for(q),
+            :type => "Question",
+            :topics => []
+          }
+        end
+      elsif type == "User"
+        User.all(:id.in => entries.map {|e| e[:entry_id]},
+                 :select => [:name, :slug]).each do |u|
+          fetched << {
+            :title => u.name,
+            :url => url_for(u),
+            :type => "User",
+            :pic => gravatar(u.email.to_s, :size => 20)
+          }
+        end
+      else # Topic
+        Topic.all(:id.in => entries.map {|e| e[:entry_id]},
+                  :select => [:title, :slug]).each do |t|
+          fetched << {
+            :title => t.title,
+            :url => url_for(t),
+            :type => "Topic"
+          }
+        end
+      end
+    end
+
+    # .map do |i|
+    #   res = {
+    #     :title => i.title,
+    #     :url => url_for(i.entry),
+    #     :type => i.entry.class.to_s }
+    #   if res[:type] == "Question"
+    #     res[:topics] = i.entry.topics.map &:title
+    #   elsif res[:type] == "User"
+    #     res[:pic] = gravatar(i.entry.email.to_s, :size => 20)
+    #   end
+    #   res
+    # end
+    render :json => fetched.to_json
   end
 end
