@@ -12,8 +12,8 @@ pt-BR:
       message2: "Descrição da medalha:"
       message3: "Você pode ver todas suas medalhas no seu %{user_page}"
     follow:
-      message1: "%{user} está te seguindo no %{app}"
-      message2: 'Você pode seguí-lo(a) clicando "Seguir" no seu %{user_page}'
+      message1: "%{user} está te seguindo no %{app}."
+      message2: 'Você pode seguí-lo(a) clicando "Seguir" no seu %{user_page}.'
     give_advice:
       message1: "%{user} fez uma pergunta que talvez você saiba responder:"
       message2: "Para responder, responda aqui:"
