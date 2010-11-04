@@ -17,18 +17,16 @@ describe 'NewsItem.from_titles!' do
       @user3 = Factory(:user)
       @group = Factory(:group)
 
-      question = Question.create!(:title => 'What does X mean?',
+      @question = Question.create!(:title => 'What does X mean?',
                                   :user => @user1, :group => @group)
 
       @users = User.all - [@user1]
-      @users.each { |u| u.add_friend(@user1) }
-
-      @news_update = NewsUpdate.create!(:author => @user1, :entry => question,
-                                       :action => 'created')
+      @users.each { |u| u.follow(@user1) }
     end
 
     it 'should create news items for followers' do
-      NewsItem.from_news_update!(@news_update)
+      @news_update = NewsUpdate.create!(:author => @user1, :entry => @question,
+                                       :action => 'created')
 
       @users.each do |user|
         user.news_items.size.should == 1
@@ -36,7 +34,8 @@ describe 'NewsItem.from_titles!' do
     end
 
     it 'should not created news item for news update author' do
-      NewsItem.from_news_update!(@news_update)
+      @news_update = NewsUpdate.create!(:author => @user1, :entry => @question,
+                                       :action => 'created')
 
       @user1.news_items.size.should == 0
     end
