@@ -1,5 +1,10 @@
 Shapado::Application.routes.draw do
-  resources :topics, :only => [:index, :show, :edit, :update]
+  resources :topics, :only => [:index, :show, :edit, :update] do
+    member do
+      post :follow
+      post :unfollow
+    end
+  end
 
   resources :invitations, :only => [:index, :create]
 

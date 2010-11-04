@@ -3,18 +3,7 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-
-
-require 'uri'
-require 'cgi'
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
-
-module WithinHelpers
-  def with_scope(locator)
-    locator ? within(locator) { yield } : yield
-  end
-end
-World(WithinHelpers)
+require File.dirname(__FILE__) + "/step_helper"
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)

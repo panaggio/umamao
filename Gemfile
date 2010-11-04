@@ -45,7 +45,7 @@ gem 'warden', '~>0.10.7'
 group :test do
   gem "rspec"
   gem "rspec-rails", "~> 2.0.0"
-  gem "factory_girl"
+  gem "factory_girl", :git => 'git://github.com/thoughtbot/factory_girl.git'
   gem "faker"
   gem "autotest-rails"
   gem "database_cleaner"

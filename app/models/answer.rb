@@ -32,6 +32,11 @@ class Answer < Comment
   validate :check_unique_answer, :if => lambda { |a| (!a.group.forum && !a.disable_limits?) }
 
   before_destroy :unsolve_question
+  after_create :create_news_update
+
+  def title
+    self.question.title
+  end
 
   def topics
     self.question.topics
@@ -130,4 +135,9 @@ class Answer < Comment
       end
     end
   end
+
+  def create_news_update
+    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
+  end
+
 end

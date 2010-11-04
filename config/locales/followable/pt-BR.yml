@@ -1,0 +1,13 @@
+pt-BR:
+  followable:
+    follow: Seguir
+    unfollow: Parar de seguir
+    following:
+      one: "Seguindo (1)"
+      other: "Seguindo (%{count})"
+    followers:
+      one: "Seguidores (1)"
+      other: "Seguidores (%{count})"
+    flash:
+      follow: "Você está seguindo %{followable}"
+      unfollow: "Você parou de seguir %{followable}"

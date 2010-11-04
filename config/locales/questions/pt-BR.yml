@@ -86,6 +86,9 @@ pt-BR:
     shared:
       flag: Reportar
     show:
+      topic_followers:
+        one: '1 pessoa seguindo os tópicos'
+        other: '%{count} pessoas seguindo os tópicos'
       accepted_tooltip: Uma das respostas foi aceita
       another_answers: Outras respostas
       answers: Respostas

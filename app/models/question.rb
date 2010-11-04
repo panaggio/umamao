@@ -7,6 +7,7 @@ class Question
   include Support::Versionable
   include Support::Voteable
   include Support::Autocompletable
+  include Scopes
 
   ensure_index :tags
   ensure_index :language
@@ -85,11 +86,12 @@ class Question
   validates_true_for :tags, :logic => lambda { tags.size <= 9},
                      :message => lambda { I18n.t("questions.model.messages.too_many_tags") if tags.size > 9 }
 
-  versionable_keys :title, :body, :tags
+  versionable_keys :title, :body, :tags, :topics
   filterable_keys :title, :body
   language :language
 
   before_save :update_activity_at, :update_exercise, :strip_tags
+  after_create :create_news_update
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -322,6 +324,10 @@ class Question
   # ensure tag names do not contain whitespace
   def strip_tags
     self.tags = self.tags.map(&:strip) if self.tags_changed?
+  end
+
+  def create_news_update
+    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
   end
 
 end

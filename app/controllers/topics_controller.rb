@@ -45,4 +45,44 @@ class TopicsController < ApplicationController
     respond_with @topic
   end
 
+  def follow
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @topic.followers << current_user
+    @topic.save
+
+    track_event(:followed_topic)
+
+    flash[:notice] = t("followable.flash.follow", :followable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+      format.js {
+        render(:json => {:success => true,
+                 :message => flash[:notice] }.to_json)
+      }
+    end
+  end
+
+  def unfollow
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @topic.followers.delete(current_user)
+    @topic.save
+
+    track_event(:unfollowed_topic)
+
+    flash[:notice] = t("followable.flash.unfollow", :followable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+      format.js {
+        render(:json => {:success => true,
+                 :message => flash[:notice] }.to_json)
+      }
+    end
+  end
+
 end

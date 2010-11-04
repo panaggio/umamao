@@ -154,9 +154,11 @@ class UsersController < ApplicationController
 
   def follow
     @user = User.find_by_login_or_id(params[:id])
-    current_user.add_friend(@user)
+    current_user.follow(@user)
 
-    flash[:notice] = t("flash_notice", :scope => "users.follow", :user => @user.name)
+    track_event(:followed_user)
+
+    flash[:notice] = t("followable.flash.follow", :followable => @user.name)
 
     if @user.notification_opts.activities
       Notifier.follow(current_user, @user).deliver
@@ -177,9 +179,11 @@ class UsersController < ApplicationController
 
   def unfollow
     @user = User.find_by_login_or_id(params[:id])
-    current_user.remove_friend(@user)
+    current_user.unfollow(@user)
 
-    flash[:notice] = t("flash_notice", :scope => "users.unfollow", :user => @user.name)
+    track_event(:unfollowed_user)
+
+    flash[:notice] = t("followable.flash.unfollow", :followable => @user.name)
 
     Magent.push("actors.judge", :on_unfollow, current_user.id, @user.id, current_group.id)
 

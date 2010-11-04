@@ -16,26 +16,11 @@ class WelcomeController < ApplicationController
   def home
     @active_subtab = params.fetch(:tab, "activity")
 
-    conditions = scoped_conditions({:banned => false, :exercise.ne => true})
-
-    order = "activity_at desc"
-    case @active_subtab
-      when "activity"
-        order = "activity_at desc"
-      when "hot"
-        order = "hotness desc"
-        conditions[:activity_at] = {:$gt => 5.days.ago}
-    end
-
-    @langs_conds = conditions[:language][:$in]
-    feed_params = { :feed_token => current_user.feed_token }
-    add_feeds_url(url_for({:controller => 'questions', :action => 'index',
-                            :format => "atom"}.merge(feed_params)), t("feeds.questions"))
-    @questions = Question.paginate({:per_page => 15,
-                                   :page => params[:page] || 1,
-                                   :fields => (Question.keys.keys - ["_keywords", "watchers"]),
-                                   :order => order}.merge(conditions))
-
+    @news_items = NewsItem.paginate({:recipient_id => current_user.id,
+                                      :per_page => 30,
+                                      :page => params[:page] || 1,
+                                      :order => :created_at.desc})
+    @questions = Question.latest.limit(10) || [] if @news_items.empty?
     render 'home'
   end
 

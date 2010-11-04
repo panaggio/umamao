@@ -6,13 +6,13 @@ Feature: News feed
   Scenario: Not following any users
     Given I don't follow any users
     When I go to the home page
-    Then I should not news item from users
+    Then I should not see news items from users
     And I should see a link to follow users
 
   Scenario: Not following any topics
     Given I don't follow any topics
     When I go to the home page
-    Then I should not news item from topics
+    Then I should not see news items from topics
     And I should see a link to follow topics
 
   Scenario: Followed user posts a question
