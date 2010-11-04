@@ -222,4 +222,7 @@
             = t("global.from", :site => @question.user.country_name)
             = country_flag(@question.user.country_code, @question.user.country_name)
     .clear
+  %span{:style => 'color: #999'}
+    = t('.topic_followers',
+        :count => @question.topics.map{|t| t.follower_ids.size }.inject(0) {|sum, count| sum + count})
 
