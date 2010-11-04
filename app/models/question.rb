@@ -7,6 +7,7 @@ class Question
   include Support::Versionable
   include Support::Voteable
   include Support::Autocompletable
+  include Scopes
 
   ensure_index :tags
   ensure_index :language

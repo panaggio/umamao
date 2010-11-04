@@ -3,6 +3,7 @@ require 'digest/sha1'
 class User
   include MongoMapper::Document
   include Support::Autocompletable
+  include Scopes
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
          :token_authenticatable, :validatable, :confirmable
 
@@ -109,27 +110,8 @@ class User
   before_create :logged!
   after_create :accept_invitation
 
-  scope :latest, sort(:created_at.desc)
-
-  # Receives one or two Time arguments
-  # One argument: list users created _after_ time
-  # Two arguments: list users created in time range
-  scope :created, lambda { |*args|
-    gte, lte = args.size > 1 ? args : [args.first, nil]
-    where(:created_at.gte => gte.utc,
-          :created_at.lte => lte ? lte.utc : Time.now.utc)
-  }
-
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
-
-  def self.method_missing(method, *args, &block)
-    if method.to_s =~ /^by_(.*)/ && args.size == 1 && block.nil?
-      all($1.to_sym => args.first)
-    else
-      super(method, args, block)
-    end
-  end
 
   def self.find_for_authentication(conditions={})
     first(conditions) || first(:login => conditions["email"])
