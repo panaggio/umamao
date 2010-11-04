@@ -41,4 +41,5 @@ namespace :data do
         topic.set(:slug => topic.slug)
       end
     end
+  end
 end
