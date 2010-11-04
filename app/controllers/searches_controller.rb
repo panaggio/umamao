@@ -38,57 +38,35 @@ class SearchesController < ApplicationController
     # Searches for entries containing keywords in the search box and
     # returns them in JSON form
 
-    options = {:per_page => 10}
-    phrase = params[:q].downcase
-    results = AutocompleteItem.filter(phrase, options).group_by do |i|
-      i.entry_type
+    phrase = params[:q]
+
+    questions = Question.filter(phrase, :per_page => 10,
+                                :select => [:title, :slug]).map do |q|
+      {
+        :title => q.title,
+        :url => question_url(q),
+        :type => "Question",
+        :topics => []
+      }
     end
-    fetched = []
-    results.each do |type, entries|
-      if type == "Question"
-        Question.all(:id.in => entries.map {|e| e[:entry_id]},
-                     :select => [:title, :slug]).each do |q|
-          fetched << {
-            :title => q.title,
-            :url => url_for(q),
-            :type => "Question",
-            :topics => []
-          }
-        end
-      elsif type == "User"
-        User.all(:id.in => entries.map {|e| e[:entry_id]},
-                 :select => [:name, :slug]).each do |u|
-          fetched << {
-            :title => u.name,
-            :url => url_for(u),
-            :type => "User",
-            :pic => gravatar(u.email.to_s, :size => 20)
-          }
-        end
-      else # Topic
-        Topic.all(:id.in => entries.map {|e| e[:entry_id]},
-                  :select => [:title, :slug]).each do |t|
-          fetched << {
-            :title => t.title,
-            :url => url_for(t),
-            :type => "Topic"
-          }
-        end
-      end
+    topics = Topic.filter(phrase, :per_page => 10,
+                          :select => [:title, :slug]).map do |t|
+      {
+        :title => t.title,
+        :url => topic_url(t),
+        :type => "Topic"
+      }
+    end
+    users = User.filter(phrase, :per_page => 10,
+                        :select => [:name, :slug, :email]).map do |u|
+      {
+        :title => u.name,
+        :url => user_url(u),
+        :type => "User",
+        :pic => gravatar(u.email.to_s, :size => 20)
+      }
     end
 
-    # .map do |i|
-    #   res = {
-    #     :title => i.title,
-    #     :url => url_for(i.entry),
-    #     :type => i.entry.class.to_s }
-    #   if res[:type] == "Question"
-    #     res[:topics] = i.entry.topics.map &:title
-    #   elsif res[:type] == "User"
-    #     res[:pic] = gravatar(i.entry.email.to_s, :size => 20)
-    #   end
-    #   res
-    # end
-    render :json => fetched.to_json
+    render :json => (questions[0 .. 3] + topics[0 .. 2] + users[0 .. 2]).to_json
   end
 end
