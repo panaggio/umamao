@@ -41,32 +41,44 @@ class SearchesController < ApplicationController
     phrase = params[:q]
 
     questions = Question.filter(phrase, :per_page => 10,
-                                :select => [:title, :slug, :topic_ids]).map do |q|
-      {
-        :title => q.title,
-        :url => url_for(q),
-        :type => "Question",
-        :topics => q.topics.map(&:title) 
-      }
-    end
+                                :select => [:title, :slug, :topic_ids])
     topics = Topic.filter(phrase, :per_page => 10,
-                          :select => [:title, :slug]).map do |t|
-      {
-        :title => t.title,
-        :url => url_for(t),
-        :type => "Topic"
-      }
-    end
+                          :select => [:title, :slug])
     users = User.filter(phrase, :per_page => 10,
-                        :select => [:name, :id, :email]).map do |u|
-      {
-        :title => u.name,
-        :url => url_for(u),
-        :type => "User",
-        :pic => gravatar(u.email.to_s, :size => 20)
-      }
-    end
+                        :select => [:name, :id, :email])
 
-    render :json => (questions[0 .. 3] + topics[0 .. 2] + users[0 .. 2]).to_json
+    # index calculation to sum 10 results and balance between classes
+    total_qs = questions.length
+    total_ts = topics.length
+    total_us = users.length
+
+    total_qs = [total_qs, 10 - [total_ts + total_us, 6].min].min
+    total_ts = [total_ts, 10 - total_qs - [total_us, 7 - total_qs].min].min
+    total_us = [total_us, 10 - total_qs - total_ts].min
+
+    # JSON serialization
+    render :json => ((questions[0...total_qs].map do |q|
+                        {
+                          :title => q.title,
+                          :url => url_for(q),
+                          :type => "Question",
+                          :topics => q.topics.map(&:title)
+                        }
+                      end) +
+                     (topics[0...total_ts].map do |t|
+                        {
+                          :title => t.title,
+                          :url => url_for(t),
+                          :type => "Topic"
+                        }
+                      end) +
+                     (users[0...total_us].map do |u|
+                        {
+                          :title => u.name,
+                          :url => url_for(u),
+                          :type => "User",
+                          :pic => gravatar(u.email.to_s, :size => 20)
+                        }
+                      end)).to_json
   end
 end
