@@ -72,9 +72,9 @@ module Actors
         end
       end
 
-      if !badge.new? && !user.email.blank? && user.notification_opts.activities
-        Notifier.deliver_earned_badge(user, group, badge)
-      end
+      # if !badge.new? && !user.email.blank? && user.notification_opts.activities
+      #   Notifier.deliver_earned_badge(user, group, badge)
+      # end
     end
   end
   Magent.register(Judge.new)
