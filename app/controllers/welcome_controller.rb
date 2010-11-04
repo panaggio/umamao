@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
                                       :per_page => 30,
                                       :page => params[:page] || 1,
                                       :order => :created_at.desc})
-
+    @questions = Question.latest.limit(10) || [] if @news_items.empty?
     render 'home'
   end
 
