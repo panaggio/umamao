@@ -172,7 +172,7 @@ class QuestionsController < ApplicationController
       format.js do
         result = []
         if q = params[:tag]
-          result = Topic.all(:title => /^#{Regexp.escape(q.downcase)}/i)
+          result = Topic.filter(q, :per_page => 5)
         end
 
         results = result.map do |t|
