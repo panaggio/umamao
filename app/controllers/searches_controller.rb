@@ -41,27 +41,27 @@ class SearchesController < ApplicationController
     phrase = params[:q]
 
     questions = Question.filter(phrase, :per_page => 10,
-                                :select => [:title, :slug]).map do |q|
+                                :select => [:title, :slug, :topic_ids]).map do |q|
       {
         :title => q.title,
-        :url => question_url(q),
+        :url => url_for(q),
         :type => "Question",
-        :topics => []
+        :topics => q.topics.map(&:title) 
       }
     end
     topics = Topic.filter(phrase, :per_page => 10,
                           :select => [:title, :slug]).map do |t|
       {
         :title => t.title,
-        :url => topic_url(t),
+        :url => url_for(t),
         :type => "Topic"
       }
     end
     users = User.filter(phrase, :per_page => 10,
-                        :select => [:name, :slug, :email]).map do |u|
+                        :select => [:name, :id, :email]).map do |u|
       {
         :title => u.name,
-        :url => user_url(u),
+        :url => url_for(u),
         :type => "User",
         :pic => gravatar(u.email.to_s, :size => 20)
       }

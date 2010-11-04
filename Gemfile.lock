@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/umamao/mongomapper_ext.git
-  revision: de5c411
+  revision: 84900fa
   specs:
     mongomapper_ext (0.5.0)
       mongo_mapper (~> 0.8)
