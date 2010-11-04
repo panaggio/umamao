@@ -41,5 +41,12 @@ namespace :data do
         topic.set(:slug => topic.slug)
       end
     end
+
+    desc "Rebuild filter indexes for questions, users and topics"
+    task :rebuild_indexes => :environment do
+      Question.all.each {|q| q.save :validate => false}
+      Topic.all.each {|q| q.save :validate => false}
+      User.all.each {|q| q.save :validate => false}
+    end
   end
 end
