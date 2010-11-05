@@ -40,9 +40,9 @@ class SearchesController < ApplicationController
 
     phrase = params[:q]
 
-    query_re = Regexp.new(phrase.split.map {|w| "(#{Regexp.escape w})"}.join "|")
+    query_res = phrase.split.map {|w| Regexp.new "^#{Regexp.escape w}"}
 
-    questions = Question.query(:autocomplete_keywords.in => [query_re],
+    questions = Question.query(:autocomplete_keywords.in => query_res,
                                :select => [:title, :slug, :topic_ids]).limit(10)
     topics = Topic.filter(phrase, :per_page => 10,
                           :select => [:title, :slug])
