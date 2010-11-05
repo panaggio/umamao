@@ -6,7 +6,6 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
-  include Support::Autocompletable
   include Scopes
 
   ensure_index :tags
@@ -17,7 +16,7 @@ class Question
   key :body, String
   slug_key :title, :unique => true, :min_length => 8
   key :slugs, Array, :index => true
-  autocompletable_key :title
+  key :autocomplete_keywords, Array, :index => true
 
   key :topic_ids, Array, :index => true
   many :topics, :in => :topic_ids
@@ -91,6 +90,7 @@ class Question
   language :language
 
   before_save :update_activity_at, :update_exercise, :strip_tags
+  before_save :update_autocomplete_keywords
   after_create :create_news_update
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
@@ -319,6 +319,13 @@ class Question
     self.votes_average = votes_average
 
     self.votes_count = self.votes.count
+  end
+
+  def update_autocomplete_keywords
+    if !title.nil?
+      @autocomplete_keywords = title.split(/\W/).
+        delete_if {|w| w.empty?}.map &:downcase
+    end
   end
 
   # ensure tag names do not contain whitespace

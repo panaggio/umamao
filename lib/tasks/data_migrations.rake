@@ -42,11 +42,11 @@ namespace :data do
       end
     end
 
-    desc "Create autocomplete index for questions, users and topics"
-    task :create_autocomplete_index => :environment do
-      Question.all.each &:update_autocomplete_item
-      Topic.all.each &:update_autocomplete_item
-      User.all.each &:update_autocomplete_item
+    desc "Rebuild filter indexes for questions, users and topics"
+    task :rebuild_indexes => :environment do
+      Question.all.each {|q| q.save :validate => false}
+      Topic.all.each {|q| q.save :validate => false}
+      User.all.each {|q| q.save :validate => false}
     end
   end
 end

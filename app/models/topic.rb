@@ -1,11 +1,11 @@
 class Topic
   include MongoMapper::Document
   include MongoMapperExt::Slugizer
+  include MongoMapperExt::Filter
   include Support::Versionable
-  include Support::Autocompletable
 
   key :title, String, :required => true, :index => true, :unique => true
-  autocompletable_key :title
+  filterable_keys :title
   key :description, String
   key :questions_count, :default => 0
 

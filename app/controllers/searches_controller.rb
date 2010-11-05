@@ -38,20 +38,49 @@ class SearchesController < ApplicationController
     # Searches for entries containing keywords in the search box and
     # returns them in JSON form
 
-    options = {:per_page => 10}
-    phrase = params[:q].downcase
-    results = AutocompleteItem.filter(phrase, options).map do |i|
-      res = {
-        :title => i.title,
-        :url => url_for(i.entry),
-        :type => i.entry.class.to_s }
-      if res[:type] == "Question"
-        res[:topics] = i.entry.topics.map &:title
-      elsif res[:type] == "User"
-        res[:pic] = gravatar(i.entry.email.to_s, :size => 20)
-      end
-      res
-    end
-    render :json => results.to_json
+    phrase = params[:q]
+
+    query_res = phrase.split.map {|w| Regexp.new "^#{Regexp.escape w}"}
+
+    questions = Question.query(:autocomplete_keywords.in => query_res,
+                               :select => [:title, :slug, :topic_ids]).limit(10)
+    topics = Topic.filter(phrase, :per_page => 10,
+                          :select => [:title, :slug])
+    users = User.filter(phrase, :per_page => 10,
+                        :select => [:name, :id, :email])
+
+    # index calculation to sum 10 results and balance between classes
+    total_qs = questions.count
+    total_ts = topics.length
+    total_us = users.length
+
+    total_qs = [total_qs, 10 - [total_ts + total_us, 6].min].min
+    total_ts = [total_ts, 10 - total_qs - [total_us, 7 - total_qs].min].min
+    total_us = [total_us, 10 - total_qs - total_ts].min
+
+    # JSON serialization
+    render :json => ((questions.limit(total_qs).map do |q|
+                        {
+                          :title => q.title,
+                          :url => url_for(q),
+                          :type => "Question",
+                          :topics => q.topics.map(&:title)
+                        }
+                      end) +
+                     (topics[0...total_ts].map do |t|
+                        {
+                          :title => t.title,
+                          :url => url_for(t),
+                          :type => "Topic"
+                        }
+                      end) +
+                     (users[0...total_us].map do |u|
+                        {
+                          :title => u.name,
+                          :url => url_for(u),
+                          :type => "User",
+                          :pic => gravatar(u.email.to_s, :size => 20)
+                        }
+                      end)).to_json
   end
 end
