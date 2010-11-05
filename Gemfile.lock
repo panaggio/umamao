@@ -1,18 +1,18 @@
 GIT
   remote: git://github.com/rails/exception_notification.git
-  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  revision: 192a49a
   specs:
     exception_notification (1.0.0)
 
 GIT
   remote: git://github.com/thoughtbot/factory_girl.git
-  revision: 1b28476713df98bed3963521e200ed34485a4209
+  revision: 1b28476
   specs:
     factory_girl (2.0.0.beta1)
 
 GIT
   remote: git://github.com/umamao/mongomapper_ext.git
-  revision: 84900fab99ecc6ecf22cb10c86c7a2b32a915ef9
+  revision: 84900fa
   specs:
     mongomapper_ext (0.5.0)
       mongo_mapper (~> 0.8)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/umamao/validatable.git
-  revision: bd0e303292b2692a11c55f851fdba3111450f24c
+  revision: bd0e303
   specs:
     jnunemaker-validatable (1.8.4)
       activesupport (>= 2.3.4)
