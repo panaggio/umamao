@@ -40,15 +40,17 @@ class SearchesController < ApplicationController
 
     phrase = params[:q]
 
-    questions = Question.filter(phrase, :per_page => 10,
-                                :select => [:title, :slug, :topic_ids])
+    query_re = Regexp.new(phrase.split.map {|w| "(#{Regexp.escape w})"}.join "|")
+
+    questions = Question.query(:autocomplete_keywords.in => [query_re],
+                               :select => [:title, :slug, :topic_ids]).limit(10)
     topics = Topic.filter(phrase, :per_page => 10,
                           :select => [:title, :slug])
     users = User.filter(phrase, :per_page => 10,
                         :select => [:name, :id, :email])
 
     # index calculation to sum 10 results and balance between classes
-    total_qs = questions.length
+    total_qs = questions.count
     total_ts = topics.length
     total_us = users.length
 
@@ -57,7 +59,7 @@ class SearchesController < ApplicationController
     total_us = [total_us, 10 - total_qs - total_ts].min
 
     # JSON serialization
-    render :json => ((questions[0...total_qs].map do |q|
+    render :json => ((questions.limit(total_qs).map do |q|
                         {
                           :title => q.title,
                           :url => url_for(q),
