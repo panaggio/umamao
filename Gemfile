@@ -22,6 +22,7 @@ gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.c
 gem 'geoip'
 gem 'haml', '~> 3.0.13'
 gem 'magent', '~> 0.4.2'
+gem 'mechanize', :require => false
 gem 'mongo'
 gem 'mongo_mapper', '~>0.8.2'
 gem 'mongomapper_ext', :git => 'git://github.com/umamao/mongomapper_ext.git'
