@@ -17,18 +17,16 @@ class NewsItem
 
   timestamps!
 
+  # Notifies each recipient of a news update
   def self.from_news_update!(news_update)
     origins = [news_update.author] + news_update.entry.topics
-    notified_users = []
+    news_update.author.notify!(news_update, news_update.author)
+    notified_users = Set.new [news_update.author]
 
     origins.each do |origin|
       origin.followers.each do |follower|
         next if notified_users.include?(follower)
-        news_item = self.create(
-          :news_update => news_update,
-          :recipient => follower,
-          :origin => origin
-        )
+        follower.notify!(news_update, origin)
         notified_users << follower
       end
     end

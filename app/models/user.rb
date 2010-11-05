@@ -489,6 +489,15 @@ Time.zone.now ? 1 : 0)
     self.feed_token = UUIDTools::UUID.random_create.hexdigest
   end
 
+  # Adds a news update to a user feed
+  def notify!(news_update, origin)
+    NewsItem.create(
+      :news_update => news_update,
+      :recipient => self,
+      :origin => origin
+    )
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)
