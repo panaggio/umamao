@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+require 'mechanize'
+
 namespace :data do
   namespace :migrate do
     desc "Move tags from an array of strings into their own (Topic) model"
@@ -52,6 +54,62 @@ namespace :data do
     desc "Migrate news items to polymorphic version"
     task :remake_news_items => :environment do
       NewsItem.all.each {|i| i.recipient_type = "User"; i.save}
+    end
+
+    desc 'Import courses from Unicamp into topics'
+    task :import_unicamp_courses => :environment do
+      courses = []
+      course = {}
+      agent = Mechanize.new
+      pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2010/ementas/')
+
+      pagelist.links.select{|l| l.href.include?('todas')}.each do |link|
+        link.click
+
+        # the first 4 items are just page header information
+        text_items = agent.page.search('font[size="-1"]').map{|el| el.text.strip}[4..-1]
+
+        text_items.each do |item|
+          case item
+          when /^(\w+\d+) (.*)/ # e.g.: AD012 Ateliê de Prática em Dança II
+            if course.present?
+              courses << course
+              print '-' # progress indicator
+              course = {}
+            end
+
+            course[:code] = $1
+            course[:title] = $2
+
+          when /^Pré-Req\.: (.*)/ # e.g.: Pré-Req.: AD011 F 429
+            course[:pre_reqs] = $1.scan(/([A-Za-z]+\d+)|([fF] \d+)/).flatten.compact
+
+          when /^Ementa: (.*)/
+            course[:syllabus] = $1.strip
+          end
+        end
+
+        courses << course
+        print '-' # progress indicator
+
+        courses.each do |course|
+          topic = Topic.find_or_create_by_title("#{course[:code]} (Unicamp)")
+
+          pre_req_links = course[:pre_reqs].present? ?
+          "<strong>Pré-requisitos</strong>: " + course[:pre_reqs].map { |code|
+            "<a href=\"/topics/#{code.tr(' ', '-')}-Unicamp\">#{code}</a>"
+          }.join(', ') + "\n\n" : ''
+
+
+          topic.description = "# #{course[:code]}: #{course[:title]}\n\n"
+          topic.description << pre_req_links + (course[:syllabus] || '')
+          topic.save
+          print '.' # progress indicator
+        end
+
+        sleep 1
+      end
+
     end
   end
 end
