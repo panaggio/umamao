@@ -48,5 +48,10 @@ namespace :data do
       Topic.all.each {|q| q.save :validate => false}
       User.all.each {|q| q.save :validate => false}
     end
+
+    desc "Migrate news items to polymorphic version"
+    task :remake_news_items => :environment do
+      NewsItem.all.each {|i| i.recipient_type = "User"; i.save}
+    end
   end
 end
