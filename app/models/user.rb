@@ -76,7 +76,7 @@ class User
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
-  has_many :news_updates
+  has_many :news_updates, :foreign_key => :author_id
   has_many :news_items, :foreign_key => :recipient_id
 
   key :friend_list_id, String
@@ -489,13 +489,24 @@ Time.zone.now ? 1 : 0)
     self.feed_token = UUIDTools::UUID.random_create.hexdigest
   end
 
-  # Adds a news update to a user feed
-  def notify!(news_update, origin)
-    NewsItem.create(
-      :news_update => news_update,
-      :recipient => self,
-      :origin => origin
-    )
+  # Attempts to add more updates from origin to the user's feed when
+  # it is too small
+  def populate_news_feed!(origin)
+    return if news_items.count > 20
+    total_feeded = 0
+    case origin
+    when User
+      updates = origin.news_updates
+    when Topic
+      updates = origin.news_items.map &:news_update
+    end
+    updates.each do |update|
+      return if total_feeded > 5
+      if !news_items.any? {|i| i.news_update == update}
+        NewsItem.notify!(update, self, origin)
+        total_feeded += 1
+      end
+    end
   end
 
   protected

@@ -17,6 +17,8 @@ class Topic
 
   slug_key :title, :unique => true, :min_length => 3
 
+  has_many :news_items, :foreign_key => :recipient_id
+
   timestamps!
 
   versionable_keys :title, :description

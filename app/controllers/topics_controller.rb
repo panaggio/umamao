@@ -49,6 +49,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_slug_or_id(params[:id])
     @topic.followers << current_user
     @topic.save
+    current_user.populate_news_feed!(@topic)
 
     track_event(:followed_topic)
 

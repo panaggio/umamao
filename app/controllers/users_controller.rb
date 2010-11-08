@@ -155,6 +155,7 @@ class UsersController < ApplicationController
   def follow
     @user = User.find_by_login_or_id(params[:id])
     current_user.follow(@user)
+    current_user.populate_news_feed!(@user)
 
     track_event(:followed_user)
 
