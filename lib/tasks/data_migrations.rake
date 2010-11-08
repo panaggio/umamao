@@ -58,12 +58,12 @@ namespace :data do
 
     desc 'Import courses from Unicamp into topics'
     task :import_unicamp_courses => :environment do
-      courses = []
-      course = {}
       agent = Mechanize.new
       pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2010/ementas/')
 
       pagelist.links.select{|l| l.href.include?('todas')}.each do |link|
+        courses = []
+        course = {}
         link.click
 
         # the first 4 items are just page header information
