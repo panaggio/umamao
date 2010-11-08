@@ -496,15 +496,27 @@ Time.zone.now ? 1 : 0)
     total_feeded = 0
     case origin
     when User
-      updates = origin.news_updates
+      NewsUpdate.query(
+        :author_id => origin.id,
+        :order => :created_at.desc
+      ).each do |update|
+        return if total_feeded > 5
+        if !news_items.any? {|i| i.news_update_id == update.id}
+          NewsItem.notify!(update, self, origin)
+          total_feeded += 1
+        end
+      end
     when Topic
-      updates = origin.news_items.map &:news_update
-    end
-    updates.each do |update|
-      return if total_feeded > 5
-      if !news_items.any? {|i| i.news_update == update}
-        NewsItem.notify!(update, self, origin)
-        total_feeded += 1
+      NewsItem.query(
+        :recipient_id => origin.id,
+        :recipient_type => "Topic",
+        :order => :created_at.desc
+      ).each do |item|
+        return if total_feeded > 5
+        if !news_items.any? {|i| i.news_update_id == item.news_update_id}
+          NewsItem.notify!(item.news_update, self, origin)
+          total_feeded += 1
+        end
       end
     end
   end

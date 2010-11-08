@@ -68,7 +68,7 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
-    @topic.followers.delete(current_user)
+    @topic.follower_ids.delete(current_user.id)
     @topic.save
 
     track_event(:unfollowed_topic)
