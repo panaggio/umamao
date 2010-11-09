@@ -1,4 +1,4 @@
--content_for :subtabs do
+- content_for :subtabs do
   .secondary-navigation
     .navtitle
       = t(".title")
@@ -10,10 +10,10 @@
 
 /Topics
 %ul.items#topics
-  -@topics.each do |topic|
+  - @topics.each do |topic|
     = render :partial => "topic", :object => topic
 
 #additional_info
-  =will_paginate @topics
+  = will_paginate @topics
   .clear
 
