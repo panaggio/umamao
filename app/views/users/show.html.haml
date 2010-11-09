@@ -18,6 +18,15 @@
       = gravatar @user.email.to_s, :size => 128
       = shapado_auto_link(markdown(@user.description))
 
+    -# Followers
+    - if @user.followers.count > 0
+      %h2.title
+        = t('followable.followers', :count => @user.followers.count)
+      .friend_list
+        - @user.followers.each do |follower|
+          %span
+            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+
     -# Followed users
     - if @user.following.count > 0
       %h2.title
@@ -26,6 +35,7 @@
         - @user.following.each do |follower|
           %span
             = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+
     -# Followed topics
     - if @topics.count > 0
       %h2.title
@@ -37,14 +47,7 @@
               = link_to topic.title, topic_url(topic), :title => topic.title
             = render :partial => "topics/follow", :locals => {:topic => topic}
             .clear
-    -# Followers
-    - if @user.followers.count > 0
-      %h2.title
-        = t('followable.followers', :count => @user.followers.count)
-      .friend_list
-        - @user.followers.each do |follower|
-          %span
-            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}
     .navtitle

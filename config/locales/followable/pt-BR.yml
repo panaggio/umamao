@@ -3,11 +3,11 @@ pt-BR:
     follow: Seguir
     unfollow: Não seguir
     following:
-      one: "Seguindo 1 usuário"
-      other: "Seguindo %{count} usuários"
+      one: "Seguindo 1 pessoa"
+      other: "Seguindo %{count} pessoas"
     followers:
-      one: "Seguidores (1)"
-      other: "Seguidores (%{count})"
+      one: "Seguido por 1 pessoa"
+      other: "Seguido por %{count} pessoas"
     flash:
       follow: "Você está seguindo %{followable}"
       unfollow: "Você parou de seguir %{followable}"
