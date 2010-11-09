@@ -85,7 +85,7 @@ class Notifier < ActionMailer::Base
     @followed = followed
 
     subject = I18n.t("mailers.notifications.follow.subject",
-                     :login => user.login, :app => AppConfig.application_name)
+                     :login => user.name, :app => AppConfig.application_name)
 
     mail(:to => followed.email, :subject => subject)
   end
