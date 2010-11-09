@@ -15,8 +15,6 @@ class Settings::ProfileController < ApplicationController
       @user.birthday = build_date(params[:user], "birthday")
     end
 
-    Magent.push("actors.judge", :on_update_user, @user.id, current_group.id)
-
     if @user.save
       flash.now[:notice] = t(:success, :scope => 'global.edit')
     else

@@ -215,10 +215,6 @@ module ApplicationHelper
     content_for(:css) { stylesheet_link_tag(*files) }
   end
 
-  def render_tag(tag)
-    %@<span class="tag"><a href="#{questions_path(:tags => tag)}">#{@badge.token}</a></span>@
-  end
-
   def class_for_question(question)
     klass = ""
 

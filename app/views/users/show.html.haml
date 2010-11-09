@@ -118,20 +118,3 @@
   .additional_info
     = will_paginate @answers, :param_name => "answers_page"
     .clear
-
-  /Badges
-  %h2.title
-    .counter
-      = number_with_delimiter(@badges.total_entries)
-    = t(:badges, :scope => "activerecord.models", :default => "Badges")
-
-  %p= link_to t('.badges.link'), badges_path
-  %br
-  %ul.list#badges
-    - @badges.each do |badge|
-      %li
-        = render :partial => "badges/badge", :object => badge, :locals => {:hide_user => true}
-  .additional_info
-    = will_paginate @badges, :param_name => "badges_page"
-    .clear
-

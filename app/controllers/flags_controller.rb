@@ -14,8 +14,6 @@ class FlagsController < ApplicationController
         flagged = true
         flag.flaggeable.flagged!
         flash[:notice] = t(:flash_notice, :scope => "flags.create")
-
-        Magent.push("actors.judge", :on_flag, flag.id)
       else
         flash[:error] = flag.errors.full_messages.join(", ")
       end

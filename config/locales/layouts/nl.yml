@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Siebrand
-nl: 
-  layouts: 
-    application: 
+nl:
+  layouts:
+    application:
       ask_question: Vraag stellen
-      badges: speldjes
       forgot: Vergeten?
       home: Hoofdmenu
       languages: Talen
@@ -16,7 +15,7 @@ nl:
       manage_ads: Advertenties beheren
       moderate: Modereren
       now: Nu!
-      openid: 
+      openid:
         explaination: "Als u wilt registreren of aanmelden, kies dan uw OpenID-provider:"
       pages: Pagina's
       questions: Vragen
@@ -31,7 +30,7 @@ nl:
       unanswered: Onbeantwoord
       users: Gebruikers
       welcome_from: Welkom! U kunt
-    manage: 
+    manage:
       actions: Handelingen
       announcements: Aankondigingen
       constrains: Beperkingen
@@ -47,5 +46,5 @@ nl:
       stats: Statistieken
       theme: Thema
       widgets: Widgets
-    notifications: 
+    notifications:
       message: Als u geen automatische meldingen van %{domain} meer wilt ontvangen, wijzig dan uw voorkeuren in het scherm voor meldingen.

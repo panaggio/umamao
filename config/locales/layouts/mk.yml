@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Bjankuloski06
-mk: 
-  layouts: 
-    application: 
+mk:
+  layouts:
+    application:
       ask_question: постави прашање
-      badges: значки
       forgot: заборавивте?
       home: почетна
       languages: јазици
@@ -16,7 +15,7 @@ mk:
       manage_ads: раководење со реклами
       moderate: модерирај
       now: веднаш!
-      openid: 
+      openid:
         explaination: ако сакате да се регистрирате или пак само да се најавите, одберете го вашиот добавувач на OpenID
       pages: страници
       questions: прашања
@@ -31,7 +30,7 @@ mk:
       unanswered: неодговорени
       users: корисници
       welcome_from: "добредојдовте! еве што можете да правите:"
-    manage: 
+    manage:
       actions: дејства
       announcements: соопштенија
       constrains: ограничувања
@@ -47,5 +46,5 @@ mk:
       stats: статистики
       theme: мотив
       widgets: елементи
-    notifications: 
+    notifications:
       message: Ако повеќе не сакате да добивате автоматски известувања од %{domain} , изменете си ги нагодувањата во екранот за известувања.

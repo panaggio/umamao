@@ -1,29 +1,26 @@
 # Messages for Spanish (Español)
 # Exported from translatewiki.net
 # Export driver: syck
-es: 
-  widgets: 
-    badges: 
-      description: este widget muestra las insignias ganadas por los usuarios o las preguntas
-      title: insignias recientes
-    groups: 
+es:
+  widgets:
+    groups:
       description: este widget muestra los últimos grupos registrados
       title: grupos recientes
-    index: 
+    index:
       description: usar las flechas para mover los widgets
       title: administrar los widgets de la barra lateral
-    pages: 
+    pages:
       description: este widget muestra las paginas wiki
       title: paginas wiki
-    tag_cloud: 
+    tag_cloud:
       description: este widget muestra una nube de etiquetas
       title: nube de etiquetas
-    top_groups: 
+    top_groups:
       description: este widget muestra los grupos mas activos
       title: ranking de grupos
-    top_users: 
+    top_users:
       description: este widget muestra ranking de usuarios
       title: ranking de usuarios
-    users: 
+    users:
       description: este widget muestra los nuevos miembros registrados
       title: usuarios recientes

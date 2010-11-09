@@ -58,7 +58,6 @@ Shapado::Application.routes.draw do
   resources :ads
   resources :adsenses
   resources :adbards
-  resources :badges
 
   resources :pages do
     member do

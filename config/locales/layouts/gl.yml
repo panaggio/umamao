@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Toliño
-gl: 
-  layouts: 
-    application: 
+gl:
+  layouts:
+    application:
       ask_question: Facer unha pregunta
-      badges: Insignias
       forgot: Esqueceu?
       home: Inicio
       languages: Linguas
@@ -16,7 +15,7 @@ gl:
       manage_ads: Xestionar os anuncios
       moderate: Moderar
       now: xa!
-      openid: 
+      openid:
         explaination: "Se quere rexistrarse ou acceder ao sistema, seleccione o seu provedor de OpenID:"
       pages: Páxinas
       questions: Preguntas
@@ -31,7 +30,7 @@ gl:
       unanswered: Sen resposta
       users: Usuarios
       welcome_from: Benvido! Pode
-    manage: 
+    manage:
       actions: Accións
       announcements: Anuncios
       constrains: Restricións
@@ -47,5 +46,5 @@ gl:
       stats: Estatísticas
       theme: Tema visual
       widgets: Widgets
-    notifications: 
+    notifications:
       message: Se non quere recibir máis notificacións automáticas de %{domain}, cambie as súas preferencias de notificación.

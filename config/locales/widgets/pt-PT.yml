@@ -1,29 +1,26 @@
 # Messages for Portuguese (Português)
 # Exported from translatewiki.net
 # Export driver: syck
-pt-PT: 
-  widgets: 
-    badges: 
-      description: this widget display recent badges earned by users or questions
-      title: recent badges
-    groups: 
+pt-PT:
+  widgets:
+    groups:
       description: this widget displays the latest groups
       title: recent groups
-    index: 
+    index:
       description: use the arrows to move your widgets
       title: manage sidebar widgets
-    pages: 
+    pages:
       description: this widget displays the list of wiki pages
       title: wiki pages
-    tag_cloud: 
+    tag_cloud:
       description: this widget displays a tag cloud
       title: tag cloud
-    top_groups: 
+    top_groups:
       description: this widget displays the top five groups
       title: top 5 groups
-    top_users: 
+    top_users:
       description: this widget displays top five users
       title: top 5 users
-    users: 
+    users:
       description: this widget display new registered members
       title: recent users

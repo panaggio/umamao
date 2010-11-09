@@ -112,10 +112,6 @@ class UsersController < ApplicationController
                                       :per_page => 10,
                                       :banned => false)
 
-    @badges = @user.badges.paginate(:page => params[:badges_page],
-                                    :group_id => current_group.id,
-                                    :per_page => 25)
-
     @f_sort, order = active_subtab(:f_sort)
     @favorites = @user.favorites.paginate(:page => params[:favorites_page],
                                           :per_page => 25,
@@ -167,8 +163,6 @@ class UsersController < ApplicationController
       Notifier.follow(current_user, @user).deliver
     end
 
-    Magent.push("actors.judge", :on_follow, current_user.id, @user.id, current_group.id)
-
     respond_to do |format|
       format.html do
         redirect_to user_path(@user)
@@ -187,8 +181,6 @@ class UsersController < ApplicationController
     track_event(:unfollowed_user)
 
     flash[:notice] = t("followable.flash.unfollow", :followable => @user.name)
-
-    Magent.push("actors.judge", :on_unfollow, current_user.id, @user.id, current_group.id)
 
     respond_to do |format|
       format.html do

@@ -24,8 +24,6 @@ pt-BR:
     show:
       title: "%{user}"
       views: visitas
-      badges:
-        link: "O que são medalhas?"
     form:
       change_password: Trocar de senha
       email: "Email:"

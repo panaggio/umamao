@@ -1,11 +1,10 @@
 # Messages for Japanese (日本語)
 # Exported from translatewiki.net
 # Export driver: syck
-ja: 
-  layouts: 
-    application: 
+ja:
+  layouts:
+    application:
       ask_question: 質問する
-      badges: バッジ
       forgot: 忘れた？
       home: ホーム
       languages: 言語
@@ -14,7 +13,7 @@ ja:
       logout: ログアウト
       manage_ads: 広告の管理
       moderate: モデレート
-      openid: 
+      openid:
         explaination: 外部サービスを使ってログインする場合は下のサービス一覧から選択してください
       pages: ページ
       questions: 質問
@@ -28,7 +27,7 @@ ja:
       title: Q&Aコミュニティ
       unanswered: 未回答な質問
       users: ユーザ
-    manage: 
+    manage:
       actions: アクション
       announcements: アナウンス
       constrains: 制約

@@ -130,7 +130,6 @@ class AnswersController < ApplicationController
 
         flash[:notice] = t(:flash_notice, :scope => "answers.update")
 
-        Magent.push("actors.judge", :on_update_answer, @answer.id)
         format.html { redirect_to(question_path(@answer.question)) }
         format.json { head :ok }
       else
@@ -148,8 +147,6 @@ class AnswersController < ApplicationController
     @answer.destroy
     @question.answer_removed!
     sweep_question(@question)
-
-    Magent.push("actors.judge", :on_destroy_answer, current_user.id, @answer.attributes)
 
     respond_to do |format|
       format.html { redirect_to(question_path(@question)) }
