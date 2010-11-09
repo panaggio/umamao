@@ -223,6 +223,7 @@ class QuestionsController < ApplicationController
     @follow_up_questions = Question.children_of(@question)
 
     respond_to do |format|
+      format.html
       format.json  { render :json => @question.to_json(:except => %w[_keywords slug watchers]) }
       format.atom
     end
