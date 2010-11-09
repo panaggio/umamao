@@ -167,6 +167,8 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Searches matching tags and render them in JSON form for input
+  # autocomplete
   def tags_for_autocomplete
     respond_to do |format|
       format.js do

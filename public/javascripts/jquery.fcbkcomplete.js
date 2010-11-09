@@ -90,7 +90,7 @@ jQuery(function($){
 
                 complete = $(document.createElement("div"));
                 complete.addClass("facebook-auto");
-                complete.offset({left: $('ul.holder').offset().left})
+                complete.offset({left: $('ul.holder').offset().left});
                 complete.append('<div class="default">' + options.complete_text + "</div>");
                 if (browser_msie) {
                     complete.append('<iframe class="ie6fix" scrolling="no" frameborder="0"></iframe>');
@@ -183,7 +183,7 @@ jQuery(function($){
                 }
                 holder.children("li.bit-box.deleted").removeClass("deleted");
                 feed.hide();
-                browser_msie ? browser_msie_frame.hide() : '';
+                if (browser_msie) browser_msie_frame.hide();
             }
 
             function removeItem(item){
@@ -191,7 +191,7 @@ jQuery(function($){
                     item.fadeOut("fast");
                     if (options.onremove.length) {
                         var _item = element.children("option[value=" + item.attr("rel") + "]");
-                        funCall(options.onremove, _item)
+                        funCall(options.onremove, _item);
                     }
                     element.children('option[value="' + item.attr("rel") + '"]').removeAttr("selected").removeClass("selected");
                     item.remove();
@@ -257,7 +257,7 @@ jQuery(function($){
 
                     if (event.keyCode == 8 && etext.length == 0) {
                         feed.hide();
-                        browser_msie ? browser_msie_frame.hide() : '';
+                        if (browser_msie) browser_msie_frame.hide();
                         if (!holder.children("li.bit-box:last").hasClass('locked')) {
                             if (holder.children("li.bit-box.deleted").length == 0) {
                                 holder.children("li.bit-box:last").addClass("deleted");
@@ -265,7 +265,7 @@ jQuery(function($){
                             }
                             else {
                                 if (deleting) {
-                                    return;
+                                    return false;
                                 }
                                 deleting = 1;
                                 holder.children("li.bit-box.deleted").fadeOut("fast", function(){
@@ -314,14 +314,12 @@ jQuery(function($){
             }
 
             function addMembers(etext, data) {
-                var re = new RegExp("^" + etext + "$", "i");
+                var etextRe = etext.replace(/([\(\)\[\]\$\^\.\?\{\}])/g, "\\$1");
+                var re = new RegExp("^" +  etextRe + "$", "i");
                 feed.html('');
                 if (!data.some(function (item) { return re.test(item.value); })) {
-                    data = data.concat([{"value":etext,"caption":etext+" (0)"}]);
+                    data = data.concat([{"value": etext, "caption": etext + " (0)"}]);
                 }
-                //if(typeof(data[0])=='undefined'){
-                //    data = ([{"value":etext,"caption":etext+" (0)"}, data]);
-                //}
                 if (!options.cache && data != null) {
                     cache = new Array();
                     search_string = "";
@@ -347,7 +345,7 @@ jQuery(function($){
 
                 var myregexp, match;
                 try {
-                    myregexp = eval('/(?:^|;)\\s*(\\d+)\\s*:[^;]*?' + etext + '[^;]*/g' + filter);
+                    myregexp = eval('/(?:^|;)\\s*(\\d+)\\s*:[^;]*?' + etextRe + '[^;]*/g' + filter);
                     match = myregexp.exec(search_string);
                 }
                 catch (ex) {
@@ -445,7 +443,7 @@ jQuery(function($){
                     var option = $(this);
                     addItem(option.text(), option.attr("rel"));
                     feed.hide();
-                    browser_msie ? browser_msie_frame.hide() : '';
+                    if (browser_msie) browser_msie_frame.hide();
                     complete.hide();
                 });
 

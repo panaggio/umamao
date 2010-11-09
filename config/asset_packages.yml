@@ -17,7 +17,6 @@ javascripts:
   - modules/index_question
   - modules/retag
   - modules/new_question
-  - modules/index_welcome
   - modules/show_user
   - modules/members
   - modules/move_group
