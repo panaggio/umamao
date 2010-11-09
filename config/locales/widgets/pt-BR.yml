@@ -3,9 +3,6 @@ pt-BR:
     index:
       title: Gerenciar widgets da barra lateral
       description: Use as setas para mover as widgets
-    badges:
-      title: Medalhas recentes
-      description: "Esta widget exibe as medalhas recentes recebidas por usuários ou perguntas"
     groups:
       title: Sites recentes
       description: "Esta widget exibe os últimos sites criados"

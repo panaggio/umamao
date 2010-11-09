@@ -3,11 +3,10 @@
 # Export driver: syck
 # Author: Fulup
 # Author: Y-M D
-br: 
-  layouts: 
-    application: 
+br:
+  layouts:
+    application:
       ask_question: Goulenn un dra bennak
-      badges: Badjoù
       forgot: Disoñjet ?
       home: Degemer
       languages: Yezhoù
@@ -17,7 +16,7 @@ br:
       manage_ads: Merañ ar bruderezh
       moderate: Habaskaat
       now: bremañ !
-      openid: 
+      openid:
         explaination: "Mar fell deoc'h en em enskrivañ pe kevreañ traken, dibabit ur pourvezer openid :"
       pages: Pajennoù
       questions: Goulennoù
@@ -32,7 +31,7 @@ br:
       unanswered: Direspontet
       users: Implijerien
       welcome_from: Degemer mat ! Gouest oc'h
-    manage: 
+    manage:
       actions: Oberoù
       announcements: Kemennoù
       constrains: Strishadurioù

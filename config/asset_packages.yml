@@ -12,7 +12,6 @@ javascripts:
   - jquery.autoSuggest
   - showdown
   - highlight/prettify
-  - components/search
   - application
   - modules/sessions
   - modules/index_question
@@ -20,9 +19,6 @@ javascripts:
   - modules/new_question
   - modules/index_welcome
   - modules/show_user
-  - modules/index_group
-  - modules/index_user
-  - modules/tags_question
   - modules/members
   - modules/move_group
 
@@ -38,7 +34,6 @@ stylesheets:
 - base:
   - jquery-ui
   - compiled/application
-  - prettify
   - search
 - landing:
   - compiled/landing

@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Discon
-el: 
-  layouts: 
-    application: 
+el:
+  layouts:
+    application:
       ask_question: Κάντε ερώτηση
-      badges: Τίτλοι
       forgot: Ξεχάσατε;
       home: Κεντρική
       languages: Γλώσσες
@@ -16,7 +15,7 @@ el:
       manage_ads: Διαχείριση διαφημίσεων
       moderate: Συντονισμός
       now: τώρα!
-      openid: 
+      openid:
         explaination: "Αν θέλετε να εγγραφείτε ή απλώς να συνδεθείτε, επιλέξτε παρακαλώ τον OpenID πάροχο σας:"
       pages: Σελίδες
       questions: Ερωτήσεις
@@ -31,7 +30,7 @@ el:
       unanswered: Αναπάντητες
       users: Μέλη
       welcome_from: Καλώς ορίσατε! Μπορείτε
-    manage: 
+    manage:
       actions: Ενέργειες
       announcements: Ανακοινώσεις
       constrains: Περιορισμοί
@@ -47,5 +46,5 @@ el:
       stats: Στατιστικά
       theme: Θέμα
       widgets: Widgets
-    notifications: 
+    notifications:
       message: Εάν δεν θέλετε να λαμβάνετε αυτόματες ειδοποιήσεις από το %{domain} πια, αλλάξτε τις προτιμήσεις σας στην σελίδα ειδοποιήσεων.

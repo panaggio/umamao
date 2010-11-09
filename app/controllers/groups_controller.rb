@@ -91,7 +91,6 @@ class GroupsController < ApplicationController
 
     @group.widgets << TagCloudWidget.new
     @group.widgets << TopUsersWidget.new
-    @group.widgets << BadgesWidget.new
 
     respond_to do |format|
       if @group.save

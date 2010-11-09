@@ -3,29 +3,26 @@
 # Export driver: syck
 # Author: Eleferen
 # Author: Lockal
-ru: 
-  widgets: 
-    badges: 
-      description: Этот виджет отображает последние беджи, заработанные пользователями или вопросами
-      title: Последние беджи
-    groups: 
+ru:
+  widgets:
+    groups:
       description: Этот виджет отображает последние группы
       title: Последние группы
-    index: 
+    index:
       description: Используйте стрелки, чтобы переместить виджеты
       title: Управление виджетами на боковой панели
-    pages: 
+    pages:
       description: Этот виджет отображает список страниц вики
       title: Вики-страницы
-    tag_cloud: 
+    tag_cloud:
       description: Этот виджет отображает облако тегов
       title: Облако тегов
-    top_groups: 
+    top_groups:
       description: Этот виджет отображает пять лучших групп
       title: 5 лучших групп
-    top_users: 
+    top_users:
       description: Этот виджет отображает пять лучших пользователей
       title: 5 лучших пользователей
-    users: 
+    users:
       description: Этот виджет отображает новых зарегистрированных пользователей
       title: Последние пользователи

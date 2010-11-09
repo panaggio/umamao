@@ -7,10 +7,6 @@ en:
       message1: "%{user} added your question as a favorite on %{group}"
       message2: "The text of your question:"
       message3: "You can see it here:"
-    earned_badge:
-      message1: "You have earned a %{badge} badge on %{app}"
-      message2: "Badge description:"
-      message3: "You can see all your badges on your %{user_page}"
     follow:
       message1: "%{user} is now following your questions and answers on %{app}"
       message2: 'You may follow him back by clicking on the button "Follow" on his %{user_page}'
@@ -34,6 +30,5 @@ en:
       message3: "%{questions} questions were created"
       message4: "%{answers} answers were created"
       message5: "%{votes} votes were made"
-      message6: "%{badges} badges were awarded"
       message7: "The account has %{users} users."
       message8: "Visit your group at %{link}"

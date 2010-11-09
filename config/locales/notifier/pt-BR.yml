@@ -7,10 +7,6 @@ pt-BR:
       message1: "%{user} adicionou sua pergunta as suas favoritas no %{group}"
       message2: "O texto da sua pergunta é:"
       message3: "Você pode vê-la aqui:"
-    earned_badge:
-      message1: "Você ganhou a medalha %{badge} no %{app}"
-      message2: "Descrição da medalha:"
-      message3: "Você pode ver todas suas medalhas no seu %{user_page}"
     follow:
       message1: "%{user} está te seguindo no %{app}."
       message2: 'Você pode seguí-lo(a) clicando "Seguir" no seu %{user_page}.'
@@ -38,6 +34,5 @@ pt-BR:
       message3: "%{questions} perguntas foram criadas"
       message4: "%{answers} respostas foram criadas"
       message5: "%{votes} votos foram computados"
-      message6: "%{badges} medalhas foram entregues"
       message7: "O site tem %{users} usuários."
       message8: "Visite o site em %{link}"

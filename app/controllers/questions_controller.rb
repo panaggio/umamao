@@ -200,8 +200,6 @@ class QuestionsController < ApplicationController
     @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
     options = {:per_page => 25, :page => params[:page] || 1,
                :order => current_order, :banned => false}
-    # arthuraa: why was this here?
-    # options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
     @answers = @question.answers.paginate(options)
 
     @answer = Answer.new(params[:answer])
@@ -225,7 +223,7 @@ class QuestionsController < ApplicationController
     @follow_up_questions = Question.children_of(@question)
 
     respond_to do |format|
-      format.html { Magent.push("actors.judge", :on_view_question, @question.id) }
+      format.html
       format.json  { render :json => @question.to_json(:except => %w[_keywords slug watchers]) }
       format.atom
     end
@@ -271,7 +269,6 @@ class QuestionsController < ApplicationController
         current_user.on_activity(:ask_question, current_group)
         current_group.on_activity(:ask_question)
 
-        Magent.push("actors.judge", :on_ask_question, @question.id)
         track_event(:asked_question, :body_present => @question.body.present?,
                     :topics_count => @question.topics.size)
 
@@ -321,8 +318,6 @@ class QuestionsController < ApplicationController
     sweep_question(@question)
     sweep_question_views
     @question.destroy
-
-    Magent.push("actors.judge", :on_destroy_question, current_user.id, @question.attributes)
 
     respond_to do |format|
       format.html { redirect_to(questions_url) }
@@ -483,8 +478,6 @@ class QuestionsController < ApplicationController
       if (Time.now - @question.created_at) < 8.days
         @question.on_activity(true)
       end
-
-      Magent.push("actors.judge", :on_retag_question, @question.id, current_user.id)
 
       flash[:notice] = t("questions.retag_to.success", :group => @question.group.name)
       respond_to do |format|

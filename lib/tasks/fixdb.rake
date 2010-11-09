@@ -1,5 +1,5 @@
 desc "Fix all"
-task :fixall => [:environment, "fixdb:badges", "fixdb:questions", "fixdb:update_widgets", "fixdb:tokens", "fixdb:es419"] do
+task :fixall => [:environment, "fixdb:questions", "fixdb:update_widgets", "fixdb:tokens", "fixdb:es419"] do
 end
 
 namespace :fixdb do
@@ -21,32 +21,6 @@ namespace :fixdb do
 
     puts "Updating Answer language from es-AR to es-419"
     User.set({:language => 'es-AR'},{:language => 'es-419'})
-  end
-  task :badges => :environment do
-    puts "Updating #{User.count} users..."
-
-    Badge.set({:token => "tutor"}, {:type => "bronze"})
-
-    User.find_each(:select => ["membership_list"]) do |user|
-      user.membership_list.each do |group_id, membership|
-        if membership["last_activity_at"].nil? && membership["reputation"] == 0
-          user.unset(:"membership_list.#{group_id}")
-        else
-          gold_count = user.badges.count(:group_id => group_id, :type => "gold")
-          bronze_count = user.badges.count(:group_id => group_id, :type => "bronze")
-          silver_count = user.badges.count(:group_id => group_id, :type => "silver")
-          editor = user.badges.first(:group_id => group_id, :token => "editor")
-
-          if editor.present?
-            user.set({"membership_list.#{group_id}.is_editor" => true})
-          end
-
-          user.set({"membership_list.#{group_id}.bronze_badges_count" => bronze_count})
-          user.set({"membership_list.#{group_id}.silver_badges_count" => silver_count})
-          user.set({"membership_list.#{group_id}.gold_badges_count" => gold_count})
-        end
-      end
-    end
   end
 
   task :questions => :environment do

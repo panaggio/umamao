@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Patcito
-es-419: 
-  layouts: 
-    application: 
+es-419:
+  layouts:
+    application:
       ask_question: pregunte
-      badges: insignias
       forgot: la olvido?
       home: pagina principal
       languages: idiomas
@@ -16,7 +15,7 @@ es-419:
       manage_ads: propagandas
       moderate: moderar
       now: ya!
-      openid: 
+      openid:
         explaination: "si deseas abrir una cuenta o solamente conectarte, por favor seleccione tu provedor openid:"
       pages: paginas
       questions: preguntas
@@ -31,7 +30,7 @@ es-419:
       unanswered: sin contestar
       users: usuarios
       welcome_from: bienvenido! puedes
-    manage: 
+    manage:
       actions: actions
       announcements: anuncios
       constrains: restricciones
@@ -47,5 +46,5 @@ es-419:
       stats: stats
       theme: tema
       widgets: widgets
-    notifications: 
+    notifications:
       message: Si ya no quieres recibir notificaciones automáticas de %{domain}, cambie sus preferencias en las opciones de notificaciones.

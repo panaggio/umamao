@@ -72,7 +72,6 @@ class User
   has_many :answers, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
-  has_many :badges, :dependent => :destroy
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -329,7 +328,6 @@ Time.zone.now ? 1 : 0)
       if last_day
         if last_day.utc.between?(day.yesterday - 12.hours, day.tomorrow)
           self.increment({"membership_list.#{group.id}.activity_days" => 1})
-          Magent.push("actors.judge", :on_activity, group.id, self.id)
         elsif !last_day.utc.today? && (last_day.utc != Time.now.utc.yesterday)
           Rails.logger.info ">> Resetting act days!! last known day: #{last_day}"
           reset_activity_days!(group)
@@ -386,19 +384,6 @@ Time.zone.now ? 1 : 0)
   def stats(*extra_fields)
     fields = [:_id]
     UserStat.find_or_create_by_user_id(self._id, :select => fields+extra_fields)
-  end
-
-  def badges_count_on(group)
-    config = config_for(group)
-    [config.bronze_badges_count, config.silver_badges_count, config.gold_badges_count]
-  end
-
-  def badges_on(group, opts = {})
-    self.badges.all(opts.merge(:group_id => group.id, :order => "created_at desc"))
-  end
-
-  def find_badge_on(group, token, opts = {})
-    self.badges.first(opts.merge(:token => token, :group_id => group.id))
   end
 
   def follow(user)

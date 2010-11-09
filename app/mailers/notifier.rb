@@ -90,17 +90,6 @@ class Notifier < ActionMailer::Base
     mail(:to => followed.email, :subject => subject)
   end
 
-  def earned_badge(user, group, badge)
-    @user = user
-    @group = group
-    @badge = badge
-
-    subject = I18n.t("mailers.notifications.earned_badge.subject",
-                     :group => group.name)
-
-    mail(:to => user.email, :subject => subject)
-  end
-
   def favorited(user, group, question)
     @user = user
     @group = group

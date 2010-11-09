@@ -2,29 +2,26 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Siebrand
-nl: 
-  widgets: 
-    badges: 
-      description: In deze widget worden speldjes weergeven die gebruikers of vragen recent hebben ontvangen
-      title: Recente speldjes
-    groups: 
+nl:
+  widgets:
+    groups:
       description: In deze widget worden de meest recent actieve groepen weergegeven
       title: Recente groepen
-    index: 
+    index:
       description: Gebruik de pijlen om uw widgets te verplaatsten
       title: Menubalkwidgets beheren
-    pages: 
+    pages:
       description: In deze widget wordt de lijst met wikipagina's weergegeven
       title: Wikipagina's
-    tag_cloud: 
+    tag_cloud:
       description: In deze widget wordt de woordenwolk weergegeven
       title: Woordenwolk
-    top_groups: 
+    top_groups:
       description: In deze widget worden de top 5 groepen weergegeven
       title: Top 5 groepen
-    top_users: 
+    top_users:
       description: In deze widget worden de top 5 gebruikers weergegeven
       title: Top 5 gebruikers
-    users: 
+    users:
       description: In deze widget wordende nieuwe gebruikers weergegeven
       title: Recente gebruikers

@@ -55,7 +55,6 @@ namespace :setup do
       default_group.widgets << GroupsWidget.new
     end
     default_group.widgets << UsersWidget.new
-    default_group.widgets << BadgesWidget.new
     default_group.save!
   end
 

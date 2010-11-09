@@ -3,9 +3,6 @@ en:
     index:
       title: Manage sidebar widgets
       description: Use the arrows to move your widgets
-    badges:
-      title: Recent badges
-      description: "This widget displays recent badges earned by users or questions"
     groups:
       title: Recent groups
       description: "This widget displays the latest groups"

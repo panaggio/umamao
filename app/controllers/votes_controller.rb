@@ -26,10 +26,6 @@ class VotesController < ApplicationController
     if vote_state == :created && !vote.new?
       if vote.voteable_type == "Question"
         sweep_question(vote.voteable)
-
-        Magent.push("actors.judge", :on_vote_question, vote.id)
-      elsif vote.voteable_type == "Answer"
-        Magent.push("actors.judge", :on_vote_answer, vote.id)
       end
     end
 

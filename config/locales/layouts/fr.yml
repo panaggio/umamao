@@ -2,11 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Patcito
-fr: 
-  layouts: 
-    application: 
+fr:
+  layouts:
+    application:
       ask_question: posez une question
-      badges: insignes
       forgot: oublié?
       home: page principale
       languages: langues
@@ -16,7 +15,7 @@ fr:
       manage_ads: administrer les publicités
       moderate: modérer
       now: now!
-      openid: 
+      openid:
         explaination: "si vous souhaitez ouvrir un compte ou juste vous connectez, sélectionnez un fournisseur openid:"
       pages: pages
       questions: questions
@@ -31,7 +30,7 @@ fr:
       unanswered: sans réponses
       users: utilisateurs
       welcome_from: welcome! you can
-    manage: 
+    manage:
       actions: actions
       announcements: annonces
       constrains: constraintes
@@ -47,5 +46,5 @@ fr:
       stats: États
       theme: thème
       widgets: widgets
-    notifications: 
+    notifications:
       message: Si vous ne souhaitez plus recevoir de notifications automatiques de %{domain}, vous pouvez changer votre configuration de notifications.

@@ -12,8 +12,6 @@ pt-BR:
         friend_subject: "Precisamos da sua ajuda em: %{question_title}"
       follow:
         subject: "%{login} está te seguindo no %{app}"
-      earned_badge:
-        subject: "Você ganhou uma medalha no %{group}!"
       favorited:
         subject: "%{login} adicionou sua pergunta às favoritas!"
       report:

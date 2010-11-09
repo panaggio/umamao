@@ -11,8 +11,6 @@ class Settings::AccountController < ApplicationController
     @user = current_user
     @user.safe_update(%w[email timezone], params[:user])
 
-    Magent.push("actors.judge", :on_update_user, @user.id, current_group.id)
-
     if @user.save
       flash.now[:notice] = t(:success, :scope => 'global.edit')
     else

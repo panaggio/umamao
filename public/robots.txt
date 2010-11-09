@@ -36,8 +36,6 @@ Disallow: /questions/tags
 Disallow: /questions/tags/
 Disallow: /questions/*/answers/*
 Disallow: /questions/*/answers/*/
-Disallow: /badges
-Disallow: /badges/
 Disallow: /search
 Disallow: /search/
 Disallow: /*?
