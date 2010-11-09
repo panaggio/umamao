@@ -6,14 +6,4 @@ $(document).ready(function() {
     highlightEffect($("#sidebar .help"));
   });
 
-  $("#ask_question").searcher({ url : "/questions/related_questions.js",
-                              target : $("#related_questions"),
-                              behaviour : "focusout",
-                              timeout : 2500,
-                              extraParams : { 'format' : 'js', 'per_page' : 5 },
-                              success: function(data) {
-                                $("label#rqlabel").show();
-                              }
-  });
-
 });
