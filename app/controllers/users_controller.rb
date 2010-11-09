@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
-  before_filter :login_required, :only => [:edit, :update, :follow]
+  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow]
 
   tabs :default => :users
 
