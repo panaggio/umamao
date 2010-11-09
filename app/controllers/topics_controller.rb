@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :only => [:edit, :update]
+  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow]
   respond_to :html
 
   tabs :default => :topics

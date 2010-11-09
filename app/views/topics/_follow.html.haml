@@ -1,6 +1,9 @@
-.follow-info
-  - if logged_in? && topic.followers.include?(current_user)
-    = link_to "#{t("followable.unfollow")}", unfollow_topic_path(topic), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_topic_path(topic)
-  - else
-    = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_topic_path(topic)
+-# Follow/unfollow topic link
+
+- if logged_in?
+  .follow-info
+    - if topic.followers.include?(current_user)
+      = link_to "#{t("followable.unfollow")}", unfollow_topic_path(topic), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_topic_path(topic)
+    - else
+      = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_topic_path(topic)
 
