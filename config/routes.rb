@@ -26,6 +26,8 @@ Shapado::Application.routes.draw do
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
 
+  match '/auth/:provider/callback', :to => 'settings/external_accounts#create'
+
   namespace :settings do
     match 'profile' => 'profile#edit', :via => :get
     match 'profile' => 'profile#update', :via => :put
@@ -36,6 +38,8 @@ Shapado::Application.routes.draw do
     match 'password' => 'password#update', :via => :put
     match 'account' => 'account#edit', :via => :get
     match 'account' => 'account#update', :via => :put
+    match 'external_accounts' => 'external_accounts#index', :via => :get
+    match 'external_accounts' => 'external_accounts#destroy', :via => :delete
   end
 
   resources :users, :except => [:edit, :update] do
