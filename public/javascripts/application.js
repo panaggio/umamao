@@ -115,38 +115,8 @@ function initAutocomplete() {
   // Dynamic search box
   // FIXME We should internationalize this
   var searchField = $("#search-field");
-  var searchForm = searchField.parent();
-  searchField.autoSuggest("/search/json", {
-                            asHtmlID: "search-field",
-                            minChars: 2,
-                            startText: "Buscar perguntas, tópicos e usuários",
-                            selectedItemProp: "title",
-                            resultClick: function (data) {
-                              if (data.attributes.type == "Search") {
-                                searchForm.submit();
-                              } else {
-                                location.href = data.attributes.url;
-                              }
-                            },
-                            retrieveComplete: function (data) {
-                              return data.concat([{ title: "Buscar", type: "Search" }]);
-                            },
-                            formatList: function (data, formatted) {
-                              switch (data.type) {
-                              case "Question":
-                                return formatted.html(data.title + ' <span class="as-desc">' + data.topics.join(', ') + '</span>');
-                              case "Topic":
-                                return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
-                              case "User":
-                                return formatted.html(data.pic + " " + data.title +
-                                                      ' <span class="as-desc">Usuário</span>');
-                              case "Search":
-                                return formatted.addClass("as-search").text('Buscar por perguntas com "' + this.val() + '"');
-                              default:
-                                return formatted.html(data.type);
-                              }
-                            }
-                          });
+
+  initSearchBox();
 
   // Keyboard shortcuts for search box
   $(document).bind("keypress", "/", function () { searchField.focus(); });

@@ -9,8 +9,8 @@ javascripts:
   - jquery.fcbkcomplete
   - jquery.notifyBar
   - jquery.hotkeys
-  - jquery.autoSuggest
   - showdown
+  - autocompleteBox
   - application
   - modules/sessions
   - modules/index_question

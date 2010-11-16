@@ -107,7 +107,6 @@
             }).keydown(function (e) {
                 // track last key pressed
                 lastKeyPressCode = e.keyCode;
-                firstFocus = false;
                 switch (e.keyCode) {
                     case 38: // up
                         e.preventDefault();

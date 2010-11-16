@@ -10,7 +10,7 @@ input#search-field {
     width: 100%;
 }
 
-ul.as-list {
+ul.item-box-list {
     border: 1px solid #444444;
     padding: 0;
     position: absolute;
@@ -24,7 +24,7 @@ ul.as-list {
     width: 38%;
 }
 
-li.as-result-item, li.as-message {
+li.item-box-item {
     margin: 0;
     padding: 7px;
     cursor: pointer;
@@ -33,7 +33,7 @@ li.as-result-item, li.as-message {
     text-overflow: ellipsis;
 }
 
-li.as-result-item .as-desc {
+li.item-box-item span.desc {
     font-size: x-small;
     color: #777;
 }
@@ -43,16 +43,16 @@ li.as-message {
     cursor: default;
 }
 
-li.as-result-item.active {
+li.item-box-item.item-box-active-item {
     background-color: #ebebeb;
     color: #0077cc;
 }
 
-li.as-search {
+li.item-box-search {
     color: #0077cc;
 }
 
-li.as-result-item em {
+li.item-box-item em {
     text-decoration: underline;
     font-weight: bold;
     padding: 0;
