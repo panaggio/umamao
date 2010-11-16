@@ -5,8 +5,6 @@ javascripts:
   - jquery.tools.min
   - jquery-ui
   - jquery.textarea
-  - jquery.autocomplete
-  - jquery.fcbkcomplete
   - jquery.notifyBar
   - jquery.hotkeys
   - showdown
@@ -17,8 +15,6 @@ javascripts:
   - modules/retag
   - modules/new_question
   - modules/show_user
-  - modules/members
-  - modules/move_group
 
 - show:
   - MathJax/mathjax/MathJax

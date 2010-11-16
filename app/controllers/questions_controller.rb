@@ -440,32 +440,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def move
-    @question = Question.find_by_slug_or_id(params[:id])
-    render
-  end
-
-  def move_to
-    @group = Group.find_by_slug_or_id(params[:question][:group])
-    @question = Question.find_by_slug_or_id(params[:id])
-
-    if @group
-      @question.group = @group
-
-      if @question.save
-        sweep_question(@question)
-
-        Answer.set({"question_id" => @question.id}, {"group_id" => @group.id})
-      end
-      flash[:notice] = t("questions.move_to.success", :group => @group.name)
-      redirect_to question_path(@question)
-    else
-      flash[:error] = t("questions.move_to.group_dont_exists",
-                        :group => params[:question][:group])
-      render :move
-    end
-  end
-
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 

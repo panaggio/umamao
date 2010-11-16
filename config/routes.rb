@@ -44,10 +44,6 @@ Shapado::Application.routes.draw do
   end
 
   resources :users, :except => [:edit, :update] do
-    collection do
-      get :autocomplete_for_user_login
-    end
-
     member do
       post :unfollow
       post :change_preferred_tags
@@ -97,8 +93,6 @@ Shapado::Application.routes.draw do
       get :history
       get :revert
       get :diff
-      get :move
-      put :move_to
       get :retag
       put :retag_to
       post :close
@@ -124,10 +118,6 @@ Shapado::Application.routes.draw do
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
 
   resources :groups do
-    collection do
-      get :autocomplete_for_group_slug
-    end
-
     member do
       get :allow_custom_ads
       get :disallow_custom_ads
