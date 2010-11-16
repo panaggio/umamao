@@ -173,12 +173,12 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.js do
         result = []
-        if q = params[:tag]
+        if q = params[:q]
           result = Topic.filter(q, :per_page => 5)
         end
 
         results = result.map do |t|
-          {:caption => "#{t.title} (#{t.questions_count})", :value => t.title}
+          {:title => t.title, :count => t.questions_count}
         end
 
         render :json => results

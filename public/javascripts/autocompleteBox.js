@@ -122,6 +122,13 @@ ItemBox.prototype = {
     });
   },
 
+  // Clears the content of the box.
+  clear: function () {
+    this.itemsUl.html("");
+    this.items = [];
+    this.currentItem = null;
+  },
+
   // Moves the current selection up.
   moveUp: function () {
     if (this.items.length == 0) return;
@@ -245,9 +252,14 @@ AutocompleteBox.prototype = {
         itemBox.hide();
         break;
       default:
-        box.fetchData($(this).val());
+        box.fetchData(box.preprocessInput($(this).val()));
       }
     });
+  },
+
+  // Pre-processes user input before sending
+  preprocessInput: function (input) {
+    return input;
   },
 
   // Sends an AJAX request for items that match current input,
@@ -276,7 +288,8 @@ AutocompleteBox.prototype = {
 
 function initSearchBox() {
   var searchBox = new AutocompleteBox("#search-field",
-    "#autocomplete-results", "/search/json");
+                                      "#autocomplete-results",
+                                      "/search/json");
 
   function makeItem(data) {
     switch (data.type) {
@@ -309,6 +322,52 @@ function initSearchBox() {
       items.push(makeItem(item));
     });
     items.push(makeSearchItem());
+    this.itemBox.setItems(items);
+    this.itemBox.show();
+  };
+};
+
+
+
+function initTopicAutocomplete() {
+  var tagBox = new AutocompleteBox("#question-topics-autocomplete",
+                                   "#question-topics-suggestions",
+                                   "/questions/tags_for_autocomplete.js");
+
+  function TopicItemForAutocomplete(topic) {
+    this.title = topic.title;
+    this.count = topic.count;
+  }
+
+  TopicItemForAutocomplete.prototype = new Item();
+
+  TopicItemForAutocomplete.prototype.render = function () {
+    return $('<li />').addClass("item-box-item").text(this.title + " ").
+      append($('<span class="desc">' + this.count +
+               ' ' + (this.count == 1 ? "questão" : "questões") + '</span>'));
+  };
+
+  tagBox.preprocessInput = function (input) {
+    return input.replace(/\".*?\"\s*/g, "");
+  },
+
+  TopicItemForAutocomplete.prototype.click = function () {
+    var oldTopics = tagBox.input.val().replace(/((?:\".*?\"\s*)*).*/, "$1");
+    var newTopic = '"' + this.title.replace(/\"/g, '\\"') + '" ';
+    tagBox.input.val(oldTopics.length != 0 ? oldTopics + " " + newTopic : newTopic);
+    tagBox.itemBox.clear();
+    tagBox.itemBox.hide();
+  };
+
+  tagBox.processData = function (data) {
+    var items = [];
+    var re = new RegExp("^" +  tagBox.input.val() + "$", "i");
+    if (!data.some(function (item) { return re.test(item.value); })) {
+      data.push({title: tagBox.preprocessInput(tagBox.input.val()), count: 0});
+    }
+    data.forEach(function (item) {
+      items.push(new TopicItemForAutocomplete(item));
+    });
     this.itemBox.setItems(items);
     this.itemBox.show();
   };

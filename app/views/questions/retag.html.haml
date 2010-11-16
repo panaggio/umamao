@@ -1,5 +1,5 @@
 
--content_for :subtabs do
+- content_for :subtabs do
   .navtitle
     = t(".title", :title => h(@question.title))
 
@@ -8,7 +8,7 @@
     = markdown(@question.body)
 
   .tag-list
-    -@question.tags.each do |tag|
+    - @question.tags.each do |tag|
       %span.tag
         = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
   %div
