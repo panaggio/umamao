@@ -19,6 +19,7 @@ Item.prototype = {
     this.view = this.render();
     this.view.click(function () {
       item.click();
+      item.box.hide();
     }).mouseover(function () {
       item.box.deactivateSelection();
       item.box.currentItem = item.index;
@@ -151,7 +152,7 @@ ItemBox.prototype = {
 
   // Deactivates the current selection.
   deactivateSelection: function () {
-    if (this.currentItem) {
+    if (this.currentItem != null) {
       this.items[this.currentItem].deactivate();
       this.currentItem = null;
     }
@@ -159,7 +160,7 @@ ItemBox.prototype = {
 
   // Runs the "click" event associated with the current active item.
   click: function () {
-    if (this.currentItem)
+    if (this.currentItem != null)
       this.items[this.currentItem].click();
   },
 
@@ -177,10 +178,17 @@ ItemBox.prototype = {
 
 // Input field that contacts a server to look for suggestions.
 function AutocompleteBox(inputField, itemBoxContainer, url) {
+
+  var box = this;
+
   this.input = $(inputField);
   this.itemBox = new ItemBox(itemBoxContainer);
+  this.itemBox.itemsContainer.mousedown(function () {
+    box.selectionClicked = true;
+  });
   this.url = url;
   this.initInputField();
+
 };
 
 AutocompleteBox.prototype = {
@@ -188,6 +196,15 @@ AutocompleteBox.prototype = {
   startText: "",
   minChars: 1,
   ajaxRequest: null,
+
+  // This is a hack to deal with inconsistencies in the order in which
+  // DOM events are fired. Sometimes, the input box will receive focusout
+  // and blur events before a clicked item receives any event. Therefore,
+  // we need to be careful when hiding the selection box when the input
+  // loses focus, since hiding it will prevent it from receiving click
+  // events.
+  selectionClicked: false,
+
 
   // Binds event handlers to input field.
   initInputField: function () {
@@ -205,8 +222,10 @@ AutocompleteBox.prototype = {
       if ($(this).val() == "") {
         $(this).val(box.startText);
       }
-      itemBox.hide();
-    }).keypress(function (e) {
+      if (!box.selectionClicked) {
+        itemBox.hide();
+      }
+    }).keydown(function (e) {
       switch (e.keyCode) {
       case 38: // up
         e.preventDefault();
@@ -238,7 +257,7 @@ AutocompleteBox.prototype = {
     var fetchUrl = this.url + "?q=" + encodeURIComponent(query);
     this.abortRequest();
     this.ajaxRequest = $.getJSON(fetchUrl, function (data) {
-      box.processData(data);
+      if (data) box.processData(data);
     });
   },
 
@@ -279,8 +298,7 @@ function initSearchBox() {
         text('Buscar por perguntas com "' + searchBox.input.val() + '"');
     };
     searchItem.click = function () {
-      console.log(searchBox);
-      searchBox.input.parent().submitForm();
+      searchBox.input.parent().submit();
     };
     return searchItem;
   };
