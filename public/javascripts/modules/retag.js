@@ -10,7 +10,7 @@ $(document).ready(function() {
         if(data.success){
           link.parents(".tag-list").find('.tag').hide();
           $('.retag').hide();
-          link.parents(".tag-list").prepend(data.html);
+          link.parents(".tag-list").after(data.html);
           initAutocomplete();
           $('.autocomplete_for_tags');
         } else {
@@ -37,8 +37,8 @@ $(document).ready(function() {
                     var tags = $.map(data.topics, function(topic){
 		      return '<span class="tag"><a rel="tag" href="/topics/'+topic.slug+'">'+topic.title+'</a></span>';
 		    });
-                    form.parents('.tag-list').find('.tag').remove();
-                    form.before(tags.join(''));
+                    $('.tag-list', form.parent()).find('.tag').remove();
+                    $('.tag-list', form.parent()).prepend(tags.join(''));
                     form.remove();
                     $('.retag').show();
                     showMessage(data.message, "notice");

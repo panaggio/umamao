@@ -34,9 +34,9 @@
 = error_messages_for 'answer'
 
 
-#question-body-col.commentable.markdown
+#question-body-col.commentable
   %a{:name => @question.id}
-  #body
+  #body.markdown
     - if @question.closed && @question.close_reason
       #close_reason
         = t(".close_reason")

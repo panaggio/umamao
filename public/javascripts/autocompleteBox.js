@@ -1,3 +1,33 @@
+// Autocomplete boxes used throughout the site.
+//
+// There are currently two kinds of autocomplete boxes: an all-purpose
+// search box, that allows the user to click on each suggested item and
+// go to its page, and a topic selection box, used when classifying
+// questions and bulk-following topics.
+//
+// There are three main classes: Item, ItemBox and AutocompleteBox.
+// Item takes care of defining how each individual suggested entry is
+// displayed and the action to be taken when it is clicked. ItemBox keeps
+// track of the currently selected entry and moving between suggestions.
+// AutocompleteBox handles keyboard input and contacts the server to
+// refresh suggestions.
+//
+// TODO:
+// - Use setInterval to refresh suggestions.
+// - Move utility functions somewhere else.
+// - Internationalize.
+// - Highlight entries where they match the input.
+
+// Utility functions.
+window.Utils = window.Utils || {};
+
+// Escapes every character in a string that has a special meaning in a
+// regular expression.
+// TODO: actually test this.
+Utils.escapeRegExp = function (string) {
+  return string.replace(/[\{\}\(\)\[\]\.\+\*\?\$\^\\]/g, "\\$&");
+};
+
 // Data item in an item box.
 // Meant to be inherited.
 function Item() { };
@@ -47,47 +77,6 @@ Item.prototype = {
     this.view.removeClass(this.activeItemsClass);
   }
 
-};
-
-// Each specific kind of item we have in autocomplete boxes.
-
-function QuestionItem(data) {
-  this.title = data.title;
-  this.url = data.url;
-  this.topics = data.topics;
-};
-
-// Not a very clever way of inheriting, but...
-QuestionItem.prototype = new Item();
-
-QuestionItem.prototype.render = function () {
-  return $('<li />').addClass("item-box-item").text(this.title + " ").
-    append($('<span class="desc" />').text(this.topics.join(", ")));
-};
-
-function TopicItem(data) {
-  this.title = data.title;
-  this.url = data.url;
-};
-
-TopicItem.prototype = new Item();
-
-TopicItem.prototype.render = function () {
-  return $('<li />').addClass("item-box-item").text(this.title).
-    append(' <span class="desc">Tópico</span>');
-};
-
-function UserItem(data) {
-  this.name = data.title;
-  this.picture = data.pic;
-  this.url = data.url;
-};
-
-UserItem.prototype = new Item();
-
-UserItem.prototype.render = function () {
-  var picture = $(this.picture);
-  return $('<li />').addClass("item-box-item").text(" " + this.name).prepend(picture);
 };
 
 // Builds a select-like box with items that can execute
@@ -201,7 +190,7 @@ function AutocompleteBox(inputField, itemBoxContainer, url) {
 AutocompleteBox.prototype = {
 
   startText: "",
-  minChars: 1,
+  minChars: 2,
   ajaxRequest: null,
 
   // This is a hack to deal with inconsistencies in the order in which
@@ -252,7 +241,7 @@ AutocompleteBox.prototype = {
         itemBox.hide();
         break;
       default:
-        box.fetchData(box.preprocessInput($(this).val()));
+        box.fetchData($(this).val());
       }
     });
   },
@@ -265,6 +254,7 @@ AutocompleteBox.prototype = {
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
+    if (query.length < this.minChars) return;
     var box = this;
     var fetchUrl = this.url + "?q=" + encodeURIComponent(query);
     this.abortRequest();
@@ -272,9 +262,6 @@ AutocompleteBox.prototype = {
       if (data) box.processData(data);
     });
   },
-
-  // Passes the received data items to the item box.
-  processData: function (data) { },
 
   // Aborts an AJAX request for items.
   abortRequest: function () {
@@ -286,6 +273,51 @@ AutocompleteBox.prototype = {
 
 };
 
+// Each specific kind of item we have in autocomplete boxes.
+
+function QuestionItem(data) {
+  this.title = data.title;
+  this.url = data.url;
+  this.topics = data.topics;
+};
+
+// Not a very clever way of inheriting, but...
+QuestionItem.prototype = new Item();
+
+QuestionItem.prototype.render = function () {
+  return $('<li />').addClass("item-box-item").text(this.title + " ").
+    append($('<span class="desc" />').text(this.topics.join(", ")));
+};
+
+function TopicItem(data) {
+  this.title = data.title;
+  this.url = data.url;
+};
+
+TopicItem.prototype = new Item();
+
+TopicItem.prototype.render = function () {
+  return $('<li />').addClass("item-box-item").text(this.title).
+    append(' <span class="desc">Tópico</span>');
+};
+
+function UserItem(data) {
+  this.name = data.title;
+  this.picture = data.pic;
+  this.url = data.url;
+};
+
+UserItem.prototype = new Item();
+
+UserItem.prototype.render = function () {
+  var picture = $(this.picture);
+  return $('<li />').addClass("item-box-item").text(" " + this.name).prepend(picture);
+};
+
+// The all-purpose search box. Looks for questions, topics and users.
+// Clicking a search result will take to the page of the corresponding
+// entity. Also, displays an item that when clicked takes the user to the
+// search page for questions.
 function initSearchBox() {
   var searchBox = new AutocompleteBox("#search-field",
                                       "#autocomplete-results",
@@ -328,11 +360,27 @@ function initSearchBox() {
 };
 
 
-
+// Box to autocomplete and select topics when creating or editing questions.
 function initTopicAutocomplete() {
+
   var tagBox = new AutocompleteBox("#question-topics-autocomplete",
                                    "#question-topics-suggestions",
                                    "/questions/tags_for_autocomplete.js");
+
+  var selectedTopicsUl = $("#selected-topics");
+  $("#selected-topics span.remove").live("click", function () {
+    $(this).parent().remove();
+  });
+
+  // Adds a topic to the list of selected topics.
+  function addTopic(topic) {
+    var topicLi = $("<li />").text(topic.title);
+    var topicInput = $('<input type="hidden" name="question[topics][]" />').
+      val(topic.title);
+    // TODO: make this a link, or use checkboxes to add/remove many topics
+    var topicRemove = $('<span class="remove"> Remover</span>');
+    selectedTopicsUl.append(topicLi.append(topicInput).append(topicRemove));
+  }
 
   function TopicItemForAutocomplete(topic) {
     this.title = topic.title;
@@ -348,20 +396,22 @@ function initTopicAutocomplete() {
   };
 
   tagBox.preprocessInput = function (input) {
-    return input.replace(/\".*?\"\s*/g, "");
+    return input;
   },
 
   TopicItemForAutocomplete.prototype.click = function () {
-    var oldTopics = tagBox.input.val().replace(/((?:\".*?\"\s*)*).*/, "$1");
-    var newTopic = '"' + this.title.replace(/\"/g, '\\"') + '" ';
-    tagBox.input.val(oldTopics.length != 0 ? oldTopics + " " + newTopic : newTopic);
-    tagBox.itemBox.clear();
+    addTopic(this);
     tagBox.itemBox.hide();
+    tagBox.input.val("");
   };
 
   tagBox.processData = function (data) {
+
+    // Ignore empty input.
+    if (tagBox.input.val().trim() == "") return;
+
     var items = [];
-    var re = new RegExp("^" +  tagBox.input.val() + "$", "i");
+    var re = new RegExp("^" +  Utils.escapeRegExp(tagBox.input.val()) + "$", "i");
     if (!data.some(function (item) { return re.test(item.value); })) {
       data.push({title: tagBox.preprocessInput(tagBox.input.val()), count: 0});
     }
@@ -370,5 +420,7 @@ function initTopicAutocomplete() {
     });
     this.itemBox.setItems(items);
     this.itemBox.show();
+
   };
+
 };
