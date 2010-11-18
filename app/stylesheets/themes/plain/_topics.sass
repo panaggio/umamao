@@ -1,0 +1,55 @@
+@mixin topic-container
+  .topic
+    padding: 2px 8px
+    background: #f7f7f7
+    overflow: hidden
+    margin-left: 3px
+    margin-bottom: 5px
+    line-height: 20px
+    font-weight: bold
+    font-size: .785em
+
+  .topic, .topic a
+    color: #444444
+
+    a
+      &:link, &:active, &:visited
+        cursor: pointer
+        text-align: center
+        white-space: nowrap
+      &:hover
+        text-decoration: underline
+        background: #F7F7F7
+
+.topic-list
+  overflow: hidden
+  line-height: 0px
+
+  ul
+    list-style-type: none
+
+  +topic-container
+
+  .topic
+    float: left
+
+// User followed topics list in profile
+
+ul.topic-list
+  list-style: none
+
+  +topic-container
+
+  .topic
+    max-width: 67%
+    text-overflow: ellipsis
+
+  .follow-info
+    float: right
+
+    a
+      color: #444444
+      font-size: 0.785em
+
+#sidebar ul.topic-list .topic
+  float: left
