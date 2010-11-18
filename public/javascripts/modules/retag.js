@@ -37,7 +37,9 @@ $(document).ready(function() {
                     var topicList = form.siblings(".topic-list");
                     topicList.find('.topic').remove();
                     data.topics.forEach(function (topic) {
-		      topicList.prepend($('<li class="topic" />').text(topic.title));
+                      var topicLink = $("<a />").attr("href", topic.url).
+                                            text(topic.title);
+		      topicList.prepend($('<li class="topic" />').append(topicLink));
 		    });
                     form.remove();
                     $('.retag').show();

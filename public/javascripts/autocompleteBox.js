@@ -379,7 +379,7 @@ function initTopicAutocomplete() {
     var topicInput = $('<input type="hidden" name="question[topics][]" />').
       val(topic.title);
     // TODO: make this a link, or use checkboxes to add/remove many topics
-    var topicRemove = $('<span class="remove"> ✕</span>');
+    var topicRemove = $('<span class="remove">✕</span>');
     selectedTopicsUl.append(topicLi.append(topicInput).
                             append(topicRemove).append('<div class="clear" />'));
   }

@@ -428,7 +428,7 @@ class QuestionsController < ApplicationController
         format.js {
           topics = @question.topics.map{ |t|
             { :title => CGI.escapeHTML(t.title),
-              :slug => CGI.escapeHTML(t.slug) }
+              :url => url_for(t) }
           }
           render(:json => {:success => true,
                    :message => flash[:notice], :topics => topics}.to_json)
