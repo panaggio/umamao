@@ -23,9 +23,9 @@
     .block
       %h3
         = t(".tags", :default => [:"layout.application.tags", :"activerecord.attributes.user.tags", "tags"])
-      .tag-list
+      .topic-list
         %ul
           - @search_tags.each do |tag|
             %li
-              %span.tag{:class => "tag_#{h(tag)}"}
+              %span.topic{:class => "tag_#{h(tag)}"}
                 = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"

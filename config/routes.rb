@@ -46,7 +46,6 @@ Shapado::Application.routes.draw do
   resources :users, :except => [:edit, :update] do
     member do
       post :unfollow
-      post :change_preferred_tags
       post :follow
     end
   end
@@ -78,7 +77,6 @@ Shapado::Application.routes.draw do
 
   resources :questions do
     collection do
-      get :tags
       get :tags_for_autocomplete
       get :unanswered
       get :related_questions

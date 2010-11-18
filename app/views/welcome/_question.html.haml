@@ -1,9 +1,5 @@
--klass = ""
--if logged_in? && question.tags.detect { |tag| current_user.preferred_tags_on(current_group).include?(tag) }
-  - klass = "highlight"
-
-.question{:class => klass}
-  -if logged_in? && current_user.can_modify?(question)
+.question
+  - if logged_in? && current_user.can_modify?(question)
     .right.buttons
       = link_to t('scaffold.edit'), edit_question_path(question), :class => "button"
       = link_to t('scaffold.destroy'), question_path(question), :confirm => t("scaffold.sure", :model => "question"), :method => :delete, :class => "button cancel"
@@ -29,9 +25,9 @@
         = gravatar(question.user.email.to_s, :size => 48)
       = link_to h(question.title), question_path(question), :title => truncate(question.body, :length => 200)
 
-    .tag-list.left
-      -question.first_tags.each do |tag|
-        %span.tag{:class => "tag_#{h(tag)}"}
+    .topic-list.left
+      - question.first_tags.each do |tag|
+        %span.topic{:class => "tag_#{h(tag)}"}
           = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
     .right
       = t(:asked_by, :scope => "activerecord.attributes.question")

@@ -73,39 +73,6 @@ module ApplicationHelper
     end
   end
 
-
-  def tag_cloud(tags = [], options = {})
-    if tags.empty?
-      tags = Question.tag_cloud({:group_id => current_group.id, :banned => false}.
-                        merge(language_conditions.merge(language_conditions)))
-    end
-
-    return '' if tags.size <= 2
-
-    # Sizes: xxs xs s l xl xxl
-    css = {1 => "xxs", 2 => "xs", 3 => "s", 4 => "l", 5 => "xl" }
-    max_size = 5
-    min_size = 1
-
-    tag_class = options.delete(:tag_class) || "tag"
-
-    lowest_value = tags.min { |a, b| a["count"].to_i <=> b["count"].to_i }
-    highest_value = tags.max { |a, b| a["count"].to_i <=> b["count"].to_i }
-
-    spread = (highest_value["count"] - lowest_value["count"])
-    spread = 1 if spread == 0
-    ratio = (max_size - min_size) / spread
-
-    cloud = '<div class="tag_cloud">'
-    tags.each do |tag|
-      size = min_size + (tag["count"] - lowest_value["count"]) * ratio
-      url = url_for(:controller => "questions", :action => "index", :tags => tag["name"])
-      cloud << "<span>#{link_to(tag["name"], url, :class => "#{tag_class} #{css[size.round]}")}</span> "
-    end
-    cloud += "</div>"
-    cloud
-  end
-
   def country_flag(code, name)
     if code
       image_tag("flags/flag_#{code.downcase}.gif", :title => name, :alt => "")

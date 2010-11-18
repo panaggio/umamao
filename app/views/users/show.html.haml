@@ -43,7 +43,7 @@
       %ul.topic-list
         - @topics.each do |topic|
           %li
-            .tag
+            .topic
               = link_to topic.title, topic_url(topic), :title => topic.title
             = render :partial => "topics/follow", :locals => {:topic => topic}
             .clear

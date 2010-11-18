@@ -1,71 +1,49 @@
-@mixin tag-container
-  .tag
-    margin-left: 3px
+@mixin topic-container
+  .topic
+    padding: 2px 8px
+    background: #f7f7f7
     overflow: hidden
+    margin-left: 3px
+    margin-bottom: 5px
+
+  .topic, .topic a
+    color: #444444
+    font-size: .785em
 
     a
       &:link, &:active, &:visited
-        color: #444444
-        font-size: .785em
-        background: #F7F7F7
+        // font-size: .785em
         cursor: pointer
         font-weight: bold
-        margin-bottom: 5px
-        padding: 2px 8px
         text-align: center
         white-space: nowrap
-        line-height: 20px
+        // line-height: 20px
       &:hover
         text-decoration: underline
         background: #F7F7F7
-      &.remove_tag
-        background: #E55252 !important
-        padding: 0px 2px
-        font-weight: bold
 
-        border: none
-        &:hover
-          color: #ffdede
-          background: #810000 !important
-
-.tag-list
-  //font-size: .785em
+.topic-list
   overflow: hidden
   line-height: 0px
 
   ul
     list-style-type: none
 
-  +tag-container
+  +topic-container
 
-  .tag
+  .topic
     float: left
-
-.tag-multiplier
-  font-size: 125%
-  color: #555
-  font-weight: bold
-  margin-left: 5px
-  display: inline
-  font-family: Helvetica
-
-.tag_cloud
-  a.tag
-    text-decoration: none
-    line-height: 26px
 
 // User followed topics list in profile
 
 ul.topic-list
   list-style: none
 
-  +tag-container
+  +topic-container
 
-  .tag
+  .topic
     max-width: 67%
-    overflow: hidden
     text-overflow: ellipsis
-    float: left
 
   .follow-info
     float: right
@@ -73,3 +51,6 @@ ul.topic-list
     a
       color: #444444
       font-size: 0.785em
+
+#sidebar ul.topic-list .topic
+  float: left

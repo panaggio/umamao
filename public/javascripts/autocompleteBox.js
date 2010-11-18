@@ -17,6 +17,11 @@
 // - Move utility functions somewhere else.
 // - Internationalize.
 // - Highlight entries where they match the input.
+//
+// FIXME:
+// - Pressing return several times in topic selection adds the same topic
+//   several times.
+//
 
 // Utility functions.
 window.Utils = window.Utils || {};
@@ -246,11 +251,6 @@ AutocompleteBox.prototype = {
     });
   },
 
-  // Pre-processes user input before sending
-  preprocessInput: function (input) {
-    return input;
-  },
-
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
@@ -363,23 +363,25 @@ function initSearchBox() {
 // Box to autocomplete and select topics when creating or editing questions.
 function initTopicAutocomplete() {
 
-  var tagBox = new AutocompleteBox("#question-topics-autocomplete",
+  var topicBox = new AutocompleteBox("#question-topics-autocomplete",
                                    "#question-topics-suggestions",
                                    "/questions/tags_for_autocomplete.js");
 
   var selectedTopicsUl = $("#selected-topics");
   $("#selected-topics span.remove").live("click", function () {
-    $(this).parent().remove();
+    $(this).parents("li").first().remove();
   });
 
   // Adds a topic to the list of selected topics.
   function addTopic(topic) {
-    var topicLi = $("<li />").text(topic.title);
+    var topicLi = $('<li class="topic"/>').text(topic.title);
+    // FIXME: This shouldn't be done with links. We should fix the CSS instead.
     var topicInput = $('<input type="hidden" name="question[topics][]" />').
       val(topic.title);
     // TODO: make this a link, or use checkboxes to add/remove many topics
-    var topicRemove = $('<span class="remove"> Remover</span>');
-    selectedTopicsUl.append(topicLi.append(topicInput).append(topicRemove));
+    var topicRemove = $('<span class="remove"> ✕</span>');
+    selectedTopicsUl.append(topicLi.append(topicInput).
+                            append(topicRemove).append('<div class="clear" />'));
   }
 
   function TopicItemForAutocomplete(topic) {
@@ -395,25 +397,21 @@ function initTopicAutocomplete() {
                ' ' + (this.count == 1 ? "questão" : "questões") + '</span>'));
   };
 
-  tagBox.preprocessInput = function (input) {
-    return input;
-  },
-
   TopicItemForAutocomplete.prototype.click = function () {
     addTopic(this);
-    tagBox.itemBox.hide();
-    tagBox.input.val("");
+    topicBox.itemBox.hide();
+    topicBox.input.val("");
   };
 
-  tagBox.processData = function (data) {
+  topicBox.processData = function (data) {
 
     // Ignore empty input.
-    if (tagBox.input.val().trim() == "") return;
+    if (topicBox.input.val().trim() == "") return;
 
     var items = [];
-    var re = new RegExp("^" +  Utils.escapeRegExp(tagBox.input.val()) + "$", "i");
+    var re = new RegExp("^" +  Utils.escapeRegExp(topicBox.input.val()) + "$", "i");
     if (!data.some(function (item) { return re.test(item.value); })) {
-      data.push({title: tagBox.preprocessInput(tagBox.input.val()), count: 0});
+      data.push({title: topicBox.input.val(), count: 0});
     }
     data.forEach(function (item) {
       items.push(new TopicItemForAutocomplete(item));

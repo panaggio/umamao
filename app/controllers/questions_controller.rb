@@ -123,14 +123,6 @@ class QuestionsController < ApplicationController
     conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
                                    :closed => false, :exercise.ne => true)
 
-    if logged_in?
-      if @active_subtab.to_s == "expert"
-        @current_tags = current_user.stats(:expert_tags).expert_tags
-      elsif @active_subtab.to_s == "mytags"
-        @current_tags = current_user.preferred_tags_on(current_group)
-      end
-    end
-
     @questions = Question.paginate({:order => current_order,
                                     :per_page => 25,
                                     :page => params[:page] || 1,
@@ -140,30 +132,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html # unanswered.html.erb
       format.json  { render :json => @questions.to_json(:except => %w[_keywords slug watchers]) }
-    end
-  end
-
-  def tags
-    conditions = scoped_conditions(:banned => false)
-    if params[:q].blank?
-      @tag_cloud = Question.tag_cloud(conditions, -1).sort{|a, b| a["name"] <=> b["name"]}.
-        paginate :per_page => 120, :page => params[:page] || 1
-    else
-      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1).
-        sort{|a, b| a["name"] <=> b["name"]}.
-        paginate :per_page => 32, :page => params[:page] || 1
-    end
-
-
-
-    respond_to do |format|
-      format.html do
-        set_page_title(t("layouts.application.tags"))
-      end
-      format.js do
-        html = render_to_string(:partial => "tag_table", :object => @tag_cloud)
-        render :json => {:html => html}
-      end
     end
   end
 
@@ -199,7 +167,6 @@ class QuestionsController < ApplicationController
       session[:user_return_to] = question_path(@question)
     end
 
-    @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
     options = {:per_page => 25, :page => params[:page] || 1,
                :order => current_order, :banned => false}
     @answers = @question.answers.paginate(options)
