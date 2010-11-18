@@ -15,16 +15,16 @@
     - owner = question.user
 
   %li.entry.item{:class => class_for_question(question)}
-    / Question Summary
+    -# Question Summary
     .summary
       - cache("question_on_index_#{question.id}") do
         %h3= link_to title, question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
-        .topic-list
+        %ul.topic-list
           - question.topics[0..5].each do |topic|
-            %span.topic
+            %li.topic
               = link_to h(topic.title), topic_path(topic), :title => t("questions.tags.tooltip", :tag => h(topic.title))
 
-      / Question Stats
+      -# Question Stats
       .info
         .metadata
           = t("time.ago", :time => time_ago_in_words(last_target.updated_at))

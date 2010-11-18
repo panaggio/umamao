@@ -20,7 +20,7 @@
       = link_to h(member.name), user_path(member)
     .bio
       = find_and_preserve(auto_link(member.bio))
-    .topic-list
+    %ul.topic-list
       - if can_modify_member
         - form_tag(member_path(member.id), :class => "form", :method => :put) do |f|
           = select_tag :role, options_for_select(Membership::ROLES, membership.role)

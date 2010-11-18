@@ -25,10 +25,10 @@
         = gravatar(question.user.email.to_s, :size => 48)
       = link_to h(question.title), question_path(question), :title => truncate(question.body, :length => 200)
 
-    .topic-list.left
+    %ul.topic-list.left
       - question.first_tags.each do |tag|
-        %span.topic{:class => "tag_#{h(tag)}"}
-          = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
+        %li.topic{:class => "tag_#{h(tag)}"}
+          = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
     .right
       = t(:asked_by, :scope => "activerecord.attributes.question")
       = link_to h(question.user.name), user_path(question.user)

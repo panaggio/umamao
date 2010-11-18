@@ -8,9 +8,9 @@ $(document).ready(function() {
       extraParams : { 'format' : 'js'},
       success: function(data) {
         if(data.success){
-          link.parents(".tag-list").find('.tag').hide();
-          $('.retag').hide();
-          link.parents(".tag-list").after(data.html);
+          var oldList = link.parents(".topic-list");
+          oldList.find('.topic, .retag').hide();
+          oldList.after(data.html);
           initAutocomplete();
           $('.autocomplete_for_tags');
         } else {
@@ -34,11 +34,11 @@ $(document).ready(function() {
             data: form.serialize()+"&format=js",
             success: function(data, textStatus) {
                 if(data.success) {
-                    var tags = $.map(data.topics, function(topic){
-		      return '<span class="tag"><a rel="tag" href="/topics/'+topic.slug+'">'+topic.title+'</a></span>';
+                    var topicList = form.siblings(".topic-list");
+                    topicList.find('.topic').remove();
+                    data.topics.forEach(function (topic) {
+		      topicList.prepend($('<li class="topic" />').text(topic.title));
 		    });
-                    $('.tag-list', form.parent()).find('.tag').remove();
-                    $('.tag-list', form.parent()).prepend(tags.join(''));
                     form.remove();
                     $('.retag').show();
                     showMessage(data.message, "notice");
@@ -58,10 +58,9 @@ $(document).ready(function() {
   });
 
   $('.cancel-retag').live('click', function(){
-      var link = $(this);
-      link.parents('.tag-list').find('.tag').show();
-      link.parents('.tag-list').find('.retag').show();
-      link.parents('.tag-list').find('form').remove();
+      var topicList = $(this).parent().siblings(".topic-list");
+      topicList.find('.topic, .retag').show();
+      topicList.siblings('form').remove();
       return false;
   });
 });

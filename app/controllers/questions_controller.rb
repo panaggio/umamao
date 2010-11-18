@@ -97,7 +97,7 @@ class QuestionsController < ApplicationController
     if params[:id]
       @question = Question.find(params[:id])
     elsif params[:question]
-      topics = Topic.from_titles!(params[:question].delete(:topics))
+      topics = Topic.from_titles!(params[:question].try(:delete, :topics))
       @question = Question.new(params[:question])
       @question.topics = topics
       @question.group_id = current_group.id
@@ -223,7 +223,7 @@ class QuestionsController < ApplicationController
                           params[:question])
     @question.group = current_group
     @question.user = current_user
-    @question.topics = Topic.from_titles!(params[:question][:topics])
+    @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
 
     if !logged_in?
       draft = Draft.create!(:question => @question)
@@ -257,7 +257,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
-      @question.topics = Topic.from_titles!(params[:question][:topics])
+      @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
       @question.updated_by = current_user
       @question.last_target = @question
 
@@ -410,7 +410,7 @@ class QuestionsController < ApplicationController
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 
-    @question.topics = Topic.from_titles!(params[:question][:topics])
+    @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
 
     @question.updated_by = current_user
     @question.last_target = @question

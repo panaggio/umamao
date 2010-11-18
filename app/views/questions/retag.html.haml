@@ -7,10 +7,10 @@
   .markdown{:style => "width: 92%"}
     = markdown(@question.body)
 
-  .topic-list
+  %ul.topic-list
     - @question.tags.each do |tag|
-      %span.topic
-        = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
+      %li.topic
+        = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
   %div
     %b
       = t("questions.show.asked_on")

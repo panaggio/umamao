@@ -27,10 +27,10 @@
       .question_summary
         = truncate(question.body, :length => 150)
 
-    .topic-list.left
+    %ul.topic-list.left
       - question.tags.each do |tag|
-        %span.topic{:class => "tag_#{h(tag)}"}
-          = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "tag"
+        %li.topic{:class => "tag_#{h(tag)}"}
+          = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
     .right
       = t(:asked_by, :scope => "activerecord.attributes.question")
       = link_to h(question.user.name), user_path(question.user)
