@@ -18,10 +18,6 @@
 // - Internationalize.
 // - Highlight entries where they match the input.
 //
-// FIXME:
-// - Pressing return several times in topic selection adds the same topic
-//   several times.
-//
 
 // Utility functions.
 window.Utils = window.Utils || {};
@@ -375,7 +371,6 @@ function initTopicAutocomplete() {
   // Adds a topic to the list of selected topics.
   function addTopic(topic) {
     var topicLi = $('<li class="topic"/>').text(topic.title);
-    // FIXME: This shouldn't be done with links. We should fix the CSS instead.
     var topicInput = $('<input type="hidden" name="question[topics][]" />').
       val(topic.title);
     // TODO: make this a link, or use checkboxes to add/remove many topics
@@ -400,6 +395,7 @@ function initTopicAutocomplete() {
   TopicItemForAutocomplete.prototype.click = function () {
     addTopic(this);
     topicBox.itemBox.hide();
+    topicBox.itemBox.clear();
     topicBox.input.val("");
   };
 
