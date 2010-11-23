@@ -2,7 +2,7 @@
   .entry
     = form_tag search_path, :id => "search-form", :method => :get do
       = text_field_tag :q, params[:q], :id => "search-field"
-      #autocomplete-results
+      %ul#search-results.autocomplete-list
   - if logged_in?
     - if !current_group.isolate && AppConfig.enable_groups
       .entry

@@ -1,6 +1,9 @@
-%li.topic
-  = h(topic.title)
-  %input{:type => "hidden", :name => "question[topics][]", :value => topic.title}
-  %span.remove
-    ✕
-  .clear
+-# Little box used for adding topics to questions.
+
+%li
+  .topic
+    = h(topic.title)
+    %input{:type => "hidden", :name => "question[topics][]", :value => topic.title}
+    %span.remove
+      ✕
+    .clear

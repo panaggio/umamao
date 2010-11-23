@@ -9,8 +9,9 @@
 
   %ul.topic-list
     - @question.tags.each do |tag|
-      %li.topic
-        = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
+      %li
+        .topic
+          = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
   %div
     %b
       = t("questions.show.asked_on")

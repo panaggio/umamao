@@ -89,13 +89,11 @@ Item.prototype = {
 // specific actions when clicked.
 function ItemBox(container) {
   this.itemsContainer = $(container);
-  this.itemsUl = $('<ul />').addClass(this.itemsUlClass);
-  this.itemsContainer.append(this.itemsUl).hide();
+  this.itemsContainer.hide();
 };
 
 ItemBox.prototype = {
 
-  itemsUlClass: "autocomplete-list",
   items: [],
   currentItem: null,
 
@@ -106,20 +104,20 @@ ItemBox.prototype = {
     var box = this;
 
     // Clears previous items.
-    this.itemsUl.html("");
+    this.itemsContainer.html("");
     this.items = items;
     this.currentItem = null;
 
     items.forEach(function (item, i) {
       item.box = box;
       item.index = i;
-      box.itemsUl.append(item.buildView());
+      box.itemsContainer.append(item.buildView());
     });
   },
 
   // Clears the content of the box.
   clear: function () {
-    this.itemsUl.html("");
+    this.itemsContainer.html("");
     this.items = [];
     this.currentItem = null;
   },
@@ -302,7 +300,7 @@ SearchItem.prototype = $.extend({}, Item.prototype, SearchItem.prototype);
 function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
-                                      "#autocomplete-results",
+                                      "#search-results",
                                       "/search/autocomplete");
 
   searchBox.processData = function (data) {

@@ -43,11 +43,6 @@
     - else
       %h2.title
         = t("followable.topics", :count => @topics.count)
-    - if logged_in? && current_user.id == @user.id
-      %h2
-        follow new topics
-      = text_field "", "", :class => "text_field autocomplete_for_tags", :id => "follow-topic-autocomplete"
-      #follow-topic-suggestions
     %ul.topic-list
       - @topics.each do |topic|
         %li

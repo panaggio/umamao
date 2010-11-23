@@ -25,5 +25,6 @@
         = t(".tags", :default => [:"layout.application.tags", :"activerecord.attributes.user.tags", "tags"])
       %ul.topic-list
         - @search_tags.each do |tag|
-          %li.topic{:class => "tag_#{h(tag)}"}
-            = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
+          %li
+            .topic{:class => "tag_#{h(tag)}"}
+              = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"

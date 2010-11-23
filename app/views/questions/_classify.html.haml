@@ -1,12 +1,7 @@
 -# Topic selection for questions with autocompletion.
 
 = text_field "topics", "", :class => "text_field autocomplete_for_tags", :id => "question-topics-autocomplete"
-#question-topics-suggestions
+%ul#question-topics-suggestions.autocomplete-list
 %ul#selected-topics.topic-list
   - @question.topics.each do |topic|
-    %li.topic
-      = link_to topic.title, topic_url(topic)
-      %input{:type => "hidden", :name => "question[topics][]", :value => topic.title}
-      %span.remove
-        = "✕"
-      .clear
+    = render :partial => "topics/box", :locals => {:topic => topic}

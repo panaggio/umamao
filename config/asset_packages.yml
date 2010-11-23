@@ -28,7 +28,7 @@ stylesheets:
 - base:
   - jquery-ui
   - compiled/application
-  - search
+  - autocomplete
 - landing:
   - compiled/landing
 
