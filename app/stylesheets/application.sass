@@ -115,35 +115,44 @@ form.share_content
   text-align: center
 
 #news_items
+  .origin
+    color: #333
 
   .answer
-    margin: 0 auto
-    width: 90%
+    margin-top: 1em
 
-  .large.answer 
-    height: 80px
-    position: relative
-    overflow: hidden
+    .vote-col
+      width: 10%
+      float: left
 
-    .more
-      background-color: white
-      bottom: 0
-      position: absolute
-      width: 100%
-      text-align: center
-      cursor: pointer
-      color: #538DC2
-      padding-top: 5px
+    .body-col
+      margin: 0 10%
+      width: 80%
 
-      .more-link
-        display: block
-        border-top: 2px dashed #EEEEEE
-        width: 90%
-        margin: 0 auto
+      &.large
+        height: 80px
+        position: relative
+        overflow: hidden
 
-  .expanded.large.answer
-    height: auto
-    overflow: visible
+        .more
+          background-color: white
+          bottom: 0
+          position: absolute
+          width: 100%
+          text-align: center
+          cursor: pointer
+          color: #538DC2
+          padding-top: 5px
 
-    .more
-      display: none
+          .more-link
+            display: block
+            border-top: 2px dashed #EEEEEE
+            width: 90%
+            margin: 0 auto
+
+        &.expanded
+          height: auto
+          overflow: visible
+
+          .more
+            display: none

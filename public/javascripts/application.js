@@ -88,12 +88,12 @@ $(document).ready(function() {
 
   $('#login_form > #email_field > input').focus();
 
-$('#news_items .answer').each(function(){
+$('#news_items .answer .body-col').each(function(){
   if ($(this).height() > 65) {
     $(this).addClass('large');
   }
 }).filter('.large').append('<div class="more"><span class="more-link">(mais)</span></div>').find('.more-link').click(function(){
-    $(this).parents('.answer').addClass('expanded');
+    $(this).parents('.body-col').addClass('expanded');
   }
 );  
 });
