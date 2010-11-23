@@ -17,7 +17,7 @@
   %li.entry.item{:class => class_for_question(question)}
     / Question Summary
     .summary
-      - cache("question_on_index_#{question.id}") do
+      - cache("question_on_index_#{question.id}_#{question.updated_at}") do
         %h3= link_to title, question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
         .tag-list
           - question.topics[0..5].each do |topic|
@@ -33,7 +33,7 @@
           = t(:answer_count, :scope => "activerecord.models", :count => question.answers_count)
     .clear
 - else
-  - cache("mini_question_on_index_#{question.id}") do
+  - cache("mini_question_on_index_#{question.id}_#{question.updated_at}") do
     %li.item{:class => "#{class_for_question(question)} #{local_assigns[:lite] ? 'lite' : ''}"}
       .stats
         .box.answers{:class => question.accepted ? "accepted" : "" }

@@ -1,4 +1,4 @@
-- cache("new_users_#{current_group.id}") do
+- cache("new_users_#{current_group.id}_#{User.count}") do
   %h3
     = t(".title")
   .content
