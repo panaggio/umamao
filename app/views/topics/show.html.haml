@@ -9,7 +9,7 @@
     .friend_list
       - @topic.followers.each do |follower|
         %span
-          = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+          = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
 - content_for :subtabs do
   .navtitle

@@ -25,7 +25,7 @@
       .friend_list
         - @user.followers.each do |follower|
           %span
-            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
     -# Followed users
     - if @user.following.count > 0
@@ -34,7 +34,7 @@
       .friend_list
         - @user.following.each do |follower|
           %span
-            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
     -# Followed topics
     - if @topics.count > 0
