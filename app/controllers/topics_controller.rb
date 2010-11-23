@@ -38,7 +38,9 @@ class TopicsController < ApplicationController
     @topic.save
     track_event(:edited_topic)
 
-    Question.all(:topic_ids => @topic.id, :select => [:id]).each do |question|
+    Question.all(:topic_ids => @topic.id,
+                 :select => [:id, :updated_at]).each do |question|
+      sweep_question(question)
     end
 
     respond_with @topic
