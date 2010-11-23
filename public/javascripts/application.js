@@ -91,6 +91,7 @@ $(document).ready(function() {
 
 function initAutocomplete() {
   initTopicAutocomplete();
+  initFollowTopicsAutocomplete();
 
   // Dynamic search box
   // FIXME We should internationalize this

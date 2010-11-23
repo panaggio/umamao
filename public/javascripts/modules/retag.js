@@ -12,7 +12,6 @@ $(document).ready(function() {
           oldList.find('.topic, .retag').hide();
           oldList.after(data.html);
           initAutocomplete();
-          $('.autocomplete_for_tags');
         } else {
             showMessage(data.message, "error");
             if(data.status == "unauthenticate") {

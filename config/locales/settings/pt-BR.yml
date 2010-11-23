@@ -17,3 +17,6 @@ pt-BR:
         description: 'Marque os eventos sobre os quais você deseja ser notificado por email.'
         new_answer: 'Respostas em perguntas e comentários em entradas suas'
         submit: Atualizar
+    follow_topics:
+      edit:
+        title: Tópicos seguidos

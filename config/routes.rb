@@ -7,6 +7,10 @@ Shapado::Application.routes.draw do
       post :follow
       post :unfollow
     end
+
+    collection do
+      post :follow
+    end
   end
 
   resources :invitations, :only => [:index, :create]
@@ -44,6 +48,7 @@ Shapado::Application.routes.draw do
     match 'password' => 'password#update', :via => :put
     match 'account' => 'account#edit', :via => :get
     match 'account' => 'account#update', :via => :put
+    match 'follow_topics' => 'follow_topics#edit', :via => :get
   end
 
   resources :users, :except => [:edit, :update] do

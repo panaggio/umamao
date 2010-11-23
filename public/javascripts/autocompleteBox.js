@@ -18,7 +18,6 @@
 // - Internationalize.
 // - Highlight entries where they match the input.
 // - Factor this into multiple files that are only loaded when needed.
-// - Remove outer <div /> in ItemBox, use <ul /> only.
 //
 
 // Utility functions.
@@ -29,6 +28,17 @@ window.Utils = window.Utils || {};
 // TODO: actually test this.
 Utils.escapeRegExp = function (string) {
   return string.replace(/[\{\}\(\)\[\]\.\+\*\?\$\^\\]/g, "\\$&");
+};
+
+// Makes A inherit from B.
+// This extension is static, so later changes to B won't be propagated.
+Utils.extend = function (A, B) {
+  A.prototype = $.extend({}, B.prototype, A.prototype);
+};
+
+// Adds parameters to an url.
+Utils.buildUrl = function (url, params) {
+  return url + (url.match(/\?/) ? "&" : "?") + params;
 };
 
 // Data item in an item box.
@@ -255,7 +265,7 @@ AutocompleteBox.prototype = {
   fetchData: function (query) {
     if (query.length < this.minChars) return;
     var box = this;
-    var fetchUrl = this.url + "?q=" + encodeURIComponent(query);
+    var fetchUrl = Utils.buildUrl(this.url, "q=" + encodeURIComponent(query));
     this.abortRequest();
     this.ajaxRequest = $.getJSON(fetchUrl, function (data) {
       if (data) box.processData(data);
@@ -272,6 +282,7 @@ AutocompleteBox.prototype = {
 
 };
 
+// Triggers a full search for questions.
 function SearchItem(input) {
   this.query = input.val();
   this.form = input.parent("form");
@@ -291,7 +302,7 @@ SearchItem.prototype = {
 
 };
 
-SearchItem.prototype = $.extend({}, Item.prototype, SearchItem.prototype);
+Utils.extend(SearchItem, Item);
 
 // The all-purpose search box. Looks for questions, topics and users.
 // Clicking a search result will take to the page of the corresponding
@@ -315,36 +326,36 @@ function initSearchBox() {
 
 };
 
+
 // Box to autocomplete and select topics when creating or editing questions.
 function initTopicAutocomplete() {
 
   var topicBox = new AutocompleteBox("#question-topics-autocomplete",
-                                   "#question-topics-suggestions",
-                                   "/topics/autocomplete");
+                                     "#question-topics-suggestions",
+                                     "/topics/autocomplete");
 
   var selectedTopicsUl = $("#selected-topics");
   $("#selected-topics span.remove").live("click", function () {
     $(this).parents("li").first().remove();
   });
 
-  function TopicItemForAutocomplete(topic) {
+  function TopicItem(topic) {
     this.title = topic.title;
     this.count = topic.count;
     this.html = topic.html;
-    this.topicBox = topic.box;
+    this.added = topic.box;
   }
 
-  TopicItemForAutocomplete.prototype = {
+  TopicItem.prototype = {
     click: function () {
-      selectedTopicsUl.append(this.topicBox);
+      selectedTopicsUl.prepend(this.added);
       topicBox.itemBox.hide();
       topicBox.itemBox.clear();
       topicBox.input.val("");
     }
   };
 
-  TopicItemForAutocomplete.prototype = $.extend({}, Item.prototype,
-    TopicItemForAutocomplete.prototype);
+  Utils.extend(TopicItem, Item);
 
   topicBox.processData = function (data) {
 
@@ -353,7 +364,63 @@ function initTopicAutocomplete() {
 
     var items = [];
     data.forEach(function (item) {
-      items.push(new TopicItemForAutocomplete(item));
+      items.push(new TopicItem(item));
+    });
+    this.itemBox.setItems(items);
+    this.itemBox.show();
+
+  };
+
+};
+
+// Box to bulk-follow topics.
+function initFollowTopicsAutocomplete() {
+  var topicBox = new AutocompleteBox("#follow-topics-autocomplete",
+                                     "#follow-topics-suggestions",
+                                     "/topics/autocomplete?follow=t");
+
+  var followedTopicsUl = $("#followed-topics");
+
+  function TopicItem(topic) {
+    this.id = topic.id;
+    this.title = topic.title;
+    this.count = topic.count;
+    this.html = topic.html;
+    this.added = topic.box;
+  }
+
+  TopicItem.prototype = {
+    click: function () {
+      var added = this.added;
+      $.ajax({
+        url: "/topics/follow.js?title=" + encodeURIComponent(this.title),
+        dataType: "json",
+        type: "POST",
+        success: function (data) {
+          if (data.success) {
+            followedTopicsUl.prepend(added);
+            showMessage(data.message, "notice");
+          } else {
+            showMessage(data.message, "error");
+          }
+        }
+      });
+      topicBox.itemBox.hide();
+      topicBox.itemBox.clear();
+      topicBox.input.val("");
+    }
+  };
+
+  Utils.extend(TopicItem, Item);
+
+  topicBox.processData = function (data) {
+
+    // Ignore empty input.
+    if (topicBox.input.val().trim() == "") return;
+
+    var items = [];
+    data.forEach(function (item) {
+      items.push(new TopicItem(item));
     });
     this.itemBox.setItems(items);
     this.itemBox.show();

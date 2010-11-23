@@ -1,6 +1,6 @@
 -# Topic selection for questions with autocompletion.
 
-= text_field "topics", "", :class => "text_field autocomplete_for_tags", :id => "question-topics-autocomplete"
+= text_field "topics", "", :class => "text_field", :id => "question-topics-autocomplete"
 %ul#question-topics-suggestions.autocomplete-list
 %ul#selected-topics.topic-list
   - @question.topics.each do |topic|

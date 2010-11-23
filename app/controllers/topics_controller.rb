@@ -46,7 +46,12 @@ class TopicsController < ApplicationController
   end
 
   def follow
-    @topic = Topic.find_by_slug_or_id(params[:id])
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
     @topic.followers << current_user
     @topic.save
     current_user.populate_news_feed!(@topic)
@@ -105,10 +110,14 @@ class TopicsController < ApplicationController
         render :json =>
           (result.map do |t|
              {
+               :id => t.id,
                :title => t.title,
                :count => t.questions_count,
                :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t}),
-               :box => (render_to_string :partial => "box.html", :locals => {:topic => t})
+               :box => (render_to_string ({
+                          :partial => (params[:follow] ? "topic.html" : "box.html"),
+                          :locals => {:topic => t}
+                        }))
              }
            end.to_json)
       end
