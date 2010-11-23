@@ -208,10 +208,6 @@ class QuestionsController < ApplicationController
 
     if @question.user != current_user && !is_bot?
       @question.viewed!(request.remote_ip)
-
-      if (@question.views_count % 10) == 0
-        sweep_question(@question)
-      end
     end
 
     set_page_title(@question.title)
@@ -299,7 +295,6 @@ class QuestionsController < ApplicationController
 
       if @question.valid? && @question.save
         sweep_question_views
-        sweep_question(@question)
 
         flash[:notice] = t(:flash_notice, :scope => "questions.update")
         format.html { redirect_to(question_path(@question)) }
@@ -317,7 +312,6 @@ class QuestionsController < ApplicationController
     if @question.user_id == current_user.id
       @question.user.update_reputation(:delete_question, current_group)
     end
-    sweep_question(@question)
     sweep_question_views
     @question.destroy
 
@@ -335,7 +329,6 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        sweep_question(@question)
 
         format.html { redirect_to question_path(@question) }
         format.json { head :ok }
@@ -453,7 +446,6 @@ class QuestionsController < ApplicationController
       @question.group = @group
 
       if @question.save
-        sweep_question(@question)
 
         Answer.set({"question_id" => @question.id}, {"group_id" => @group.id})
       end
@@ -475,8 +467,6 @@ class QuestionsController < ApplicationController
     @question.last_target = @question
 
     if @question.save
-      sweep_question(@question)
-
       if (Time.now - @question.created_at) < 8.days
         @question.on_activity(true)
       end

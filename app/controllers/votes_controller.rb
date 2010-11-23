@@ -23,12 +23,6 @@ class VotesController < ApplicationController
 
     vote_state = push_vote(vote)
 
-    if vote_state == :created && !vote.new?
-      if vote.voteable_type == "Question"
-        sweep_question(vote.voteable)
-      end
-    end
-
     respond_to do |format|
       format.html{redirect_to params[:source]}
 
@@ -66,9 +60,6 @@ class VotesController < ApplicationController
     value = @vote.value
     if  @vote && current_user == @vote.user
       @vote.destroy
-      if voteable.kind_of?(Question)
-        sweep_question(voteable)
-      end
       voteable.remove_vote!(value, current_user)
     end
     respond_to do |format|
@@ -141,11 +132,6 @@ class VotesController < ApplicationController
     else
       flash[:error] = user_vote.errors.full_messages.join(", ")
       state = :error
-    end
-
-    if vote.voteable_type == "Answer"
-      question = voteable.question
-      sweep_question(question)
     end
 
     state

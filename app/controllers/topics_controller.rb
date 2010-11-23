@@ -39,7 +39,6 @@ class TopicsController < ApplicationController
     track_event(:edited_topic)
 
     Question.all(:topic_ids => @topic.id, :select => [:id]).each do |question|
-      sweep_question(question)
     end
 
     respond_with @topic

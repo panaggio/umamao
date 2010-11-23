@@ -74,8 +74,6 @@ class AnswersController < ApplicationController
       @answer.user = current_user
       respond_to do |format|
         if @question && @answer.save
-          sweep_question(@question)
-
           Question.update_last_target(@question.id, @answer)
 
           current_user.stats.add_answer_tags(*@question.tags)
@@ -124,8 +122,6 @@ class AnswersController < ApplicationController
       @answer.updated_by = current_user
 
       if @answer.valid? && @answer.save
-        sweep_question(@question)
-
         Question.update_last_target(@question.id, @answer)
 
         flash[:notice] = t(:flash_notice, :scope => "answers.update")
@@ -146,7 +142,6 @@ class AnswersController < ApplicationController
     end
     @answer.destroy
     @question.answer_removed!
-    sweep_question(@question)
 
     respond_to do |format|
       format.html { redirect_to(question_path(@question)) }
