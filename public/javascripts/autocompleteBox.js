@@ -1,4 +1,4 @@
-// Autocomplete boxes used throughout the site.
+// Autocomplete boxes used throughout the website.
 //
 // There are currently two kinds of autocomplete boxes: an all-purpose
 // search box, that allows the user to click on each suggested item and
@@ -17,6 +17,8 @@
 // - Move utility functions somewhere else.
 // - Internationalize.
 // - Highlight entries where they match the input.
+// - Factor this into multiple files that are only loaded when needed.
+// - Remove outer <div /> in ItemBox, use <ul /> only.
 //
 
 // Utility functions.
@@ -30,14 +32,16 @@ Utils.escapeRegExp = function (string) {
 };
 
 // Data item in an item box.
-// Meant to be inherited.
-function Item() { };
+function Item(data) {
+  this.url = data.url;
+  this.html = data.html;
+};
 
 Item.prototype = {
 
-  itemsClass: "item-box-item",
-  activeItemsClass: "item-box-active-item",
-  url: null,
+  activeItemsClass: "active",
+  url: "",
+  html: "",
   view: null,
   box: null,
 
@@ -60,8 +64,9 @@ Item.prototype = {
   },
 
   // Builds the actual DOM element.
-  // Meant to be implemented by inheriting classes.
-  render: function () { },
+  render: function () {
+    return $(this.html);
+  },
 
   // Action to be executed when the item is selected.
   click: function () {
@@ -90,7 +95,7 @@ function ItemBox(container) {
 
 ItemBox.prototype = {
 
-  itemsUlClass: "item-box-list",
+  itemsUlClass: "autocomplete-list",
   items: [],
   currentItem: null,
 
@@ -269,135 +274,79 @@ AutocompleteBox.prototype = {
 
 };
 
-// Each specific kind of item we have in autocomplete boxes.
+function SearchItem(input) {
+  this.query = input.val();
+  this.form = input.parent("form");
+}
 
-function QuestionItem(data) {
-  this.title = data.title;
-  this.url = data.url;
-  this.topics = data.topics;
+SearchItem.prototype = {
+
+  html: '<li class="search" />',
+
+  render: function () {
+    return $(this.html).text('Buscar por perguntas com "' + this.query + '"');
+  },
+
+  click: function () {
+    this.form.submit();
+  }
+
 };
 
-// Not a very clever way of inheriting, but...
-QuestionItem.prototype = new Item();
-
-QuestionItem.prototype.render = function () {
-  return $('<li />').addClass("item-box-item").text(this.title + " ").
-    append($('<span class="desc" />').text(this.topics.join(", ")));
-};
-
-function TopicItem(data) {
-  this.title = data.title;
-  this.url = data.url;
-};
-
-TopicItem.prototype = new Item();
-
-TopicItem.prototype.render = function () {
-  return $('<li />').addClass("item-box-item").text(this.title).
-    append(' <span class="desc">Tópico</span>');
-};
-
-function UserItem(data) {
-  this.name = data.title;
-  this.picture = data.pic;
-  this.url = data.url;
-};
-
-UserItem.prototype = new Item();
-
-UserItem.prototype.render = function () {
-  var picture = $(this.picture);
-  return $('<li />').addClass("item-box-item").text(" " + this.name).prepend(picture);
-};
+SearchItem.prototype = $.extend({}, Item.prototype, SearchItem.prototype);
 
 // The all-purpose search box. Looks for questions, topics and users.
 // Clicking a search result will take to the page of the corresponding
 // entity. Also, displays an item that when clicked takes the user to the
 // search page for questions.
 function initSearchBox() {
+
   var searchBox = new AutocompleteBox("#search-field",
                                       "#autocomplete-results",
-                                      "/search/json");
-
-  function makeItem(data) {
-    switch (data.type) {
-    case "Question":
-      return new QuestionItem(data);
-    case "Topic":
-      return new TopicItem(data);
-    case "User":
-      return new UserItem(data);
-    }
-    return null;
-  };
-
-  function makeSearchItem() {
-    searchItem = new Item();
-    searchItem.render = function () {
-      return $('<li />').addClass("item-box-search").
-        addClass("item-box-item").
-        text('Buscar por perguntas com "' + searchBox.input.val() + '"');
-    };
-    searchItem.click = function () {
-      searchBox.input.parent().submit();
-    };
-    return searchItem;
-  };
+                                      "/search/autocomplete");
 
   searchBox.processData = function (data) {
     var items = [];
     data.forEach(function (item) {
-      items.push(makeItem(item));
+      items.push(new Item(item));
     });
-    items.push(makeSearchItem());
+    items.push(new SearchItem(this.input));
     this.itemBox.setItems(items);
     this.itemBox.show();
   };
-};
 
+};
 
 // Box to autocomplete and select topics when creating or editing questions.
 function initTopicAutocomplete() {
 
   var topicBox = new AutocompleteBox("#question-topics-autocomplete",
                                    "#question-topics-suggestions",
-                                   "/questions/tags_for_autocomplete.js");
+                                   "/topics/autocomplete");
 
   var selectedTopicsUl = $("#selected-topics");
   $("#selected-topics span.remove").live("click", function () {
     $(this).parents("li").first().remove();
   });
 
-  // Adds a topic to the list of selected topics.
-  function addTopic(topic) {
-    var topicLi = $('<li class="topic"/>').text(topic.title);
-    var topicInput = $('<input type="hidden" name="question[topics][]" />').
-      val(topic.title);
-    // TODO: make this a link, or use checkboxes to add/remove many topics
-    var topicRemove = $('<span class="remove">✕</span>');
-    selectedTopicsUl.append(topicLi.append(topicInput).
-                            append(topicRemove).append('<div class="clear" />'));
-  }
-
   function TopicItemForAutocomplete(topic) {
     this.title = topic.title;
     this.count = topic.count;
+    this.html = topic.html;
+    this.topicBox = topic.box;
   }
 
-  TopicItemForAutocomplete.prototype = new Item();
-
-  TopicItemForAutocomplete.prototype.render = function () {
-    return $('<li />').addClass("item-box-item").text(this.title + " ").
-      append($('<span class="desc">' + this.count +
-               ' ' + (this.count == 1 ? "questão" : "questões") + '</span>'));
+  TopicItemForAutocomplete.prototype = {
+    click: function () {
+      selectedTopicsUl.append(this.topicBox);
+      topicBox.itemBox.hide();
+      topicBox.itemBox.clear();
+      topicBox.input.val("");
+    }
   };
 
-  TopicItemForAutocomplete.prototype.click = function () {
-    addTopic(this);
-    topicBox.itemBox.hide();
-    topicBox.itemBox.clear();
-    topicBox.input.val("");
-  };
+  TopicItemForAutocomplete.prototype = $.extend({}, Item.prototype,
+    TopicItemForAutocomplete.prototype);
 
   topicBox.processData = function (data) {
 
@@ -405,10 +354,6 @@ function initTopicAutocomplete() {
     if (topicBox.input.val().trim() == "") return;
 
     var items = [];
-    var re = new RegExp("^" +  Utils.escapeRegExp(topicBox.input.val()) + "$", "i");
-    if (!data.some(function (item) { return re.test(item.value); })) {
-      data.push({title: topicBox.input.val(), count: 0});
-    }
     data.forEach(function (item) {
       items.push(new TopicItemForAutocomplete(item));
     });

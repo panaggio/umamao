@@ -1,0 +1,6 @@
+-# Question result in autocomplete search box.
+
+%li
+  = question.title
+  %span.desc
+    = question.topics.map(&:title).join(", ")

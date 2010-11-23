@@ -1,4 +1,7 @@
 Shapado::Application.routes.draw do
+
+  match '/topics/autocomplete' => 'topics#autocomplete'
+
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do
       post :follow
@@ -151,7 +154,7 @@ Shapado::Application.routes.draw do
   end
 
   match '/search' => 'searches#index', :as => :search
-  match '/search/json' => 'searches#json'
+  match '/search/autocomplete' => 'searches#autocomplete'
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
   root :to => 'welcome#index'

@@ -37,16 +37,24 @@
             = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
 
     -# Followed topics
-    - if @topics.count > 0
+    - if @topics.count == 0
+      %h2.title
+        = t("followable.topics.none")
+    - else
       %h2.title
         = t("followable.topics", :count => @topics.count)
-      %ul.topic-list
-        - @topics.each do |topic|
-          %li
-            .topic
-              = link_to topic.title, topic_url(topic), :title => topic.title
-            = render :partial => "topics/follow", :locals => {:topic => topic}
-            .clear
+    - if logged_in? && current_user.id == @user.id
+      %h2
+        follow new topics
+      = text_field "", "", :class => "text_field autocomplete_for_tags", :id => "follow-topic-autocomplete"
+      #follow-topic-suggestions
+    %ul.topic-list
+      - @topics.each do |topic|
+        %li
+          .topic
+            = link_to topic.title, topic_url(topic), :title => topic.title
+          = render :partial => "topics/follow", :locals => {:topic => topic}
+          .clear
 
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}

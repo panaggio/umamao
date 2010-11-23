@@ -1,0 +1,8 @@
+-# Topic result autocomplete in classification.
+-# Maybe we should merge this with the other one in searches/.
+
+%li
+  = topic.title
+  %span.desc
+    = topic.questions_count
+    = t("activerecord.models.question_count", :count => topic.questions_count)

@@ -10,7 +10,7 @@ input#search-field {
     width: 100%;
 }
 
-ul.item-box-list {
+ul.autocomplete-list {
     border: 1px solid #444444;
     padding: 0;
     position: absolute;
@@ -24,7 +24,7 @@ ul.item-box-list {
     width: 38%;
 }
 
-li.item-box-item {
+ul.autocomplete-list li {
     margin: 0;
     padding: 7px;
     cursor: pointer;
@@ -33,64 +33,22 @@ li.item-box-item {
     text-overflow: ellipsis;
 }
 
-li.item-box-item span.desc {
+ul.autocomplete-list span.desc {
     font-size: x-small;
     color: #777;
 }
 
-li.as-message {
-    margin: 0;
-    cursor: default;
-}
-
-li.item-box-item.item-box-active-item {
+ul.autocomplete-list li.active {
     background-color: #ebebeb;
     color: #0077cc;
 }
 
-li.item-box-search {
+ul.autocomplete-list li.search {
     color: #0077cc;
 }
 
-li.item-box-item em {
+ul.autocomplete-list em {
     text-decoration: underline;
     font-weight: bold;
     padding: 0;
-}
-
-/* Webkit Hacks  */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    ul.as-selections {
-        border-top-width: 2px;
-    }
-    ul.as-selections li.as-selection-item {
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
-    ul.as-selections li.as-selection-item a.as-close {
-        margin-top: -1px;
-    }
-    ul.as-selections li.as-original input {
-        height: 19px;
-    }
-}
-
-/* Opera Hacks  */
-@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
-    ul.as-list {
-        border: 1px solid #888;
-    }
-    ul.as-selections li.as-selection-item a.as-close {
-        margin-left: 4px;
-        margin-top: 0;
-    }
-}
-
-/* IE Hacks  */
-ul.as-list {
-    border: 1px solid #888\9;
-}
-ul.as-selections li.as-selection-item a.as-close {
-    margin-left: 4px\9;
-    margin-top: 0\9;
 }

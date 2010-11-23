@@ -1,0 +1,6 @@
+%li.topic
+  = h(topic.title)
+  %input{:type => "hidden", :name => "question[topics][]", :value => topic.title}
+  %span.remove
+    ✕
+  .clear

@@ -86,4 +86,33 @@ class TopicsController < ApplicationController
     end
   end
 
+  # Searches matching topics and render them in JSON form for input
+  # autocomplete.
+  def autocomplete
+    result = []
+    if q = params[:q]
+      result = Topic.filter(q, :per_page => 5)
+    end
+
+    re = Regexp.new("^#{Regexp.escape q}$")
+
+    if !result.any? {|t| t.title =~ re}
+      result << Topic.new(:title => q, :questions_count => 0)
+    end
+
+    respond_to do |format|
+      format.js do
+        render :json =>
+          (result.map do |t|
+             {
+               :title => t.title,
+               :count => t.questions_count,
+               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t}),
+               :box => (render_to_string :partial => "box.html", :locals => {:topic => t})
+             }
+           end.to_json)
+      end
+    end
+  end
+
 end
