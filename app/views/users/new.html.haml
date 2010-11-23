@@ -9,7 +9,7 @@
       = markdown(@invitation.message)
   - elsif @group_invitation
     #invitation_message
-      = @group_invitation.message
+      = markdown(@group_invitation.message)
 
     %hr
   - @user.password = @user.password_confirmation = nil
