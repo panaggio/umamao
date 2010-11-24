@@ -1,7 +1,7 @@
 -# Follow/unfollow topic link
 
 - if logged_in?
-  .follow-info
+  .follow-info.block
     - if topic.followers.include?(current_user)
       = link_to "#{t("followable.unfollow")}", unfollow_topic_path(topic), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_topic_path(topic)
     - else

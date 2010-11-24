@@ -4,12 +4,13 @@
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic}
   - if @topic.followers.count > 0
-    %h2.title
-      = t('followable.followers', :count => @topic.followers.count)
-    .friend_list
-      - @topic.followers.each do |follower|
-        %span
-          = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
+    .block
+      %h2.title
+        = t('followable.followers', :count => @topic.followers.count)
+      .friend_list
+        - @topic.followers.each do |follower|
+          %span
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
 - content_for :subtabs do
   .navtitle
