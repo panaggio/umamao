@@ -31,8 +31,8 @@ $(document).ready(function() {
             link.removeClass('busy');
             link.text(dataTitle);
         }
-        })
+        });
     }
     return false;
-  })
-})
+  });
+});

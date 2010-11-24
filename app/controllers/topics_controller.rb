@@ -47,23 +47,37 @@ class TopicsController < ApplicationController
   end
 
   def follow
-    @topic = Topic.find_by_slug_or_id(params[:id])
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
     @topic.followers << current_user
     @topic.save
     current_user.populate_news_feed!(@topic)
 
     track_event(:followed_topic)
 
-    flash[:notice] = t("followable.flash.follow", :followable => @topic.title)
+    notice = t("followable.flash.follow", :followable => @topic.title)
 
     respond_to do |format|
       format.html do
         redirect_to topic_path(@topic)
       end
-      format.js {
-        render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
-      }
+      format.js do
+        res = {
+          :success => true,
+          :message => notice
+        }
+
+        # Used when following from settings page
+        if params[:answer]
+          res[:html] = render_to_string(:partial => "topic.html",
+                                        :locals => {:topic => @topic})
+        end
+        render :json => res.to_json
+      end
     end
   end
 
@@ -74,7 +88,7 @@ class TopicsController < ApplicationController
 
     track_event(:unfollowed_topic)
 
-    flash[:notice] = t("followable.flash.unfollow", :followable => @topic.title)
+    notice = t("followable.flash.unfollow", :followable => @topic.title)
 
     respond_to do |format|
       format.html do
@@ -82,8 +96,42 @@ class TopicsController < ApplicationController
       end
       format.js {
         render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
+                 :message => notice }.to_json)
       }
+    end
+  end
+
+  # Searches matching topics and render them in JSON form for input
+  # autocomplete.
+  def autocomplete
+    result = []
+    if q = params[:q]
+      result = Topic.filter(q, :per_page => 5)
+    end
+
+    re = Regexp.new("^#{Regexp.escape q}$")
+
+    if !result.any? {|t| t.title =~ re}
+      result << Topic.new(:title => q, :questions_count => 0)
+    end
+
+    respond_to do |format|
+      format.js do
+        render :json =>
+          (result.map do |t|
+             res = {
+               :id => t.id,
+               :title => t.title,
+               :count => t.questions_count,
+               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t})
+             }
+             if !params[:follow]
+               res[:box] = render_to_string(:partial => "box.html",
+                                            :locals => {:topic => t})
+             end
+             res
+           end.to_json)
+      end
     end
   end
 

@@ -1,8 +1,15 @@
 Shapado::Application.routes.draw do
+
+  match '/topics/autocomplete' => 'topics#autocomplete'
+
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do
       post :follow
       post :unfollow
+    end
+
+    collection do
+      post :follow
     end
   end
 
@@ -41,16 +48,12 @@ Shapado::Application.routes.draw do
     match 'password' => 'password#update', :via => :put
     match 'account' => 'account#edit', :via => :get
     match 'account' => 'account#update', :via => :put
+    match 'follow_topics' => 'follow_topics#edit', :via => :get
   end
 
   resources :users, :except => [:edit, :update] do
-    collection do
-      get :autocomplete_for_user_login
-    end
-
     member do
       post :unfollow
-      post :change_preferred_tags
       post :follow
     end
   end
@@ -82,7 +85,6 @@ Shapado::Application.routes.draw do
 
   resources :questions do
     collection do
-      get :tags
       get :tags_for_autocomplete
       get :unanswered
       get :related_questions
@@ -97,8 +99,6 @@ Shapado::Application.routes.draw do
       get :history
       get :revert
       get :diff
-      get :move
-      put :move_to
       get :retag
       put :retag_to
       post :close
@@ -124,10 +124,6 @@ Shapado::Application.routes.draw do
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
 
   resources :groups do
-    collection do
-      get :autocomplete_for_group_slug
-    end
-
     member do
       get :allow_custom_ads
       get :disallow_custom_ads
@@ -163,7 +159,7 @@ Shapado::Application.routes.draw do
   end
 
   match '/search' => 'searches#index', :as => :search
-  match '/search/json' => 'searches#json'
+  match '/search/autocomplete' => 'searches#autocomplete'
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
   root :to => 'welcome#index'

@@ -5,19 +5,15 @@ javascripts:
   - jquery.tools.min
   - jquery-ui
   - jquery.textarea
-  - jquery.autocomplete
-  - jquery.fcbkcomplete
   - jquery.notifyBar
   - jquery.hotkeys
-  - jquery.autoSuggest
   - showdown
+  - autocompleteBox
   - application
   - modules/sessions
   - modules/retag
   - modules/new_question
   - modules/show_user
-  - modules/members
-  - modules/move_group
   - modules/show_question
   - MathJax/mathjax/MathJax
 
@@ -31,7 +27,7 @@ stylesheets:
 - base:
   - jquery-ui
   - compiled/application
-  - search
+  - autocomplete
 - landing:
   - compiled/landing
 

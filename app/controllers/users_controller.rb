@@ -193,16 +193,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def autocomplete_for_user_login
-    @users = User.all( :limit => params[:limit] || 20,
-                       :fields=> 'login',
-                       :login =>  /^#{Regexp.escape(params[:prefix].to_s.downcase)}.*/,
-                       :order => "login desc")
-    respond_to do |format|
-      format.json {render :json=>@users}
-    end
-  end
-
   def destroy
     if false && current_user.delete # FIXME We need a better way to delete users
       flash[:notice] = t("destroyed", :scope => "devise.registrations")

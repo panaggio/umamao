@@ -28,8 +28,6 @@
   - if logged_in?
     = render :partial => "shared/language_filter"
 
-  = render :partial => "shared/current_tags"
-
 - if params[:tags].present? && params[:tags].include?('resolução-de-exercício')
   %p= link_to 'Como funciona a resolução de exercícios no Umamão?', question_path('eu-posso-usar-o-umamao-para-colaborar-na-resolucao-de-exercicios')
 

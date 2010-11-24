@@ -1,0 +1,10 @@
+-# Topic selection for questions with autocompletion.
+
+= text_field "topics", "", :class => "", :id => "question-topics-autocomplete", :value => t("searches.form.select_topics")
+- if !@question.new?
+  = submit_tag t("questions.retag_form.submit")
+  = link_to t("questions.retag_form.cancel"), question_path(@question), :class => "cancel-retag"
+%ul#question-topics-suggestions.autocomplete-list
+%ul#selected-topics.topic-list
+  - @question.topics.each do |topic|
+    = render :partial => "topics/box", :locals => {:topic => topic}

@@ -101,67 +101,18 @@ $(document).ready(function() {
 });
 
 function initAutocomplete() {
-  var select = $('<select size="100px" name="question[topics]" id="question_topics" class="autocomplete_for_tags" ></select>');
-  var tagInput = $('.autocomplete_for_tags');
-  var width = tagInput.width();
-  tagInput.after(select);
-  if(typeof(tagInput)!='undefined' && $.trim(tagInput.val())!=''){
-    var tags = tagInput.val().split(',,');
-    if( tags.length > 0){
-      $.each(tags, function(i,n){
-        if($.trim(n)!='')
-          select.append('<option value="'+n+'" selected="selected" class="selected">'+n+'</option>');
-      });
-    }
-  }
-  tagInput.remove();
-//   $('.autocomplete_for_tags').fcbkcomplete({
-//     json_url: '/questions/tags_for_autocomplete.js',
-//     firstselected: true,
-//     delay: 200,
-//     maxitimes: 6,
-//     width: width
-//   });
+  initTopicAutocomplete();
+  initFollowTopicsAutocomplete();
 
-//   // Dynamic search box
-//   // FIXME We should internationalize this
-//   var searchField = $("#search-field");
-//   var searchForm = searchField.parent();
-//   searchField.autoSuggest("/search/json", {
-//                             asHtmlID: "search-field",
-//                             minChars: 2,
-//                             startText: "Buscar perguntas, tópicos e usuários",
-//                             selectedItemProp: "title",
-//                             resultClick: function (data) {
-//                               if (data.attributes.type == "Search") {
-//                                 searchForm.submit();
-//                               } else {
-//                                 location.href = data.attributes.url;
-//                               }
-//                             },
-//                             retrieveComplete: function (data) {
-//                               return data.concat([{ title: "Buscar", type: "Search" }]);
-//                             },
-//                             formatList: function (data, formatted) {
-//                               switch (data.type) {
-//                               case "Question":
-//                                 return formatted.html(data.title + ' <span class="as-desc">' + data.topics.join(', ') + '</span>');
-//                               case "Topic":
-//                                 return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
-//                               case "User":
-//                                 return formatted.html(data.pic + " " + data.title +
-//                                                       ' <span class="as-desc">Usuário</span>');
-//                               case "Search":
-//                                 return formatted.addClass("as-search").text('Buscar por perguntas com "' + this.val() + '"');
-//                               default:
-//                                 return formatted.html(data.type);
-//                               }
-//                             }
-//                           });
+  // Dynamic search box
+  // FIXME We should internationalize this
+  var searchField = $("#search-field");
 
-// // Keyboard shortcuts for search box
-//   $(document).bind("keypress", "/", function () { searchField.focus(); });
-//   $(searchField).bind("keydown", "esc", function () { searchField.blur(); });
+  initSearchBox();
+
+  // Keyboard shortcuts for search box
+  $(document).bind("keypress", "/", function () { searchField.focus(); });
+  $(searchField).bind("keydown", "esc", function () { searchField.blur(); });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {

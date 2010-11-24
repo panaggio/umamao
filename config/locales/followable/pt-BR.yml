@@ -14,3 +14,4 @@ pt-BR:
     topics:
       one: "Seguindo 1 tópico"
       other: "Seguindo %{count} tópicos"
+      none: "Nenhum tópico seguido"

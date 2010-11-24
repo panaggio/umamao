@@ -97,7 +97,7 @@ class QuestionsController < ApplicationController
     if params[:id]
       @question = Question.find(params[:id])
     elsif params[:question]
-      topics = Topic.from_titles!(params[:question].delete(:topics))
+      topics = Topic.from_titles!(params[:question].try(:delete, :topics))
       @question = Question.new(params[:question])
       @question.topics = topics
       @question.group_id = current_group.id
@@ -123,14 +123,6 @@ class QuestionsController < ApplicationController
     conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
                                    :closed => false, :exercise.ne => true)
 
-    if logged_in?
-      if @active_subtab.to_s == "expert"
-        @current_tags = current_user.stats(:expert_tags).expert_tags
-      elsif @active_subtab.to_s == "mytags"
-        @current_tags = current_user.preferred_tags_on(current_group)
-      end
-    end
-
     @questions = Question.paginate({:order => current_order,
                                     :per_page => 25,
                                     :page => params[:page] || 1,
@@ -143,42 +135,18 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def tags
-    conditions = scoped_conditions(:banned => false)
-    if params[:q].blank?
-      @tag_cloud = Question.tag_cloud(conditions, -1).sort{|a, b| a["name"] <=> b["name"]}.
-        paginate :per_page => 120, :page => params[:page] || 1
-    else
-      @tag_cloud = Question.find_tags(/^#{Regexp.escape(params[:q])}/, conditions, -1).
-        sort{|a, b| a["name"] <=> b["name"]}.
-        paginate :per_page => 32, :page => params[:page] || 1
-    end
-
-
-
-    respond_to do |format|
-      format.html do
-        set_page_title(t("layouts.application.tags"))
-      end
-      format.js do
-        html = render_to_string(:partial => "tag_table", :object => @tag_cloud)
-        render :json => {:html => html}
-      end
-    end
-  end
-
   # Searches matching tags and render them in JSON form for input
   # autocomplete
   def tags_for_autocomplete
     respond_to do |format|
       format.js do
         result = []
-        if q = params[:tag]
+        if q = params[:q]
           result = Topic.filter(q, :per_page => 5)
         end
 
         results = result.map do |t|
-          {:caption => "#{t.title} (#{t.questions_count})", :value => t.title}
+          {:title => t.title, :count => t.questions_count}
         end
 
         render :json => results
@@ -199,7 +167,6 @@ class QuestionsController < ApplicationController
       session[:user_return_to] = question_path(@question)
     end
 
-    @tag_cloud = Question.tag_cloud(:_id => @question.id, :banned => false)
     options = {:per_page => 25, :page => params[:page] || 1,
                :order => current_order, :banned => false}
     @answers = @question.answers.paginate(options)
@@ -252,7 +219,7 @@ class QuestionsController < ApplicationController
                           params[:question])
     @question.group = current_group
     @question.user = current_user
-    @question.topics = Topic.from_titles!(params[:question][:topics])
+    @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
 
     if !logged_in?
       draft = Draft.create!(:question => @question)
@@ -286,7 +253,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
-      @question.topics = Topic.from_titles!(params[:question][:topics])
+      @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
       @question.updated_by = current_user
       @question.last_target = @question
 
@@ -433,35 +400,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def move
-    @question = Question.find_by_slug_or_id(params[:id])
-    render
-  end
-
-  def move_to
-    @group = Group.find_by_slug_or_id(params[:question][:group])
-    @question = Question.find_by_slug_or_id(params[:id])
-
-    if @group
-      @question.group = @group
-
-      if @question.save
-
-        Answer.set({"question_id" => @question.id}, {"group_id" => @group.id})
-      end
-      flash[:notice] = t("questions.move_to.success", :group => @group.name)
-      redirect_to question_path(@question)
-    else
-      flash[:error] = t("questions.move_to.group_dont_exists",
-                        :group => params[:question][:group])
-      render :move
-    end
-  end
-
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 
-    @question.topics = Topic.from_titles!(params[:question][:topics])
+    @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
 
     @question.updated_by = current_user
     @question.last_target = @question
@@ -477,7 +419,7 @@ class QuestionsController < ApplicationController
         format.js {
           topics = @question.topics.map{ |t|
             { :title => CGI.escapeHTML(t.title),
-              :slug => CGI.escapeHTML(t.slug) }
+              :url => url_for(t) }
           }
           render(:json => {:success => true,
                    :message => flash[:notice], :topics => topics}.to_json)

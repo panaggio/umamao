@@ -8,11 +8,10 @@ $(document).ready(function() {
       extraParams : { 'format' : 'js'},
       success: function(data) {
         if(data.success){
-          link.parents(".tag-list").find('.tag').hide();
-          $('.retag').hide();
-          link.parents(".tag-list").prepend(data.html);
+          var oldList = link.parents(".topic-list");
+          oldList.find('.topic, .retag').hide();
+          oldList.after(data.html);
           initAutocomplete();
-          $('.autocomplete_for_tags');
         } else {
             showMessage(data.message, "error");
             if(data.status == "unauthenticate") {
@@ -34,11 +33,13 @@ $(document).ready(function() {
             data: form.serialize()+"&format=js",
             success: function(data, textStatus) {
                 if(data.success) {
-                    var tags = $.map(data.topics, function(topic){
-		      return '<span class="tag"><a rel="tag" href="/topics/'+topic.slug+'">'+topic.title+'</a></span>';
+                    var topicList = form.siblings(".topic-list");
+                    topicList.find('.topic').remove();
+                    data.topics.forEach(function (topic) {
+                      var topicLink = $("<a />").attr("href", topic.url).
+                                            text(topic.title);
+		      topicList.prepend($('<li class="topic" />').append(topicLink));
 		    });
-                    form.parents('.tag-list').find('.tag').remove();
-                    form.before(tags.join(''));
                     form.remove();
                     $('.retag').show();
                     showMessage(data.message, "notice");
@@ -58,10 +59,9 @@ $(document).ready(function() {
   });
 
   $('.cancel-retag').live('click', function(){
-      var link = $(this);
-      link.parents('.tag-list').find('.tag').show();
-      link.parents('.tag-list').find('.retag').show();
-      link.parents('.tag-list').find('form').remove();
+      var topicList = $(this).parent().siblings(".topic-list");
+      topicList.find('.topic, .retag').show();
+      topicList.siblings('form').remove();
       return false;
   });
 });

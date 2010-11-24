@@ -84,17 +84,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_group
 
-  def current_tags
-    @current_tags ||=  if params[:tags].kind_of?(String)
-      params[:tags].split("+")
-    elsif params[:tags].kind_of?(Array)
-      params[:tags]
-    else
-      []
-    end
-  end
-  helper_method :current_tags
-
   def current_languages
     @current_languages ||= find_languages.join("+")
   end
@@ -138,9 +127,6 @@ class ApplicationController < ActionController::Base
   helper_method :language_conditions
 
   def scoped_conditions(conditions = {})
-    unless current_tags.empty?
-      conditions.deep_merge!({:tags => {:$all => current_tags}})
-    end
     conditions.deep_merge!({:group_id => current_group.id})
     conditions.deep_merge!(language_conditions)
   end

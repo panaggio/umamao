@@ -76,7 +76,7 @@ pt-BR:
       title: Editar tópicos
     retag_form:
       cancel: Cancelar
-      submit: Atualizar tópicos
+      submit: Atualizar
       title: Atualizar tópicos
     retag_to:
       failure: Não foi possível atualizar os tópicos.
