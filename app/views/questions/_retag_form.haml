@@ -1,5 +1,3 @@
 - form_for @question, :url => retag_to_question_path(@question.id), :html => {:class => "form retag-form"} do |f|
-  = f.label :topics, "#{t(:tags, :scope => "activerecord.attributes.question")}", :class => "label"
   = render :partial => "classify"
-  = submit_tag t(".submit")
-  = link_to t('.cancel'), question_path(@question), :class => 'cancel-retag'
+

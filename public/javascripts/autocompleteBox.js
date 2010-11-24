@@ -359,7 +359,7 @@ function initTopicAutocomplete() {
 
   TopicItem.prototype = {
     click: function () {
-      selectedTopicsUl.prepend(rendered);
+      selectedTopicsUl.prepend(this.added);
       topicBox.itemBox.hide();
       topicBox.itemBox.clear();
       topicBox.input.val("");
