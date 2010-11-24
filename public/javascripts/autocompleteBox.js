@@ -192,6 +192,7 @@ function AutocompleteBox(inputField, itemBoxContainer, url) {
   var box = this;
 
   this.input = $(inputField);
+  this.startText = this.input.val();
   this.itemBox = new ItemBox(itemBoxContainer);
   this.itemBox.itemsContainer.mousedown(function () {
     box.selectionClicked = true;
@@ -221,7 +222,6 @@ AutocompleteBox.prototype = {
     var box = this;
     var itemBox = this.itemBox;
     this.input.attr("autocomplete", "off").
-      val(this.startText).
       focus(function () {
       if ($(this).val() == box.startText) {
         $(this).val("");

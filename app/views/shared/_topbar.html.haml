@@ -1,7 +1,7 @@
 #top-bar
   .entry
     = form_tag search_path, :id => "search-form", :method => :get do
-      = text_field_tag :q, params[:q], :id => "search-field"
+      = text_field_tag :q, params[:q] || t("searches.form.search_all"), :id => "search-field"
       %ul#search-results.autocomplete-list
   - if logged_in?
     - if !current_group.isolate && AppConfig.enable_groups

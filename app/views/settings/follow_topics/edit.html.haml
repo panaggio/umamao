@@ -4,8 +4,10 @@
   = t(".title")
 = error_messages_for :user
 
-%input.text_field#follow-topics-autocomplete{:type => "text-field"}
+%input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics")}
 %ul.autocomplete-list#follow-topics-suggestions
+
+%hr
 %ul.items#followed-topics
   - @topics.each do |topic|
     = render :partial => "topics/topic", :locals => {:topic => topic}
