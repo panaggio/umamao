@@ -9,3 +9,5 @@
 %ul.items#followed-topics
   - @topics.each do |topic|
     = render :partial => "topics/topic", :locals => {:topic => topic}
+
+= will_paginate @topics

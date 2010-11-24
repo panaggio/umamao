@@ -348,7 +348,7 @@ function initTopicAutocomplete() {
 
   TopicItem.prototype = {
     click: function () {
-      selectedTopicsUl.prepend(this.added);
+      selectedTopicsUl.prepend(rendered);
       topicBox.itemBox.hide();
       topicBox.itemBox.clear();
       topicBox.input.val("");
@@ -392,13 +392,39 @@ function initFollowTopicsAutocomplete() {
   TopicItem.prototype = {
     click: function () {
       var added = this.added;
+      var title = this.title;
       $.ajax({
-        url: "/topics/follow.js?title=" + encodeURIComponent(this.title),
+        url: "/topics/follow.js?title=" + encodeURIComponent(title),
         dataType: "json",
         type: "POST",
         success: function (data) {
           if (data.success) {
-            followedTopicsUl.prepend(added);
+            var rendered = $(added);
+            var link = rendered.find(".follow-info a");
+            if (link.hasClass("follow_link")) {
+              // We need to change to an "unfollow" link.
+              // Hack to fix entries sent by the server.
+              var href = link.attr("href");
+              var text = link.text();
+              var dataText = link.attr("data-title");
+              var dataUndo = link.attr("data-undo");
+              var linkClass = link.attr("class");
+              var dataClass = link.attr("data-class");
+              link.attr({
+                href: dataUndo,
+                'data-undo': href,
+                'data-title': text,
+                'class': dataClass,
+                'data-class': linkClass
+              });
+              link.text(dataText);
+            }
+            // Avoid duplicating entries.
+            followedTopicsUl.find(".title a").
+              filter(function () {
+                       return $(this).text() == title;
+                     }).parents("#followed-topics li").remove();
+            followedTopicsUl.prepend(rendered);
             showMessage(data.message, "notice");
           } else {
             showMessage(data.message, "error");

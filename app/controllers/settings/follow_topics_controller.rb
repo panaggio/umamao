@@ -6,7 +6,8 @@ class Settings::FollowTopicsController < ApplicationController
   set_tab :follow_topics, :settings
 
   def edit
-    @topics = Topic.query(:follower_ids => current_user.id)
+    @topics = Topic.query(:follower_ids => current_user.id).
+      paginate(:per_page => 10, :page => params[:page] || 1)
   end
 
 end
