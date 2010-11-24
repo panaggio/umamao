@@ -13,10 +13,9 @@
       - else
         = link_to "#{t("followable.follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
       .clear
-  .block
-    .inner{:style => "padding-top: 10px"}
-      = gravatar @user.email.to_s, :size => 128
-      = shapado_auto_link(markdown(@user.description))
+  .user-info.block
+    = gravatar @user.email.to_s, :size => 128
+    = shapado_auto_link(markdown(@user.description))
 
   -# Followers
   - if @user.followers.count > 0
