@@ -6,7 +6,6 @@ $(document).ready(function() {
   $('input#question_title').focus();
 
   $("form.vote_form button").live("click", function(event) {
-    console.log("click");
     var btn_name = $(this).attr("name");
     var form = $(this).parents("form");
     $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
@@ -30,7 +29,7 @@ $(document).ready(function() {
         showMessage(data.message, "error");
         if(data.status == "unauthenticate") {
           window.onbeforeunload = null;
-          window.location="/users/login";
+          window.location = "/users/login";
         }
       }
     }, "json");
@@ -79,7 +78,6 @@ $(document).ready(function() {
                     highlightEffect(answer);
                     showMessage(data.message, "notice");
                     form.find("textarea").val("");
-                    removeFromLocalStorage(location.href, "answer-input");
                     MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
                   } else {
                     showMessage(data.message, "error");
@@ -118,7 +116,6 @@ $(document).ready(function() {
                             showMessage(data.message, "notice");
                             form.hide();
                             textarea.val("");
-                            removeFromLocalStorage(location.href, textarea.attr('id'));
                             MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
                           } else {
                             showMessage(data.message, "error");
@@ -203,7 +200,6 @@ $(document).ready(function() {
                                 link.show();
                                 highlightEffect(comment);
                                 showMessage(data.message, "notice");
-                                removeFromLocalStorage(location.href, textarea.attr('id'));
                                 window.onbeforeunload = null;
                               } else {
                                 showMessage(data.message, "error");

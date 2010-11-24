@@ -2,8 +2,6 @@ $(document).ready(function() {
   $("form.nestedAnswerForm").hide();
   $("#add_comment_form").hide();
   $("form").live('submit', function() {
-    var textarea = $(this).find('textarea');
-    removeFromLocalStorage(location.href, textarea.attr('id'));
     window.onbeforeunload = null;
   });
 
@@ -60,15 +58,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $('textarea').live('keyup',function(){
-      var value = $(this).val();
-      var id = $(this).attr('id');
-      addToLocalStorage(location.href, id, value);
-  });
-
-  initStorageMethods();
-  fillTextareas();
-
   $(".highlight_for_user").effect("highlight", {}, 2000);
   sortValues('group_language', ':last');
   sortValues('language_filter', ':lt(2)');
@@ -100,15 +89,13 @@ $(document).ready(function() {
 
 });
 
+// Init autocompletable boxes.
 function initAutocomplete() {
+  initSearchBox();
   initTopicAutocomplete();
   initFollowTopicsAutocomplete();
 
-  // Dynamic search box
-  // FIXME We should internationalize this
   var searchField = $("#search-field");
-
-  initSearchBox();
 
   // Keyboard shortcuts for search box
   $(document).bind("keypress", "/", function () { searchField.focus(); });
@@ -128,80 +115,6 @@ function showMessage(message, t, delay) {
     barClass: "flash"
   });
 }
-
-function hasStorage(){
-  if (window.localStorage && typeof(Storage)!='undefined'){
-    return true;
-  } else {
-      return false;
-  }
-}
-
-function initStorageMethods(){
-  if(hasStorage()){
-    Storage.prototype.setObject = function(key, value) {
-        this.setItem(key, JSON.stringify(value));
-    };
-
-    Storage.prototype.getObject = function(key) {
-        return JSON.parse(this.getItem(key));
-    };
-  }
-}
-
-function fillTextareas(){
-   if(hasStorage() && localStorage[location.href]!=null && localStorage[location.href]!='null'){
-       localStorageArr = localStorage.getObject(location.href);
-       $.each(localStorageArr, function(i, n){
-           $("#"+n.id).val(n.value);
-           $("#"+n.id).parents('form.commentForm').show();
-           $("#"+n.id).parents('form.nestedAnswerForm').show();
-       });
-    }
-}
-
-function addToLocalStorage(key, id, value){
-  if(hasStorage()){
-    var ls = localStorage[key];
-    if($.trim(value)!=""){
-      if(ls == null || ls == "null" || typeof(ls)=="undefined"){
-          localStorage.setObject(key,[{id: id, value: value}]);
-      } else {
-          var storageArr = localStorage.getObject(key);
-          var isIn = false;
-          storageArr = $.map(storageArr, function(n, i){
-              if(n.id == id){
-                n.value = value;
-                isIn = true;
-              }
-          return n;
-          });
-      if(!isIn)
-        storageArr = $.merge(storageArr, [{id: id, value: value}]);
-      localStorage.setObject(key, storageArr);
-    }
-    } else {removeFromLocalStorage(key, id);}
-  }
-}
-
-function removeFromLocalStorage(key, id){
-  if(hasStorage()){
-    var ls = localStorage[key];
-    if(typeof(ls)=='string'){
-      var storageArr = localStorage.getObject(key);
-
-      storageArr = $.map(storageArr, function(n, i){
-          if(n.id == id){
-            return null;
-          } else {
-              return n;
-          }
-      });
-      localStorage.setObject(key, storageArr);
-    }
-  }
-}
-
 
 function sortValues(selectID, keepers){
   if(keepers){
