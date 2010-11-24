@@ -2,11 +2,11 @@
 $(document).ready(function() {
   $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
-  $('.auto-link').autoVideo();
   $('.comments').hide();
   $('input#question_title').focus();
 
   $("form.vote_form button").live("click", function(event) {
+    console.log("click");
     var btn_name = $(this).attr("name");
     var form = $(this).parents("form");
     $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
@@ -351,8 +351,4 @@ $(document).ready(function() {
     return false;
   });
 
-});
-
-$(window).load(function() {
-  prettyPrint();
 });
