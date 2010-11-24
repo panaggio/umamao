@@ -120,10 +120,16 @@ form.share_content
 
     .description
       color: #999
-      margin-top: 0.25em
+      margin-top: 0.5em
 
   .answer
     margin-top: 1em
+
+    &.own
+      .votes_average
+        display: block !important
+      img
+        display: none
 
     .markdown.entry-content
       margin: 0
@@ -138,8 +144,8 @@ form.share_content
       margin-left: 4%
       text-align: center
 
-      button, img
-        display: none
+      button
+        display: block
 
       .vote_box
         padding: 0
@@ -150,11 +156,18 @@ form.share_content
         background-color: #eee
         +border-radius
         font-size: 0.8em
+        display: none
 
     &.large
       height: 80px
       position: relative
       overflow: hidden
+
+      .votes_average
+        display: block
+
+      button
+        display: none
 
       .more
         background-color: white
@@ -179,7 +192,7 @@ form.share_content
         .votes_average
           display: none
 
-        button, img
+        button
           display: block
 
         .more

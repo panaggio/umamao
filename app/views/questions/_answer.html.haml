@@ -1,8 +1,9 @@
 - solution = false
 - source = question_path(question)
 - hide_controls = local_assigns[:hide_controls]
+- own = (current_user == answer.user) ? "own" : ""
 
-.answer.commentable{:id => answer.id, :class => "post-#{answer.id} #{solution ? "solution" : ""}" }
+.answer.commentable{:id => answer.id, :class => "post-#{answer.id} #{solution ? "solution" : ""} #{own}" }
   .vote-col
     = vote_box(answer, question_path(question), question.closed)
   .body-col
