@@ -113,3 +113,87 @@ form.share_content
 
 .center
   text-align: center
+
+#news_items
+  .origin
+    color: #333
+
+    .description
+      color: #999
+      margin-top: 0.5em
+
+  .answer
+    margin-top: 1em
+
+    &.own
+      .votes_average
+        display: block !important
+      img
+        display: none
+
+    .markdown.entry-content
+      margin: 0
+
+    .body-col
+      margin: 0 10%
+      width: 80%
+
+    .vote-col
+      float: left
+      width: 5%
+      margin-left: 4%
+      text-align: center
+
+      button
+        display: block
+
+      .vote_box
+        padding: 0
+
+      .votes_average
+        margin-right: 0.25em
+        padding: 0.25em
+        background-color: #eee
+        +border-radius
+        font-size: 0.8em
+        display: none
+
+    &.large
+      height: 80px
+      position: relative
+      overflow: hidden
+
+      .votes_average
+        display: block
+
+      button
+        display: none
+
+      .more
+        background-color: white
+        bottom: 0
+        position: absolute
+        width: 100%
+        text-align: center
+        cursor: pointer
+        color: #538DC2
+        padding-top: 5px
+
+        .more-link
+          display: block
+          border-top: 2px dashed #EEEEEE
+            width: 90%
+            margin: 0 auto
+
+      &.expanded
+        height: auto
+        overflow: visible
+
+        .votes_average
+          display: none
+
+        button
+          display: block
+
+        .more
+          display: none

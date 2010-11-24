@@ -1,9 +1,9 @@
-
 - solution = false
-- source = question_path(@question)
+- source = question_path(question)
+- hide_controls = local_assigns[:hide_controls]
+- own = (current_user == answer.user) ? "own" : ""
 
-.answer.commentable{:class => "post-#{answer.id} #{solution ? "solution" : ""}" }
-  %a{:name=>answer.id}
+.answer.commentable{:id => answer.id, :class => "post-#{answer.id} #{solution ? "solution" : ""} #{own}" }
   .vote-col
     = vote_box(answer, question_path(question), question.closed)
   .body-col
@@ -11,65 +11,68 @@
       = render :partial => "users/user_mini", :locals => {:user => answer.user}
     .markdown.entry-content
       = find_and_preserve(shapado_auto_link(markdown(answer.body)))
-    - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group)) && answer.flags_count > 0
+    - if !hide_controls && logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group)) && answer.flags_count > 0
       %h3
         = t(:flags, :scope => "activerecord.models")
       = render :partial => "flags/list", :locals => {:flaggeable => answer}
-    .controls
-      .actions
-        = link_to t('activerecord.attributes.answer.link'), question_answer_path(@question, answer), :class => "bookmark"
-        - if logged_in?
+    - if !hide_controls
+      .controls
+        .actions
+          = link_to t('activerecord.attributes.answer.link'), question_answer_path(question, answer), :class => "bookmark"
+          - if logged_in?
+            - if current_user != answer.user
+              = link_to t(".flag"), flag_question_answer_path(question, answer), :class => "flag-link"
+
+            - if current_user.can_modify?(answer) || current_user.mod_of?(question.group)
+              = link_to t("scaffold.destroy"), question_answer_path(question, answer), :confirm => t("scaffold.sure", :model => t("activerecord.models.answer").downcase), :method => :delete, :class =>"cancel"
+
+            - if current_user.mod_of?(question.group)
+              = link_to t("answers.ban"), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
+
+          - if answer.versions.count > 0
+            = link_to t("wiki.history.link", :default => "history"), history_question_answer_path(question, answer)
+
+          - if logged_in?
+            = link_to t('scaffold.edit'), edit_question_answer_path(question, answer)
+        .updated{:title => answer.updated_at}
+          .time_ago
+            = t('activerecord.attributes.answer.created_at')
+            %strong.published{:title => answer.created_at, :class => "relativetime"}
+              = t("time.ago", :time => time_ago_in_words(answer.created_at))
+        .clear
+        .forms
           - if current_user != answer.user
-            = link_to t(".flag"), flag_question_answer_path(@question, answer), :class => "flag-link"
-
-          - if current_user.can_modify?(answer) || current_user.mod_of?(@question.group)
-            = link_to t("scaffold.destroy"), question_answer_path(@question, answer), :confirm => t("scaffold.sure", :model => t("activerecord.models.answer").downcase), :method => :delete, :class =>"cancel"
-
-          - if current_user.mod_of?(@question.group)
-            = link_to t("answers.ban"), ban_path(:answer_ids => [answer.id]), :confirm => t("answers.sure_ban")
-
-        - if answer.versions.count > 0
-          = link_to t("wiki.history.link", :default => "history"), history_question_answer_path(@question, answer)
-
-        - if logged_in?
-          = link_to t('scaffold.edit'), edit_question_answer_path(@question, answer)
-      .updated{:title => answer.updated_at}
-        .time_ago
-          = t('activerecord.attributes.answer.created_at')
-          %strong.published{:title => answer.created_at, :class => "relativetime"}
-            = t("time.ago", :time => time_ago_in_words(answer.created_at))
-      .clear
-      .forms
-        - if current_user != answer.user
-          - flag = Flag.new
-          - flag.flaggeable = answer
-          = render :partial => "flags/form", :locals => {:flag => flag, :source => source }
+            - flag = Flag.new
+            - flag.flaggeable = answer
+            = render :partial => "flags/form", :locals => {:flag => flag, :source => source }
     .clear
 
-    .ccontrol
-      %a{:href => "", :class => "ccontrol-link"}
-        - if answer.comments.size == 1
-          = answer.comments.size.to_s + " " + t("models.comment")
-        - elsif answer.comments.size != 0
-          = answer.comments.size.to_s + " " + t("models.comments")
+    - if !hide_controls
+      .ccontrol
+        %a{:href => "", :class => "ccontrol-link"}
+          - if answer.comments.size == 1
+            = answer.comments.size.to_s + " " + t("models.comment")
+          - elsif answer.comments.size != 0
+            = answer.comments.size.to_s + " " + t("models.comments")
 
-    / Nested Answers
-    .children.comments
-      - answer.comments.each do |comment|
-        = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
+      / Nested Answers
+      .children.comments
+        - answer.comments.each do |comment|
+          = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
 
-    - if logged_in?
-      = link_to t(".add_comment"), new_question_comment_path(@question, answer), :class => "addNestedAnswer add_answer_comment_link"
+      - if logged_in?
+        = link_to t(".add_comment"), new_question_comment_path(question, answer), :class => "addNestedAnswer add_answer_comment_link"
 
-  .avatar
-    = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
-  .clear
+  - if !hide_controls
+    .avatar
+      = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
+    .clear
 
-  .forms.comment-form
-    - form_tag question_answer_comments_path(@question, answer), :class => "form commentForm nestedAnswerForm" do
-      - @comment = Comment.new
-      = render :partial => "comments/form", :locals => {:source => source, :commentable => answer}
-      .group.navform
-        = submit_tag t("comments.shared.comment_submit"), :class => "button"
-        = t("global.or")
-        = link_to t("scaffold.cancel"), "", :class => "cancel_comment"
+    .forms.comment-form
+      - form_tag question_answer_comments_path(question, answer), :class => "form commentForm nestedAnswerForm" do
+        - @comment = Comment.new
+        = render :partial => "comments/form", :locals => {:source => source, :commentable => answer}
+        .group.navform
+          = submit_tag t("comments.shared.comment_submit"), :class => "button"
+          = t("global.or")
+          = link_to t("scaffold.cancel"), "", :class => "cancel_comment"
