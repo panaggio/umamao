@@ -58,16 +58,25 @@ class TopicsController < ApplicationController
 
     track_event(:followed_topic)
 
-    flash[:notice] = t("followable.flash.follow", :followable => @topic.title)
+    notice = t("followable.flash.follow", :followable => @topic.title)
 
     respond_to do |format|
       format.html do
         redirect_to topic_path(@topic)
       end
-      format.js {
-        render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
-      }
+      format.js do
+        res = {
+          :success => true,
+          :message => notice
+        }
+
+        # Used when following from settings page
+        if params[:answer]
+          res[:html] = render_to_string(:partial => "topic.html",
+                                        :locals => {:topic => @topic})
+        end
+        render :json => res.to_json
+      end
     end
   end
 
@@ -78,7 +87,7 @@ class TopicsController < ApplicationController
 
     track_event(:unfollowed_topic)
 
-    flash[:notice] = t("followable.flash.unfollow", :followable => @topic.title)
+    notice = t("followable.flash.unfollow", :followable => @topic.title)
 
     respond_to do |format|
       format.html do
@@ -86,7 +95,7 @@ class TopicsController < ApplicationController
       end
       format.js {
         render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
+                 :message => notice }.to_json)
       }
     end
   end
@@ -109,16 +118,17 @@ class TopicsController < ApplicationController
       format.js do
         render :json =>
           (result.map do |t|
-             {
+             res = {
                :id => t.id,
                :title => t.title,
                :count => t.questions_count,
-               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t}),
-               :box => (render_to_string ({
-                          :partial => (params[:follow] ? "topic.html" : "box.html"),
-                          :locals => {:topic => t}
-                        }))
+               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t})
              }
+             if !params[:follow]
+               res[:box] = render_to_string(:partial => "box.html",
+                                            :locals => {:topic => t})
+             end
+             res
            end.to_json)
       end
     end

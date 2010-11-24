@@ -13,7 +13,6 @@
 // refresh suggestions.
 //
 // TODO:
-// - Use setInterval to refresh suggestions.
 // - Move utility functions somewhere else.
 // - Internationalize.
 // - Highlight entries where they match the input.
@@ -207,6 +206,9 @@ AutocompleteBox.prototype = {
   startText: "",
   minChars: 2,
   ajaxRequest: null,
+  interval: null,
+  delay: 400,
+  previousQuery: null,
 
   // This is a hack to deal with inconsistencies in the order in which
   // DOM events are fired. Sometimes, the input box will receive focusout
@@ -223,17 +225,26 @@ AutocompleteBox.prototype = {
     var itemBox = this.itemBox;
     this.input.attr("autocomplete", "off").
       focus(function () {
-      if ($(this).val() == box.startText) {
-        $(this).val("");
-      } else if ($(this).val() != "") {
-        itemBox.show();
-      }
+        if ($(this).val() == box.startText) {
+          $(this).val("");
+        } else if ($(this).val() != "") {
+          itemBox.show();
+        }
+        if (!box.interval) {
+          box.interval = setInterval(function () {
+                                       box.fetchData(box.input.val());
+                                     }, box.delay);
+        }
     }).blur(function () {
       if ($(this).val() == "") {
         $(this).val(box.startText);
       }
       if (!box.selectionClicked) {
         itemBox.hide();
+      }
+      if (box.interval) {
+        clearInterval(box.interval);
+        box.interval = null;
       }
     }).keydown(function (e) {
       switch (e.keyCode) {
@@ -254,8 +265,6 @@ AutocompleteBox.prototype = {
         box.abortRequest();
         itemBox.hide();
         break;
-      default:
-        box.fetchData($(this).val());
       }
     });
   },
@@ -263,7 +272,9 @@ AutocompleteBox.prototype = {
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
-    if (query.length < this.minChars) return;
+    if (query.length < this.minChars ||
+       this.previousQuery && this.previousQuery == query) return;
+    this.previousQuery = query;
     var box = this;
     var fetchUrl = Utils.buildUrl(this.url, "q=" + encodeURIComponent(query));
     this.abortRequest();
@@ -386,7 +397,6 @@ function initFollowTopicsAutocomplete() {
     this.title = topic.title;
     this.count = topic.count;
     this.html = topic.html;
-    this.added = topic.box;
   }
 
   TopicItem.prototype = {
@@ -394,37 +404,17 @@ function initFollowTopicsAutocomplete() {
       var added = this.added;
       var title = this.title;
       $.ajax({
-        url: "/topics/follow.js?title=" + encodeURIComponent(title),
+        url: "/topics/follow.js?answer=t&title=" + encodeURIComponent(title),
         dataType: "json",
         type: "POST",
         success: function (data) {
           if (data.success) {
-            var rendered = $(added);
-            var link = rendered.find(".follow-info a");
-            if (link.hasClass("follow_link")) {
-              // We need to change to an "unfollow" link.
-              // Hack to fix entries sent by the server.
-              var href = link.attr("href");
-              var text = link.text();
-              var dataText = link.attr("data-title");
-              var dataUndo = link.attr("data-undo");
-              var linkClass = link.attr("class");
-              var dataClass = link.attr("data-class");
-              link.attr({
-                href: dataUndo,
-                'data-undo': href,
-                'data-title': text,
-                'class': dataClass,
-                'data-class': linkClass
-              });
-              link.text(dataText);
-            }
             // Avoid duplicating entries.
             followedTopicsUl.find(".title a").
               filter(function () {
                        return $(this).text() == title;
                      }).parents("#followed-topics li").remove();
-            followedTopicsUl.prepend(rendered);
+            followedTopicsUl.prepend(data.html);
             showMessage(data.message, "notice");
           } else {
             showMessage(data.message, "error");
