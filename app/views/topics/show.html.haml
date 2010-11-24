@@ -2,7 +2,7 @@
   = javascript_include_merged :show
 
 - content_for :sidebar do
-  = render :partial => "follow", :locals => {:topic => @topic}
+  = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   - if @topic.followers.count > 0
     .block
       %h2.title

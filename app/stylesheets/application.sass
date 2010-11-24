@@ -201,6 +201,8 @@ form.share_content
         .more
           display: none
 
+$affirmative: #BFDD48
+
 #sidebar
   .follow-info
     a
@@ -209,15 +211,27 @@ form.share_content
       font-weight: bold
       color: black
       padding: 2px 8px
+      border: 1px solid darken($affirmative, 25%)
+      text-align: center
 
       &.follow_link
-        background-color: #C3DD82
+        background-color: lighten($affirmative, 15%)
+        +linear-gradient(color-stops(lighten($affirmative, 15%),$affirmative 50%,lighten($affirmative, 10%)),top)
+
+        &:hover
+          background-color: $affirmative
+          +linear-gradient(color-stops(lighten($affirmative, 25%),lighten($affirmative, 10%) 50%,lighten($affirmative, 20%)),top)
 
       &.unfollow_link
         background-color: #EEEEEE
 
+        &:hover
+          background-color: #BBBBBB
+
     &.block
-      width: 70%
+      width: 65%
 
       a
         padding: 5px 10px
+        font-size: 16px
+        line-height: 20px
