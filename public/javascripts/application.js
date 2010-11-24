@@ -89,7 +89,7 @@ $(document).ready(function() {
   $('#login_form > #email_field > input').focus();
 
   $('#news_items .answer').each(function(){
-    if ($(this).height() > 65) {
+    if ($(this).height() > 85) {
       $(this).addClass('large');
     }
   }).filter('.large').append(
