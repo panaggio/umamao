@@ -21,9 +21,8 @@ class Vote
   validates_presence_of :user_id, :voteable_id, :voteable_type
   validates_inclusion_of :value, :within => [1,-1]
 
-  # Should enable this once we remove duplicate votes
-  #ensure_index([[:user_id, 1], [:voteable_id, 1], [:voteable_type, 1]],
-  #             :unique => true)
+  ensure_index([[:user_id, 1], [:voteable_id, 1], [:voteable_type, 1]],
+               :unique => true)
 
   validate :check_reputation
   validate :check_owner
