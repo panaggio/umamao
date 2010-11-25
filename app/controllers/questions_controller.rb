@@ -443,7 +443,6 @@ class QuestionsController < ApplicationController
   def retag
     @question = Question.find_by_slug_or_id(params[:id])
     respond_to do |format|
-      format.html {render}
       format.js {
         render(:json => {:success => true, :html => render_to_string(:partial => "questions/retag_form",
                                                    :member  => @question)}.to_json)

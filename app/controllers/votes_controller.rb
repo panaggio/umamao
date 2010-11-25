@@ -60,7 +60,6 @@ class VotesController < ApplicationController
     value = @vote.value
     if  @vote && current_user == @vote.user
       @vote.destroy
-      voteable.remove_vote!(value, current_user)
     end
     respond_to do |format|
       format.html { redirect_to params[:source] }
@@ -123,7 +122,6 @@ class VotesController < ApplicationController
       else
         value = vote.value
         user_vote.destroy
-        voteable.remove_vote!(value, current_user)
         track_event(:removed_vote, :voteable => voteable.class.name.downcase)
 
         flash[:notice] = t("votes.destroy.flash_notice")
