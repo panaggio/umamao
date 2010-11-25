@@ -8,6 +8,8 @@ class NewsUpdate
   key :entry_type, :required => true
   belongs_to :entry, :polymorphic => true
 
+  has_many :news_items, :dependent => :destroy
+
   key :action, String, :required => true, :in => %w[created upvoted]
 
   timestamps!

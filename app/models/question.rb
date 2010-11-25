@@ -76,6 +76,9 @@ class Question
   has_many :comments, :as => "commentable", :order => "created_at asc", :dependent => :destroy
   has_many :close_requests
 
+  # This ought to be has_one, but it wasn't working
+  has_many :news_updates, :as => "entry", :dependent => :destroy
+
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
@@ -308,6 +311,12 @@ class Question
 
   def close_reason
     self.close_requests.detect{ |rq| rq.id == close_reason_id }
+  end
+
+  # Returns the (only) associated news update.
+  # We need this because has_one isn't working.
+  def news_update
+    news_update.first
   end
 
   protected

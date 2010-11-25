@@ -22,6 +22,9 @@ class Answer < Comment
 
   has_many :comments, :foreign_key => "commentable_id", :class_name => "Comment", :order => "created_at asc", :dependent => :destroy
 
+  # This ought to be has_one, but it wasn't working
+  has_many :news_updates, :as => "entry", :dependent => :destroy
+
   validates_presence_of :user_id
   validates_presence_of :question_id
 
@@ -31,7 +34,6 @@ class Answer < Comment
   validate :disallow_spam
   validate :check_unique_answer, :if => lambda { |a| (!a.group.forum && !a.disable_limits?) }
 
-  before_destroy :unsolve_question
   after_create :create_news_update
 
   def title
@@ -138,6 +140,12 @@ class Answer < Comment
 
   def create_news_update
     NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
+  end
+
+  # Returns the (only) associated news update.
+  # We need this because has_one doesn't work.
+  def news_update
+    news_updates.first
   end
 
 end
