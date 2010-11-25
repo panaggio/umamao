@@ -37,21 +37,21 @@
           %span
             = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
-    -# Followed topics
-    - if @topics.count == 0
+  -# Followed topics
+  - if @topics.count == 0
+    %h2.title
+      = t("followable.topics.none")
+  - else
+    .block
       %h2.title
-        = t("followable.topics.none")
-    - else
-      .block
-        %h2.title
-          = t("followable.topics", :count => @topics.count)
-        %ul.topic-list
-          - @topics.each do |topic|
-            %li
-              .topic
-                = link_to topic.title, topic_url(topic), :title => topic.title
-              = render :partial => "topics/follow", :locals => {:topic => topic}
-              .clear
+        = t("followable.topics", :count => @topics.count)
+      %ul.topic-list
+        - @topics.each do |topic|
+          %li
+            .topic
+              = link_to topic.title, topic_url(topic), :title => topic.title
+            = render :partial => "topics/follow", :locals => {:topic => topic}
+            .clear
 
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}
