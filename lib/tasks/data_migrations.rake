@@ -6,7 +6,7 @@ namespace :data do
     desc "Remove duplicate votes"
     task :remove_dup_votes => :environment do
       dups = Vote.all.group_by{|v| [v.user_id, v.voteable_id, v.voteable_type]}.
-        to_a.each{|g| g[1][1..1000].map {|v| v.destroy}}
+        to_a.each{|g| g[1][1..-1].map {|v| v.destroy}}
 
       if Vote.all.group_by{|v| [v.user_id, v.voteable_id, v.voteable_type]}.
           to_a.select{|g| g[1].length > 1}.length == 0
