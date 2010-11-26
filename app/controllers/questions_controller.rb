@@ -135,25 +135,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # Searches matching tags and render them in JSON form for input
-  # autocomplete
-  def tags_for_autocomplete
-    respond_to do |format|
-      format.js do
-        result = []
-        if q = params[:q]
-          result = Topic.filter(q, :per_page => 5)
-        end
-
-        results = result.map do |t|
-          {:title => t.title, :count => t.questions_count}
-        end
-
-        render :json => results
-      end
-    end
-  end
-
   # GET /questions/1
   # GET /questions/1.xml
   def show

@@ -24,19 +24,27 @@
 %p
   = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
 
+-# TODO: use topic description for this.
 - if @topic.title == 'resolução-de-exercício'
   %p= link_to 'Como funciona a resolução de exercícios no Umamão?', question_path('eu-posso-usar-o-umamao-para-colaborar-na-resolucao-de-exercicios')
 
--# Questions
-%ul.items#questions
-  - if @questions.empty?
-    %li.highlight
-      = t(".empty")
-  - @questions.each do |question|
-    = render :partial => "questions/question", :object => question
+- if @news_items.empty?
+  %ul.items#questions
+    - if @questions.empty?
+      %li.highlight
+        = t(".empty")
+    - @questions.each do |question|
+      = render :partial => "questions/question", :object => question
+- else
+  %ul.items#news_items
+    - @news_items.each do |news_item|
+      = render :partial => "welcome/news_item", :object => news_item
 
 #additional_info
-  = will_paginate @questions
+  - if @news_items.empty?
+    = will_paginate @questions
+  - else
+    = will_paginate @news_items
 
   #help_us
     = t("questions.index.help_to_answer")

@@ -91,7 +91,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise, :strip_tags
+  before_save :update_activity_at, :update_exercise
   before_save :update_autocomplete_keywords
   after_create :create_news_update
 
@@ -103,6 +103,7 @@ class Question
 
   timestamps!
 
+  # TODO: remove this
   def tags=(t)
     if t.kind_of?(String)
       t = t.downcase.split(",").join(" ").split(" ").uniq
@@ -319,6 +320,26 @@ class Question
     news_update.first
   end
 
+  # Classifies self under topic topic.
+  def classify!(topic)
+    if !topic_ids.include? topic.id
+      topics << topic
+      topic.questions_count +=1
+      topic.save
+      save
+    end
+  end
+
+  # Removes self from topic topic.
+  def unclassify!(topic)
+    if topic_ids.include? topic.id
+      topics.delete topic
+      topic.questions_count -= 1
+      topic.save
+      save
+    end
+  end
+
   protected
   def update_answer_count
     self.answers_count = self.answers.where(:banned => false).count
@@ -334,11 +355,6 @@ class Question
       @autocomplete_keywords = title.split(/\W/).
         delete_if {|w| w.empty?}.map &:downcase
     end
-  end
-
-  # ensure tag names do not contain whitespace
-  def strip_tags
-    self.tags = self.tags.map(&:strip) if self.tags_changed?
   end
 
   def create_news_update

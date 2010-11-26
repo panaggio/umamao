@@ -18,7 +18,7 @@
     -# News_item Stats
     .info
       .metadata
-        = t("time.ago", :time => time_ago_in_words(news_item.created_at))
+        = t("time.ago", :time => time_ago_in_words(entry.created_at))
         \|
         = format_number(question.answers_count)
         = t(:answer_count, :scope => "activerecord.models", :count => question.answers_count)
