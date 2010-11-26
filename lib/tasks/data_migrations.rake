@@ -3,6 +3,15 @@ require 'mechanize'
 
 namespace :data do
   namespace :migrate do
+    desc "Update questions count in topics"
+    task :update_topic_questions_count => :environment do
+      Topic.all.each do |topic|
+        topic.questions_count = Question.query(:topic_ids => topic.id,
+                                               :banned => false).count
+        topic.save
+      end
+    end
+
     desc "Remove duplicate votes"
     task :remove_dup_votes => :environment do
       dups = Vote.all.group_by{|v| [v.user_id, v.voteable_id, v.voteable_type]}.

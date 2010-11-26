@@ -45,6 +45,8 @@ class Topic
   # Merges other to self: self receives every question, follower and
   # news update from other. Destroys other. Cannot be undone.
   def merge_with!(other)
+    return false if id == other.id
+
     other.followers.each do |f|
       if !follower_ids.include? f.id
         followers << f
