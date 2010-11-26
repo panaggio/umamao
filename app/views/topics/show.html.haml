@@ -15,8 +15,7 @@
 - content_for :subtabs do
   .navtitle
     &= @topic.title
-    - if @questions
-      == (#{@questions.total_entries})
+    == (#{@topic.questions_count})
 %br
 .markdown
   = markdown(@topic.description)

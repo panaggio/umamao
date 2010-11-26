@@ -191,6 +191,7 @@ class Question
                                                          :upsert => true)
   end
 
+  # FIXME: Is this still working?
   def update_exercise
     self.exercise = self.tags.include?('resolução-de-exercício')
   end
@@ -208,6 +209,10 @@ class Question
   def ban
     self.collection.update({:_id => self._id}, {:$set => {:banned => true}},
                                                :upsert => true)
+    topics.each do |topic|
+      topic.questions_count -= 1
+      topic.save
+    end
   end
 
   def self.ban(ids)
@@ -216,11 +221,21 @@ class Question
     self.collection.update({:_id => {:$in => ids}}, {:$set => {:banned => true}},
                                                      :multi => true,
                                                      :upsert => true)
+    query(:id.in => ids, :select => :topic_ids).each do |question|
+      question.topics.each do |topic|
+        topic.questions_count -= 1
+        topic.save
+      end
+    end
   end
 
   def unban
     self.collection.update({:_id => self._id}, {:$set => {:banned => false}},
                                                :upsert => true)
+    topics.each do |topic|
+      topic.questions_count += 1
+      topic.save
+    end
   end
 
   def self.unban(ids)
@@ -229,6 +244,13 @@ class Question
     self.collection.update({:_id => {:$in => ids}}, {:$set => {:banned => false}},
                                                      :multi => true,
                                                      :upsert => true)
+    query(:id.in => ids, :select => :topic_ids).each do |question|
+      question.topics.each do |topic|
+        topic.questions_count += 1
+        topic.save
+      end
+    end
+
   end
 
   def favorite_for?(user)
@@ -324,8 +346,10 @@ class Question
   def classify!(topic)
     if !topic_ids.include? topic.id
       topics << topic
-      topic.questions_count +=1
-      topic.save
+      if !banned
+        topic.questions_count += 1
+        topic.save
+      end
       save
     end
   end
@@ -334,8 +358,10 @@ class Question
   def unclassify!(topic)
     if topic_ids.include? topic.id
       topics.delete topic
-      topic.questions_count -= 1
-      topic.save
+      if !banned
+        topic.questions_count -= 1
+        topic.save
+      end
       save
     end
   end
