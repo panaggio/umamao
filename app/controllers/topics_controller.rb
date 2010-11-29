@@ -103,10 +103,12 @@ class TopicsController < ApplicationController
       format.html do
         redirect_to topic_path(@topic)
       end
-      format.js {
-        render(:json => {:success => true,
-                 :message => notice }.to_json)
-      }
+      format.js do
+        render(:json => {
+                 :success => true,
+                 :message => notice
+               }.to_json)
+      end
     end
   end
 
@@ -132,11 +134,11 @@ class TopicsController < ApplicationController
                :id => t.id,
                :title => t.title,
                :count => t.questions_count,
-               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t})
+               :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t, :question => false})
              }
              if !params[:follow]
                res[:box] = render_to_string(:partial => "box.html",
-                                            :locals => {:topic => t})
+                                            :locals => {:topic => t, :question => false})
              end
              res
            end.to_json)

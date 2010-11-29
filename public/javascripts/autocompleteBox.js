@@ -42,14 +42,13 @@ Utils.buildUrl = function (url, params) {
 
 // Data item in an item box.
 function Item(data) {
-  this.url = data.url;
+  this.data = data;
   this.html = data.html;
 };
 
 Item.prototype = {
 
   activeItemsClass: "active",
-  url: "",
   html: "",
   view: null,
   box: null,
@@ -78,9 +77,7 @@ Item.prototype = {
   },
 
   // Action to be executed when the item is selected.
-  click: function () {
-    location.href = this.url;
-  },
+  click: function () { },
 
   // Activates the item view.
   activate: function () {
@@ -167,6 +164,11 @@ ItemBox.prototype = {
     }
   },
 
+  // Tells whether some entry is selected or not.
+  isSelected: function () {
+    return this.currentItem == null ? false : true;
+  },
+
   // Runs the "click" event associated with the current active item.
   click: function () {
     if (this.currentItem != null)
@@ -210,6 +212,9 @@ AutocompleteBox.prototype = {
   delay: 400,
   previousQuery: null,
 
+  // Whether or not pressing <tab> should trigger activate an item.
+  activateWithTab: false,
+
   // This is a hack to deal with inconsistencies in the order in which
   // DOM events are fired. Sometimes, the input box will receive focusout
   // and blur events before a clicked item receives any event. Therefore,
@@ -218,6 +223,8 @@ AutocompleteBox.prototype = {
   // events.
   selectionClicked: false,
 
+  // Called when return is pressed but no selection is active.
+  returnDefault: null,
 
   // Binds event handlers to input field.
   initInputField: function () {
@@ -257,8 +264,18 @@ AutocompleteBox.prototype = {
         itemBox.moveDown();
         break;
       case 13: // return
+        if (itemBox.isSelected()) {
+          itemBox.click();
+        } else if (box.returnDefault) {
+          box.returnDefault();
+        }
         e.preventDefault();
-        itemBox.click();
+        break;
+      case 9: // tab
+        if (box.activateWithTab) {
+          e.preventDefault();
+          itemBox.click();
+        }
         break;
       // ignore [escape] [shift] [capslock]
       case 27: case 16: case 20:
@@ -279,8 +296,19 @@ AutocompleteBox.prototype = {
     var fetchUrl = Utils.buildUrl(this.url, "q=" + encodeURIComponent(query));
     this.abortRequest();
     this.ajaxRequest = $.getJSON(fetchUrl, function (data) {
-      if (data) box.processData(data);
+      if (data) {
+        box.itemBox.setItems(box.processData(data));
+        box.itemBox.show();
+      }
     });
+  },
+
+  // Clears current input, hides selection box.
+  clear: function () {
+    this.itemBox.hide();
+    this.itemBox.clear();
+    this.input.val("");
+    this.abortRequest();
   },
 
   // Aborts an AJAX request for items.
@@ -292,6 +320,23 @@ AutocompleteBox.prototype = {
   }
 
 };
+
+
+// Items that have an associated url.
+function UrlItem(data) {
+  this.data = data;
+  this.url = data.url;
+  this.html = data.html;
+}
+
+UrlItem.prototype = {
+  click: function () {
+    location.href = this.url;
+  }
+};
+
+Utils.extend(UrlItem, Item);
+
 
 // Triggers a full search for questions.
 function SearchItem(input) {
@@ -328,119 +373,178 @@ function initSearchBox() {
   searchBox.processData = function (data) {
     var items = [];
     data.forEach(function (item) {
-      items.push(new Item(item));
+      items.push(new UrlItem(item));
     });
     items.push(new SearchItem(this.input));
-    this.itemBox.setItems(items);
-    this.itemBox.show();
+    return items;
   };
 
 };
 
+// Topic autocomplete for several boxes in the website.
+function TopicAutocomplete(inputField, itemBoxContainer, url) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer, url);
+}
 
-// Box to autocomplete and select topics when creating or editing questions.
-function initTopicAutocomplete() {
+TopicAutocomplete.prototype = {
 
-  var topicBox = new AutocompleteBox("#question-topics-autocomplete",
-                                     "#question-topics-suggestions",
-                                     "/topics/autocomplete");
+  activateWithTab: true,
+
+  // Builds an item for this box.
+  makeItem: function (data) {
+    var item = new Item(data);
+    var me = this;
+    item.click = this.itemClicked ||
+                   function () {
+                     me.action(this.data.title);
+                     me.clear();
+                   };
+    return item;
+  },
+
+  // Populates the suggestion box when data is received.
+  processData: function (data) {
+    var items = [];
+    var me = this;
+    data.forEach(function (it) {
+      items.push(me.makeItem(it));
+    });
+    return items;
+  },
+
+  returnDefault: function () {
+    var input = this.input.val();
+    if (input.trim() != "") {
+      this.clear();
+      this.action(input);
+    }
+  },
+
+  // HACK
+  itemClicked: null,
+
+  // Action to be run on topic title or input box value.
+  action: null
+
+};
+
+Utils.extend(TopicAutocomplete, AutocompleteBox);
+
+function initTopicAutocompleteForNewQuestion() {
+  var topicBox = new TopicAutocomplete("#question-topics-autocomplete",
+                                       "#question-topics-suggestions",
+                                       "/topics/autocomplete");
 
   var selectedTopicsUl = $("#selected-topics");
-  $("#selected-topics span.remove").live("click", function () {
-    $(this).parents("li").first().remove();
+  $(".remove", selectedTopicsUl).live("click", function () {
+    $(this).closest("li").remove();
   });
 
-  function TopicItem(topic) {
-    this.title = topic.title;
-    this.count = topic.count;
-    this.html = topic.html;
-    this.added = topic.box;
-  }
-
-  TopicItem.prototype = {
-    click: function () {
-      selectedTopicsUl.prepend(this.added);
-      topicBox.itemBox.hide();
-      topicBox.itemBox.clear();
-      topicBox.input.val("");
-    }
+  // Adds the selected topic to the list of topics for the new question.
+  topicBox.itemClicked = function (input) {
+    selectedTopicsUl.prepend(this.data.box);
+    topicBox.clear();
   };
 
-  Utils.extend(TopicItem, Item);
+  // We'll turn this off for now.
+  topicBox.returnDefault = null;
 
-  topicBox.processData = function (data) {
+}
 
-    // Ignore empty input.
-    if (topicBox.input.val().trim() == "") return;
+function initTopicAutocompleteForReclassifying() {
+  var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
+                                       "#reclassify-suggestions",
+                                       "/topics/autocomplete");
+  var topicsUl = $("#question-body-col ul.topic-list");
 
-    var items = [];
-    data.forEach(function (item) {
-      items.push(new TopicItem(item));
+  var questionUrl = location.href;
+
+  // Hides the autocomplete.
+  function turnOff() {
+    topicsUl.find(".remove").hide();
+    $("#reclassify-autocomplete").hide();
+    $(".add-topic").hide();
+    $(".cancel-reclassify").hide();
+    $(".reclassify").show();
+  }
+
+  // Shows the autocomplete.
+  function turnOn() {
+    topicsUl.find(".remove").show();
+    $("#reclassify-autocomplete").show();
+    $(".add-topic").show();
+    $(".cancel-reclassify").show();
+    $(".reclassify").hide();
+  }
+
+  turnOff();
+
+  $(".reclassify").click(function () {
+    turnOn();
+    return false;
+  });
+
+  $(".add-topic").live("click", function() {
+    topicBox.returnDefault();
+    return false;
+  });
+
+  $(".cancel-reclassify").live("click", function () {
+    turnOff();
+    return false;
+  });
+
+  $("a.remove", topicsUl).live("click", function () {
+    var link = $(this);
+    $.getJSON(link.attr("href"), function (data) {
+      link.closest(".topic").remove();
     });
-    this.itemBox.setItems(items);
-    this.itemBox.show();
+    return false;
+  });
 
+  // Classifies the current question under topic named title.
+  topicBox.action = function (title) {
+    // FIXME: does this always work?
+    $.getJSON(questionUrl + "/classify?topic=" +
+              encodeURIComponent(title),
+              function (data) {
+                if (data.success) {
+                  topicsUl.append(data.box);
+                }
+              });
+    topicBox.clear();
   };
 
-};
+}
 
-// Box to bulk-follow topics.
-function initFollowTopicsAutocomplete() {
-  var topicBox = new AutocompleteBox("#follow-topics-autocomplete",
-                                     "#follow-topics-suggestions",
-                                     "/topics/autocomplete?follow=t");
+function initTopicAutocompleteForFollowing() {
+  var topicBox = new TopicAutocomplete("#follow-topics-autocomplete",
+                                       "#follow-topics-suggestions",
+                                       "/topics/autocomplete?follow=t");
 
-  var followedTopicsUl = $("#followed-topics");
+  var topicsUl = $("#followed-topics");
 
-  function TopicItem(topic) {
-    this.id = topic.id;
-    this.title = topic.title;
-    this.count = topic.count;
-    this.html = topic.html;
-  }
-
-  TopicItem.prototype = {
-    click: function () {
-      var added = this.added;
-      var title = this.title;
-      $.ajax({
-        url: "/topics/follow.js?answer=t&title=" + encodeURIComponent(title),
-        dataType: "json",
-        type: "POST",
-        success: function (data) {
-          if (data.success) {
-            // Avoid duplicating entries.
-            followedTopicsUl.find(".title a").
-              filter(function () {
-                       return $(this).text() == title;
-                     }).parents("#followed-topics li").remove();
-            followedTopicsUl.prepend(data.html);
-            showMessage(data.message, "notice");
-          } else {
-            showMessage(data.message, "error");
-          }
+  // Sends to the server a request to follow topic named title.
+  topicBox.action = function (title) {
+    $.ajax({
+      url: "/topics/follow.js?answer=t&title=" + encodeURIComponent(title),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          // HACK: avoid duplicating entries.
+          topicsUl.find(".title a").
+            filter(function () {
+                     return $(this).text() == title;
+                   }).parents("#followed-topics li").remove();
+          topicsUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
         }
-      });
-      topicBox.itemBox.hide();
-      topicBox.itemBox.clear();
-      topicBox.input.val("");
-    }
-  };
-
-  Utils.extend(TopicItem, Item);
-
-  topicBox.processData = function (data) {
-
-    // Ignore empty input.
-    if (topicBox.input.val().trim() == "") return;
-
-    var items = [];
-    data.forEach(function (item) {
-      items.push(new TopicItem(item));
+      }
     });
-    this.itemBox.setItems(items);
-    this.itemBox.show();
-
+    topicBox.clear();
   };
 
-};
+}

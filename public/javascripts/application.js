@@ -92,8 +92,19 @@ $(document).ready(function() {
 // Init autocompletable boxes.
 function initAutocomplete() {
   initSearchBox();
-  initTopicAutocomplete();
-  initFollowTopicsAutocomplete();
+
+  // TODO: load for each right page with the HTML.
+  if ($("#question-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForNewQuestion();
+  }
+
+  if ($("#reclassify-autocomplete").length > 0) {
+    initTopicAutocompleteForReclassifying();
+  }
+
+  if ($("#follow-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForFollowing();
+  }
 
   var searchField = $("#search-field");
 

@@ -351,18 +351,22 @@ class Question
         topic.save
       end
       save
+    else
+      false
     end
   end
 
   # Removes self from topic topic.
   def unclassify!(topic)
     if topic_ids.include? topic.id
-      topics.delete topic
+      topic_ids.delete topic.id
       if !banned
         topic.questions_count -= 1
         topic.save
       end
       save
+    else
+      false
     end
   end
 

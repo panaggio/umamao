@@ -99,6 +99,8 @@ Shapado::Application.routes.draw do
       get :history
       get :revert
       get :diff
+      get :classify
+      get :unclassify
       get :retag
       put :retag_to
       post :close

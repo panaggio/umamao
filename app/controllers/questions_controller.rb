@@ -381,6 +381,55 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Classifies the question under a certain topic.
+  def classify
+    @question = Question.find_by_slug_or_id(params[:id])
+
+    @topic = Topic.find_by_title(params[:topic])
+
+    # Create new topic when it doesn't exist yet.
+    if @topic.nil?
+      @topic = Topic.create(:title => params[:topic])
+      @topic.save
+    end
+
+    status = @question.classify! @topic
+
+    respond_to do |format|
+      format.html do
+        redirect_to question_path(@question)
+      end
+
+      format.js do
+        res = { :success => status }
+        res[:box] = render_to_string(:partial => "topics/box.html",
+                                     :locals => {
+                                       :topic => @topic,
+                                       :question => @question
+                                     }) if status
+        render :json => res.to_json
+      end
+    end
+  end
+
+  # Removes a question from a certain topic.
+  def unclassify
+    @question = Question.find_by_slug_or_id(params[:id])
+
+    @topic = Topic.find_by_title(params[:topic])
+    status = @question.unclassify! @topic
+
+    respond_to do |format|
+      format.html do
+        redirect_to question_path(@question)
+      end
+
+      format.js do
+        render :json => { :success => status }.to_json
+      end
+    end
+  end
+
   def retag_to
     @question = Question.find_by_slug_or_id(params[:id])
 

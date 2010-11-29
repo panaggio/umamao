@@ -7,4 +7,4 @@
 %ul#question-topics-suggestions.autocomplete-list
 %ul#selected-topics.topic-list
   - @question.topics.each do |topic|
-    = render :partial => "topics/box", :locals => {:topic => topic}
+    = render :partial => "topics/box", :locals => {:topic => topic, :question => @question}
