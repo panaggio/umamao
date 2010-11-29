@@ -471,7 +471,8 @@ function initTopicAutocompleteForReclassifying() {
   });
 
   $(".add-topic").live("click", function() {
-    topicBox.returnDefault();
+    if (topicBox.input.val() != topicBox.startText)
+      topicBox.returnDefault();
     return false;
   });
 

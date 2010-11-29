@@ -1,11 +1,7 @@
-$logo-color: #da242b
-$link-color: #0077cc
-$controls-color: #666
-$affirmative: #BFDD48
-
 @import "compass/utilities"
 @import "fancy-buttons"
-
+@import colors
+@import buttons
 @import mixins
 
 @import nav_menu
@@ -200,16 +196,10 @@ form.share_content
         .more
           display: none
 
+
 .follow-info
   a
-    display: block
-    +border-radius
-    font-weight: bold
-    color: black
-    padding: 1px 8px
-    border: 1px solid darken($affirmative, 25%)
-    text-align: center
-    text-decoration: none !important
+    +button
 
     &.follow_link
       background-color: lighten($affirmative, 15%)

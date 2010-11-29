@@ -94,10 +94,6 @@ function initAutocomplete() {
   initSearchBox();
 
   // TODO: load for each right page with the HTML.
-  if ($("#question-topics-autocomplete").length > 0) {
-    initTopicAutocompleteForNewQuestion();
-  }
-
   if ($("#reclassify-autocomplete").length > 0) {
     initTopicAutocompleteForReclassifying();
   }
