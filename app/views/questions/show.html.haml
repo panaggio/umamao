@@ -51,7 +51,10 @@
       = render :partial => "topics/box", :locals => {:topic => topic, :question => @question}
   - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
     %a.reclassify{:href => "#"}
-      = t(".retag")
+      %strong.empty
+        = t(".tag")
+      %span.not-empty
+        = t(".retag")
     = text_field "topics", "", :class => "", :id => "reclassify-autocomplete", :value => t("searches.form.select_topics")
     %a.add-topic{:href => "#"}
       = t("scaffold.add")

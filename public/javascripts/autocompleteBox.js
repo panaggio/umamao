@@ -272,7 +272,7 @@ AutocompleteBox.prototype = {
         e.preventDefault();
         break;
       case 9: // tab
-        if (box.activateWithTab) {
+        if (box.activateWithTab && itemBox.isSelected()) {
           e.preventDefault();
           itemBox.click();
         }
@@ -430,27 +430,6 @@ TopicAutocomplete.prototype = {
 
 Utils.extend(TopicAutocomplete, AutocompleteBox);
 
-function initTopicAutocompleteForNewQuestion() {
-  var topicBox = new TopicAutocomplete("#question-topics-autocomplete",
-                                       "#question-topics-suggestions",
-                                       "/topics/autocomplete");
-
-  var selectedTopicsUl = $("#selected-topics");
-  $(".remove", selectedTopicsUl).live("click", function () {
-    $(this).closest("li").remove();
-  });
-
-  // Adds the selected topic to the list of topics for the new question.
-  topicBox.itemClicked = function (input) {
-    selectedTopicsUl.prepend(this.data.box);
-    topicBox.clear();
-  };
-
-  // We'll turn this off for now.
-  topicBox.returnDefault = null;
-
-}
-
 function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
                                        "#reclassify-suggestions",
@@ -465,6 +444,13 @@ function initTopicAutocompleteForReclassifying() {
     $("#reclassify-autocomplete").hide();
     $(".add-topic").hide();
     $(".cancel-reclassify").hide();
+    if (topicsUl.find("li").length == 0) {
+      $(".reclassify .empty").show();
+      $(".reclassify .not-empty").hide();
+    } else {
+      $(".reclassify .empty").hide();
+      $(".reclassify .not-empty").show();
+    }
     $(".reclassify").show();
   }
 
@@ -497,7 +483,7 @@ function initTopicAutocompleteForReclassifying() {
   $("a.remove", topicsUl).live("click", function () {
     var link = $(this);
     $.getJSON(link.attr("href"), function (data) {
-      link.closest(".topic").remove();
+      link.closest("li").remove();
     });
     return false;
   });

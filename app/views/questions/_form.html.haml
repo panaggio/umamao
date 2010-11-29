@@ -6,9 +6,6 @@
     = current_group.question_prompt
 
 .group
-  = render :partial => "classify"
-
-.group
   = f.label :body, t(:body, :scope => "activerecord.attributes.question"), :class => "label"
   = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
   %label.label
