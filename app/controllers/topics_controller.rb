@@ -18,7 +18,11 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by_slug_or_id(params[:id])
+    begin
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    rescue BSON::InvalidObjectId
+      raise Goalie::NotFound
+    end
     set_page_title(@topic.title)
     @news_items = NewsItem.paginate(:recipient_id => @topic.id,
                                     :recipient_type => "Topic",
