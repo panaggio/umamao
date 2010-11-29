@@ -23,9 +23,9 @@
 %p
   = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
 
-- if @news_items.empty?
+- if @news_items.blank?
   %ul.items#questions
-    - if @questions.empty?
+    - if @questions.blank?
       %li.highlight
         = t(".empty")
     - @questions.each do |question|
@@ -36,7 +36,7 @@
       = render :partial => "welcome/news_item", :object => news_item
 
 #additional_info
-  - if @news_items.empty?
+  - if @news_items.blank?
     = will_paginate @questions
   - else
     = will_paginate @news_items
