@@ -2,7 +2,8 @@
 
 %li
   .topic
-    = h(topic.title)
+    %span.topic-title
+      = h(topic.title)
     - if question && !question.new?
       %a.remove{:href => question_url(question) + "/unclassify?topic=" + h(topic.title)}
         ✕
@@ -10,4 +11,3 @@
       %input{:type => "hidden", :name => "question[topics][]", :value => topic.title}
       %span.remove
         ✕
-    .clear
