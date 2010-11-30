@@ -3,7 +3,10 @@
 %li
   .topic
     %span.topic-title
-      = h(topic.title)
+      - if topic.new?
+        = h(topic.title)
+      - else
+        = link_to h(topic.title), topic_url(topic)
     - if question && !question.new?
       %a.remove{:href => question_url(question) + "/unclassify?topic=" + h(topic.title)}
         ✕
