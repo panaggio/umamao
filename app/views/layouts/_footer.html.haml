@@ -1,30 +1,34 @@
+#footer
+  %ul
+    %li
+      = link_to 'Quem somos', about_url
+      \|
+    %li
+      = link_to 'Feedback', feedback_url
+      \|
+    %li
+      = link_to 'Blog', 'http://blog.umamao.com', :target => '_blank'
+      \|
+    %li
+      = link_to 'Twitter', 'http://twitter.com/umamao', :target => '_blank'
+      \|
+    %li= link_to 'Facebook', 'http://www.facebook.com/#!/pages/Umamao/110957438924904', :target => '_blank'
+  %p
+    %a{:rel => "license", :href => "http://creativecommons.org/licenses/by-sa/2.5/br/"}
+      %img{:alt => "Licença Creative Commons", :style => "border-width:0",
+           :src => "http://i.creativecommons.org/l/by-sa/2.5/br/88x31.png"}
+    = link_to image_tag('agpl.png', :alt => "Licença AGPL"), 'http://www.gnu.org/licenses/agpl.html'
+    %br
 
--if !current_group.footer.blank?
-  =current_group.footer
--else
-  #cc.center
-    = image_tag('/images/ccby.png')
-    == All Shapado.com content and data are available under the #{link_to 'Creative Commons Attribution 3.0 license', 'http://creativecommons.org/licenses/by/3.0/'}
+    Todo o conteúdo gerado por usuários está sob uma
+    = link_to "licença Creative Commons", "http://creativecommons.org/licenses/by-sa/2.5/br/", :rel => "license"
+    (a mesma da Wikipédia!), com atribuição obrigatória.
 
-  #blog.center
-    = link_to 'blog', 'http://blog.ricodigo.com/shapado'
-    |
-    = link_to 'twitter', 'http://twitter.com/shapado'
-    |
-    = link_to 'identi.ca', 'http://identi.ca/shapado'
-    |
-    = link_to 'irc', 'irc://irc.freenode.org/shapado'
-    = link_to '(web chat)', domain_url+'/chat'
-    |
-    %b
-      = link_to 'feedback', feedback_url, :class => "feedback", :id => "feedback"
-    |
-    = link_to 'tos', tos_path
-    |
-    = link_to 'privacy', privacy_path
-    #feedbackform.hide
-      = render :partial => "welcome/feedback"
+  %p
+    O Umamão é software livre sob
+    licença #{link_to 'AGPL', 'http://pt.wikipedia.org/wiki/GNU_Affero_General_Public_License'}.
+    O código é um <em>fork</em> do projeto
+    = link_to 'Shapado', 'http://shapado.com'
+    e está disponível no #{link_to 'Github', 'http://github.com/umamao/umamao'}.
 
-#default_footer.center
-  == Powered by #{link_to 'Shapado', 'http://gitorious.org/shapado'} #{AppConfig.version} under the #{link_to 'GNU Affero General Public License','http://www.fsf.org/licensing/licenses/agpl-3.0.html'}
-
+~ AppConfig.conversion_tracking_code if flash[:conversion]
