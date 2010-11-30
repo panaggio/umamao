@@ -345,9 +345,9 @@ class Question
 
       # Notify followers of new topic.
       topic.followers.each do |follower|
-        if !NewsItem.query(:recipient_id => follower.id,
-                           :recipient_type => "User",
-                           :news_update_id => news_update.id).any?
+        if NewsItem.query(:recipient_id => follower.id,
+                          :recipient_type => "User",
+                          :news_update_id => news_update.id).count == 0
           NewsItem.notify!(news_update, follower, topic)
         end
       end
