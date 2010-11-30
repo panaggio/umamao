@@ -210,8 +210,7 @@ class Question
     self.collection.update({:_id => self._id}, {:$set => {:banned => true}},
                                                :upsert => true)
     topics.each do |topic|
-      topic.questions_count -= 1
-      topic.save
+      topic.increment(:questions_count => -1)
     end
   end
 
@@ -223,8 +222,7 @@ class Question
                                                      :upsert => true)
     query(:id.in => ids, :select => :topic_ids).each do |question|
       question.topics.each do |topic|
-        topic.questions_count -= 1
-        topic.save
+        topic.increment(:questions_count => -1)
       end
     end
   end
@@ -233,8 +231,7 @@ class Question
     self.collection.update({:_id => self._id}, {:$set => {:banned => false}},
                                                :upsert => true)
     topics.each do |topic|
-      topic.questions_count += 1
-      topic.save
+      topic.increment(:questions_count => 1)
     end
   end
 
@@ -246,8 +243,7 @@ class Question
                                                      :upsert => true)
     query(:id.in => ids, :select => :topic_ids).each do |question|
       question.topics.each do |topic|
-        topic.questions_count += 1
-        topic.save
+        topic.increment(:questions_count => 1)
       end
     end
 
@@ -339,17 +335,27 @@ class Question
   # Returns the (only) associated news update.
   # We need this because has_one isn't working.
   def news_update
-    news_update.first
+    news_updates.first
   end
 
   # Classifies self under topic topic.
   def classify!(topic)
     if !topic_ids.include? topic.id
       topics << topic
-      if !banned
-        topic.questions_count += 1
-        topic.save
+
+      # Notify followers of new topic.
+      topic.followers.each do |follower|
+        if !NewsItem.query(:recipient_id => follower.id,
+                           :recipient_type => "User",
+                           :news_update_id => news_update.id).any?
+          NewsItem.notify!(news_update, follower, topic)
+        end
       end
+
+      if !banned
+        topic.increment(:questions_count => 1)
+      end
+
       save
     else
       false
@@ -361,8 +367,7 @@ class Question
     if topic_ids.include? topic.id
       topic_ids.delete topic.id
       if !banned
-        topic.questions_count -= 1
-        topic.save
+        topic.increment(:questions_count => -1)
       end
       save
     else
