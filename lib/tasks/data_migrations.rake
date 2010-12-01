@@ -3,9 +3,25 @@ require 'mechanize'
 
 namespace :data do
   namespace :migrate do
+
+    desc "Create news updates for entries that don't have one"
+    task :create_old_news_updates => :environment do
+      Question.query.each do |question|
+        if !question.news_update
+          question.create_news_update
+        end
+      end
+
+      Answer.query.each do |answer|
+        if !answer.news_update
+          answer.create_news_update
+        end
+      end
+    end
+
     desc "Update questions count in topics"
     task :update_topic_questions_count => :environment do
-      Topic.all.each do |topic|
+      Topic.query.each do |topic|
         topic.questions_count = Question.query(:topic_ids => topic.id,
                                                :banned => false).count
         topic.save

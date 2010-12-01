@@ -343,12 +343,51 @@ class Question
     if !topic_ids.include? topic.id
       topics << topic
 
-      # Notify followers of new topic.
-      topic.followers.each do |follower|
-        if NewsItem.query(:recipient_id => follower.id,
-                          :recipient_type => "User",
+      # Notify followers of new topic and the topic itself. We give
+      # them the current timestamp so they will appear on top of the
+      # news feed.
+
+      # We need this to make sure that answers appear after question.
+      stamp = Time.zone.now
+
+      # Question updates
+      if news_update
+        # Users
+        topic.followers.each do |follower|
+          if NewsItem.query(:recipient_id => follower.id,
+                            :recipient_type => "User",
+                            :news_update_id => news_update.id).count == 0
+            NewsItem.notify!(news_update, follower, topic, stamp)
+          end
+        end
+        # Topic
+        if NewsItem.query(:recipient_id => topic.id,
+                          :recipient_type => "Topic",
                           :news_update_id => news_update.id).count == 0
-          NewsItem.notify!(news_update, follower, topic)
+          NewsItem.notify!(news_update, topic, topic, stamp)
+        end
+      end
+
+      # Question's answers' updates
+      # FIXME: the answers' ids ought to be kept in the question.
+      answer_ids = answers.map(&:id)
+      NewsUpdate.query(:entry_id.in => answer_ids,
+                       :entry_type => "Answer").each do |update|
+        stamp = stamp + 1.second
+        # Users
+        topic.followers.each do |follower|
+          if NewsItem.query(:recipient_id => follower.id,
+                            :recipient_type => "User",
+                            :news_update_id => update.id).count == 0
+            NewsItem.notify!(update, follower, topic, stamp)
+          end
+        end
+
+        # Topic
+        if NewsItem.query(:recipient_id => topic.id,
+                          :recipient_type => "Topic",
+                          :news_update_id => update.id).count == 0
+          NewsItem.notify!(update, topic, topic, stamp)
         end
       end
 
@@ -375,6 +414,11 @@ class Question
     end
   end
 
+  def create_news_update
+    NewsUpdate.create(:author => self.user, :entry => self,
+                      :created_at => created_at, :action => 'created')
+  end
+
   protected
   def update_answer_count
     self.answers_count = self.answers.where(:banned => false).count
@@ -390,10 +434,6 @@ class Question
       @autocomplete_keywords = title.split(/\W/).
         delete_if {|w| w.empty?}.map &:downcase
     end
-  end
-
-  def create_news_update
-    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
   end
 
 end

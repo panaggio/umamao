@@ -98,7 +98,6 @@ class Answer < Comment
                                                :upsert => true)
   end
 
-
   def ban
     self.question.answer_removed!
     self.set({:banned => true})
@@ -139,7 +138,8 @@ class Answer < Comment
   end
 
   def create_news_update
-    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
+    NewsUpdate.create(:author => self.user, :entry => self,
+                      :created_at => created_at, :action => 'created')
   end
 
   # Returns the (only) associated news update.
