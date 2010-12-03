@@ -18,6 +18,75 @@ window.Utils = {
   // Adds parameters to an url.
   buildUrl: function (url, params) {
     return url + (url.match(/\?/) ? "&" : "?") + params;
+  },
+
+  manageAjaxError: function (XMLHttpRequest, textStatus, errorThrown) {
+    Utils.showMessage("sorry, something went wrong.", "error");
+  },
+
+  showMessage: function (message, t, delay) {
+    $("#notifyBar").remove();
+    $.notifyBar({
+      html: "<div class='message "+t+"' style='width: 100%; height: 100%; padding: 5px'>"+message+"</div>",
+      delay: delay||3000,
+      animationSpeed: "normal",
+      barClass: "flash"
+    });
+  },
+
+  clickObject: function (selector, prepare) {
+    $(selector).live("click", function (event) {
+      var element = this;
+      var settings = prepare.call(element);
+
+      // Basic behavior.
+      var ajaxParams = {
+        dataType: "json",
+
+        complete: function () {
+          $(element).removeAttr("disabled");
+          if (settings.complete) settings.complete.call(element);
+        },
+
+        error: Utils.manageAjaxError,
+
+        success: function (data) {
+          if (data.success) {
+            if (settings.success) settings.success.call(element, data);
+            if (data.message) Utils.showMessage(data.message, "notice");
+          } else {
+            if (data.message) Utils.showMessage(data.message, "error");
+            if (settings.error) settings.error.call(element, data);
+          }
+        }
+      };
+
+      // Try to guess what to do based on the type and attributes
+      // of the element.
+      if ($(element).is("a")) {
+        ajaxParams.url = settings.url || $(element).attr("href");
+        if (typeof settings.data === "string" ||
+            settings.data instanceof String) {
+          ajaxParams.data = settings.data + "format=js";
+        } else if (typeof settings.data === "object") {
+          ajaxParams.data = $.extend({}, settings.data, {format: "js"});
+        } else {
+          ajaxParams.data = "format=js";
+        }
+        ajaxParams.type = settings.type || "GET";
+      } else {
+        // Assume element belongs to a form.
+        var form = $(element).closest("form");
+        ajaxParams.url = settings.url || (form.attr("action") + ".js");
+        ajaxParams.data = settings.data || form.serialize();
+        ajaxParams.type = settings.type || form.attr("method");
+      }
+      $.ajax(ajaxParams);
+
+      $(element).attr("disabled", "true");
+
+      return false;
+    });
   }
 
 };

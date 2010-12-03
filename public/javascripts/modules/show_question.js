@@ -5,11 +5,14 @@ $(document).ready(function() {
   $('.comments').hide();
   $('input#question_title').focus();
 
-  $("form.vote_form button").live("click", function(event) {
+  Utils.clickObject("form.vote_form button", function () {
     var btn_name = $(this).attr("name");
     var form = $(this).parents("form");
-    $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
-      if(data.success){
+
+    return {
+      data: form.serialize() + "&" + btn_name + "=1",
+
+      success: function (data) {
         form.find(".votes_average").text(data.average);
         if(data.vote_state == "deleted") {
           form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png");
@@ -24,146 +27,93 @@ $(document).ready(function() {
             form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png");
           }
         }
-        showMessage(data.message, "notice");
-      } else {
-        showMessage(data.message, "error");
+      },
+
+      error: function (data) {
         if(data.status == "unauthenticate") {
           window.onbeforeunload = null;
           window.location = "/users/login";
         }
       }
-    }, "json");
-    return false;
+
+    };
   });
 
-  $(".comment .comment-votes form.vote-up-comment-form input[name=vote_up]").live("click", function(event) {
+  Utils.clickObject(".comment .comment-votes form.vote-up-comment-form input[name=vote_up]", function () {
     var btn = $(this);
-    var form = $(this).parents("form");
+    var form = $(this).closest("form");
     btn.hide();
-    $.post(form.attr("action"), form.serialize()+"&"+btn.attr("name")+"=1", function(data){
-      if(data.success){
+
+    return {
+      //url: form.attr("action"),
+      data: form.serialize()+"&"+btn.attr("name")+"=1",
+      //type: "POST",
+
+      success: function (data) {
         if(data.vote_state == "deleted") {
           btn.attr("src", "/images/dialog-ok.png" );
         } else {
           btn.attr("src", "/images/dialog-ok-apply.png" );
         }
         btn.parents(".comment-votes").children(".votes_average").html(data.average);
-        showMessage(data.message, "notice");
-      } else {
-        showMessage(data.message, "error");
-      }
-      btn.show();
-    }, "json");
-    return false;
+      },
+
+      complete: function () { btn.show(); }
+    };
   });
 
-  $("form.mainAnswerForm .button").live("click", function(event) {
+  Utils.clickObject("form.mainAnswerForm .button", function () {
     var form = $(this).parents("form");
     var answers = $("#answers .block");
     var button = $(this);
 
-    button.attr('disabled', true);
-    $.ajax({ url: form.attr("action"),
-      data: form.serialize()+"&format=js",
-      dataType: "json",
-      type: "POST",
-      success: function(data, textStatus, XMLHttpRequest) {
-                  if(data.success) {
-                    window.onbeforeunload = null;
+    return {
+      success: function (data) {
+        window.onbeforeunload = null;
+        var answer = $(data.html);
+        var content = answer.find(".entry-content");
+        answer.find("form.commentForm").hide();
+        answers.append(answer);
+        highlightEffect(answer);
+        form.find("textarea").val("");
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
+      },
 
-                    var answer = $(data.html);
-                    var content = answer.find(".entry-content");
-                    answer.find("form.commentForm").hide();
-                    answers.append(answer);
-                    highlightEffect(answer);
-                    showMessage(data.message, "notice");
-                    form.find("textarea").val("");
-                    MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
-                  } else {
-                    showMessage(data.message, "error");
-                    if(data.status == "unauthenticate") {
-                      window.onbeforeunload = null;
-                      window.location="/users/login";
-                    }
-                  }
-                },
-      error: manageAjaxError,
-      complete: function(XMLHttpRequest, textStatus) {
-        button.attr('disabled', false);
+      error: function (data) {
+        if(data.status == "unauthenticate") {
+          window.onbeforeunload = null;
+          window.location="/users/login";
+        }
       }
-    });
-    return false;
+    };
   });
 
-  $("form.commentForm .button").live("click", function(event) {
+  Utils.clickObject("form.commentForm .button", function () {
+    // TODO: show new comment when it is the first one.
     var form = $(this).parents("form");
     var commentable = $(this).parents(".commentable");
     var comments = commentable.find(".comments");
     var button = $(this);
 
-    button.attr('disabled', true);
-    $.ajax({ url: form.attr("action"),
-             data: form.serialize()+"&format=js",
-             dataType: "json",
-             type: "POST",
-             success: function(data, textStatus, XMLHttpRequest) {
-                          if(data.success) {
-                            var textarea = form.find("textarea");
-                            window.onbeforeunload = null;
-                            var comment = $(data.html);
-                            comments.append(comment);
-                            highlightEffect(comment);
-                            showMessage(data.message, "notice");
-                            form.hide();
-                            textarea.val("");
-                            MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
-                          } else {
-                            showMessage(data.message, "error");
-                            if(data.status == "unauthenticate") {
-                              window.onbeforeunload = null;
-                              window.location="/users/login";
-                            }
-                          }
-                      },
-             error: manageAjaxError,
-             complete: function(XMLHttpRequest, textStatus) {
-               button.attr('disabled', false);
-             }
-    });
-    return false;
-  });
-
-  $("#request_close_question_form").submit(function() {
-    var request_button = $(this).find("input.button");
-    request_button.attr('disabled', true);
-    var close_button = $(this).find("button");
-    close_button.attr('disabled', true);
-    form = $(this);
-
-    $.ajax({
-      url: $(this).attr("action"),
-      data: $(this).serialize()+"&format=js",
-      dataType: "json",
-      type: "POST",
-      success: function(data, textStatus, XMLHttpRequest) {
-        if(data.success) {
-          form.slideUp();
-          showMessage(data.message, "notice");
-        } else {
-          showMessage(data.message, "error");
-          if(data.status == "unauthenticate") {
-            window.onbeforeunload = null;
-            window.location="/users/login";
-          }
-        }
+    return {
+      success: function (data) {
+        var textarea = form.find("textarea");
+        window.onbeforeunload = null;
+        var comment = $(data.html);
+        comments.append(comment);
+        highlightEffect(comment);
+        form.hide();
+        textarea.val("");
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
       },
-      error: manageAjaxError,
-      complete: function(XMLHttpRequest, textStatus) {
-        request_button.attr('disabled', false);
-        close_button.attr('disabled', false);
+
+      error: function (data) {
+        if(data.status == "unauthenticate") {
+          window.onbeforeunload = null;
+          window.location="/users/login";
+        }
       }
-    });
-    return false;
+    };
   });
 
   $(".edit_comment").live("click", function() {
@@ -285,14 +235,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $("#close_question_link").click(function() {
-    $("#request_close_question_form").slideUp();
-    $("#add_comment_form").slideUp();
-    $("#question_flag_form").slideUp();
-    $("#close_question_form").slideToggle();
-    return false;
-  });
-
   $("#question_flag_link.flag-link").click(function() {
     $("#request_close_question_form").slideUp();
     $("#add_comment_form").slideUp();
@@ -301,15 +243,7 @@ $(document).ready(function() {
     return false;
   });
 
-  $("#request-close-link").click(function() {
-    var controls = $(this).parents(".controls");
-    $("#add_comment_form").slideUp();
-    $("#question_flag_form").slideUp();
-    $("#close_question_form").slideUp();
-    $("#request_close_question_form").slideToggle();
-    return false;
-  });
-
+  // TODO: see if this is still necessary.
   $(".question-action").live("click", function(event) {
     var link = $(this);
     if(!link.hasClass('busy')){
