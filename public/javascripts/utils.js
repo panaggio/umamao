@@ -15,11 +15,6 @@ window.Utils = {
     A.prototype = $.extend({}, B.prototype, A.prototype);
   },
 
-  // Adds parameters to an url.
-  buildUrl: function (url, params) {
-    return url + (url.match(/\?/) ? "&" : "?") + params;
-  },
-
   manageAjaxError: function (XMLHttpRequest, textStatus, errorThrown) {
     Utils.showMessage("sorry, something went wrong.", "error");
   },

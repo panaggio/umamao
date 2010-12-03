@@ -272,9 +272,8 @@ AutocompleteBox.prototype = {
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
     var box = this;
-    var fetchUrl = Utils.buildUrl(this.url, "q=" + encodeURIComponent(query));
     this.abortRequest();
-    this.ajaxRequest = $.getJSON(fetchUrl, function (data) {
+    this.ajaxRequest = $.getJSON(this.url, {q: query}, function (data) {
       if (data) {
         box.itemBox.setItems(box.processData(data));
         box.itemBox.show();
