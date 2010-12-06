@@ -42,15 +42,15 @@ class NewsItem
   # Notifies a single recipient. Allows us to specify when the item
   # was created.
   def self.notify!(news_update, recipient, origin, created_at = nil)
-    i = create(:news_update => news_update,
+    news_item = create(:news_update => news_update,
                :recipient => recipient,
                :origin => origin)
     if created_at
-      i.created_at = created_at
-      i.save
+      news_item.created_at = created_at
+      news_item.save
     end
 
-    i
+    news_item
   end
 
   def title
