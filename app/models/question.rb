@@ -370,7 +370,7 @@ class Question
 
       # Question's answers' updates
       # FIXME: the answers' ids ought to be kept in the question.
-      answer_ids = answers.map(&:id)
+      answer_ids = answers.all(:select => :id).map(&:id)
       NewsUpdate.query(:entry_id.in => answer_ids,
                        :entry_type => "Answer").each do |update|
         stamp = stamp + 1.second
