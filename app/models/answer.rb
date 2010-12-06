@@ -139,7 +139,7 @@ class Answer < Comment
 
   def create_news_update
     NewsUpdate.create(:author => self.user, :entry => self,
-                      :created_at => created_at, :action => 'created')
+                      :created_at => self.created_at, :action => 'created')
   end
 
   # Returns the (only) associated news update.
