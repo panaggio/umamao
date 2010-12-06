@@ -13,32 +13,11 @@
 // refresh suggestions.
 //
 // TODO:
-// - Move utility functions somewhere else.
 // - Internationalize.
 // - Highlight entries where they match the input.
 // - Factor this into multiple files that are only loaded when needed.
 //
 
-// Utility functions.
-window.Utils = window.Utils || {};
-
-// Escapes every character in a string that has a special meaning in a
-// regular expression.
-// TODO: actually test this.
-Utils.escapeRegExp = function (string) {
-  return string.replace(/[\{\}\(\)\[\]\.\+\*\?\$\^\\]/g, "\\$&");
-};
-
-// Makes A inherit from B.
-// This extension is static, so later changes to B won't be propagated.
-Utils.extend = function (A, B) {
-  A.prototype = $.extend({}, B.prototype, A.prototype);
-};
-
-// Adds parameters to an url.
-Utils.buildUrl = function (url, params) {
-  return url + (url.match(/\?/) ? "&" : "?") + params;
-};
 
 // Data item in an item box.
 function Item(data) {

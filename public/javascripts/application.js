@@ -105,8 +105,8 @@ function initAutocomplete() {
   var searchField = $("#search-field");
 
   // Keyboard shortcuts for search box
-  $(document).bind("keypress", "/", function () { searchField.focus(); });
-  $(searchField).bind("keydown", "esc", function () { searchField.blur(); });
+  $(document).bind("keypress", "/", function () { searchField.focus(); return false; });
+  $(searchField).bind("keydown", "esc", function () { searchField.blur(); return false; });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {

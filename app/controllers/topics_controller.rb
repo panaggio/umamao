@@ -25,12 +25,11 @@ class TopicsController < ApplicationController
     end
     set_page_title(@topic.title)
 
-    # FIXME: create news items from old entries
-    @news_items = nil # NewsItem.paginate(:recipient_id => @topic.id,
-                                    # :recipient_type => "Topic",
-                                    # :per_page => 30,
-                                    # :page => params[:page] || 1,
-                                    # :order => :created_at.desc)
+    @news_items = NewsItem.paginate(:recipient_id => @topic.id,
+                                    :recipient_type => "Topic",
+                                    :per_page => 30,
+                                    :page => params[:page] || 1,
+                                    :order => :created_at.desc)
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
                                    :page => params[:page] || 1) if @news_items.blank?

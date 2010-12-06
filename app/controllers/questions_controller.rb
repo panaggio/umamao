@@ -234,7 +234,6 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
-      @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
       @question.updated_by = current_user
       @question.last_target = @question
 

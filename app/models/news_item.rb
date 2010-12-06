@@ -18,32 +18,39 @@ class NewsItem
 
   timestamps!
 
-  # Notifies each recipient of a news update
+  # Notifies each recipient of a news update. The creation date will
+  # be the same as the news update's.
   def self.from_news_update!(news_update)
     origins = [news_update.author] + news_update.entry.topics
-    notify!(news_update, news_update.author, news_update.author)
+    notify!(news_update, news_update.author,
+            news_update.author, news_update.created_at)
     notified_users = Set.new [news_update.author]
 
     origins.each do |origin|
       origin.followers.each do |follower|
         next if notified_users.include?(follower)
-        notify!(news_update, follower, origin)
+        notify!(news_update, follower, origin, news_update.created_at)
         notified_users << follower
       end
     end
 
     news_update.entry.topics.each do |topic|
-      notify!(news_update, topic, topic)
+      notify!(news_update, topic, topic, news_update.created_at)
     end
   end
 
-  # Notifies a single recipient
-  def self.notify!(news_update, recipient, origin)
-    create(
-      :news_update => news_update,
-      :recipient => recipient,
-      :origin => origin
-    )
+  # Notifies a single recipient. Allows us to specify when the item
+  # was created.
+  def self.notify!(news_update, recipient, origin, created_at = nil)
+    i = create(:news_update => news_update,
+               :recipient => recipient,
+               :origin => origin)
+    if created_at
+      i.created_at = created_at
+      i.save
+    end
+
+    i
   end
 
   def title
