@@ -2,8 +2,6 @@ $(document).ready(function() {
   $("form.nestedAnswerForm").hide();
   $("#add_comment_form").hide();
   $("form").live('submit', function() {
-    var textarea = $(this).find('textarea');
-    removeFromLocalStorage(location.href, textarea.attr('id'));
     window.onbeforeunload = null;
   });
 
@@ -60,15 +58,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $('textarea').live('keyup',function(){
-      var value = $(this).val();
-      var id = $(this).attr('id');
-      addToLocalStorage(location.href, id, value);
-  });
-
-  initStorageMethods();
-  fillTextareas();
-
   $(".highlight_for_user").effect("highlight", {}, 2000);
   sortValues('group_language', ':last');
   sortValues('language_filter', ':lt(2)');
@@ -87,70 +76,37 @@ $(document).ready(function() {
   };
 
   $('#login_form > #email_field > input').focus();
-});
 
-function initAutocomplete() {
-  var select = $('<select size="100px" name="question[topics]" id="question_topics" class="autocomplete_for_tags" ></select>');
-  var tagInput = $('.autocomplete_for_tags');
-  var width = tagInput.width();
-  tagInput.after(select);
-  if(typeof(tagInput)!='undefined' && $.trim(tagInput.val())!=''){
-    var tags = tagInput.val().split(',,');
-    if( tags.length > 0){
-      $.each(tags, function(i,n){
-        if($.trim(n)!='')
-          select.append('<option value="'+n+'" selected="selected" class="selected">'+n+'</option>');
-      });
+  $('#news_items .answer').each(function(){
+    if ($(this).height() > 85) {
+      $(this).addClass('large');
     }
-  }
-  tagInput.remove();
-  $('.autocomplete_for_tags').fcbkcomplete({
-    json_url: '/questions/tags_for_autocomplete.js',
-    firstselected: true,
-    delay: 200,
-    maxitimes: 6,
-    width: width
+  }).filter('.large').append(
+    '<div class="more"><span class="more-link">(mais)</span></div>'
+  ).find('.more-link').click(function(){
+    $(this).parents('.answer').addClass('expanded');
   });
 
-  // Dynamic search box
-  // FIXME We should internationalize this
+});
+
+// Init autocompletable boxes.
+function initAutocomplete() {
+  initSearchBox();
+
+  // TODO: load for each right page with the HTML.
+  if ($("#reclassify-autocomplete").length > 0) {
+    initTopicAutocompleteForReclassifying();
+  }
+
+  if ($("#follow-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForFollowing();
+  }
+
   var searchField = $("#search-field");
-  var searchForm = searchField.parent();
-  searchField.autoSuggest("/search/json", {
-                            asHtmlID: "search-field",
-                            minChars: 2,
-                            startText: "Buscar perguntas, tópicos e usuários",
-                            selectedItemProp: "title",
-                            resultClick: function (data) {
-                              if (data.attributes.type == "Search") {
-                                searchForm.submit();
-                              } else {
-                                location.href = data.attributes.url;
-                              }
-                            },
-                            retrieveComplete: function (data) {
-                              return data.concat([{ title: "Buscar", type: "Search" }]);
-                            },
-                            formatList: function (data, formatted) {
-                              switch (data.type) {
-                              case "Question":
-                                return formatted.html(data.title + ' <span class="as-desc">' + data.topics.join(', ') + '</span>');
-                              case "Topic":
-                                return formatted.html(data.title + ' <span class="as-desc">Tópico</span>');
-                              case "User":
-                                return formatted.html(data.pic + " " + data.title +
-                                                      ' <span class="as-desc">Usuário</span>');
-                              case "Search":
-                                return formatted.addClass("as-search").text('Buscar por perguntas com "' + this.val() + '"');
-                              default:
-                                return formatted.html(data.type);
-                              }
-                            }
-                          });
 
   // Keyboard shortcuts for search box
-  $(document).bind("keypress", "/", function () { searchField.focus(); });
-  $(searchField).bind("keydown", "esc", function () { searchField.blur(); });
+  $(document).bind("keypress", "/", function () { searchField.focus(); return false; });
+  $(searchField).bind("keydown", "esc", function () { searchField.blur(); return false; });
 }
 
 function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {
@@ -166,80 +122,6 @@ function showMessage(message, t, delay) {
     barClass: "flash"
   });
 }
-
-function hasStorage(){
-  if (window.localStorage && typeof(Storage)!='undefined'){
-    return true;
-  } else {
-      return false;
-  }
-}
-
-function initStorageMethods(){
-  if(hasStorage()){
-    Storage.prototype.setObject = function(key, value) {
-        this.setItem(key, JSON.stringify(value));
-    };
-
-    Storage.prototype.getObject = function(key) {
-        return JSON.parse(this.getItem(key));
-    };
-  }
-}
-
-function fillTextareas(){
-   if(hasStorage() && localStorage[location.href]!=null && localStorage[location.href]!='null'){
-       localStorageArr = localStorage.getObject(location.href);
-       $.each(localStorageArr, function(i, n){
-           $("#"+n.id).val(n.value);
-           $("#"+n.id).parents('form.commentForm').show();
-           $("#"+n.id).parents('form.nestedAnswerForm').show();
-       });
-    }
-}
-
-function addToLocalStorage(key, id, value){
-  if(hasStorage()){
-    var ls = localStorage[key];
-    if($.trim(value)!=""){
-      if(ls == null || ls == "null" || typeof(ls)=="undefined"){
-          localStorage.setObject(key,[{id: id, value: value}]);
-      } else {
-          var storageArr = localStorage.getObject(key);
-          var isIn = false;
-          storageArr = $.map(storageArr, function(n, i){
-              if(n.id == id){
-                n.value = value;
-                isIn = true;
-              }
-          return n;
-          });
-      if(!isIn)
-        storageArr = $.merge(storageArr, [{id: id, value: value}]);
-      localStorage.setObject(key, storageArr);
-    }
-    } else {removeFromLocalStorage(key, id);}
-  }
-}
-
-function removeFromLocalStorage(key, id){
-  if(hasStorage()){
-    var ls = localStorage[key];
-    if(typeof(ls)=='string'){
-      var storageArr = localStorage.getObject(key);
-
-      storageArr = $.map(storageArr, function(n, i){
-          if(n.id == id){
-            return null;
-          } else {
-              return n;
-          }
-      });
-      localStorage.setObject(key, storageArr);
-    }
-  }
-}
-
 
 function sortValues(selectID, keepers){
   if(keepers){

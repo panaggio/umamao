@@ -21,23 +21,14 @@ class Vote
   validates_presence_of :user_id, :voteable_id, :voteable_type
   validates_inclusion_of :value, :within => [1,-1]
 
-  validate :should_be_unique
+  ensure_index([[:user_id, 1], [:voteable_id, 1], [:voteable_type, 1]],
+               :unique => true)
+
   validate :check_reputation
   validate :check_owner
   validate :check_voteable
 
   protected
-  def should_be_unique
-    vote = Vote.first( :voteable_type => self.voteable_type,
-                       :voteable_id => self.voteable_id,
-                       :user_id     => self.user_id )
-
-    valid = (vote.nil? || vote.id == self.id)
-    if !valid
-      self.errors.add(:voteable, "You already voted this #{self.voteable_type}")
-    end
-  end
-
   def check_reputation
     if self.value > 0
       unless user.can_vote_up_on?(self.voteable.group)
@@ -99,4 +90,11 @@ class Vote
     end
     return valid
   end
+
+  # Ensures the vote is removed from the voted entity.
+  after_destroy :remove_vote
+  def remove_vote
+    voteable.remove_vote!(value, user)
+  end
+
 end

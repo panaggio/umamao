@@ -6,45 +6,51 @@
   %hr
 
 - content_for :sidebar do
-  .block
-    .follow-info
-      - if current_user != @user
-        - if logged_in? && current_user.following?(@user)
-          = link_to "#{t("followable.unfollow")}", unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user)
-        - else
-          = link_to "#{t("followable.follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
-        .clear
-    .inner{:style => "padding-top: 10px"}
-      = gravatar @user.email.to_s, :size => 128
-      = shapado_auto_link(markdown(@user.description))
+  .follow-info.block
+    - if current_user != @user
+      - if logged_in? && current_user.following?(@user)
+        = link_to "#{t("followable.unfollow")}", unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user)
+      - else
+        = link_to "#{t("followable.follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
+      .clear
+  .user-info.block
+    = gravatar @user.email.to_s, :size => 128
+    = shapado_auto_link(markdown(@user.description))
 
-    -# Followers
-    - if @user.followers.count > 0
+  -# Followers
+  - if @user.followers.count > 0
+    .block
       %h2.title
         = t('followable.followers', :count => @user.followers.count)
       .friend_list
         - @user.followers.each do |follower|
           %span
-            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
-    -# Followed users
-    - if @user.following.count > 0
+  -# Followed users
+  - if @user.following.count > 0
+    .block
       %h2.title
         = t('followable.following', :count => @user.following.count)
       .friend_list
         - @user.following.each do |follower|
           %span
-            = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
-    -# Followed topics
-    - if @topics.count > 0
+  -# Followed topics
+  - if @topics.count == 0
+    %h2.title
+      = t("followable.topics.none")
+  - else
+    .block
       %h2.title
         = t("followable.topics", :count => @topics.count)
       %ul.topic-list
         - @topics.each do |topic|
           %li
-            .tag
-              = link_to topic.title, topic_url(topic), :title => topic.title
+            .topic
+              %span.topic-title
+                = link_to topic.title, topic_url(topic), :title => topic.title
             = render :partial => "topics/follow", :locals => {:topic => topic}
             .clear
 

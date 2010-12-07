@@ -1,5 +1,4 @@
 class SearchesController < ApplicationController
-  include GravatarHelper::PublicMethods
 
   def index
     options = {:per_page => 25, :page => params[:page] || 1}
@@ -34,7 +33,7 @@ class SearchesController < ApplicationController
     end
   end
 
-  def json
+  def autocomplete
     # Searches for entries containing keywords in the search box and
     # returns them in JSON form
 
@@ -43,9 +42,10 @@ class SearchesController < ApplicationController
     query_res = phrase.split.map {|w| Regexp.new "^#{Regexp.escape w}"}
 
     questions = Question.query(:autocomplete_keywords.in => query_res,
+                               :banned => false,
                                :select => [:title, :slug, :topic_ids]).limit(10)
     topics = Topic.filter(phrase, :per_page => 10,
-                          :select => [:title, :slug])
+                          :select => [:title, :slug, :questions_count])
     users = User.filter(phrase, :per_page => 10,
                         :select => [:name, :id, :email])
 
@@ -61,25 +61,23 @@ class SearchesController < ApplicationController
     # JSON serialization
     render :json => ((questions.limit(total_qs).map do |q|
                         {
-                          :title => q.title,
                           :url => url_for(q),
-                          :type => "Question",
-                          :topics => q.topics.map(&:title)
+                          :html => render_to_string(:partial => "questions/autocomplete.html",
+                                                    :locals => {:question => q})
                         }
                       end) +
                      (topics[0...total_ts].map do |t|
                         {
-                          :title => t.title,
                           :url => url_for(t),
-                          :type => "Topic"
+                          :html => render_to_string(:partial => "topics/autocomplete.html",
+                                                    :locals => {:topic => t})
                         }
                       end) +
                      (users[0...total_us].map do |u|
                         {
-                          :title => u.name,
                           :url => url_for(u),
-                          :type => "User",
-                          :pic => gravatar(u.email.to_s, :size => 20)
+                          :html => render_to_string(:partial => "users/autocomplete.html",
+                                                    :locals => {:user => u})
                         }
                       end)).to_json
   end

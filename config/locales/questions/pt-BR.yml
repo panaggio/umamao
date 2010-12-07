@@ -73,10 +73,11 @@ pt-BR:
     question:
       accepted_tooltip: Esta pergunta tem uma resposta aceita
     retag:
+
       title: Editar tópicos
     retag_form:
       cancel: Cancelar
-      submit: Atualizar tópicos
+      submit: Atualizar
       title: Atualizar tópicos
     retag_to:
       failure: Não foi possível atualizar os tópicos.
@@ -114,6 +115,7 @@ pt-BR:
       share: Compartilhar esta pergunta em
       share_on: Compartilhar esta pergunta em %{site}
       solution: Resposta aceita
+      tag: Adicionar tópicos
       to_answer_question: para responder a esta pergunta
       unauthenticated_retag: Você precisa de uma conta para editar tópicos
       unfavorite_tooltip: Remover esta pergunta das suas favoritas

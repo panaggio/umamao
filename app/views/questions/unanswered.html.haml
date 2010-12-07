@@ -16,9 +16,8 @@
     %li.votes
       = link_to t("questions.index.votes"), unanswered_questions_path(:sort=>"votes")
 
--content_for :sidebar do
-  = render :partial => "shared/current_tags"
-  -if logged_in?
+- content_for :sidebar do
+  - if logged_in?
     = render :partial => "shared/language_filter"
 
 /Questions

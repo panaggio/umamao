@@ -4,7 +4,7 @@
       = link_to h(topic.title), topic_path(topic)
     .info
       .metadata
-        = render :partial => "follow", :locals => {:topic => topic}
+        = render :partial => "topics/follow", :locals => {:topic => topic}
 
         - count = topic.questions_count
         = format_number(count)

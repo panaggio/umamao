@@ -41,15 +41,15 @@ module GravatarHelper
     # the given user object will respond_to "email", and return the user's
     # email address.
     def gravatar_for(user, options={})
-      gravatar(user.email, options)
+      gravatar(user.email.to_s, options.reverse_merge(:title => user.name, :alt => user.name))
     end
 
     # Return the HTML img tag for the given email address's gravatar.
     def gravatar(email, options={})
       src = CGI.escapeHTML(gravatar_url(email, options))
       options = DEFAULT_OPTIONS.merge(options)
-      [:class, :alt, :size].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
-      "<img class=\"#{options[:class]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{src}\" />"
+      [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
+      "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{src}\" />"
     end
 
     # Returns the base Gravatar URL for the given email hash. If ssl evaluates to true,

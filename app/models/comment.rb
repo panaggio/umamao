@@ -1,4 +1,3 @@
-
 class Comment
   include MongoMapper::Document
   include Support::Voteable

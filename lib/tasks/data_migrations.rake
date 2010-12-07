@@ -3,6 +3,44 @@ require 'mechanize'
 
 namespace :data do
   namespace :migrate do
+
+    desc "Create news updates for entries that don't have one"
+    task :create_old_news_updates => :environment do
+      Question.query.each do |question|
+        if !question.news_update
+          question.create_news_update
+        end
+      end
+
+      Answer.query.each do |answer|
+        if !answer.news_update
+          answer.create_news_update
+        end
+      end
+    end
+
+    desc "Update questions count in topics"
+    task :update_topic_questions_count => :environment do
+      Topic.query.each do |topic|
+        topic.questions_count = Question.query(:topic_ids => topic.id,
+                                               :banned => false).count
+        topic.save
+      end
+    end
+
+    desc "Remove duplicate votes"
+    task :remove_dup_votes => :environment do
+      dups = Vote.all.group_by{|v| [v.user_id, v.voteable_id, v.voteable_type]}.
+        to_a.each{|g| g[1][1..-1].map {|v| v.destroy}}
+
+      if Vote.all.group_by{|v| [v.user_id, v.voteable_id, v.voteable_type]}.
+          to_a.select{|g| g[1].length > 1}.length == 0
+        puts "Success!"
+      else
+        puts "Error"
+      end
+    end
+
     desc "Move tags from an array of strings into their own (Topic) model"
     task :tags_to_topics => :environment do
       Topic.delete_all

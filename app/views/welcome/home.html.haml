@@ -1,6 +1,4 @@
 - content_for :head do
-  - if !current_group.default_tags.empty?
-    %meta{:name => "keywords", :content => current_group.default_tags.join(", ")}
   %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
 
 - content_for :subtabs do
@@ -23,6 +21,7 @@
   - else
     - @news_items.each do |news_item|
       = render :partial => "news_item", :object => news_item
+    = will_paginate @news_items
 
   #additional_info
     #help_us

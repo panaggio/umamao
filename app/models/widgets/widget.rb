@@ -8,7 +8,7 @@ class Widget
   alias :group :_root_document
 
   def self.types
-    types = %w[UsersWidget TopUsersWidget TagCloudWidget PagesWidget]
+    types = %w[UsersWidget TopUsersWidget PagesWidget]
     if AppConfig.enable_groups
       types += %w[GroupsWidget TopGroupsWidget]
     end

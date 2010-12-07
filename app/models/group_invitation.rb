@@ -7,7 +7,7 @@ class GroupInvitation
 
   key :slug, String
   key :message, String
-  key :active, Boolean
+  key :active, Boolean, :default => true
 
   key :user_ids, Array
   many :users, :in => :user_ids

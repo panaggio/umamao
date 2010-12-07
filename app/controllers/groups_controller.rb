@@ -81,7 +81,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new
-    @group.safe_update(%w[name legend description default_tags subdomain logo forum
+    @group.safe_update(%w[name legend description subdomain logo forum
                           custom_favicon language theme custom_css], params[:group])
 
     @group.safe_update(%w[isolate domain private], params[:group]) if current_user.admin?
@@ -89,7 +89,6 @@ class GroupsController < ApplicationController
     @group.owner = current_user
     @group.state = "active"
 
-    @group.widgets << TagCloudWidget.new
     @group.widgets << TopUsersWidget.new
 
     respond_to do |format|
@@ -108,7 +107,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
-    @group.safe_update(%w[name legend description default_tags subdomain logo logo_info forum
+    @group.safe_update(%w[name legend description subdomain logo logo_info forum
                           custom_favicon language theme reputation_rewards reputation_constrains
                           has_adult_content registered_only openid_only custom_css fb_button], params[:group])
 

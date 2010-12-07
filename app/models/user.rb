@@ -68,7 +68,7 @@ class User
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
   has_many :news_updates, :foreign_key => :author_id
-  has_many :news_items, :foreign_key => :recipient_id
+  has_many :news_items, :as => "recipient", :dependent => :destroy
 
   key :friend_list_id, String
   belongs_to :friend_list, :dependent => :destroy

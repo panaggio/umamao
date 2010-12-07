@@ -34,9 +34,9 @@
 = error_messages_for 'answer'
 
 
-#question-body-col.commentable.markdown
+#question-body-col.commentable
   %a{:name => @question.id}
-  #body
+  #body.markdown
     - if @question.closed && @question.close_reason
       #close_reason
         = t(".close_reason")
@@ -46,13 +46,22 @@
             = find_and_preserve(shapado_auto_link(@question.close_reason.comment))
     .post-text.entry-content
       = question_body
-  .tag-list
+  %ul.topic-list
     - @question.topics.each do |topic|
-      %span.tag
-        = link_to h(topic.title), topic_path(topic)
-    - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
-      %span.retag
-        = link_to t('.retag'), retag_question_path(@question), :id => 'retag'
+      = render :partial => "topics/box", :locals => {:topic => topic, :question => @question}
+  - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
+    %a.reclassify{:href => "#"}
+      %strong.empty
+        = t(".tag")
+      %span.not-empty
+        = t(".retag")
+    = text_field "topics", "", :class => "", :id => "reclassify-autocomplete", :value => t("searches.form.select_topics")
+    %a.add-topic{:href => "#"}
+      = t("scaffold.add")
+    %a.cancel-reclassify{:href => "#"}
+      = t("scaffold.done")
+    %ul#reclassify-suggestions.autocomplete-list
+
 
   .controls
     .actions

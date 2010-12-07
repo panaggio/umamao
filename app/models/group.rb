@@ -18,7 +18,6 @@ class Group
   key :domain, String
   key :legend, String
   key :description, String
-  key :default_tags, Array
   key :has_custom_ads, Boolean, :default => true
   key :state, String, :default => "pending" #pending, active, closed
   key :isolate, Boolean, :default => false
@@ -66,8 +65,6 @@ class Group
   validates_length_of       :name,           :within => 3..40
   validates_length_of       :description,    :within => 3..10000, :allow_blank => true
   validates_length_of       :legend,         :maximum => 50
-  validates_length_of       :default_tags,   :within => 0..15,
-      :message =>  I18n.t('activerecord.models.default_tags_message')
   validates_uniqueness_of   :name
   validates_uniqueness_of   :subdomain
   validates_presence_of     :subdomain
@@ -154,16 +151,6 @@ class Group
     self.custom_html.footer[I18n.locale.to_s.split("-").first] = value
   end
 
-  def tag_list
-    TagList.first(:group_id => self.id) || TagList.create(:group_id => self.id)
-  end
-
-  def default_tags=(c)
-    if c.kind_of?(String)
-      c = c.downcase.split(",").join(" ").split(" ")
-    end
-    self[:default_tags] = c
-  end
   alias :user :owner
 
   def is_member?(user)

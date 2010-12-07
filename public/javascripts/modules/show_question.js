@@ -2,7 +2,6 @@
 $(document).ready(function() {
   $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
-  $('.auto-link').autoVideo();
   $('.comments').hide();
   $('input#question_title').focus();
 
@@ -30,7 +29,7 @@ $(document).ready(function() {
         showMessage(data.message, "error");
         if(data.status == "unauthenticate") {
           window.onbeforeunload = null;
-          window.location="/users/login";
+          window.location = "/users/login";
         }
       }
     }, "json");
@@ -79,7 +78,6 @@ $(document).ready(function() {
                     highlightEffect(answer);
                     showMessage(data.message, "notice");
                     form.find("textarea").val("");
-                    removeFromLocalStorage(location.href, "answer-input");
                     MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
                   } else {
                     showMessage(data.message, "error");
@@ -118,7 +116,6 @@ $(document).ready(function() {
                             showMessage(data.message, "notice");
                             form.hide();
                             textarea.val("");
-                            removeFromLocalStorage(location.href, textarea.attr('id'));
                             MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
                           } else {
                             showMessage(data.message, "error");
@@ -203,7 +200,6 @@ $(document).ready(function() {
                                 link.show();
                                 highlightEffect(comment);
                                 showMessage(data.message, "notice");
-                                removeFromLocalStorage(location.href, textarea.attr('id'));
                                 window.onbeforeunload = null;
                               } else {
                                 showMessage(data.message, "error");
@@ -351,8 +347,4 @@ $(document).ready(function() {
     return false;
   });
 
-});
-
-$(window).load(function() {
-  prettyPrint();
 });

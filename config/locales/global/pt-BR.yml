@@ -15,6 +15,7 @@ pt-BR:
     send: Enviar
     save: Salvar
     details: Detalhes
+    done: Pronto
   time:
     today: hoje
     ago: "%{time} atrás"

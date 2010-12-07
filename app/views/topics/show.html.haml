@@ -2,20 +2,20 @@
   = javascript_include_merged :show
 
 - content_for :sidebar do
-  = render :partial => "follow", :locals => {:topic => @topic}
+  = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   - if @topic.followers.count > 0
-    %h2.title
-      = t('followable.followers', :count => @topic.followers.count)
-    .friend_list
-      - @topic.followers.each do |follower|
-        %span
-          = link_to gravatar(follower.email.to_s, :size => 24).html_safe, user_path(follower)
+    .block
+      %h2.title
+        = t('followable.followers', :count => @topic.followers.count)
+      .friend_list
+        - @topic.followers.each do |follower|
+          %span
+            = link_to gravatar_for(follower, :size => 24).html_safe, user_path(follower)
 
 - content_for :subtabs do
   .navtitle
     &= @topic.title
-    - if @questions
-      == (#{@questions.total_entries})
+    == (#{@topic.questions_count})
 %br
 .markdown
   = markdown(@topic.description)
@@ -23,19 +23,23 @@
 %p
   = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
 
-- if @topic.title == 'resolução-de-exercício'
-  %p= link_to 'Como funciona a resolução de exercícios no Umamão?', question_path('eu-posso-usar-o-umamao-para-colaborar-na-resolucao-de-exercicios')
-
--# Questions
-%ul.items#questions
-  - if @questions.empty?
-    %li.highlight
-      = t(".empty")
-  - @questions.each do |question|
-    = render :partial => "questions/question", :object => question
+- if @news_items.blank?
+  %ul.items#questions
+    - if @questions.blank?
+      %li.highlight
+        = t(".empty")
+    - @questions.each do |question|
+      = render :partial => "questions/question", :object => question
+- else
+  %ul.items#news_items
+    - @news_items.each do |news_item|
+      = render :partial => "welcome/news_item", :object => news_item
 
 #additional_info
-  = will_paginate @questions
+  - if @news_items.blank?
+    = will_paginate @questions
+  - else
+    = will_paginate @news_items
 
   #help_us
     = t("questions.index.help_to_answer")

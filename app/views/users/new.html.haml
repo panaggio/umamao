@@ -5,11 +5,11 @@
     %p#invitation_introduction
       = t('.invitation.title', :user => '<span class="inviter_name">' + h(@invitation.sender.name) + '</span>')
     #invitation_message
-      = gravatar_for(@invitation.sender, :size => 64, :class => 'inviter_avatar', :alt => @invitation.sender.name)
+      = gravatar_for(@invitation.sender, :size => 64, :class => 'inviter_avatar')
       = markdown(@invitation.message)
   - elsif @group_invitation
     #invitation_message
-      = @group_invitation.message
+      = markdown(@group_invitation.message)
 
     %hr
   - @user.password = @user.password_confirmation = nil

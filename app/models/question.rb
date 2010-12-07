@@ -76,6 +76,9 @@ class Question
   has_many :comments, :as => "commentable", :order => "created_at asc", :dependent => :destroy
   has_many :close_requests
 
+  # This ought to be has_one, but it wasn't working
+  has_many :news_updates, :as => "entry", :dependent => :destroy
+
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
@@ -88,7 +91,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise, :strip_tags
+  before_save :update_activity_at, :update_exercise
   before_save :update_autocomplete_keywords
   after_create :create_news_update
 
@@ -100,6 +103,7 @@ class Question
 
   timestamps!
 
+  # TODO: remove this
   def tags=(t)
     if t.kind_of?(String)
       t = t.downcase.split(",").join(" ").split(" ").uniq
@@ -187,6 +191,7 @@ class Question
                                                          :upsert => true)
   end
 
+  # FIXME: Is this still working?
   def update_exercise
     self.exercise = self.tags.include?('resolução-de-exercício')
   end
@@ -204,6 +209,9 @@ class Question
   def ban
     self.collection.update({:_id => self._id}, {:$set => {:banned => true}},
                                                :upsert => true)
+    topics.each do |topic|
+      topic.increment(:questions_count => -1)
+    end
   end
 
   def self.ban(ids)
@@ -212,11 +220,19 @@ class Question
     self.collection.update({:_id => {:$in => ids}}, {:$set => {:banned => true}},
                                                      :multi => true,
                                                      :upsert => true)
+    query(:id.in => ids, :select => :topic_ids).each do |question|
+      question.topics.each do |topic|
+        topic.increment(:questions_count => -1)
+      end
+    end
   end
 
   def unban
     self.collection.update({:_id => self._id}, {:$set => {:banned => false}},
                                                :upsert => true)
+    topics.each do |topic|
+      topic.increment(:questions_count => 1)
+    end
   end
 
   def self.unban(ids)
@@ -225,6 +241,12 @@ class Question
     self.collection.update({:_id => {:$in => ids}}, {:$set => {:banned => false}},
                                                      :multi => true,
                                                      :upsert => true)
+    query(:id.in => ids, :select => :topic_ids).each do |question|
+      question.topics.each do |topic|
+        topic.increment(:questions_count => 1)
+      end
+    end
+
   end
 
   def favorite_for?(user)
@@ -310,6 +332,93 @@ class Question
     self.close_requests.detect{ |rq| rq.id == close_reason_id }
   end
 
+  # Returns the (only) associated news update.
+  # We need this because has_one isn't working.
+  def news_update
+    news_updates.first
+  end
+
+  # Classifies self under topic topic.
+  def classify!(topic)
+    if !topic_ids.include? topic.id
+      topics << topic
+
+      # Notify followers of new topic and the topic itself. We give
+      # them the current timestamp so they will appear on top of the
+      # news feed.
+
+      # We need this to make sure that answers appear after question.
+      stamp = Time.zone.now
+
+      # Question updates
+      if news_update
+        # Users
+        topic.followers.each do |follower|
+          if NewsItem.query(:recipient_id => follower.id,
+                            :recipient_type => "User",
+                            :news_update_id => news_update.id).count == 0
+            NewsItem.notify!(news_update, follower, topic, stamp)
+          end
+        end
+        # Topic
+        if NewsItem.query(:recipient_id => topic.id,
+                          :recipient_type => "Topic",
+                          :news_update_id => news_update.id).count == 0
+          NewsItem.notify!(news_update, topic, topic, stamp)
+        end
+      end
+
+      # Question's answers' updates
+      # FIXME: the answers' ids ought to be kept in the question.
+      answer_ids = answers.all(:select => :id).map(&:id)
+      NewsUpdate.query(:entry_id.in => answer_ids,
+                       :entry_type => "Answer").each do |update|
+        stamp = stamp + 1.second
+        # Users
+        topic.followers.each do |follower|
+          if NewsItem.query(:recipient_id => follower.id,
+                            :recipient_type => "User",
+                            :news_update_id => update.id).count == 0
+            NewsItem.notify!(update, follower, topic, stamp)
+          end
+        end
+
+        # Topic
+        if NewsItem.query(:recipient_id => topic.id,
+                          :recipient_type => "Topic",
+                          :news_update_id => update.id).count == 0
+          NewsItem.notify!(update, topic, topic, stamp)
+        end
+      end
+
+      if !banned
+        topic.increment(:questions_count => 1)
+      end
+
+      save
+    else
+      false
+    end
+  end
+
+  # Removes self from topic topic.
+  def unclassify!(topic)
+    if topic_ids.include? topic.id
+      topic_ids.delete topic.id
+      if !banned
+        topic.increment(:questions_count => -1)
+      end
+      save
+    else
+      false
+    end
+  end
+
+  def create_news_update
+    NewsUpdate.create(:author => self.user, :entry => self,
+                      :created_at => created_at, :action => 'created')
+  end
+
   protected
   def update_answer_count
     self.answers_count = self.answers.where(:banned => false).count
@@ -325,15 +434,6 @@ class Question
       @autocomplete_keywords = title.split(/\W/).
         delete_if {|w| w.empty?}.map &:downcase
     end
-  end
-
-  # ensure tag names do not contain whitespace
-  def strip_tags
-    self.tags = self.tags.map(&:strip) if self.tags_changed?
-  end
-
-  def create_news_update
-    NewsUpdate.create(:author => self.user, :entry => self, :action => 'created')
   end
 
 end

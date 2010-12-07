@@ -17,6 +17,7 @@ class WelcomeController < ApplicationController
     @active_subtab = params.fetch(:tab, "activity")
 
     @news_items = NewsItem.paginate({:recipient_id => current_user.id,
+                                      :recipient_type => "User",
                                       :per_page => 30,
                                       :page => params[:page] || 1,
                                       :order => :created_at.desc})

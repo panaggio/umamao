@@ -80,8 +80,6 @@ config.session_options[:secret] = AppConfig.session_secret
 
 ActionMailer::Base.default_url_options[:host] = AppConfig.domain
 
-AppConfig.version = File.read(Rails.root + "VERSION")
-
 if AppConfig.smtp["activate"]
   # Yeah, we have to set both
   ActionMailer::Base.delivery_method = :smtp

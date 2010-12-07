@@ -4,35 +4,28 @@ javascripts:
   - rails
   - jquery.tools.min
   - jquery-ui
-  - jquery.textarea
-  - jquery.autocomplete
-  - jquery.fcbkcomplete
   - jquery.notifyBar
   - jquery.hotkeys
-  - jquery.autoSuggest
   - showdown
+  - utils
+  - autocompleteBox
   - application
-  - modules/sessions
-  - modules/index_question
-  - modules/retag
   - modules/new_question
   - modules/show_user
-  - modules/members
-  - modules/move_group
+  - modules/show_question
+  - MathJax/mathjax/MathJax
 
 - show:
-  - MathJax/mathjax/MathJax
   - wmd/jquery.wmd
   - wmd/jquery.wmd.mathjax
   - modules/single/question
-  - jquery.autovideo
-  - modules/show_question
+
 
 stylesheets:
 - base:
   - jquery-ui
   - compiled/application
-  - search
+  - autocomplete
 - landing:
   - compiled/landing
 
