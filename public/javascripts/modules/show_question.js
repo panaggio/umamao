@@ -45,9 +45,7 @@ $(document).ready(function() {
     btn.hide();
 
     return {
-      //url: form.attr("action"),
       data: form.serialize()+"&"+btn.attr("name")+"=1",
-      //type: "POST",
 
       success: function (data) {
         if(data.vote_state == "deleted") {
