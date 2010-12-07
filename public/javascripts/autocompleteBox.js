@@ -331,7 +331,7 @@ SearchItem.prototype = {
   },
 
   click: function () {
-    this.form.submit();
+    window.location.href = '/search?q=' + this.query;
   }
 
 };
