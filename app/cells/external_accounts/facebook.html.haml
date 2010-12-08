@@ -1,0 +1,3 @@
+= "(#{link_to t(".disconnect"), settings_external_account_path(@external_account), :method => :delete})"
+- avatar_url = @external_account.user_info['image']
+= image_tag avatar_url if avatar_url.present?

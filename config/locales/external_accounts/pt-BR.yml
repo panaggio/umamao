@@ -1,0 +1,5 @@
+pt-BR:
+  external_accounts:
+    connected_as: "Conectado como: %{name}"
+    disconnect: desconectar
+    connect: Conectar

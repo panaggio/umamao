@@ -2,10 +2,11 @@
   .secondary-navigation
     .navtitle
       = t(".title")
-    - tabs_tag :namespace => :settings do |tab|
+    = tabs_tag :namespace => :settings do |tab|
       = tab.profile t('.profile_tab'), settings_profile_path
       = tab.follow_topics t('.follow_topics_tab'), settings_follow_topics_path
       = tab.notifications t('.notifications_tab'), settings_notifications_path
+      = tab.external_accounts t('.external_accounts_tab'), settings_external_accounts_path
       = tab.account t('.account_tab'), settings_account_path
       = tab.password t('.password_tab'), settings_password_path
     .clear
