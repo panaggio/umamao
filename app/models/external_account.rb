@@ -11,10 +11,11 @@ class ExternalAccount
   key :user_id, BSON::ObjectId
   belongs_to :user
 
-  ensure_index([[:provider, 1], [:uid, 1]])
+  ensure_index([[:provider, 1], [:uid, 1]], :unique => true)
 
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
+  validates_uniqueness_of :user_id, :scope => :provider
 
   def self.find_from_hash(hash)
     self.first(:provider => hash['provider'], :uid => hash['uid'])
