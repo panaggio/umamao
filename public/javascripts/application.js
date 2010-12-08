@@ -27,31 +27,6 @@ $(document).ready(function() {
 
   initAutocomplete();
 
-  $(".quick-vote-button").live("click", function(event) {
-    var btn = $(this);
-    btn.hide();
-    var src = btn.attr('src');
-    if (src.indexOf('/images/dialog-ok.png') == 0){
-      var btn_name = $(this).attr("name");
-      var form = $(this).parents("form");
-      $.post(form.attr("action"), form.serialize()+"&"+btn_name+"=1", function(data){
-        if(data.success){
-          btn.parents('.item').find('.votes .counter').text(data.average);
-          btn.attr('src', '/images/dialog-ok-apply.png');
-          showMessage(data.message, "notice");
-        } else {
-          showMessage(data.message, "error");
-          if(data.status == "unauthenticate") {
-            window.onbeforeunload = null;
-            window.location="/users/login";
-          }
-        }
-        btn.show();
-      }, "json");
-    }
-    return false;
-  });
-
   $("a#hide_announcement").click(function() {
     $("#announcement").fadeOut();
     $.post($(this).attr("href"), "format=js");
@@ -77,6 +52,7 @@ $(document).ready(function() {
 
   $('#login_form > #email_field > input').focus();
 
+  // TODO: internationalize.
   $('#news_items .answer').each(function(){
     if ($(this).height() > 85) {
       $(this).addClass('large');
@@ -109,19 +85,9 @@ function initAutocomplete() {
   $(searchField).bind("keydown", "esc", function () { searchField.blur(); return false; });
 }
 
-function manageAjaxError(XMLHttpRequest, textStatus, errorThrown) {
-  showMessage("sorry, something went wrong.", "error");
-}
-
-function showMessage(message, t, delay) {
-  $("#notifyBar").remove();
-  $.notifyBar({
-    html: "<div class='message "+t+"' style='width: 100%; height: 100%; padding: 5px'>"+message+"</div>",
-    delay: delay||3000,
-    animationSpeed: "normal",
-    barClass: "flash"
-  });
-}
+// FIXME: remove this later
+window.manageAjaxError = Utils.manageAjaxError;
+window.showMessage = Utils.showMessage;
 
 function sortValues(selectID, keepers){
   if(keepers){
