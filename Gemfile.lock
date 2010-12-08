@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/apotonick/cells.git
+  revision: 10ce867bc58fdd212fba6b7d7af2829054e5e8a0
+  specs:
+    cells (3.4.2)
+
+GIT
   remote: git://github.com/rails/exception_notification.git
   revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
   specs:
@@ -115,7 +121,6 @@ GEM
       capybara (~> 0.4.0)
       envjs (>= 0.3.7)
     celerity (0.8.5)
-    cells (3.4.2)
     childprocess (0.1.4)
       ffi (~> 0.6.3)
     columnize (0.3.2)
@@ -292,7 +297,7 @@ DEPENDENCIES
   bson_ext
   capybara
   capybara-envjs
-  cells
+  cells!
   compass (~> 0.10.2)
   compass-colors (~> 0.3.1)
   cucumber-rails
