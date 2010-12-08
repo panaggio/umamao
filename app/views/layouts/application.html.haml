@@ -47,7 +47,7 @@
       #wrapper
         #main
           = render :partial => "shared/ads/header_ads"
-          #block-text.block
+          #block-text
             .secondary-navigation{:class => @active_subtab.to_s}
               = yield :subtabs
               .clear
