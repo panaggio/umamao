@@ -28,7 +28,7 @@
 @import search
 
 #header
-  margin: 2em 0 1em
+  margin: 1em 0 2em
   clear: both
   overflow: visible
 
@@ -38,11 +38,13 @@
   overflow: visible
 
 #logo
-  +column(2)
+  +column(4)
 
 #top-bar
   +column(8, true)
-  +prepend(5)
+  +prepend(4)
+  margin-top: 13px
+
   .menu
     +no-bullets
     +inline-block-list
@@ -65,6 +67,11 @@
 
 #main
   +column(18)
+
+  #block-text
+  +column(14)
+  +prepend(2)
+  +append(2)
 
 #sidebar
   +column(6, true)
