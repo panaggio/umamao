@@ -189,31 +189,3 @@ form.share_content
           display: none
 
 
-.follow-info
-  a
-    +button
-
-    &.follow_link
-      background-color: lighten($affirmative, 15%)
-      +linear-gradient(color-stops(lighten($affirmative, 15%),$affirmative 50%,lighten($affirmative, 10%)),top)
-
-      &:hover
-        background-color: $affirmative
-        +linear-gradient(color-stops(lighten($affirmative, 25%),lighten($affirmative, 10%) 50%,lighten($affirmative, 20%)),top)
-
-    &.unfollow_link
-      background-color: #EEEEEE
-
-      &:hover
-        background-color: #BBBBBB
-
-#sidebar
-
-  .follow-info.block
-    width: 65%
-
-    a
-      padding: 2px 10px
-      font-size: 16px
-      line-height: 20px
-
