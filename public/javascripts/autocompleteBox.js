@@ -257,7 +257,7 @@ AutocompleteBox.prototype = {
         }
         break;
       // ignore [escape] [shift] [capslock]
-      case 27: case 16: case 20:
+      case 27: 
         box.abortRequest();
         itemBox.hide();
         break;
@@ -355,6 +355,15 @@ function initSearchBox() {
     });
     items.push(new SearchItem(this.input));
     return items;
+  };
+
+  searchBox.returnDefault = function () {
+    var query = searchBox.input.val();
+    if (query.match(/\?$/)) {
+      searchBox.input.closest("form").submit();
+    } else {
+      window.location.href = '/search?q=' + query;
+    }
   };
 
 };
