@@ -438,7 +438,10 @@ class Question
   end
   
   def get_topics_from_parent
-	self.topics = self.parent_question.topics self.parent_question
+	#debugger
+	self.topics = self.parent_question.topics if self.parent_question_id.present?
+	
+	#self.topics = (self.parent_question_id != "" ? self.parent_question.topics : Array.new)
   end
 
 end
