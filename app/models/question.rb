@@ -93,6 +93,7 @@ class Question
 
   before_save :update_activity_at, :update_exercise
   before_save :update_autocomplete_keywords
+  before_create :get_topics_from_parent
   after_create :create_news_update
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
@@ -434,6 +435,10 @@ class Question
       @autocomplete_keywords = title.split(/\W/).
         delete_if {|w| w.empty?}.map &:downcase
     end
+  end
+  
+  def get_topics_from_parent
+	self.topics = self.parent_question.topics self.parent_question
   end
 
 end

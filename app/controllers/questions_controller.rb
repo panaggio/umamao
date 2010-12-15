@@ -163,7 +163,6 @@ class QuestionsController < ApplicationController
 
     @follow_up_question = {
       :parent_question_id => @question.id,
-      :topics => @question.topics,
       :body => render_to_string(:file => 'questions/_new_follow_up_question.text.erb')
     }
     @follow_up_questions = Question.children_of(@question)
@@ -178,9 +177,9 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.xml
   def new
-    topics = Topic.from_titles!(params[:question].try(:delete, :topics))
+    #topics = Topic.from_titles!(params[:question].try(:delete, :topics))
     @question = Question.new(params[:question])
-    @question.topics = topics
+    #@question.topics = topics
 
     respond_to do |format|
       format.html # new.html.erb
@@ -200,7 +199,6 @@ class QuestionsController < ApplicationController
                           params[:question])
     @question.group = current_group
     @question.user = current_user
-    @question.topics = Topic.from_titles!(params[:question].try(:delete, :topics))
 
     if !logged_in?
       draft = Draft.create!(:question => @question)
