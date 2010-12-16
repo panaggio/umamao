@@ -56,6 +56,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new
+    
     @answer.safe_update(%w[body wiki], params[:answer])
     @question = Question.find_by_slug_or_id(params[:question_id])
     @answer.question = @question
@@ -70,8 +71,9 @@ class AnswersController < ApplicationController
       draft = Draft.create(:answer => @answer)
       session[:draft] = draft.id
       login_required
+      
     else # TODO: put a return statement and remove this else block
-      @answer.user = current_user
+      @answer.user = current_user #has answered the question
       respond_to do |format|
         if @question && @answer.save
           Question.update_last_target(@question.id, @answer)
@@ -86,11 +88,6 @@ class AnswersController < ApplicationController
           track_event(:answered_question,
                       :question_answers_count => @question.answers_count,
                       :own_question => @question.user_id == @answer.user_id)
-
-          if @question.user != current_user && @question.user.notification_opts.new_answer
-            Notifier.new_answer(@question.user, current_group, @answer, false).
-              deliver
-          end
 
           flash[:notice] = t(:flash_notice, :scope => "answers.create")
           format.html{redirect_to question_path(@question)}
