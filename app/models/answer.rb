@@ -34,7 +34,7 @@ class Answer < Comment
   validate :disallow_spam
   validate :check_unique_answer, :if => lambda { |a| (!a.group.forum && !a.disable_limits?) }
 
-  after_create :create_news_update
+  after_create :create_news_update, :new_answer_notification
 
   def title
     self.question.title
@@ -140,6 +140,14 @@ class Answer < Comment
   def create_news_update
     NewsUpdate.create(:author => self.user, :entry => self,
                       :created_at => self.created_at, :action => 'created')
+  end
+  
+  def new_answer_notification
+	# only if the answer inst created by question creator and question creator asked to receive
+	#email notification about answers
+    if self.question.user != self.user && self.question.user.notification_opts.new_answer
+		Notifier.new_answer(self.question.user, self.group, self, false).deliver
+	end
   end
 
   # Returns the (only) associated news update.

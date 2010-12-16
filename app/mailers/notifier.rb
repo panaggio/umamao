@@ -26,9 +26,9 @@ class Notifier < ActionMailer::Base
   end
 
   def new_answer(user, group, answer, following = false)
-    @user = user
-    @group = group
-    @answer = answer
+    @user = user     #question creator
+    @group = group   
+    @answer = answer #answer.user
     @following = following
 
     @domain = group.domain
@@ -37,17 +37,20 @@ class Notifier < ActionMailer::Base
     scope = "mailers.notifications.new_answer"
 
     if user == answer.question.user
-      subject = I18n.t("subject_owner", :scope => scope,
+      subject = I18n.t("subject_owner",
+					   :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.login)
+                       :login => answer.user.name)
     elsif following
-      subject = I18n.t("subject_friend", :scope => scope,
+      subject = I18n.t("subject_friend",
+                       :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.login)
+                       :login => answer.user.name)
     else
-      subject = I18n.t("subject_other", :scope => scope,
+      subject = I18n.t("subject_other",
+                       :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.login)
+                       :login => answer.user.name)
     end
 
     mail(:to => user.email, :subject => subject)
