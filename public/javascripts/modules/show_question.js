@@ -275,7 +275,7 @@ $(document).ready(function() {
   });
 
   $(".ccontrol-link").click(function(){
-    $(this).parent().next().slideToggle("slow");
+    $(this).parent().prev().slideToggle("slow");
     return false;
   });
 
