@@ -33,8 +33,10 @@ class AnnouncementsController < ApplicationController
 
     respond_to do |format|
       if @announcement.save
-        flash[:notice] = I18n.t("announcements.create.success")
-        format.html { redirect_to announcements_url }
+        format.html do
+          flash[:notice] = I18n.t("announcements.create.success")
+          redirect_to announcements_url
+        end
         format.json  { render :json => @announcement, :status => :created, :location => @announcement }
       else
         format.html { render :action => "index" }

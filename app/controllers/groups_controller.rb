@@ -94,8 +94,10 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         @group.add_member(current_user, "owner")
-        flash[:notice] = I18n.t("groups.create.flash_notice")
-        format.html { redirect_to(domain_url(:custom => @group.domain, :controller => "admin/manage", :action => "properties")) }
+        format.html do
+          flash[:notice] = I18n.t("groups.create.flash_notice")
+          redirect_to(domain_url(:custom => @group.domain, :controller => "admin/manage", :action => "properties"))
+        end
         format.json  { render :json => @group.to_json, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }
@@ -117,8 +119,10 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        flash[:notice] = 'Group was successfully updated.' # TODO: i18n
-        format.html { redirect_to(params[:source] ? params[:source] : group_path(@group)) }
+        format.html do
+          flash[:notice] = 'Group was successfully updated.' # TODO: i18n
+          redirect_to(params[:source] ? params[:source] : group_path(@group))
+        end
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
