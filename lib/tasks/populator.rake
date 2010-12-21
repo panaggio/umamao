@@ -1,13 +1,29 @@
-desc "Imports mongodb dump from dump/ to DB shapado-development"
+desc "Imports mongodb dump from dump/"
 task :import => :environment do
+  `mongorestore dump`
+end
+
+desc "Removes all private data from a DB dump located in dump/"
+task :clean_dump => :environment do
+  puts "Importing downloaded dump..."
   `mongo --eval 'db.getSisterDB("shapado-production").dropDatabase(); db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
   `mongorestore dump`
-  `mongo --eval 'db.copyDatabase("shapado-production", "shapado-#{Rails.env}")'`
+  `mongo --eval 'db.copyDatabase("shapado-production", "shapado-#{Rails.env}"); db.getSisterDB("shapado-production").dropDatabase()'`
+  `rm -Rf dump/shapado-production`
   umamao = Group.first
   umamao.domain = "localhost.lan"
   umamao.save!
-end
 
+  puts "Cleaning private user data..."
+  User.query.each do |user|
+    user.email = "#{user.id}@example.com"
+    user.academic_email = "#{user.id}@example.edu"
+    user.reset_password!("umamao", "umamao")
+  end
+
+  puts "Exporting clean dump..."
+  `mongodump -db shapado-#{Rails.env}`
+end
 
 namespace :populator do
   task :populator_env => :environment do
