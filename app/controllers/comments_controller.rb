@@ -18,9 +18,9 @@ class CommentsController < ApplicationController
         Question.update_last_target(question_id, @comment)
       end
 
-      flash[:notice] = t("comments.create.flash_notice")
+      notice = t("comments.create.flash_notice")
     else
-      flash[:error] = @comment.errors.full_messages.join(", ")
+      error = @comment.errors.full_messages.join(", ")
     end
 
     # TODO: use magent to do it
@@ -33,18 +33,34 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if saved
-        format.html {redirect_to params[:source]}
+        format.html do
+          flash[:notice] = notice
+          redirect_to params[:source]
+        end
         format.json {render :json => @comment.to_json, :status => :created}
         format.js do
-          render(:json => {:success => true, :message => flash[:notice],
-            :html => render_to_string(:partial => "comments/comment",
-                                      :object => @comment,
-                                      :locals => {:source => params[:source], :mini => true})}.to_json)
+          render(:json => {
+                   :success => true,
+                   :message => notice,
+                   :html => render_to_string(:partial => "comments/comment",
+                                             :object => @comment,
+                                             :locals => {
+                                               :source => params[:source],
+                                               :mini => true
+                                             })
+                 }.to_json)
         end
       else
-        format.html {redirect_to params[:source]}
-        format.json {render :json => @comment.errors.to_json, :status => :unprocessable_entity }
-        format.js {render :json => {:success => false, :message => flash[:error] }.to_json }
+        format.html do
+          flash[:error] = error
+          redirect_to params[:source]
+        end
+        format.json do
+          render :json => @comment.errors.to_json, :status => :unprocessable_entity
+        end
+        format.js do
+          render :json => {:success => false, :message => error}.to_json
+        end
       end
     end
   end
@@ -72,17 +88,33 @@ class CommentsController < ApplicationController
           Question.update_last_target(question_id, @comment)
         end
 
-        flash[:notice] = t(:flash_notice, :scope => "comments.update")
-        format.html { redirect_to(params[:source]) }
-        format.json { render :json => @comment.to_json, :status => :ok}
-        format.js { render :json => { :message => flash[:notice],
-                                      :success => true,
-                                      :body => @comment.body} }
+        notice = t(:flash_notice, :scope => "comments.update")
+        format.html do
+          flash[:notice] = redirect_to(params[:source])
+        end
+        format.json do
+          render :json => @comment.to_json, :status => :ok
+        end
+        format.js do
+          render :json => {
+            :message => notice,
+            :success => true,
+            :body => @comment.body
+          }
+        end
       else
-        flash[:error] = @comment.errors.full_messages.join(", ")
-        format.html { render :action => "edit" }
+        error = @comment.errors.full_messages.join(", ")
+        format.html do
+          flash[:error] = error
+          render :action => "edit"
+        end
         format.json { render :json => @comment.errors, :status => :unprocessable_entity }
-        format.js { render :json => { :success => false, :message => flash[:error]}.to_json }
+        format.js do
+          render :json => {
+            :success => false,
+            :message => error
+          }.to_json
+        end
       end
     end
   end
