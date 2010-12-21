@@ -401,7 +401,7 @@ class QuestionsController < ApplicationController
                  :success => true,
                  :message => notice
                }.to_json)
-      }
+      end
       format.json { head :ok }
     end
   end
@@ -481,7 +481,7 @@ class QuestionsController < ApplicationController
           }
           render(:json => {:success => true,
                    :message => notice, :topics => topics}.to_json)
-        }
+        end
       end
     else
       error = t("questions.retag_to.failure",
