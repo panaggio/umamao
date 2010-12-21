@@ -216,9 +216,10 @@ class QuestionsController < ApplicationController
         track_event(:asked_question, :body_present => @question.body.present?,
                     :topics_count => @question.topics.size)
 
-        flash[:notice] = t(:flash_notice, :scope => "questions.create")
-
-        format.html { redirect_to(question_path(@question)) }
+        format.html do
+          flash[:notice] = t(:flash_notice, :scope => "questions.create")
+          redirect_to(question_path(@question))
+        end
         format.json { render :json => @question.to_json(:except => %w[_keywords watchers]), :status => :created}
       else
         format.html { render :action => "new" }
@@ -241,8 +242,10 @@ class QuestionsController < ApplicationController
       if @question.valid? && @question.save
         sweep_question_views
 
-        flash[:notice] = t(:flash_notice, :scope => "questions.update")
-        format.html { redirect_to(question_path(@question)) }
+        format.html do
+          flash[:notice] = t(:flash_notice, :scope => "questions.update")
+          redirect_to(question_path(@question))
+        end
         format.json  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -278,8 +281,11 @@ class QuestionsController < ApplicationController
         format.html { redirect_to question_path(@question) }
         format.json { head :ok }
       else
-        flash[:error] = @question.errors.full_messages.join(", ")
-        format.html { redirect_to question_path(@question) }
+
+        format.html do
+          flash[:error] = @question.errors.full_messages.join(", ")
+          redirect_to question_path(@question)
+        end
         format.json { render :json => @question.errors, :status => :unprocessable_entity  }
       end
     end
@@ -311,19 +317,25 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @favorite.save
         @question.add_favorite!(@favorite, current_user)
-        flash[:notice] = t("favorites.create.success")
-        format.html { redirect_to(question_path(@question)) }
+        notice = t("favorites.create.success")
+        format.html do
+          flash[:notice] = notice
+          redirect_to(question_path(@question))
+        end
         format.json { head :ok }
         format.js {
           render(:json => {:success => true,
-                   :message => flash[:notice], :increment => 1 }.to_json)
+                   :message => notice, :increment => 1 }.to_json)
         }
       else
-        flash[:error] = @favorite.errors.full_messages.join("**")
-        format.html { redirect_to(question_path(@question)) }
+        error = @favorite.errors.full_messages.join("**")
+        format.html do
+          flash[:error] = error
+          redirect_to(question_path(@question))
+        end
         format.js {
           render(:json => {:success => false,
-                   :message => flash[:error], :increment => 0 }.to_json)
+                   :message => error, :increment => 0 }.to_json)
         }
         format.json { render :json => @favorite.errors, :status => :unprocessable_entity }
       end
@@ -339,13 +351,19 @@ class QuestionsController < ApplicationController
         @question.remove_watcher(current_user)
       end
     end
-    flash[:notice] = t("unfavorites.create.success")
+    notice = t("unfavorites.create.success")
     respond_to do |format|
-      format.html { redirect_to(question_path(@question)) }
-      format.js {
-        render(:json => {:success => true,
-                 :message => flash[:notice], :increment => -1 }.to_json)
-      }
+      format.html do
+        flash[:notice] = notice
+        redirect_to(question_path(@question))
+      end
+      format.js do
+        render(:json => {
+                 :success => true,
+                 :message => notice,
+                 :increment => -1
+               }.to_json)
+      end
       format.json  { head :ok }
     end
   end
@@ -353,13 +371,18 @@ class QuestionsController < ApplicationController
   def watch
     @question = Question.find_by_slug_or_id(params[:id])
     @question.add_watcher(current_user)
-    flash[:notice] = t("questions.watch.success")
+    notice = t("questions.watch.success")
     respond_to do |format|
-      format.html {redirect_to question_path(@question)}
-      format.js {
-        render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
-      }
+      format.html do
+        flash[:notice] = notice
+        redirect_to question_path(@question)
+      end
+      format.js do
+        render(:json => {
+                 :success => true,
+                 :message => notice
+               }.to_json)
+      end
       format.json { head :ok }
     end
   end
@@ -367,12 +390,17 @@ class QuestionsController < ApplicationController
   def unwatch
     @question = Question.find_by_slug_or_id(params[:id])
     @question.remove_watcher(current_user)
-    flash[:notice] = t("questions.unwatch.success")
+    notice = t("questions.unwatch.success")
     respond_to do |format|
-      format.html {redirect_to question_path(@question)}
-      format.js {
-        render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
+      format.html do
+        flash[:notice] = notice
+        redirect_to question_path(@question)
+      end
+      format.js do
+        render(:json => {
+                 :success => true,
+                 :message => notice
+               }.to_json)
       }
       format.json { head :ok }
     end
@@ -440,28 +468,36 @@ class QuestionsController < ApplicationController
         @question.on_activity(true)
       end
 
-      flash[:notice] = t("questions.retag_to.success", :group => @question.group.name)
+      notice = t("questions.retag_to.success", :group => @question.group.name)
       respond_to do |format|
-        format.html {redirect_to question_path(@question)}
-        format.js {
+        format.html do
+          flash[:notice] = notice
+          redirect_to question_path(@question)
+        end
+        format.js do
           topics = @question.topics.map{ |t|
             { :title => CGI.escapeHTML(t.title),
               :url => url_for(t) }
           }
           render(:json => {:success => true,
-                   :message => flash[:notice], :topics => topics}.to_json)
+                   :message => notice, :topics => topics}.to_json)
         }
       end
     else
-      flash[:error] = t("questions.retag_to.failure",
-                        :group => params[:question][:group])
+      error = t("questions.retag_to.failure",
+                :group => params[:question][:group])
 
       respond_to do |format|
-        format.html {render :retag}
-        format.js {
-          render(:json => {:success => false,
-                   :message => flash[:error] }.to_json)
-        }
+        format.html do
+          flash[:error] = error
+          render :retag
+        end
+        format.js do
+          render(:json => {
+                   :success => false,
+                   :message => error
+                 }.to_json)
+        end
       end
     end
   end
@@ -471,8 +507,11 @@ class QuestionsController < ApplicationController
     @question = Question.find_by_slug_or_id(params[:id])
     respond_to do |format|
       format.js {
-        render(:json => {:success => true, :html => render_to_string(:partial => "questions/retag_form",
-                                                   :member  => @question)}.to_json)
+        render(:json => {
+                 :success => true,
+                 :html => render_to_string(:partial => "questions/retag_form",
+                                           :member  => @question)
+               }.to_json)
       }
     end
   end
@@ -523,19 +562,19 @@ class QuestionsController < ApplicationController
   def check_favorite_permissions
     @question = current_group.questions.find_by_slug_or_id(params[:id])
     unless logged_in?
-      flash[:error] = t(:unauthenticated, :scope => "favorites.create")
+      error = t(:unauthenticated, :scope => "favorites.create")
       respond_to do |format|
         format.html do
-          flash[:error] += ", [#{t("global.please_login")}](#{new_user_session_path})"
+          flash[:error] = "#{error}, [#{t("global.please_login")}](#{new_user_session_path})"
           redirect_to question_path(@question)
         end
         format.js do
-          flash[:error] += ", <a href='#{new_user_session_path}'> #{t("global.please_login")} </a>"
-          render(:json => {:status => :error, :message => flash[:error] }.to_json)
+          error += ", <a href='#{new_user_session_path}'> #{t("global.please_login")} </a>"
+          render(:json => {:status => :error, :message => error }.to_json)
         end
         format.json do
-          flash[:error] += ", <a href='#{new_user_session_path}'> #{t("global.please_login")} </a>"
-          render(:json => {:status => :error, :message => flash[:error] }.to_json)
+          error += ", <a href='#{new_user_session_path}'> #{t("global.please_login")} </a>"
+          render(:json => {:status => :error, :message => error }.to_json)
         end
       end
     end
@@ -547,18 +586,23 @@ class QuestionsController < ApplicationController
     unless logged_in? && (current_user.can_retag_others_questions_on?(current_group) ||  current_user.can_modify?(@question))
       reputation = @question.group.reputation_constrains["retag_others_questions"]
       if !logged_in?
-        flash[:error] = t("questions.show.unauthenticated_retag")
+        error = t("questions.show.unauthenticated_retag")
       else
-        flash[:error] = I18n.t("users.messages.errors.reputation_needed",
-                               :min_reputation => reputation,
-                               :action => I18n.t("users.actions.retag_others_questions"))
+        error = I18n.t("users.messages.errors.reputation_needed",
+                       :min_reputation => reputation,
+                       :action => I18n.t("users.actions.retag_others_questions"))
       end
       respond_to do |format|
-        format.html {redirect_to @question}
-        format.js {
-          render(:json => {:success => false,
-                   :message => flash[:error] }.to_json)
-        }
+        format.html do
+          flash[:error] = error
+          redirect_to @question
+        end
+        format.js do
+          render(:json => {
+                   :success => false,
+                   :message => error
+                 }.to_json)
+        end
       end
     end
   end
