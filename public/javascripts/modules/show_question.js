@@ -94,10 +94,12 @@ $(document).ready(function() {
 
     return {
       success: function (data) {
+        // TODO: center screen on new comment.
         var textarea = form.find("textarea");
         window.onbeforeunload = null;
         var comment = $(data.html);
         comments.append(comment);
+        comments.slideDown("slow");
         comments.parent().find(".ccontrol").html(data.count);
         highlightEffect(comment);
         form.hide();
