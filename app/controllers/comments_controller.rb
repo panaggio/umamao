@@ -47,7 +47,11 @@ class CommentsController < ApplicationController
                                              :locals => {
                                                :source => params[:source],
                                                :mini => true
-                                             })
+                                             }),
+                   :count => render_to_string(:partial => "comments/count",
+                                              :locals => {
+                                                :commentable => @comment.commentable
+                                              })
                  }.to_json)
         end
       else

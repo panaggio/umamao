@@ -87,7 +87,6 @@ $(document).ready(function() {
   });
 
   Utils.clickObject("form.commentForm .button", function () {
-    // TODO: show new comment when it is the first one.
     var form = $(this).parents("form");
     var commentable = $(this).parents(".commentable");
     var comments = commentable.find(".comments");
@@ -99,6 +98,7 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var comment = $(data.html);
         comments.append(comment);
+        comments.parent().find(".ccontrol").html(data.count);
         highlightEffect(comment);
         form.hide();
         textarea.val("");
@@ -274,7 +274,7 @@ $(document).ready(function() {
     return false;
   });
 
-  $(".ccontrol-link").click(function(){
+  $(".ccontrol-link").live("click", function(){
     $(this).parent().next().slideToggle("slow");
     return false;
   });

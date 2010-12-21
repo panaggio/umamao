@@ -81,11 +81,7 @@
       = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
 
   .ccontrol
-    %a{:href => "", :class => "ccontrol-link"}
-      - if @question.comments.size == 1
-        = @question.comments.size.to_s + " " + t("models.comment")
-      - elsif @question.comments.size != 0
-        = @question.comments.size.to_s + " " + t("models.comments")
+    = render :partial => "comments/count", :locals => {:commentable => @question}
 
   .comments
     - @question.comments.each do |comment|

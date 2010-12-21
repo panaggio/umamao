@@ -49,11 +49,7 @@
 
     - if !hide_controls
       .ccontrol
-        %a{:href => "", :class => "ccontrol-link"}
-          - if answer.comments.size == 1
-            = answer.comments.size.to_s + " " + t("models.comment")
-          - elsif answer.comments.size != 0
-            = answer.comments.size.to_s + " " + t("models.comments")
+        = render :partial => "comments/count", :locals => {:commentable => answer}
 
       / Nested Answers
       .children.comments
