@@ -1,58 +1,101 @@
 base: &common
   site: http://example.com
-  analytics_id: UA-10385211-1
-  analytics_vendor: googlean
   session_key: _shapado_session
-  session_secret: 9ac4fd97a52153070a0bd47467c00eded1badf526f145827384ddfde45ac0bfd3f0230c961ddfb9ef84d490b3d889e0169de8eee3ef7b7ed114262824f8aa8aa
-  rest_auth_key: b4d66d73a1ade79ce227fba01b33f2ab021888ef
+  session_secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  rest_auth_key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   rest_auth_digest_stretches: 10
-  enable_sharing: true
-  notification_email: notifications@example.com
-  default_language: en
-  adbard_host_id: 2746b6d24c93f71df12503ec2ab667e5
-  adbard_site_key: e8e24a6b2cba51145dc0c874e1b2f4a4
+  enable_sharing: false
+  notification_email: 'MyWebsite <sample@sample.com>'
+  adbard_host_id: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  adbard_site_key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   enable_adbard: false
-  application_name: Shapado
-  is_shapadocom: false
+  application_name: MyWebsite
   enable_groups: false
-  default_language: en
+  default_language: pt-BR
   enable_i18n: false
-  default_timezone: "Tokyo"
+  default_timezone: "Brasilia"
+  conversion_tracking_code: |
+    <!-- Paste this code just above the closing </body> of your conversion page. The tag will record a conversion every time this page is loaded. Optional 'sku' and 'value' fields are described in the Help Center. -->
+
+  about:
+    users:
+      - name: João Silva
+        email: sample@sample.com
+        bio: |
+
+          Lorem Ipsum.
+
+      - name: José Silva
+        email: sample2@sample.com
+        bio: |
+
+          Lorem Ipsum.
 
   smtp:
-    activate: false
+    activate: true
     settings:
-      address: "smtp.gmail.com"
+      address: "smtp.sample.net"
       port: 587
-      domain: "shapado.com"
-      user_name: "shapado@gmail.com"
-      password: "shapado123"
+      domain: "example.com"
+      authentication: 'plain'
+      enable_starttls_auto: true
+      user_name: "sample@sample.com"
+      password: "sample"
+
+  postmark:
+    activate: false
+    api_key: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+
+  mixpanel:
+    api_key: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
 
   facebook:
-    activate: false
-    key: facebook api key
-    secret: facebook secret key
+    app_id: 101010101010101
+    key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
   twitter:
-    activate: false
-    key: twitter api key
-    secret: twitter secret key
+    key: aaaaaaaaaaaaaaaaaaaaa
+    secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
   exception_notification:
     activate: true
     exception_sender_address:
-      "[Shapado] error notifier <error-notifier@example.com>"
+      '[MyWebsite] error notifier <error-notifier@sample.com>'
     exception_recipients:
-    - admin@example.com
+    - sample@sample.com
 
 development:
   <<: *common
+  smtp:
+    activate: false
+  postmark:
+    activate: false
   domain: localhost.lan
+  facebook:
+    app_id: 101010101010101
+    key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
 production:
   <<: *common
   domain: example.com
-  googlean_domain: .shapado.com
+  googlean_domain: .example.com
+
+staging:
+  <<: *common
+  smtp:
+    activate: false
+  postmark:
+    activate: false
+  domain: localhost.lan
+  googlean_domain: .example.com
+
 test:
   <<: *common
-  domain: test.loc
+  smtp:
+    activate: false
+  postmark:
+    activate: false
+  domain: localhost.lan
 
