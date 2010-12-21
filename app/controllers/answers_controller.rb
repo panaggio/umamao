@@ -56,7 +56,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new
-    
+
     @answer.safe_update(%w[body wiki], params[:answer])
     @question = Question.find_by_slug_or_id(params[:question_id])
     @answer.question = @question
@@ -71,7 +71,7 @@ class AnswersController < ApplicationController
       draft = Draft.create(:answer => @answer)
       session[:draft] = draft.id
       login_required
-      
+
     else # TODO: put a return statement and remove this else block
       @answer.user = current_user #has answered the question
       respond_to do |format|
@@ -89,20 +89,33 @@ class AnswersController < ApplicationController
                       :question_answers_count => @question.answers_count,
                       :own_question => @question.user_id == @answer.user_id)
 
-          flash[:notice] = t(:flash_notice, :scope => "answers.create")
-          format.html{redirect_to question_path(@question)}
+          notice = t(:flash_notice, :scope => "answers.create")
+          format.html do
+            flash[:notice] = notice
+            redirect_to question_path(@question)
+          end
           format.json { render :json => @answer.to_json(:except => %w[_keywords]) }
           format.js do
-            render(:json => {:success => true, :message => flash[:notice],
-              :html => render_to_string(:partial => "questions/answer",
-                                        :object => @answer,
-                                        :locals => {:question => @question})}.to_json)
+            render(:json => {
+                     :success => true,
+                     :message => notice,
+                     :html => render_to_string(:partial => "questions/answer",
+                                               :object => @answer,
+                                               :locals => {:question => @question})}.to_json)
           end
         else
-          flash[:error] = t(:flash_error, :scope => "answers.create")
-          format.html{redirect_to question_path(@question)}
+          error = t(:flash_error, :scope => "answers.create")
+          format.html do
+            flash[:error] = error
+            redirect_to question_path(@question)
+          end
           format.json { render :json => @answer.errors, :status => :unprocessable_entity }
-          format.js {render :json => {:success => false, :message => flash[:error] }.to_json }
+          format.js do
+            render :json => {
+              :success => false,
+              :message => error
+            }.to_json
+          end
         end
       end
     end
@@ -121,9 +134,10 @@ class AnswersController < ApplicationController
       if @answer.valid? && @answer.save
         Question.update_last_target(@question.id, @answer)
 
-        flash[:notice] = t(:flash_notice, :scope => "answers.update")
-
-        format.html { redirect_to(question_path(@answer.question)) }
+        format.html do
+          flash[:notice] = t(:flash_notice, :scope => "answers.update")
+          redirect_to(question_path(@answer.question))
+        end
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
