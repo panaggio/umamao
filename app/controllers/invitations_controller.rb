@@ -22,10 +22,12 @@ class InvitationsController < ApplicationController
 
   private
   def fetch_invitations
-    @pending_invitations = Invitation.where(:sender_id => current_user.id,
-                                             :accepted_at => nil)
-    @accepted_invitations = Invitation.where(:sender_id => current_user.id,
-                                             :accepted_at.ne => nil)
+    @pending_invitations = Invitation.query(:sender_id => current_user.id,
+                                            :accepted_at => nil,
+                                            :order => :created_at.desc)
+    @accepted_invitations = Invitation.query(:sender_id => current_user.id,
+                                             :accepted_at.ne => nil,
+                                             :order => :created_at.desc)
   end
 
 end
