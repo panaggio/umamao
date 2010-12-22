@@ -499,6 +499,23 @@ Time.zone.now ? 1 : 0)
     end
   end
 
+  def suggested_topics
+    count = {}
+    Topic.query(:follower_ids => self.id, :select => [:id, :title]).each do |topic|
+      Question.query(:topic_ids => topic.id, :select => :topic_ids).each do |question|
+        question.topics.each do |related_topic|
+          next if related_topic.id == topic.id || related_topic.follower_ids.include?(self.id)
+          count[related_topic.id] ||= {:title => related_topic.title}
+          count[related_topic.id][:count] = (count[related_topic.id][:count] || 0) + 1
+          count[related_topic.id][:topic] = topic.title
+        end
+      end
+    end
+    count.to_a.sort do |a,b|
+      -(a[1][:count] <=> b[1][:count])
+    end[0..5].map {|v| "#{v[1][:title]} (#{v[1][:count]}, #{v[1][:topic]})"}
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)

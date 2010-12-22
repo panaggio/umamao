@@ -49,3 +49,7 @@
     .block{:style => "background: transparent"}
       .content
         = link_to t(".create_own_site"), new_group_path, :id => "create_own_site"
+  %ul
+    - current_user.suggested_topics.each do |topic|
+      %li= topic
+
