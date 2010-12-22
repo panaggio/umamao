@@ -27,4 +27,5 @@ stylesheets:
   - autocomplete
 - landing:
   - compiled/landing
+  - autocomplete_landing
 
