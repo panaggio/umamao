@@ -49,7 +49,19 @@
     .block{:style => "background: transparent"}
       .content
         = link_to t(".create_own_site"), new_group_path, :id => "create_own_site"
-  %ul
-    - current_user.suggested_topics.each do |topic|
-      %li= topic
 
+  -# Topic suggestions
+  - if logged_in?
+    - suggested_topics = current_user.suggested_topics
+    - if !suggested_topics.blank?
+      .block
+        %h2.title
+          Sugestões de tópicos
+        %ul.topic-list
+          - suggested_topics.each do |topic|
+            %li
+              .topic
+                %span.topic-title
+                  = link_to topic.title, topic_url(topic), :title => topic.title
+              = render :partial => "topics/follow", :locals => {:topic => topic}
+              .clear
