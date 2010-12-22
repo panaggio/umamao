@@ -176,6 +176,26 @@ class UniversitiesController < ApplicationController
     return redirect_to(:root)
   end
 
+  def autocomplete
+    result = []
+    if q = params[:q]
+      result = University.filter(q, :per_page => 5)
+    end
+
+    respond_to do |format|
+      format.js do
+        render :json =>
+          (result.map do |u|
+             {
+               :id => u.id,
+               :name => u.name,
+             }
+
+         end.to_json)
+      end
+    end
+  end
+
   protected
   def active_subtab(param)
     key = params.fetch(param, "votes")

@@ -76,6 +76,10 @@ function initAutocomplete() {
     initTopicAutocompleteForFollowing();
   }
 
+  if ($("#user_university").length > 0) {
+    initUniversityAutocomplete();
+  }
+
   var searchField = $("#search-field");
 
   // Keyboard shortcuts for search box

@@ -522,3 +522,35 @@ function initTopicAutocompleteForFollowing() {
   };
 
 }
+
+function UniversityItem(data) {
+  this.data = data;
+  this.html = "<li>"+data.name+"</li>";
+}
+
+UniversityItem.prototype = {
+  click: function () {
+	$("#user_university").val(this.data.name);
+	this.box.hide();
+	this.box.clear();
+  }
+};
+
+Utils.extend(UniversityItem, Item);
+
+function initUniversityAutocomplete() {
+  var searchBox = new AutocompleteBox("#user_university",
+                                      "#user_university_suggestions",
+                                      "/universities/autocomplete");
+  
+  searchBox.processData = function (data) {
+	var items = [];
+    data.forEach(function (item) {
+      items.push(new UniversityItem(item));
+    });
+    if (items.length == 0) {
+      items.push(new Item({html: "<li>Nenhum resultado encontrado</li>"}));
+    }
+    return items;
+  };
+}

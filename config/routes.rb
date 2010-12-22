@@ -1,6 +1,8 @@
 Shapado::Application.routes.draw do
 
-  #match '/topics/autocomplete' => 'topics#autocomplete'
+  match '/topics/autocomplete' => 'topics#autocomplete'
+  match '/universities/autocomplete' => 'universities#autocomplete'
+  
   #match '/universities/index' => 'universities#index'
   #match '/universities/new' => 'universities#new'
   

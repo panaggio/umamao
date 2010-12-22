@@ -42,6 +42,7 @@
         = f.label :university, t('users.form.university')
       .input
         = f.text_field :university, :tabindex => 142
+        %ul#user_university_suggestions.autocomplete-list
 
     .submit
       = f.submit t('layouts.application.signup'), :tabindex => 10

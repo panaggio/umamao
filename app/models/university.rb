@@ -20,7 +20,7 @@ class University
   validates_presence_of     :name
   validates_uniqueness_of   :name
   validates_length_of       :name, :maximum => 100
-  filterable_keys           :name
+  filterable_keys           :name, :sig
 
   validates_presence_of     :sig
   validates_length_of       :sig, :maximum => 20
