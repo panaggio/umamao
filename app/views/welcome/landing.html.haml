@@ -32,34 +32,6 @@
       Se você é curioso e gosta de compartilhar conhecimento, o
       Umamão é para você.
 
-  %hr
-
-  %p
-
-    Se você <strong>NÃO</strong> é da Unicamp ou da USP (ou é
-    ex-aluno(a)), deixe seu email que nós avisaremos quando você puder
-    se cadastrar. Caso contrário, cadastre-se ao lado.
-
-  - if flash[:notice].present? && params[:saved] == 'true'
-    .success
-      = flash[:notice]
-
-  = error_messages_for @waiting_user, :class => 'error'
-
-  - unless params[:saved] == 'true'
-    = form_tag waiting_users_path, :id => 'waiting_list' do
-      #email_label.label
-        = label_tag 'user[email]', t('users.form.email')
-      #university_label.label
-        = label_tag 'user[university]', 'Universidade (opcional):'
-
-      #email_field
-        = email_field_tag 'user[email]', @waiting_user.email
-      #university_field
-        = text_field_tag 'user[university]', @waiting_user.university
-      #submit_button
-        = submit_tag 'Enviar'
-
 #signup
   %h3  #{ t('layouts.application.signup') }
   = form_for @user, :url => registration_path('user') do |f|
@@ -67,33 +39,9 @@
 
     .field
       .label
-        = f.label :email, t('users.form.email')
+        = f.label :university, t('users.form.university')
       .input
-        = f.email_field :email, :tabindex => 5
-
-    .field
-      .label
-        = f.label :password, t('users.form.password')
-      .input
-        = f.password_field :password, :tabindex => 6
-
-    .field
-      .label
-        = f.label :password_confirmation, t('users.form.password_confirmation')
-      .input
-        = f.password_field :password_confirmation, :tabindex => 7
-
-    .field
-      .label
-        = f.label :name, t("users.form.name"), :class => "label"
-      .input
-        = f.text_field :name, :class => "text_field", :tabindex => 8
-
-    .field
-      .label
-        = f.label :academic_email, t('users.form.academic_email')
-      .input
-        = f.email_field :academic_email, :tabindex => 9
+        = f.text_field :university, :tabindex => 142
 
     .submit
       = f.submit t('layouts.application.signup'), :tabindex => 10

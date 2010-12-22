@@ -32,5 +32,33 @@ class String
     parameterized_string
   end
 
+  def downcase_with_accents
+     norm = self.downcase
+     norm.tr!('ÁÉÍÓÚÇ', 'áéíóúç')
+     norm.tr!('ÀÈÌÒÙ', 'àèìòù')
+     norm.tr!('ÄËÏÖÜ', 'äëïöü')
+     norm.tr!('ÂÊÎÔÛ', 'âêîôû')
+     norm.tr!('ÃẼĨÕŨ', 'ãẽĩõũ')
+     norm
+   end
+
+  def downcase_with_accents!
+     self.downcase!
+     self.tr!('ÁÉÍÓÚÇ', 'áéíóúç')
+     self.tr!('ÀÈÌÒÙ', 'àèìòù')
+     self.tr!('ÄËÏÖÜ', 'äëïöü')
+     self.tr!('ÂÊÎÔÛ', 'âêîôû')
+     self.tr!('ÃẼĨÕŨ', 'ãẽĩõũ')
+   end
+   
+  def phrase_ucfirst
+	a = self.split(' ').map {|x| if x == "da" or x == "de" or x == "do" then x else x.capitalize end}
+	a.join(' ')
+  end
+
+  def capitalize_with_accents
+    self[0..0] + self[1..-1].downcase
+  end
+
 end
 

@@ -39,6 +39,7 @@ pt-BR:
       reports_notification: com relatório das últimas atividades do site (apenas para admins)
       avatar_tip: "Troque a foto do seu perfil no Gravatar"
       show_more_lang: "Mostrar mais idiomas"
+      university: "Universidade:"
     create:
       welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
       confirm: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."

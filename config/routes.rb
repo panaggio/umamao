@@ -1,6 +1,10 @@
 Shapado::Application.routes.draw do
 
-  match '/topics/autocomplete' => 'topics#autocomplete'
+  #match '/topics/autocomplete' => 'topics#autocomplete'
+  #match '/universities/index' => 'universities#index'
+  #match '/universities/new' => 'universities#new'
+  
+  resources :universities
 
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do
@@ -33,7 +37,7 @@ Shapado::Application.routes.draw do
   match '/send_feedback' => 'welcome#send_feedback', :as => :send_feedback
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
-
+  
   match '/auth/:provider/callback' => 'settings/external_accounts#create'
   match '/auth/failure' => 'settings/external_accounts#failure'
 
