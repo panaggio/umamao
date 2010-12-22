@@ -20,6 +20,8 @@ class Invitation
 
   validate_on_create :recipient_is_not_user
 
+  ensure_index([[:created_at, -1]])
+
   timestamps!
 
   # stolen from devise
