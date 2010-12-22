@@ -13,6 +13,8 @@ class University
   key :validation_type,			  String
   key :email_regexp,			  String
   
+  has_many :affiliation, :dependent => :destroy
+  
   timestamps!
 
   validates_presence_of     :name

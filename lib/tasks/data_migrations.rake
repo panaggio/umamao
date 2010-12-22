@@ -41,6 +41,38 @@ namespace :data do
       end
     end
 
+	desc "Update old users format (Confirmation e-mail inside users model) to the new one (user affiliation university)"
+	task :update_users_format => :environment do
+		
+		User.all.each do |u|
+			print u.academic_email+"\n" if u.academic_email
+			if u.academic_email then
+				debugger
+				u.affiliations.delete_all
+				a = Affiliation.new
+				a.user = u
+				
+				a.confirmation_status = true
+				a.email = u.academic_email
+				sig = /[.@]unicamp.br$/.match(a.email) ? "Unicamp" : "USP"
+				a.university = University.where(:sig => sig).first
+				
+				a.save!
+				u.affiliations << a
+				
+				u.save
+				print "Created for "+u.name+"\n"
+			end
+		end
+	end
+
+	desc "Delete all users affiliations (Debugging pourposes only) "
+	task :delete_users_affiliations => :environment do
+		User.all.each do |u|
+			print u.academic_email+"\n" if u.academic_email
+		end
+	end
+
 	desc "Import Universities from a csv file in the format [name, sig, state, V] where V is TRUE if the university is open for signup or something else otherwise"
 	task :import_universities => :environment do
 		Ccsv.foreach("data/uni.csv") do |row|
