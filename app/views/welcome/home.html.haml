@@ -41,6 +41,10 @@
     %hr{:style => 'margin-top: 1em'}
     = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
 
+  -# Topic suggestions
+  - if logged_in?
+    = render_cell :topics, :suggestions, :user => current_user
+
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}
@@ -53,6 +57,3 @@
       .content
         = link_to t(".create_own_site"), new_group_path, :id => "create_own_site"
 
-  -# Topic suggestions
-  - if logged_in?
-    = render_cell :topics, :suggestions, :user => current_user

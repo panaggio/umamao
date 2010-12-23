@@ -6,6 +6,7 @@ Shapado::Application.routes.draw do
     member do
       post :follow
       post :unfollow
+      post :refuse_suggestion
     end
 
     collection do

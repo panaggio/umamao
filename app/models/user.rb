@@ -66,6 +66,9 @@ class User
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
 
+  key :refused_topic_suggestion_ids, Array
+  many :refused_topic_suggestions, :class_name => "Topic", :in => :refused_topic_suggestion_ids
+
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
   has_many :news_updates, :foreign_key => :author_id
@@ -499,14 +502,17 @@ Time.zone.now ? 1 : 0)
     end
   end
 
-  # Finds topics that might be of interest to user by choosing that
+  # Finds topics that might be of interest to user by choosing the
   # ones that occur often in the followed topics' questions.
+  # TODO: denormalize this.
   def suggested_topics
     count = {}
     Topic.query(:follower_ids => self.id, :select => [:id, :title]).each do |topic|
       Question.query(:topic_ids => topic.id, :select => :topic_ids).each do |question|
         question.topics.each do |related_topic|
-          next if related_topic.id == topic.id || related_topic.follower_ids.include?(self.id)
+          next if related_topic.id == topic.id ||
+            related_topic.follower_ids.include?(self.id) ||
+            self.refused_topic_suggestion_ids.include?(related_topic.id)
           count[related_topic.id] ||= {:topic => related_topic}
           count[related_topic.id][:count] = (count[related_topic.id][:count] || 0) + 1
         end
@@ -515,6 +521,12 @@ Time.zone.now ? 1 : 0)
     count.to_a.sort do |a,b|
       -(a[1][:count] <=> b[1][:count])
     end[0..5].map {|v| v[1][:topic]}
+  end
+
+  # Adds topic to the list of refused suggestions.
+  def refuse_topic_suggestion!(topic)
+    self.refused_topic_suggestions << topic
+    self.save!
   end
 
   protected
