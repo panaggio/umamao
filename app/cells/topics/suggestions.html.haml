@@ -1,0 +1,14 @@
+-# Topic suggestions in home page
+#topic-suggestions.block
+  - if !@topics.blank?
+    %h2.title
+      Sugestões de tópicos
+    %ul.topic-list
+      - @topics.each do |topic|
+        %li
+          .topic
+            %span.topic-title
+              = link_to topic.title, topic_path(topic), :title => topic.title
+          .follow-info
+            = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link"
+          .clear
