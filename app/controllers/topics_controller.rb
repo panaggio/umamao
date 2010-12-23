@@ -81,11 +81,15 @@ class TopicsController < ApplicationController
           :message => notice
         }
 
-        # Used when following from settings page
         if params[:answer]
+          # Used when following from settings page
           res[:html] = render_to_string(:partial => "topic.html",
                                         :locals => {:topic => @topic})
+        elsif params[:suggestion]
+          # We need to redraw the topics suggestions
+          res[:suggestions] = render_cell :topics, :suggestions, :user => current_user
         end
+
         render :json => res.to_json
       end
     end

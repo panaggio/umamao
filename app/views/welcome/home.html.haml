@@ -1,6 +1,9 @@
 - content_for :head do
   %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
 
+- content_for :js do
+  = javascript_include_tag "modules/home"
+
 - content_for :subtabs do
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
