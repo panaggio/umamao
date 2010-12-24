@@ -69,6 +69,7 @@ class TopicsController < ApplicationController
     @topic.save
     user.remove_topic_suggestion(@topic)
     user.populate_news_feed!(@topic)
+    user.save!
 
     track_event(:followed_topic)
 

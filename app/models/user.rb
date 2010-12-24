@@ -552,7 +552,7 @@ Time.zone.now ? 1 : 0)
 
   def mark_topic_as_uninteresting!(topic)
     if !self.uninteresting_topic_ids.include?(topic.id)
-      self.uninteresting_topics_ids << topic.id
+      self.uninteresting_topic_ids << topic.id
     end
     self.save!
   end
