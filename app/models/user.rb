@@ -521,6 +521,31 @@ Time.zone.now ? 1 : 0)
   # Finds topics that might be of interest to user by choosing the
   # ones that occur often in the followed topics' questions.
   def suggest_topics!
+    if self.suggested_topic_ids.length < 8 &&
+        Topic.query(:follower_ids => self.id).count == 0
+      # If user doesn't follow anything, we show the most popular
+      # topics, and some random ones.
+      Topic.query(:order => :questions_count.desc, :limit => 6).each do |topic|
+        unless self.uninteresting_topic_ids.include?(topic.id)
+          self.suggested_topic_ids << topic.id
+        end
+      end
+
+      tried = 0 # Avoid picky users causing infinite loops.
+      while self.suggested_topic_ids.length < 13 && tried < 30
+        t = Topic.query(:offset => 5 + rand(50)).first.id
+        unless self.suggested_topic_ids.include?(t) ||
+            self.uninteresting_topic_ids.include?(t)
+          self.suggested_topic_ids << t
+        end
+        tried += 1
+      end
+
+      self.suggested_topics_fresh = true
+      self.save!
+      return
+    end
+
     count = {}
 
     Topic.query(:follower_ids => self.id, :select => [:id, :title]).each do |topic|

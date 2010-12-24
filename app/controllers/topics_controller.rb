@@ -68,6 +68,7 @@ class TopicsController < ApplicationController
     @topic.followers << user
     @topic.save
     user.remove_topic_suggestion(@topic)
+    user.suggested_topics_fresh = false
     user.populate_news_feed!(@topic)
     user.save!
 
