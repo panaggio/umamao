@@ -63,9 +63,12 @@ class TopicsController < ApplicationController
       @topic = Topic.find_by_title(params[:title]) ||
         Topic.new(:title => params[:title])
     end
-    @topic.followers << current_user
+
+    user = current_user
+    @topic.followers << user
     @topic.save
-    current_user.populate_news_feed!(@topic)
+    user.remove_topic_suggestion(@topic)
+    user.populate_news_feed!(@topic)
 
     track_event(:followed_topic)
 
@@ -99,6 +102,8 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_slug_or_id(params[:id])
     @topic.follower_ids.delete(current_user.id)
     @topic.save
+
+    current_user.mark_topic_as_uninteresting!(@topic)
 
     track_event(:unfollowed_topic)
 

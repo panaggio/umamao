@@ -66,8 +66,13 @@ class User
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
 
-  key :refused_topic_suggestion_ids, Array
-  many :refused_topic_suggestions, :class_name => "Topic", :in => :refused_topic_suggestion_ids
+  # Denormalized array of relevant topics that we suggest to the user,
+  # sorted by decreasing order of relevance. See suggest_topics!
+  key :suggested_topic_ids, Array, :default => []
+  key :suggested_topics_fresh, Boolean, :default => false # Whether or not this is has just been calculated.
+
+  key :uninteresting_topic_ids, Array
+  many :uninteresting_topics, :class_name => "Topic", :in => :uninteresting_topic_ids
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -502,31 +507,60 @@ Time.zone.now ? 1 : 0)
     end
   end
 
+  # Lists the best topic suggestions for the user, recalculating it if needed.
+  def suggested_topics(max = 5)
+    if !self.suggested_topics_fresh && self.suggested_topic_ids.length < 10
+      self.suggest_topics!
+    end
+
+    self.suggested_topic_ids[0 .. max].map do |topic_id|
+      Topic.find(topic_id)
+    end
+  end
+
   # Finds topics that might be of interest to user by choosing the
   # ones that occur often in the followed topics' questions.
-  # TODO: denormalize this.
-  def suggested_topics
+  def suggest_topics!
     count = {}
+
     Topic.query(:follower_ids => self.id, :select => [:id, :title]).each do |topic|
       Question.query(:topic_ids => topic.id, :select => :topic_ids).each do |question|
         question.topics.each do |related_topic|
           next if related_topic.id == topic.id ||
             related_topic.follower_ids.include?(self.id) ||
-            self.refused_topic_suggestion_ids.include?(related_topic.id)
-          count[related_topic.id] ||= {:topic => related_topic}
-          count[related_topic.id][:count] = (count[related_topic.id][:count] || 0) + 1
+            self.uninteresting_topic_ids.include?(related_topic.id)
+          count[related_topic.id] = (count[related_topic.id] || 0) + 1
         end
       end
     end
-    count.to_a.sort do |a,b|
-      -(a[1][:count] <=> b[1][:count])
-    end[0..5].map {|v| v[1][:topic]}
+
+    self[:suggested_topic_ids] = count.to_a.sort do |a,b|
+      -(a[1] <=> b[1])
+    end[0 .. 49].map {|v| v[0]}
+
+    self.suggested_topics_fresh = true
+
+    self.save!
   end
 
-  # Adds topic to the list of refused suggestions.
-  def refuse_topic_suggestion!(topic)
-    self.refused_topic_suggestions << topic
+  # Removes a topic from the list of suggested topics.
+  def remove_topic_suggestion(topic)
+    if self.suggested_topic_ids.delete(topic.id)
+      self.suggested_topics_fresh = false
+    end
+  end
+
+  def mark_topic_as_uninteresting!(topic)
+    if !self.uninteresting_topic_ids.include?(topic.id)
+      self.uninteresting_topics_ids << topic.id
+    end
     self.save!
+  end
+
+  # Refuses a topic suggestions
+  def refuse_topic_suggestion!(topic)
+    self.remove_topic_suggestion(topic)
+    self.mark_topic_as_uninteresting!(topic)
   end
 
   protected
