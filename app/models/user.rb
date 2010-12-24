@@ -508,6 +508,7 @@ Time.zone.now ? 1 : 0)
   end
 
   # Lists the best topic suggestions for the user, recalculating it if needed.
+  # TODO: Check whether the suggestion list is old.
   def suggested_topics(max = 5)
     if !self.suggested_topics_fresh && self.suggested_topic_ids.length < 10
       self.suggest_topics!
@@ -515,6 +516,22 @@ Time.zone.now ? 1 : 0)
 
     self.suggested_topic_ids[0 .. max].map do |topic_id|
       Topic.find(topic_id)
+    end
+  end
+
+  # Adds random topics to the user's suggestion list.
+  # Choose among the top topics.
+  def randomize_topic_suggestions
+    failed = 0 # Avoid picky users causing infinite loops.
+    while self.suggested_topic_ids.length < 13 && failed < 30
+      topic = Topic.query(:offset => 5 + rand(50)).first
+      if self.suggested_topic_ids.include?(topic.id) ||
+          self.uninteresting_topic_ids.include?(topic.id) ||
+          topic.follower_ids.include?(self.id)
+        failed += 1
+        next
+      end
+      self.suggested_topic_ids << topic.id
     end
   end
 
@@ -531,16 +548,7 @@ Time.zone.now ? 1 : 0)
         end
       end
 
-      tried = 0 # Avoid picky users causing infinite loops.
-      while self.suggested_topic_ids.length < 13 && tried < 30
-        t = Topic.query(:offset => 5 + rand(50)).first.id
-        unless self.suggested_topic_ids.include?(t) ||
-            self.uninteresting_topic_ids.include?(t)
-          self.suggested_topic_ids << t
-        end
-        tried += 1
-      end
-
+      self.randomize_topic_suggestions
       self.suggested_topics_fresh = true
       self.save!
       return
@@ -559,9 +567,12 @@ Time.zone.now ? 1 : 0)
       end
     end
 
-    self[:suggested_topic_ids] = count.to_a.sort do |a,b|
+    self.suggested_topic_ids = count.to_a.sort do |a,b|
       -(a[1] <=> b[1])
     end[0 .. 49].map {|v| v[0]}
+    if self.suggested_topic_ids.length < 10
+      self.randomize_topic_suggestions
+    end
 
     self.suggested_topics_fresh = true
 
