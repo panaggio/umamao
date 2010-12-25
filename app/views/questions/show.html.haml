@@ -80,28 +80,7 @@
       - flag.flaggeable = @question
       = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
 
-  .ccontrol
-    %a{:href => "", :class => "ccontrol-link"}
-      - if @question.comments.size == 1
-        = @question.comments.size.to_s + " " + t("models.comment")
-      - elsif @question.comments.size != 0
-        = @question.comments.size.to_s + " " + t("models.comments")
-
-  .comments
-    - @question.comments.each do |comment|
-      = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
-  .clear
-  - if logged_in?
-    = link_to t("comments.shared.add_comment"), new_question_comment_path(@question), :id => "add_comment_link", :rel => 'nofollow'
-  .forms
-    .comment-form-question
-      = form_tag question_comments_path(@question), :class => "form commentForm nestedAnswerForm", :id => "add_comment_form" do
-        - @comment = Comment.new
-        = render :partial => "comments/form", :locals => {:source => source, :commentable => @question}
-        .group.navform
-          = submit_tag t("comments.shared.comment_submit"), :class => "button"
-          = t("global.or")
-          = link_to t('scaffold.cancel'), '', :class => 'cancel_comment'
+  = render :partial => "shared/comments", :locals => {:commentable => @question, :source => source, :path_scope => [@question]}
 
 %a{:name=>"answers"}
 #answers

@@ -49,30 +49,9 @@
 
     - if !hide_controls
       .ccontrol
-        %a{:href => "", :class => "ccontrol-link"}
-          - if answer.comments.size == 1
-            = answer.comments.size.to_s + " " + t("models.comment")
-          - elsif answer.comments.size != 0
-            = answer.comments.size.to_s + " " + t("models.comments")
-
-      / Nested Answers
-      .children.comments
-        - answer.comments.each do |comment|
-          = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
-
-      - if logged_in?
-        = link_to t(".add_comment"), new_question_comment_path(question, answer), :class => "addNestedAnswer add_answer_comment_link"
+        = render :partial => "shared/comments", :locals => {:commentable => answer, :path_scope => [question, answer]}
 
   - if !hide_controls
     .avatar
       = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
     .clear
-
-    .forms.comment-form
-      - form_tag question_answer_comments_path(question, answer), :class => "form commentForm nestedAnswerForm" do
-        - @comment = Comment.new
-        = render :partial => "comments/form", :locals => {:source => source, :commentable => answer}
-        .group.navform
-          = submit_tag t("comments.shared.comment_submit"), :class => "button"
-          = t("global.or")
-          = link_to t("scaffold.cancel"), "", :class => "cancel_comment"

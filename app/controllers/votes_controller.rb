@@ -30,12 +30,12 @@ class VotesController < ApplicationController
         if vote_state != :error
           average = vote.voteable.reload.votes_average
           render(:json => {:success => true,
-                           :message => flash[:notice],
+                           :message => @notice,
                            :vote_type => vote_type,
                            :vote_state => vote_state,
                            :average => average}.to_json)
         else
-          render(:json => {:success => false, :message => flash[:error] }.to_json)
+          render(:json => {:success => false, :message => @error_message }.to_json)
         end
       end
 
@@ -43,12 +43,12 @@ class VotesController < ApplicationController
         if vote_state != :error
           average = vote.voteable.reload.votes_average
           render(:json => {:success => true,
-                           :message => flash[:notice],
+                           :message => @notice,
                            :vote_type => vote_type,
                            :vote_state => vote_state,
                            :average => average}.to_json)
         else
-          render(:json => {:success => false, :message => flash[:error] }.to_json)
+          render(:json => {:success => false, :message => @error_message }.to_json)
         end
       end
     end
@@ -70,19 +70,18 @@ class VotesController < ApplicationController
   protected
   def check_permissions
     unless logged_in?
-      flash[:error] = t(:unauthenticated, :scope => "votes.create")
       respond_to do |format|
         format.html do
-          flash[:error] += ", [#{t("global.please_login")}](#{new_user_session_path})"
+          flash[:notice] = "#{t(:unauthenticated, :scope => "votes.create")}, [#{t("global.please_login")}](#{new_user_session_path})"
           redirect_to params[:source]
         end
         format.json do
-          flash[:error] = t("global.please_login")
-          render(:json => {:status => :unauthenticate, :success => false, :message => flash[:error] }.to_json)
+          @error_message = t("global.please_login")
+          render(:json => {:status => :unauthenticate, :success => false, :message => @error_message }.to_json)
         end
         format.js do
-          flash[:error] = t("global.please_login")
-          render(:json => {:status => :unauthenticate, :success => false, :message => flash[:error] }.to_json)
+          @error_message = t("global.please_login")
+          render(:json => {:status => :unauthenticate, :success => false, :message => @error_message }.to_json)
         end
       end
     end
@@ -98,10 +97,10 @@ class VotesController < ApplicationController
         track_event("#{vote.value == 1 ? 'up' : 'down'}voted".to_sym,
                     :voteable => voteable.class.name.downcase)
         vote.voteable.add_vote!(vote.value, current_user)
-        flash[:notice] = t("votes.create.flash_notice")
+        @notice = t("votes.create.flash_notice")
         state = :created
       else
-        flash[:error] = vote.errors.full_messages.join(", ")
+        @error_message = vote.errors.full_messages.join(", ")
       end
     elsif(user_vote.valid?)
       if(user_vote.value != vote.value)
@@ -117,18 +116,18 @@ class VotesController < ApplicationController
           track_event(:changed_upvote_to_downvote,
                       :voteable => voteable.class.name.downcase)
         end
-        flash[:notice] = t("votes.create.flash_notice")
+        @notice = t("votes.create.flash_notice")
         state = :updated
       else
         value = vote.value
         user_vote.destroy
         track_event(:removed_vote, :voteable => voteable.class.name.downcase)
 
-        flash[:notice] = t("votes.destroy.flash_notice")
+        @notice = t("votes.destroy.flash_notice")
         state = :deleted
       end
     else
-      flash[:error] = user_vote.errors.full_messages.join(", ")
+      @error_message = user_vote.errors.full_messages.join(", ")
       state = :error
     end
 

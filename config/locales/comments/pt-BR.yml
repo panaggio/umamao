@@ -13,6 +13,10 @@ pt-BR:
       reply: Responder
     comment:
       confirm_destroy: "Certeza que você quer remover este comentário?"
+    count:
+      none: "Adicionar comentário"
+      one: "1 comentário"
+      other: "%{count} comentários"
   models:
     comments: Comentários
     comment: Comentário

@@ -157,7 +157,7 @@ class UsersController < ApplicationController
 
     track_event(:followed_user)
 
-    flash[:notice] = t("followable.flash.follow", :followable => @user.name)
+    notice = t("followable.flash.follow", :followable => @user.name)
 
     if @user.notification_opts.activities
       Notifier.follow(current_user, @user).deliver
@@ -165,11 +165,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
+        flash[:notice] = notice
         redirect_to user_path(@user)
       end
       format.js {
         render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
+                 :message => notice }.to_json)
       }
     end
   end
@@ -180,15 +181,16 @@ class UsersController < ApplicationController
 
     track_event(:unfollowed_user)
 
-    flash[:notice] = t("followable.flash.unfollow", :followable => @user.name)
+    notice = t("followable.flash.unfollow", :followable => @user.name)
 
     respond_to do |format|
       format.html do
+        flash[:notice] = notice
         redirect_to user_path(@user)
       end
       format.js {
         render(:json => {:success => true,
-                 :message => flash[:notice] }.to_json)
+                 :message => notice }.to_json)
       }
     end
   end
