@@ -14,8 +14,8 @@ pt-BR:
     comment:
       confirm_destroy: "Certeza que você quer remover este comentário?"
     count:
-      none: "Nenhum comentário"
-      one: "1 Comentário"
+      none: "Adicionar comentário"
+      one: "1 comentário"
       other: "%{count} comentários"
   models:
     comments: Comentários

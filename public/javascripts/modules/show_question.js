@@ -2,7 +2,7 @@
 $(document).ready(function() {
   $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
-  $('.comments').hide();
+  $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
   Utils.clickObject("form.vote_form button", function () {
@@ -70,7 +70,7 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var answer = $(data.html);
         var content = answer.find(".entry-content");
-        answer.find("form.commentForm").hide();
+        answer.find(".comments_wrapper").hide();
         answers.append(answer);
         highlightEffect(answer);
         form.find("textarea").val("");
@@ -99,10 +99,8 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var comment = $(data.html);
         comments.append(comment);
-        comments.slideDown("slow");
-        comments.parent().find(".ccontrol").html(data.count);
+        comments.parent().parent().parent().find(".ccontrol").html(data.count);
         highlightEffect(comment);
-        form.hide();
         textarea.val("");
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
       },
@@ -175,52 +173,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $(".addNestedAnswer").live("click", function() {
-    var link = $(this);
-    var user = link.attr('data-author');
-    var isreply = link.hasClass('reply');
-    var controls = link.parents(".body-col");
-    var form = controls.parents(".answer").find("form.nestedAnswerForm");
-    if(form.length == 0) // if comment is child of a question
-      form = link.parents("#question-body-col").find("form.commentForm");
-    var textarea = form.find('textarea');
-    var isHidden = !form.is(':visible');
-    controls.find(".forms form.flag_form").slideUp();
-    form.slideDown();
-    if(isreply){
-      textarea.focus();
-      textarea.text('@'+user+' ');
-    } else { textarea.text('').focus();  }
-
-    var viewportHeight = window.innerHeight ? window.innerHeight : $(window).height();
-    var top = form.offset().top - viewportHeight/2;
-
-    $('html,body').animate({scrollTop: top}, 1000);
-    return false;
-  });
-
-  $("#add_comment_link").live('click', function() {
-    var link = $(this);
-    var isreply = link.hasClass('reply');
-    var form = $("#add_comment_form");
-    var textarea = form.find('textarea');
-    $("#request_close_question_form").slideUp();
-    $("#question_flag_form").slideUp();
-    $("#close_question_form").slideUp();
-    $("#add_comment_form").slideDown();
-    textarea.text('').focus();
-    var viewportHeight = window.innerHeight ? window.innerHeight : $(window).height();
-    var top = form.offset().top - viewportHeight/2;
-
-    $('html,body').animate({scrollTop: top}, 1000);
-    return false;
-  });
-
-  $('.cancel_comment').live('click', function(){
-    $(this).parents('form').slideUp();
-    return false;
-  });
-
   $(".flag_form .cancel").live("click", function() {
     $(this).parents(".flag_form").slideUp();
     return false;
@@ -229,7 +181,6 @@ $(document).ready(function() {
   $(".answer .flag-link").live("click", function() {
     var link = $(this);
     var controls = link.parents(".controls");
-    controls.find(".forms form.nestedAnswerForm").slideUp();
     controls.parents(".answer").find(".forms .flag_form").slideToggle();
 
     return false;
@@ -237,7 +188,6 @@ $(document).ready(function() {
 
   $("#question_flag_link.flag-link").click(function() {
     $("#request_close_question_form").slideUp();
-    $("#add_comment_form").slideUp();
     $("#close_question_form").slideUp();
     $("#question_flag_form").slideToggle();
     return false;

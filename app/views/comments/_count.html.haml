@@ -1,5 +1,3 @@
-- if commentable.comments.size == 0
-  = t("comments.count.none")
-- else
+.ccontrol
   %a{:href => "", :class => "ccontrol-link"}
     = t("comments.count", :count => commentable.comments.count)
