@@ -99,7 +99,7 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var comment = $(data.html);
         comments.append(comment);
-        comments.parent().parent().parent().find(".ccontrol").html(data.count);
+        comments.parent().parent().parent().find(".ccontrol").replaceWith(data.count);
         highlightEffect(comment);
         textarea.val("");
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
