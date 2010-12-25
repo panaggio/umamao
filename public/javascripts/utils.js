@@ -29,6 +29,19 @@ window.Utils = {
     });
   },
 
+  // Associates with objects of a given selector AJAX behavior when clicked.
+  // prepare is a callback of no arguments that returns parameters to be used in
+  // a jQuery.ajax() call. All fields returned by prepare behave exactly as the options
+  // expected by jQuery.ajax(), except:
+  //
+  //   - success: callback to be called if the AJAX request succeeds and the value
+  //     of data.success is true.
+  //   - error: callback to be called if the AJAX request succeeds but the value
+  //     of data.success is false.
+  //
+  // Both callbacks get passed the return data of the AJAX request. Also, the value
+  // of data.message is displayed in an animated box (see Utils.showMessage) if
+  // it is present.
   clickObject: function (selector, prepare) {
     $(selector).live("click", function (event) {
       var element = this;

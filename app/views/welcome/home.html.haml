@@ -1,6 +1,9 @@
 - content_for :head do
   %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
 
+- content_for :js do
+  = javascript_include_tag "modules/home"
+
 - content_for :subtabs do
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
@@ -38,6 +41,10 @@
     %hr{:style => 'margin-top: 1em'}
     = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
 
+  -# Topic suggestions
+  - if logged_in?
+    = render_cell :topics, :suggestions, :user => current_user
+
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}
@@ -49,3 +56,4 @@
     .block{:style => "background: transparent"}
       .content
         = link_to t(".create_own_site"), new_group_path, :id => "create_own_site"
+

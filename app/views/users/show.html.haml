@@ -72,7 +72,7 @@
     .clear
   .block
     %ul.items#questions
-      -@questions.each do |question|
+      - @questions.each do |question|
         = render :partial => "questions/question", :object => question
     .additional_info
       = will_paginate @questions, :param_name => "questions_page"
