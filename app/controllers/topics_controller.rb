@@ -63,9 +63,14 @@ class TopicsController < ApplicationController
       @topic = Topic.find_by_title(params[:title]) ||
         Topic.new(:title => params[:title])
     end
-    @topic.followers << current_user
+
+    user = current_user
+    @topic.followers << user
     @topic.save
-    current_user.populate_news_feed!(@topic)
+    user.remove_topic_suggestion(@topic)
+    user.suggested_topics_fresh = false
+    user.populate_news_feed!(@topic)
+    user.save!
 
     track_event(:followed_topic)
 
@@ -81,11 +86,15 @@ class TopicsController < ApplicationController
           :message => notice
         }
 
-        # Used when following from settings page
         if params[:answer]
+          # Used when following from settings page
           res[:html] = render_to_string(:partial => "topic.html",
                                         :locals => {:topic => @topic})
+        elsif params[:suggestion]
+          # We need to redraw the topics suggestions
+          res[:suggestions] = render_cell :topics, :suggestions, :user => current_user
         end
+
         render :json => res.to_json
       end
     end
@@ -95,6 +104,8 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_slug_or_id(params[:id])
     @topic.follower_ids.delete(current_user.id)
     @topic.save
+
+    current_user.mark_topic_as_uninteresting!(@topic)
 
     track_event(:unfollowed_topic)
 
@@ -112,6 +123,22 @@ class TopicsController < ApplicationController
       end
     end
   end
+
+  # Adds topic to the current user's list of refused topic suggestions.
+  def refuse_suggestion
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    current_user.refuse_topic_suggestion!(@topic) if @topic
+
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => true,
+          :suggestions => (render_cell :topics, :suggestions, :user => current_user)
+        }.to_json
+      end
+    end
+  end
+
 
   # Searches matching topics and render them in JSON form for input
   # autocomplete.

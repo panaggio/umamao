@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  $("form.nestedAnswerForm").hide();
-  $("#add_comment_form").hide();
   $("form").live('submit', function() {
     window.onbeforeunload = null;
   });

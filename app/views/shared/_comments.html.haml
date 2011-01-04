@@ -1,0 +1,17 @@
+- source = local_assigns[:source]
+- commentable = local_assigns[:commentable]
+- path_scope = local_assigns[:path_scope]
+
+= render :partial => 'comments/count', :locals => {:commentable => commentable}
+
+.comments_wrapper
+  .comments
+    - commentable.comments.each do |comment|
+      = render :partial => "comments/comment", :object => comment, :locals => {:source => source, :mini => true}
+  - if logged_in?
+    .forms
+      - @comment = Comment.new
+      = form_tag(path_scope + [@comment], :class => "form commentForm", :id => "add_comment_form") do
+        = render :partial => "comments/form", :locals => {:source => source, :commentable => commentable}
+        .group.navform
+          = submit_tag t("comments.shared.comment_submit"), :class => "button"
