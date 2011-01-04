@@ -5,7 +5,6 @@ class University
   include Scopes
   include MongoMapperExt::Filter
 
-  key :_id,                       String
   key :name,                      String, :limit => 100, :null => false, :index => true
   key :sig,						  String, :limit => 20, :null =>false, :index => true
   key :state,					  String, :limit => 20, :null =>false

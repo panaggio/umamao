@@ -530,7 +530,9 @@ function UniversityItem(data) {
 
 UniversityItem.prototype = {
   click: function () {
-	$("#user_university").val(this.data.name);
+	$("#view_university").val(this.data.name);
+	$("#university_id").val(this.data.id);
+	$("div.hidden").removeClass("hidden");
 	this.box.hide();
 	this.box.clear();
   }
@@ -539,8 +541,8 @@ UniversityItem.prototype = {
 Utils.extend(UniversityItem, Item);
 
 function initUniversityAutocomplete() {
-  var searchBox = new AutocompleteBox("#user_university",
-                                      "#user_university_suggestions",
+  var searchBox = new AutocompleteBox("#view_university",
+                                      "#view_university_suggestions",
                                       "/universities/autocomplete");
   
   searchBox.processData = function (data) {

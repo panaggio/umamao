@@ -53,3 +53,7 @@ ul.autocomplete-list em {
     font-weight: bold;
     padding: 0;
 }
+
+div.hidden {
+	display:none;
+}

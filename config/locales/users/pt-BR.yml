@@ -27,7 +27,7 @@ pt-BR:
     form:
       change_password: Trocar de senha
       email: "Email:"
-      academic_email: "Email acadêmico (Apenas da Unicamp e da USP por enquanto):"
+      academic_email: "Email acadêmico:"
       name: "Nome e sobrenome:"
       password: "Senha:"
       password_confirmation: "Repetir senha:"

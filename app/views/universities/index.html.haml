@@ -1,0 +1,12 @@
+-content_for :subtabs do
+  .navtitle
+    = t("universities.index.title")
+
+/Users
+%ul.items#university
+  -@universities.each do |university|
+    = render :partial => "university", :object => university
+
+#additional_info
+  =will_paginate @universities
+  .clear

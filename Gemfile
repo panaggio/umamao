@@ -12,6 +12,7 @@ gem 'rails', '~>3.0.0'
 
 gem 'bson_ext', :require => 'bson'
 gem 'BadMinus-devise', '~> 1.2.0', :require => 'devise'
+gem 'ccsv', '~> 0.1'
 gem 'cells', :git => 'git://github.com/apotonick/cells.git'
 gem 'compass', '~> 0.10.2'
 gem 'compass-colors', '~> 0.3.1'

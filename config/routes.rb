@@ -7,6 +7,8 @@ Shapado::Application.routes.draw do
   #match '/universities/new' => 'universities#new'
   
   resources :universities
+  
+  resources :affiliations
 
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do

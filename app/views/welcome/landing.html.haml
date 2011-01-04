@@ -34,15 +34,23 @@
 
 #signup
   %h3  #{ t('layouts.application.signup') }
-  = form_for @user, :url => registration_path('user') do |f|
+  .field
+    .label
+      = label :view_university, t('users.form.university')
+    .input
+      = text_field_tag :view_university
+      %ul#view_university_suggestions.autocomplete-list
+  
+  = form_for @affiliation do |f|
     = f.error_messages
 
-    .field
-      .label
-        = f.label :university, t('users.form.university')
-      .input
-        = f.text_field :university, :tabindex => 142
-        %ul#user_university_suggestions.autocomplete-list
-
-    .submit
-      = f.submit t('layouts.application.signup'), :tabindex => 10
+    .hidden          
+      .field
+        .label
+          = f.label :email, t('users.form.email')
+        .input
+          = f.text_field :email, :tabindex => 142
+          %ul#user_university_suggestions.autocomplete-list
+	
+      .submit
+        = f.submit t('layouts.application.signup'), :tabindex => 10

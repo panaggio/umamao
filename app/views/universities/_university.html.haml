@@ -1,0 +1,10 @@
+%li.item
+  / University Summary
+  .summary
+    %p
+      = link_to h(university.name), university_path(university)
+    .info
+      .metadata
+        = t(:created_at, :scope => "activerecord.attributes.university")
+        = t("time.ago", :time => time_ago_in_words(university.created_at))
+    .clear
