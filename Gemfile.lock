@@ -120,6 +120,7 @@ GEM
     capybara-envjs (0.4.0)
       capybara (~> 0.4.0)
       envjs (>= 0.3.7)
+    ccsv (0.1)
     celerity (0.8.5)
     childprocess (0.1.4)
       ffi (~> 0.6.3)
@@ -311,6 +312,7 @@ DEPENDENCIES
   bson_ext
   capybara
   capybara-envjs
+  ccsv (~> 0.1)
   cells!
   compass (~> 0.10.2)
   compass-colors (~> 0.3.1)
