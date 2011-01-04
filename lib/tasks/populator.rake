@@ -2,6 +2,9 @@ desc "Imports mongodb dump from dump/"
 task :import => :environment do
   `mongo --eval 'db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
   `mongorestore dump`
+  User.query.each do |user|
+    user.reset_password!("umamao", "umamao")
+  end
 end
 
 desc "Removes all private data from a DB dump located in dump/"
