@@ -82,9 +82,16 @@ class Question
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
-  validates_length_of       :title,    :within => 5..280, :message => lambda { I18n.t("questions.model.messages.title_too_long") }
-  validates_length_of       :body,     :minimum => 5, :allow_blank => true, :allow_nil => true
-  validates_true_for :tags, :logic => lambda { tags.size <= 9},
+  validates_length_of       :title,    :within => 5..280, :message =>
+    lambda {
+      if title.length < 5
+        I18n.t("questions.model.messages.title_too_short")
+      else
+        I18n.t("questions.model.messages.title_too_long")
+      end
+    }
+  validates_length_of       :body,     :minimum => 5, :allow_blank => true, :allow_nil => true, :message => lambda { I18n.t("questions.model.messages.body_too_short") }
+  validates_true_for :tags, :logic => lambda { tags.size <= 9 },
                      :message => lambda { I18n.t("questions.model.messages.too_many_tags") if tags.size > 9 }
 
   versionable_keys :title, :body, :tags, :topics
@@ -436,11 +443,11 @@ class Question
         delete_if {|w| w.empty?}.map &:downcase
     end
   end
-  
+
   def get_topics_from_parent
 	#debugger
 	self.topics = self.parent_question.topics if self.parent_question_id.present?
-	
+
 	#self.topics = (self.parent_question_id != "" ? self.parent_question.topics : Array.new)
   end
 
