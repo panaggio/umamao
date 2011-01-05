@@ -1,0 +1,11 @@
+%li.item
+  .summary
+    .title
+      = link_to h(@topic.title), topic_path(@topic)
+    .info
+      .metadata
+        = link_to "✕", unfollow_topic_path(@topic), :class => "unfollow_link"
+        - count = @topic.questions_count
+        = format_number(count)
+        = t(:question_count, :scope => "activerecord.models", :count => count)
+    .clear

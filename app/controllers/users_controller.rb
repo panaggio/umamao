@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
-  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow]
+  before_filter :login_required, :only => [:edit, :update, :wizard,
+                                           :follow, :unfollow]
 
   tabs :default => :users
 
@@ -85,11 +86,17 @@ class UsersController < ApplicationController
       else
         flash[:notice] = t("confirm", :scope => "users.create")
       end
-      sign_in_and_redirect(:user, @user) # !! now logged in
+      # sign_in_and_redirect(:user, @user) # !! now logged in
+      sign_in(:user, @user)
+      render :action => "show"
     else
       flash[:error]  = t("flash_error", :scope => "users.create")
       render :action => 'new'
     end
+  end
+
+  def wizard
+    render :layout => "welcome"
   end
 
   def show

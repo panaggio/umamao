@@ -88,8 +88,7 @@ class TopicsController < ApplicationController
 
         if params[:answer]
           # Used when following from settings page
-          res[:html] = render_to_string(:partial => "topic.html",
-                                        :locals => {:topic => @topic})
+          res[:html] = render_cell "topics", :followed, :topic => @topic
         elsif params[:suggestion]
           # We need to redraw the topics suggestions
           res[:suggestions] = render_cell :topics, :suggestions, :user => current_user
