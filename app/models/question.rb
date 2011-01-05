@@ -416,6 +416,21 @@ class Question
       if !banned
         topic.increment(:questions_count => -1)
       end
+
+      # Remove related news items
+      if news_update
+        NewsItem.query(:origin_id => topic.id,
+                       :origin_type => "Topic",
+                       :news_update_id => news_update.id).each &:delete
+      end
+      self.answers.each do |answer|
+        if answer.news_update
+          NewsItem.query(:origin_id => topic.id,
+                         :origin_type => "Topic",
+                         :news_update_id => answer.news_update.id).each &:delete
+        end
+      end
+
       save
     else
       false
