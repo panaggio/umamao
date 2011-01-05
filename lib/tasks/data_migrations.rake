@@ -4,6 +4,17 @@ require 'mechanize'
 namespace :data do
   namespace :migrate do
 
+    desc "Delete a question's news items if it has already been answered."
+    task :delete_duplicate_news_items => :environment do
+      Question.query.each do |question|
+        if !question.answers.blank? && question.news_update
+          NewsItem.query(:news_update_id => question.news_update.id).each do |item|
+            item.destroy
+          end
+        end
+      end
+    end
+
     desc "Create missing news items for topics."
     task :create_news_items_for_topics => :environment do
       Question.query.each do |question|

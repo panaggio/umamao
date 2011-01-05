@@ -376,29 +376,6 @@ class Question
         end
       end
 
-      # Question's answers' updates
-      # FIXME: the answers' ids ought to be kept in the question.
-      answer_ids = answers.all(:select => :id).map(&:id)
-      NewsUpdate.query(:entry_id.in => answer_ids,
-                       :entry_type => "Answer").each do |update|
-        stamp = stamp + 1.second
-        # Users
-        topic.followers.each do |follower|
-          if NewsItem.query(:recipient_id => follower.id,
-                            :recipient_type => "User",
-                            :news_update_id => update.id).count == 0
-            NewsItem.notify!(update, follower, topic, stamp)
-          end
-        end
-
-        # Topic
-        if NewsItem.query(:recipient_id => topic.id,
-                          :recipient_type => "Topic",
-                          :news_update_id => update.id).count == 0
-          NewsItem.notify!(update, topic, topic, stamp)
-        end
-      end
-
       if !banned
         topic.increment(:questions_count => 1)
       end
