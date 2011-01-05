@@ -1,0 +1,16 @@
+-# Bulk-following of topics.
+
+- content_for :js do
+  = javascript_include_tag "modules/unfollow_topic"
+  %meta
+    oi
+
+%input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics")}
+%ul.autocomplete-list#follow-topics-suggestions
+
+%hr
+%ul.items#followed-topics
+  - @topics.each do |topic|
+    = render_cell "topics", :followed, :topic => topic
+
+= will_paginate @topics
