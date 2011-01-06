@@ -2,6 +2,9 @@ class ExternalAccountsCell < Cell::Rails
   include Devise::Controllers::Helpers
 
   def display
+    # We track from which page we authenticate so we can return to it
+    # later.
+    session["return_url"] = request.url
     render
   end
 
