@@ -1,4 +1,13 @@
 $(document).ready(function() {
+
+  // TODO: place this somewhere else
+  if ($("#landing_signup").length > 0 ) {
+	  Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
+  }
+	
+  $("form.nestedAnswerForm").hide();
+  $("#add_comment_form").hide();
+
   $("form").live('submit', function() {
     window.onbeforeunload = null;
   });
@@ -60,7 +69,6 @@ $(document).ready(function() {
   ).find('.more-link').click(function(){
     $(this).parents('.answer').addClass('expanded');
   });
-
 });
 
 // Init autocompletable boxes.
@@ -76,7 +84,7 @@ function initAutocomplete() {
     initTopicAutocompleteForFollowing();
   }
 
-  if ($("#user_university").length > 0) {
+  if ($("#view_university").length > 0) {
     initUniversityAutocomplete();
   }
 

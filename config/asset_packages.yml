@@ -18,7 +18,9 @@ javascripts:
   - wmd/jquery.wmd
   - wmd/jquery.wmd.mathjax
   - modules/single/question
-
+  
+- landing:
+  - modules/landing
 
 stylesheets:
 - base:

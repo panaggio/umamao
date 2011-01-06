@@ -1,5 +1,5 @@
-
 $(document).ready(function() {
+	
   $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
   $('.comments_wrapper').hide();

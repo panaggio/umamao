@@ -15,6 +15,9 @@
     #remember_me
       = label_tag 'user[remember_me]', t("sessions.new.remember_me")
       = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
+      
+- content_for :js do
+  = javascript_include_merged :landing
 
 #content
   %h3 Qualquer pergunta, não qualquer resposta.
@@ -34,6 +37,8 @@
 
 #signup
   %h3  #{ t('layouts.application.signup') }
+
+
   .field
     .label
       = label :view_university, t('users.form.university')
@@ -43,14 +48,16 @@
   
   = form_for @affiliation do |f|
     = f.error_messages
-
-    .hidden          
+    
+    #landing_signup
+      .input
+        = f.hidden_field :university_id, :value => "4d235c531d41c8347e0000b4"
+        
       .field
         .label
           = f.label :email, t('users.form.email')
         .input
-          = f.text_field :email, :tabindex => 142
-          %ul#user_university_suggestions.autocomplete-list
-	
+          = f.text_field :email, :value => "du@gmail.com", :tabindex => 142
+
       .submit
         = f.submit t('layouts.application.signup'), :tabindex => 10

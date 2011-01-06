@@ -531,7 +531,7 @@ function UniversityItem(data) {
 UniversityItem.prototype = {
   click: function () {
 	$("#view_university").val(this.data.name);
-	$("#university_id").val(this.data.id);
+	$("#affiliation_university_id").val(this.data.id);
 	$("div.hidden").removeClass("hidden");
 	this.box.hide();
 	this.box.clear();
