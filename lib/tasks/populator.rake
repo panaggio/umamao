@@ -3,7 +3,7 @@ task :import => :environment do
   `mongo --eval 'db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
   `mongorestore dump`
   User.query.each do |user|
-    user.reset_password!("umamao", "umamao")
+    user.reset_password!("umamao", "umamao");
   end
 end
 
@@ -108,4 +108,3 @@ namespace :populator do
     end
   end
 end
-

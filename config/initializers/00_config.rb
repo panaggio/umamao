@@ -80,7 +80,7 @@ config.session_options[:secret] = AppConfig.session_secret
 
 ActionMailer::Base.default_url_options[:host] = AppConfig.domain
 
-if AppConfig.smtp["activate"]
+if AppConfig.smtp!= nil and AppConfig.smtp["activate"]
   # Yeah, we have to set both
   ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.delivery_method = :smtp
@@ -89,7 +89,7 @@ if AppConfig.smtp["activate"]
   config.action_mailer.smtp_settings = options
 end
 
-if AppConfig.postmark['activate']
+if AppConfig.postmark != nil and AppConfig.postmark['activate']
   # Yeah, we have to set both
   ActionMailer::Base.delivery_method = :postmark
   config.action_mailer.delivery_method = :postmark
@@ -99,5 +99,5 @@ if AppConfig.postmark['activate']
 end
 
 class Mixpanel
-  TOKEN = AppConfig.mixpanel['api_key']
+  TOKEN = AppConfig.mixpanel['api_key'] if AppConfig.mixpanel
 end

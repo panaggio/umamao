@@ -5,12 +5,18 @@ class University
   include Scopes
   include MongoMapperExt::Filter
 
-  key :name,                      String, :limit => 100, :null => false, :index => true
-  key :sig,						  String, :limit => 20, :null =>false, :index => true
-  key :state,					  String, :limit => 20, :null =>false
+  key :name,                      String, :limit => 100,
+                                          :null => false,
+                                          :index => true
+                                                         
+  key :sig,						  String, :limit => 20,
+                                          :null =>false,
+                                          :index => true
+                                                         
+  key :state,					  String, :limit => 20,  :null =>false
   key :open_for_signup,			  Boolean
   key :validation_type,			  String
-  key :email_regexp,			  String
+  key :domain,		  String
   
   has_many :affiliation, :dependent => :destroy
   
@@ -24,6 +30,10 @@ class University
   validates_presence_of     :sig
   validates_length_of       :sig, :maximum => 20
   validates_length_of       :state, :maximum => 20
+
+  def email_regexp
+    return /[.@]unicamp.br$/
+  end
 
 #  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 #  validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,

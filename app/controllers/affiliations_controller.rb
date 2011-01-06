@@ -23,6 +23,9 @@ class AffiliationsController < ApplicationController
                 when "has already been taken"
                   flash[:error] << " " << t("email_in_use",
                                       :scope => "affiliations.messages.errors")
+                when "is invalid"
+                  flash[:error] << " " << t("is_invalid",
+                                      :scope => "affiliations.messages.errors")
                 else
                   flash[:error] << " " << e
                 end
