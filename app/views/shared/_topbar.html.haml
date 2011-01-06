@@ -29,5 +29,6 @@
       %li.menu-item
         = link_to t("layouts.application.logout"), destroy_user_session_path
 
+    - else
       %li.menu-item
         = link_to t("layouts.application.log_in"), new_user_session_path
