@@ -168,6 +168,8 @@ GEM
       stackdeck (~> 0.2)
     json (1.2.4)
     json_pure (1.4.6)
+    koala (0.10.0)
+      json (>= 1.0)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -312,6 +314,7 @@ DEPENDENCIES
   goalie
   haml (~> 3.0.13)
   jnunemaker-validatable!
+  koala (~> 0.10.0)
   launchy
   magent (~> 0.4.2)
   mechanize
