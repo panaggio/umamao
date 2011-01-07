@@ -1,5 +1,4 @@
-@import "compass/utilities/lists/horizontal-list"
-@import "compass/utilities/general/tag-cloud"
+@import compass
 
 @import colors
 @import buttons
@@ -9,9 +8,7 @@
 @import ./base
 
 @import ./items
-@import ./main_bar
 @import ./announcements
-@import ./top_bar
 @import ./topics
 @import ./questions
 @import ./vote_box
@@ -19,7 +16,6 @@
 @import ./stats
 @import ./groups
 @import ./quick_question
-@import ./search_box
 @import ./widgets
 @import ./users
 @import ./close_requests
@@ -27,3 +23,72 @@
 @import ./manage_widgets
 
 @import ./navigation
+
+@import search
+@import sidebar
+
+#header
+  margin: 0 0 2em
+  clear: both
+  overflow: visible
+  background: url(/images/bgheader.png) repeat-x 0 0 #F5F5F5
+  border-bottom: 1pt solid #CCCCCC
+  margin: 0 0 2em
+  padding-bottom: 0.5em
+  padding-top: 0.5em
+
+#main-bar
+  +container
+  +pie-clearfix
+  overflow: visible
+
+#logo
+  +column(4)
+  +append(1)
+
+#top-bar
+  +column(8, true)
+  +prepend(2)
+  margin-top: 13px
+
+  .menu
+    +no-bullets
+    +inline-block-list
+    text-align: right
+
+    a
+      +hover-link
+      font-size: 1.167em
+      line-height: 3em
+      vertical-align: middle
+      padding: 0 0.25em
+
+      img
+        background-color: white
+        vertical-align: middle
+        padding: 0.25em
+
+#container
+  +pie-clearfix
+
+#wrapper
+  +container
+  +pie-clearfix
+
+#main
+  +column(18)
+
+  #block-text
+    +column(14)
+    +prepend(2)
+    +append(2)
+
+    .secondary-navigation
+      margin-bottom: 1em
+
+      .navtitle
+        margin-bottom: 0.5em
+        font-size: 1.75em
+
+#sidebar
+  +column(6, true)

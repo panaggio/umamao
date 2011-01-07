@@ -54,29 +54,8 @@ body
   min-width: 960px
 
 
-#header, #wrapper
+#wrapper
   padding: 0 20px
-
-
-#header
-  position: relative
-  padding-top: 1px
-
-  h1
-    margin: 0
-    padding: 10px 0
-    font-size: 30px
-
-    a
-      &:link, &:active, &:hover, &:visited
-        text-decoration: none
-
-  .group_logo
-    padding: 2px
-
-#main
-  width: 70%
-  float: left
 
 
 .actions-bar
@@ -91,18 +70,16 @@ body
 
 
 #sidebar
-  width: 25%
-  float: right
 
   h3
     padding: 10px 15px
     margin: 0
     margin-bottom: 3px
-    font-size: 13px
 
   .block
     margin-bottom: 20px
     padding-bottom: 10px
+    clear: both
 
     .content
       padding: 0 15px
@@ -176,15 +153,13 @@ body
 
 h1.navtitle
   margin: 0
-  padding: 1px 0
-  color: inherit
+  font-size: 21px
+  line-height: 26px
+  margin-bottom: 13px
+  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
 
 .secondary-navigation .navtitle
-  float: left
-  padding: 0px 15px
-  font-size: 20px
   font-family: Trebuchet MS, Helvetica, sans-serif
-  margin-top: -4px
 
 #main .content .secondary-navigation .navtitle
   text-transform: capitalize
@@ -277,7 +252,7 @@ input.checkbox
 
 .form
   .group
-    margin-bottom: 15px
+    margin-bottom: 13px
 
   div
     &.left
@@ -299,9 +274,12 @@ input.checkbox
       float: right
 
   textarea.comment_text_area
-    font-size: 12px
-    padding: 1px 0
-    margin: 0
+    font-size: 13px
+    line-height: 26px
+    margin: -2px 0 -1px 0
+    height: auto
+    width: 100%
+    padding: 0
 
   label.label, input.text_field, textarea.text_area
     font-size: 1.2em

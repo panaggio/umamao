@@ -257,7 +257,7 @@ AutocompleteBox.prototype = {
         }
         break;
       // ignore [escape] [shift] [capslock]
-      case 27: case 16: case 20:
+      case 27: 
         box.abortRequest();
         itemBox.hide();
         break;
@@ -331,7 +331,7 @@ SearchItem.prototype = {
   },
 
   click: function () {
-    this.form.submit();
+    window.location.href = '/search?q=' + this.query;
   }
 
 };
@@ -355,6 +355,15 @@ function initSearchBox() {
     });
     items.push(new SearchItem(this.input));
     return items;
+  };
+
+  searchBox.returnDefault = function () {
+    var query = searchBox.input.val();
+    if (query.match(/\?$/)) {
+      searchBox.input.closest("form").submit();
+    } else {
+      window.location.href = '/search?q=' + query;
+    }
   };
 
 };
@@ -412,7 +421,7 @@ function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
                                        "#reclassify-suggestions",
                                        "/topics/autocomplete");
-  var topicsUl = $("#question-body-col ul.topic-list");
+  var topicsUl = $("#question .body-col ul.topic-list");
 
   var questionUrl = location.href;
 
@@ -429,7 +438,7 @@ function initTopicAutocompleteForReclassifying() {
       $(".reclassify .empty").hide();
       $(".reclassify .not-empty").show();
     }
-    $(".reclassify").show();
+    $(".retag").show();
   }
 
   // Shows the autocomplete.
@@ -438,7 +447,7 @@ function initTopicAutocompleteForReclassifying() {
     $("#reclassify-autocomplete").show();
     $(".add-topic").show();
     $(".cancel-reclassify").show();
-    $(".reclassify").hide();
+    $(".retag").hide();
   }
 
   turnOff();
@@ -474,7 +483,7 @@ function initTopicAutocompleteForReclassifying() {
               encodeURIComponent(title),
               function (data) {
                 if (data.success) {
-                  topicsUl.append(data.box);
+                  topicsUl.find(".retag").before(data.box);
                 }
               });
     topicBox.clear();

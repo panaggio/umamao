@@ -226,7 +226,7 @@ $(document).ready(function() {
     return false;
   });
 
-  $(".ccontrol-link").live("click", function(){
+  $(".ccontrol-link").click(function(){
     $(this).parent().next().slideToggle("slow");
     return false;
   });

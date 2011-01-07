@@ -1,0 +1,62 @@
+#search
+  +column(9)
+  margin-top: 13px
+
+  .search-form-wrap
+    border: 1px solid black
+    position: relative
+    margin-top: 0.75em
+    padding: 0.25em
+    height: 1.5em
+    background-color: white
+
+  #search-field
+    border: none
+    width: 100%
+    background-color: white
+    font-size: 1.2em
+
+  #search-submit
+    background-color: darken(#F84249, 20%)
+    color: white
+    border: medium none
+    padding: 3px 0
+    position: absolute
+    right: -80px
+    top: -1px
+    width: 80px
+    font-size: 1.2em
+    height: 1.8em
+    font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif
+    cursor: pointer
+
+    &:hover
+      background-color: #F84249
+
+  #search-results
+    +column(12)
+    +no-bullets
+    position: absolute
+    left: -1px 
+    top: 24px
+    background-color: white
+    border: 1px solid black
+    padding: 0
+    margin: 0
+    font-size: 1.2em
+    z-index: 2
+
+    li
+      padding: 0.25em
+      cursor: pointer
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+
+      &.active
+        background: #eee
+        color: blue
+
+      .desc
+        font-size: 0.8em
+        color: #777

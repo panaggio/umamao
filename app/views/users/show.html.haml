@@ -12,7 +12,7 @@
         = link_to "#{t("followable.unfollow")}", unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user)
       - else
         = link_to "#{t("followable.follow")}", follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
-      .clear
+    
   .user-info.block
     = gravatar @user.email.to_s, :size => 128
     = shapado_auto_link(markdown(@user.description))
