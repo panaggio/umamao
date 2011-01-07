@@ -6,7 +6,7 @@
     %ul.topic-list
       - @suggested_topics.each do |topic|
         %li
-          .topic
+          .topic.info
             %span.topic-title
               = link_to topic.title, topic_path(topic), :title => topic.title
           .controls
