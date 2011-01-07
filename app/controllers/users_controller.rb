@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
-                                           :follow, :unfollow]
+                                           :follow, :unfollow, :refuse_suggestion]
 
   tabs :default => :users
 
@@ -176,8 +176,15 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
       end
       format.js {
-        render(:json => {:success => true,
-                 :message => notice }.to_json)
+        response = {
+          :success => true,
+          :message => notice
+        }
+        if params[:suggestion]
+          response[:suggestions] =
+            render_cell :suggestions, :users, :user => current_user
+        end
+        render :json => response.to_json
       }
     end
   end
@@ -209,6 +216,23 @@ class UsersController < ApplicationController
       flash[:notice] = t("destroy_failed", :scope => "devise.registrations")
     end
     return redirect_to(:root)
+  end
+
+  # Adds user to the current user's list of refused user suggestions
+  def refuse_suggestion
+    @user = User.find_by_id(params[:id])
+    if @user && !current_user.uninteresting_user_ids.include?(@user.id)
+      current_user.uninteresting_user_ids << @user.id
+    end
+
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => true,
+          :suggestions => (render_cell :suggestions, :users, :user => current_user)
+        }.to_json
+      end
+    end
   end
 
   protected
