@@ -421,7 +421,7 @@ function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
                                        "#reclassify-suggestions",
                                        "/topics/autocomplete");
-  var topicsUl = $("#question-body-col ul.topic-list");
+  var topicsUl = $("#question .body-col ul.topic-list");
 
   var questionUrl = location.href;
 
@@ -438,7 +438,7 @@ function initTopicAutocompleteForReclassifying() {
       $(".reclassify .empty").hide();
       $(".reclassify .not-empty").show();
     }
-    $(".reclassify").show();
+    $(".retag").show();
   }
 
   // Shows the autocomplete.
@@ -447,7 +447,7 @@ function initTopicAutocompleteForReclassifying() {
     $("#reclassify-autocomplete").show();
     $(".add-topic").show();
     $(".cancel-reclassify").show();
-    $(".reclassify").hide();
+    $(".retag").hide();
   }
 
   turnOff();
@@ -483,7 +483,7 @@ function initTopicAutocompleteForReclassifying() {
               encodeURIComponent(title),
               function (data) {
                 if (data.success) {
-                  topicsUl.append(data.box);
+                  topicsUl.find(".retag").before(data.box);
                 }
               });
     topicBox.clear();

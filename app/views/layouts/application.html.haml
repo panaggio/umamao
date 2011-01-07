@@ -16,7 +16,7 @@
       = current_group.head
       #main-bar{:class => @active_tab}
         #logo
-          = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"]), domain_url(:custom => current_group.domain)
+          = link_to image_tag("default_logo.png", :class => "group_logo", :width => current_group.logo_info["width"], :height => current_group.logo_info["height"], :alt => "Umamão"), domain_url(:custom => current_group.domain)
 
         = render :partial => "shared/search"
         = render :partial => "shared/topbar"
@@ -46,25 +46,21 @@
     #container{:class => @current_class}
       #wrapper
         #main
-          = render :partial => "shared/ads/header_ads"
           #block-text
-            .secondary-navigation{:class => @active_subtab.to_s}
-              = yield :subtabs
-              .clear
+
+            - if content_for?(:subtabs)
+              .secondary-navigation{:class => @active_subtab.to_s}
+                =yield :subtabs
+
             .content
-              %p
-                = show_flash_messages(:class => "flash", :markdown => true)
-              = render :partial => "shared/ads/content_ads"
+              - if flash[:key]
+                %p= show_flash_messages(:class => "flash", :markdown => true)
               .inner
                 = content_for?(:content) ? yield(:content) : yield
-                .clear
+
         #sidebar
           = yield :sidebar
 
-          = render :partial => "shared/ads/context_panel_ads"
-
-        .clear
-        = render :partial => "shared/ads/footer_ads"
       .push
 
     = render :partial => "layouts/footer"
