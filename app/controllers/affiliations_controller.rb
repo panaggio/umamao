@@ -6,47 +6,50 @@ class AffiliationsController < ApplicationController
     u = University.find_id_by_email_domain(@affiliation[:email])
     @affiliation.university_id = u
     
-    success = u && @affiliation && @affiliation.save
-    if success && @affiliation.errors.empty? then
+    #Verifications
+    if u == nil then #if-1.1
+      flash[:notice] = t("email_sent",
+                         :scope => "affiliations.create")
+    
+    elsif @affiliation && @affiliation.save && @affiliation.errors.empty? then     
       flash[:notice]  = t("email_sent", :scope => "affiliations.create")
-      respond_to do |format|
-        format.js {
-          render(:json => {:success => true,
-                           :message => flash[:notice] }.to_json)
-        }
-      end
-    else
-      flash[:error] = ""
+    
+    else #not necessarily an error (no_match) if-1
       #TODO: Put this somewhere else (errors module?)
-      case
-        when u == nil
-          flash[:error] << " " << t("is_invalid",
-                                     :scope => "affiliations.messages.errors")
-                                      
+      case #case 1                                     
         when @affiliation.errors[:email] != nil
+          flash[:error] = ""
           @affiliation.errors[:email].each do |e|
-            case e
-                when "has already been taken"
-                  flash[:error] << " " << t("email_in_use",
+            case e #case 2
+              when "has already been taken"
+                flash[:error] << " " << t("email_in_use",
                                       :scope => "affiliations.messages.errors")
-                else
+              else
                   flash[:error] << " " << e
-                end
-          end
-          
-        else
+              end #case 2
+          end #each do
+        else #case 1
           flash[:error] = @affiliation.errors.full_messages.join("**")
-        end
-      
-      respond_to do |format|
-        format.js {
-          render(:json => {:success => false,
-                           :message => flash[:error] }.to_json)
-        }
-        
-      end
+        end #case 1
+    end #if 1
+    
+    #Responding
+    if !flash[:error].nil? then
+		respond_to do |format|
+		  format.js {
+			render(:json => {:success => false,
+							 :message => flash[:error] }.to_json)
+		  }
+		end
+	elsif !flash[:notice].nil?
+		respond_to do |format|
+		  format.js {
+			render(:json => {:success => true,
+							 :message => flash[:notice] }.to_json)
+		  }
+        end #respond to
     end
-  end
+  end #def create
 end
 
 

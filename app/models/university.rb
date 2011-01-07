@@ -32,7 +32,7 @@ class University
   validates_length_of       :state, :maximum => 20
 
   def email_regexp
-    return /[.@]unicamp.br$/
+	Regexp.new "[.@]"+self.domain+"$" if !self.domain.nil? && !self.domain.empty?
   end
   
   def self.find_id_by_email_domain(email)
