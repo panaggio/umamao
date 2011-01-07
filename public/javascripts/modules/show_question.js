@@ -62,7 +62,7 @@ $(document).ready(function() {
 
   Utils.clickObject("form.mainAnswerForm .button", function () {
     var form = $(this).parents("form");
-    var answers = $("#answers .block");
+    var answers = $("#answers .hentry");
     var button = $(this);
 
     return {
