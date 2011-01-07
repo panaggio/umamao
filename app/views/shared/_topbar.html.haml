@@ -21,7 +21,8 @@
           = link_to t("layouts.application.moderate"), moderate_path, :class => "moderate_link"
 
       %li.menu-item
-        = link_to(gravatar(current_user.email.to_s, :size => 20).html_safe + truncate(h(current_user.name.split.first + ' ' + current_user.name.split.last), :length => 16), user_path(current_user))
+        = link_to(gravatar(current_user.email.to_s, :size => 20).html_safe, user_path(current_user))
+        = link_to(truncate(h(current_user.name.split.first + ' ' + current_user.name.split.last), :length => 16), user_path(current_user))
 
       %li.menu-item
         = link_to t("layouts.application.settings"), settings_profile_path
