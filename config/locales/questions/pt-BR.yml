@@ -58,6 +58,8 @@ pt-BR:
       messages:
         empty_tags: A pergunta precisa ter pelo menos um tópico.
         title_too_long: A pergunta é comprida demais. Não pode ter mais que 280 caracteres.
+        title_too_short: A pergunta deve ter no mínimo 5 caracteres.
+        body_too_short: O corpo da pergunta deve ter no mínimo 5 caracteres.
         too_many_tags: A pergunta pode ter no máximo 9 tópicos.
         too_short: Muito curta. Use mais que %{count} palavras para ser mais específico.
     move:

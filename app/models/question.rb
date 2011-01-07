@@ -82,9 +82,16 @@ class Question
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
-  validates_length_of       :title,    :within => 5..280, :message => lambda { I18n.t("questions.model.messages.title_too_long") }
-  validates_length_of       :body,     :minimum => 5, :allow_blank => true, :allow_nil => true
-  validates_true_for :tags, :logic => lambda { tags.size <= 9},
+  validates_length_of       :title,    :within => 5..280, :message =>
+    lambda {
+      if title.length < 5
+        I18n.t("questions.model.messages.title_too_short")
+      else
+        I18n.t("questions.model.messages.title_too_long")
+      end
+    }
+  validates_length_of       :body,     :minimum => 5, :allow_blank => true, :allow_nil => true, :message => lambda { I18n.t("questions.model.messages.body_too_short") }
+  validates_true_for :tags, :logic => lambda { tags.size <= 9 },
                      :message => lambda { I18n.t("questions.model.messages.too_many_tags") if tags.size > 9 }
 
   versionable_keys :title, :body, :tags, :topics
@@ -369,29 +376,6 @@ class Question
         end
       end
 
-      # Question's answers' updates
-      # FIXME: the answers' ids ought to be kept in the question.
-      answer_ids = answers.all(:select => :id).map(&:id)
-      NewsUpdate.query(:entry_id.in => answer_ids,
-                       :entry_type => "Answer").each do |update|
-        stamp = stamp + 1.second
-        # Users
-        topic.followers.each do |follower|
-          if NewsItem.query(:recipient_id => follower.id,
-                            :recipient_type => "User",
-                            :news_update_id => update.id).count == 0
-            NewsItem.notify!(update, follower, topic, stamp)
-          end
-        end
-
-        # Topic
-        if NewsItem.query(:recipient_id => topic.id,
-                          :recipient_type => "Topic",
-                          :news_update_id => update.id).count == 0
-          NewsItem.notify!(update, topic, topic, stamp)
-        end
-      end
-
       if !banned
         topic.increment(:questions_count => 1)
       end
@@ -409,6 +393,21 @@ class Question
       if !banned
         topic.increment(:questions_count => -1)
       end
+
+      # Remove related news items
+      if news_update
+        NewsItem.query(:origin_id => topic.id,
+                       :origin_type => "Topic",
+                       :news_update_id => news_update.id).each &:delete
+      end
+      self.answers.each do |answer|
+        if answer.news_update
+          NewsItem.query(:origin_id => topic.id,
+                         :origin_type => "Topic",
+                         :news_update_id => answer.news_update.id).each &:delete
+        end
+      end
+
       save
     else
       false
@@ -436,11 +435,11 @@ class Question
         delete_if {|w| w.empty?}.map &:downcase
     end
   end
-  
+
   def get_topics_from_parent
 	#debugger
 	self.topics = self.parent_question.topics if self.parent_question_id.present?
-	
+
 	#self.topics = (self.parent_question_id != "" ? self.parent_question.topics : Array.new)
   end
 

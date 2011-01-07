@@ -18,7 +18,7 @@
     -# Question Summary
     .summary
       - cache("question_on_index_#{question.id}_#{question.updated_at}") do
-        %h3= link_to title, question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
+        %h3= link_to title, question_path(question), :title => truncate(question.body, :length => 200)
         %ul.topic-list
           - question.topics[0..5].each do |topic|
             %li

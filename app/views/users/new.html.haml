@@ -7,6 +7,8 @@
     #invitation_message
       = gravatar_for(@invitation.sender, :size => 64, :class => 'inviter_avatar')
       = markdown(@invitation.message)
+      -# Sorry about this, guys
+      .clear
   - elsif @group_invitation
     #invitation_message
       = markdown(@group_invitation.message)
