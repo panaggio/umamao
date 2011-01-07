@@ -19,12 +19,14 @@ namespace :data do
     task :create_news_items_for_topics => :environment do
       Question.query.each do |question|
         next if !question.news_update
+
         question.topics.each do |topic|
           if NewsItem.query(:recipient_id => topic.id,
                             :recipient_type => "Topic",
                             :news_update_id => question.news_update.id).count == 0
             NewsItem.notify!(question.news_update, topic, topic, question.news_update.created_at)
           end
+
           question.answers.each do |answer|
             next if !answer.news_update # This shouldn't happen.
             if NewsItem.query(:recipient_id => topic.id,

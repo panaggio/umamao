@@ -82,7 +82,7 @@ class Question
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
-  validates_length_of       :title,    :within => 5..280, :message =>
+  validates_length_of :title, :within => 5..280, :message =>
     lambda {
       if title.length < 5
         I18n.t("questions.model.messages.title_too_short")
@@ -90,9 +90,17 @@ class Question
         I18n.t("questions.model.messages.title_too_long")
       end
     }
-  validates_length_of       :body,     :minimum => 5, :allow_blank => true, :allow_nil => true, :message => lambda { I18n.t("questions.model.messages.body_too_short") }
+
+  validates_length_of :body, :minimum => 5, :allow_blank => true,
+    :allow_nil => true,
+    :message => lambda { I18n.t("questions.model.messages.body_too_short") }
+
   validates_true_for :tags, :logic => lambda { tags.size <= 9 },
-                     :message => lambda { I18n.t("questions.model.messages.too_many_tags") if tags.size > 9 }
+    :message => lambda {
+                  if tags.size > 9
+                    I18n.t("questions.model.messages.too_many_tags")
+                  end
+                }
 
   versionable_keys :title, :body, :tags, :topics
   filterable_keys :title, :body
@@ -395,16 +403,18 @@ class Question
       end
 
       # Remove related news items
-      if news_update
+      if self.news_update
         NewsItem.query(:origin_id => topic.id,
                        :origin_type => "Topic",
-                       :news_update_id => news_update.id).each &:delete
+                       :news_update_id => self.news_update.id).each &:delete
       end
+
       self.answers.each do |answer|
         if answer.news_update
-          NewsItem.query(:origin_id => topic.id,
-                         :origin_type => "Topic",
-                         :news_update_id => answer.news_update.id).each &:delete
+          news_items = NewsItem.query(:origin_id => topic.id,
+                                      :origin_type => "Topic",
+                                      :news_update_id => answer.news_update.id)
+          news_items.each(&:delete)
         end
       end
 
