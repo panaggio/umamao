@@ -34,6 +34,13 @@ class University
   def email_regexp
     return /[.@]unicamp.br$/
   end
+  
+  def self.find_id_by_email_domain(email)
+	University.all.each { |u|
+		return u._id if email =~ u.email_regexp
+	}
+	return nil
+  end
 
 #  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 #  validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,

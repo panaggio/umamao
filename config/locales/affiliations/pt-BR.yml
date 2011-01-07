@@ -1,0 +1,8 @@
+pt-BR:
+  affiliations:
+    create:
+      email_sent: "Obrigado! Verifique seu e-mail para mais instruções."
+    messages:
+      errors:
+        email_in_use: "O email já está em uso. As instruções foram reenviadas"
+        is_invalid: "Este e-mail não parece um e-mail acadêmico ou sua universidade não está cadastrada."

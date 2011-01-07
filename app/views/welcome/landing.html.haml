@@ -37,27 +37,16 @@
 
 #signup
   %h3  #{ t('layouts.application.signup') }
-
-
-  .field
-    .label
-      = label :view_university, t('users.form.university')
-    .input
-      = text_field_tag :view_university
-      %ul#view_university_suggestions.autocomplete-list
   
   = form_for @affiliation do |f|
     = f.error_messages
     
     #landing_signup
-      .input
-        = f.hidden_field :university_id, :value => "4d235c531d41c8347e0000b4"
-        
       .field
         .label
           = f.label :email, t('users.form.email')
         .input
-          = f.text_field :email, :value => "du@gmail.com", :tabindex => 142
+          = f.text_field :email, :value => "jose@unicamp.br", :tabindex => 142
 
       .submit
         = f.submit t('layouts.application.signup'), :tabindex => 10
