@@ -46,7 +46,7 @@
         .label
           = f.label :email, t('users.form.email')
         .input
-          = f.text_field :email, :value => "jose@unicamp.br", :tabindex => 142
+          = f.email_field :email, :value => "jose@unicamp.br", :tabindex => 142
 
       .submit
         = f.submit t('layouts.application.signup'), :tabindex => 10

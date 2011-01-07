@@ -10,8 +10,8 @@ class Affiliation
   belongs_to :user
 
   validates_uniqueness_of   :email
-  #validates_true_for        :email, :logic => lambda {
-  #                                             self.university.email_regexp
-  #											  }
+  validates_true_for        :email, :logic => lambda {
+                                               self.university.email_regexp
+  											  }
 
 end

@@ -40,6 +40,7 @@ en:
     create:
       flash_notice: "Thanks for signing up!"
       flash_error:  "Sorry, we could not set up that account. Please try again, or contact an administrator (link is above)."
+      confirm: "ty"
     messages:
       errors:
         reputation_needed: "You need a reputation of %{min_reputation} to %{action}"

@@ -3,7 +3,7 @@ class WaitingUser
 
   key :_id, String
   key :email, String
-  key :university, String
+  key :university, String #legacy
 
   timestamps!
 
