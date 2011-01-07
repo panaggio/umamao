@@ -1,6 +1,6 @@
 #navigation-all
   - @steps.each do |step|
-    = link_to step, "/signup/wizard/#{step}", :class => (step == @current_step ? "active" : "")
+    = link_to step, wizard_path(step), :class => (step == @current_step ? "active" : "")
 
 -# FIXME: is there a better name for this?
 #interaction
@@ -12,7 +12,7 @@
 
 #navigation-step
   - if @previous_step
-    = link_to "Anterior", "/signup/wizard/#{@previous_step}"
+    = link_to "Anterior", wizard_path(@previous_step)
   - if @next_step
-    = link_to "Próximo", "/signup/wizard/#{@next_step}"
+    = link_to "Próximo", wizard_path(@next_step)
   = link_to "Ir para o Umamão", root_path

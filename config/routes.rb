@@ -25,7 +25,7 @@ Shapado::Application.routes.draw do
   match '/change_language_filter' => 'welcome#change_language_filter', :as => :change_language_filter
   match '/register' => 'users#create', :as => :register
   match '/signup' => 'users#new', :as => :signup
-  match '/signup/wizard/:current_step' => 'users#wizard'
+  match '/signup/:current_step' => 'users#wizard', :as => :wizard
   match '/moderate' => 'admin/moderate#index', :as => :moderate
   match '/moderate/ban' => 'admin/moderate#ban', :as => :ban
   match '/moderate/unban' => 'admin/moderate#unban', :as => :unban
