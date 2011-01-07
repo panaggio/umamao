@@ -15,3 +15,6 @@ pt-BR:
       one: "Seguindo 1 tópico"
       other: "Seguindo %{count} tópicos"
       none: "Nenhum tópico seguido"
+    suggestions:
+      users: "Sugestões de usuários"
+      topics: "Sugestões de tópicos"
