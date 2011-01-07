@@ -6,7 +6,7 @@
   %ul
     - @suggested_users[0..4].each do |user|
       %li
-        .user
+        .user.info
           = gravatar user.email.to_s, :size => 32
           = user.name
         .controls
