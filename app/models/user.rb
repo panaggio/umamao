@@ -77,7 +77,7 @@ class User
   many :uninteresting_topics, :class_name => "Topic", :in => :uninteresting_topic_ids
 
   key :suggested_user_ids, Array, :default => []
-  mnay :suggested_users, :class_name, :in => :suggested_user_ids
+  many :suggested_users, :class_name => "User", :in => :suggested_user_ids
 
   key :uninteresting_user_ids, Array
   many :uninteresting_users, :class_name => "User", :in => :uninteresting_user_ids
