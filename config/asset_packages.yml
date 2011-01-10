@@ -13,7 +13,6 @@ javascripts:
   - modules/new_question
   - modules/show_user
   - modules/show_question
-  - MathJax/MathJax
 
 - show:
   - wmd/jquery.wmd
