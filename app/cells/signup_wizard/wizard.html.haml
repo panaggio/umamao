@@ -18,6 +18,6 @@
       = link_to t("navigation.previous"), wizard_path(@previous_step)
     - if @next_step
       = link_to t("navigation.next"), wizard_path(@next_step)
-      = link_to t("signup_wizard.skip"), root_path, :class => "skip"
+      = link_to t("signup_wizard.skip"), wizard_path("skip"), :class => "skip"
     - else
-      = link_to t("signup_wizard.finish"), root_path, :class => "finish"
+      = link_to t("signup_wizard.finish"), wizard_path("finish"), :class => "finish"

@@ -92,6 +92,10 @@ class User
 
   key :invitation_token, String
 
+  # New users should go through our signup wizard to connect their
+  # external accounts, receive suggestions, etc.
+  key :has_been_through_wizard, Boolean, :default => false
+
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
 

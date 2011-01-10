@@ -24,7 +24,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     track_event(:sign_in)
-    super
+    if resource.is_a?(User) && !resource.has_been_through_wizard?
+      # We need to redirect the user to our signup wizard
+      wizard_path("connect")
+    else
+      super
+    end
   end
 
   def require_no_authentication
