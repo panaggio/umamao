@@ -3,17 +3,17 @@
 
 class SuggestionsCell < Cell::Rails
   include Devise::Controllers::Helpers
+  helper UsersHelper
 
   def topics
-    @user = @opts[:user]
-    @suggested_topics = @user.suggested_topics
+    @suggested_topics = current_user.suggested_topics
     render
   end
 
   def users
-    @user = @opts[:user]
-    @suggested_users = @user.suggested_users.select do |user|
-      !@user.following?(user) && !@user.uninteresting_user_ids.include?(user.id)
+    @suggested_users = current_user.suggested_users.select do |user|
+      !current_user.following?(user) &&
+        !current_user.uninteresting_user_ids.include?(user.id)
     end
     render
   end

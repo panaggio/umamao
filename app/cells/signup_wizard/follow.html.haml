@@ -1,5 +1,5 @@
-- if !@user.suggested_user_ids.blank?
-  = render_cell :suggestions, :users, :user => @user
-- if !@user.suggested_topic_ids.blank?
+- if !@current_user.suggested_user_ids.blank?
+  = render_cell :suggestions, :users
+- if !@current_user.suggested_topic_ids.blank?
   -# This should always happen right now
-  = render_cell :suggestions, :topics, :user => @user
+  = render_cell :suggestions, :topics

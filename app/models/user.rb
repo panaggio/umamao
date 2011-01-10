@@ -618,7 +618,7 @@ Time.zone.now ? 1 : 0)
   end
 
   # Find users using self's external accounts.
-  def find_users
+  def find_external_contacts
     res = []
     if account = self.facebook_account
       graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
