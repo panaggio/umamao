@@ -66,6 +66,8 @@ class User
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
 
+  # FIXME: use a separate class for suggestions
+
   # Denormalized array of relevant topics that we suggest to the user,
   # sorted by decreasing order of relevance. See suggest_topics!
   key :suggested_topic_ids, Array, :default => []
@@ -73,6 +75,12 @@ class User
 
   key :uninteresting_topic_ids, Array
   many :uninteresting_topics, :class_name => "Topic", :in => :uninteresting_topic_ids
+
+  key :suggested_user_ids, Array, :default => []
+  many :suggested_users, :class_name => "User", :in => :suggested_user_ids
+
+  key :uninteresting_user_ids, Array
+  many :uninteresting_users, :class_name => "User", :in => :uninteresting_user_ids
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -83,6 +91,10 @@ class User
   belongs_to :friend_list, :dependent => :destroy
 
   key :invitation_token, String
+
+  # New users should go through our signup wizard to connect their
+  # external accounts, receive suggestions, etc.
+  key :has_been_through_wizard, Boolean, :default => false
 
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
@@ -597,6 +609,39 @@ Time.zone.now ? 1 : 0)
   def refuse_topic_suggestion!(topic)
     self.remove_topic_suggestion(topic)
     self.mark_topic_as_uninteresting!(topic)
+  end
+
+  # Return the user's associated Facebook account, if there is one,
+  # and nil otherwise.
+  def facebook_account
+    self.external_accounts.first(:provider => "facebook")
+  end
+
+  # Find users using self's external accounts.
+  def find_users
+    res = []
+    if account = self.facebook_account
+      graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
+      ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
+      res += ExternalAccount.query(:provider => "facebook", :uid.in => ids).map &:user
+    end
+    res
+  end
+
+  # Find interesting topics using self's external accounts.
+  def find_topics
+    topics = Set.new
+    if account = self.facebook_account
+      graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
+      likes = graph.get_connections("me", "likes")
+      likes.each do |like|
+        topic = Topic.first(:title => [/^#{Regexp.escape like["name"]}/i])
+        if topic
+          topics << topic
+        end
+      end
+    end
+    topics
   end
 
   protected

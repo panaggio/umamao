@@ -1,12 +1,12 @@
--# Topic suggestions in home page
-#topic-suggestions.block
-  - if !@topics.blank?
+-# Topic suggestions
+#topic-suggestions.block.suggestions
+  - if !@suggested_topics.blank?
     %h3.title
-      Sugestões de tópicos
+      = t("followable.suggestions.topics")
     %ul.topic-list
-      - @topics.each do |topic|
+      - @suggested_topics.each do |topic|
         %li
-          .topic
+          .topic.info
             %span.topic-title
               = link_to topic.title, topic_path(topic), :title => topic.title
           .controls

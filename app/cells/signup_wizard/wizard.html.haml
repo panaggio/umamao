@@ -1,0 +1,21 @@
+#signup-wizard
+
+  %h2
+    = "#{t("signup_wizard.#{@current_step}")} (#{@steps.index(@current_step) + 1}/#{@steps.length})"
+
+  -# FIXME: is there a better name for this?
+  #interaction
+    - case @current_step
+    - when "connect"
+      = render_cell "external_accounts", :display
+    - when "follow"
+      = render :state => :follow
+
+  #navigation
+    - if @previous_step
+      = link_to t("navigation.previous"), wizard_path(@previous_step)
+    - if @next_step
+      = link_to t("navigation.next"), wizard_path(@next_step)
+      = link_to t("signup_wizard.skip"), wizard_path("skip"), :class => "skip"
+    - else
+      = link_to t("signup_wizard.finish"), wizard_path("finish"), :class => "finish"

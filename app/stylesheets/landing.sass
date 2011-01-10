@@ -1,8 +1,12 @@
-$logo-color: #da242b
-$link-color: #0077cc
-
 @import screen
 @import blueprint/buttons
+@import colors
+@import buttons
+@import follow
+@import suggestions
+@import compass/css3/border-radius
+@import compass/css3/gradient
+@import topic_container
 @import compass/utilities/lists/horizontal-list
 @import footer
 
@@ -99,10 +103,7 @@ hr#colruler
 
 input[type=submit]
   // The +button-button mixin is just like the +anchor-button mixin, but for <button> elements.
-  +button-button
-  +button-colors
-  +button-hover-colors(#fff, $logo-color + 30, $logo-color + 30)
-  +button-active-colors(#fff, $logo-color - 50, $logo-color - 50)
+  +umamao-button
 
 form#waiting_list
   /* true means it's the last column in the row
@@ -175,3 +176,41 @@ ul#team
 
 .inviter_name
   font-weight: bold
+
+#signup-wizard
+  width: 550px
+  margin: 0 auto
+  // background-color: #eee
+  padding: 20px
+  +border-radius
+  border: 1px solid #eee
+
+  #interaction
+    a.connect, a.disconnect
+      +umamao-button
+      width: 70px
+      text-align: center
+      margin-left: 10px
+
+  #interaction
+    width: 550px
+
+    #external_accounts
+      list-style: none
+      padding: 0
+      margin: 0
+
+      li
+        padding-top: 10px
+        padding-bottom: 10px
+        border-bottom: 1px dotted #dddddd
+
+    +suggestions
+    .suggestions
+      width: 300px
+      margin: 0 auto 20px auto
+
+
+  #navigation
+    a
+      +umamao-button
