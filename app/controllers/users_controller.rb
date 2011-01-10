@@ -86,7 +86,9 @@ class UsersController < ApplicationController
       else
         flash[:notice] = t("confirm", :scope => "users.create")
       end
-      sign_in_and_redirect(:user, @user) # !! now logged in
+      # sign_in_and_redirect(:user, @user) # !! now logged in
+      sign_in(:user, @user)
+      render :action => "show"
     else
       flash[:error]  = t("flash_error", :scope => "users.create")
       render :action => 'new'
