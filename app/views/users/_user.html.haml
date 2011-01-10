@@ -2,7 +2,7 @@
   / User Summary
   .summary
     .avatar
-      = link_to gravatar(user.email.to_s, :size => 96).html_safe, user_path(user)
+      = link_to avatar_for(user, :size => 96).html_safe, user_path(user)
 
       %p
         = link_to h(user.name), user_path(user)

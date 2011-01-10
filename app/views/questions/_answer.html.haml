@@ -53,5 +53,5 @@
 
   - if !hide_controls
     .avatar
-      = link_to gravatar(answer.user.email.to_s, :size => 25).html_safe, user_path(answer.user)
+      = link_to avatar_for(answer.user, :size => 25).html_safe, user_path(answer.user)
     .clear

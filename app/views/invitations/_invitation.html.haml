@@ -1,11 +1,10 @@
 %li.item
   / User Summary
   .summary
-    -# The user might have signed up with a different email than the one used to invite her
-    - email = invitation.accepted_at ? h(invitation.recipient.email) : h(invitation.recipient_email)
     .avatar
-      = gravatar(email, :size => 72)
-    = invitation.accepted_at ? link_to(h(invitation.recipient.name), user_path(invitation.recipient)) : "#{email}:"
+      = avatar_for(invitation.recipient, :size => 72) || gravatar(invitation.recipient_email, :size => 72)
+    = invitation.accepted_at ? link_to(h(invitation.recipient.name),
+      user_path(invitation.recipient)) : "#{invitation.recipient_email}:"
     .info
       #bio
         = markdown(invitation.message)

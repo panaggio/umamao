@@ -5,7 +5,7 @@
     %p#invitation_introduction
       = t('.invitation.title', :user => '<span class="inviter_name">' + h(@invitation.sender.name) + '</span>')
     #invitation_message
-      = gravatar_for(@invitation.sender, :size => 64, :class => 'inviter_avatar')
+      = avatar_for(@invitation.sender, :size => 64, :class => 'inviter_avatar')
       = markdown(@invitation.message)
       -# Sorry about this, guys
       .clear

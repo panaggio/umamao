@@ -28,7 +28,7 @@ class Settings::ExternalAccountsController < ApplicationController
   def destroy
     @external_account = ExternalAccount.find(params[:id])
     @external_account.destroy
-    respond_with(@external_account, :status => :created) do |format|
+    respond_with(@external_account, :status => :ok) do |format|
       format.html { redirect_to session["return_url"] }
     end
   end
