@@ -38,6 +38,5 @@
     .inner{:style => "padding-top: 10px"}
       %ul.navigation
         %li{:style => "text-align: center"}
-          = gravatar @user.email.to_s, :size => 128
-          =link_to t("users.form.avatar_tip"), "http://gravatar.com", :target => "_blank"
+          = avatar_for(@user, :size => 128)
 

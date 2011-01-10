@@ -1,7 +1,7 @@
 -# User result in autocomplete search box.
 
 %li.autocomplete-entry
-  = gravatar(user.email.to_s, :size => 20)
+  = avatar_for(user, :size => 20)
   = user.name
   %span.desc
     = t("activerecord.models.user")

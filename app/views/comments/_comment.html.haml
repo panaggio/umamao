@@ -4,7 +4,7 @@
 
     %span.left{:style => "padding: 2px; width: 64px; margin-right: 10px"}
       .gravatar
-        = gravatar(comment.user.email.to_s)
+        = avatar_for(comment.user)
       = link_to h(comment.user.name), user_path(comment.user), :class => "clear"
     .markdown
       = shapado_auto_link(markdown(comment.body))

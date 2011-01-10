@@ -1,5 +1,32 @@
 module UsersHelper
 
+  def avatar_for(user, options={})
+    return nil unless user.present?
+
+    options.reverse_merge!(:title => user.name, :alt => user.name)
+    options = GravatarHelper::DEFAULT_OPTIONS.merge(options)
+
+    accounts = user.external_accounts.all
+    image_url = nil
+
+    ['facebook', 'twitter'].each do |provider|
+      if account = accounts.find{ |a| a.provider == provider }
+        image_url = account.user_info['image']
+        break
+      end
+    end
+
+    if options[:size] > 50 && image_url.present?
+      image_url = image_url.gsub('type=square', 'type=large').
+        gsub('_normal.', '.')
+    end
+
+    src = image_url || gravatar_url(user.email, options)
+
+    [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
+    "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{src}\" />"
+  end
+
   #
   # Use this to wrap view elements that the user can't access.
   # !! Note: this is an *interface*, not *security* feature !!
