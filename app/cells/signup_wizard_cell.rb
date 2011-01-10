@@ -19,7 +19,8 @@ class SignupWizardCell < Cell::Rails
     # We begin by populating the suggestions list.
     if @current_user.suggested_user_ids.blank?
       @current_user.find_external_contacts.each do |user|
-        unless @current_user.following?(user)
+        unless @current_user.following?(user) ||
+            @current_user.uninteresting_user_ids.include?(user.id)
           @current_user.suggested_users << user
         end
       end
@@ -31,8 +32,10 @@ class SignupWizardCell < Cell::Rails
           @current_user.suggested_topic_ids << topic.id
         end
       end
+      @current_user.randomize_topic_suggestions
       @current_user.suggested_topics_fresh = true
     end
+
     @current_user.save
     render
   end

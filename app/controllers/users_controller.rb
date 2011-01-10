@@ -225,11 +225,15 @@ class UsersController < ApplicationController
     return redirect_to(:root)
   end
 
-  # Adds user to the current user's list of refused user suggestions
+  # Adds user to the current user's list of refused user suggestions,
+  # removing it from the suggestions list.
   def refuse_suggestion
     @user = User.find_by_id(params[:id])
     if @user && !current_user.uninteresting_user_ids.include?(@user.id)
-      current_user.uninteresting_user_ids << @user.id
+      @current_user = current_user
+      @current_user.uninteresting_user_ids << @user.id
+      @current_user.suggested_user_ids.delete(@user.id)
+      @current_user.save!
     end
 
     respond_to do |format|
