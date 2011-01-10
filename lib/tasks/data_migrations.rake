@@ -73,20 +73,41 @@ namespace :data do
 		end
 	end
 
-	desc "Import Universities from a csv file in the format [name, sig, state, V] where V is TRUE if the university is open for signup or something else otherwise"
+    desc "(USING THIS WILL REMOVE DOMAINS!) fix csv file from uni2.csv to uni.csv"
+    task :fix_csv_file => :environment do
+        f = File.new("data/uni.csv", "w")
+		Ccsv.foreach("data/uni2.csv") do |row|
+			name 			  = row[0].split('-')[0].tr("\"", "")
+			
+			sig 			  = row[1].tr("\"", "")
+			state 		  = row[2].tr("\"", "")
+			
+			if row[3] == "TRUE" then
+				open_for_signup = "TRUE"
+			else 
+			    open_for_signup = "FALSE"
+			end
+			f.puts("\"#{name}\", \"#{sig}\", \"#{state}\", \"#{open_for_signup}\", \"\"")
+		end
+		f.close
+	end
+
+	desc "Import Universities from a csv file in the format [name, sig, 
+	state, V, domain] where V is TRUE if the university is open for signup or 
+	FALSE otherwise"
 	task :import_universities => :environment do
 		Ccsv.foreach("data/uni.csv") do |row|
 			a 				  = University.new
 			a.name 			  = row[0].split('-')[0].tr("\"", "")
 			a.name.downcase_with_accents!
-			a.name = a.name.phrase_ucfirst
+			a.name = a.name.phrase_ucfirst.strip
 			
-			a.sig 			  = row[1].tr("\"", "")
-			a.state 		  = row[2].tr("\"", "")
+			a.sig 			  = row[1].tr("\"", "").strip
+			a.state 		  = row[2].tr("\"", "").strip
 			
 			a.open_for_signup = (row[3] == "TRUE")
 			a.validation_type = ""
-			a.email_regexp    = //
+			a.domain    = row[4].tr("\"", "").strip
 			a.save!
 			nil
 		end
