@@ -24,7 +24,9 @@ module UsersHelper
     src = image_url || gravatar_url(user.email, options)
 
     [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
-    "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{src}\" />"
+    # Don't set height in case size > 50
+    # (Twitter/Facebook don't return square images after this size)
+    "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" #{options[:size].to_i > 50 ? '' : "height=" + "\"#{options[:size]}\""} src=\"#{src}\" />"
   end
 
   #
