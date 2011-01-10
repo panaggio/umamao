@@ -114,4 +114,9 @@ class Notifier < ActionMailer::Base
 
     mail(:to => user.email, :subject => subject)
   end
+  
+  def signup(affiliation)
+    @confirmation_token = affiliation.confirmation_token
+    mail(:to => affiliation.email, :subject => t("mailers.notifications.signup.subject"))
+  end
 end

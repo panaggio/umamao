@@ -16,3 +16,5 @@ pt-BR:
         subject: "%{login} adicionou sua pergunta às favoritas!"
       report:
         subject: "Relatório do %{app}"
+      signup:
+        subject: "Confirme seu cadastro no Umamão."

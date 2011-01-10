@@ -16,7 +16,7 @@ class University
   key :state,					  String, :limit => 20,  :null =>false
   key :open_for_signup,			  Boolean
   key :validation_type,			  String
-  key :domain,		  String
+  key :domain,		              String
   
   has_many :affiliation, :dependent => :destroy
   
@@ -32,7 +32,7 @@ class University
   validates_length_of       :state, :maximum => 20
 
   def email_regexp
-	Regexp.new "[.@]"+self.domain+"$" if !self.domain.nil? && !self.domain.empty?
+	Regexp.new "([.@]"+self.domain.split(" ").join("$)|([.@]")+"$)" if !self.domain.nil? && !self.domain.empty?
   end
   
   def self.find_id_by_email_domain(email)

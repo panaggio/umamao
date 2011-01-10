@@ -105,8 +105,8 @@ namespace :data do
 			a.sig 			  = row[1].tr("\"", "").strip
 			a.state 		  = row[2].tr("\"", "").strip
 			
-			a.open_for_signup = (row[3] == "TRUE")
-			a.validation_type = ""
+			a.open_for_signup = (row[3].tr("\"", "").strip == "TRUE")
+			a.validation_type = "email"
 			a.domain    = row[4].tr("\"", "").strip
 			a.save!
 			nil
