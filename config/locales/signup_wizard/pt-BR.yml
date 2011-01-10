@@ -1,6 +1,6 @@
 pt-BR:
   signup_wizard:
-    connect: "Importar contas"
+    connect: "Conectar contas"
     follow: "Seguir"
     skip: "Ir direto para o site"
     finish: "Terminar"

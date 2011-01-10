@@ -1,19 +1,17 @@
 #signup-wizard
 
-  %ul#navigation-all
-    - @steps.each do |step|
-      %li{:class => "step#{step == @current_step ? " active" : ""}"}
-        = link_to t("signup_wizard.#{step}"), wizard_path(step)
+  %h2
+    = "#{t("signup_wizard.#{@current_step}")} (#{@steps.index(@current_step) + 1} / #{@steps.length})"
 
   -# FIXME: is there a better name for this?
   #interaction
-  - case @current_step
-  - when "connect"
-    = render_cell "external_accounts", :display
-  - when "follow"
-    = render :state => :follow
+    - case @current_step
+    - when "connect"
+      = render_cell "external_accounts", :display
+    - when "follow"
+      = render :state => :follow
 
-  #navigation-step
+  #navigation
     - if @previous_step
       = link_to t("navigation.previous"), wizard_path(@previous_step)
     - if @next_step
