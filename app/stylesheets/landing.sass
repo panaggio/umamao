@@ -1,9 +1,12 @@
-$logo-color: #da242b
-$link-color: #0077cc
-
 @import screen
 @import blueprint/buttons
+@import colors
 @import buttons
+@import follow
+@import suggestions
+@import compass/css3/border-radius
+@import compass/css3/gradient
+@import topic_container
 @import compass/utilities/lists/horizontal-list
 @import footer
 
@@ -191,6 +194,11 @@ ul#team
         padding-top: 10px
         padding-bottom: 10px
         border-bottom: 1px dotted #dddddd
+
+    +suggestions
+    .suggestions
+      width: 300px
+      margin-bottom: 20px
 
   #navigation
     a

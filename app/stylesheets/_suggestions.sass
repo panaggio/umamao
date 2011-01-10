@@ -1,0 +1,33 @@
+// Style for suggestion widgets (users, topics, etc)
+
+@import compass/css3/box
+
+=suggestions
+  .suggestions
+    ul
+      list-style: none
+      padding: 0
+      margin: 0
+
+      .controls
+        float: right
+
+      +follow-button
+
+      .follow-info
+        float: left
+
+      .refuse-suggestion
+        float: right
+        margin-left: 3px
+        a
+          color: $link-color
+          text-decoration: none
+          &:hover, &:active
+
+    +topic-container
+
+    .info
+      float: left
+      img
+        vertical-align: middle
