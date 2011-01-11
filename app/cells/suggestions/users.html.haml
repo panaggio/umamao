@@ -1,0 +1,18 @@
+-# User suggestions
+#user-suggestions.block.suggestions
+  %h3
+    = t("followable.suggestions.users")
+
+  %ul
+    - @suggested_users[0..4].each do |user|
+      %li
+        .user.info
+          = avatar_for(user, :size => 32)
+          = user.name
+        .controls
+          .follow-info
+            = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link"
+          .refuse-suggestion
+            = link_to "✕", refuse_suggestion_user_path(user)
+        .clear
+

@@ -15,13 +15,13 @@ class Settings::ExternalAccountsController < ApplicationController
     end
 
     respond_with(@external_account, :status => :created) do |format|
-      format.html { redirect_to settings_external_accounts_path }
+      format.html { redirect_to session["return_url"] }
     end
   end
 
   def failure
     respond_to do |format|
-      format.html { redirect_to settings_external_accounts_path }
+      format.html { redirect_to session["return_url"] }
     end
   end
 
@@ -29,7 +29,7 @@ class Settings::ExternalAccountsController < ApplicationController
     @external_account = ExternalAccount.find(params[:id])
     @external_account.destroy
     respond_with(@external_account, :status => :ok) do |format|
-      format.html { redirect_to settings_external_accounts_path }
+      format.html { redirect_to session["return_url"] }
     end
   end
 

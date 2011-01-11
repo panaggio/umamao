@@ -1,0 +1,32 @@
+// Little box for holding a topic name in listings (question topics,
+// topics followed by a user, etc).
+
+=topic-container
+  .topic
+    +border-radius
+    padding: 4px
+    background: #f7f7f7
+    overflow: hidden
+    margin: 0 5px 5px 0
+    font-weight: normal
+    font-size: 10px
+    line-height: 13px
+    height: 13px
+    font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
+
+    .topic-title
+      white-space: nowrap
+
+    .remove
+      cursor: pointer
+
+  .topic, .topic a
+    color: #444444
+
+    a
+      &:link, &:active, &:visited
+        cursor: pointer
+        text-align: center
+      &:hover
+        text-decoration: underline
+        background: #F7F7F7

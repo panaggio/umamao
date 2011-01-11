@@ -22,6 +22,7 @@ gem 'goalie'
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
 gem 'geoip'
 gem 'haml', '~> 3.0.13'
+gem 'koala', '~> 0.10.0'
 gem 'magent', '~> 0.4.2'
 gem 'mechanize', :require => false
 gem 'mongo'

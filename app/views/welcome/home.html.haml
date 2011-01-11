@@ -2,7 +2,7 @@
   %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
 
 - content_for :js do
-  = javascript_include_tag "modules/home"
+  = javascript_include_tag "modules/suggestions"
 
 - content_for :subtabs do
   .navtitle
@@ -43,7 +43,7 @@
 
   -# Topic suggestions
   - if logged_in?
-    = render_cell :topics, :suggestions, :user => current_user
+    = render_cell :suggestions, :topics, :user => current_user
 
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
