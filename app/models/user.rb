@@ -617,15 +617,47 @@ Time.zone.now ? 1 : 0)
     self.external_accounts.first(:provider => "facebook")
   end
 
+  # Return the user's associated Twitter account, if there is one, and
+  # nil otherwise.
+  def twitter_account
+    self.external_accounts.first(:provider => "twitter")
+  end
+
+  # Return a Twitter::Client object to access the user's Twitter
+  # account, or nil if the user doesn't have an associated account.
+  def twitter_client
+    if account = self.twitter_account
+      Twitter.configure do |config|
+        config.consumer_key = AppConfig.twitter['key']
+        config.consumer_secret = AppConfig.twitter['secret']
+        config.oauth_token = account.credentials['token']
+        config.oauth_token_secret = account.credentials['secret']
+      end
+
+      return Twitter::Client.new
+    end
+
+    return nil
+  end
+
   # Find users using self's external accounts.
   def find_external_contacts
-    res = []
+    res = Set.new
+
+    # Look in Facebook
     if account = self.facebook_account
       graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
       ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
       res += ExternalAccount.query(:provider => "facebook", :uid.in => ids).map &:user
     end
-    res
+
+    # Look in Twitter
+    if client = self.twitter_client
+      ids = client.friends.users.map {|friend| friend.id.to_s}
+      res += ExternalAccount.query(:provider => "twitter", :uid.in => ids).map &:user
+    end
+
+    res.to_a
   end
 
   # Find interesting topics using self's external accounts.
