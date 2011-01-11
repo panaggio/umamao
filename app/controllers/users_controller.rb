@@ -95,7 +95,6 @@ class UsersController < ApplicationController
 
   def wizard
     if ["skip", "finish"].include?(params[:current_step])
-      user = current_user
       current_user.has_been_through_wizard = true
       current_user.save!
       redirect_to root_path
