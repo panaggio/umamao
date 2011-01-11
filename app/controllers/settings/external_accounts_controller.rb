@@ -15,6 +15,7 @@ class Settings::ExternalAccountsController < ApplicationController
     end
 
     respond_with(@external_account, :status => :created) do |format|
+      track_event("connected_#{@external_account.provider}".to_sym)
       format.html { redirect_to session["return_url"] }
     end
   end
