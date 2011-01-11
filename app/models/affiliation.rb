@@ -16,7 +16,7 @@ class Affiliation
 
 				            
   validates_uniqueness_of   :email
-
+  validates_presence_of :email
   after_create              :send_confirmation
 
   # stolen from devise (TODO place this somewhere common to affiliation,
@@ -46,5 +46,9 @@ class Affiliation
     else
       Notifier.wait(self).deliver
     end
+  end
+  
+  def self.resend_confirmation(email)
+    where(:email=>email).first.send_confirmation
   end
 end

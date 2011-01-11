@@ -1,0 +1,7 @@
+%p= t('.greeting')
+
+%p= simple_format(t('.message', :link => "umamao.com"))
+
+= new_user_url(:confirmation_token => @confirmation_token)
+
+%p= simple_format(t('.goodbye'))
