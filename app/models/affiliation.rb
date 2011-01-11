@@ -16,11 +16,11 @@ class Affiliation
 
 				            
   validates_uniqueness_of   :email
-  validates_presence_of :email
+  validates_presence_of     :email
   after_create              :send_confirmation
 
-  # stolen from devise (TODO place this somewhere common to affiliation,
-  #                                   user, waiting user and invitation)
+  # stolen from devise (TODO place this somewhere common to affiliation
+  #                                                      and invitation)
   def self.generate_token
     loop do
       token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
@@ -44,7 +44,7 @@ class Affiliation
       generate_confirmation_token! if self.confirmation_token.nil?
       Notifier.signup(self).deliver
     else
-      Notifier.wait(self).deliver
+      Notifier.closed_for_signup(self).deliver
     end
   end
   

@@ -40,6 +40,31 @@ pt-BR:
       greeting: "Olá,"
       message: "Obrigado por se juntar ao %{link}! Para
   completar seu cadastro, precisamos confirmar seu endereço de email
-  acadêmico. Para fazer isso, é só clicar no link abaixo:"
-      text_link_label: "umamao.com: "
+  acadêmico. Para fazer isso, é só clicar no link abaixo: "
+      goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
+    wait:
+      greeting: "Olá,"
+      message: "Aparentemente o email %{email} não pertence a nenhuma
+  universidade aberta para cadastro no momento. Entretanto pode ser que
+  sua universide esteja liberada e nosso sistema apenas não reconheceu seu e-mail
+  verifique na lista abaixo se consta o nome de sua universidade e, caso
+  conste, nos avise! %{contact}"
+      goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
+    closed_for_signup:
+      greeting: "Olá,"
+      message: "Ainda não abrimos o cadastro para sua universidade: %{university}.
+   Entretando foi gerado um aviso para nossos administradores, que poderão liberar
+   o acesso para você ou para toda sua universidade.
+                Como eventualmente o site será liberado para acesso geral, seu e-mail
+   foi guardado e te avisaremos!
+                Se esta não é sua universidade, nos avise! %{contact}"
+      goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
+    nonacademic:
+      greeting: "Olá,"
+      message: "Ainda não abrimos o cadastro para usuários que não estejam vinculados a universidades.
+   Entretando foi gerado um aviso para nossos administradores, que poderão liberar
+   o acesso para você.
+                Como eventualmente o site será liberado para acesso geral, seu e-mail
+   foi guardado e te avisaremos!
+                Além disso, caso este seja um e-mail acadêmico, nos avise! %{contact}"
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
