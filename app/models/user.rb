@@ -606,6 +606,17 @@ Time.zone.now ? 1 : 0)
     self.external_accounts.first(:provider => "facebook")
   end
 
+  # Return a Koala::Facebook::GraphAPI object to access the user's
+  # Facebook account, or nil if the user doesn't have an associated
+  # account.
+  def facebook_connection
+    if account = self.facebook_account
+      return Koala::Facebook::GraphAPI.new(account.credentials["token"])
+    end
+
+    return nil
+  end
+
   # Return the user's associated Twitter account, if there is one, and
   # nil otherwise.
   def twitter_account
