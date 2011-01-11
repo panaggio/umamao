@@ -94,6 +94,7 @@ class UsersController < ApplicationController
   end
 
   def wizard
+    track_event("wizard_#{params[:current_step]}".to_sym)
     if ["skip", "finish"].include?(params[:current_step])
       current_user.has_been_through_wizard = true
       current_user.save!
