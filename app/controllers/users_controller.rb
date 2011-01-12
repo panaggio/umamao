@@ -68,8 +68,12 @@ class UsersController < ApplicationController
       
     end
 
-    @user.timezone = AppConfig.default_timezone
-    render 'new', :layout => 'welcome'
+    if @invitation or @affiliation
+      @user.timezone = AppConfig.default_timezone
+      render 'new', :layout => 'welcome'
+    else
+      return redirect_to(:root)
+    end
   end
 
   def create
