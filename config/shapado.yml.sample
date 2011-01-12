@@ -4,7 +4,6 @@ base: &common
   session_secret: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   rest_auth_key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   rest_auth_digest_stretches: 10
-  enable_sharing: false
   notification_email: 'MyWebsite <sample@sample.com>'
   adbard_host_id: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   adbard_site_key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
