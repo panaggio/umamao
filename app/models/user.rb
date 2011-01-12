@@ -171,7 +171,14 @@ class User
     # FIXME We're considering dac.unicamp.br users active for now
     # because we're experiencing problems with the emails bouncing off
     # their server. This should be removed soon.
-    !self.new? && (self.academic_email =~ /\w\d+@dac.unicamp.br/ || super)
+    !self.new? && (self.confirmed_affiliation? || super)
+  end
+
+  def confirmed_affiliation?
+    self.affiliations.each do |a|
+      return true if a.confirmed_at != nil
+    end
+    nil
   end
 
   def first_name

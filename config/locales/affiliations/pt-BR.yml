@@ -5,3 +5,5 @@ pt-BR:
     messages:
       errors:
         email_in_use: "O email já está em uso. As instruções foram reenviadas."
+    form:
+      email: "E-mail acadêmico"

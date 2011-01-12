@@ -44,9 +44,9 @@
     #landing_signup
       .field
         .label
-          = f.label :email, t('users.form.email')
+          = f.label :email, t('affiliations.form.email')
         .input
-          = f.email_field :email, :value => "jose@unicamp.br", :tabindex => 142
+          = f.email_field :email, :value => "", :tabindex => 142
 
       .submit
         = f.submit t('layouts.application.signup'), :tabindex => 10

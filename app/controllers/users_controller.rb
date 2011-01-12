@@ -9,6 +9,8 @@ class UsersController < ApplicationController
                      [:oldest, "created_at asc"],
                      [:name, "name asc"]]
 
+  attr_accessor :affiliation_token
+
   def index
     set_page_title(t("users.index.title"))
     options =  {:per_page => params[:per_page]||24,
@@ -61,9 +63,7 @@ class UsersController < ApplicationController
         find_by_affiliation_token(params[:affiliation_token])
         
       if @affiliation
-        @user.academic_email = @affiliation[:email] #just for autoset in form
         @user.affiliation_token = @affiliation.affiliation_token
-        @user.affiliations << @affiliation
       end
       
     end
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new
     @user.safe_update(%w[login email academic_email name password_confirmation password preferred_languages website
-                         language timezone identity_url bio hide_country invitation_token], params[:user])
+                         language timezone identity_url bio hide_country invitation_token affiliation_token], params[:user])
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
     end
@@ -90,6 +90,15 @@ class UsersController < ApplicationController
 
     if @user.save
       @group_invitation.push(:user_ids => @user.id) if @group_invitation
+
+      debugger
+      if !@user.affiliation_token.blank?
+        @affiliation = Affiliation.
+                    find_by_affiliation_token(@user.affiliation_token)
+        @affiliation.confirmed_at = Time.now
+        @user.affiliations << @affiliation
+        @user.save
+      end
 
       current_group.add_member(@user)
       track_event(:sign_up, :user_id => @user.id, :confirmed => @user.confirmed?)
