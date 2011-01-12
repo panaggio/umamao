@@ -1,0 +1,9 @@
+%p= t('.greeting')
+
+%p= simple_format(t('.message', :email => @email, :contact => "contato@umamao.com"))
+
+%ul
+  - @open_universities.each do |u|
+    %li=  u.name+" - "+u.sig
+
+%p= simple_format(t('.goodbye'))

@@ -2,6 +2,7 @@
 
 <%= t('.message', :link => "umamao.com") %>
 
+<%= @confirmation_token %>
 <%= new_user_url(:confirmation_token => @confirmation_token) %>
 
 <%= t('.goodbye') %>

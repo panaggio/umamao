@@ -50,6 +50,15 @@ class UsersController < ApplicationController
       @user.email = @invitation[:recipient_email]
       @user.invitation_token = @invitation.invitation_token
     end
+    
+    #User added by affiliation
+    @affiliation = Affiliation.
+       find_by_confirmation_token(params[:confirmation_token])
+    if @affiliation
+      @user.academic_email = @affiliation[:email] #just for autoset in form
+      @user.confirmation_token = @affiliation.confirmation_token
+      @user.affiliations << @affiliation
+    end
 
     @user.timezone = AppConfig.default_timezone
     render 'new', :layout => 'welcome'
@@ -67,9 +76,7 @@ class UsersController < ApplicationController
       first(:slug => params[:group_invitation])
     @user.confirmed_at = Time.now if @group_invitation
 
-    success = @user && @user.save
-    if success && @user.errors.empty?
-
+    if @user.save
       @group_invitation.push(:user_ids => @user.id) if @group_invitation
 
       current_group.add_member(@user)

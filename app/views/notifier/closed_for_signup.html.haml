@@ -1,0 +1,5 @@
+%p= t('.greeting')
+
+%p= simple_format(t('.message', :email => @email, :contact => "contato@umamao.com", :university => @university.name))
+
+%p= simple_format(t('.goodbye'))
