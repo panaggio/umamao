@@ -516,6 +516,28 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Shares the current question on Facebook, Twitter, etc.
+  def share
+    @question = Question.find_by_slug_or_id(params[:id])
+    if params[:where] == "facebook"
+      graph = current_user.facebook_connection
+      graph.put_wall_post(@question.title, :link => question_url(@question))
+    end
+
+    respond_to do |format|
+      format.html do
+        redirect_to question_path(@question)
+      end
+
+      format.js do
+        render :json => {
+          :success => true,
+          :message => "Sucesso!" # TODO: I18n
+        }.to_json
+      end
+    end
+  end
+
   protected
   def check_permissions
     @question = Question.find_by_slug_or_id(params[:id])

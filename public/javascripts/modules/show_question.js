@@ -4,6 +4,12 @@ $(document).ready(function() {
   $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
+  Utils.clickObject("#sidebar .share .facebook", function () {
+    return {
+      dataType: "POST"
+    };
+  });
+
   Utils.clickObject("form.vote_form button", function () {
     var btn_name = $(this).attr("name");
     var form = $(this).parents("form");

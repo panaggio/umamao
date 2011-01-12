@@ -84,7 +84,7 @@ Shapado::Application.routes.draw do
     end
   end
 
-  get '/questions/:id/:slug' => 'questions#show', :as => :se_url, :id => /\d+/
+  match '/questions/:id/:slug' => 'questions#show', :as => :se_url, :id => /\d+/
 
   resources :questions do
     collection do
@@ -124,6 +124,8 @@ Shapado::Application.routes.draw do
 
     resources :close_requests
   end
+
+  match '/questions/:id/share/:where' => 'questions#share', :as => :share_question
 
   match 'questions/tagged/:tags' => 'questions#index', :constraints => { :tags => /\S+/ }, :as => :tag
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'

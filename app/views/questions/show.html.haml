@@ -76,6 +76,7 @@
         - if logged_in?
           - if (@question.wiki && current_user.can_edit_wiki_post_on?(@question.group)) || current_user.can_edit_others_posts_on?(@question.group) || current_user.can_modify?(@question)
             = link_to t('scaffold.edit'), edit_question_path(@question), :class => "button"
+
         = link_to t('.add_follow_up_question'), new_question_path(:question => @follow_up_question), :target => '_blank', :id => 'add_follow_up_question'
 
       .forms
@@ -116,6 +117,7 @@
     %p= t("answers.form.not_logged", :link => new_user_session_path)
 
 - content_for :sidebar do
+  -# TODO: Remove this
   - if AppConfig.enable_sharing
     .block
       %h3= t(".share")
@@ -140,7 +142,7 @@
         %h3= t(:prural_name, :scope => "close_requests.model")
         .content= render :partial => "close_requests/list", :locals => {:question => @question}
 
-  - related_questions = Question.related_questions(@question, :language => find_languages)
+  - related_questions = Question.related_questions(@question, :language => find_languages, :per_page => 3)
   - if @follow_up_questions.present?
     .block
       %h3
@@ -157,6 +159,9 @@
         %ul.list
           - related_questions.each do |rq|
             %li= link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
+  - if logged_in? && current_user.facebook_account
+    .share.block
+      = link_to "Facebook", share_question_path(@question, "facebook"), :method => :post, :class => "facebook"
 
   .author.user_info.vcard
     .user_data
