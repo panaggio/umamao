@@ -17,6 +17,7 @@ javascripts:
 - show:
   - wmd/jquery.wmd
   - wmd/jquery.wmd.mathjax
+  - jquery.colorbox-min
   - modules/single/question
   
 - landing:
@@ -27,6 +28,7 @@ stylesheets:
   - jquery-ui
   - compiled/application
   - autocomplete
+  - colorbox/colorbox
 - landing:
   - compiled/landing
   - autocomplete_landing
