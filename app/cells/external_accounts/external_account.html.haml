@@ -3,7 +3,7 @@
     .title
       = image_tag "#{@provider}.gif"
       %strong= @provider.capitalize
-      %div{:style => 'float: right'}
+      .controls
         - if @external_account.present?
           - name_link = link_to(@name, @external_account.user_info['urls'][@provider.capitalize], :target => '_blank')
           = t('external_accounts.connected_as', :name => name_link)
