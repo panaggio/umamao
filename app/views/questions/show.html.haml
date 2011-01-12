@@ -117,20 +117,6 @@
     %p= t("answers.form.not_logged", :link => new_user_session_path)
 
 - content_for :sidebar do
-  -# TODO: Remove this
-  - if AppConfig.enable_sharing
-    .block
-      %h3= t(".share")
-      .content
-        %ul.share
-          %li= render :partial => "identica"
-          - if current_group.domain != AppConfig.domain
-            %li= render :partial => "shapado"
-          %li= render :partial => "twitter"
-          %li= render :partial => "linkedin"
-          %li= render :partial => "think"
-          %li= render :partial => "facebook"
-
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0
       .block
@@ -159,9 +145,10 @@
         %ul.list
           - related_questions.each do |rq|
             %li= link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
-  - if logged_in? && current_user.facebook_account
+  - if logged_in?
     .share.block
-      = link_to "Facebook", share_question_path(@question, "facebook"), :method => :post, :class => "facebook"
+      %h3= t("questions.show.share")
+      = link_to (image_tag "facebook.gif"), share_question_path(@question, "facebook"), :class => "facebook"
 
   .author.user_info.vcard
     .user_data

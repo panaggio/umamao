@@ -6,7 +6,13 @@ $(document).ready(function() {
 
   Utils.clickObject("#sidebar .share .facebook", function () {
     return {
-      dataType: "POST"
+      type: "POST",
+
+      error: function (data) {
+        if (data.status == "needs_connection") {
+          location.href = data.redirect_to;
+        }
+      }
     };
   });
 
@@ -19,12 +25,12 @@ $(document).ready(function() {
 
       success: function (data) {
         form.find(".votes_average").text(data.average);
-        if(data.vote_state == "deleted") {
+        if (data.vote_state == "deleted") {
           form.find("button[name=vote_down] img").attr("src", "/images/to_vote_down.png");
           form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png");
         }
         else {
-          if(data.vote_type == "vote_down") {
+          if (data.vote_type == "vote_down") {
             form.find("button[name=vote_down] img").attr("src", "/images/vote_down.png");
             form.find("button[name=vote_up] img").attr("src", "/images/to_vote_up.png");
           } else {
@@ -35,7 +41,7 @@ $(document).ready(function() {
       },
 
       error: function (data) {
-        if(data.status == "unauthenticate") {
+        if (data.status == "unauthenticate") {
           window.onbeforeunload = null;
           window.location = "/users/login";
         }
