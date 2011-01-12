@@ -91,7 +91,6 @@ class UsersController < ApplicationController
     if @user.save
       @group_invitation.push(:user_ids => @user.id) if @group_invitation
 
-      debugger
       if !@user.affiliation_token.blank?
         @affiliation = Affiliation.
                     find_by_affiliation_token(@user.affiliation_token)

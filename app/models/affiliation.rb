@@ -42,7 +42,6 @@ class Affiliation
   
   def send_confirmation
     if self.university.open_for_signup
-      debugger
       generate_affiliation_token! if self.affiliation_token.nil?
       Notifier.signup(self).deliver
     else

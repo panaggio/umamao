@@ -4,6 +4,6 @@
 
 %ul
   - @open_universities.each do |u|
-    %li=  u.name+" - "+u.sig
+    %li=  u.sig+" - "+u.name
 
 %p= simple_format(t('.goodbye'))

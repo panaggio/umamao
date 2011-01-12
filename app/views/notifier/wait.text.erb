@@ -3,7 +3,7 @@
 <%= t('.message', :email => @email, :contact => "contato@umamao.com") %>
 
 <% for u in @open_universities %>
-  <%= u.name+" - "+u.sig %>
+  <%= u.sig+" - "+u.name %>
 <% end %>
 
 <%= t('.goodbye') %>
