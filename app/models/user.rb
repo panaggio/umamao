@@ -642,22 +642,24 @@ Time.zone.now ? 1 : 0)
 
   # Find users using self's external accounts.
   def find_external_contacts
-    res = Set.new
+    external_contacts = Set.new
 
     # Look in Facebook
     if account = self.facebook_account
       graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
       ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
-      res += ExternalAccount.query(:provider => "facebook", :uid.in => ids).map &:user
+      external_contacts += ExternalAccount.query(:provider => "facebook",
+                                                 :uid.in => ids).map(&:user)
     end
 
     # Look in Twitter
     if client = self.twitter_client
       ids = client.friends.users.map {|friend| friend.id.to_s}
-      res += ExternalAccount.query(:provider => "twitter", :uid.in => ids).map &:user
+      external_contacts += ExternalAccount.query(:provider => "twitter",
+                                                 :uid.in => ids).map(&:user)
     end
 
-    res.to_a
+    external_contacts.to_a
   end
 
   # Find interesting topics using self's external accounts.
