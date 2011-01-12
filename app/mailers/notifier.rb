@@ -116,7 +116,7 @@ class Notifier < ActionMailer::Base
   end
   
   def signup(affiliation)
-    @confirmation_token = affiliation.confirmation_token
+    @affiliation_token = affiliation.affiliation_token
     mail(:to => affiliation.email, :subject => t("mailers.notifications.signup.subject"))
   end
 
@@ -127,13 +127,13 @@ class Notifier < ActionMailer::Base
   end
   
   def wait(waiting_user)
-    @open_universities = University.where(:open_for_signup => true).all
+    @open_universities = University.open_for_signup
     @email = waiting_user.email
     mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
   end
   
   def nonacademic(waiting_user)
-    @open_universities = University.where(:open_for_signup => true).all
+    @open_universities = University.open_for_signup
     @email = waiting_user.email
     mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
   end

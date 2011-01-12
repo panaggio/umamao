@@ -43,21 +43,29 @@ class UsersController < ApplicationController
 
     @user = User.new
 
+    #User added by invitation
+    if params[:invitation_token]
     @invitation = Invitation.
       find_by_invitation_token(params[:invitation_token])
 
-    if @invitation
-      @user.email = @invitation[:recipient_email]
-      @user.invitation_token = @invitation.invitation_token
+      if @invitation
+        @user.email = @invitation[:recipient_email]
+        @user.invitation_token = @invitation.invitation_token
+      end
+      
     end
     
     #User added by affiliation
-    @affiliation = Affiliation.
-       find_by_confirmation_token(params[:confirmation_token])
-    if @affiliation
-      @user.academic_email = @affiliation[:email] #just for autoset in form
-      @user.confirmation_token = @affiliation.confirmation_token
-      @user.affiliations << @affiliation
+    if params[:affiliation_token]
+      @affiliation = Affiliation.
+        find_by_affiliation_token(params[:affiliation_token])
+        
+      if @affiliation
+        @user.academic_email = @affiliation[:email] #just for autoset in form
+        @user.affiliation_token = @affiliation.affiliation_token
+        @user.affiliations << @affiliation
+      end
+      
     end
 
     @user.timezone = AppConfig.default_timezone

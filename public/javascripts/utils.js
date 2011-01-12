@@ -96,5 +96,4 @@ window.Utils = {
       return false;
     });
   }
-
 };

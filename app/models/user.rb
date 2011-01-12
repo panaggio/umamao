@@ -92,6 +92,7 @@ class User
   belongs_to :friend_list, :dependent => :destroy
 
   key :invitation_token, String
+  key :affiliation_token, String
 
   # New users should go through our signup wizard to connect their
   # external accounts, receive suggestions, etc.
@@ -114,10 +115,10 @@ class User
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
 
-  validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
-  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
-  validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
-                            :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
+  #validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
+  #validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
+  #validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
+  #                          :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 
   before_create :logged!
   after_create :accept_invitation

@@ -5,7 +5,7 @@ class Affiliation
   key :user_id,            String
   key :university_id,      ObjectId
   key :email,              String, :limit => 40, :default => nil
-  key :confirmation_token, String, :index => true
+  key :affiliation_token,  String, :index => true
 
   belongs_to :university
   belongs_to :user
@@ -17,7 +17,7 @@ class Affiliation
   validates_uniqueness_of   :email
   validates_presence_of     :email
   
-  before_create             :generate_confirmation_token
+  before_create             :generate_affiliation_token
   after_create              :send_confirmation
 
   # stolen from devise (TODO place this somewhere common to affiliation
@@ -26,24 +26,24 @@ class Affiliation
     loop do
       token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
         delete("\n")
-      break token unless self.where(:confirmation_token => token).count > 0
+      break token unless self.where(:affiliation_token => token).count > 0
     end
   end
 
-  def generate_confirmation_token
-    self.confirmation_token = nil
-    self.confirmation_token = self.class.generate_token
+  def generate_affiliation_token
+    self.affiliation_token = nil
+    self.affiliation_token = self.class.generate_token
   end
 
-  def generate_confirmation_token!
-    generate_confirmation_token && save(:validate => false)
+  def generate_affiliation_token!
+    generate_affiliation_token && save(:validate => false)
   end
   #######
   
   def send_confirmation
     if self.university.open_for_signup
       debugger
-      generate_confirmation_token! if self.confirmation_token.nil?
+      generate_affiliation_token! if self.affiliation_token.nil?
       Notifier.signup(self).deliver
     else
       Notifier.closed_for_signup(self).deliver

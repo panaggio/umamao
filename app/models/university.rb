@@ -31,6 +31,8 @@ class University
   validates_length_of       :sig, :maximum => 20
   validates_length_of       :state, :maximum => 20
 
+  scope :open_for_signup, where(:open_for_signup => true).sort(:name.asc).all
+
   def email_regexp
 	Regexp.new "([.@]"+self.domain.split(" ").join("$)|([.@]")+"$)" if !self.domain.nil? && !self.domain.empty?
   end
@@ -41,7 +43,7 @@ class University
 	}
 	return nil
   end
-
+  
 #  validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 #  validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
 #                            :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }

@@ -43,13 +43,6 @@
       .input
         = f.text_field :name
 
-    - if (@invitation.blank? || !@invitation.sender.can_invite_without_confirmation) && (@group_invitation.blank? || !@group_invitation.active?)
-      .field
-        .label
-          = f.label :academic_email, t(:academic_email, :scope => "users.form")
-        .input
-          = f.email_field :academic_email
-
     .submit
       = submit_tag t('.submit')
 
