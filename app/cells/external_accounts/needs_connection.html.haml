@@ -1,3 +1,7 @@
 -# TODO: better messages, I18n
-= "Você precisa se conectar ao #{@provider}!"
-= link_to "conectar", "/auth/facebook"
+.modal
+  = "Você precisa se conectar ao #{@provider}!"
+  .controls
+    = link_to "Cancelar", "#", :class => "close"
+    = link_to "Conectar", "/auth/facebook"
+  .clear

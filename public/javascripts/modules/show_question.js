@@ -4,6 +4,11 @@ $(document).ready(function() {
   $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
+  $(".modal .close").live("click", function () {
+    $.colorbox.close();
+    return false;
+  });
+
   Utils.clickObject(".share-question input[type=submit]", function () {
     return {
       success: function (data) {

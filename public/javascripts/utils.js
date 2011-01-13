@@ -101,11 +101,16 @@ window.Utils = {
   modal: function (options) {
     var defaultOptions = {
       transition: "none",
-      opacity: 0.2
+      opacity: 0.2,
+      close: "",
+      overlayClose: false,
+      scrolling: false
     };
 
     options = $.extend({}, options, defaultOptions);
 
     $.colorbox(options);
+
+    $.colorbox.resize();
   }
 };
