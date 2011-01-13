@@ -24,7 +24,7 @@ class ShareQuestionController < ApplicationController
     case params[:where]
     when "facebook"
       graph = current_user.facebook_connection
-      graph.put_wall_post(@body, :link => question_url(@question))
+      graph.put_wall_post(@body, :link => @link)
       status = :success
       message = I18n.t("questions.show.share_success", :site => "Facebook")
     end
@@ -60,6 +60,8 @@ class ShareQuestionController < ApplicationController
         format.js do
           case status
           when :needs_connection
+            session["omniauth_return_url"] =
+              question_url(Question.find_by_id(params[:question]))
             render :json => {
               :success => false,
               :status => "needs_connection",
