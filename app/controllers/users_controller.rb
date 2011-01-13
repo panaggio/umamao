@@ -43,7 +43,7 @@ class UsersController < ApplicationController
 
     @user = User.new
 
-    #User added by invitation
+    # User added by invitation
     if params[:invitation_token]
     @invitation = Invitation.
       find_by_invitation_token(params[:invitation_token])
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
     end
 
-    #User added by affiliation
+    # User added by affiliation
     if params[:affiliation_token]
       @affiliation = Affiliation.
         find_by_affiliation_token(params[:affiliation_token])
