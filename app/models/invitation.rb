@@ -25,7 +25,7 @@ class Invitation
   timestamps!
 
   # stolen from devise (TODO place this somewhere common to affiliation
-  #                                , user, waiting user and invitation)
+  # and invitation)
   def self.generate_token
     loop do
       token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.

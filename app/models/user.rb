@@ -158,10 +158,7 @@ class User
   end
 
   def confirmed_affiliation?
-    self.affiliations.each do |a|
-      return true if a.confirmed_at != nil
-    end
-    nil
+    self.affiliations.any?{ |a| a.confirmed_at.present? }
   end
 
   def first_name

@@ -5,14 +5,8 @@ class University
   include Scopes
   include MongoMapperExt::Filter
 
-  key :name, String, :limit => 100,
-  :null => false,
-  :index => true
-
-  key :short_name, String, :limit => 20,
-  :null =>false,
-  :index => true
-
+  key :name, String, :limit => 100, :null => false, :index => true
+  key :short_name, String, :limit => 20, :null =>false, :index => true
   key :state, String, :limit => 20,  :null =>false
   key :open_for_signup, Boolean
   key :validation_type, String

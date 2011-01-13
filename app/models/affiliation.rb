@@ -1,27 +1,27 @@
 class Affiliation
   include MongoMapper::Document
 
-  key :confirmed_at,       Time, :default => nil
-  key :user_id,            String
-  key :university_id,      ObjectId
-  key :email,              String, :limit => 40, :default => nil
-  key :affiliation_token,  String, :index => true
+  key :confirmed_at, Time, :default => nil
+  key :user_id, String
+  key :university_id, ObjectId
+  key :email, String, :limit => 40, :default => nil
+  key :affiliation_token, String, :index => true
 
   belongs_to :university
   belongs_to :user
 
-  validates_true_for        :email, :logic => lambda {
-                              (self.email =~ self.university.email_regexp) != nil
-				            }
+  validates_true_for :email, :logic => lambda {
+    (self.email =~ self.university.email_regexp) != nil
+  }
 
-  validates_uniqueness_of   :email
-  validates_presence_of     :email
+  validates_uniqueness_of :email
+  validates_presence_of :email
 
-  before_create             :generate_affiliation_token
-  after_create              :send_confirmation
+  before_create :generate_affiliation_token
+  after_create :send_confirmation
 
   # stolen from devise (TODO place this somewhere common to affiliation
-  #                                                      and invitation)
+  # and invitation)
   def self.generate_token
     loop do
       token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
@@ -38,7 +38,6 @@ class Affiliation
   def generate_affiliation_token!
     generate_affiliation_token && save(:validate => false)
   end
-  #######
 
   def send_confirmation
     if self.university.open_for_signup
