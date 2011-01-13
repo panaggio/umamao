@@ -16,13 +16,13 @@ class Settings::ExternalAccountsController < ApplicationController
 
     respond_with(@external_account, :status => :created) do |format|
       track_event("connected_#{@external_account.provider}".to_sym)
-      format.html { redirect_to session["return_url"] }
+      format.html { redirect_to session["omniauth_return_url"] }
     end
   end
 
   def failure
     respond_to do |format|
-      format.html { redirect_to session["return_url"] }
+      format.html { redirect_to session["omniauth_return_url"] }
     end
   end
 
@@ -30,7 +30,7 @@ class Settings::ExternalAccountsController < ApplicationController
     @external_account = ExternalAccount.find(params[:id])
     @external_account.destroy
     respond_with(@external_account, :status => :ok) do |format|
-      format.html { redirect_to session["return_url"] }
+      format.html { redirect_to session["omniauth_return_url"] }
     end
   end
 

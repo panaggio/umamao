@@ -4,7 +4,7 @@ class ExternalAccountsCell < Cell::Rails
   def display
     # We track from which page we authenticate so we can return to it
     # later.
-    session["return_url"] = request.url
+    session["omniauth_return_url"] = request.url
     render
   end
 
@@ -26,6 +26,13 @@ class ExternalAccountsCell < Cell::Rails
     end
 
     render :view => 'external_account'
+  end
+
+  # Displays a message telling the user that he needs to connect his
+  # external account.
+  def needs_connection
+    @provider = @opts[:provider]
+    render
   end
 
 end
