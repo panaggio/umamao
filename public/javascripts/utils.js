@@ -95,5 +95,17 @@ window.Utils = {
 
       return false;
     });
+  },
+
+  // Wrapper around Colorbox to unify modal's style.
+  modal: function (options) {
+    var defaultOptions = {
+      transition: "none",
+      opacity: 0.2
+    };
+
+    options = $.extend({}, options, defaultOptions);
+
+    $.colorbox(options);
   }
 };

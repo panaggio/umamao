@@ -4,11 +4,7 @@
     = render_cell :share_question, :display, :question => @question
   :javascript
     $(document).ready(function () {
-      $.colorbox({
-        transition: "none",
-        inline: true,
-        href: "#share-question-widget"
-      });
+      Utils.modal({html: $(".share-question-widget").html()});
     });
 
 - @current_class = 'question hentry entry post'

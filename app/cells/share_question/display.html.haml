@@ -1,4 +1,4 @@
-- form_tag "/share_question", :method => :post, :id => "share-question-widget" do
+- form_tag "/share_question", :method => :post, :class => "share-question-widget" do
   = text_field_tag "body", @question.title
   = hidden_field_tag "question", @question.id
   = hidden_field_tag "where", "facebook"

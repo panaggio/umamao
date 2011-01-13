@@ -14,18 +14,12 @@ $(document).ready(function() {
   Utils.clickObject("#sidebar .share .facebook", function () {
     return {
       success: function (data) {
-        $.colorbox({
-          html: data.html,
-          transition: "none"
-        });
+        Utils.modal({html: data.html});
       },
 
       error: function (data) {
         if (data.status == "needs_connection") {
-          $.colorbox({
-            html: data.html,
-            transition: "none"
-          });
+          Utils.modal({html: data.html});
         }
       }
     };
