@@ -1,7 +1,7 @@
--# TODO: better messages, I18n
 .modal
-  = "Você precisa se conectar ao #{@provider}!"
+  %h1= t("questions.show.needs_connection.title")
+  %p= t("questions.show.needs_connection.message")
   .controls
-    = link_to "Cancelar", "#", :class => "close"
-    = link_to "Conectar", "/auth/facebook"
+    = link_to t("scaffold.cancel"), "#", :class => "close"
+    = link_to t("external_accounts.connect"), "/auth/facebook"
   .clear

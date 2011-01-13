@@ -110,6 +110,14 @@ pt-BR:
       related_questions: Perguntas relacionadas
       follow_up_questions: Perguntas derivadas
       add_follow_up_question: Fazer pergunta derivada
+      needs_connection:
+        title: Conecte sua conta
+        message: |
+          Para poder postar essa pergunta no Facebook, é necessário
+          conectar sua conta. Ao clicar no botão "Conectar" abaixo,
+          você será direcionado ao Facebook para autorizar o uso de
+          sua conta. Você retornará ao site ao final do processo de
+          autorização.
       request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
       retag: Editar tópicos
@@ -117,6 +125,7 @@ pt-BR:
       share: Compartilhar esta pergunta
       share_on: Compartilhar esta pergunta em %{site}
       share_success: Pergunta compartilhada com sucesso no %{site}.
+      post_on_facebook: Postar no Facebook
       solution: Resposta aceita
       tag: Adicionar tópicos
       to_answer_question: para responder a esta pergunta
