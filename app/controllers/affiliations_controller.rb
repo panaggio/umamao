@@ -13,7 +13,7 @@ class AffiliationsController < ApplicationController
         track_event(:new_waiting_user)
         flash[:notice] = t("affiliations.create.email_sent")
 
-      else if @waiting_user.errors[:email] != nil
+      else if @waiting_user.errors[:email].present?
           # TODO: Put this somewhere else (errors module?) Part II
           flash[:error] = ""
           @waiting_user.errors[:email].each do |e|
@@ -41,7 +41,7 @@ class AffiliationsController < ApplicationController
 
       else
         # TODO: Put this somewhere else (errors module?) Part II
-        if @affiliation.errors[:email] != nil
+        if @affiliation.errors[:email].present?
           flash[:error] = ""
           @affiliation.errors[:email].each do |e|
 
@@ -61,7 +61,7 @@ class AffiliationsController < ApplicationController
     end
 
     # Responding
-    if !flash[:error].nil?
+    if flash[:error].present?
         respond_to do |format|
           format.js {
             render(:json => {:success => false,
@@ -69,7 +69,7 @@ class AffiliationsController < ApplicationController
           }
         end
 
-    elsif !flash[:notice].nil?
+    elsif flash[:notice].present?
         respond_to do |format|
           format.js {
             render(:json => {:success => true,
