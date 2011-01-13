@@ -111,6 +111,8 @@ window.Utils = {
 
     $.colorbox(options);
 
-    $.colorbox.resize();
+    var placedModal = $("#colorbox .modal");
+
+    $.colorbox.resize({width: placedModal.outerWidth()});
   }
 };
