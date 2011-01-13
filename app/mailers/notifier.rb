@@ -132,7 +132,7 @@ class Notifier < ActionMailer::Base
     mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
   end
 
-  def nonacademic(waiting_user)
+  def non_academic(waiting_user)
     @open_universities = University.open_for_signup
     @email = waiting_user.email
     mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
