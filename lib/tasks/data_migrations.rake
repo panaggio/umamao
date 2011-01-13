@@ -41,77 +41,63 @@ namespace :data do
       end
     end
 
-	desc "Update old users format (Confirmation e-mail inside users model) to the new one (user affiliation university)"
-	task :update_users_format => :environment do
-		
-		User.all.each do |u|
-			print u.academic_email+"\n" if u.academic_email
-			if u.academic_email then
-				debugger
-				u.affiliations.delete_all
-				a = Affiliation.new
-				a.user = u
-				
-				a.confirmation_status = true
-				a.email = u.academic_email
-				sig = /[.@]unicamp.br$/.match(a.email) ? "Unicamp" : "USP"
-				a.university = University.where(:sig => sig).first
-				
-				a.save!
-				u.affiliations << a
-				
-				u.save
-				print "Created for "+u.name+"\n"
-			end
-		end
-	end
+    desc "Update old users format (academic e-mail inside users model) to the new one (user affiliation university)"
+    task :move_user_academic_email_to_affiliation => :environment do
 
-	desc "Delete all users affiliations (Debugging pourposes only) "
-	task :delete_users_affiliations => :environment do
-		User.all.each do |u|
-			print u.academic_email+"\n" if u.academic_email
-		end
-	end
+      User.where(:academic_email.ne => nil).each do |user|
+        a = Affiliation.new
+        a.user = user
+
+        a.confirmed_at = user.confirmed_at
+        a.email = user.academic_email
+        short_name = /[.@]unicamp.br$/ =~ a.email ? "Unicamp" : "USP"
+        a.university = University.where(:short_name => short_name).first
+
+        a.save ? print('.') : puts("Failed saving affiliation for user #{user.id}!!!!")
+
+        user.save ? print('-') : puts("Failed saving user #{user.id}!!!!")
+      end
+    end
 
     desc "(USING THIS WILL REMOVE DOMAINS!) fix csv file from uni2.csv to uni.csv"
     task :fix_csv_file => :environment do
-        f = File.new("data/uni.csv", "w")
-		Ccsv.foreach("data/uni2.csv") do |row|
-			name 			  = row[0].split('-')[0].tr("\"", "")
-			
-			sig 			  = row[1].tr("\"", "")
-			state 		  = row[2].tr("\"", "")
-			
-			if row[3] == "TRUE" then
-				open_for_signup = "TRUE"
-			else 
-			    open_for_signup = "FALSE"
-			end
-			f.puts("\"#{name}\", \"#{sig}\", \"#{state}\", \"#{open_for_signup}\", \"\"")
-		end
-		f.close
-	end
+      f = File.new("data/uni.csv", "w")
+      Ccsv.foreach("data/uni2.csv") do |row|
+        name      = row[0].split('-')[0].tr("\"", "")
 
-	desc "Import Universities from a csv file in the format [name, sig, 
-	state, V, domain] where V is TRUE if the university is open for signup or 
-	FALSE otherwise"
-	task :import_universities => :environment do
-		Ccsv.foreach("data/uni.csv") do |row|
-			a 				  = University.new
-			a.name 			  = row[0].split('-')[0].tr("\"", "")
-			a.name.downcase_with_accents!
-			a.name = a.name.phrase_ucfirst.strip
-			
-			a.sig 			  = row[1].tr("\"", "").strip
-			a.state 		  = row[2].tr("\"", "").strip
-			
-			a.open_for_signup = (row[3].tr("\"", "").strip == "TRUE")
-			a.validation_type = "email"
-			a.domain    = row[4].tr("\"", "").strip
-			a.save!
-			nil
-		end
-	end
+        short_name   = row[1].tr("\"", "")
+        state     = row[2].tr("\"", "")
+
+        if row[3] == "TRUE" then
+          open_for_signup = "TRUE"
+        else
+          open_for_signup = "FALSE"
+        end
+        f.puts("\"#{name}\", \"#{short_name}\", \"#{state}\", \"#{open_for_signup}\", \"\"")
+      end
+      f.close
+    end
+
+    desc "Import Universities from a csv file in the format [name, short_name,
+ state, V, domain] where V is TRUE if the university is open for signup or
+ FALSE otherwise"
+    task :import_universities => :environment do
+      Ccsv.foreach("data/uni.csv") do |row|
+        a = University.new
+        a.name = row[0].split('-')[0].tr("\"", "")
+        a.name.downcase_with_accents!
+        a.name = a.name.phrase_ucfirst.strip
+
+        a.short_name = row[1].tr("\"", "").strip
+        a.state = row[2].tr("\"", "").strip
+
+        a.open_for_signup = (row[3].tr("\"", "").strip == "TRUE")
+        a.validation_type = "email"
+        a.domains = row[4].tr("\"", "").strip.split(" ")
+        a.save!
+        nil
+      end
+    end
 
     desc "Create news updates for entries that don't have one"
     task :create_old_news_updates => :environment do

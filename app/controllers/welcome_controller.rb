@@ -9,7 +9,6 @@ class WelcomeController < ApplicationController
 
   def landing
     @affiliation = Affiliation.new
-    @waiting_user = WaitingUser.new
     render 'landing', :layout => 'welcome'
   end
 

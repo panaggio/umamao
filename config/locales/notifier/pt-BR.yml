@@ -46,25 +46,19 @@ pt-BR:
       greeting: "Olá,"
       message: "Aparentemente o email %{email} não pertence a nenhuma
   universidade aberta para cadastro no momento. Entretanto pode ser que
-  sua universide esteja liberada e nosso sistema apenas não reconheceu seu e-mail
-  verifique na lista abaixo se consta o nome de sua universidade e, caso
-  conste, nos avise! %{contact}"
+  sua universide esteja liberada e nosso sistema não tenha reconhecido seu e-mail.
+  Verifique na lista abaixo se consta o nome de sua universidade e, caso
+  conste, avise-nos pelo email %{contact} para que possamos liberar seu cadastro."
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
     closed_for_signup:
       greeting: "Olá,"
-      message: "Ainda não abrimos o cadastro para sua universidade: %{university}.
-   Entretando foi gerado um aviso para nossos administradores, que poderão liberar
-   o acesso para você ou para toda sua universidade.
-                Como eventualmente o site será liberado para acesso geral, seu e-mail
-   foi guardado e te avisaremos!
-                Se esta não é sua universidade, nos avise! %{contact}"
+      message: "Ainda não abrimos o cadastro para %{university}.
+                Seu e-mail foi guardado e você será avisado quando abrirmos para sua universidade.
+                Se esta não for sua universidade, por favor, nos avise pelo %{contact}!"
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
     nonacademic:
       greeting: "Olá,"
       message: "Ainda não abrimos o cadastro para usuários que não estejam vinculados a universidades.
-   Entretando foi gerado um aviso para nossos administradores, que poderão liberar
-   o acesso para você.
-                Como eventualmente o site será liberado para acesso geral, seu e-mail
-   foi guardado e te avisaremos!
-                Além disso, caso este seja um e-mail acadêmico, nos avise! %{contact}"
+                Seu e-mail foi guardado e você será avisado quando puder se cadastrar.
+                Caso este seja um e-mail acadêmico, por favor, nos avise pelo %{contact}."
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."

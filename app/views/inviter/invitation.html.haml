@@ -6,7 +6,7 @@
 %p= markdown(@message, :group => @group)
 \---
 
-%p= simple_format(t('.site_description'))
+= simple_format(t('.site_description'))
 
 - url = new_user_url(:invitation_token => @invitation_token)
 %p
@@ -14,4 +14,4 @@
   %br
   = url
 
-%p= simple_format(t('.goodbye'))
+= simple_format(t('.goodbye'))

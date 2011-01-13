@@ -9,6 +9,7 @@ class AffiliationsController < ApplicationController
       @waiting_user.email = email
 
       if @waiting_user.save
+        track_event(:new_waiting_user)
         flash[:notice] = t("affiliations.create.email_sent")
 
       else if @waiting_user.errors[:email] != nil
@@ -34,6 +35,7 @@ class AffiliationsController < ApplicationController
       @affiliation.email = email
 
       if @affiliation.save
+        track_event(:new_affiliation)
         flash[:notice] = t("affiliations.create.email_sent")
 
       else

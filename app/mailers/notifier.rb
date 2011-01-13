@@ -27,7 +27,7 @@ class Notifier < ActionMailer::Base
 
   def new_answer(user, group, answer, following = false)
     @user = user     #question creator
-    @group = group   
+    @group = group
     @answer = answer #answer.user
     @following = following
 
@@ -114,7 +114,7 @@ class Notifier < ActionMailer::Base
 
     mail(:to => user.email, :subject => subject)
   end
-  
+
   def signup(affiliation)
     @affiliation_token = affiliation.affiliation_token
     mail(:to => affiliation.email, :subject => t("mailers.notifications.signup.subject"))
@@ -125,13 +125,13 @@ class Notifier < ActionMailer::Base
     @email = affiliation.email
     mail(:to => affiliation.email, :subject => t("mailers.notifications.signup.subject"))
   end
-  
+
   def wait(waiting_user)
     @open_universities = University.open_for_signup
     @email = waiting_user.email
     mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
   end
-  
+
   def nonacademic(waiting_user)
     @open_universities = University.open_for_signup
     @email = waiting_user.email

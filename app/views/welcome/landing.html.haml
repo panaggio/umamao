@@ -15,7 +15,7 @@
     #remember_me
       = label_tag 'user[remember_me]', t("sessions.new.remember_me")
       = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
-      
+
 - content_for :js do
   = javascript_include_merged :landing
 
@@ -37,16 +37,16 @@
 
 #signup
   %h3  #{ t('layouts.application.signup') }
-  
+
   = form_for @affiliation do |f|
     = f.error_messages
-    
+
     #landing_signup
       .field
         .label
           = f.label :email, t('affiliations.form.email')
         .input
-          = f.email_field :email, :value => "", :tabindex => 142
+          = f.email_field :email, :value => "", :tabindex => 5
 
       .submit
-        = f.submit t('layouts.application.signup'), :tabindex => 10
+        = f.submit t('layouts.application.signup'), :tabindex => 6

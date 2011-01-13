@@ -1,10 +1,15 @@
 desc "Imports mongodb dump from dump/"
 task :import => :environment do
-  `mongo --eval 'db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
+  `mongo --eval 'db.getSisterDB("shapado-production").dropDatabase(); db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
   `mongorestore dump`
+  `mongo --eval 'db.getSisterDB("shapado-#{Rails.env}").dropDatabase(); db.copyDatabase("shapado-production", "shapado-#{Rails.env}"); db.getSisterDB("shapado-production").dropDatabase()'`
   User.query.each do |user|
-    user.reset_password!("umamao", "umamao");
+    user.reset_password!("umamao", "umamao")
   end
+
+  umamao = Group.first
+  umamao.domain = "localhost.lan"
+  umamao.save!
 end
 
 desc "Removes all private data from a DB dump located in dump/"
@@ -21,7 +26,6 @@ task :clean_dump => :environment do
   puts "Cleaning private user data..."
   User.query.each do |user|
     user.email = "#{user.id}@example.com"
-    user.academic_email = "#{user.id}@example.edu"
     user.reset_password!("umamao", "umamao")
   end
 

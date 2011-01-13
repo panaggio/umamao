@@ -7,15 +7,6 @@ class User
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
          :token_authenticatable, :validatable, :confirmable
 
-  # Hack to make devise confirm :academic_email, not :email.
-  def send_confirmation_instructions_with_academic_email
-    email = self.email
-    self.email = self.academic_email
-    self.send_confirmation_instructions_without_academic_email
-    self.email = email
-  end
-  alias_method_chain :send_confirmation_instructions, :academic_email
-
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
   LOGGED_OUT_LANGUAGE_FILTERS = %w[any] + AVAILABLE_LANGUAGES
@@ -23,7 +14,6 @@ class User
   key :_id,                       String
   key :login,                     String, :limit => 40, :index => true
   key :name,                      String, :limit => 100, :null => false, :index => true
-  key :academic_email,            String, :limit => 40, :default => nil
 
   key :bio,                       String, :limit => 140
   key :website,                   String, :limit => 200
@@ -92,7 +82,8 @@ class User
   belongs_to :friend_list, :dependent => :destroy
 
   key :invitation_token, String
-  key :affiliation_token, String
+
+  attr_accessor :affiliation_token
 
   # New users should go through our signup wizard to connect their
   # external accounts, receive suggestions, etc.
@@ -114,11 +105,6 @@ class User
 
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
-
-  #validates_presence_of     :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
-  #validates_uniqueness_of   :academic_email, :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
-  #validates_format_of       :academic_email, :with => /([.@]unicamp.br$)|([.@]usp.br$)/,
-  #                          :if => lambda { |u| u.new_record? && u.confirmed_at.blank? }
 
   before_create :logged!
   after_create :accept_invitation
@@ -168,9 +154,6 @@ class User
   # are allowed in, if not, they have to do something (like confirm
   # email) before being allowed to log in.
   def active?
-    # FIXME We're considering dac.unicamp.br users active for now
-    # because we're experiencing problems with the emails bouncing off
-    # their server. This should be removed soon.
     !self.new? && (self.confirmed_affiliation? || super)
   end
 

@@ -26,7 +26,7 @@ pt-BR:
       views: visitas
     form:
       change_password: Trocar de senha
-      email: "Email:"
+      email: "Email pessoal:"
       academic_email: "Email acadêmico:"
       name: "Nome e sobrenome:"
       password: "Senha:"

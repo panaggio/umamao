@@ -11,19 +11,19 @@ class WaitingUser
   validates_presence_of   :email
   validates_uniqueness_of :email
   after_create            :send_wait_note
-  
-  def nonacademic_email?
-    self.email =~ /.com(.|$)/
+
+  def non_academic_email?
+    self.email =~ /\.com(\.|$)/
   end
-  
+
   def send_wait_note
-    if nonacademic_email?
+    if non_academic_email?
       Notifier.nonacademic(self).deliver
     else
       Notifier.wait(self).deliver
     end
   end
-    
+
   def self.resend_wait_note(email)
     where(:email=>email).first.send_wait_note
   end
