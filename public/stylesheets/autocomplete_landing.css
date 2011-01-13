@@ -54,6 +54,6 @@ ul.autocomplete-list em {
     padding: 0;
 }
 
-div.hidden {
+.hidden {
 	display:none;
 }
