@@ -148,6 +148,10 @@ class QuestionsController < ApplicationController
       session[:user_return_to] = question_path(@question)
     end
 
+    if @open_sharing_widget = session[:open_sharing_widget]
+      session[:open_sharing_widget] = nil
+    end
+
     options = {:per_page => 25, :page => params[:page] || 1,
                :order => current_order, :banned => false}
     @answers = @question.answers.paginate(options)

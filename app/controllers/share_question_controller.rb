@@ -62,6 +62,7 @@ class ShareQuestionController < ApplicationController
           when :needs_connection
             session["omniauth_return_url"] =
               question_url(Question.find_by_id(params[:question]))
+            session[:open_sharing_widget] = "facebook"
             render :json => {
               :success => false,
               :status => "needs_connection",

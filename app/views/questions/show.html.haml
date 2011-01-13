@@ -1,3 +1,16 @@
+- case @open_sharing_widget
+- when "facebook"
+  %div{:style => "display: none"}
+    = render_cell :share_question, :display, :question => @question
+  :javascript
+    $(document).ready(function () {
+      $.colorbox({
+        transition: "none",
+        inline: true,
+        href: "#share-question-widget"
+      });
+    });
+
 - @current_class = 'question hentry entry post'
 
 - show_close_request_form = !@question.closed && logged_in? && @question.can_be_requested_to_close_by?(current_user)
