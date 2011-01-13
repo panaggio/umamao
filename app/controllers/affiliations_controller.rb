@@ -3,7 +3,8 @@ class AffiliationsController < ApplicationController
     email = params[:affiliation][:email]
     uni_id = University.find_id_by_email_domain(email)
 
-    # Verifications
+    # If we don't recognize the email as being from any university,
+    # add it to waiting list
     if uni_id.blank?
       @waiting_user = WaitingUser.new
       @waiting_user.email = email
