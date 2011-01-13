@@ -125,8 +125,6 @@ Shapado::Application.routes.draw do
     resources :close_requests
   end
 
-  match '/questions/:id/share/:where' => 'questions#share', :as => :share_question
-
   match 'questions/tagged/:tags' => 'questions#index', :constraints => { :tags => /\S+/ }, :as => :tag
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
 
@@ -142,6 +140,7 @@ Shapado::Application.routes.draw do
 
   resources :votes
   resources :flags
+  resources :share_question
 
   scope '/manage' do
     resources :widgets do

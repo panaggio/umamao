@@ -516,51 +516,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # Shares the current question on Facebook, Twitter, etc.
-  #
-  # TODO: after connecting his accounts, the user should return to
-  # where he was.
-  def share
-    @question = Question.find_by_slug_or_id(params[:id])
-    if params[:where] == "facebook"
-      graph = current_user.facebook_connection
-      if graph
-        graph.put_wall_post(@question.title, :link => question_url(@question))
-        status = :success
-        message = I18n.t("questions.show.share_success", :site => "Facebook")
-      else
-        status = :needs_connection
-      end
-    end
-
-    respond_to do |format|
-      format.html do
-        case status
-        when :success
-          redirect_to question_path(@question)
-        when :needs_connection
-          redirect_to settings_external_accounts_path
-        end
-      end
-
-      format.js do
-        case status
-        when :success
-          render :json => {
-            :success => true,
-            :message => message
-          }.to_json
-        when :needs_connection
-          render :json => {
-            :success => false,
-            :status => "needs_connection",
-            :redirect_to => settings_external_accounts_path
-          }.to_json
-        end
-      end
-    end
-  end
-
   protected
   def check_permissions
     @question = Question.find_by_slug_or_id(params[:id])

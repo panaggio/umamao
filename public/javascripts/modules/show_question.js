@@ -4,13 +4,28 @@ $(document).ready(function() {
   $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
+  Utils.clickObject(".share-question input[type=submit]", function () {
+    return {
+      success: function (data) {
+      }
+    };
+  });
+
   Utils.clickObject("#sidebar .share .facebook", function () {
     return {
-      type: "POST",
+      success: function (data) {
+        $.colorbox({
+          html: data.html,
+          transition: "none"
+        });
+      },
 
       error: function (data) {
         if (data.status == "needs_connection") {
-          location.href = data.redirect_to;
+          $.colorbox({
+            html: data.html,
+            transition: "none"
+          });
         }
       }
     };

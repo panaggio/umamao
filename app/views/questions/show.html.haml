@@ -148,7 +148,7 @@
   - if logged_in?
     .share.block
       %h3= t("questions.show.share")
-      = link_to (image_tag "facebook.gif"), share_question_path(@question, "facebook"), :class => "facebook"
+      = link_to (image_tag "facebook.gif"), new_share_question_path(:question => @question.id), :class => "facebook"
 
   .author.user_info.vcard
     .user_data
