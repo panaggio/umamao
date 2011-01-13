@@ -1,7 +1,7 @@
 - case @open_sharing_widget
 - when "facebook"
   #hidden-widget{:style => "display: none"}
-    = render_cell :share_question, :display, :question => @question
+    = render_cell :share_question, :display, :question => @question, :recently_connected_to => "facebook"
   :javascript
     $(document).ready(function () {
       Utils.modal({html: $("#hidden-widget").html()});

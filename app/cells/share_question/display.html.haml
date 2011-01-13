@@ -1,5 +1,8 @@
 .modal.share-question-widget
   %h1= t("questions.show.post_on_facebook")
+  - if @recently_connected_to == "facebook"
+    .message
+      = t("external_accounts.connected_to.success", :site => "Facebook")
   - form_tag "/share_question", :method => :post do
     = text_area_tag "body", @question.title
     = hidden_field_tag "question", @question.id

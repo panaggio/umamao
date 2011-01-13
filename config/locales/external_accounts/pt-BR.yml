@@ -3,3 +3,5 @@ pt-BR:
     connected_as: "Conectado como: %{name}"
     disconnect: Desconectar
     connect: Conectar
+    connected_to:
+      success: Conta do %{site} conectada com sucesso.
