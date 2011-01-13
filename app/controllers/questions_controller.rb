@@ -148,9 +148,7 @@ class QuestionsController < ApplicationController
       session[:user_return_to] = question_path(@question)
     end
 
-    if @open_sharing_widget = session[:open_sharing_widget]
-      session[:open_sharing_widget] = nil
-    end
+    @open_sharing_widget = flash[:connected_to]
 
     options = {:per_page => 25, :page => params[:page] || 1,
                :order => current_order, :banned => false}

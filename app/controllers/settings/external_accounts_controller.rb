@@ -16,6 +16,7 @@ class Settings::ExternalAccountsController < ApplicationController
 
     respond_with(@external_account, :status => :created) do |format|
       track_event("connected_#{@external_account.provider}".to_sym)
+      flash[:connected_to] = @external_account.provider
       format.html { redirect_to session["omniauth_return_url"] }
     end
   end
