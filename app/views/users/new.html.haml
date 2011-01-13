@@ -12,6 +12,9 @@
   - elsif @group_invitation
     #invitation_message
       = markdown(@group_invitation.message)
+  - elsif @affiliation
+    #invitation_message
+      = t('.affiliation_message', :email => @affiliation.email)
 
     %hr
   - @user.password = @user.password_confirmation = nil

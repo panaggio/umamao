@@ -17,6 +17,8 @@ pt-BR:
       submit: Criar conta
       invitation:
           title: "Você veio a convite de %{user}:"
+      affiliation_message: "Seu e-mail acadêmico %{email} foi confirmado!
+       Agora basta terminar seu cadastro preenchendo o formulário abaixo."
     edit:
       title: Configurações
       submit: Salvar
