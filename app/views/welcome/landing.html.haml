@@ -39,11 +39,9 @@
   %h3  #{ t('layouts.application.signup') }
 
   = form_for @affiliation do |f|
-    = f.error_messages
-
     #landing_signup
       .field
-        .label
+        .label{:style => "position: relative; top: 12px"}
           = f.label :email, t('affiliations.form.email')
         .input
           = f.email_field :email, :value => "", :tabindex => 5
