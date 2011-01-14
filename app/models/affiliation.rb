@@ -1,11 +1,17 @@
 class Affiliation
   include MongoMapper::Document
+  include Support::TokenConfirmable
+
+  @@token_confirmable_key = :affiliation_token
 
   key :confirmed_at, Time, :default => nil
   key :user_id, String
   key :university_id, ObjectId
   key :email, String, :limit => 40, :default => nil
   key :affiliation_token, String, :index => true
+  key :sent_at, Time
+  
+  token_confirmable_key :affiliation_token
 
   belongs_to :university
   belongs_to :user
@@ -17,31 +23,11 @@ class Affiliation
   validates_uniqueness_of :email
   validates_presence_of :email
 
-  before_create :generate_affiliation_token
-  after_create :send_confirmation
-
-  # stolen from devise (TODO place this somewhere common to affiliation
-  # and invitation)
-  def self.generate_token
-    loop do
-      token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
-        delete("\n")
-      break token unless self.where(:affiliation_token => token).count > 0
-    end
-  end
-
-  def generate_affiliation_token
-    self.affiliation_token = nil
-    self.affiliation_token = self.class.generate_token
-  end
-
-  def generate_affiliation_token!
-    generate_affiliation_token && save(:validate => false)
-  end
+  after_create  :send_confirmation
 
   def send_confirmation
     if self.university.open_for_signup
-      generate_affiliation_token! if self.affiliation_token.nil?
+      generate_confirmation_token! if self.affiliation_token.nil?
       Notifier.signup(self).deliver
     else
       Notifier.closed_for_signup(self).deliver
