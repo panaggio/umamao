@@ -1,6 +1,7 @@
 function signUpAjaxRequest() {
     var form = $(this).parents("form");
-    $("#affiliation_submit").fadeOut("slow", function(){$("#ajax-loader").removeClass('hidden');});
+    $("#affiliation_submit").attr("readonly", "readonly");
+    $("#ajax-loader").removeClass('hidden');
     $("input#affiliation_email").attr("readonly", "readonly");
     
     return {
@@ -8,8 +9,8 @@ function signUpAjaxRequest() {
       data: form.serialize(),
       complete: function(){
 		                    $("#ajax-loader").addClass('hidden');
-		                    $("#affiliation_submit").fadeIn("slow");
-		                    $("input#affiliation_email").removeAttr("readonly") ;
+		                    $("#affiliation_submit").removeAttr("readonly");
+		                    $("input#affiliation_email").removeAttr("readonly");
 		                  }
     };
  }
