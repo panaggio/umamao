@@ -35,7 +35,10 @@ class AffiliationsController < ApplicationController
       @affiliation.university_id = uni_id
       @affiliation.email = email
 
-      if @affiliation.save
+      # FIXME: Used "save!" to help find a Heisenbug in
+      # production. Should be switched back to "save" when that
+      # happens.
+      if @affiliation.save!
         track_event(:new_affiliation)
         flash[:notice] = t("affiliations.create.email_sent")
 
