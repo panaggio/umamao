@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 
       if @user.affiliation_token.present?
         @affiliation = Affiliation.
-                    find_by_affiliation_token(@user.affiliation_token)
+          find_by_affiliation_token(@user.affiliation_token)
         @affiliation.confirmed_at = Time.now
         @user.affiliations << @affiliation
         @user.save
