@@ -4,9 +4,6 @@ $(document).ready(function() {
   if ($("#landing_signup").length > 0 ) {
 	  Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
   }
-	
-  $("form.nestedAnswerForm").hide();
-  $("#add_comment_form").hide();
 
   $("form").live('submit', function() {
     window.onbeforeunload = null;
