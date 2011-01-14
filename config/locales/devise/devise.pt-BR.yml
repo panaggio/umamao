@@ -51,8 +51,14 @@ pt-BR:
       unlocked: 'Sua conta foi desbloqueada. Você está logado(a) agora.'
     mailer:
       confirmation_instructions:
-        subject: 'Por favor, confirme seu email acadêmico'
+        subject: 'Por favor, confirme seu email'
+        greeting: 'Olá, %{name}'
+        message: "Obrigado por se juntar ao %{link}! Para
+    completar seu cadastro, precisamos confirmar seu endereço de email.
+    Para fazer isso, é só clicar no link abaixo:"
+        email_link: 'Confirmar meu e-mail.'
+        goodbye: 'Caso não tenha se cadastrado no site, por favor, desconsidere este email.'
       reset_password_instructions:
         subject: 'Instruções para redefinir senha'
       unlock_instructions:
-        subject: 'Instruções para desbloquear sua conta'
+        subject: 'Instruções para desbloquear sua conta'      
