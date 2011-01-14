@@ -94,7 +94,7 @@ class User
 
   timestamps!
 
-  before_validation :confirm_from_invitation
+  before_validation :confirm_from_invitation, :strip_email
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
@@ -682,5 +682,9 @@ Time.zone.now ? 1 : 0)
     if !self.notification_opts
       self.notification_opts = NotificationConfig.new
     end
+  end
+
+  def strip_email
+    self.email = self.email.strip
   end
 end
