@@ -257,7 +257,7 @@ AutocompleteBox.prototype = {
         }
         break;
       // ignore [escape] [shift] [capslock]
-      case 27: 
+      case 27:
         box.abortRequest();
         itemBox.hide();
         break;
@@ -521,38 +521,4 @@ function initTopicAutocompleteForFollowing() {
     topicBox.clear();
   };
 
-}
-
-function UniversityItem(data) {
-  this.data = data;
-  this.html = "<li>"+data.name+"</li>";
-}
-
-UniversityItem.prototype = {
-  click: function () {
-	$("#view_university").val(this.data.name);
-	$("#affiliation_university_id").val(this.data.id);
-	$("div.hidden").removeClass("hidden");
-	this.box.hide();
-	this.box.clear();
-  }
-};
-
-Utils.extend(UniversityItem, Item);
-
-function initUniversityAutocomplete() {
-  var searchBox = new AutocompleteBox("#view_university",
-                                      "#view_university_suggestions",
-                                      "/universities/autocomplete");
-  
-  searchBox.processData = function (data) {
-	var items = [];
-    data.forEach(function (item) {
-      items.push(new UniversityItem(item));
-    });
-    if (items.length == 0) {
-      items.push(new Item({html: "<li>Nenhum resultado encontrado</li>"}));
-    }
-    return items;
-  };
 }
