@@ -48,8 +48,7 @@
     .clear
 
     - if !hide_controls
-      .ccontrol
-        = render :partial => "shared/comments", :locals => {:commentable => answer, :path_scope => [question, answer], :source => source}
+      = render :partial => "shared/comments", :locals => {:commentable => answer, :path_scope => [question, answer], :source => source}
 
   - if !hide_controls
     .avatar

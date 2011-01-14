@@ -22,14 +22,14 @@
 
 = error_messages_for 'answer'
 
-#question
+#question.commentable
 
   %h1.navtitle.title.entry-title.question-title-col
     &= @question.title
     - if @question.closed
       = " [#{t("closed", :scope => "activerecord.attributes.question").upcase}]"
 
-  .body-col.commentable
+  .body-col
     .body.markdown
       - if @question.closed && @question.close_reason
         .close_reason

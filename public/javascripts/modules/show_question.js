@@ -85,10 +85,10 @@ $(document).ready(function() {
     };
   });
 
+  // Send new comment.
   Utils.clickObject("form.commentForm .button", function () {
     var form = $(this).parents("form");
-    var commentable = $(this).parents(".commentable");
-    var comments = commentable.find(".comments");
+    var comments = $(this).closest(".commentable").find(".comments");
     var button = $(this);
 
     return {
@@ -98,7 +98,7 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var comment = $(data.html);
         comments.append(comment);
-        comments.parent().parent().parent().find(".ccontrol").replaceWith(data.count);
+        comments.closest(".commentable").find(".ccontrol").replaceWith(data.count);
         highlightEffect(comment);
         textarea.val("");
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, comment[0]]);
@@ -225,8 +225,9 @@ $(document).ready(function() {
     return false;
   });
 
-  $(".ccontrol-link").click(function(){
-    $(this).parent().next().slideToggle("slow");
+  // Display comments and new comment form.
+  $(".ccontrol-link").live("click", function () {
+    $(this).closest(".commentable").find(".comments_wrapper").slideToggle("slow");
     return false;
   });
 
