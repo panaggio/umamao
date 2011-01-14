@@ -4,18 +4,28 @@ $(document).ready(function() {
   $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
+  // Close modal boxes.
   $(".modal .close").live("click", function () {
     $.colorbox.close();
     return false;
   });
 
-  Utils.clickObject(".share-question input[type=submit]", function () {
+  // Send shared question to Facebook.
+  Utils.clickObject(".share-question-widget input[type=submit]", function () {
     return {
       success: function (data) {
+        $.colorbox.close();
+      },
+
+      error: function (data) {
+        if (data.status == "needs_permission") {
+          Utils.modal({html: data.html});
+        }
       }
     };
   });
 
+  // Open modal box to share question.
   Utils.clickObject("#sidebar .share .facebook", function () {
     return {
       success: function (data) {

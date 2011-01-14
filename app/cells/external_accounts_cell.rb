@@ -28,11 +28,19 @@ class ExternalAccountsCell < Cell::Rails
     render :view => 'external_account'
   end
 
-  # Displays a message telling the user that he needs to connect his
+  # Display a message telling the user that he needs to connect his
   # external account.
   def needs_connection
     @provider = @opts[:provider]
     render
+  end
+
+  # Display a message asking for more access permissions for an
+  # external account.
+  def needs_permission
+    @provider = @opts[:provider]
+    @needs_permission = true
+    render :view => "needs_connection"
   end
 
 end

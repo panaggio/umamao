@@ -1,6 +1,9 @@
 .modal
   %h1= t("questions.show.needs_connection.title")
-  %p= t("questions.show.needs_connection.message")
+  - if @needs_permission
+    %p= t("questions.show.needs_permission")
+  - else
+    %p= t("questions.show.needs_connection.message")
   .controls
     = link_to t("scaffold.cancel"), "#", :class => "close"
     = link_to t("external_accounts.connect"), "/auth/facebook"

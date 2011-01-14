@@ -1,3 +1,6 @@
+# This controller is used to share content on other websites, such as
+# posting a question on Facebook.
+
 class ShareQuestionController < ApplicationController
   before_filter :login_required
   before_filter :check_connections
@@ -20,13 +23,19 @@ class ShareQuestionController < ApplicationController
     @body = params[:body]
     @question = Question.find_by_id(params[:question])
     @link = question_url(@question)
+    status = :success
 
     case params[:where]
     when "facebook"
-      graph = current_user.facebook_connection
-      graph.put_wall_post(@body, :link => @link)
-      status = :success
-      message = I18n.t("questions.show.share_success", :site => "Facebook")
+      begin
+        graph = current_user.facebook_connection
+        graph.put_wall_post(@body, :link => @link)
+        status = :success
+        message = I18n.t("questions.show.share_success", :site => "Facebook")
+      rescue Koala::Facebook::APIError
+        status = :needs_permission
+        session["omniauth_return_url"] = question_path(@question)
+      end
     end
 
     respond_to do |format|
@@ -35,14 +44,26 @@ class ShareQuestionController < ApplicationController
       end
 
       format.js do
-        render :json => {
-          :success => true,
-          :message => message
-        }.to_json
+        case status
+        when :success
+          render :json => {
+            :success => true,
+            :message => message
+          }.to_json
+        when :needs_permission
+          render :json => {
+            :success => false,
+            :status => "needs_permission",
+            :html => (render_cell :external_accounts, :needs_permission,
+                      :provider => "facebook")
+          }.to_json
+        end
       end
     end
   end
 
+  # Check whether the corresponding external account is actually present,
+  # asking the user to connect it if it isn't.
   def check_connections
     status = :success
 
@@ -70,9 +91,8 @@ class ShareQuestionController < ApplicationController
             }.to_json
           when :unknown_destination
             render :json => {
-              # TODO: I18n
               :success => false,
-              :message => "unknown destination"
+              :message => I18n.t("questions.show.unknown_destination")
             }.to_json
           end
         end

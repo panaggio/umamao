@@ -118,6 +118,10 @@ pt-BR:
           você será direcionado ao Facebook para autorizar o uso de
           sua conta. Você retornará ao site ao final do processo de
           autorização.
+      needs_permission: |
+        Aparentemente, sua conta do Facebook não está conectada com
+        as permissões necessárias para permitir essa ação. Clique em
+        "Conectar" para habilitá-las.
       request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
       retag: Editar tópicos
@@ -131,6 +135,7 @@ pt-BR:
       to_answer_question: para responder a esta pergunta
       unauthenticated_retag: Você precisa de uma conta para editar tópicos
       unfavorite_tooltip: Remover esta pergunta das suas favoritas
+      unknown_destination: Destino de compartilhamento inválido.
       unwatch_tooltip: Parar de seguir esta pergunta
       viewed: visitada
       watch_tooltip: Seguir esta pergunta
