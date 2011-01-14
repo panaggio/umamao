@@ -1,16 +1,9 @@
 - group = @resource.instance_variable_get("@group")
 - domain = ActionMailer::Base.default_url_options[:host]
 
-%p
-  Olá, #{@resource.first_name}!
-%p
+%p= t('.greeting', :name => @resource.first_name)
+%p= t('.message', :link => link_to('Umamão', domain))
 
-  Obrigado por se juntar ao #{link_to 'Umamão', domain}! Para
-  completar seu cadastro, precisamos confirmar seu endereço de email
-  acadêmico. Para fazer isso, é só clicar no link abaixo:
-
-%p
-  = link_to 'Confirmar meu email.', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
-%p
-  Caso não tenha se cadastrado no site, por favor, desconsidere este email.
+%p= link_to t('.email_link'), confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+%p= t('.goodbye')
 
