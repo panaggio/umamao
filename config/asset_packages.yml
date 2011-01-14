@@ -28,7 +28,7 @@ stylesheets:
   - jquery-ui
   - compiled/application
   - autocomplete
-  - colorbox/colorbox
+  - colorbox
 - landing:
   - compiled/landing
   - autocomplete_landing
