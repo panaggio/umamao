@@ -11,7 +11,7 @@
   - if logged_in?
     .forms
       - @comment = Comment.new
-      = form_tag(path_scope + [@comment], :class => "form commentForm", :id => "add_comment_form") do
+      = form_tag(path_scope + [@comment], :class => "form commentForm") do
         = render :partial => "comments/form", :locals => {:source => source, :commentable => commentable}
         .group.navform
           = submit_tag t("comments.shared.comment_submit"), :class => "button"
