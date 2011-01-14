@@ -29,7 +29,9 @@ class ShareQuestionController < ApplicationController
     when "facebook"
       begin
         graph = current_user.facebook_connection
-        graph.put_wall_post(@body, :link => @link)
+        # FIXME: how can we get an image url inside a controller?
+        graph.put_wall_post(@body, :link => @link,
+                            :picture => AppConfig.site + "/images/logosquare.png")
         status = :success
         message = I18n.t("questions.show.share_success", :site => "Facebook")
       rescue Koala::Facebook::APIError
