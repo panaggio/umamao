@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 class Invitation
   include MongoMapper::Document
+  include Support::TokenConfirmable
+
+  @@token_confirmable_key = :invitation_token
 
   key :_id, String
   key :sender_id, String, :required => true, :index => true
@@ -15,7 +18,8 @@ class Invitation
   key :group_id, String
   belongs_to :group
 
-  before_create :generate_invitation_token
+  token_confirmable_key :invitation_token
+
   after_create :send_invitation
 
   validate_on_create :recipient_is_not_user
@@ -23,26 +27,6 @@ class Invitation
   ensure_index([[:created_at, -1]])
 
   timestamps!
-
-  # stolen from devise (TODO place this somewhere common to affiliation
-  # and invitation)
-  def self.generate_token
-    loop do
-      token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
-        delete("\n")
-      break token unless self.where(:invitation_token => token).count > 0
-    end
-  end
-
-  def generate_invitation_token
-    self.invitation_token = nil
-    self.invitation_token = self.class.generate_token
-    self.sent_at = Time.now.utc
-  end
-
-  def generate_invitation_token!
-    generate_invitation_token && save(:validate => false)
-  end
 
   # Send confirmation instructions by email
   def send_invitation

@@ -24,17 +24,4 @@ class Affiliation
   validates_presence_of :email
 
   after_create  :send_confirmation
-
-  def send_confirmation
-    if self.university.open_for_signup
-      generate_confirmation_token! if self.affiliation_token.nil?
-      Notifier.signup(self).deliver
-    else
-      Notifier.closed_for_signup(self).deliver
-    end
-  end
-
-  def self.resend_confirmation(email)
-    where(:email=>email).first.send_confirmation
-  end
 end
