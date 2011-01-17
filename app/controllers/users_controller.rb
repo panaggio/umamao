@@ -60,6 +60,10 @@ class UsersController < ApplicationController
       @affiliation = Affiliation.
         find_by_affiliation_token(params[:affiliation_token])
 
+      if @affiliation.confirmed_at.present?
+        redirect_to(root_url) && return
+      end
+
       if @affiliation
         @user.affiliation_token = @affiliation.affiliation_token
       end
