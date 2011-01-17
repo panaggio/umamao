@@ -72,22 +72,6 @@
     a
       color: $link-color
 
-  .comments
-    +column(12, true)
-    +prepend(1)
-
-    .comment
-      border-top: 1px solid #CCCCCC
-      margin-top: 10px
-      padding-top: 2px
-
-      .comment-content
-        +column(10, true)
-        +prepend(1)
-
-      .controls
-        text-align: right
-
   .topic-list
 
     .topic,.retag
@@ -185,3 +169,29 @@
 
 .version_message
   background: #EEEEFF
+
+
+#question, #answers
+
+  .comments
+
+    margin-top: 10px
+
+    +column(12, true)
+
+    .comment
+      border-top: 1px solid #CCCCCC
+      padding-top: 2px
+
+      .comment-content
+        +column(10, true)
+
+      .actions
+        float: left
+        padding-top: 0
+
+        a
+          color: $controls-color
+          font-size: 13px
+          line-height: 26px
+          margin-right: 1em
