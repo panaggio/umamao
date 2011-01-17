@@ -23,6 +23,7 @@
 
 - content_for :js do
   = javascript_include_merged :show
+  = javascript_include_tag "jquery.colorbox-min"
 
 - content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question.topics.map(&:title).dup, @question.title)}

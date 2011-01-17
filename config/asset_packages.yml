@@ -17,9 +17,8 @@ javascripts:
 - show:
   - wmd/jquery.wmd
   - wmd/jquery.wmd.mathjax
-  - jquery.colorbox-min
   - modules/single/question
-  
+
 - landing:
   - modules/landing
 
