@@ -45,7 +45,6 @@ class User
   key :following_count,           Integer, :default => 0
 
   key :membership_list,           MembershipList
-  key :university,				  String
 
   key :feed_token,                String
   key :can_invite_without_confirmation, Boolean, :default => true
