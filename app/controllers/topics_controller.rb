@@ -67,8 +67,8 @@ class TopicsController < ApplicationController
     user = current_user
     @topic.followers << user
     @topic.save
-    user.remove_topic_suggestion(@topic)
-    user.suggested_topics_fresh = false
+    user.suggestion_list.remove(@topic)
+    user.suggestion_list.save!
     user.populate_news_feed!(@topic)
     user.save!
 
@@ -126,13 +126,13 @@ class TopicsController < ApplicationController
   # Adds topic to the current user's list of refused topic suggestions.
   def refuse_suggestion
     @topic = Topic.find_by_slug_or_id(params[:id])
-    current_user.refuse_topic_suggestion!(@topic) if @topic
+    current_user.suggestion_list.mark_as_uninteresting(@topic) if @topic
 
     respond_to do |format|
       format.js do
         render :json => {
           :success => true,
-          :suggestions => (render_cell :suggestions, :topics, :user => current_user)
+          :suggestions => (render_cell :suggestions, :topics)
         }.to_json
       end
     end

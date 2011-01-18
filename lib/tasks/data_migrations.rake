@@ -6,6 +6,17 @@ require 'ccsv'
 namespace :data do
   namespace :migrate do
 
+    desc "Create suggestion lists for all users."
+    task :create_suggestion_lists => :environment do
+      User.query.each do |user|
+        if user.suggestion_list.blank?
+          user.suggestion_list = SuggestionList.new
+          user.suggestion_list.refresh_suggestions!
+          user.suggestion_list.save!
+        end
+      end
+    end
+
     desc "Delete a question's news items if it has already been answered."
     task :delete_duplicate_news_items => :environment do
       Question.query.each do |question|

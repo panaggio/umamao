@@ -6,15 +6,12 @@ class SuggestionsCell < Cell::Rails
   helper UsersHelper
 
   def topics
-    @suggested_topics = current_user.suggested_topics
+    @suggested_topics = current_user.suggestion_list.suggested_topics
     render
   end
 
   def users
-    @suggested_users = current_user.suggested_users.select do |user|
-      !current_user.following?(user) &&
-        !current_user.uninteresting_user_ids.include?(user.id)
-    end
+    @suggested_users = current_user.suggestion_list.suggested_users
     render
   end
 end

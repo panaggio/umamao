@@ -78,15 +78,14 @@ class Topic
 
   # Removes topic from user suggestions and ignored topics.
   def remove_from_suggestions
-    User.query(:suggested_topic_ids => self.id).each do |user|
-      user.suggested_topic_ids.delete(self.id)
-      user.suggested_topics_fresh = false
-      user.save
+    SuggestionList.query(:suggested_topic_ids => self.id).each do |list|
+      list.suggested_topic_ids.delete(self.id)
+      list.save!
     end
 
-    User.query(:uninteresting_topic_ids => self.id).each do |user|
-      user.uninteresting_topic_ids.delete(self.id)
-      user.save
+    SuggestionList.query(:uninteresting_topic_ids => self.id).each do |list|
+      list.uninteresting_topic_ids.delete(self.id)
+      list.save!
     end
   end
   after_destroy :remove_from_suggestions

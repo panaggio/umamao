@@ -4,7 +4,7 @@
     = t("followable.suggestions.users")
 
   %ul
-    - @suggested_users[0..4].each do |user|
+    - @suggested_users.each do |user|
       %li
         .user.info
           = avatar_for(user, :size => 32)

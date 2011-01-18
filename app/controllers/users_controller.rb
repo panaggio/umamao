@@ -196,6 +196,8 @@ class UsersController < ApplicationController
   def follow
     @user = User.find_by_login_or_id(params[:id])
     current_user.follow(@user)
+    current_user.suggestion_list.remove(@user)
+    current_user.suggestion_list.save!
     current_user.populate_news_feed!(@user)
 
     track_event(:followed_user)
@@ -218,7 +220,7 @@ class UsersController < ApplicationController
         }
         if params[:suggestion]
           response[:suggestions] =
-            render_cell :suggestions, :users, :user => current_user
+            render_cell :suggestions, :users
         end
         render :json => response.to_json
       }
@@ -258,18 +260,17 @@ class UsersController < ApplicationController
   # removing it from the suggestions list.
   def refuse_suggestion
     @user = User.find_by_id(params[:id])
-    if @user && !current_user.uninteresting_user_ids.include?(@user.id)
+    if @user
       @current_user = current_user
-      @current_user.uninteresting_user_ids << @user.id
-      @current_user.suggested_user_ids.delete(@user.id)
-      @current_user.save!
+      @current_user.suggestion_list.mark_as_uninteresting(@user)
+      @current_user.suggestion_list.save!
     end
 
     respond_to do |format|
       format.js do
         render :json => {
           :success => true,
-          :suggestions => (render_cell :suggestions, :users, :user => current_user)
+          :suggestions => (render_cell :suggestions, :users)
         }.to_json
       end
     end
