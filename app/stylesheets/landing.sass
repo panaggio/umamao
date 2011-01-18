@@ -24,7 +24,7 @@ body.bp
   padding: 20px 0
 
 #login_form
-  /* true means it's the last column in the row
+  // true means it's the last column in the row 
   +column(10, true)
   +blueprint-inline-form
   +blueprint-form-sizes(142px)
@@ -59,22 +59,38 @@ body.bp
 
 hr#colruler
   +colruler(#EEEEEE)
-
+  
+#help-box  
+  background-color: #eef5e9
+  border: 1pt dashed #DA242B
+  font-size: 0.8em
+  display: none
+  padding: 10px
+  position: absolute
+  width: 250px
+  p
+    margin: 0
+  
 #content
   +column(13)
-  +colborder
+  //+colborder
+  //border-right: 1px solid #EEEEEE
   margin-bottom: 20px
+  padding-top: 20px
 
 #signup
   $signup-columns: 10
-  /* true means it's the last column in the row
+  // true means it's the last column in the row 
   +column($signup-columns, true)
+  +border-radius(8px)
+  background-color: #F5F5F5
+  padding: 20px
 
   form
     +blueprint-form-sizes(258px)
   .label
-    +column(floor($signup-columns / 3))
-    text-align: right
+    +column($signup-columns, true)
+    text-align: left
     line-height: 1
     height: 39px
 
@@ -89,14 +105,20 @@ hr#colruler
       vertical-align: -100%
     label[for=user_name]
       padding: 6px 0px 0px
+    img
+      margin-bottom: -2px
+      margin-right: 2px
+    
   .input
-    +column(ceil(2* $signup-columns / 3), true)
+    +column($signup-columns, true)
 
   .field
     +column($signup-columns, true)
+    margin-left: 60px
 
   .submit
-    +prepend(floor($signup-columns / 3))
+    //+prepend(floor($signup-columns / 3))
+    padding-left: 220px
     +column(ceil(2* $signup-columns / 3), true)
 
     #user_submit
@@ -105,9 +127,10 @@ hr#colruler
 input[type=submit]
   // The +button-button mixin is just like the +anchor-button mixin, but for <button> elements.
   +umamao-button
+  background-color: #FFFFFF
 
 form#waiting_list
-  /* true means it's the last column in the row
+  // true means it's the last column in the row
   +column(14, true)
   +blueprint-inline-form
   +blueprint-form-sizes(180px)
@@ -154,7 +177,7 @@ ul#team
   .avatar
     margin-right: 20px
 
-/* users#new and stuff
+// users#new and stuff
 #main
   +prepend(6)
   +column(10, true)

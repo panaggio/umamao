@@ -14,3 +14,14 @@ function signUpAjaxRequest() {
 		                  }
     };
  }
+ 
+ function emailtooltip(){
+    $("#email-help").hover( function(e){
+      $("#help-box").css({'left': e.pageX - 290, 'top': e.pageY - 50});
+      $("#help-box").show();
+    },
+    function(){
+      $("#help-box").hide();
+    }
+  );
+ }

@@ -42,10 +42,16 @@
     #landing_signup
       .field
         .label{:style => "position: relative; top: 12px"}
+          = image_tag('icon_question.gif', :id => 'email-help')
           = f.label :email, t('affiliations.form.email')
         .input
           = f.email_field :email, :value => "", :tabindex => 5
+        #help-box
+          %p
+
+            Email acadêmico é o seu email de vínculo com sua a Universidade: seunome@unicamp.br, por exemplo.
+            Se você não possui um, deixe o seu email pessoal que entraremos em contato.
 
       .submit
-        = f.submit t('layouts.application.signup'), :tabindex => 6
+        = f.submit t('layouts.application.signup_button'), :tabindex => 6
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hidden")

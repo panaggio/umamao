@@ -2,17 +2,20 @@ $(document).ready(function() {
 
   // TODO: place this somewhere else
   if ($("#landing_signup").length > 0 ) {
-	  Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
+    Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
   }
+
+  if ($("#email-help").length > 0) {
+    emailtooltip();
+  };
 
   $("form").live('submit', function() {
     window.onbeforeunload = null;
   });
 
   $('.confirm-domain').submit(function(){
-      var bool = confirm($(this).attr('data-confirm'));
-      if(bool==false) return false;
-
+    var bool = confirm($(this).attr('data-confirm'));
+    if(bool==false) return false;
   });
   $("#feedbackform").dialog({ title: "Feedback", autoOpen: false, modal: true, width:"420px" });
   $('#feedbackform .cancel-feedback').click(function(){
