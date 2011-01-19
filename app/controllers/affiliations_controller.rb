@@ -13,22 +13,22 @@ class AffiliationsController < ApplicationController
         track_event(:new_waiting_user)
         flash[:notice] = t("affiliations.create.email_sent")
 
-      else if @waiting_user.errors[:email].present?
-          # TODO: Put this somewhere else (errors module?) Part II
-          flash[:error] = ""
-          @waiting_user.errors[:email].each do |e|
-            case e
-              when "has already been taken"
-                flash[:error] << " " << t("affiliations.messages.errors.email_in_use")
-                WaitingUser.resend_wait_note(email) # resends confirmation
-              else
-                flash[:error] << " " << e
-              end
+      elsif @waiting_user.errors[:email].present?
+        # TODO: Put this somewhere else (errors module?) Part II
+        flash[:error] = ""
+        @waiting_user.errors[:email].each do |e|
+          case e
+          when "has already been taken"
+            flash[:error] << " " <<
+              t("affiliations.messages.errors.email_in_use")
+            WaitingUser.resend_wait_note(email) # resends confirmation
+          else
+            flash[:error] << " " << e
           end
-
-        else
-          flash[:error] = @waiting_user.errors.full_messages.join("**")
         end
+
+      else
+        flash[:error] = @waiting_user.errors.full_messages.join("**")
       end
     else
       @affiliation = Affiliation.new
@@ -38,46 +38,43 @@ class AffiliationsController < ApplicationController
       if @affiliation.save
         track_event(:new_affiliation)
         flash[:notice] = t("affiliations.create.email_sent")
-
-      else
+      elsif @affiliation.errors[:email].present?
         # TODO: Put this somewhere else (errors module?) Part II
-        if @affiliation.errors[:email].present?
-          flash[:error] = ""
-          @affiliation.errors[:email].each do |e|
-
-            case e
-              when "has already been taken"
-                flash[:error] << " " << t("affiliations.messages.errors.email_in_use")
-                Affiliation.resend_confirmation(email) #resends confirmation
-              else
-                  flash[:error] << " " << e
-              end
+        flash[:error] = ""
+        @affiliation.errors[:email].each do |e|
+          case e
+          when "has already been taken"
+            flash[:error] << " " <<
+              t("affiliations.messages.errors.email_in_use")
+            Affiliation.resend_confirmation(email) #resends confirmation
+          else
+            flash[:error] << " " << e
           end
-
-        else
-          flash[:error] = @affiliation.errors.full_messages.join("**")
         end
+      else
+        flash[:error] = @affiliation.errors.full_messages.join("**")
       end
     end
 
     # Responding
     if flash[:error].present?
-        respond_to do |format|
-          format.js {
-            render(:json => {:success => false,
-                             :message => flash[:error] }.to_json)
-          }
+      respond_to do |format|
+        format.js do
+          render(:json => {
+                   :success => false,
+                   :message => flash[:error]
+                 }.to_json)
         end
-
+      end
     elsif flash[:notice].present?
-        respond_to do |format|
-          format.js {
-            render(:json => {:success => true,
-                             :message => flash[:notice] }.to_json)
-          }
+      respond_to do |format|
+        format.js do
+          render(:json => {
+                   :success => true,
+                   :message => flash[:notice]
+                 }.to_json)
         end
+      end
     end
   end
 end
-
-
