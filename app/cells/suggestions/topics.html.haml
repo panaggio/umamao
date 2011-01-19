@@ -11,7 +11,7 @@
               = link_to topic.title, topic_path(topic), :title => topic.title
           .controls
             .follow-info
-              = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link"
+              = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
             .refuse-suggestion
-              = link_to "✕", refuse_suggestion_topic_path(topic)
+              = link_to "✕", remove_suggestion_path(:topic => topic.id), :method => :post
           .clear

@@ -8,7 +8,6 @@ Shapado::Application.routes.draw do
     member do
       post :follow
       post :unfollow
-      post :refuse_suggestion
     end
 
     collection do
@@ -57,9 +56,11 @@ Shapado::Application.routes.draw do
     member do
       post :unfollow
       post :follow
-      post :refuse_suggestion
     end
   end
+
+  match "/suggestions/remove" => "suggestions#destroy",
+    :as => :remove_suggestion
 
   resources :ads
   resources :adsenses

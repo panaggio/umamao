@@ -123,22 +123,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  # Adds topic to the current user's list of refused topic suggestions.
-  def refuse_suggestion
-    @topic = Topic.find_by_slug_or_id(params[:id])
-    current_user.suggestion_list.mark_as_uninteresting(@topic) if @topic
-
-    respond_to do |format|
-      format.js do
-        render :json => {
-          :success => true,
-          :suggestions => (render_cell :suggestions, :topics)
-        }.to_json
-      end
-    end
-  end
-
-
   # Searches matching topics and render them in JSON form for input
   # autocomplete.
   def autocomplete

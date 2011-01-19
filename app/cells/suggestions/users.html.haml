@@ -11,8 +11,8 @@
           = user.name
         .controls
           .follow-info
-            = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link"
+            = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link", :method => :post
           .refuse-suggestion
-            = link_to "✕", refuse_suggestion_user_path(user)
+            = link_to "✕", remove_suggestion_path(:user => user.id)
         .clear
 

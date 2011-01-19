@@ -73,15 +73,27 @@ window.Utils = {
       // of the element.
       if ($(element).is("a")) {
         ajaxParams.url = settings.url || $(element).attr("href");
+        var type = settings.type || $(element).attr("data-method") ||
+          "GET";
+        var isDelete = type.match(/DELETE/i) ? true : false;
+
         if (typeof settings.data === "string" ||
             settings.data instanceof String) {
-          ajaxParams.data = settings.data + "format=js";
+          ajaxParams.data = settings.data + "&format=js";
+          if (isDelete) {
+            ajaxParams.data += "&method=delete";
+          }
         } else if (typeof settings.data === "object") {
-          ajaxParams.data = $.extend({}, settings.data, {format: "js"});
+          var extraParams = {format: "js"};
+          if (isDelete) {
+            extraParams.method = "delete";
+          }
+          ajaxParams.data = $.extend({}, settings.data, extraParams);
         } else {
-          ajaxParams.data = "format=js";
+          ajaxParams.data = isDelete ? "format=js&method=delete" :
+            "format=js";
         }
-        ajaxParams.type = settings.type || "GET";
+        ajaxParams.type = isDelete ? "POST" : type;
       } else {
         // Assume element belongs to a form.
         var form = $(element).closest("form");

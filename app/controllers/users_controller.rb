@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
-                                           :follow, :unfollow, :refuse_suggestion]
+                                           :follow, :unfollow]
 
   tabs :default => :users
 
@@ -254,26 +254,6 @@ class UsersController < ApplicationController
       flash[:notice] = t("destroy_failed", :scope => "devise.registrations")
     end
     return redirect_to(:root)
-  end
-
-  # Adds user to the current user's list of refused user suggestions,
-  # removing it from the suggestions list.
-  def refuse_suggestion
-    @user = User.find_by_id(params[:id])
-    if @user
-      @current_user = current_user
-      @current_user.suggestion_list.mark_as_uninteresting(@user)
-      @current_user.suggestion_list.save!
-    end
-
-    respond_to do |format|
-      format.js do
-        render :json => {
-          :success => true,
-          :suggestions => (render_cell :suggestions, :users)
-        }.to_json
-      end
-    end
   end
 
   protected
