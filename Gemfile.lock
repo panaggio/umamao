@@ -159,7 +159,6 @@ GEM
       faraday (~> 0.5.3)
     ffi (0.6.3)
       rake (>= 0.8.7)
-    geoip (0.8.7)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
     goalie (0.0.4)
@@ -324,7 +323,6 @@ DEPENDENCIES
   factory_girl!
   faker
   fancy-buttons (~> 0.5.1)
-  geoip
   goalie
   haml (~> 3.0.13)
   jnunemaker-validatable!

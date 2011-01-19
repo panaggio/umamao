@@ -4,10 +4,10 @@
 # Author: Eleferen
 # Author: Lockal
 # Author: Александр Сигачёв
-ru: 
-  activerecord: 
-    attributes: 
-      user: 
+ru:
+  activerecord:
+    attributes:
+      user:
         activated_at: активен с
         activation_code: Код активации
         age: Возраст
@@ -18,7 +18,6 @@ ru:
         current_password: Текущий пароль
         email: Электронная почта
         fullname: Полное имя
-        hide_country: Не отображать мою страну
         language: Язык
         language_filter: Фильтр по языку
         last_logged_at: был последний раз на сайте
@@ -32,11 +31,11 @@ ru:
         timezone: Часовой пояс
         updated_at: обновлено
         website: Веб-сайт
-    models: 
+    models:
       user: Пользователь
       users: Пользователи
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: Изменение чужих постов
       edit_wiki_post: Редактирование вики-записей
       flag: Отметить
@@ -45,16 +44,16 @@ ru:
       vote_to_close_any_question: Запросить закрытие любого вопроса
       vote_to_close_own_question: Запросить закрытие своего вопроса
       vote_up: Голосовать за
-    create: 
+    create:
       flash_error: К сожалению, настроить эту учётную запись не удалось. Повторите попытку снова или обратитесь к администратору (по ссылке выше).
       flash_notice: Благодарим за регистрацию!
-    edit: 
+    edit:
       enable_twitter: Включить учётные записи facebook или twitter
       submit: Сохранить
       title: Настройки
-    follow: 
+    follow:
       flash_notice: Пользователь %{user} добавлен в список ваших друзей
-    form: 
+    form:
       activities_notification: Получить уведомления по электронной почте о системных действиях, таких как появление новых беджей, новых следящих и т. д.
       avatar_tip: Измените изображение в своём профиле с помощью Gravatar
       give_advice_notification: Получать уведомления по электронной почте о вопросах в вашей области знаний
@@ -63,7 +62,7 @@ ru:
       notifications: Уведомления
       reports_notification: Получать отчёт о последних действиях в группе (только для администраторов групп)
       show_more_lang: Другие языки
-    index: 
+    index:
       empty: Эта группа пуста, примите участие для присоединения к ней.
       filter: Поиск пользователей
       name: Имя
@@ -75,16 +74,16 @@ ru:
       reputation: Репутация
       reputation_tooltip: Пользователи отсортированы по более высокой репутации
       title: Все пользователи
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: Вам необходимо обладать репутацией более {{min_reputation}} для того, чтобы {{action}}
-    new: 
+    new:
       submit: Зарегистрироваться
       title: Зарегистрироваться как новый пользователь
-    show: 
+    show:
       follow: Следить
       title: Пользователь %{user}
       unfollow: Не следить
       views: просмотры
-    unfollow: 
+    unfollow:
       flash_notice: Пользователь {{user}} удалён из списка ваших друзей

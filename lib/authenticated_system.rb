@@ -39,7 +39,6 @@ module AuthenticatedSystem
       :path => "/"
     }
 
-    user.localize(request.remote_ip)
     user.logged!(current_group)
     check_draft
   end
@@ -56,7 +55,6 @@ module AuthenticatedSystem
     if user
       cookies.delete(:reset_openid_token)
 
-      user.localize(request.remote_ip)
       user.logged!(current_group)
       check_draft
     end

@@ -148,11 +148,6 @@
       = link_to h(@question.user.name), user_path(@question.user)
       %span.time_ago.published{:title => @question.created_at, :class => "relativetime"}
         = t("time.ago", :time => time_ago_in_words(@question.created_at))
-      %span.adr
-        - if !@question.user.hide_country
-          %span.country-name
-            = t("global.from", :site => @question.user.country_name)
-            = country_flag(@question.user.country_code, @question.user.country_name)
 
   .audience-size
     = t('.topic_followers',

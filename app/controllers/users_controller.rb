@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     @user = User.new
     @user.safe_update(%w[login email name password_confirmation password
                          preferred_languages website language timezone
-                         identity_url bio hide_country invitation_token
+                         identity_url bio invitation_token
                          affiliation_token], params[:user])
 
     if params[:user]["birthday(1i)"]
@@ -112,7 +112,6 @@ class UsersController < ApplicationController
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
       # reset_session
-      @user.localize(request.remote_ip)
       if @user.active?
         flash[:notice] = t("welcome", :scope => "users.create")
       else

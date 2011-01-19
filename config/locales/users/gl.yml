@@ -2,10 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Toliño
-gl: 
-  activerecord: 
-    attributes: 
-      user: 
+gl:
+  activerecord:
+    attributes:
+      user:
         activated_at: activado o
         activation_code: Código de activación
         age: Idade
@@ -16,7 +16,6 @@ gl:
         current_password: Contrasinal actual
         email: Correo electrónico
         fullname: Nome completo
-        hide_country: Non mostrar o meu país
         language: Lingua
         language_filter: Filtrar por lingua
         last_logged_at: visto o
@@ -30,11 +29,11 @@ gl:
         timezone: Zona horaria
         updated_at: actualizado o
         website: Páxina web
-    models: 
+    models:
       user: Usuario
       users: Usuarios
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: Editar a entrada doutro
       edit_wiki_post: Editar entradas do wiki
       flag: Marcar
@@ -43,16 +42,16 @@ gl:
       vote_to_close_any_question: Pedir o peche de calquera pregunta
       vote_to_close_own_question: Pedir o peche dunha pregunta propia
       vote_up: Votar positivamente
-    create: 
+    create:
       flash_error: Por desgraza, non podemos crear a conta. Inténteo de novo ou póñase en contacto cun administrador (a ligazón está enriba).
       flash_notice: Grazas por se rexistrar!
-    edit: 
+    edit:
       enable_twitter: Activar as súas contas no Facebook ou no Twitter
       submit: Gardar
       title: Configuracións
-    follow: 
+    follow:
       flash_notice: O usuario {{user}} xa forma parte dos seus amigos
-    form: 
+    form:
       activities_notification: Recibir notificacións por correo electrónico sobre as actividades do sistema, como ganancia de insignias, novos seguidores etc.
       avatar_tip: Cambiar a imaxe do seu perfil usando o gravatar
       give_advice_notification: Recibir notificacións por correo electrónico sobre as preguntas ligadas co seu campo de experiencia
@@ -61,7 +60,7 @@ gl:
       notifications: Notificacións
       reports_notification: Recibir un informe coas últimas actividades do grupo (soamente para o administrador do grupo)
       show_more_lang: Mostrar máis linguas
-    index: 
+    index:
       empty: Este grupo aínda non conta con ningún membro. Únase a el.
       filter: Procurar usuarios
       name: Nome
@@ -73,16 +72,16 @@ gl:
       reputation: Reputación
       reputation_tooltip: Usuarios ordenados por maior reputación
       title: Todos os usuarios
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: Necesita unha reputación de {{min_reputation}} para poder {{action}}
-    new: 
+    new:
       submit: Rexístrese
       title: Rexístrese como novo usuario
-    show: 
+    show:
       follow: Vixiar
       title: Usuario {{user}}
       unfollow: Deixar de vixiar
       views: visitas
-    unfollow: 
+    unfollow:
       flash_notice: O usuario {{user}} xa non pertence aos seus amigos

@@ -3,10 +3,10 @@
 # Export driver: syck
 # Author: Patcito
 # Author: Peter17
-fr: 
-  activerecord: 
-    attributes: 
-      user: 
+fr:
+  activerecord:
+    attributes:
+      user:
         activated_at: activé le
         activation_code: code d'activation
         age: Âge
@@ -17,7 +17,6 @@ fr:
         current_password: mot de passe actuel
         email: email
         fullname: nom entier
-        hide_country: Ne pas dévoiler mon pays
         language: langue
         language_filter: filter by language
         last_logged_at: vu
@@ -31,11 +30,11 @@ fr:
         timezone: fuseau horaire
         updated_at: crée le
         website: Site internet
-    models: 
+    models:
       user: utilisateur
       users: utilisateurs
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: modifier les postes des autres
       edit_wiki_post: editer les postes wiki
       flag: flag
@@ -44,16 +43,16 @@ fr:
       vote_to_close_any_question: demander de fermer toute question
       vote_to_close_own_question: demander de fermer sa propre question
       vote_up: voter positif
-    create: 
+    create:
       flash_error: désolé, nous n'avons pas pu configurer votre compte. Éssayer encore s'il vous plait, ou contacter un administrateur, le lien es ci-dessus.
       flash_notice: merci de vous avoir enregistrer!
-    edit: 
+    edit:
       enable_twitter: Activer vos comptes facebook ou twitter
       submit: sauver
       title: configuration
-    follow: 
+    follow:
       flash_notice: L'utilisateur %{user} a été ajouté à votre liste d' amis
-    form: 
+    form:
       activities_notification: recevoir des notifications via courrier électronique sur les activités système telles que les insignes gagnées, les nouveaux suiveurs, etc.
       avatar_tip: changer l'image de votre profil en utilisant gravatar
       give_advice_notification: recevoir des notifications via courrier électronique sur les questions liées à votre champs d'expertise
@@ -62,7 +61,7 @@ fr:
       notifications: notifications
       reports_notification: recevoir un rapport avec les dernières activités du groupes (juste pour l'admin du groupe)
       show_more_lang: Afficher plus de langues
-    index: 
+    index:
       empty: ce groupe n'a pas de membres pour l'instant, participer pour en devenir un.
       filter: Recherchez des utilisateurs
       name: name
@@ -74,16 +73,16 @@ fr:
       reputation: reputation
       reputation_tooltip: utilisateurs par ordre de réputation
       title: tous les utilisateurs
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: vous avez besoin d'une réputation de %{min_reputation} à fin de pouvoir %{action}
-    new: 
+    new:
       submit: ouvrir un compte
       title: se connecter en tant que nouvel utilisateur
-    show: 
+    show:
       follow: suivre
       title: User %{user}
       unfollow: ne plus suivre
       views: vues
-    unfollow: 
+    unfollow:
       flash_notice: L'utilisateur %{user} a été ajouté à votre liste d'amis

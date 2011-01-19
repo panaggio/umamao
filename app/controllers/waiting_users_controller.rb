@@ -1,6 +1,4 @@
 class WaitingUsersController < ApplicationController
-  # POST /lectures
-  # POST /lectures.xml
   def create
     @user = User.new
     @waiting_user = WaitingUser.new(params[:user])

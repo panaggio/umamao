@@ -2,10 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Hamilton Abreu
-pt-PT: 
-  activerecord: 
-    attributes: 
-      user: 
+pt-PT:
+  activerecord:
+    attributes:
+      user:
         activated_at: activado em
         activation_code: Código de activação
         age: Idade
@@ -16,7 +16,6 @@ pt-PT:
         current_password: Palavra-chave actual
         email: Correio electrónico
         fullname: Nome completo
-        hide_country: Não mostrar o meu país
         language: Língua
         language_filter: Filtrar por língua
         last_logged_at: visto
@@ -30,11 +29,11 @@ pt-PT:
         timezone: Localização
         updated_at: actualizado em
         website: Site na internet
-    models: 
+    models:
       user: Utilizador
       users: Utilizadores
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: Editar publicações de outros
       edit_wiki_post: Editar publicações wiki
       flag: Reportar
@@ -43,16 +42,16 @@ pt-PT:
       vote_to_close_any_question: request closing any question
       vote_to_close_own_question: Pedir encerramento de uma pergunta própria
       vote_up: Voto positivo
-    create: 
+    create:
       flash_error: Desculpe, não foi possível criar essa conta. Tente novamente ou contacte um administrador (link está acima), por favor.
       flash_notice: Obrigado por se registar!
-    edit: 
+    edit:
       enable_twitter: Activar as suas contas no Facebook ou no Twitter
       submit: Gravar
       title: Definições
-    follow: 
+    follow:
       flash_notice: O utilizador %{user} foi adicionado aos seus amigos
-    form: 
+    form:
       activities_notification: Receber notificações por correio electrónico de actividades como atribuições de distintivos, novos seguidores, etc.
       avatar_tip: Alterar a imagem do perfil usando o Gravatar
       give_advice_notification: Receber notificações por correio electrónico de perguntas na sua área de especialidade
@@ -61,7 +60,7 @@ pt-PT:
       notifications: Notificações
       reports_notification: Receber um relatório das actividades mais recentes do grupo (só para administradores de grupos)
       show_more_lang: Mostrar mais línguas
-    index: 
+    index:
       empty: Este grupo não tem membros. Participe, aderindo a este grupo.
       filter: Pesquisar utilizadores
       name: Nome
@@ -73,16 +72,16 @@ pt-PT:
       reputation: Reputação
       reputation_tooltip: Utilizadores por ordem decrescente de reputação
       title: Todos os utilizadores
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: Precisa de ter uma reputação mínima de %{min_reputation} para %{action}
-    new: 
+    new:
       submit: Registar
       title: Registar-se como novo utilizador
-    show: 
+    show:
       follow: Seguir
       title: Utilizador %{user}
       unfollow: Deixar de seguir
       views: visitas
-    unfollow: 
+    unfollow:
       flash_notice: O utilizador %{user} foi removido dos seus amigos

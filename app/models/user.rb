@@ -35,9 +35,6 @@ class User
   key :language_filter,           String, :default => "user", :in => LANGUAGE_FILTERS
 
   key :ip,                        String
-  key :country_code,              String
-  key :country_name,              String, :default => "unknown"
-  key :hide_country,              Boolean, :default => true
 
   key :default_subtab,            Hash
 
@@ -366,16 +363,6 @@ Time.zone.now ? 1 : 0)
                                 :reputation => current_reputation,
                                 :delta => value )
     ReputationStat.collection.update({:_id => stats.id}, {:$addToSet => {:events => event.attributes}})
-  end
-
-  def localize(ip)
-    l = Localize.country(ip)
-    self.ip = ip
-    if l
-      self.country_code = l[2]
-      self.country_name = l[4]
-    end
-    save
   end
 
   def reputation_on(group)

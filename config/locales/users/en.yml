@@ -79,7 +79,6 @@ en:
         created_at: joined
         reputation: Reputation
         avatar: Profile image
-        hide_country: Do not display my country
         language_filter: Filter by language
         website: Website
         birthday: Birthday

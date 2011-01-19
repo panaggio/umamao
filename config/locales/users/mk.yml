@@ -2,10 +2,10 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Bjankuloski06
-mk: 
-  activerecord: 
-    attributes: 
-      user: 
+mk:
+  activerecord:
+    attributes:
+      user:
         activated_at: активирано во
         activation_code: активационен код
         age: Возраст
@@ -16,7 +16,6 @@ mk:
         current_password: тековна лозинка
         email: е-пошта
         fullname: полно име
-        hide_country: Не прикажувај од која земја сум
         language: јазик
         language_filter: филтрирај по јазик
         last_logged_at: виден
@@ -30,11 +29,11 @@ mk:
         timezone: часовна зона
         updated_at: подновено во
         website: Мреж. место
-    models: 
+    models:
       user: корисник
       users: корисници
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: уредување на туѓи пораки
       edit_wiki_post: уредување на вики-пораки
       flag: означи
@@ -43,16 +42,16 @@ mk:
       vote_to_close_any_question: барање да се затвори било кое прашање
       vote_to_close_own_question: барање да се затвори сопствено прашање
       vote_up: гласај „за“
-    create: 
+    create:
       flash_error: Нажалост, не можевме да ја направиме таа сметка. Обидете се повторно, или пак обратете се кај администратор (врската е погоре)
       flash_notice: ви благодариме што се регистриравте!
-    edit: 
+    edit:
       enable_twitter: Овозможете ги вашите сметки на Facebook или Twitter
       submit: зачувај
       title: поставки
-    follow: 
+    follow:
       flash_notice: Корисникот %{user} е додаден како ваш пријател
-    form: 
+    form:
       activities_notification: добивање на соопштенија по е-пошта за системски активности како заработени значки, нови следбеници и тн.
       avatar_tip: сменете си ја профилната слика со граватар
       give_advice_notification: добивање на известувања по е-пошта за прашања од вашата стручна област
@@ -61,7 +60,7 @@ mk:
       notifications: соопштенија
       reports_notification: добивање на извештај за најновите активности во групата (само за администратори на групи)
       show_more_lang: Покажи повеќе јазици
-    index: 
+    index:
       empty: оваа група нема членови. Учествувајте за да се зачлените во групава.
       filter: пребарај корисници
       name: име
@@ -73,16 +72,16 @@ mk:
       reputation: углед
       reputation_tooltip: корисниците по повисок углед
       title: сите корисници
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: за да %{action} потребен ви е углед од %{min_reputation}
-    new: 
+    new:
       submit: пријави се
       title: регистрирај се како нов корисник
-    show: 
+    show:
       follow: следи
       title: Корисник %{user}
       unfollow: повеќе не следи
       views: прегледи
-    unfollow: 
+    unfollow:
       flash_notice: Корисникот %{user} е отстранет од вашите пријатели

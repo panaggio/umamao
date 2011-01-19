@@ -1,10 +1,10 @@
 # Messages for Japanese (日本語)
 # Exported from translatewiki.net
 # Export driver: syck
-ja: 
-  activerecord: 
-    attributes: 
-      user: 
+ja:
+  activerecord:
+    attributes:
+      user:
         activated_at: 認証時間
         activation_code: 認証コード
         age: Age
@@ -15,7 +15,6 @@ ja:
         current_password: 現在のパスワード
         email: メールアドレス
         fullname: フルネーム
-        hide_country: 国を表示しない
         language: 表示言語
         language_filter: 言語でフィルタリング
         last_logged_at: 最新ログイン時間
@@ -29,11 +28,11 @@ ja:
         timezone: タイムゾーン
         updated_at: 更新時間
         website: Webサイト
-    models: 
+    models:
       user: ユーザ
       users: ユーザ
-  users: 
-    actions: 
+  users:
+    actions:
       edit_others_posts: 他のユーザの投稿を編集する
       edit_wiki_post: Wikiポストを編集する
       flag: 報告をする
@@ -42,16 +41,16 @@ ja:
       vote_to_close_any_question: 任意の質問について終了リクエストを出す
       vote_to_close_own_question: 自分の質問について終了リクエストを出す
       vote_up: ＋の投票
-    create: 
+    create:
       flash_error: アカウントの作成に失敗しました。以下のエラーメッセージを確認して修正してもらうか、管理者にご連絡ください。
       flash_notice: アカウントを作成しました。登録ありがとうございます！
-    edit: 
+    edit:
       enable_twitter: Enable your facebook or twitter accounts
       submit: 設定を変更する
       title: 設定
-    follow: 
+    follow:
       flash_notice: "%{user}があなたの友達になりました"
-    form: 
+    form:
       activities_notification: バッジやフォローを受けたらメールで通知する
       avatar_tip: Gravatarを使ってアイコン画像を変更できます
       give_advice_notification: 自分の専門分野に対する質問が登録されたらメールで通知する
@@ -59,7 +58,7 @@ ja:
       new_answer_notification: 新しい回答を受け取ったらメールで通知する
       notifications: 通知の設定
       reports_notification: グループに関する新しい活動レポートを受け取る（グループ管理者のみ）
-    index: 
+    index:
       empty: このグループはメンバーがいません。参加してください！
       filter: ユーザを検索する
       name: 名前順
@@ -71,15 +70,15 @@ ja:
       reputation: 評価の高い順
       reputation_tooltip: 評価の高い順にユーザを表示します
       title: 全てのユーザ
-    messages: 
-      errors: 
+    messages:
+      errors:
         reputation_needed: "%{action}をするには%{min_reputation}の評価が必要です"
-    new: 
+    new:
       submit: 新規ユーザ登録
       title: 新規ユーザ
-    show: 
+    show:
       follow: フォローする
       unfollow: フォロー解除
       views: 回表示
-    unfollow: 
+    unfollow:
       flash_notice: "%{user}があなたの友達リストから除外されました"

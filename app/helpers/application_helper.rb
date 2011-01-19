@@ -73,12 +73,6 @@ module ApplicationHelper
     end
   end
 
-  def country_flag(code, name)
-    if code
-      image_tag("flags/flag_#{code.downcase}.gif", :title => name, :alt => "")
-    end
-  end
-
   # Modified Markdown syntax that understands LaTeX math
   def markdown(txt, options = {})
     escaped_math = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
