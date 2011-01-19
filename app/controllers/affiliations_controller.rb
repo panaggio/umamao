@@ -74,7 +74,7 @@ class AffiliationsController < ApplicationController
       case e
       when "has already been taken"
         yield # resends confirmation
-        t("affiliations.messages.errors.email_in_use")
+        t("affiliations.create.email_sent")
       else
         status = :error
         e

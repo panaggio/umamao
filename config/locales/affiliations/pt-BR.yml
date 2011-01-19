@@ -2,8 +2,5 @@ pt-BR:
   affiliations:
     create:
       email_sent: "Obrigado! Verifique seu e-mail para mais instruções."
-    messages:
-      errors:
-        email_in_use: "O email já está em uso. As instruções foram reenviadas."
     form:
       email: "E-mail acadêmico"
