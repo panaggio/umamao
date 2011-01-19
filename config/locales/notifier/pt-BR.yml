@@ -56,7 +56,7 @@ pt-BR:
                 Seu e-mail foi guardado e você será avisado quando abrirmos para sua universidade.
                 Se esta não for sua universidade, por favor, nos avise pelo %{contact}!"
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
-    nonacademic:
+    non_academic:
       greeting: "Olá,"
       message: "Ainda não abrimos o cadastro para usuários que não estejam vinculados a universidades.
                 Seu e-mail foi guardado e você será avisado quando puder se cadastrar.
