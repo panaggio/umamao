@@ -10,6 +10,7 @@ namespace :data do
       Topic.query.each do |topic|
         next if topic.follower_ids.blank?
         topic.followers_count = topic.follower_ids.length
+        topic.save!
       end
     end
 

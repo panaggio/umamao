@@ -65,18 +65,20 @@ class Topic
   end
 
   # Add a follower to topic.
-  def add_follower(user)
+  def add_follower!(user)
     if !self.followers.include?(user)
       self.followers << user
-      Topic.increment(self.id, :followers_count => 1)
+      self.save!
+      self.increment(:followers_count => 1)
     end
   end
 
   # Remove a follower from topic.
-  def remove_follower(user)
+  def remove_follower!(user)
     if self.followers.include?(user)
       self.follower_ids.delete(user.id)
-      Topic.increment(self.id, :followers_count => -1)
+      self.save!
+      self.increment(:followers_count => -1)
     end
   end
 
@@ -86,7 +88,7 @@ class Topic
     return false if id == other.id
 
     other.followers.each do |f|
-      self.add_follower(f)
+      self.add_follower!(f)
     end
 
     Question.query(:topic_ids => other.id).each do |q|
