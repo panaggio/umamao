@@ -55,8 +55,8 @@ class User
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :suggested_topics, :suggested_users, :suggest,
-    :remove_suggestion, :mark_as_uninteresting, :refresh_suggestions,
-    :to => :suggestion_list
+    :remove_suggestion, :mark_as_uninteresting, :refuse_suggestion,
+    :refresh_suggestions, :find_first_suggestions, :to => :suggestion_list
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -549,7 +549,7 @@ Time.zone.now ? 1 : 0)
   end
 
   # Find interesting topics using self's external accounts.
-  def find_topics
+  def find_external_topics
     topics = Set.new
     if account = self.facebook_account
       graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])

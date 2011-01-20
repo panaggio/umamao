@@ -1,6 +1,7 @@
 class SuggestionsController < ApplicationController
   before_filter :login_required
 
+  # Refuse suggestions.
   def destroy
     thing = type = nil
     if params[:user]
@@ -12,7 +13,7 @@ class SuggestionsController < ApplicationController
     end
 
     if thing
-      current_user.mark_as_uninteresting(thing)
+      current_user.refuse_suggestion(thing)
       current_user.save!
     end
 

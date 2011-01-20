@@ -23,29 +23,44 @@ class SuggestionList
   has_many :uninteresting_users, :class_name => "User",
     :in => :uninteresting_user_ids
 
-  def suggest(thing)
+  # Add things to the user's suggestion lists, ignoring the ones that
+  # were already suggested, followed, or marked as
+  # uninteresting. Works on enumerables as well.
+  #
+  # options:
+  # - limit: maximum number of things to suggest
+  #
+  def suggest(thing, options = {})
+    limit = options[:limit]
     # For some reason, the case statement wasn't working.
     if thing.is_a?(Topic)
       if !self.suggested_topic_ids.include?(thing.id) &&
           !thing.follower_ids.include?(self.user_id) &&
           !self.uninteresting_topic_ids.include?(thing.id)
         self.suggested_topic_ids << thing.id
+        return 1
       end
     elsif thing.is_a?(User)
       if !self.suggested_user_ids.include?(thing.id) &&
           !self.user.following?(thing) &&
           !self.uninteresting_user_ids.include?(thing.id)
         self.suggested_user_ids << thing.id
+        return 1
       end
     elsif thing.respond_to?(:each)
+      total = 0
       thing.each do |t|
-        self.suggest(t)
+        break if limit.present? && total >= limit
+        total += self.suggest(t)
       end
+      return total
     else
       raise "Entity can't be suggested to a user: #{thing.class}"
     end
+    return 0
   end
 
+  # Remove a thing from the list of suggestions.
   def remove_suggestion(thing)
     case thing
     when Topic
@@ -55,15 +70,15 @@ class SuggestionList
     end
   end
 
+  # Mark something as uninteresting. Uninteresting users and topics
+  # will be ignored in future suggestions.
   def mark_as_uninteresting(thing)
     case thing
     when Topic
-      self.suggested_topic_ids.delete(thing.id)
       if !self.uninteresting_topic_ids.include?(thing.id)
         self.uninteresting_topic_ids << thing.id
       end
     when User
-      self.suggested_user_ids.delete(thing.id)
       if !self.uninteresting_user_ids.include?(thing.id)
         self.uninteresting_user_ids << thing.id
       end
@@ -72,21 +87,34 @@ class SuggestionList
     end
   end
 
-  def suggest_random_topics
-    failed = 0
-    while self.suggested_topic_ids.length < 13 && failed < 30
-      topic = Topic.query(:offset => 5 + rand(50)).first
-      if self.suggested_topic_ids.include?(topic.id) ||
-          self.uninteresting_topic_ids.include?(topic.id) ||
-          topic.follower_ids.include?(self.user_id)
-        # We cannot suggest this topic
-        failed += 1
-        next
-      end
-      self.suggested_topic_ids << topic.id
+  # Refuse a suggestion. Refused suggestions cannot be re-suggested.
+  def refuse_suggestion(thing)
+    self.remove_suggestion(thing)
+    self.mark_as_uninteresting(thing)
+  end
+
+  # Find suggestions from the user's external accounts.
+  def suggest_from_outside
+    self.suggest(self.user.find_external_contacts)
+    self.suggest(self.user.find_external_topics)
+  end
+
+  # Suggest the 20 most followed topics.
+  def suggest_popular_topics
+    self.suggest(Topic.query(:order => :followers_count.desc),
+                 :limit => 20)
+  end
+
+  # Populate the user's suggestion list for the signup wizard.
+  def find_first_suggestions
+    if self.suggested_topic_ids.blank? &&
+        self.suggested_user_ids.blank?
+      self.suggest_from_outside
+      self.suggest_popular_topics
     end
   end
 
+  # Recalculate suggestions for the user.
   def refresh_suggestions(type = :all)
     if [:all, :topics].include?(type)
       self.refresh_topic_suggestions

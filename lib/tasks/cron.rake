@@ -4,7 +4,11 @@ namespace :cron do
     User.query.each do |user|
       puts user.name
       user.refresh_suggestions
-      user.save!
+      begin
+        user.save!
+      rescue
+        puts "Error while saving user #{user.name}"
+      end
     end
   end
 
@@ -14,7 +18,11 @@ namespace :cron do
       puts topic.name
       next if topic.questions_count == 0
       topic.find_related_topics
-      topic.save!
+      begin
+        topic.save!
+      rescue
+        puts "Error while saving topic #{topic.name}"
+      end
     end
   end
 end

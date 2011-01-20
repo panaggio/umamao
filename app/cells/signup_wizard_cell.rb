@@ -4,6 +4,7 @@
 class SignupWizardCell < Cell::Rails
   include Devise::Controllers::Helpers
   helper ApplicationHelper
+  helper_method :current_user
 
   def wizard
     @steps = ["connect", "follow"]
@@ -15,20 +16,8 @@ class SignupWizardCell < Cell::Rails
   end
 
   def follow
-    @current_user = current_user
-    @suggestion_list = @current_user.suggestion_list
-    # We begin by populating the suggestions list.
-    if @suggestion_list.suggested_user_ids.blank?
-      @suggestion_list.suggest(@current_user.find_external_contacts)
-    end
-
-    if @suggestion_list.suggested_topic_ids.blank?
-      @suggestion_list.suggest(@current_user.find_topics)
-      @suggestion_list.suggest_random_topics
-    end
-
-    @suggestion_list.last_modified_at = Time.now
-    @suggestion_list.save!
+    current_user.find_first_suggestions
+    current_user.save!
     render
   end
 
