@@ -7,14 +7,14 @@
     +reset-font
     margin: 0 0 13px
     font-size: 13px
-    line-height: 26px
+    line-height: 22px
     font-family: Helvetica,Arial,"Liberation Sans","DejaVu Sans",sans-serif
 
   p + p, ul + p, ol + p
-    margin-top: 1em
+    margin-top: 0.8em
 
   p + ul
-    margin-top: 1em
+    margin-top: 0.8em
 
   strong
     font-weight: bold
@@ -29,35 +29,38 @@
 
   ul, ol
   //list-style-position: inside
+  
+  li
+    line-height: 22px
 
   li + li
     margin-top: 0.9em
+    //line-height: 22px
 
   h1,h2,h3,h4,h5,h6
     +reset-font
-    color: #000
+    color: #222222
     font-weight: bold
 
   h1
     font-size: 20px
   h2
-    font-size: 18px
+    font-size: 17px
+    line-height: 30px
   h3
-    font-size: 16px
+    font-size: 15px
   h4
     font-size: 14px
   h5
     font-size: 14px
 
   code
-    margin-bottom: 0px
+    background-color: #F0F0F0
     max-height: 600px
     overflow: auto
-    padding: 5px
     width: auto
     display: inline
     font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace
-    font-size: 90%
 
   pre
     code
