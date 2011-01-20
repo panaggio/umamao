@@ -19,6 +19,11 @@ class Topic
 
   has_many :news_items, :foreign_key => :recipient_id, :dependent => :destroy
 
+  key :related_topic_ids, :default => []
+  has_many :related_topics, :class_name => "Topic",
+    :in => :related_topic_ids
+  key :related_topics_refreshed_at, Time
+
   timestamps!
 
   versionable_keys :title, :description
@@ -40,6 +45,24 @@ class Topic
 
   def name
     title
+  end
+
+  def find_related_topics
+    topic_counts = {}
+
+    Question.query(:topic_ids => self.id).each do |question|
+      question.topics.each do |related_topic|
+        next if related_topic == self
+        topic_counts[related_topic.id] =
+          (topic_counts[related_topic.id] || 0) + 1
+      end
+    end
+
+    self.related_topic_ids =
+      topic_counts.to_a.sort{|a, b| -(a[1] <=> b[1])}[0 .. 9].map(&:first)
+    self.related_topics_refreshed_at = Time.now
+
+    self.related_topics
   end
 
   # Merges other to self: self receives every question, follower and

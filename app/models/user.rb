@@ -55,7 +55,7 @@ class User
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :suggested_topics, :suggested_users, :suggest,
-    :remove_suggestion, :mark_as_uninteresting, :refresh_suggestions!,
+    :remove_suggestion, :mark_as_uninteresting, :refresh_suggestions,
     :to => :suggestion_list
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"

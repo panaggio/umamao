@@ -6,17 +6,31 @@ require 'ccsv'
 namespace :data do
   namespace :migrate do
 
+    desc "Refreshes suggestions"
+    task :refresh_suggestions => :environment do
+      User.query.each do |user|
+        puts user.name
+        user.refresh_suggestions
+        user.save!
+      end
+    end
+
+    desc "Refreshes each topic's list of related topics"
+    task :refresh_related_topics => :environment do
+      Topic.query.each do |topic|
+        puts topic.name
+        next if topic.questions_count == 0
+        topic.find_related_topics
+        topic.save!
+      end
+    end
+
     desc "Create suggestion lists for all users."
     task :create_suggestion_lists => :environment do
       User.query.each do |user|
         if user.suggestion_list.blank?
           puts user.name
-          user.suggestion_list = SuggestionList.new
-          user.suggestion_list.user = user
-
-          # Arbitrary "old" date
-          user.suggestion_list.last_modified_at = Time.gm(2010)
-
+          user.suggestion_list = SuggestionList.new(:user => user)
           user.save!
         end
       end
