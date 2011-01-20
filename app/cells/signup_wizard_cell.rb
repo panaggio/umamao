@@ -22,11 +22,12 @@ class SignupWizardCell < Cell::Rails
       @suggestion_list.suggest(@current_user.find_external_contacts)
     end
 
-    if @current_user.suggested_topic_ids.blank?
+    if @suggestion_list.suggested_topic_ids.blank?
       @suggestion_list.suggest(@current_user.find_topics)
       @suggestion_list.suggest_random_topics
     end
 
+    @suggestion_list.last_modified_at = Time.now
     @suggestion_list.save!
     render
   end

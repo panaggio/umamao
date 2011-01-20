@@ -67,8 +67,7 @@ class TopicsController < ApplicationController
     user = current_user
     @topic.followers << user
     @topic.save
-    user.suggestion_list.remove(@topic)
-    user.suggestion_list.save!
+    user.remove_suggestion(@topic)
     user.populate_news_feed!(@topic)
     user.save!
 

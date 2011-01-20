@@ -12,9 +12,8 @@ class SuggestionsController < ApplicationController
     end
 
     if thing
-      list = current_user.suggestion_list
-      list.mark_as_uninteresting(thing)
-      list.save!
+      current_user.mark_as_uninteresting(thing)
+      current_user.save!
     end
 
     respond_to do |format|

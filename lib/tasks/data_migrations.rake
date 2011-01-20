@@ -10,9 +10,14 @@ namespace :data do
     task :create_suggestion_lists => :environment do
       User.query.each do |user|
         if user.suggestion_list.blank?
+          puts user.name
           user.suggestion_list = SuggestionList.new
-          user.suggestion_list.refresh_suggestions!
-          user.suggestion_list.save!
+          user.suggestion_list.user = user
+
+          # Arbitrary "old" date
+          user.suggestion_list.last_modified_at = Time.gm(2010)
+
+          user.save!
         end
       end
     end

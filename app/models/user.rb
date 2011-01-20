@@ -54,6 +54,9 @@ class User
   has_many :external_accounts, :dependent => :destroy
 
   has_one :suggestion_list, :dependent => :destroy
+  delegate :suggested_topics, :suggested_users, :suggest,
+    :remove_suggestion, :mark_as_uninteresting, :refresh_suggestions!,
+    :to => :suggestion_list
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -367,6 +370,8 @@ Time.zone.now ? 1 : 0)
 
     User.increment(self.id, :following_count => 1)
     User.increment(user.id, :followers_count => 1)
+
+    self.remove_suggestion(user)
     true
   end
 
@@ -378,6 +383,7 @@ Time.zone.now ? 1 : 0)
     User.decrement(self.id, :following_count => 1)
     User.decrement(user.id, :followers_count => 1)
 
+    self.mark_as_uninteresting(user)
     true
   end
 
@@ -478,12 +484,6 @@ Time.zone.now ? 1 : 0)
         end
       end
     end
-  end
-
-  # Lists the best topic suggestions for the user, recalculating it if needed.
-  # TODO: Check whether the suggestion list is old.
-  def suggested_topics(max = 5)
-    self.suggestion_list.suggested_topics
   end
 
   # Return the user's associated Facebook account, if there is one,

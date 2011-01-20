@@ -196,9 +196,8 @@ class UsersController < ApplicationController
   def follow
     @user = User.find_by_login_or_id(params[:id])
     current_user.follow(@user)
-    current_user.suggestion_list.remove(@user)
-    current_user.suggestion_list.save!
     current_user.populate_news_feed!(@user)
+    current_user.save!
 
     track_event(:followed_user)
 
@@ -230,6 +229,7 @@ class UsersController < ApplicationController
   def unfollow
     @user = User.find_by_login_or_id(params[:id])
     current_user.unfollow(@user)
+    current_user.save!
 
     track_event(:unfollowed_user)
 

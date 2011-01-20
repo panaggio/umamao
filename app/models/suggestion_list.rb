@@ -1,12 +1,17 @@
 class SuggestionList
-  include MongoMapper::Document
+  include MongoMapper::EmbeddedDocument
 
   key :user_id, String
   belongs_to :user
 
+  key :last_modified_at, Time
+
   key :suggested_topic_ids, Array, :default => []
 
   def suggested_topics(count = 5)
+    if Time.now - self.last_modified_at > 1.week
+      self.refresh_suggestions!
+    end
     Topic.query(:id.in => self.suggested_topic_ids[0 .. count])
   end
 
@@ -28,12 +33,14 @@ class SuggestionList
     # For some reason, the case statement wasn't working.
     if thing.is_a?(Topic)
       if !self.suggested_topic_ids.include?(thing.id) &&
-          !thing.follower_ids.include?(self.user_id)
+          !thing.follower_ids.include?(self.user_id) &&
+          !self.uninteresting_topic_ids.include?(thing.id)
         self.suggested_topic_ids << thing.id
       end
     elsif thing.is_a?(User)
       if !self.suggested_user_ids.include?(thing.id) &&
-          !self.user.following?(thing)
+          !self.user.following?(thing) &&
+          !self.uninteresting_user_ids.include?(thing.id)
         self.suggested_user_ids << thing.id
       end
     elsif thing.respond_to?(:each)
@@ -50,7 +57,7 @@ class SuggestionList
     self.save!
   end
 
-  def remove(thing)
+  def remove_suggestion(thing)
     case thing
     when Topic
       self.suggested_topic_ids.delete(thing.id)
@@ -63,10 +70,14 @@ class SuggestionList
     case thing
     when Topic
       self.suggested_topic_ids.delete(thing.id)
-      self.uninteresting_topic_ids << thing.id
+      if !self.uninteresting_topic_ids.include?(thing.id)
+        self.uninteresting_topic_ids << thing.id
+      end
     when User
       self.suggested_user_ids.delete(thing.id)
-      self.uninteresting_user_ids << thing.id
+      if !self.uninteresting_user_ids.include?(thing.id)
+        self.uninteresting_user_ids << thing.id
+      end
     else
       raise "Entity can't be suggested to a user"
     end
@@ -93,6 +104,8 @@ class SuggestionList
     else
       raise "Don't know how to suggest #{type}"
     end
+
+    self.last_modified_at = Time.now
 
     self.save!
   end
@@ -136,6 +149,5 @@ class SuggestionList
     self.save!
 
   end
-
 
 end
