@@ -65,8 +65,8 @@ class TopicsController < ApplicationController
     end
 
     user = current_user
-    @topic.followers << user
-    @topic.save
+    @topic.add_follower(user)
+    @topic.save!
     user.remove_suggestion(@topic)
     user.populate_news_feed!(@topic)
     user.save!
@@ -100,7 +100,7 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
-    @topic.follower_ids.delete(current_user.id)
+    @topic.remove_follower(current_user.id)
     @topic.save!
 
     current_user.mark_as_uninteresting(@topic)

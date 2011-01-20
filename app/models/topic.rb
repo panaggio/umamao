@@ -14,6 +14,7 @@ class Topic
 
   key :follower_ids, Array, :index => true
   has_many :followers, :class_name => 'User', :in => :follower_ids
+  key :followers_count, :default => 0
 
   slug_key :title, :unique => true, :min_length => 3
 
@@ -22,7 +23,6 @@ class Topic
   key :related_topic_ids, :default => []
   has_many :related_topics, :class_name => "Topic",
     :in => :related_topic_ids
-  key :related_topics_refreshed_at, Time
 
   timestamps!
 
@@ -60,9 +60,24 @@ class Topic
 
     self.related_topic_ids =
       topic_counts.to_a.sort{|a, b| -(a[1] <=> b[1])}[0 .. 9].map(&:first)
-    self.related_topics_refreshed_at = Time.now
 
     self.related_topics
+  end
+
+  # Add a follower to topic.
+  def add_follower(user)
+    if !self.followers.include?(user)
+      self.followers << user
+      Topic.increment(self.id, :followers_count => 1)
+    end
+  end
+
+  # Remove a follower from topic.
+  def remove_follower(user)
+    if self.followers.include?(user)
+      self.follower_ids.delete(user.id)
+      Topic.increment(self.id, :followers_count => -1)
+    end
   end
 
   # Merges other to self: self receives every question, follower and
@@ -71,9 +86,7 @@ class Topic
     return false if id == other.id
 
     other.followers.each do |f|
-      if !follower_ids.include? f.id
-        followers << f
-      end
+      self.add_follower(f)
     end
 
     Question.query(:topic_ids => other.id).each do |q|
