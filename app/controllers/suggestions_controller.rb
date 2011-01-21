@@ -2,24 +2,19 @@ class SuggestionsController < ApplicationController
   before_filter :login_required
 
   # Refuse suggestions.
-  def destroy
-    thing = type = nil
-    if params[:user]
-      thing = User.find_by_id(params[:user])
-      type = :users
-    elsif params[:topic]
-      thing = Topic.find_by_id(params[:topic])
-      type = :topics
-    end
-
-    if thing
-      current_user.refuse_suggestion(thing)
+  def refuse
+    type = nil
+    if @suggestion = Suggestion.find_by_id(params[:suggestion])
+      type = (@suggestion.entry_type.downcase + "s").to_sym
+      current_user.refuse_suggestion(@suggestion)
       current_user.save!
     end
 
+    track_event(:refused_suggestion)
+
     respond_to do |format|
       format.js do
-        request_answer = {:success => !!thing}
+        request_answer = {:success => !!@suggestion}
         if type
           request_answer[:suggestions] = render_cell :suggestions, type
         end

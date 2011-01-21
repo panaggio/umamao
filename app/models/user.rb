@@ -54,7 +54,7 @@ class User
   has_many :external_accounts, :dependent => :destroy
 
   has_one :suggestion_list, :dependent => :destroy
-  delegate :suggested_topics, :suggested_users, :suggest,
+  delegate :topic_suggestions, :user_suggestions, :suggest,
     :remove_suggestion, :mark_as_uninteresting, :refuse_suggestion,
     :refresh_suggestions, :find_first_suggestions, :to => :suggestion_list
 

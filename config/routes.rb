@@ -59,8 +59,8 @@ Shapado::Application.routes.draw do
     end
   end
 
-  match "/suggestions/remove" => "suggestions#destroy",
-    :as => :remove_suggestion
+  post "/suggestions/refuse" => "suggestions#refuse",
+    :as => :refuse_suggestion
 
   resources :ads
   resources :adsenses

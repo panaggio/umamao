@@ -1,4 +1,4 @@
-- if current_user.suggested_users.present?
+- if current_user.user_suggestions.present?
   = render_cell :suggestions, :users
-- if current_user.suggested_topics.present?
+- if current_user.topic_suggestions.present?
   = render_cell :suggestions, :topics
