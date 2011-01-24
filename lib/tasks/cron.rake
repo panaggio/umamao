@@ -1,14 +1,10 @@
 namespace :cron do
-  desc "Refreshes suggestions"
+  desc "Refreshes suggestions for all users"
   task :refresh_suggestions => :environment do
     User.query.each do |user|
       puts user.name
       user.refresh_suggestions
-      begin
-        user.save!
-      rescue
-        puts "Error while saving user #{user.name}"
-      end
+      user.save :validate => false
     end
   end
 
@@ -18,11 +14,7 @@ namespace :cron do
       puts topic.name
       next if topic.questions_count == 0
       topic.find_related_topics
-      begin
-        topic.save!
-      rescue
-        puts "Error while saving topic #{topic.name}"
-      end
+      topic.save :validate => false
     end
   end
 end

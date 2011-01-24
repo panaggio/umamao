@@ -10,7 +10,7 @@ namespace :data do
       Topic.query.each do |topic|
         next if topic.follower_ids.blank?
         topic.followers_count = topic.follower_ids.length
-        topic.save!
+        topic.save :validate => false
       end
     end
 
@@ -20,7 +20,9 @@ namespace :data do
         if user.suggestion_list.blank?
           puts user.name
           user.suggestion_list = SuggestionList.new(:user => user)
-          user.save!
+          user.save :validate => false
+        else
+          puts "User #{user.name} had already a suggestion list"
         end
       end
     end

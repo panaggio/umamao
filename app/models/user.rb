@@ -93,6 +93,7 @@ class User
 
   before_create :logged!
   after_create :accept_invitation
+  after_create :create_suggestion_list
 
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
@@ -584,4 +585,11 @@ Time.zone.now ? 1 : 0)
   def strip_email
     self.email = self.email.strip
   end
+
+  # Create a suggestion list for the user. Used with an after_create.
+  def create_suggestion_list
+    self.suggestion_list = SuggestionList.new(:user => self)
+    self.save :validate => false
+  end
+
 end
