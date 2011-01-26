@@ -458,7 +458,7 @@ Time.zone.now ? 1 : 0)
   # Attempts to add more updates from origin to the user's feed when
   # it is too small
   def populate_news_feed!(origin)
-    return if news_items.count > 20
+    limit = self.news_items.count > 1000 ? 5 : 100
     total_feeded = 0
     case origin
     when User
@@ -466,9 +466,11 @@ Time.zone.now ? 1 : 0)
         :author_id => origin.id,
         :order => :created_at.desc
       ).each do |update|
-        return if total_feeded > 5
-        if !news_items.any? {|i| i.news_update_id == update.id}
-          NewsItem.notify!(update, self, origin)
+        return if total_feeded >= limit
+        if NewsItem.query(:recipient_id => self.id,
+                          :recipient_type => "User",
+                          :news_update_id => update.id).count == 0
+          NewsItem.notify!(update, self, origin, update.created_at)
           total_feeded += 1
         end
       end
@@ -478,9 +480,11 @@ Time.zone.now ? 1 : 0)
         :recipient_type => "Topic",
         :order => :created_at.desc
       ).each do |item|
-        return if total_feeded > 5
-        if !news_items.any? {|i| i.news_update_id == item.news_update_id}
-          NewsItem.notify!(item.news_update, self, origin)
+        return if total_feeded >= limit
+        if NewsItem.query(:recipient_id => self.id,
+                          :recipient_type => "User",
+                          :news_update_id => item.news_update_id).count == 0
+          NewsItem.notify!(item.news_update, self, origin, item.created_at)
           total_feeded += 1
         end
       end
