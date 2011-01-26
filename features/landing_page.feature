@@ -5,4 +5,5 @@ Feature: Landing page
 
   Scenario: Visiting the site for the first time
     Given I am on the home page
-    Then I should see "Fazer cadastro"
+    Then I should see "Faça seu cadastro"
+    And I should see "E-mail acadêmico"
