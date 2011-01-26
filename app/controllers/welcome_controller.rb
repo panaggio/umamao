@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   helper :questions
   tabs :default => :welcome
@@ -21,6 +22,10 @@ class WelcomeController < ApplicationController
                                       :page => params[:page] || 1,
                                       :order => :created_at.desc})
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
+    if !current_user.confirmed?
+      flash[:notice] = I18n.t("users.anoying.uncorfimed_non_academic_email")
+    end
+
     render 'home'
   end
 

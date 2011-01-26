@@ -1,9 +1,11 @@
 $(document).ready(function() {
 
+  Utils.showInlineMessage();
+
   // TODO: place this somewhere else
   if ($("#landing_signup").length > 0 ) {
     Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
-  }
+  };
 
   if ($("#email-help").length > 0) {
     emailtooltip();

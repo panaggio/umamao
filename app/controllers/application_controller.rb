@@ -12,9 +12,19 @@ class ApplicationController < ActionController::Base
   before_filter :check_group_access
   before_filter :set_locale
   before_filter :find_languages
+  before_filter :flash_to_session
   layout :set_layout
 
   protected
+
+  def flash_to_session
+    if(flash[:error]) 
+      cookies[:flash_message] = flash[:error]
+    elsif(flash[:notice])
+      cookies[:flash_message] = flash[:notice]
+    end
+    cookies[:flash_message] = "josefa"
+  end
 
   def track_event(event, properties = {})
     user_id = current_user ? current_user.id : properties.delete(:user_id)

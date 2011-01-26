@@ -42,6 +42,8 @@ pt-BR:
       avatar_tip: "Troque a foto do seu perfil no Gravatar"
       show_more_lang: "Mostrar mais idiomas"
       university: "Universidade:"
+    anoying:
+      uncorfimed_non_academic_email: "Você ainda não confirmou seu e-mail pessoal!"
     create:
       flash_error: "Desculpe, não foi possível criar sua conta. Tente de novo, ou entre em contato conosco (no link de feedback na base da página)."
       welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
