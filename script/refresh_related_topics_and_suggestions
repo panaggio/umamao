@@ -1,0 +1,8 @@
+#!/bin/bash
+
+RAILS_ENV=production
+
+cd $HOME/www/umamao/current
+
+rake cron:refresh_related_topics > /dev/null
+rake cron:refresh_suggestions > /dev/null
