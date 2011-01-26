@@ -79,6 +79,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    tracking_properties = {}
     @user = User.new
     @user.safe_update(%w[login email name password_confirmation password
                          preferred_languages website language timezone
@@ -93,8 +94,15 @@ class UsersController < ApplicationController
       first(:slug => params[:group_invitation])
     @user.confirmed_at = Time.now if @group_invitation
 
+    if invitation = Invitation.find_by_invitation_token(@user.invitation_token)
+      tracking_properties[:invited_by] = invitation.sender.email
+    end
+
     if @user.save
-      @group_invitation.push(:user_ids => @user.id) if @group_invitation
+      if @group_invitation
+        @group_invitation.push(:user_ids => @user.id)
+        tracking_properties[:invited_by] = @group_invitation.slug
+      end
 
       if @user.affiliation_token.present?
         @affiliation = Affiliation.
@@ -105,7 +113,8 @@ class UsersController < ApplicationController
       end
 
       current_group.add_member(@user)
-      track_event(:sign_up, :user_id => @user.id, :confirmed => @user.confirmed?)
+      track_event(:sign_up, {:user_id => @user.id,
+                    :confirmed => @user.confirmed?}.merge(tracking_properties))
       flash[:conversion] = true
 
       # Protects against session fixation attacks, causes request forgery
