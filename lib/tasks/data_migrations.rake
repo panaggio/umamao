@@ -5,6 +5,30 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Find topics related to Unicamp"
+    task :populate_unicamp_topics => :environment do
+      unicamp = University.find_by_short_name("Unicamp")
+      topic_names = ["Unicamp",
+                     "Barão Geraldo", "Campinas",
+                     "DAC (Unicamp)", "SAE Unicamp",
+                     "CECOM (Unicamp)",
+                     "Restaurante Universitário da Unicamp (Bandejão)",
+                     "Bolsas-auxílio (Unicamp)",
+                     "Comida na Unicamp", "Moradia Estudantil da Unicamp",
+                     "DCE da Unicamp", "Sistema de Bibliotecas da Unicamp",
+                     "Restaurantes da Unicamp", "Intercâmbio"]
+      topic_names.each do |topic_name|
+        puts topic_name
+        topic = Topic.find_by_title(topic_name)
+        if topic.blank?
+          puts "Could not find topic \"#{topic_name}\""
+        else
+          unicamp.university_topics << topic
+        end
+      end
+      unicamp.save!
+    end
+
     desc "Calculate each topic's followers count"
     task :calculate_followers_count => :environment do
       Topic.query.each do |topic|
