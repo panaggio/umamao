@@ -9,7 +9,10 @@
         %li
           .topic.info
             %span.topic-title
-              = link_to topic.title, topic_path(topic), :title => topic.title
+              - if @render_links
+                = link_to topic.title, topic_path(topic), :title => topic.title
+              - else
+                = topic.title
           .controls
             .follow-info
               = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
