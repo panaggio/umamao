@@ -10,6 +10,8 @@ class Affiliation
   belongs_to :university
   belongs_to :user
 
+  timestamps!
+
   validates_true_for :email, :logic => lambda {
     (self.email =~ self.university.email_regexp) != nil
   }
