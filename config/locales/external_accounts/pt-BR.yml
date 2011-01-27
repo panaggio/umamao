@@ -5,3 +5,6 @@ pt-BR:
     connect: Conectar
     connected_to:
       success: Conta do %{site} conectada com sucesso.
+    connection_error: |
+      Houve um erro durante a autenticação. Por favor, tente
+      novamente mais tarde.
