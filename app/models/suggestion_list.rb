@@ -135,10 +135,18 @@ class SuggestionList
                  :limit => 20, :reason => "popular")
   end
 
+  # Suggest topics related to the user's affiliations.
+  def suggest_university_topics
+    self.user.affiliations.each do |affiliation|
+      self.suggest(affiliation.university.university_topics, "university")
+    end
+  end
+
   # Populate the user's suggestion list for the signup wizard.
   def find_first_suggestions
     if self.topic_suggestions.blank? &&
         self.user_suggestions.blank?
+      self.suggest_university_topics
       self.suggest_from_outside
       self.suggest_popular_topics
     end
@@ -157,7 +165,7 @@ class SuggestionList
     kept_suggestions = []
 
     self.topic_suggestions.each do |topic_suggestion|
-      if topic_suggestion.reason == "external"
+      if ["external", "university"].include?(topic_suggestion.reason)
         kept_suggestions << topic_suggestion
       else
         topic_suggestion.destroy
