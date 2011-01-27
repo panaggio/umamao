@@ -61,7 +61,7 @@ class UsersController < ApplicationController
         find_by_affiliation_token(params[:affiliation_token])
 
       if @affiliation.present?
-        if @affiliation.confirmed_at.present?
+        if @affiliation.user.present?
           redirect_to(root_url) && return
         else
           @user.affiliation_token = @affiliation.affiliation_token
@@ -107,7 +107,7 @@ class UsersController < ApplicationController
       if @user.affiliation_token.present?
         @affiliation = Affiliation.
           find_by_affiliation_token(@user.affiliation_token)
-        @affiliation.confirmed_at = Time.now
+        @affiliation.confirmed_at ||= Time.now
         @user.affiliations << @affiliation
         @user.save
       end
