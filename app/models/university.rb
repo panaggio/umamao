@@ -42,7 +42,7 @@ class University
 
   def self.find_id_by_email_domain(email)
     University.all.each { |u|
-      return u._id if email =~ u.email_regexp
+      return u.id if email.strip =~ u.email_regexp
     }
     return nil
   end

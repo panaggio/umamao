@@ -20,6 +20,7 @@ class Affiliation
   validates_uniqueness_of :email
   validates_presence_of :email
 
+  before_validation :strip_email
   before_create :generate_affiliation_token
   after_create :send_confirmation
 
@@ -54,5 +55,9 @@ class Affiliation
 
   def self.resend_confirmation(email)
     where(:email=>email).first.send_confirmation
+  end
+
+  def strip_email
+    self.email = self.email.strip
   end
 end

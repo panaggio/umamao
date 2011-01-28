@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 class AffiliationsController < ApplicationController
   def create
-    email = params[:affiliation][:email].strip
+    email = params[:affiliation][:email].try(:strip)
     status = nil
 
     if @affiliation = Affiliation.find_by_email(email)
