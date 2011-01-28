@@ -18,12 +18,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def flash_to_session
-    if(flash[:error]) 
+    if flash[:error] 
       cookies[:flash_message] = flash[:error]
-    elsif(flash[:notice])
+    elsif flash[:notice]
       cookies[:flash_message] = flash[:notice]
     end
-    cookies[:flash_message] = "josefa"
   end
 
   def track_event(event, properties = {})

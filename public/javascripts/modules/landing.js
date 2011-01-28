@@ -5,13 +5,13 @@ function signUpAjaxRequest() {
     $("input#affiliation_email").attr("readonly", "readonly");
     
     return {
-	  url: "/affiliations?format=js",
+      url: "/affiliations?format=js",
       data: form.serialize(),
       complete: function(){
-		                    $("#ajax-loader").addClass('hidden');
-		                    $("#affiliation_submit").removeAttr("readonly");
-		                    $("input#affiliation_email").removeAttr("readonly");
-		                  }
+	$("#ajax-loader").addClass('hidden');
+	$("#affiliation_submit").removeAttr("readonly");
+	$("input#affiliation_email").removeAttr("readonly");
+      }
     };
  }
  

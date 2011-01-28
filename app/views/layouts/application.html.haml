@@ -44,6 +44,14 @@
                 =link_to t("sessions.new.with_facebook"), oauth_authorize_path, :title => "Facebook", :id => "facebook_auth"
                 =t(".now")
 
+
+    -unless current_user.confirmed?
+      %span.persistent_message
+        =I18n.t("users.annoying.unconfirmed_non_academic_email")
+        %a#resend_confirmation_email{:href => '#'}
+          =t("users.annoying.resend_confirmation_email")
+        = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hide")
+
     #container{:class => @current_class}
       #wrapper
         #main

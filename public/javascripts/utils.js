@@ -34,7 +34,7 @@ window.Utils = {
   showInlineMessage: function() {
     var message = readCookie("flash_message");
     if(message) {
-      Utils.showMessage(message, "error");
+      Utils.showMessage(message, "notice");
       eraseCookie("flash_message");
     }
   },
