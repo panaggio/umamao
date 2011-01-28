@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def resend_confirmation_email
-    
+    current_user.resend_confirmation_token
 
     respond_to do |format|
       format.js {
