@@ -1,0 +1,6 @@
+- if @title
+  %h3= @title
+.friend_list
+  - @users.each do |user|
+    %span
+      = link_to avatar_for(user, :size => 24).html_safe, user_path(user)
