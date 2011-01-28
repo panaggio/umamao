@@ -29,6 +29,14 @@ GIT
       plucky (~> 0.3.6)
 
 GIT
+  remote: git://github.com/thoughtbot/factory_girl_rails.git
+  revision: 8a421148bf70577b1c944f8494bf37295c44b06e
+  specs:
+    factory_girl_rails (1.1.beta1)
+      factory_girl (~> 2.0.0.beta)
+      railties (>= 3.0.0)
+
+GIT
   remote: git://github.com/umamao/mongomapper_ext.git
   revision: 84900fab99ecc6ecf22cb10c86c7a2b32a915ef9
   specs:
@@ -336,6 +344,7 @@ DEPENDENCIES
   differ (~> 0.1.1)
   dynamic_form
   factory_girl!
+  factory_girl_rails!
   faker
   fancy-buttons (~> 0.5.1)
   haml (~> 3.0.13)

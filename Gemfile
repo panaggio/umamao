@@ -52,6 +52,7 @@ group :test do
   gem "rspec"
   gem "rspec-rails", "~> 2.0.0"
   gem "factory_girl", :git => 'git://github.com/thoughtbot/factory_girl.git'
+  gem "factory_girl_rails", :git => 'git://github.com/thoughtbot/factory_girl_rails.git'
   gem "faker"
   gem "autotest-rails"
   gem "database_cleaner"
