@@ -4,3 +4,7 @@ pt-BR:
       email_sent: "Obrigado! Verifique seu e-mail para mais instruções."
     form:
       email: "E-mail acadêmico"
+    errors:
+      invalid_email: O endereço de e-mail é inválido.
+      duplicate_email: Já existe um usuário com esse e-mail.
+      unknown: Houve um erro.

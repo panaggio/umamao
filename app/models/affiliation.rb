@@ -16,6 +16,7 @@ class Affiliation
     (self.email =~ self.university.email_regexp) != nil
   }
 
+  validates_format_of :email, :with => Devise::email_regexp
   validates_uniqueness_of :email
   validates_presence_of :email
 

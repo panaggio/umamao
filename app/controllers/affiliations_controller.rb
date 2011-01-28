@@ -1,13 +1,13 @@
 class AffiliationsController < ApplicationController
   def create
-    email = params[:affiliation][:email]
+    email = params[:affiliation][:email].strip
     status = nil
 
     if @affiliation = Affiliation.find_by_email(email)
       # Try to see whether we have already gotten this address.
       if @affiliation.user.present?
         status = :error
-        message = "Já existe um usuário com esse email"
+        message = t("affiliations.errors.duplicate_email")
       elsif @affiliation.confirmed_at.present?
         status = :confirmed
         url = new_user_url(:affiliation_token => @affiliation.affiliation_token)
@@ -37,12 +37,16 @@ class AffiliationsController < ApplicationController
         end
       else
         status = :error
-        message = @affiliation.errors.full_messages.join("**")
+        if @affiliations.errors[:email].present?
+          message = t("affiliations.errors.invalid_email")
+        else
+          message = t("affiliations.errors.unknown")
+        end
       end
 
     elsif @user = User.find_by_email(email)
       status = :error
-      message = "Já existe um usuário com esse email"
+      message = t("affiliations.errors.duplicate_email")
 
     elsif @waiting_user = WaitingUser.find_by_email(email)
       # Check for existing waiting user.
@@ -60,7 +64,11 @@ class AffiliationsController < ApplicationController
         track_event(:new_waiting_user)
       else
         status = :error
-        message = @waiting_user.errors.full_messages.join("**")
+        if @waiting_user.errors[:email].present?
+          message = t("affiliations.errors.invalid_email")
+        else
+          message = t("affiliations.errors.unknown")
+        end
       end
 
     end

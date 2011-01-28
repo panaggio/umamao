@@ -14,6 +14,14 @@ Feature: Signup
     Then I should see "Obrigado"
     And a confirmation email should be sent to "fulano@unicamp.br"
 
+  Scenario: First time signup with "wrong" academic email
+    Given there is no user with email "joao@unicamp.br"
+    And I am on the home page
+    When I fill in "affiliation_email" with "joao@unicamp.br   "
+    And I press "affiliation_submit"
+    Then I should see "Obrigado"
+    And a confirmation email should be sent to "joao@unicamp.br"
+
   Scenario: University affiliation confirmation
     Given there is no user with email "fulano2@unicamp.br"
     And I have signed up with email "fulano2@unicamp.br"
