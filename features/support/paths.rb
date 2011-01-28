@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /the login page/
+      '/'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -25,6 +28,9 @@ module NavigationHelpers
       end
       @confirmation_path = @body.to_s[/http:\/\/[^\/]+(\S+)/, 1]
       @confirmation_path
+
+    when /^the question's page$/
+      question_path(@question)
 
     else
       begin
