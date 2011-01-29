@@ -99,7 +99,7 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
-    @topic.remove_follower!(current_user.id)
+    @topic.remove_follower!(current_user)
     @topic.save!
 
     current_user.mark_as_uninteresting(@topic)
