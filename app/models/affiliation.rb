@@ -47,9 +47,9 @@ class Affiliation
     return if self.confirmed_at.present? # We don't need to confirm this.
     if self.university.open_for_signup
       generate_affiliation_token! if self.affiliation_token.nil?
-      Notifier.signup(self).deliver
+      Notifier.delay.signup(self)
     else
-      Notifier.closed_for_signup(self).deliver
+      Notifier.delay.closed_for_signup(self)
     end
   end
 

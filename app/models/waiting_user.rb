@@ -19,9 +19,9 @@ class WaitingUser
 
   def send_wait_note
     if non_academic_email?
-      Notifier.non_academic(self).deliver
+      Notifier.delay.non_academic(self)
     else
-      Notifier.wait(self).deliver
+      Notifier.delay.wait(self)
     end
   end
 

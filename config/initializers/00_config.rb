@@ -89,6 +89,4 @@ if AppConfig.postmark != nil and AppConfig.postmark['activate']
   config.action_mailer.postmark_settings = options
 end
 
-class Mixpanel
-  TOKEN = AppConfig.mixpanel['api_key'] if AppConfig.mixpanel
-end
+Tracking::Mixpanel::TOKEN = AppConfig.mixpanel['api_key'] if AppConfig.mixpanel

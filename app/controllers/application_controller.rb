@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
 
   def track_event(event, properties = {})
     user_id = current_user ? current_user.id : properties.delete(:user_id)
-    Magent.push('actors.tracker', :track_event, event, user_id, request.ip,
-                properties)
+    Tracking::EventTracker.delay.track_event([event, user_id, request.ip,
+                properties])
   end
 
   def after_sign_in_path_for(resource)

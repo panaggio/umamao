@@ -47,7 +47,7 @@ class Invitation
   # Send confirmation instructions by email
   def send_invitation
     generate_invitation_token! if self.invitation_token.nil?
-    Inviter.invitation(self).deliver
+    Inviter.delay.invitation(self)
   end
 
   private
