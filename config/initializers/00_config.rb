@@ -2,25 +2,16 @@ require 'ostruct'
 
 require "#{Rails.root}/lib/tracking/mixpanel"
 
-config_file = "/etc/shapado.yml"
-if !File.exist?(config_file)
-  config_file = Rails.root + "config/shapado.yml"
-end
-
-if !File.exist?(config_file)
-  raise StandardError,  "Config file was not found"
-end
-
-options = YAML.load_file(config_file)
+options = YAML.load(ENV["SHAPADO_YML"])
 if !options[Rails.env]
-  raise "'#{Rails.env}' was not found in #{config_file}"
+  raise "'#{Rails.env}' was not found in SHAPADO_YML"
 end
 
 AppConfig = OpenStruct.new(options[Rails.env])
 
 # check config
 begin
-  known_options = YAML.load_file(Rails.root + "config/shapado.yml.sample")[Rails.env]
+  known_options = YAML.load(ENV["SHAPADO_YML_SAMPLE"])[Rails.env]
   if known_options
     known_options.each do |k, v|
       if AppConfig.send(k).nil?
@@ -38,7 +29,7 @@ REPUTATION_CONSTRAINS = {"vote_up" => 15, "flag" => 15, "post_images" => 15,
 "edit_others_posts" => 2000, "view_offensive_counts" => 2000, "vote_to_close_any_question" => 3000,
 "vote_to_open_any_question" => 3000, "delete_closed_questions" => 10000, "moderate" => 10000, "retag_others_tags" => 60}
 
-REPUTATION_REWARDS = YAML.load_file(Rails.root + "config/default_reputation.yml")
+REPUTATION_REWARDS = YAML.load(ENV["DEFAULT_REPUTATION_YML"])
 
 
 REST_AUTH_SITE_KEY         = AppConfig.rest_auth_key
