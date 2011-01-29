@@ -23,12 +23,12 @@ gem 'dynamic_form'
 gem 'fancy-buttons', '~>0.5.1'
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
 gem 'haml', '~> 3.0.13'
+gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
 gem 'mechanize', :require => false
 gem 'mongo'
 gem 'mongo_mapper', '~>0.8.2'
 gem 'mongomapper_ext', :git => 'git://github.com/umamao/mongomapper_ext.git'
-gem 'newrelic_rpm', '~>2.13.1'
 gem 'omniauth', :git => 'git://github.com/umamao/omniauth.git'
 gem 'postmark', '~>0.9.0'
 gem 'postmark-rails', '~>0.4.0'

@@ -6,14 +6,8 @@ GIT
       rails (~> 3.0)
 
 GIT
-  remote: git://github.com/rails/exception_notification.git
-  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
-  specs:
-    exception_notification (1.0.0)
-
-GIT
   remote: git://github.com/thoughtbot/factory_girl.git
-  revision: a7f7e85187e9178f4da2db1b87fa38aec6a96178
+  revision: 5aea0f4096e0a097231f64e0cfc2ba04d1bf9687
   specs:
     factory_girl (2.0.0.beta1)
 
@@ -101,7 +95,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    addressable (2.2.3)
+    addressable (2.2.4)
     arel (2.0.7)
     autotest-rails (4.1.0)
       ZenTest
@@ -170,11 +164,11 @@ GEM
       rake (>= 0.8.7)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
-    goalie (0.0.4)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     haml (3.0.25)
     hashie (0.4.0)
+    hoptoad_notifier (2.4.4)
+      activesupport
+      builder
     i18n (0.5.0)
     johnson (2.0.0.pre3)
       stackdeck (~> 0.2)
@@ -204,7 +198,6 @@ GEM
     multi_xml (0.2.0)
     multipart-post (1.1.0)
     net-ldap (0.1.1)
-    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     oauth (0.4.4)
     oauth2 (0.1.1)
@@ -327,12 +320,11 @@ DEPENDENCIES
   delayed_job_mongo_mapper
   differ (~> 0.1.1)
   dynamic_form
-  exception_notification!
   factory_girl!
   faker
   fancy-buttons (~> 0.5.1)
-  goalie
   haml (~> 3.0.13)
+  hoptoad_notifier
   jnunemaker-validatable!
   koala (~> 0.10.0)
   launchy
@@ -340,7 +332,6 @@ DEPENDENCIES
   mongo
   mongo_mapper (~> 0.8.2)
   mongomapper_ext!
-  newrelic_rpm (~> 2.13.1)
   omniauth!
   postmark (~> 0.9.0)
   postmark-rails (~> 0.4.0)
