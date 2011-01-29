@@ -108,6 +108,7 @@ class Question
 
   before_save :update_activity_at, :update_exercise
   before_save :update_autocomplete_keywords
+  before_create :add_question_author_to_watchers
   before_create :get_topics_from_parent
   after_create :create_news_update
 
@@ -451,6 +452,10 @@ class Question
 	self.topics = self.parent_question.topics if self.parent_question_id.present?
 
 	#self.topics = (self.parent_question_id != "" ? self.parent_question.topics : Array.new)
+  end
+
+  def add_question_author_to_watchers
+    self.watchers = [self.user_id]
   end
 
 end

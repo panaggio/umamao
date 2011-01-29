@@ -98,8 +98,8 @@ Shapado::Application.routes.draw do
       get :flag
       get :favorite
       get :unfavorite
-      get :watch
-      get :unwatch
+      post :watch
+      post :unwatch
       get :history
       get :revert
       get :diff

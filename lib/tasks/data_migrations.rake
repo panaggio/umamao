@@ -5,6 +5,19 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Add question authors as watchers"
+    task :add_question_authors_as_watchers => :environment do
+      Question.query.each do |question|
+        if !question.watchers.include?(question.user_id)
+          puts "Added in \"#{question.title}\""
+          question.add_watcher(question.user)
+          question.save :validate => false
+        else
+          puts "Skipped \"#{question.title}\""
+        end
+      end
+    end
+
     desc "Find topics related to Unicamp."
     task :populate_unicamp_topics => :environment do
       unicamp = University.find_by_short_name("Unicamp")

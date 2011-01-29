@@ -108,6 +108,14 @@
     %p= t("answers.form.not_logged", :link => new_user_session_path)
 
 - content_for :sidebar do
+  - if logged_in? && current_user != @question.user
+    -# Can add watcher to question
+    .follow-info.block
+      - if @question.watch_for?(current_user)
+        = link_to t("followable.unfollow"), unwatch_question_path(@question), :class => "unfollow_link", "data-class" => "follow_link", "data-title" => t("followable.follow"), "data-undo" => watch_question_path(@question)
+      - else
+        = link_to t("followable.follow"), watch_question_path(@question), :class => "follow_link", "data-class" => "unfollow_link", "data-title" => t("followable.unfollow"), "data-undo" => unwatch_question_path(@question)
+
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0
       .block
@@ -141,13 +149,10 @@
       %h3= t("questions.show.share")
       = link_to(image_tag("facebook.gif") + " Facebook", new_share_question_path(:question => @question.id, :where => "facebook"), :class => "facebook")
 
-  .author.user_info.vcard
-    .user_data
-      %span.asked_by
-        = t('activerecord.attributes.question.asked_by')
-      = link_to h(@question.user.name), user_path(@question.user)
-      %span.time_ago.published{:title => @question.created_at, :class => "relativetime"}
-        = t("time.ago", :time => time_ago_in_words(@question.created_at))
+
+  - if @question.watchers.count > 0
+    .block
+      = render_cell :users, :list, :users => User.query(:id.in => @question.watchers), :title => "Seguindo esta pergunta"
 
   .audience-size
     = t('.topic_followers',

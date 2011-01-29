@@ -3,6 +3,7 @@ class UsersCell < Cell::Rails
   helper ApplicationHelper
   helper UsersHelper
 
+  # List of users with small avatars.
   def list
     @users = @opts[:users]
     @title = @opts[:title]
