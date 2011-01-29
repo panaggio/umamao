@@ -2,7 +2,6 @@
 .DS_Store
 *.orig
 coverage
-public/stylesheets/compiled/
 config/*.yml
 data/*.dat
 config/database.yml
