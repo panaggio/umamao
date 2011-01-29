@@ -1,4 +1,4 @@
-= stylesheet_link_merged :base
+= render :partial => "shared/layout/css/base"
 
 %link#current-theme{ :href => "/stylesheets/compiled/themes/#{current_group.theme}/style.css", :rel => "stylesheet", :media => "screen", :type => "text/css" }
 -if current_group.has_custom_css?
