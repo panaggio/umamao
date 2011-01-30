@@ -12,6 +12,23 @@ GIT
     factory_girl (2.0.0.beta1)
 
 GIT
+  remote: git://github.com/umamao/devise.git
+  revision: 0cdec89cc81d45a6b05878614f9ce07770d493a2
+  specs:
+    devise (1.2.0)
+      bcrypt-ruby (~> 2.1.2)
+      warden (~> 0.10.7)
+
+GIT
+  remote: git://github.com/umamao/mongomapper.git
+  revision: 66637ea5ebc4dd5722edde1de2af759de1ffea4b
+  specs:
+    mongo_mapper (0.8.6)
+      activesupport (>= 2.3.4)
+      jnunemaker-validatable (~> 1.8.4)
+      plucky (~> 0.3.6)
+
+GIT
   remote: git://github.com/umamao/mongomapper_ext.git
   revision: 84900fab99ecc6ecf22cb10c86c7a2b32a915ef9
   specs:
@@ -63,9 +80,6 @@ GIT
 GEM
   remote: http://gemcutter.org/
   specs:
-    BadMinus-devise (1.2.0)
-      bcrypt-ruby (~> 2.1.2)
-      warden (~> 0.10.7)
     RedCloth (4.1.9)
     ZenTest (4.4.2)
     abstract (1.0.0)
@@ -135,6 +149,7 @@ GEM
       cucumber (>= 0.8.0)
     culerity (0.2.15)
     daemons (1.1.0)
+    dalli (1.0.1)
     database_cleaner (0.6.1)
     delayed_job (2.1.3)
       activesupport (~> 3.0)
@@ -190,14 +205,11 @@ GEM
     mime-types (1.16)
     mongo (1.2.0)
       bson (>= 1.2.0)
-    mongo_mapper (0.8.6)
-      activesupport (>= 2.3.4)
-      jnunemaker-validatable (~> 1.8.4)
-      plucky (~> 0.3.6)
     multi_json (0.0.5)
     multi_xml (0.2.0)
     multipart-post (1.1.0)
     net-ldap (0.1.1)
+    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     oauth (0.4.4)
     oauth2 (0.1.1)
@@ -239,6 +251,8 @@ GEM
     responders (0.6.2)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    rpm_contrib (1.0.13)
+      newrelic_rpm (>= 2.13.1)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
@@ -304,7 +318,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  BadMinus-devise (~> 1.2.0)
   RedCloth (~> 4.1.1)
   autotest-rails
   bson_ext
@@ -315,9 +328,11 @@ DEPENDENCIES
   compass (~> 0.10.2)
   compass-colors (~> 0.3.1)
   cucumber-rails
+  dalli
   database_cleaner
   delayed_job
   delayed_job_mongo_mapper
+  devise!
   differ (~> 0.1.1)
   dynamic_form
   factory_girl!
@@ -330,14 +345,16 @@ DEPENDENCIES
   launchy
   mechanize
   mongo
-  mongo_mapper (~> 0.8.2)
+  mongo_mapper!
   mongomapper_ext!
+  newrelic_rpm
   omniauth!
   postmark (~> 0.9.0)
   postmark-rails (~> 0.4.0)
   rails (~> 3.0.0)
   rdiscount (~> 1.6.3.1)
   responders
+  rpm_contrib
   rspec
   rspec-rails (~> 2.0.0)
   ruby-debug
