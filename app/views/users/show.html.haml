@@ -23,9 +23,10 @@
       %h2.title
         = t('followable.followers', :count => @user.followers.count)
       .friend_list
-        - @user.followers.each do |follower|
-          %span
-            = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
+        - cache("user_followers_#{@user.id}_#{@user.followers.count}") do
+          - @user.followers.each do |follower|
+            %span
+              = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
 
   -# Followed users
   - if @user.following.count > 0
@@ -33,9 +34,10 @@
       %h2.title
         = t('followable.following', :count => @user.following.count)
       .friend_list
-        - @user.following.each do |follower|
-          %span
-            = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
+        - cache("user_following_#{@user.id}_#{@user.following.count}") do
+          - @user.following.each do |follower|
+            %span
+              = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
 
   -# Followed topics
   - if @topics.count == 0
@@ -45,14 +47,15 @@
     .block
       %h2.title
         = t("followable.topics", :count => @topics.count)
-      %ul.topic-list
-        - @topics.each do |topic|
-          %li
-            .topic
-              %span.topic-title
-                = link_to topic.title, topic_url(topic), :title => topic.title
-            = render :partial => "topics/follow", :locals => {:topic => topic}
-            .clear
+      - cache("user_topics_#{@user.id}_#{@topics.count}", :expires_in => 2.hours) do
+        %ul.topic-list
+          - @topics.each do |topic|
+            %li
+              .topic
+                %span.topic-title
+                  = link_to topic.title, topic_url(topic), :title => topic.title
+              = render :partial => "topics/follow", :locals => {:topic => topic}
+              .clear
 
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}
@@ -72,11 +75,12 @@
     .clear
   .block
     %ul.items#questions
-      - @questions.each do |question|
-        = render :partial => "questions/question", :object => question
-    .additional_info
-      = will_paginate @questions, :param_name => "questions_page"
-      .clear
+      - cache("user_questions_#{@user.id}_#{@questions.total_entries}") do
+        - @questions.each do |question|
+          = render :partial => "questions/question", :object => question
+      .additional_info
+        = will_paginate @questions, :param_name => "questions_page"
+        .clear
 
   / Favorites
   .secondary-navigation{:class => @f_sort||"votes"}
@@ -121,9 +125,10 @@
   .block
 
   %ul.items#answers
-    - @answers.each do |answer|
-      - next if answer.question.banned
-      = render :partial => "answers/answer", :object => answer
-  .additional_info
-    = will_paginate @answers, :param_name => "answers_page"
-    .clear
+    - cache("user_questions_#{@user.id}_#{@questions.total_entries}") do
+      - @answers.each do |answer|
+        - next if answer.question.banned
+        = render :partial => "answers/answer", :object => answer
+    .additional_info
+      = will_paginate @answers, :param_name => "answers_page"
+      .clear
