@@ -9,12 +9,7 @@
     = t(".title")
     - if @questions
       == (#{@questions.total_entries})
-
-  %ul
-    %li.newest
-      = link_to t("questions.index.newest"), unanswered_questions_path(:sort=>"newest")
-    %li.votes
-      = link_to t("questions.index.votes"), unanswered_questions_path(:sort=>"votes")
+  = t("questions.unanswered.explanation")
 
 - content_for :sidebar do
   - if logged_in?

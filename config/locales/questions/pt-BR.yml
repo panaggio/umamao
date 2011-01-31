@@ -51,7 +51,7 @@ pt-BR:
       newest_tooltip: Perguntas mais recentes
       oldest: Mais antigas
       title: Todas as perguntas
-      unanswered_questions: perguntas sem resposta
+      unanswered_questions: perguntas em aberto
       votes: Votos
       votes_tooltip: Perguntas com mais votos
     model:
@@ -146,11 +146,12 @@ pt-BR:
       title: Tópicos
       tooltip: Mostrar perguntas no tópico %{tag}
     unanswered:
-      empty: Não há perguntas sem resposta.
+      explanation: Perguntas em aberto são aquelas cujas respostas ainda não tiveram nenhum voto. Contribua votando nas perguntas com respostas adequadas.
+      empty: Não há perguntas em aberto.
       expert: Especialistas
       my_tags: Meus tópicos
       tags: Tópicos sem respostas
-      title: Perguntas sem resposta
+      title: Perguntas em aberto
     unsolve:
       flash_notice: Resposta marcada como não aceita.
     unwatch:
