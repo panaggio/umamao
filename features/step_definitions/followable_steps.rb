@@ -4,19 +4,7 @@ Then /^I should see my picture in the followers box$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-Given /^I follow a question$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^"([^"]*)" posts an answer to that question$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
 Then /^I should receive an email$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I post an answer to that question$/ do
   pending # express the regexp above with the code you wish you had
 end
 

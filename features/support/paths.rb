@@ -30,7 +30,7 @@ module NavigationHelpers
       @confirmation_path
 
     when /^the question's page$/
-      question_path(@question)
+      "/questions/#{@question.slug}"
 
     else
       begin
