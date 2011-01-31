@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_group
-    @current_group ||= begin
+    @current_group ||= Rails.cache.fetch('group_first') {
       subdomains = request.subdomains
       subdomains.delete("www") if request.host == "www.#{AppConfig.domain}"
       _current_group = Group.first(:state => "active", :domain => request.host)
@@ -86,8 +86,7 @@ class ApplicationController < ActionController::Base
         return
       end
       _current_group
-    end
-    @current_group
+    }
   end
 
   def current_group
