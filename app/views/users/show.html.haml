@@ -125,7 +125,7 @@
   .block
 
   %ul.items#answers
-    - cache("user_questions_#{@user.id}_#{@questions.total_entries}") do
+    - cache("user_answers_#{@user.id}_#{@questions.total_entries}") do
       - @answers.each do |answer|
         - next if answer.question.banned
         = render :partial => "answers/answer", :object => answer
