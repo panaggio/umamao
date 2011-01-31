@@ -11,6 +11,12 @@ pt-BR:
       description: Descrição
     show:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
+      all_tab: Todas perguntas
+      unanswered_tab: Perguntas sem resposta
+    unanswered:
+      empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
+      all_tab: Todas perguntas
+      unanswered_tab: Perguntas sem resposta
   activerecord:
     models:
       topic: Tópico
