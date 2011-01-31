@@ -24,6 +24,8 @@ class TopicsController < ApplicationController
       raise Goalie::NotFound
     end
     set_page_title(@topic.title)
+    
+    set_tab :all, :topic_show
 
     @news_items = NewsItem.paginate(:recipient_id => @topic.id,
                                     :recipient_type => "Topic",
@@ -128,6 +130,26 @@ class TopicsController < ApplicationController
                }.to_json)
       end
     end
+  end
+  
+  def unanswered
+    begin
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    rescue BSON::InvalidObjectId
+      raise Goalie::NotFound
+    end
+    set_page_title(@topic.title)
+
+    set_tab :unanswered, :topic_show
+     
+    conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
+                                   :closed => false, :exercise.ne => true)
+
+    @questions = Question.paginate({:topic_ids => @topic.id, :banned => false,
+                                   :order => :activity_at.desc, :per_page => 25,
+                                   :page => params[:page] || 1}.merge(conditions))
+
+    respond_with @topics
   end
 
   # Searches matching topics and render them in JSON form for input

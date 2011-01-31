@@ -8,6 +8,7 @@ Shapado::Application.routes.draw do
     member do
       post :follow
       post :unfollow
+      get :unanswered
     end
 
     collection do
