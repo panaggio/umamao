@@ -14,7 +14,12 @@
         = link_to t("followable.follow"), follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
 
   .user-info.block
-    = avatar_for(@user, :size => 128)
+    = avatar_for(@user, :size => 128) 
+    %br
+    - if @user.facebook_account
+      = link_to image_tag("facebook.gif"), 'http://www.facebook.com/' + @user.facebook_account.user_info["nickname"]
+    - if @user.twitter_account
+      = link_to image_tag("twitter.gif"), 'http://twitter.com/' + @user.twitter_account.user_info["nickname"]
     = shapado_auto_link(markdown(@user.description))
 
   -# Followers
