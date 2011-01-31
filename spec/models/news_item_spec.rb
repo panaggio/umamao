@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
-require 'factories/user'
-require 'factories/group'
 
 describe 'NewsItem.from_titles!' do
   context 'when it gets passed a news update from a user with followers' do
@@ -12,9 +10,9 @@ describe 'NewsItem.from_titles!' do
       User.delete_all
       Group.delete_all
 
-      @user1 = Factory(:user)
-      @user2 = Factory(:user)
-      @user3 = Factory(:user)
+      @user1 = Factory(:user, :name => "John")
+      @user2 = Factory(:user, :name => "Jack")
+      @user3 = Factory(:user, :name => "Mike")
       @group = Factory(:group)
 
       @users = User.all - [@user1]

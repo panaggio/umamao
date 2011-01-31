@@ -152,7 +152,8 @@
 
   - if @question.watchers.count > 0
     .block
-      = render_cell :users, :list, :users => User.query(:id.in => @question.watchers), :title => "Seguindo esta pergunta"
+      %h2= t("questions.show.question_followers")
+      = render_cell :users, :list, :users => User.query(:id.in => @question.watchers)
 
   .audience-size
     = t('.topic_followers',

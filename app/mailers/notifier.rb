@@ -38,7 +38,7 @@ class Notifier < ActionMailer::Base
 
     if user == answer.question.user
       subject = I18n.t("subject_owner",
-					   :scope => scope,
+                       :scope => scope,
                        :title => answer.question.title,
                        :login => answer.user.name)
     elsif following

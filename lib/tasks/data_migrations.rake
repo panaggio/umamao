@@ -8,10 +8,12 @@ namespace :data do
     desc "Add question authors as watchers"
     task :add_question_authors_as_watchers => :environment do
       Question.query.each do |question|
-        if !question.watchers.include?(question.user_id)
-          puts "Added in \"#{question.title}\""
+        if question.user_id.blank?
+          puts "Missing author in \"#{question.title}\""
+          next
+        elsif !question.watchers.include?(question.user_id)
+          puts "Added user \"#{question.user.name}\" in \"#{question.title}\""
           question.add_watcher(question.user)
-          question.save :validate => false
         else
           puts "Skipped \"#{question.title}\""
         end

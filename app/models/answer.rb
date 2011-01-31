@@ -152,8 +152,12 @@ class Answer < Comment
     # only if the answer wasn't created by question author and
     # question author asked to receive email notification about
     # answers
-    if self.question.user != self.user && self.question.user.notification_opts.new_answer
-      Notifier.delay.new_answer(self.question.user, self.group, self, false)
+    self.question.watchers.each do |watcher|
+      user = User.find_by_id(watcher)
+      if user != self.user &&
+          user.notification_opts.new_answer
+        Notifier.delay.new_answer(user, self.group, self, true)
+      end
     end
   end
 
