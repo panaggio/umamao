@@ -12,6 +12,14 @@ GIT
     factory_girl (2.0.0.beta1)
 
 GIT
+  remote: git://github.com/thoughtbot/factory_girl_rails.git
+  revision: 8a421148bf70577b1c944f8494bf37295c44b06e
+  specs:
+    factory_girl_rails (1.1.beta1)
+      factory_girl (~> 2.0.0.beta)
+      railties (>= 3.0.0)
+
+GIT
   remote: git://github.com/umamao/devise.git
   revision: 0cdec89cc81d45a6b05878614f9ce07770d493a2
   specs:
@@ -27,14 +35,6 @@ GIT
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
-
-GIT
-  remote: git://github.com/thoughtbot/factory_girl_rails.git
-  revision: 8a421148bf70577b1c944f8494bf37295c44b06e
-  specs:
-    factory_girl_rails (1.1.beta1)
-      factory_girl (~> 2.0.0.beta)
-      railties (>= 3.0.0)
 
 GIT
   remote: git://github.com/umamao/mongomapper_ext.git
