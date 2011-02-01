@@ -27,7 +27,6 @@ class Affiliation
   validates_presence_of :email
 
   before_validation :strip_email
-  before_create :generate_token
   after_create :send_confirmation
 
   def send_confirmation
