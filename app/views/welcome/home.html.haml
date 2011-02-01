@@ -8,7 +8,7 @@
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
 
-- cache("user_news_items_#{current_user.id}_#{@news_items.total_entries}") do
+- cache("user_news_items_#{current_user.id}") do
   %ul.items#news_items
     - if @news_items.empty?
 
