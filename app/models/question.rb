@@ -6,15 +6,13 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
+  extend Sweepers
   include Scopes
   
-  require "lib/support/news_expirer"
-  include Support::NewsExpirer
-
   ensure_index :tags
   ensure_index :language
 
-  after_save { |question| expire_news_fragments(question.id) }
+  after_save { |question| sweep_news_items(question) }
 
   key :_id, String
   key :title, String, :required => true

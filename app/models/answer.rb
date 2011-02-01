@@ -2,11 +2,9 @@ class Answer < Comment
   include MongoMapper::Document
   include MongoMapperExt::Filter
   include Support::Versionable
+  extend Sweepers
 
-  require "lib/support/news_expirer"
-  include Support::NewsExpirer
-
-  after_save { |answer| expire_news_fragments(answer.question.id) }
+  after_save { |answer| sweep_news_items(answer.question) }
 
   key :_id, String
 
