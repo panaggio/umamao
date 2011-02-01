@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
-                                           :follow, :unfollow, :refuse_suggestion]
+                                           :follow, :unfollow]
 
   tabs :default => :users
 
@@ -72,12 +72,12 @@ class UsersController < ApplicationController
       @affiliation = Affiliation.
         find_by_affiliation_token(params[:affiliation_token])
 
-      if @affiliation.confirmed_at.present?
-        redirect_to(root_url) && return
-      end
-
-      if @affiliation
-        @user.affiliation_token = @affiliation.affiliation_token
+      if @affiliation.present?
+        if @affiliation.user.present?
+          redirect_to(root_url) && return
+        else
+          @user.affiliation_token = @affiliation.affiliation_token
+        end
       end
 
     end
@@ -91,6 +91,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    tracking_properties = {}
     @user = User.new
     @user.safe_update(%w[login email name password_confirmation password
                          preferred_languages website language timezone
@@ -105,19 +106,27 @@ class UsersController < ApplicationController
       first(:slug => params[:group_invitation])
     @user.confirmed_at = Time.now if @group_invitation
 
+    if invitation = Invitation.find_by_invitation_token(@user.invitation_token)
+      tracking_properties[:invited_by] = invitation.sender.email
+    end
+
     if @user.save
-      @group_invitation.push(:user_ids => @user.id) if @group_invitation
+      if @group_invitation
+        @group_invitation.push(:user_ids => @user.id)
+        tracking_properties[:invited_by] = @group_invitation.slug
+      end
 
       if @user.affiliation_token.present?
         @affiliation = Affiliation.
           find_by_affiliation_token(@user.affiliation_token)
-        @affiliation.confirmed_at = Time.now
+        @affiliation.confirmed_at ||= Time.now
         @user.affiliations << @affiliation
         @user.save
       end
 
       current_group.add_member(@user)
-      track_event(:sign_up, :user_id => @user.id, :confirmed => @user.confirmed?)
+      track_event(:sign_up, {:user_id => @user.id,
+                    :confirmed => @user.confirmed?}.merge(tracking_properties))
       flash[:conversion] = true
 
       # Protects against session fixation attacks, causes request forgery
@@ -209,13 +218,14 @@ class UsersController < ApplicationController
     @user = User.find_by_login_or_id(params[:id])
     current_user.follow(@user)
     current_user.populate_news_feed!(@user)
+    current_user.save!
 
     track_event(:followed_user)
 
     notice = t("followable.flash.follow", :followable => @user.name)
 
     if @user.notification_opts.activities
-      Notifier.follow(current_user, @user).deliver
+      Notifier.delay.follow(current_user, @user)
     end
 
     respond_to do |format|
@@ -230,7 +240,7 @@ class UsersController < ApplicationController
         }
         if params[:suggestion]
           response[:suggestions] =
-            render_cell :suggestions, :users, :user => current_user
+            render_cell :suggestions, :users
         end
         render :json => response.to_json
       }
@@ -240,6 +250,7 @@ class UsersController < ApplicationController
   def unfollow
     @user = User.find_by_login_or_id(params[:id])
     current_user.unfollow(@user)
+    current_user.save!
 
     track_event(:unfollowed_user)
 
@@ -264,27 +275,6 @@ class UsersController < ApplicationController
       flash[:notice] = t("destroy_failed", :scope => "devise.registrations")
     end
     return redirect_to(:root)
-  end
-
-  # Adds user to the current user's list of refused user suggestions,
-  # removing it from the suggestions list.
-  def refuse_suggestion
-    @user = User.find_by_id(params[:id])
-    if @user && !current_user.uninteresting_user_ids.include?(@user.id)
-      @current_user = current_user
-      @current_user.uninteresting_user_ids << @user.id
-      @current_user.suggested_user_ids.delete(@user.id)
-      @current_user.save!
-    end
-
-    respond_to do |format|
-      format.js do
-        render :json => {
-          :success => true,
-          :suggestions => (render_cell :suggestions, :users, :user => current_user)
-        }.to_json
-      end
-    end
   end
 
   protected

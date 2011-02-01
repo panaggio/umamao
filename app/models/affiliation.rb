@@ -16,25 +16,36 @@ class Affiliation
   belongs_to :university
   belongs_to :user
 
+  timestamps!
+
   validates_true_for :email, :logic => lambda {
     (self.email =~ self.university.email_regexp) != nil
   }
 
+  validates_format_of :email, :with => Devise::email_regexp
   validates_uniqueness_of :email
   validates_presence_of :email
 
   after_create  :send_confirmation
-  
+  before_validation :strip_email
+  before_create :generate_affiliation_token
+  after_create :send_confirmation
+
   def send_confirmation
+    return if self.confirmed_at.present? # We don't need to confirm this.
     if self.university.open_for_signup
       generate_affiliation_token! if self.affiliation_token.nil?
-      Notifier.signup(self).deliver
+      Notifier.delay.signup(self)
     else
-      Notifier.closed_for_signup(self).deliver
+      Notifier.delay.closed_for_signup(self)
     end
   end
   
   def self.resend_confirmation(email)
     where(:email=>email).first.send_confirmation
+  end
+
+  def strip_email
+    self.email = self.email.strip
   end
 end

@@ -3,9 +3,6 @@ task :import => :environment do
   `mongo --eval 'db.getSisterDB("shapado-production").dropDatabase(); db.getSisterDB("shapado-#{Rails.env}").dropDatabase()'`
   `mongorestore dump`
   `mongo --eval 'db.getSisterDB("shapado-#{Rails.env}").dropDatabase(); db.copyDatabase("shapado-production", "shapado-#{Rails.env}"); db.getSisterDB("shapado-production").dropDatabase()'`
-  User.query.each do |user|
-    user.reset_password!("umamao", "umamao")
-  end
 
   umamao = Group.first
   umamao.domain = "localhost.lan"

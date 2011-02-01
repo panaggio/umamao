@@ -53,21 +53,10 @@ class User
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
 
-  # FIXME: use a separate class for suggestions
-
-  # Denormalized array of relevant topics that we suggest to the user,
-  # sorted by decreasing order of relevance. See suggest_topics!
-  key :suggested_topic_ids, Array, :default => []
-  key :suggested_topics_fresh, Boolean, :default => false # Whether or not this is has just been calculated.
-
-  key :uninteresting_topic_ids, Array
-  many :uninteresting_topics, :class_name => "Topic", :in => :uninteresting_topic_ids
-
-  key :suggested_user_ids, Array, :default => []
-  many :suggested_users, :class_name => "User", :in => :suggested_user_ids
-
-  key :uninteresting_user_ids, Array
-  many :uninteresting_users, :class_name => "User", :in => :uninteresting_user_ids
+  has_one :suggestion_list, :dependent => :destroy
+  delegate :topic_suggestions, :user_suggestions, :suggest,
+    :remove_suggestion, :mark_as_uninteresting, :refuse_suggestion,
+    :refresh_suggestions, :find_first_suggestions, :to => :suggestion_list
 
   has_many :favorites, :class_name => "Favorite", :foreign_key => "user_id"
 
@@ -104,6 +93,7 @@ class User
 
   before_create :logged!
   after_create :accept_invitation
+  after_create :create_suggestion_list
 
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
@@ -381,6 +371,8 @@ Time.zone.now ? 1 : 0)
 
     User.increment(self.id, :following_count => 1)
     User.increment(user.id, :followers_count => 1)
+
+    self.remove_suggestion(user)
     true
   end
 
@@ -392,6 +384,7 @@ Time.zone.now ? 1 : 0)
     User.decrement(self.id, :following_count => 1)
     User.decrement(user.id, :followers_count => 1)
 
+    self.mark_as_uninteresting(user)
     true
   end
 
@@ -465,7 +458,7 @@ Time.zone.now ? 1 : 0)
   # Attempts to add more updates from origin to the user's feed when
   # it is too small
   def populate_news_feed!(origin)
-    return if news_items.count > 20
+    limit = self.news_items.count > 1000 ? 5 : 100
     total_feeded = 0
     case origin
     when User
@@ -473,9 +466,11 @@ Time.zone.now ? 1 : 0)
         :author_id => origin.id,
         :order => :created_at.desc
       ).each do |update|
-        return if total_feeded > 5
-        if !news_items.any? {|i| i.news_update_id == update.id}
-          NewsItem.notify!(update, self, origin)
+        return if total_feeded >= limit
+        if NewsItem.query(:recipient_id => self.id,
+                          :recipient_type => "User",
+                          :news_update_id => update.id).count == 0
+          NewsItem.notify!(update, self, origin, update.created_at)
           total_feeded += 1
         end
       end
@@ -485,105 +480,15 @@ Time.zone.now ? 1 : 0)
         :recipient_type => "Topic",
         :order => :created_at.desc
       ).each do |item|
-        return if total_feeded > 5
-        if !news_items.any? {|i| i.news_update_id == item.news_update_id}
-          NewsItem.notify!(item.news_update, self, origin)
+        return if total_feeded >= limit
+        if NewsItem.query(:recipient_id => self.id,
+                          :recipient_type => "User",
+                          :news_update_id => item.news_update_id).count == 0
+          NewsItem.notify!(item.news_update, self, origin, item.created_at)
           total_feeded += 1
         end
       end
     end
-  end
-
-  # Lists the best topic suggestions for the user, recalculating it if needed.
-  # TODO: Check whether the suggestion list is old.
-  def suggested_topics(max = 5)
-    if !self.suggested_topics_fresh && self.suggested_topic_ids.length < 10
-      self.suggest_topics!
-    end
-
-    self.suggested_topic_ids[0 .. max].map do |topic_id|
-      Topic.find(topic_id)
-    end
-  end
-
-  # Adds random topics to the user's suggestion list.
-  # Choose among the top topics.
-  def randomize_topic_suggestions
-    failed = 0 # Avoid picky users causing infinite loops.
-    while self.suggested_topic_ids.length < 13 && failed < 30
-      topic = Topic.query(:offset => 5 + rand(50)).first
-      if self.suggested_topic_ids.include?(topic.id) ||
-          self.uninteresting_topic_ids.include?(topic.id) ||
-          topic.follower_ids.include?(self.id)
-        failed += 1
-        next
-      end
-      self.suggested_topic_ids << topic.id
-    end
-  end
-
-  # Finds topics that might be of interest to user by choosing the
-  # ones that occur often in the followed topics' questions.
-  def suggest_topics!
-    if self.suggested_topic_ids.length < 8 &&
-        Topic.query(:follower_ids => self.id).count == 0
-      # If user doesn't follow anything, we show the most popular
-      # topics, and some random ones.
-      Topic.query(:order => :questions_count.desc, :limit => 6).each do |topic|
-        unless self.uninteresting_topic_ids.include?(topic.id)
-          self.suggested_topic_ids << topic.id
-        end
-      end
-
-      self.randomize_topic_suggestions
-      self.suggested_topics_fresh = true
-      self.save!
-      return
-    end
-
-    count = {}
-
-    Topic.query(:follower_ids => self.id, :select => [:id, :title]).each do |topic|
-      Question.query(:topic_ids => topic.id, :select => :topic_ids).each do |question|
-        question.topics.each do |related_topic|
-          next if related_topic.id == topic.id ||
-            related_topic.follower_ids.include?(self.id) ||
-            self.uninteresting_topic_ids.include?(related_topic.id)
-          count[related_topic.id] = (count[related_topic.id] || 0) + 1
-        end
-      end
-    end
-
-    self.suggested_topic_ids = count.to_a.sort do |a,b|
-      -(a[1] <=> b[1])
-    end[0 .. 49].map {|v| v[0]}
-    if self.suggested_topic_ids.length < 10
-      self.randomize_topic_suggestions
-    end
-
-    self.suggested_topics_fresh = true
-
-    self.save!
-  end
-
-  # Removes a topic from the list of suggested topics.
-  def remove_topic_suggestion(topic)
-    if self.suggested_topic_ids.delete(topic.id)
-      self.suggested_topics_fresh = false
-    end
-  end
-
-  def mark_topic_as_uninteresting!(topic)
-    if !self.uninteresting_topic_ids.include?(topic.id)
-      self.uninteresting_topic_ids << topic.id
-    end
-    self.save!
-  end
-
-  # Refuses a topic suggestions
-  def refuse_topic_suggestion!(topic)
-    self.remove_topic_suggestion(topic)
-    self.mark_topic_as_uninteresting!(topic)
   end
 
   # Return the user's associated Facebook account, if there is one,
@@ -649,7 +554,7 @@ Time.zone.now ? 1 : 0)
   end
 
   # Find interesting topics using self's external accounts.
-  def find_topics
+  def find_external_topics
     topics = Set.new
     if account = self.facebook_account
       graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
@@ -684,4 +589,11 @@ Time.zone.now ? 1 : 0)
   def strip_email
     self.email = self.email.strip
   end
+
+  # Create a suggestion list for the user. Used with an after_create.
+  def create_suggestion_list
+    self.suggestion_list = SuggestionList.new(:user => self)
+    self.save :validate => false
+  end
+
 end

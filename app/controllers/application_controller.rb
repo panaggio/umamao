@@ -28,8 +28,8 @@ class ApplicationController < ActionController::Base
 
   def track_event(event, properties = {})
     user_id = current_user ? current_user.id : properties.delete(:user_id)
-    Magent.push('actors.tracker', :track_event, event, user_id, request.ip,
-                properties)
+    Tracking::EventTracker.delay.track_event([event, user_id, request.ip,
+                properties])
   end
 
   def after_sign_in_path_for(resource)
@@ -73,13 +73,19 @@ class ApplicationController < ActionController::Base
   end
 
   def find_group
-    @current_group ||= begin
+    @current_group ||= Rails.cache.fetch('group_first') {
       subdomains = request.subdomains
       subdomains.delete("www") if request.host == "www.#{AppConfig.domain}"
       _current_group = Group.first(:state => "active", :domain => request.host)
       unless _current_group
+        _current_group = Group.first(:state => "active",
+                                     :domain => AppConfig.domain)
+      end
+      unless _current_group
         if subdomain = subdomains.first
-          _current_group = Group.first(:state => "active", :subdomain => subdomain)
+          _current_group = Group.first(:state => "active",
+                                       :subdomain => subdomain) ||
+            Group.first
           unless _current_group.nil?
             redirect_to domain_url(:custom => _current_group.domain)
             return
@@ -90,8 +96,7 @@ class ApplicationController < ActionController::Base
         return
       end
       _current_group
-    end
-    @current_group
+    }
   end
 
   def current_group

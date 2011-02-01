@@ -65,10 +65,8 @@ class TopicsController < ApplicationController
     end
 
     user = current_user
-    @topic.followers << user
-    @topic.save
-    user.remove_topic_suggestion(@topic)
-    user.suggested_topics_fresh = false
+    @topic.add_follower!(user)
+    user.remove_suggestion(@topic)
     user.populate_news_feed!(@topic)
     user.save!
 
@@ -91,7 +89,7 @@ class TopicsController < ApplicationController
           res[:html] = render_cell :topics, :followed, :topic => @topic
         elsif params[:suggestion]
           # We need to redraw the topics suggestions
-          res[:suggestions] = render_cell :suggestions, :topics, :user => current_user
+          res[:suggestions] = render_cell :suggestions, :topics
         end
 
         render :json => res.to_json
@@ -101,10 +99,11 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
-    @topic.follower_ids.delete(current_user.id)
-    @topic.save
+    @topic.remove_follower!(current_user)
+    @topic.save!
 
-    current_user.mark_topic_as_uninteresting!(@topic)
+    current_user.mark_as_uninteresting(@topic)
+    current_user.save!
 
     track_event(:unfollowed_topic)
 
@@ -122,22 +121,6 @@ class TopicsController < ApplicationController
       end
     end
   end
-
-  # Adds topic to the current user's list of refused topic suggestions.
-  def refuse_suggestion
-    @topic = Topic.find_by_slug_or_id(params[:id])
-    current_user.refuse_topic_suggestion!(@topic) if @topic
-
-    respond_to do |format|
-      format.js do
-        render :json => {
-          :success => true,
-          :suggestions => (render_cell :suggestions, :topics, :user => current_user)
-        }.to_json
-      end
-    end
-  end
-
 
   # Searches matching topics and render them in JSON form for input
   # autocomplete.

@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     if (question = @comment.find_question) && (recipient = @comment.find_recipient)
       email = recipient.email
       if !email.blank? && current_user.id != recipient.id && recipient.notification_opts.new_answer
-        Notifier.new_comment(recipient, current_group, @comment, question).deliver
+        Notifier.delay.new_comment(recipient, current_group, @comment, question)
       end
     end
 

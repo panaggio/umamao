@@ -153,7 +153,7 @@ class Answer < Comment
     # question author asked to receive email notification about
     # answers
     if self.question.user != self.user && self.question.user.notification_opts.new_answer
-      Notifier.new_answer(self.question.user, self.group, self, false).deliver
+      Notifier.delay.new_answer(self.question.user, self.group, self, false)
     end
   end
 

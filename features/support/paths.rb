@@ -17,6 +17,15 @@ module NavigationHelpers
     when /^(.*)'s profile page$/i
       user_path(User.find_by_name($1))
 
+    when /^the confirmation page$/
+      @confirmation_email = find_confirmation_email(@affiliation_email)
+      if @confirmation_email.multipart?
+        @body = @confirmation_email.parts.
+          find{|part| part.content_type =~ /text\/plain/ }.body
+      end
+      @confirmation_path = @body.to_s[/http:\/\/[^\/]+(\S+)/, 1]
+      @confirmation_path
+
     else
       begin
         page_name =~ /the (.*) page/

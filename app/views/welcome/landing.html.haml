@@ -17,7 +17,7 @@
       = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
 
 - content_for :js do
-  = javascript_include_merged :landing
+  = render :partial => "shared/layout/javascript/landing"
 
 #content
   %h3 Qualquer pergunta, não qualquer resposta.
@@ -49,9 +49,10 @@
         #help-box
           %p
 
-            Email acadêmico é o seu email de vínculo com a universidade.
-            Para a Unicamp, por exemplo, seria algo como h033245@dac.unicamp.br.
-            Se você não possui um, deixe o seu email pessoal que entraremos em contato.
+            Email acadêmico é o seu email de vínculo com a
+            universidade, como seunome@suauniversidade.br.  Se você
+            não possui um, deixe o seu email pessoal que entraremos em
+            contato.
 
       .submit
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hidden")

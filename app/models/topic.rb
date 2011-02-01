@@ -14,10 +14,15 @@ class Topic
 
   key :follower_ids, Array, :index => true
   has_many :followers, :class_name => 'User', :in => :follower_ids
+  key :followers_count, :default => 0
 
   slug_key :title, :unique => true, :min_length => 3
 
   has_many :news_items, :foreign_key => :recipient_id, :dependent => :destroy
+
+  key :related_topic_ids, :default => []
+  has_many :related_topics, :class_name => "Topic",
+    :in => :related_topic_ids
 
   timestamps!
 
@@ -42,15 +47,48 @@ class Topic
     title
   end
 
+  def find_related_topics
+    topic_counts = {}
+
+    Question.query(:topic_ids => self.id).each do |question|
+      question.topics.each do |related_topic|
+        next if related_topic == self
+        topic_counts[related_topic.id] =
+          (topic_counts[related_topic.id] || 0) + 1
+      end
+    end
+
+    self.related_topic_ids =
+      topic_counts.to_a.sort{|a, b| -(a[1] <=> b[1])}[0 .. 9].map(&:first)
+
+    self.related_topics
+  end
+
+  # Add a follower to topic.
+  def add_follower!(user)
+    if !self.followers.include?(user)
+      self.followers << user
+      self.save!
+      self.increment(:followers_count => 1)
+    end
+  end
+
+  # Remove a follower from topic.
+  def remove_follower!(user)
+    if self.followers.include?(user)
+      self.follower_ids.delete(user.id)
+      self.save!
+      self.increment(:followers_count => -1)
+    end
+  end
+
   # Merges other to self: self receives every question, follower and
   # news update from other. Destroys other. Cannot be undone.
   def merge_with!(other)
     return false if id == other.id
 
     other.followers.each do |f|
-      if !follower_ids.include? f.id
-        followers << f
-      end
+      self.add_follower!(f)
     end
 
     Question.query(:topic_ids => other.id).each do |q|
@@ -78,15 +116,14 @@ class Topic
 
   # Removes topic from user suggestions and ignored topics.
   def remove_from_suggestions
-    User.query(:suggested_topic_ids => self.id).each do |user|
-      user.suggested_topic_ids.delete(self.id)
-      user.suggested_topics_fresh = false
-      user.save
+    SuggestionList.query(:suggested_topic_ids => self.id).each do |list|
+      list.suggested_topic_ids.delete(self.id)
+      list.save!
     end
 
-    User.query(:uninteresting_topic_ids => self.id).each do |user|
-      user.uninteresting_topic_ids.delete(self.id)
-      user.save
+    SuggestionList.query(:uninteresting_topic_ids => self.id).each do |list|
+      list.uninteresting_topic_ids.delete(self.id)
+      list.save!
     end
   end
   after_destroy :remove_from_suggestions

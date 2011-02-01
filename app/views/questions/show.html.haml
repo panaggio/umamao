@@ -14,7 +14,7 @@
 - source = question_path(@question)
 
 - content_for :js do
-  = javascript_include_merged :show
+  = render :partial => "shared/layout/javascript/show"
   = javascript_include_tag "jquery.colorbox-min"
 
 - content_for :head do

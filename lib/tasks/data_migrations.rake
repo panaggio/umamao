@@ -5,6 +5,51 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Find topics related to Unicamp."
+    task :populate_unicamp_topics => :environment do
+      unicamp = University.find_by_short_name("Unicamp")
+      topic_names = ["Unicamp",
+                     "Barão Geraldo", "Campinas",
+                     "DAC (Unicamp)", "SAE Unicamp",
+                     "CECOM (Unicamp)",
+                     "Restaurante Universitário da Unicamp (Bandejão)",
+                     "Bolsas-auxílio (Unicamp)",
+                     "Comida na Unicamp", "Moradia Estudantil da Unicamp",
+                     "DCE da Unicamp", "Sistema de Bibliotecas da Unicamp",
+                     "Restaurantes da Unicamp", "Intercâmbio"]
+      topic_names.each do |topic_name|
+        puts topic_name
+        topic = Topic.find_by_title(topic_name)
+        if topic.blank?
+          puts "Could not find topic \"#{topic_name}\""
+        else
+          unicamp.university_topics << topic
+        end
+      end
+      unicamp.save!
+    end
+
+    desc "Calculate each topic's followers count"
+    task :calculate_followers_count => :environment do
+      Topic.query.each do |topic|
+        next if topic.follower_ids.blank?
+        topic.followers_count = topic.follower_ids.length
+        topic.save :validate => false
+      end
+    end
+
+    desc "Create suggestion lists for all users."
+    task :create_suggestion_lists => :environment do
+      User.query.each do |user|
+        if user.suggestion_list.blank?
+          puts user.name
+          user.suggestion_list = SuggestionList.new(:user => user)
+          user.save :validate => false
+        else
+          puts "User #{user.name} had already a suggestion list"
+        end
+      end
+    end
 
     desc "Delete a question's news items if it has already been answered."
     task :delete_duplicate_news_items => :environment do
@@ -44,19 +89,45 @@ namespace :data do
     desc "Update old users format (academic e-mail inside users model) to the new one (user affiliation university)"
     task :move_user_academic_email_to_affiliation => :environment do
 
+      unconfirmed_users = 0
+
       User.where(:academic_email.ne => nil).each do |user|
+        if Affiliation.find_by_email(user.academic_email).present?
+          puts "Skipping email #{user.academic_email}"
+          next
+        end
+        puts "Creating affiliation for #{user.academic_email}"
         a = Affiliation.new
         a.user = user
+        unconfirmed = false
 
-        a.confirmed_at = user.confirmed_at
+        if !(a.confirmed_at = user.confirmed_at)
+          puts "Unconfirmed affiliation for #{user.academic_email}"
+          unconfirmed = true
+
+          # HACK: We do not want to send emails to old unconfirmed
+          # users.  The confirmation step is ignored if the
+          # affiliation has a confimation date, so we set it now and
+          # unset it later.
+          a.confirmed_at = Time.now
+          unconfirmed_users += 1
+        end
+
         a.email = user.academic_email
         short_name = /[.@]unicamp.br$/ =~ a.email ? "Unicamp" : "USP"
         a.university = University.where(:short_name => short_name).first
 
-        a.save ? print('.') : puts("Failed saving affiliation for user #{user.id}!!!!")
+        a.save!
+        if unconfirmed
+          # This will avoid the after_create hook.
+          a.confirmed_at = nil
+          a.save!
+        end
 
-        user.save ? print('-') : puts("Failed saving user #{user.id}!!!!")
+        user.save :validate => false
       end
+
+      puts "There were #{unconfirmed_users} unconfirmed users"
     end
 
     desc "(USING THIS WILL REMOVE DOMAINS!) fix csv file from uni2.csv to uni.csv"

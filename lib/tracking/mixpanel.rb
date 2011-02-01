@@ -5,6 +5,7 @@
 #Short version: do whatever you want, just don't sue me.
 #Long version: http://www.opensource.org/licenses/mit-license.php
 
+module Tracking
 class Mixpanel
   require 'net/http'
 
@@ -82,6 +83,4 @@ class Mixpanel
     end
   end
 end
-
-
-
+end

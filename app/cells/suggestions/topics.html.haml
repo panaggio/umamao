@@ -1,17 +1,21 @@
 -# Topic suggestions
 #topic-suggestions.block.suggestions
-  - if !@suggested_topics.blank?
+  - if !@topic_suggestions.blank?
     %h3.title
       = t("followable.suggestions.topics")
     %ul.topic-list
-      - @suggested_topics.each do |topic|
+      - @topic_suggestions.each do |suggestion|
+        - topic = suggestion.entry
         %li
           .topic.info
             %span.topic-title
-              = link_to topic.title, topic_path(topic), :title => topic.title
+              - if @render_links
+                = link_to topic.title, topic_path(topic), :title => topic.title
+              - else
+                = topic.title
           .controls
             .follow-info
-              = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link"
+              = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
             .refuse-suggestion
-              = link_to "✕", refuse_suggestion_topic_path(topic)
+              = link_to "✕", refuse_suggestion_path(:suggestion => suggestion.id), :method => :post
           .clear

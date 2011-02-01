@@ -12,9 +12,7 @@ Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a
       li.slideUp(800, function () {
         suggestionsDiv.replaceWith(data.suggestions);
       });
-    },
-
-    type: "POST"
+    }
 
   };
 

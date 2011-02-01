@@ -25,6 +25,13 @@ class University
   validates_length_of       :short_name, :maximum => 20
   validates_length_of       :state, :maximum => 20
 
+  # Topics we want to suggest to affiliated users initially. We do not
+  # include here subject topics, only topics of general
+  # interest.
+  key :university_topic_ids, Array, :default => []
+  has_many :university_topics, :class_name => "Topic",
+    :in => :university_topic_ids
+
   scope :open_for_signup, where(:open_for_signup => true).sort(:short_name.asc)
 
   def email_regexp
@@ -35,7 +42,7 @@ class University
 
   def self.find_id_by_email_domain(email)
     University.all.each { |u|
-      return u._id if email =~ u.email_regexp
+      return u.id if email.strip =~ u.email_regexp
     }
     return nil
   end

@@ -34,6 +34,7 @@ class ShareQuestionController < ApplicationController
                             :picture => AppConfig.site + "/images/logosquare.png")
         status = :success
         message = I18n.t("questions.show.share_success", :site => "Facebook")
+        track_event(:shared_question, :where => "facebook")
       rescue Koala::Facebook::APIError
         status = :needs_permission
         session["omniauth_return_url"] = question_path(@question)

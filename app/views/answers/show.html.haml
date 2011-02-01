@@ -1,5 +1,5 @@
 - content_for :js do
-  = javascript_include_merged :show
+  = render :partial => "shared/layout/javascript/show"
 
 - content_for :subtabs do
   %table

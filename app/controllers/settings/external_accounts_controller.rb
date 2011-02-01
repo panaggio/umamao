@@ -9,6 +9,15 @@ class Settings::ExternalAccountsController < ApplicationController
 
   def create
     auth_hash = request.env['omniauth.auth']
+
+    if request.env['omniauth.error.type'].present?
+      respond_to do |format|
+        flash[:error] = I18n.t("external_accounts.connection_error")
+        format.html { redirect_to session["omniauth_return_url"] }
+      end
+      return
+    end
+
     unless @external_account = ExternalAccount.find_from_hash(auth_hash)
       @external_account = ExternalAccount.create_from_hash(auth_hash,
                                                            current_user)

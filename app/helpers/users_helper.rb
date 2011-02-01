@@ -21,6 +21,8 @@ module UsersHelper
         gsub('_normal.', '.')
     end
 
+    image_url = nil if image_url =~ /default_profile_images/
+
     src = image_url || gravatar_url(user.email, options)
 
     [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
