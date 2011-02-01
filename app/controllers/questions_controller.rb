@@ -374,6 +374,8 @@ class QuestionsController < ApplicationController
     @question = Question.find_by_slug_or_id(params[:id])
     @question.add_watcher(current_user)
     notice = t("questions.watch.success")
+    track_event(:followed_question)
+
     respond_to do |format|
       format.html do
         flash[:notice] = notice
@@ -398,6 +400,8 @@ class QuestionsController < ApplicationController
     @question = Question.find_by_slug_or_id(params[:id])
     @question.remove_watcher(current_user)
     notice = t("questions.unwatch.success")
+    track_event(:unfollowed_question)
+
     respond_to do |format|
       format.html do
         flash[:notice] = notice
