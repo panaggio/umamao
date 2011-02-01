@@ -2,6 +2,12 @@ class Answer < Comment
   include MongoMapper::Document
   include MongoMapperExt::Filter
   include Support::Versionable
+
+  require "lib/support/news_expirer"
+  include Support::NewsExpirer
+
+  after_save { |answer| expire_news_fragments(answer.question.id) }
+
   key :_id, String
 
   key :body, String, :required => true
