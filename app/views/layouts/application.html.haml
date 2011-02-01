@@ -45,7 +45,7 @@
                 =t(".now")
 
 
-    -unless current_user.confirmed?
+    -unless current_user && current_user.confirmed?
       %span.persistent_message
         =I18n.t("users.annoying.unconfirmed_non_academic_email")
         %a#resend_confirmation_email{:href => '#'}
