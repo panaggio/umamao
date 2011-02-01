@@ -9,7 +9,7 @@ module Sweepers
   end
 
   def sweep_news_items(question)
-    User.all.each do |u|
+    User.query.each do |u|
       if u.news_items.include? question
         expire_fragment("user_news_items_#{u.id}")
       end
