@@ -1,4 +1,3 @@
----
 javascripts:
 - base:
   - rails
@@ -32,4 +31,3 @@ stylesheets:
 - landing:
   - compiled/landing
   - autocomplete_landing
-
