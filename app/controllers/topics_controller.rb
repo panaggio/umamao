@@ -65,6 +65,7 @@ class TopicsController < ApplicationController
     end
 
     user = current_user
+    followers_count = @topic.followers_count + 1
     @topic.add_follower!(user)
     user.remove_suggestion(@topic)
     user.populate_news_feed!(@topic)
@@ -82,7 +83,10 @@ class TopicsController < ApplicationController
         res = {
           :success => true,
           :message => notice,
-          :follower => (render_cell :users, :small_picture, :user => current_user)
+          :follower => (render_cell :users, :small_picture,
+                        :user => current_user),
+          :followers_count => I18n.t("followable.followers",
+                                     :count => followers_count)
         }
 
         if params[:answer]
@@ -100,8 +104,8 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
+    followers_count = @topic.followers_count - 1
     @topic.remove_follower!(current_user)
-    @topic.save!
 
     current_user.mark_as_uninteresting(@topic)
     current_user.save!
@@ -118,7 +122,9 @@ class TopicsController < ApplicationController
         render(:json => {
                  :success => true,
                  :message => notice,
-                 :user_id => current_user.id
+                 :user_id => current_user.id,
+                 :followers_count => I18n.t("followable.followers",
+                                            :count => followers_count)
                }.to_json)
       end
     end

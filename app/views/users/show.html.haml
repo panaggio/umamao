@@ -20,7 +20,7 @@
   -# Followers
   - if @user.followers.count > 0
     .block.followers
-      %h2.title
+      %h2.title.count
         = t('followable.followers', :count => @user.followers.count)
       .friend_list
         - cache("user_followers_#{@user.id}_#{@user.followers.count}") do

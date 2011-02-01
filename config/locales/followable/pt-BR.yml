@@ -8,6 +8,9 @@ pt-BR:
     followers:
       one: "Seguido por 1 pessoa"
       other: "Seguido por %{count} pessoas"
+      question:
+        one: "Seguida por 1 pessoa"
+        other: "Seguida por %{count} pessoas"
     flash:
       follow: "Você está seguindo %{followable}"
       unfollow: "Você parou de seguir %{followable}"

@@ -222,10 +222,14 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
       end
       format.js {
+        followers_count = @user.followers.count
         response = {
           :success => true,
           :message => notice,
-          :follower => (render_cell :users, :small_picture, :user => current_user)
+          :follower => (render_cell :users, :small_picture,
+                        :user => current_user),
+          :followers_count => I18n.t("followable.followers",
+                                     :count => followers_count)
         }
         if params[:suggestion]
           response[:suggestions] =
@@ -251,10 +255,13 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
       end
       format.js {
+        followers_count = @user.followers.count
         render(:json => {
                  :success => true,
                  :message => notice,
-                 :user_id => current_user.id
+                 :user_id => current_user.id,
+                 :followers_count => I18n.t("followable.followers",
+                                            :count => followers_count)
                }.to_json)
       }
     end

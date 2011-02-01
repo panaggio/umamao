@@ -5,7 +5,7 @@
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   - if @topic.followers.count > 0
     .block.followers
-      %h2.title
+      %h2.title.count
         = t('followable.followers', :count => @topic.followers.count)
       .friend_list
         - @topic.followers.each do |follower|

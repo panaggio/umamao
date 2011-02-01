@@ -380,11 +380,14 @@ class QuestionsController < ApplicationController
         redirect_to question_path(@question)
       end
       format.js do
+        followers_count = @question.watchers.count + 1
         render(:json => {
                  :success => true,
                  :message => notice,
                  :follower => (render_cell :users, :small_picture,
-                               :user => current_user)
+                               :user => current_user),
+                 :followers_count => I18n.t("followable.followers.question",
+                                            :count => followers_count)
                }.to_json)
       end
       format.json { head :ok }
@@ -401,10 +404,13 @@ class QuestionsController < ApplicationController
         redirect_to question_path(@question)
       end
       format.js do
+        followers_count = @question.watchers.count - 1
         render(:json => {
                  :success => true,
                  :message => notice,
-                 :user_id => current_user.id
+                 :user_id => current_user.id,
+                 :followers_count => I18n.t("followable.followers.question",
+                                            :count => followers_count)
                }.to_json)
       end
       format.json { head :ok }

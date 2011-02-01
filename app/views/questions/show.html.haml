@@ -150,10 +150,11 @@
       = link_to(image_tag("facebook.gif") + " Facebook", new_share_question_path(:question => @question.id, :where => "facebook"), :class => "facebook")
 
 
-  - if @question.watchers.count > 0
-    #question-followers.block.followers
-      %h2= t("questions.show.question_followers")
-      = render_cell :users, :list, :users => User.query(:id.in => @question.watchers)
+  #question-followers.block.followers
+    %h2.count
+      = t("followable.followers.question", :count => @question.watchers.count)
+    = render_cell :users, :list, :users => User.query(:id.in => @question.watchers)
+
 
   .audience-size
     = t('.topic_followers',
