@@ -101,7 +101,7 @@ class Vote
   # Ensures the vote is removed from the voted entity.
   after_destroy :remove_vote
   def remove_vote
-    voteable.remove_vote!(value, user)
+    voteable.remove_vote!(value, user) if voteable
   end
 
 end
