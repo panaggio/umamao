@@ -4,7 +4,7 @@ class Answer < Comment
   include Support::Versionable
   extend Sweepers
 
-  after_save { |answer| sweep_news_items(answer.question) }
+  after_save { |answer| delay.sweep_news_items(answer.question) }
 
   key :_id, String
 

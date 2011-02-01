@@ -12,7 +12,7 @@ class Question
   ensure_index :tags
   ensure_index :language
 
-  after_save { |question| sweep_news_items(question) }
+  after_save { |question| delay.sweep_news_items(question) }
 
   key :_id, String
   key :title, String, :required => true
