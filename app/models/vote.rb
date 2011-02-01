@@ -1,5 +1,10 @@
 class Vote
   include MongoMapper::Document
+  extend Sweepers
+
+  after_save do |vote|
+    delay.sweep_news_items(Vote.find(vote.votable.votable_id))
+  end
 
   timestamps!
 
