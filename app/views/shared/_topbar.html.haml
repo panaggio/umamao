@@ -22,7 +22,8 @@
 
       %li.menu-item
         = link_to(avatar_for(current_user, :size => 20).html_safe, user_path(current_user))
-        = link_to(truncate(h(current_user.name.split.first + ' ' + current_user.name.split.last), :length => 16), user_path(current_user))
+        - uname = current_user.name.split
+        = link_to(truncate(h(if uname.size == 1 then uname else uname.first + ' ' + uname.last end), :length => 16), user_path(current_user))
 
       %li.menu-item
         = link_to t("layouts.application.settings"), settings_profile_path
