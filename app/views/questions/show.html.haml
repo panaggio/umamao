@@ -109,8 +109,8 @@
 
 - content_for :sidebar do
   - if logged_in? && current_user != @question.user
-    -# Can add watcher to question
-    .follow-info.block
+    -# Can watch the question
+    .follow-info.block.question
       - if @question.watch_for?(current_user)
         = link_to t("followable.unfollow"), unwatch_question_path(@question), :class => "unfollow_link", "data-class" => "follow_link", "data-title" => t("followable.follow"), "data-undo" => watch_question_path(@question)
       - else
@@ -151,7 +151,7 @@
 
 
   - if @question.watchers.count > 0
-    .block
+    #question-followers.block.followers
       %h2= t("questions.show.question_followers")
       = render_cell :users, :list, :users => User.query(:id.in => @question.watchers)
 

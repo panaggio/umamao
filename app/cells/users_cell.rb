@@ -10,4 +10,9 @@ class UsersCell < Cell::Rails
     render
   end
 
+  def small_picture
+    @user = options[:user]
+    render
+  end
+
 end

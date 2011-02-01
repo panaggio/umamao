@@ -382,7 +382,9 @@ class QuestionsController < ApplicationController
       format.js do
         render(:json => {
                  :success => true,
-                 :message => notice
+                 :message => notice,
+                 :follower => (render_cell :users, :small_picture,
+                               :user => current_user)
                }.to_json)
       end
       format.json { head :ok }
@@ -401,7 +403,8 @@ class QuestionsController < ApplicationController
       format.js do
         render(:json => {
                  :success => true,
-                 :message => notice
+                 :message => notice,
+                 :user_id => current_user.id
                }.to_json)
       end
       format.json { head :ok }

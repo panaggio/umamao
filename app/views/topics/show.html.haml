@@ -4,12 +4,12 @@
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   - if @topic.followers.count > 0
-    .block
+    .block.followers
       %h2.title
         = t('followable.followers', :count => @topic.followers.count)
       .friend_list
         - @topic.followers.each do |follower|
-          %span
+          %span{"data-user-id" => follower.id}
             = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
 
 - content_for :subtabs do

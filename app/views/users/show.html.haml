@@ -19,13 +19,13 @@
 
   -# Followers
   - if @user.followers.count > 0
-    .block
+    .block.followers
       %h2.title
         = t('followable.followers', :count => @user.followers.count)
       .friend_list
         - cache("user_followers_#{@user.id}_#{@user.followers.count}") do
           - @user.followers.each do |follower|
-            %span
+            %span{"data-user-id" => follower.id}
               = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
 
   -# Followed users

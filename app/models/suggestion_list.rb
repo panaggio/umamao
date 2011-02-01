@@ -137,8 +137,10 @@ class SuggestionList
 
   # Suggest topics related to the user's affiliations.
   def suggest_university_topics
-    self.user.affiliations.each do |affiliation|
-      self.suggest(affiliation.university.university_topics, "university")
+    if self.user.affiliations.present?
+      self.user.affiliations.each do |affiliation|
+        self.suggest(affiliation.university.university_topics, "university")
+      end
     end
   end
 

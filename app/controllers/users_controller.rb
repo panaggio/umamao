@@ -224,7 +224,8 @@ class UsersController < ApplicationController
       format.js {
         response = {
           :success => true,
-          :message => notice
+          :message => notice,
+          :follower => (render_cell :users, :small_picture, :user => current_user)
         }
         if params[:suggestion]
           response[:suggestions] =
@@ -250,8 +251,11 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
       end
       format.js {
-        render(:json => {:success => true,
-                 :message => notice }.to_json)
+        render(:json => {
+                 :success => true,
+                 :message => notice,
+                 :user_id => current_user.id
+               }.to_json)
       }
     end
   end

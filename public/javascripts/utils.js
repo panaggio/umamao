@@ -126,5 +126,24 @@ window.Utils = {
     var placedModal = $("#colorbox .modal");
 
     $.colorbox.resize({width: placedModal.outerWidth()});
+  },
+
+  // Toggle a button state between "follow" and "unfollow"
+  toggleFollowLink: function (link) {
+    var href = link.attr("href");
+    var title = link.text();
+    var dataTitle = link.attr("data-title");
+    var dataUndo = link.attr("data-undo");
+    var linkClass = link.attr("class");
+    var dataClass = link.attr("data-class");
+    link.attr({
+      href: dataUndo,
+      "data-undo": href,
+      "data-title": title,
+      "class": dataClass,
+      "data-class": linkClass
+    });
+    link.text(dataTitle);
   }
+
 };
