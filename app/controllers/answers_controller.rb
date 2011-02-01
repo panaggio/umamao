@@ -167,7 +167,14 @@ class AnswersController < ApplicationController
     @flag.flaggeable_id = @answer.id
     respond_to do |format|
       format.html
-      format.json
+      format.js do
+        render :json => {:status => :ok,
+         :html => render_to_string(:partial => "flags/form",
+                                   :locals => {:flag => @flag, 
+                                               :source => params[:source], 
+                                               :form_id => "answer_flag_form" })
+        }
+     end
     end
   end
 
