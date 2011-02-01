@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  $(".forms form.flag_form").hide();
   $("#close_question_form").hide();
   $('.comments_wrapper').hide();
   $('input#question_title').focus();
@@ -209,22 +208,38 @@ $(document).ready(function() {
   });
 
   $(".flag_form .cancel").live("click", function() {
-    $(this).parents(".flag_form").slideUp();
+    $("#question_flag_div").html('');
     return false;
   });
 
   $(".answer .flag-link").live("click", function() {
     var link = $(this);
     var controls = link.parents(".controls");
-    controls.parents(".answer").find(".forms .flag_form").slideToggle();
+    $.ajax({
+      url: $(this).attr("href"),
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        controls.parents(".answer").find("#answer_flag_div").html(data.html);
+        return false;
+      }
+    });
 
     return false;
   });
 
   $("#question_flag_link.flag-link").click(function() {
-    $("#request_close_question_form").slideUp();
-    $("#close_question_form").slideUp();
-    $("#question_flag_form").slideToggle();
+    $.ajax({
+      url: $(this).attr("href"),
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        $("#question_flag_div").html(data.html);
+        $("#request_close_question_form").slideUp();
+        $("#close_question_form").slideUp();
+        return false;
+      }
+    });
     return false;
   });
 
