@@ -65,8 +65,8 @@ class Mixpanel
     #If you have DelayedJob installed, this will use it, otherwise it fires the request *immediately*.
     #This is a very bad idea for most uses because it will result in *your* site blocking while waiting
     #for the Mixpanel API to return.  Be smart: install DelayedJob.
-    if (respond_to? :send_later)
-      dj = send_later :access_api!
+    if (respond_to? :delay)
+      dj = self.delay.access_api!
       dj.priority = -1 #This puts the Mixpanel DJs on the lowest priority so that
       dj.save          #they don't block print jobs on BCC if Mixpanel times out.
     else
