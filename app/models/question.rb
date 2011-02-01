@@ -8,7 +8,7 @@ class Question
   include Support::Voteable
   extend Sweepers
   include Scopes
-  
+
   ensure_index :tags
   ensure_index :language
 
