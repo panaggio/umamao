@@ -109,6 +109,7 @@ class UsersController < ApplicationController
           find_by_affiliation_token(@user.affiliation_token)
         @affiliation.confirmed_at ||= Time.now
         @user.affiliations << @affiliation
+        @user.bio = @affiliation.university.short_name
         @user.save
       end
 
