@@ -5,6 +5,21 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Add the user's university to his short bio"
+    task :add_university_to_short_bio => :environment do
+      User.query.each do |user|
+        if user.bio.blank? && user.affiliations.present?
+          university = user.affiliations.first.university
+          puts ("Populating short bio for user \"#{user.name}\" " +
+                "from #{university.short_name}")
+          user.bio = university.short_name
+          user.save :validate => false
+        else
+          puts "Skipping user \"#{user.name}\""
+        end
+      end
+    end
+
     desc "Add question authors as watchers"
     task :add_question_authors_as_watchers => :environment do
       Question.query.each do |question|
