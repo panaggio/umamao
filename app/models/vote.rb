@@ -3,7 +3,9 @@ class Vote
   extend Sweepers
 
   after_save do |vote|
-    delay.sweep_news_items(Vote.find(vote.votable.votable_id))
+    question = vote.voteable.is_a?(Answer) ?
+      vote.voteable.question : vote.voteable
+    delay.sweep_news_items(question)
   end
 
   timestamps!
