@@ -3,8 +3,8 @@ class ShareQuestionCell < Cell::Rails
 
   # Displays a dialog box to share a question on other site.
   def display
-    @question = @opts[:question]
-    @recently_connected_to = @opts[:recently_connected_to]
+    @question = options[:question]
+    @where = options[:where]
     render
   end
 

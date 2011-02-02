@@ -113,9 +113,9 @@ pt-BR:
       needs_connection:
         title: Conecte sua conta
         message: |
-          Para poder postar essa pergunta no Facebook, é necessário
+          Para poder postar essa pergunta no %{site}, é necessário
           conectar sua conta. Ao clicar no botão "Conectar" abaixo,
-          você será direcionado ao Facebook para autorizar o uso de
+          você será direcionado ao %{site} para autorizar o uso de
           sua conta. Você retornará ao site ao final do processo de
           autorização.
       needs_permission: |
@@ -130,6 +130,7 @@ pt-BR:
       share_on: Compartilhar esta pergunta em %{site}
       share_success: Pergunta compartilhada com sucesso no %{site}.
       post_on_facebook: Postar no Facebook
+      post_on_twitter: Postar no Twitter
       solution: Resposta aceita
       tag: Adicionar tópicos
       to_answer_question: para responder a esta pergunta

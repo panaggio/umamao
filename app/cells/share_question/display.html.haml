@@ -1,12 +1,12 @@
 .modal.share-question-widget
-  %h1= t("questions.show.post_on_facebook")
-  - if @recently_connected_to == "facebook"
+  %h1= t("questions.show.post_on_#{@where}")
+  - if [ "facebook", "twitter" ].include? @where
     .message
-      = t("external_accounts.connected_to.success", :site => "Facebook")
+      = t("external_accounts.connected_to.success", :site => @where.capitalize)
   - form_tag "/share_question", :method => :post do
     = text_area_tag "body", @question.title
     = hidden_field_tag "question", @question.id
-    = hidden_field_tag "where", "facebook"
+    = hidden_field_tag "where", @where
     .controls
       = link_to t("scaffold.cancel"), "#", :class => "close"
       = submit_tag t("global.share")

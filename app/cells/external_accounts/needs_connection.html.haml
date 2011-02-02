@@ -3,8 +3,8 @@
   - if @needs_permission
     %p= t("questions.show.needs_permission")
   - else
-    %p= t("questions.show.needs_connection.message")
+    %p= t("questions.show.needs_connection.message", :site => @provider.capitalize)
   .controls
     = link_to t("scaffold.cancel"), "#", :class => "close"
-    = link_to t("external_accounts.connect"), "/auth/facebook"
+    = link_to t("external_accounts.connect"), "/auth/#{@provider}"
   .clear

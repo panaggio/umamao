@@ -39,6 +39,19 @@ $(document).ready(function() {
       }
     };
   });
+  Utils.clickObject("#sidebar .share .twitter", function () {
+    return {
+      success: function (data) {
+        Utils.modal({html: data.html});
+      },
+
+      error: function (data) {
+        if (data.status == "needs_connection") {
+          Utils.modal({html: data.html});
+        }
+      }
+    };
+  });
 
   Utils.clickObject("form.vote_form button", function () {
     var btn_name = $(this).attr("name");
