@@ -44,6 +44,7 @@ gem 'twitter-text', '~>1.1.1'
 gem 'uuidtools', '~>2.1.1'
 gem 'whatlanguage', '~>1.0.0'
 gem 'warden', '~>0.10.7'
+gem 'bitly'
 
 group :test do
   gem "rspec"

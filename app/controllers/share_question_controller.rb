@@ -42,13 +42,14 @@ class ShareQuestionController < ApplicationController
     when "twitter"
       begin
         client = current_user.twitter_client
-        client.update(@body)
+        bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
+        client.update(@body + bitly.shorten(@link).short_url)
         status = :success
         message = I18n.t("questions.show.share_success", :site => "Twitter")
         track_event(:shared_question, :where => "twitter")
-      rescue
-        status = :needs_permission
-        session["omniauth_return_url"] = question_path(@question)
+#      rescue
+#        status = :needs_permission
+#        session["omniauth_return_url"] = question_path(@question)
       end
     end
 
