@@ -5,6 +5,46 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Add default topics to each university"
+    task :add_default_topics_to_universities => :environment do
+
+      # Topics of interest to everyone
+      shared_topics = []
+      ["Moradia", "Bolsas",
+       "Consumo consciente",
+       "Iniciação científica", "Intercâmbio",
+       "Assistência estudantil", "Entrega em domicílio",
+       "Esporte", "Aprendizado de idiomas", "Aluguel",
+       "Bicicleta"].each do |title|
+        topic = Topic.find_by_title(title)
+        if topic.blank?
+          puts "Topic \"#{title}\" not found!"
+        else
+          shared_topics << topic
+        end
+      end
+
+      University.query.each do |university|
+        name = university.short_name || university.name
+        if university.university_topics.blank?
+          puts "Populating topics for #{name}"
+          own_topic = Topic.find_by_title(name)
+          if own_topic.blank?
+            puts "Creating topic \"#{name}\""
+            own_topic = Topic.create!(:title => name)
+          end
+
+          university.university_topics << own_topic
+          shared_topics.each do |topic|
+            university.university_topics << topic
+          end
+          university.save :validate => false
+        else
+          puts "Skipping #{name}"
+        end
+      end
+    end
+
     desc "Add the user's university to his short bio"
     task :add_university_to_short_bio => :environment do
       User.query.each do |user|
