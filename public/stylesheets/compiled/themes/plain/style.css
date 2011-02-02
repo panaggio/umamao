@@ -1,16 +1,16 @@
 @charset "UTF-8";
 /* incase an inverted custom gradient isn't specified */
-/* line 3, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000033}}
 * {
   margin: 0;
 }
 
-/* line 6, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000036}}
 html, body, #container {
   height: 100%;
 }
 
-/* line 16, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000316}}
 #footer, .push {
   height: 130px;
   padding: 15px 10px 0 10px;
@@ -18,19 +18,19 @@ html, body, #container {
   clear: both;
 }
 
-/* line 26, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000326}}
 #footer {
   text-align: center;
   background: white;
   color: #444444;
   border-top: 1px solid #cccccc;
 }
-/* line 32, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000332}}
 #footer p {
   margin-bottom: 5px;
   clear: both;
 }
-/* line 37, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000337}}
 #footer ul {
   margin: 0;
   padding: 0;
@@ -40,7 +40,7 @@ html, body, #container {
   *zoom: 1;
   margin: 0 0 10px;
 }
-/* line 56, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_horizontal-list.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000356}}
 #footer ul li {
   list-style-image: none;
   list-style-type: none;
@@ -51,20 +51,20 @@ html, body, #container {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 45, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_horizontal-list.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000345}}
 #footer ul li:first-child, #footer ul li.first {
   padding-left: 0;
 }
-/* line 46, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_horizontal-list.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000346}}
 #footer ul li:last-child, #footer ul li.last {
   padding-right: 0;
 }
-/* line 40, ../../../../../app/stylesheets/_footer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000340}}
 #footer ul li {
   float: none;
 }
 
-/* line 4, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000034}}
 html, body {
   margin: 0;
   padding: 0;
@@ -76,12 +76,12 @@ html, body {
   vertical-align: baseline;
 }
 
-/* line 6, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000036}}
 html {
   font-size: 100.01%;
 }
 
-/* line 16, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000316}}
 div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
 pre, a, abbr, acronym, address, code, del, dfn, em, img,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr {
@@ -95,7 +95,7 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, th
   vertical-align: baseline;
 }
 
-/* line 18, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000318}}
 blockquote, q {
   margin: 0;
   padding: 0;
@@ -107,12 +107,12 @@ blockquote, q {
   vertical-align: baseline;
   quotes: "" "";
 }
-/* line 45, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000345}}
 blockquote:before, blockquote:after, q:before, q:after {
   content: "";
 }
 
-/* line 20, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000320}}
 th, td, caption {
   margin: 0;
   padding: 0;
@@ -127,7 +127,7 @@ th, td, caption {
   vertical-align: middle;
 }
 
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000322}}
 table {
   margin: 0;
   padding: 0;
@@ -142,262 +142,262 @@ table {
   vertical-align: middle;
 }
 
-/* line 24, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000324}}
 a img {
   border: none;
 }
 
-/* line 9, ../../../../../app/stylesheets/partials/_page.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/partials\/_page\.scss}line{font-family:\000039}}
 body.bp {
   line-height: 1.5;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: #333333;
   font-size: 75%;
 }
-/* line 65, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000365}}
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-weight: normal;
   color: #222222;
 }
-/* line 66, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000366}}
 body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img {
   margin: 0;
 }
-/* line 67, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000367}}
 body.bp h1 {
   font-size: 3em;
   line-height: 1;
   margin-bottom: 0.50em;
 }
-/* line 68, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000368}}
 body.bp h2 {
   font-size: 2em;
   margin-bottom: 0.75em;
 }
-/* line 69, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000369}}
 body.bp h3 {
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1.00em;
 }
-/* line 70, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000370}}
 body.bp h4 {
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
-/* line 71, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000371}}
 body.bp h5 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.50em;
 }
-/* line 72, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000372}}
 body.bp h6 {
   font-size: 1em;
   font-weight: bold;
 }
-/* line 73, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000373}}
 body.bp p {
   margin: 0 0 1.5em;
 }
-/* line 74, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000374}}
 body.bp p img.left {
   display: inline;
   float: left;
   margin: 1.5em 1.5em 1.5em 0;
   padding: 0;
 }
-/* line 75, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000375}}
 body.bp p img.right {
   display: inline;
   float: right;
   margin: 1.5em 0 1.5em 1.5em;
   padding: 0;
 }
-/* line 77, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000377}}
 body.bp a {
   text-decoration: underline;
   color: #0077cc;
 }
-/* line 18, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/links/_link-colors.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000318}}
 body.bp a:visited {
   color: #004499;
 }
-/* line 21, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/links/_link-colors.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000321}}
 body.bp a:focus {
   color: black;
 }
-/* line 24, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/links/_link-colors.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000324}}
 body.bp a:hover {
   color: black;
 }
-/* line 27, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/links/_link-colors.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000327}}
 body.bp a:active {
   color: #cc77cc;
 }
-/* line 78, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000378}}
 body.bp blockquote {
   margin: 1.5em;
   color: #666666;
   font-style: italic;
 }
-/* line 79, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000379}}
 body.bp strong {
   font-weight: bold;
 }
-/* line 80, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000380}}
 body.bp em {
   font-style: italic;
 }
-/* line 81, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000381}}
 body.bp dfn {
   font-style: italic;
   font-weight: bold;
 }
-/* line 82, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000382}}
 body.bp sup, body.bp sub {
   line-height: 0;
 }
-/* line 83, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000383}}
 body.bp abbr, body.bp acronym {
   border-bottom: 1px dotted #666666;
 }
-/* line 84, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000384}}
 body.bp address {
   margin: 0 0 1.5em;
   font-style: italic;
 }
-/* line 85, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000385}}
 body.bp del {
   color: #666666;
 }
-/* line 86, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000386}}
 body.bp pre {
   margin: 1.5em 0;
   white-space: pre;
 }
-/* line 87, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000387}}
 body.bp pre, body.bp code, body.bp tt {
   font: 1em "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
-/* line 88, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000388}}
 body.bp li ul, body.bp li ol {
   margin: 0;
 }
-/* line 89, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000389}}
 body.bp ul, body.bp ol {
   margin: 0 1.5em 1.5em 0;
   padding-left: 3.333em;
 }
-/* line 90, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000390}}
 body.bp ul {
   list-style-type: disc;
 }
-/* line 91, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000391}}
 body.bp ol {
   list-style-type: decimal;
 }
-/* line 92, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000392}}
 body.bp dl {
   margin: 0 0 1.5em 0;
 }
-/* line 93, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000393}}
 body.bp dl dt {
   font-weight: bold;
 }
-/* line 94, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000394}}
 body.bp dd {
   margin-left: 1.5em;
 }
-/* line 95, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000395}}
 body.bp table {
   margin-bottom: 1.4em;
   width: 100%;
 }
-/* line 96, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000396}}
 body.bp th {
   font-weight: bold;
 }
-/* line 97, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000397}}
 body.bp thead th {
   background: #c3d9ff;
 }
-/* line 98, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000398}}
 body.bp th, body.bp td, body.bp caption {
   padding: 4px 10px 4px 5px;
 }
-/* line 99, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000399}}
 body.bp tr.even td {
   background: #e5ecf9;
 }
-/* line 100, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003100}}
 body.bp tfoot {
   font-style: italic;
 }
-/* line 101, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003101}}
 body.bp caption {
   background: #eeeeee;
 }
-/* line 102, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003102}}
 body.bp .quiet {
   color: #666666;
 }
-/* line 103, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003103}}
 body.bp .loud {
   color: #111111;
 }
-/* line 9, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\000039}}
 body.bp .clear {
   clear: both;
 }
-/* line 12, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000312}}
 body.bp .nowrap {
   white-space: nowrap;
 }
-/* line 16, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000316}}
 body.bp .clearfix {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 18, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000318}}
 body.bp .small {
   font-size: 0.8em;
   margin-bottom: 1.875em;
   line-height: 1.875em;
 }
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000322}}
 body.bp .large {
   font-size: 1.2em;
   line-height: 2.5em;
   margin-bottom: 1.25em;
 }
-/* line 26, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000326}}
 body.bp .first {
   margin-left: 0;
   padding-left: 0;
 }
-/* line 29, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000329}}
 body.bp .last {
   margin-right: 0;
   padding-right: 0;
 }
-/* line 32, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000332}}
 body.bp .top {
   margin-top: 0;
   padding-top: 0;
 }
-/* line 35, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000335}}
 body.bp .bottom {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-/* line 8, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_debug.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_debug\.scss}line{font-family:\000038}}
 body.bp .showgrid {
-  background: url('/images/grid.png?1291139106');
+  background: url('/images/grid.png?1291138098');
 }
-/* line 4, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000034}}
 body.bp .error {
   padding: 0.8em;
   margin-bottom: 1em;
@@ -406,11 +406,11 @@ body.bp .error {
   color: #8a1f11;
   border-color: #fbc2c4;
 }
-/* line 29, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000329}}
 body.bp .error a {
   color: #8a1f11;
 }
-/* line 6, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000036}}
 body.bp .notice {
   padding: 0.8em;
   margin-bottom: 1em;
@@ -419,11 +419,11 @@ body.bp .notice {
   color: #514721;
   border-color: #ffd324;
 }
-/* line 37, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000337}}
 body.bp .notice a {
   color: #514721;
 }
-/* line 8, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000038}}
 body.bp .success {
   padding: 0.8em;
   margin-bottom: 1em;
@@ -432,48 +432,48 @@ body.bp .success {
   color: #264409;
   border-color: #c6d880;
 }
-/* line 45, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000345}}
 body.bp .success a {
   color: #264409;
 }
-/* line 10, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000310}}
 body.bp .hide {
   display: none;
 }
-/* line 12, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000312}}
 body.bp .highlight {
   background: yellow;
 }
-/* line 14, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000314}}
 body.bp .added {
   background: #006600;
   color: white;
 }
-/* line 16, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000316}}
 body.bp .removed {
   background: #990000;
   color: white;
 }
 
-/* line 41, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000341}}
 body.bp .box {
   padding: 1.5em;
   margin-bottom: 1.5em;
   background: #e5ecf9;
 }
-/* line 44, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000344}}
 body.bp div.border {
   padding-right: 4px;
   margin-right: 5px;
   border-right: 1px solid #eeeeee;
 }
-/* line 47, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000347}}
 body.bp div.colborder {
   padding-right: 24px;
   margin-right: 25px;
   border-right: 1px solid #eeeeee;
 }
-/* line 49, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000349}}
 body.bp hr {
   background: #dddddd;
   color: #dddddd;
@@ -484,7 +484,7 @@ body.bp hr {
   margin: 0 0 1.45em;
   border: none;
 }
-/* line 51, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000351}}
 body.bp hr.space {
   background: #dddddd;
   color: #dddddd;
@@ -498,130 +498,130 @@ body.bp hr.space {
   color: white;
   visibility: hidden;
 }
-/* line 53, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_scaffolding.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000353}}
 body.bp form.inline {
   line-height: 3;
 }
-/* line 6, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
 body.bp form.inline p {
   margin-bottom: 0;
 }
 
-/* line 18, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
 form.bp label {
   font-weight: bold;
 }
-/* line 19, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
 form.bp fieldset {
   padding: 1.4em;
   margin: 0 0 1.5em 0;
 }
-/* line 20, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
 form.bp legend {
   font-weight: bold;
   font-size: 1.2em;
 }
-/* line 26, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
 form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] {
   margin: 0.5em 0;
   background-color: white;
   padding: 5px;
 }
-/* line 27, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
 form.bp input.title {
   font-size: 1.5em;
 }
-/* line 31, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
 form.bp input[type=checkbox], form.bp input.checkbox, form.bp input[type=radio], form.bp input.radio {
   position: relative;
   top: 0.25em;
 }
-/* line 33, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
 form.bp textarea {
   margin: 0.5em 0;
   padding: 5px;
 }
-/* line 34, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
 form.bp select {
   margin: 0.5em 0;
 }
-/* line 59, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
 form.bp fieldset {
   border: 1px solid #cccccc;
 }
-/* line 62, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
 form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password],
 form.bp textarea, form.bp select {
   border: 1px solid #bbbbbb;
 }
-/* line 64, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
 form.bp input.text:focus, form.bp input.title:focus, form.bp input[type=email]:focus, form.bp input[type=text]:focus, form.bp input[type=password]:focus,
 form.bp textarea:focus, form.bp select:focus {
   border: 1px solid #666666;
 }
-/* line 48, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
 form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] {
   width: 300px;
 }
-/* line 50, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
 form.bp textarea {
   width: 390px;
   height: 250px;
 }
 
-/* line 25, ../../../../../app/stylesheets/partials/_two_col.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000325}}
 body.two-col #container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 27, ../../../../../app/stylesheets/partials/_two_col.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000327}}
 body.two-col #header, body.two-col #footer {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 950px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html body.two-col #header, * html body.two-col #footer {
   overflow-x: hidden;
 }
-/* line 29, ../../../../../app/stylesheets/partials/_two_col.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000329}}
 body.two-col #sidebar {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 310px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html body.two-col #sidebar {
   overflow-x: hidden;
 }
-/* line 33, ../../../../../app/stylesheets/partials/_two_col.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000333}}
 body.two-col #content {
   display: inline;
   float: left;
   margin-right: 0;
   width: 630px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 8, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\000038}}
 a {
   color: #0077cc;
   text-decoration: none;
 }
 
-/* line 12, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000312}}
 h1, h2, h3 {
   color: #444444;
 }
 
-/* line 15, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000315}}
 body {
   color: #333333;
   background: white;
@@ -629,7 +629,7 @@ body {
   font-size: 13px;
 }
 
-/* line 22, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000322}}
 hr {
   background-color: #dddddd;
   color: #dddddd;
@@ -639,48 +639,48 @@ hr {
   margin-top: 6px;
 }
 
-/* line 30, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000330}}
 p {
   margin: 5px 0;
   font-size: 12px;
   line-height: 20px;
 }
 
-/* line 35, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000335}}
 input.checkbox {
   vertical-align: middle;
 }
 
-/* line 39, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000339}}
 .hightlight {
   background-color: #ffffcc;
 }
 
-/* line 43, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000343}}
 .small {
   font-size: 11px;
 }
 
-/* line 47, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000347}}
 .gray {
   color: #999999;
 }
 
-/* line 53, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000353}}
 #main .block {
   padding: 0 40px 20px 0;
   margin-bottom: 20px;
   background: transparent;
 }
-/* line 58, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000358}}
 #main .block .content {
   background: white;
 }
-/* line 60, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000360}}
 #main .block .content .inner {
   padding: 0px 3px 0px 0px;
 }
-/* line 63, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000363}}
 #main .block h2.title {
   margin: 10px 0 5px 0;
   background-color: none;
@@ -689,7 +689,7 @@ input.checkbox {
   color: #445566;
 }
 
-/* line 70, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000370}}
 #container {
   min-height: 100%;
   height: auto !important;
@@ -697,13 +697,13 @@ input.checkbox {
   margin: 0 auto -166px;
 }
 
-/* line 73, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000373}}
 #wrapper {
   padding: 0;
   margin: 0;
 }
 
-/* line 78, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000378}}
 #sidebar .notice {
   background-color: #d9e3ed;
   padding: 10px;
@@ -712,25 +712,25 @@ input.checkbox {
   border-top: 1px solid white;
   border-left: 1px solid white;
 }
-/* line 86, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000386}}
 #sidebar .notice h1 {
   margin-bottom: 10px;
 }
-/* line 88, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000388}}
 #sidebar .notice h2 {
   font-size: 16px;
   margin: 5px 0;
   border-bottom: 1px solid #445566;
 }
-/* line 93, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000393}}
 #sidebar .notice p {
   font-size: 12px;
 }
-/* line 96, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000396}}
 #sidebar .help {
   background-color: #ffefc6;
 }
-/* line 99, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\0000399}}
 #sidebar h3 {
   padding: 0 0 10px 0;
   margin: 0;
@@ -739,26 +739,26 @@ input.checkbox {
   font-size: 17px;
   line-height: 26px;
 }
-/* line 109, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003109}}
 #sidebar ul.navigation li.last a {
   border-bottom: none;
 }
-/* line 113, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003113}}
 #sidebar ul.navigation li a:link, #sidebar ul.navigation li a:visited {
   padding: 7px 10px;
   color: #6a6a6a;
   text-decoration: none;
 }
-/* line 118, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003118}}
 #sidebar ul.navigation li a:hover {
   text-decoration: underline;
 }
-/* line 121, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003121}}
 #sidebar .block .sidebar-block h4 {
   border-bottom: 1px dotted #aaaaaa;
 }
 
-/* line 125, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003125}}
 #main-navigation ul li {
   background: #445566;
   border-top: 1px solid #5c738a;
@@ -766,127 +766,127 @@ input.checkbox {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-/* line 132, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003132}}
 #main-navigation ul li:hover {
   border-top-color: #7593b0;
   background-color: #576c82 !important;
   color: white;
 }
-/* line 137, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003137}}
 #main-navigation ul li.active {
   background-color: #eeeeee !important;
   color: #333333;
 }
-/* line 142, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003142}}
 #main-navigation ul li a:link, #main-navigation ul li a:visited, #main-navigation ul li a:hover, #main-navigation ul li a:active {
   text-decoration: none;
   color: #f5f5f5;
 }
 
-/* line 147, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003147}}
 #user-navigation ul li a:link, #user-navigation ul li a:visited, #user-navigation ul li a:hover, #user-navigation ul li a:active {
   text-decoration: none;
   color: #f5f5f5;
 }
-/* line 151, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003151}}
 #user-navigation ul li a:link, #user-navigation ul li a:visited {
   color: #ccddee;
   border-bottom: 1px dotted #334455;
 }
-/* line 155, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003155}}
 #user-navigation ul li a:hover {
   color: white;
   border-bottom: 1px dotted #ccddee;
   text-decoration: none;
 }
 
-/* line 162, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003162}}
 #main-navigation ul li a {
   font-size: 12px;
   padding: 3px 10px;
 }
-/* line 167, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003167}}
 #main-navigation ul li.active a:link, #main-navigation ul li.active a:visited, #main-navigation ul li.active a:hover, #main-navigation ul li.active a:active {
   color: #364b69;
 }
 
-/* line 171, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003171}}
 .secondary-navigation ul li a:link, .secondary-navigation ul li a:visited, .secondary-navigation ul li a:hover, .secondary-navigation ul li a:active {
   text-decoration: none;
   color: #666666;
 }
 
-/* line 175, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003175}}
 .secondary-navigation {
   background: white;
   color: #222222;
   margin-bottom: -4px;
 }
-/* line 180, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003180}}
 .secondary-navigation ul {
   float: right;
 }
-/* line 183, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003183}}
 .secondary-navigation ul + ul {
   margin-left: 5px;
 }
-/* line 186, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003186}}
 .secondary-navigation ul li {
   color: black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding: 1px 1px 0px 1px;
 }
-/* line 192, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003192}}
 .secondary-navigation ul li a, .secondary-navigation ul li span {
   padding: 3px 10px;
   color: black;
   font-weight: bold;
 }
-/* line 197, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003197}}
 .secondary-navigation ul li:hover {
   color: #777777;
 }
 
-/* line 200, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003200}}
 .pagination {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 203, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003203}}
 .pagination span {
   padding-bottom: 0px;
 }
-/* line 205, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003205}}
 .pagination span.current {
   background: #808185;
   color: #ffffe0;
 }
-/* line 210, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003210}}
 .pagination span.disabled {
   background: #eeeeee;
   color: #aaaaaa;
   border: 1px solid #dddddd;
 }
-/* line 215, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003215}}
 .pagination a {
   color: #808185;
   border: 1px solid #dddddd;
 }
-/* line 220, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003220}}
 .pagination a:hover {
   color: #444444;
   border: 1px solid #576c82;
 }
 
-/* line 226, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003226}}
 .table th {
   background: #576c82;
   color: #f5f5f5;
   font-weight: normal;
   padding: 3px;
 }
-/* line 232, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003232}}
 .table th a.toggle {
   display: block;
   width: 12px;
@@ -895,23 +895,23 @@ input.checkbox {
   text-indent: -9999px;
   -moz-outline: none;
 }
-/* line 240, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003240}}
 .table th.first {
   width: 30px;
   text-align: center;
 }
-/* line 244, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003244}}
 .table td {
   border-bottom: 1px solid #aaaaaa;
 }
 
-/* line 249, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003249}}
 .form input.text {
   border: 1px solid #dddddd;
   padding: 5px;
   width: 99%;
 }
-/* line 254, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003254}}
 .form input.text_field, .form textarea.text_area {
   border-right: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
@@ -919,7 +919,7 @@ input.checkbox {
   border-left: 2px solid #cccccc;
   width: 99%;
 }
-/* line 261, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003261}}
 .form textarea.editor-input {
   font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
   font-size: 90%;
@@ -929,7 +929,7 @@ input.checkbox {
   padding: 3px;
   width: 100%;
 }
-/* line 270, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003270}}
 .form .navform {
   font-size: 13px;
   line-height: 26px;
@@ -941,117 +941,117 @@ input.checkbox {
   border-top: 1px solid #eeeeee;
   border-left: 1px solid #eeeeee;
 }
-/* line 281, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003281}}
 .form .navform input[type=submit] {
   height: 26px;
 }
 
-/* line 285, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003285}}
 .invitation_form .tip {
   color: #666666;
   margin: 0 0 10px 0;
   font-size: 90%;
 }
-/* line 290, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003290}}
 .invitation_form .tip p {
   line-height: 1em;
   margin: 0 0 5px 0;
 }
-/* line 293, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003293}}
 .invitation_form .tip ul {
   list-style-position: inside;
 }
-/* line 296, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003296}}
 .invitation_form h3 {
   color: #444444;
   padding-top: 14px;
 }
-/* line 299, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003299}}
 .invitation_form form {
   color: #444444;
 }
-/* line 18, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
 .invitation_form form label {
   font-weight: bold;
 }
-/* line 19, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
 .invitation_form form fieldset {
   padding: 1.4em;
   margin: 0 0 1.5em 0;
 }
-/* line 20, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
 .invitation_form form legend {
   font-weight: bold;
   font-size: 1.2em;
 }
-/* line 26, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
 .invitation_form form input.text, .invitation_form form input.title, .invitation_form form input[type=email], .invitation_form form input[type=text], .invitation_form form input[type=password] {
   margin: 0.5em 0;
   background-color: white;
   padding: 5px;
 }
-/* line 27, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
 .invitation_form form input.title {
   font-size: 1.5em;
 }
-/* line 31, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
 .invitation_form form input[type=checkbox], .invitation_form form input.checkbox, .invitation_form form input[type=radio], .invitation_form form input.radio {
   position: relative;
   top: 0.25em;
 }
-/* line 33, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
 .invitation_form form textarea {
   margin: 0.5em 0;
   padding: 5px;
 }
-/* line 34, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
 .invitation_form form select {
   margin: 0.5em 0;
 }
-/* line 59, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
 .invitation_form form fieldset {
   border: 1px solid #cccccc;
 }
-/* line 62, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
 .invitation_form form input.text, .invitation_form form input.title, .invitation_form form input[type=email], .invitation_form form input[type=text], .invitation_form form input[type=password],
 .invitation_form form textarea, .invitation_form form select {
   border: 1px solid #bbbbbb;
 }
-/* line 64, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
 .invitation_form form input.text:focus, .invitation_form form input.title:focus, .invitation_form form input[type=email]:focus, .invitation_form form input[type=text]:focus, .invitation_form form input[type=password]:focus,
 .invitation_form form textarea:focus, .invitation_form form select:focus {
   border: 1px solid #666666;
 }
-/* line 48, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
 .invitation_form form input.text, .invitation_form form input.title, .invitation_form form input[type=email], .invitation_form form input[type=text], .invitation_form form input[type=password] {
   width: 300px;
 }
-/* line 50, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
 .invitation_form form textarea {
   width: 390px;
   height: 250px;
 }
-/* line 48, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
 .invitation_form form input.text, .invitation_form form input.title, .invitation_form form input[type=email], .invitation_form form input[type=text], .invitation_form form input[type=password] {
   width: 95%;
 }
-/* line 50, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_form.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
 .invitation_form form textarea {
   width: 390px;
   height: 250px;
 }
-/* line 303, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003303}}
 .invitation_form form textarea {
   width: 95%;
 }
 
-/* line 307, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003307}}
 .description {
   color: #aaaaaa;
   font-family: Georgia, serif;
 }
 
-/* line 313, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003313}}
 .flash .message {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1059,33 +1059,33 @@ input.checkbox {
   margin: 0 auto 5px;
   width: 80%;
 }
-/* line 320, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003320}}
 .flash .message p {
   margin: 8px;
 }
-/* line 323, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003323}}
 .flash .error {
   border: 1px solid #ffbbbb;
   background-color: #ffdddd;
 }
-/* line 327, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003327}}
 .flash .warning {
   border: 1px solid #fffaaa;
   background-color: #ffffcc;
 }
-/* line 331, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003331}}
 .flash .notice {
   border: 1px solid #ddddff;
   background-color: #eeeeff;
 }
 
-/* line 336, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003336}}
 #box .block {
   background: #f5f5f5;
   border: 1px solid #dddddd;
   border-radius: 10px;
 }
-/* line 341, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003341}}
 #box .block h2 {
   background: #576c82;
   color: #f5f5f5;
@@ -1093,45 +1093,45 @@ input.checkbox {
   border-top-right-radius: 5px;
 }
 
-/* line 347, ../../../../../app/stylesheets/themes/plain/_base.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_base\.sass}line{font-family:\00003347}}
 .edit-link {
   color: #666666;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\000031}}
 ul.items, ul.list {
   list-style-type: none;
   border-bottom-color: #f0f0ee;
 }
-/* line 5, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\000035}}
 ul.items .item .avatar, ul.list .item .avatar {
   border-color: #f0f0ee;
   margin: 3px 10px 0 0;
 }
-/* line 9, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\000039}}
 ul.items .left, ul.list .left {
   padding: 5px 5px;
 }
-/* line 13, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000313}}
 ul.items li.item, ul.list li.item {
   border-bottom: 1px dotted #dddddd;
   padding-bottom: 10px;
   padding-top: 10px;
   clear: both;
 }
-/* line 19, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000319}}
 ul.items li.item h3, ul.list li.item h3 {
   margin-top: 0;
   font-size: 16px;
   font-weight: bold;
 }
-/* line 24, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000324}}
 ul.items li.item .logo, ul.list li.item .logo {
   float: left;
   padding: 0px 10px;
   margin-right: 4px;
 }
-/* line 29, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000329}}
 ul.items li.item .box, ul.list li.item .box {
   float: left;
   padding: 5px 5px;
@@ -1145,157 +1145,157 @@ ul.items li.item .box, ul.list li.item .box {
   font-family: Helvetica Neue, Arial, sans-serif;
   color: #666666;
 }
-/* line 43, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000343}}
 ul.items li.item .box .counter, ul.list li.item .box .counter {
   padding: 2px;
   font-size: 22px;
   font-weight: bold;
 }
-/* line 47, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000347}}
 ul.items li.item .box .counter.medium_number, ul.list li.item .box .counter.medium_number {
   font-size: 20px;
   color: orange;
 }
-/* line 50, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000350}}
 ul.items li.item .box .counter.big_number, ul.list li.item .box .counter.big_number {
   padding: 1px;
   font-size: 19px;
   color: red;
 }
-/* line 54, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000354}}
 ul.items li.item .box .counter.negative_number, ul.list li.item .box .counter.negative_number {
   font-size: 19px;
   color: #ee3746;
 }
-/* line 58, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000358}}
 ul.items li.item .votes, ul.list li.item .votes {
   color: #898989;
 }
-/* line 60, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000360}}
 ul.items li.item .answers, ul.list li.item .answers {
   color: #2a61b3;
 }
-/* line 62, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000362}}
 ul.items li.item .answers.accepted, ul.list li.item .answers.accepted {
   color: #337816;
 }
-/* line 64, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000364}}
 ul.items li.item .answers.unanswered, ul.list li.item .answers.unanswered {
   color: #b82312;
 }
-/* line 66, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000366}}
 ul.items li.item .views, ul.list li.item .views {
   color: #898989;
 }
-/* line 69, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000369}}
 ul.items li.item .stats, ul.list li.item .stats {
   float: left;
 }
-/* line 73, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000373}}
 ul.items li.item .summary a:link, ul.items li.item .summary a:active, ul.items li.item .summary a:visited, ul.list li.item .summary a:link, ul.list li.item .summary a:active, ul.list li.item .summary a:visited {
   color: #444444;
   font-weight: bold;
 }
-/* line 76, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000376}}
 ul.items li.item .summary a:hover, ul.list li.item .summary a:hover {
   text-decoration: underline;
 }
-/* line 79, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000379}}
 ul.items li.item .summary .origin, ul.list li.item .summary .origin {
   color: #999999;
 }
-/* line 81, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000381}}
 ul.items li.item .summary .origin a:link, ul.items li.item .summary .origin a:active, ul.items li.item .summary .origin a:visited, ul.list li.item .summary .origin a:link, ul.list li.item .summary .origin a:active, ul.list li.item .summary .origin a:visited {
   color: #538dc2;
   font-weight: normal;
 }
-/* line 84, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000384}}
 ul.items li.item .summary .origin a:hover, ul.list li.item .summary .origin a:hover {
   text-decoration: underline;
 }
-/* line 87, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000387}}
 ul.items li.item .summary .avatar, ul.list li.item .summary .avatar {
   float: left;
 }
-/* line 89, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000389}}
 ul.items li.item .summary .avatar p, ul.list li.item .summary .avatar p {
   width: 96px;
 }
-/* line 92, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000392}}
 ul.items li.item .summary .tag-list, ul.list li.item .summary .tag-list {
   float: left;
   margin-top: 0px;
 }
-/* line 95, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000395}}
 ul.items li.item .summary .owner-data, ul.list li.item .summary .owner-data {
   float: right;
   padding-top: 4px;
 }
-/* line 98, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\0000398}}
 ul.items li.item .summary .owner-data .reputation, ul.list li.item .summary .owner-data .reputation {
   font-weight: bold;
   color: #666666;
 }
-/* line 102, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003102}}
 ul.items li.item .summary .time_ago, ul.items li.item .summary .metadata, ul.list li.item .summary .time_ago, ul.list li.item .summary .metadata {
   color: #999999;
   float: right;
   padding-top: 4px;
 }
-/* line 108, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003108}}
 ul.items li.item .summary .info .bio, ul.list li.item .summary .info .bio {
   line-height: inherit;
   float: left;
   width: 45%;
 }
-/* line 113, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003113}}
 ul.items li.item .summary .info .metadata, ul.list li.item .summary .info .metadata {
   font-size: 80%;
   vertical-align: text-bottom;
 }
-/* line 117, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003117}}
 ul.items li.item .actions, ul.list li.item .actions {
   padding: 5px;
   margin: 6px;
   background: #eeeeee;
 }
-/* line 121, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003121}}
 ul.items li.item .actions a, ul.list li.item .actions a {
   margin: 2px 5px;
   font-size: 15px;
   font-weight: bold;
 }
-/* line 126, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003126}}
 ul.items li.item .vote-up-form, ul.list li.item .vote-up-form {
   display: inline;
   vertical-align: middle;
 }
-/* line 131, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003131}}
 ul.items li.item.lite .box, ul.list li.item.lite .box {
   width: 20px;
   height: 20px;
   padding: 2px;
 }
-/* line 135, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003135}}
 ul.items li.item.lite .box .counter, ul.list li.item.lite .box .counter {
   font-size: 18px;
   padding: 1px;
 }
 
-/* line 140, ../../../../../app/stylesheets/themes/plain/_items.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_items\.sass}line{font-family:\00003140}}
 ul.invitations #bio {
   float: left;
   width: 65%;
   margin-left: 10px;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_announcements.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_announcements\.sass}line{font-family:\000031}}
 #announcement {
   background-color: #eeeeee;
   margin-bottom: 15px;
   margin-top: 15px;
 }
-/* line 6, ../../../../../app/stylesheets/themes/plain/_announcements.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_announcements\.sass}line{font-family:\000036}}
 #announcement #announcement_message {
   text-align: center;
   color: #3f3a2f;
@@ -1303,13 +1303,13 @@ ul.invitations #bio {
   float: left;
   width: 90%;
 }
-/* line 12, ../../../../../app/stylesheets/themes/plain/_announcements.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_announcements\.sass}line{font-family:\0000312}}
 #announcement #announcement_message p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   margin: 0;
 }
-/* line 16, ../../../../../app/stylesheets/themes/plain/_announcements.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_announcements\.sass}line{font-family:\0000316}}
 #announcement a#hide_announcement {
   float: left;
   width: 5%;
@@ -1318,7 +1318,7 @@ ul.invitations #bio {
   font-weight: bold;
 }
 
-/* line 5, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
 ul#questions ul.topic-list .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1336,42 +1336,42 @@ ul#questions ul.topic-list .topic {
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-/* line 17, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
 ul#questions ul.topic-list .topic .topic-title {
   white-space: nowrap;
 }
-/* line 20, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
 ul#questions ul.topic-list .topic .remove {
   cursor: pointer;
 }
-/* line 23, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
 ul#questions ul.topic-list .topic, ul#questions ul.topic-list .topic a {
   color: #444444;
   font-weight: normal;
 }
-/* line 26, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
 ul#questions ul.topic-list .topic:hover, ul#questions ul.topic-list .topic a:hover {
   background: #eeeeee;
 }
-/* line 29, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
 ul#questions ul.topic-list .topic a:link, ul#questions ul.topic-list .topic a:active, ul#questions ul.topic-list .topic a:visited, ul#questions ul.topic-list .topic a a:link, ul#questions ul.topic-list .topic a a:active, ul#questions ul.topic-list .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-/* line 32, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
 ul#questions ul.topic-list .topic a:hover, ul#questions ul.topic-list .topic a a:hover {
   text-decoration: none;
 }
 
-/* line 4, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\000034}}
 .topic-list {
   overflow: hidden;
 }
-/* line 7, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\000037}}
 .topic-list ul {
   list-style-type: none;
 }
-/* line 5, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
 .topic-list .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1389,42 +1389,42 @@ ul#questions ul.topic-list .topic a:hover, ul#questions ul.topic-list .topic a a
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-/* line 17, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
 .topic-list .topic .topic-title {
   white-space: nowrap;
 }
-/* line 20, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
 .topic-list .topic .remove {
   cursor: pointer;
 }
-/* line 23, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
 .topic-list .topic, .topic-list .topic a {
   color: #444444;
   font-weight: normal;
 }
-/* line 26, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
 .topic-list .topic:hover, .topic-list .topic a:hover {
   background: #eeeeee;
 }
-/* line 29, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
 .topic-list .topic a:link, .topic-list .topic a:active, .topic-list .topic a:visited, .topic-list .topic a a:link, .topic-list .topic a a:active, .topic-list .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-/* line 32, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
 .topic-list .topic a:hover, .topic-list .topic a a:hover {
   text-decoration: none;
 }
-/* line 12, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000312}}
 .topic-list .topic {
   float: left;
 }
 
-/* line 17, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000317}}
 ul.topic-list {
   list-style: none;
 }
-/* line 5, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
 ul.topic-list .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1442,81 +1442,81 @@ ul.topic-list .topic {
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-/* line 17, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
 ul.topic-list .topic .topic-title {
   white-space: nowrap;
 }
-/* line 20, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
 ul.topic-list .topic .remove {
   cursor: pointer;
 }
-/* line 23, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
 ul.topic-list .topic, ul.topic-list .topic a {
   color: #444444;
   font-weight: normal;
 }
-/* line 26, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
 ul.topic-list .topic:hover, ul.topic-list .topic a:hover {
   background: #eeeeee;
 }
-/* line 29, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
 ul.topic-list .topic a:link, ul.topic-list .topic a:active, ul.topic-list .topic a:visited, ul.topic-list .topic a a:link, ul.topic-list .topic a a:active, ul.topic-list .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-/* line 32, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
 ul.topic-list .topic a:hover, ul.topic-list .topic a a:hover {
   text-decoration: none;
 }
-/* line 22, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000322}}
 ul.topic-list .topic {
   max-width: 55%;
   text-overflow: ellipsis;
 }
-/* line 26, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000326}}
 ul.topic-list .topic .remove {
   margin-left: 3px;
 }
-/* line 29, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000329}}
 ul.topic-list .topic a.remove:hover {
   text-decoration: none;
 }
-/* line 32, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000332}}
 ul.topic-list .follow-info {
   float: right;
 }
-/* line 35, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000335}}
 ul.topic-list .follow-info a {
   color: #444444;
   font-size: 0.785em;
 }
 
-/* line 40, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000340}}
 #topic-suggestions .controls {
   float: right;
 }
-/* line 43, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000343}}
 #topic-suggestions .follow-info {
   float: left;
 }
-/* line 46, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000346}}
 #topic-suggestions .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
 
-/* line 50, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000350}}
 #sidebar ul.topic-list .topic {
   float: left;
   padding: 2px 8px;
 }
 
-/* line 55, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000355}}
 .reclassify .empty {
   display: none;
 }
 
-/* line 58, ../../../../../app/stylesheets/themes/plain/_topics.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_topics\.sass}line{font-family:\0000358}}
 .add-topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1534,13 +1534,13 @@ ul.topic-list .follow-info a {
   width: 10%;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\000031}}
 #question {
   position: relative;
   margin-bottom: 3em;
   *zoom: 1;
 }
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000322}}
 #question:after {
   content: "\0020";
   display: block;
@@ -1549,12 +1549,12 @@ ul.topic-list .follow-info a {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 8, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\000038}}
 #question .body-col .flagged {
   font-size: 13px;
   font-weight: bold;
 }
-/* line 14, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000314}}
 #question .body-col #body #close_reason {
   text-align: center;
   padding: 10px;
@@ -1564,7 +1564,7 @@ ul.topic-list .follow-info a {
   font-weight: bold;
   background: #e0ebf1;
 }
-/* line 23, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000323}}
 #question .body-col .user_info {
   font-size: 12px;
   padding: 8px 4px;
@@ -1573,65 +1573,65 @@ ul.topic-list .follow-info a {
   background: #e0ebf1;
   float: right;
 }
-/* line 32, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000332}}
 #question .body-col .user_info .wiki_flag {
   float: right;
   font-weight: bold;
   color: #e55b00;
 }
-/* line 36, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000336}}
 #question .body-col .user_info .gravatar {
   float: left;
 }
-/* line 38, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000338}}
 #question .body-col .user_info .user_data {
   margin-left: 2px;
   float: left;
 }
-/* line 42, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000342}}
 #question .body-col .user_info .user_data .user_reputation {
   font-weight: bold;
   font-size: 14px;
 }
-/* line 45, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000345}}
 #question .body-col .user_info .user_data .time_ago {
   display: block;
   font-weight: bold;
 }
-/* line 49, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000349}}
 #question .body-col .actions {
   font-size: 13px;
   line-height: 26px;
 }
-/* line 53, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000353}}
 #question .body-col .actions a {
   margin-right: 2px;
   color: #666666;
 }
-/* line 57, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000357}}
 #question .body-col .actions a#add_follow_up_question {
   float: right;
 }
-/* line 60, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000360}}
 #question .body-col .ccontrol {
   font-size: 13px;
   line-height: 26px;
 }
-/* line 64, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000364}}
 #question .body-col .ccontrol a#add_comment_link {
   color: #666666;
 }
-/* line 67, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000367}}
 #question .ccontrol {
   text-decoration: none;
   display: block;
   font-size: 13px;
 }
-/* line 72, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000372}}
 #question .ccontrol a {
   color: #0077cc;
 }
-/* line 77, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000377}}
 #question .topic-list .topic, #question .topic-list .retag {
   margin: 0 5px 5px 0;
   padding: 4px;
@@ -1642,11 +1642,11 @@ ul.topic-list .follow-info a {
   font-weight: normal;
   max-width: none;
 }
-/* line 87, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000387}}
 #question .topic-list .retag {
   float: left;
 }
-/* line 90, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000390}}
 #question .topic-list .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1655,110 +1655,110 @@ ul.topic-list .follow-info a {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 93, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000393}}
 #question .topic-list .topic .topic-title {
   vertical-align: middle;
 }
-/* line 96, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\0000396}}
 #question .topic-list + #reclassify-autocomplete,
 #question .topic-list + .add-topic,
 #question .topic-list + .cancel-reclassify {
   font-size: 13px;
   margin: 4px 0 3px;
 }
-/* line 102, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003102}}
 #question .topic-list .cancel-reclassify {
   margin: 5px 0 4px;
 }
 
-/* line 105, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003105}}
 #answers, #questions {
   clear: both;
 }
-/* line 108, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003108}}
 #answers .wiki_flag, #questions .wiki_flag {
   font-weight: bold;
   color: #e55b00;
   font-size: 130%;
 }
-/* line 112, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003112}}
 #answers .secondary-navigation, #questions .secondary-navigation {
   background: white;
   border-bottom: 1px solid #666666;
 }
-/* line 116, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003116}}
 #answers .answer, #answers .question, #questions .answer, #questions .question {
   margin-bottom: 25px;
   margin-top: 25px;
   padding-bottom: 25px;
 }
-/* line 121, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003121}}
 #answers .answer h2.version_title, #answers .question h2.version_title, #questions .answer h2.version_title, #questions .question h2.version_title {
   padding: 20px;
   background: #ffffcd;
 }
-/* line 124, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003124}}
 #answers .answer h2.version_title .version, #answers .question h2.version_title .version, #questions .answer h2.version_title .version, #questions .question h2.version_title .version {
   font-size: 36px;
   color: #666666;
 }
-/* line 128, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003128}}
 #answers .answer #vote-col, #answers .answer .vote-col, #answers .question #vote-col, #answers .question .vote-col, #questions .answer #vote-col, #questions .answer .vote-col, #questions .question #vote-col, #questions .question .vote-col {
   float: left;
   text-align: center;
   margin-top: 6px;
 }
-/* line 133, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003133}}
 #answers .answer .vote_box, #answers .question .vote_box, #questions .answer .vote_box, #questions .question .vote_box {
   margin-top: -21px;
 }
-/* line 136, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003136}}
 #answers .answer .avatar, #answers .question .avatar, #questions .answer .avatar, #questions .question .avatar {
   float: right;
   padding-right: 5px;
 }
-/* line 140, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003140}}
 #answers .answer #body-col, #answers .answer .body-col, #answers .question #body-col, #answers .question .body-col, #questions .answer #body-col, #questions .answer .body-col, #questions .question #body-col, #questions .question .body-col {
   float: left;
   width: 90%;
   margin-bottom: 10px;
 }
-/* line 145, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003145}}
 #answers .answer #body-col .actions, #answers .answer .body-col .actions, #answers .question #body-col .actions, #answers .question .body-col .actions, #questions .answer #body-col .actions, #questions .answer .body-col .actions, #questions .question #body-col .actions, #questions .question .body-col .actions {
   float: left;
   padding-top: 10px;
 }
-/* line 149, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003149}}
 #answers .answer #body-col .actions a, #answers .answer .body-col .actions a, #answers .question #body-col .actions a, #answers .question .body-col .actions a, #questions .answer #body-col .actions a, #questions .answer .body-col .actions a, #questions .question #body-col .actions a, #questions .question .body-col .actions a {
   color: #666666;
   font-size: 13px;
   line-height: 26px;
   margin-right: 1em;
 }
-/* line 156, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003156}}
 #answers .answer #body-col .controls .updated, #answers .answer .body-col .controls .updated, #answers .question #body-col .controls .updated, #answers .question .body-col .controls .updated, #questions .answer #body-col .controls .updated, #questions .answer .body-col .controls .updated, #questions .question #body-col .controls .updated, #questions .question .body-col .controls .updated {
   float: right;
   padding-top: 10px;
 }
-/* line 160, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003160}}
 #answers .answer #body-col .user_data, #answers .answer .body-col .user_data, #answers .question #body-col .user_data, #answers .question .body-col .user_data, #questions .answer #body-col .user_data, #questions .answer .body-col .user_data, #questions .question #body-col .user_data, #questions .question .body-col .user_data {
   margin-bottom: 5px;
   padding: 4px;
   float: left;
   border-bottom: 1px dotted #aaaaaa;
 }
-/* line 166, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003166}}
 #answers .answer #body-col .entry-content, #answers .answer .body-col .entry-content, #answers .question #body-col .entry-content, #answers .question .body-col .entry-content, #questions .answer #body-col .entry-content, #questions .answer .body-col .entry-content, #questions .question #body-col .entry-content, #questions .question .body-col .entry-content {
   clear: both;
   padding-top: 15px;
 }
 
-/* line 170, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003170}}
 .version_message {
   background: #eeeeff;
 }
 
-/* line 176, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003176}}
 #question .comments, #answers .comments {
   margin-top: 10px;
   display: inline;
@@ -1766,32 +1766,32 @@ ul.topic-list .follow-info a {
   margin-right: 0;
   width: 470px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #question .comments, * html #answers .comments {
   overflow-x: hidden;
 }
-/* line 182, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003182}}
 #question .comments .comment, #answers .comments .comment {
   border-top: 1px solid #cccccc;
   padding-top: 2px;
 }
-/* line 186, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003186}}
 #question .comments .comment .comment-content, #answers .comments .comment .comment-content {
   display: inline;
   float: left;
   margin-right: 0;
   width: 390px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #question .comments .comment .comment-content, * html #answers .comments .comment .comment-content {
   overflow-x: hidden;
 }
-/* line 189, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003189}}
 #question .comments .comment .actions, #answers .comments .comment .actions {
   float: left;
   padding-top: 0;
 }
-/* line 193, ../../../../../app/stylesheets/themes/plain/_questions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003193}}
 #question .comments .comment .actions a, #answers .comments .comment .actions a {
   color: #666666;
   font-size: 13px;
@@ -1799,13 +1799,25 @@ ul.topic-list .follow-info a {
   margin-right: 1em;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003200}}
+#ask_question .controls {
+  margin-bottom: 10px;
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_questions\.sass}line{font-family:\00003204}}
+#ask_question #question_submit {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\000031}}
 .vote_box {
   display: block;
   text-align: center;
   vertical-align: middle;
 }
-/* line 6, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\000036}}
 .vote_box .votes_average {
   display: block;
   font-weight: bold;
@@ -1815,28 +1827,28 @@ ul.topic-list .follow-info a {
   padding: 0;
   margin: 0;
 }
-/* line 16, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000316}}
 .vote_box button {
   cursor: pointer;
   border: 0px;
   padding: 0px;
   width: 100%;
 }
-/* line 22, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000322}}
 .vote_box button.arrow {
   height: 13px;
   font-size: 13px;
   line-heigth: 13px;
 }
-/* line 28, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000328}}
 .vote_box button.arrow.vote_up img:hover {
   border-bottom: 1px solid red;
 }
-/* line 31, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000331}}
 .vote_box button.arrow.vote_down img:hover {
   border-top: 1px solid red;
 }
-/* line 35, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000335}}
 .vote_box .arrow {
   border: none;
   background-color: transparent;
@@ -1844,37 +1856,37 @@ ul.topic-list .follow-info a {
   font-size: 13px;
   line-heigth: 13px;
 }
-/* line 42, ../../../../../app/stylesheets/themes/plain/_vote_box.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_vote_box\.sass}line{font-family:\0000342}}
 .vote_box a {
   font-size: 25px;
   text-decoration: none;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\000031}}
 .markdown {
   color: #222222;
 }
-/* line 4, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\000034}}
 .markdown p {
   margin-top: 0;
   color: #222222;
 }
-/* line 8, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\000038}}
 .markdown ol li {
   list-style-type: decimal;
 }
-/* line 11, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000311}}
 .markdown#markdown_preview {
   border: 2px dotted #cccccc;
   min-height: 20px;
 }
 
-/* line 17, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000317}}
 #answers .children .markdown {
   font-size: 14px;
   color: #555555;
 }
-/* line 21, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000321}}
 #answers .children .markdown p {
   margin-top: 0;
   font-size: 12px;
@@ -1883,18 +1895,18 @@ ul.topic-list .follow-info a {
   margin-bottom: 10px;
 }
 
-/* line 29, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000329}}
 #question-body-col .ccontrol {
   color: #666666;
   text-decoration: none;
   display: block;
   font-size: 12px;
 }
-/* line 36, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000336}}
 #question-body-col .comments .comment {
   font-size: 13px;
 }
-/* line 39, ../../../../../app/stylesheets/themes/plain/_markdown.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_markdown\.sass}line{font-family:\0000339}}
 #question-body-col .comments .comment .markdown p {
   margin-top: 0;
   font-size: 12px;
@@ -1903,30 +1915,30 @@ ul.topic-list .follow-info a {
   margin-bottom: 4px;
 }
 
-/* line 2, ../../../../../app/stylesheets/themes/plain/_stats.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_stats\.sass}line{font-family:\000032}}
 .stats .entry {
   padding: 12px 2px;
 }
-/* line 4, ../../../../../app/stylesheets/themes/plain/_stats.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_stats\.sass}line{font-family:\000034}}
 .stats .entry .text {
   font-size: 16px;
 }
-/* line 6, ../../../../../app/stylesheets/themes/plain/_stats.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_stats\.sass}line{font-family:\000036}}
 .stats .entry .data {
   font-size: 20px;
   font-weight: bold;
   color: #666666;
 }
 
-/* line 2, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\000032}}
 #groups .actions {
   float: right;
 }
 
-/* line 5, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\000035}}
 a.request_group {
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1279768283') repeat-x bottom left;
+  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -1964,40 +1976,40 @@ a.request_group {
   margin-top: 20px;
   float: right;
 }
-/* line 172, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003172}}
 a.request_group::-moz-focus-inner {
   border: none;
   padding: 0;
 }
-/* line 175, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003175}}
 a.request_group:focus {
   outline: none;
 }
-/* line 178, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003178}}
 a.request_group.disabled, a.request_group[disabled] {
   opacity: 0.7;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
 }
-/* line 183, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003183}}
 a.request_group.disabled:hover, a.request_group.disabled:focus, a.request_group[disabled]:hover, a.request_group[disabled]:focus {
   cursor: default;
 }
-/* line 152, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
 a.request_group:active {
   padding: 4px 17px;
   border-width: 2px;
 }
-/* line 156, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
 a.request_group.disabled:active, a.request_group[disabled] {
   padding: 5px 18px;
   border-width: 1px;
 }
-/* line 98, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
 a.request_group, a.request_group:visited {
   color: white;
 }
-/* line 26, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000326}}
 a.request_group.disabled:active, a.request_group.disabled:hover, a.request_group[disabled]:active, a.request_group[disabled]:hover {
   background-color: #26b82b;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b));
@@ -2006,11 +2018,11 @@ a.request_group.disabled:active, a.request_group.disabled:hover, a.request_group
   border-color: #365c37;
   text-shadow: #104e12 0px 1px 1px;
 }
-/* line 98, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
 a.request_group.disabled:active, a.request_group.disabled:active:visited, a.request_group.disabled:hover, a.request_group.disabled:hover:visited, a.request_group[disabled]:active, a.request_group[disabled]:active:visited, a.request_group[disabled]:hover, a.request_group[disabled]:hover:visited {
   color: white;
 }
-/* line 28, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000328}}
 a.request_group:hover, a.request_group:focus {
   background-color: #23ab28;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #a9cdab), color-stop(10%, #6fab72), color-stop(50%, #477948), color-stop(50%, #416f42), color-stop(100%, #548f55));
@@ -2019,11 +2031,11 @@ a.request_group:hover, a.request_group:focus {
   border-color: #305231;
   text-shadow: #0d410f 0px 1px 1px;
 }
-/* line 98, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
 a.request_group:hover, a.request_group:hover:visited, a.request_group:focus, a.request_group:focus:visited {
   color: white;
 }
-/* line 33, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000333}}
 a.request_group:active {
   background-color: #219f23;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #477949), color-stop(30%, #4b804c), color-stop(50%, #447345), color-stop(50%, #3e693f), color-stop(100%, #569358));
@@ -2032,68 +2044,68 @@ a.request_group:active {
   border-color: #2b492b;
   text-shadow: #0b350c 0px -1px -1px;
 }
-/* line 98, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
 a.request_group:active, a.request_group:active:visited {
   color: white;
 }
-/* line 152, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
 a.request_group:active {
   padding: 5px 23px;
   border-width: 3px;
 }
-/* line 156, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/fancy-buttons-0.5.5/lib/stylesheets/_fancy-buttons.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
 a.request_group.disabled:active, a.request_group[disabled] {
   padding: 6px 24px;
   border-width: 2px;
 }
-/* line 12, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\0000312}}
 a.request_group:visited, a.request_group:link {
   color: white;
 }
 
-/* line 16, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\0000316}}
 #show_group .group_logo {
   float: right;
 }
-/* line 18, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\0000318}}
 #show_group .actions {
   padding: 5px;
   margin: 6px;
   background: #eeeeee;
 }
-/* line 22, ../../../../../app/stylesheets/themes/plain/_groups.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_groups\.sass}line{font-family:\0000322}}
 #show_group .actions a {
   margin: 2px 5px;
   font-size: 15px;
   font-weight: bold;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\000031}}
 #quick_question {
   background: #dcdcdc;
   color: #222222;
   padding: 10px;
 }
-/* line 6, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\000036}}
 #quick_question h3 {
   color: #222222;
   font-size: 15px;
 }
-/* line 9, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\000039}}
 #quick_question .form {
   margin-left: 20px;
   width: 95%;
 }
-/* line 12, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000312}}
 #quick_question .columns {
   margin-top: 15px;
 }
-/* line 14, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000314}}
 #quick_question .columns .column_form {
   float: left;
   width: 100%;
 }
-/* line 17, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000317}}
 #quick_question .columns .column_form textarea {
   padding: 4px;
   height: 20px;
@@ -2106,102 +2118,102 @@ a.request_group:visited, a.request_group:link {
   overflow: hidden;
   overflow-y: hidden;
 }
-/* line 28, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000328}}
 #quick_question .columns .column_form textarea:focus {
   outline: 0px;
 }
-/* line 31, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000331}}
 #quick_question .columns .column_form #tags .text_field {
   width: 60%;
 }
-/* line 34, ../../../../../app/stylesheets/themes/plain/_quick_question.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_quick_question\.sass}line{font-family:\0000334}}
 #quick_question .ask_question {
   padding: 5px 20px;
   font-weight: bold;
   float: right;
 }
 
-/* line 2, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\000032}}
 .widget .more {
   float: right;
   margin-right: 10px;
   padding: 1px;
 }
-/* line 8, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\000038}}
 .widget#groups ul li {
   color: #888888;
 }
-/* line 10, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\0000310}}
 .widget#groups ul li a {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 15, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\0000315}}
 .widget#users ul li, .widget#top_users ul li {
   height: 35px;
 }
-/* line 17, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\0000317}}
 .widget#users ul li .gravatar, .widget#top_users ul li .gravatar {
   float: left;
 }
-/* line 19, ../../../../../app/stylesheets/themes/plain/_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_widgets\.sass}line{font-family:\0000319}}
 .widget#users ul li .item, .widget#top_users ul li .item {
   margin-left: 40px;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\000031}}
 #users_show {
   padding-top: 20px;
 }
 
-/* line 4, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\000034}}
 .reputation {
   font-weight: bold;
   font-size: 120%;
 }
 
-/* line 8, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\000038}}
 .modflair, .ownerflair {
   color: black;
 }
 
-/* line 11, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000311}}
 .general-info {
   margin-top: 20px;
 }
-/* line 13, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000313}}
 .general-info .avatar {
   float: left;
   width: 20%;
   text-align: center;
 }
-/* line 17, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000317}}
 .general-info .avatar .reputation {
   margin-top: 20px;
   font-size: 400%;
   font-weight: bold;
 }
-/* line 21, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000321}}
 .general-info .avatar .text {
   font-weight: bold;
   margin-bottom: 10px;
 }
-/* line 25, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000325}}
 .general-info .user-info {
   float: left;
   width: 34%;
 }
-/* line 28, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000328}}
 .general-info .user-info .user-field {
   font-weight: bold;
   font-size: 120%;
   width: 45%;
 }
-/* line 32, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000332}}
 .general-info .user-info .user-field-value {
   width: 40%;
 }
-/* line 35, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000335}}
 .general-info .bio-info {
   float: left;
   width: 40%;
@@ -2212,43 +2224,43 @@ a.request_group:visited, a.request_group:link {
   overflow-y: scroll;
 }
 
-/* line 48, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000348}}
 .friend_list {
   margin: 3px;
 }
-/* line 50, ../../../../../app/stylesheets/themes/plain/_users.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_users\.sass}line{font-family:\0000350}}
 .friend_list span {
   padding: 1px 2px;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_close_requests.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_close_requests\.sass}line{font-family:\000031}}
 #request_close_question_form, #question_flag_form {
   padding: 20px 20px 0px 20px;
   border: 8px solid lightGray;
 }
 
-/* line 2, ../../../../../app/stylesheets/themes/plain/_manage_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_manage_widgets\.sass}line{font-family:\000032}}
 #manage_widgets ul#widgets {
   width: 100%;
 }
-/* line 5, ../../../../../app/stylesheets/themes/plain/_manage_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_manage_widgets\.sass}line{font-family:\000035}}
 #manage_widgets ul#widgets li .widget {
   width: 40%;
   border: 1px dotted #666666;
   padding: 4px;
 }
-/* line 9, ../../../../../app/stylesheets/themes/plain/_manage_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_manage_widgets\.sass}line{font-family:\000039}}
 #manage_widgets ul#widgets li .widget .controls {
   float: right;
   padding: 4px;
   width: 30%;
 }
-/* line 13, ../../../../../app/stylesheets/themes/plain/_manage_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_manage_widgets\.sass}line{font-family:\0000313}}
 #manage_widgets ul#widgets li .widget .controls .action {
   float: right;
   display: block;
 }
-/* line 16, ../../../../../app/stylesheets/themes/plain/_manage_widgets.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_manage_widgets\.sass}line{font-family:\0000316}}
 #manage_widgets ul#widgets li .widget_description {
   width: 40%;
   color: #666666;
@@ -2257,7 +2269,7 @@ a.request_group:visited, a.request_group:link {
   font-size: 20px;
 }
 
-/* line 23, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000323}}
 #main-bar.questions ul li.questions a,
 #main-bar.users ul li.users a,
 #main-bar.topics ul li.topics a,
@@ -2276,7 +2288,7 @@ a.request_group:visited, a.request_group:link {
   color: white;
 }
 
-/* line 39, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000339}}
 .secondary-navigation.votes ul li.votes a,
 .secondary-navigation.newest ul li.newest a,
 .secondary-navigation.oldest ul li.oldest a,
@@ -2305,7 +2317,7 @@ a.request_group:visited, a.request_group:link {
   background-color: white;
   color: #333333;
 }
-/* line 15, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000315}}
 .secondary-navigation.votes ul li.votes a:hover,
 .secondary-navigation.newest ul li.newest a:hover,
 .secondary-navigation.oldest ul li.oldest a:hover,
@@ -2330,7 +2342,7 @@ a.request_group:visited, a.request_group:link {
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
 }
-/* line 20, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000320}}
 .secondary-navigation.votes ul li.votes a a, .secondary-navigation.votes ul li.votes a a:active, .secondary-navigation.votes ul li.votes a a:visited, .secondary-navigation.votes ul li.votes a a:link,
 .secondary-navigation.newest ul li.newest a a,
 .secondary-navigation.newest ul li.newest a a:active,
@@ -2411,7 +2423,7 @@ a.request_group:visited, a.request_group:link {
   color: #333333;
 }
 
-/* line 61, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000361}}
 .secondary-navigation ul li.current {
   border-top: 1px solid #222222;
   border-left: 1px solid #222222;
@@ -2421,18 +2433,18 @@ a.request_group:visited, a.request_group:link {
   background-color: white;
   color: #333333;
 }
-/* line 15, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000315}}
 .secondary-navigation ul li.current:hover {
   background: white !important;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
 }
-/* line 20, ../../../../../app/stylesheets/themes/plain/_navigation.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_navigation\.sass}line{font-family:\0000320}}
 .secondary-navigation ul li.current a, .secondary-navigation ul li.current a:active, .secondary-navigation ul li.current a:visited, .secondary-navigation ul li.current a:link {
   color: #333333;
 }
 
-/* line 1, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\000031}}
 #search {
   display: inline;
   float: left;
@@ -2440,11 +2452,11 @@ a.request_group:visited, a.request_group:link {
   width: 350px;
   margin-top: 13px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #search {
   overflow-x: hidden;
 }
-/* line 5, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\000035}}
 #search .search-form-wrap {
   border: 1px solid black;
   position: relative;
@@ -2453,14 +2465,14 @@ a.request_group:visited, a.request_group:link {
   height: 1.5em;
   background-color: white;
 }
-/* line 13, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000313}}
 #search #search-field {
   border: none;
   width: 100%;
   background-color: white;
   font-size: 1.2em;
 }
-/* line 19, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000319}}
 #search #search-submit {
   background-color: #cc080f;
   color: white;
@@ -2475,11 +2487,11 @@ a.request_group:visited, a.request_group:link {
   font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
   cursor: pointer;
 }
-/* line 33, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000333}}
 #search #search-submit:hover {
   background-color: #f84249;
 }
-/* line 36, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000336}}
 #search #search-results {
   display: inline;
   float: left;
@@ -2496,17 +2508,17 @@ a.request_group:visited, a.request_group:link {
   font-size: 1.2em;
   z-index: 2;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #search #search-results {
   overflow-x: hidden;
 }
-/* line 11, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_bullets\.scss}line{font-family:\0000311}}
 #search #search-results li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 49, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000349}}
 #search #search-results li {
   padding: 0.25em;
   cursor: pointer;
@@ -2514,18 +2526,18 @@ a.request_group:visited, a.request_group:link {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-/* line 56, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000356}}
 #search #search-results li.active {
   background: #eeeeee;
   color: blue;
 }
-/* line 60, ../../../../../app/stylesheets/themes/plain/_search.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_search\.sass}line{font-family:\0000360}}
 #search #search-results li .desc {
   font-size: 0.8em;
   color: #777777;
 }
 
-/* line 5, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000035}}
 #sidebar .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2540,39 +2552,39 @@ a.request_group:visited, a.request_group:link {
   text-align: center;
   text-decoration: none !important;
 }
-/* line 8, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000038}}
 #sidebar .follow-info a.follow_link {
   background-color: #d6e989;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
   background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
   background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
 }
-/* line 12, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000312}}
 #sidebar .follow-info a.follow_link:hover {
   background-color: #bfdd48;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
   background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
   background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
 }
-/* line 16, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000316}}
 #sidebar .follow-info a.unfollow_link {
   background-color: #eeeeee;
 }
-/* line 19, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000319}}
 #sidebar .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-/* line 7, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\000037}}
 #sidebar .suggestions ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 12, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000312}}
 #sidebar .suggestions ul .controls {
   float: right;
 }
-/* line 5, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000035}}
 #sidebar .suggestions ul .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2587,43 +2599,43 @@ a.request_group:visited, a.request_group:link {
   text-align: center;
   text-decoration: none !important;
 }
-/* line 8, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000038}}
 #sidebar .suggestions ul .follow-info a.follow_link {
   background-color: #d6e989;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
   background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
   background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
 }
-/* line 12, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000312}}
 #sidebar .suggestions ul .follow-info a.follow_link:hover {
   background-color: #bfdd48;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
   background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
   background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
 }
-/* line 16, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000316}}
 #sidebar .suggestions ul .follow-info a.unfollow_link {
   background-color: #eeeeee;
 }
-/* line 19, ../../../../../app/stylesheets/_follow.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000319}}
 #sidebar .suggestions ul .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-/* line 17, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000317}}
 #sidebar .suggestions ul .follow-info {
   float: left;
 }
-/* line 20, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000320}}
 #sidebar .suggestions ul .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
-/* line 23, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000323}}
 #sidebar .suggestions ul .refuse-suggestion a {
   color: #0077cc;
   text-decoration: none;
 }
-/* line 5, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
 #sidebar .suggestions .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2641,46 +2653,46 @@ a.request_group:visited, a.request_group:link {
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-/* line 17, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
 #sidebar .suggestions .topic .topic-title {
   white-space: nowrap;
 }
-/* line 20, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
 #sidebar .suggestions .topic .remove {
   cursor: pointer;
 }
-/* line 23, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
 #sidebar .suggestions .topic, #sidebar .suggestions .topic a {
   color: #444444;
   font-weight: normal;
 }
-/* line 26, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
 #sidebar .suggestions .topic:hover, #sidebar .suggestions .topic a:hover {
   background: #eeeeee;
 }
-/* line 29, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
 #sidebar .suggestions .topic a:link, #sidebar .suggestions .topic a:active, #sidebar .suggestions .topic a:visited, #sidebar .suggestions .topic a a:link, #sidebar .suggestions .topic a a:active, #sidebar .suggestions .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-/* line 32, ../../../../../app/stylesheets/_topic_container.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
 #sidebar .suggestions .topic a:hover, #sidebar .suggestions .topic a a:hover {
   text-decoration: none;
 }
-/* line 30, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000330}}
 #sidebar .suggestions .info {
   margin: 0;
   float: left;
 }
-/* line 33, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000333}}
 #sidebar .suggestions .info img {
   vertical-align: middle;
 }
-/* line 36, ../../../../../app/stylesheets/_suggestions.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000336}}
 #sidebar .suggestions li + li {
   margin-top: 5px;
 }
-/* line 6, ../../../../../app/stylesheets/themes/plain/_sidebar.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_sidebar\.sass}line{font-family:\000036}}
 #sidebar .follow-info.block {
   display: inline;
   float: left;
@@ -2688,11 +2700,11 @@ a.request_group:visited, a.request_group:link {
   width: 150px;
   margin-top: 2px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #sidebar .follow-info.block {
   overflow-x: hidden;
 }
-/* line 10, ../../../../../app/stylesheets/themes/plain/_sidebar.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/_sidebar\.sass}line{font-family:\0000310}}
 #sidebar .follow-info.block a {
   display: block;
   padding: 2px 10px;
@@ -2700,7 +2712,7 @@ a.request_group:visited, a.request_group:link {
   line-height: 20px;
 }
 
-/* line 33, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000333}}
 #header {
   margin: 0 0 2em;
   clear: both;
@@ -2712,7 +2724,7 @@ a.request_group:visited, a.request_group:link {
   padding-top: 0.5em;
 }
 
-/* line 43, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000343}}
 #main-bar {
   width: 950px;
   margin: 0 auto;
@@ -2721,7 +2733,7 @@ a.request_group:visited, a.request_group:link {
   *zoom: 1;
   overflow: visible;
 }
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000322}}
 #main-bar:after {
   content: "\0020";
   display: block;
@@ -2731,7 +2743,7 @@ a.request_group:visited, a.request_group:link {
   visibility: hidden;
 }
 
-/* line 48, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000348}}
 #logo {
   display: inline;
   float: left;
@@ -2739,12 +2751,12 @@ a.request_group:visited, a.request_group:link {
   width: 150px;
   padding-right: 40px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #logo {
   overflow-x: hidden;
 }
 
-/* line 52, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000352}}
 #top-bar {
   display: inline;
   float: left;
@@ -2753,11 +2765,11 @@ a.request_group:visited, a.request_group:link {
   padding-left: 80px;
   margin-top: 13px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #top-bar {
   overflow-x: hidden;
 }
-/* line 57, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000357}}
 #top-bar .menu {
   list-style: none;
   margin: 0;
@@ -2768,13 +2780,13 @@ a.request_group:visited, a.request_group:link {
   *zoom: 1;
   text-align: right;
 }
-/* line 11, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_bullets.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_bullets\.scss}line{font-family:\0000311}}
 #top-bar .menu li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 46, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/lists/_inline-block-list.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_inline-block-list\.scss}line{font-family:\0000346}}
 #top-bar .menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2786,11 +2798,11 @@ a.request_group:visited, a.request_group:link {
   *vertical-align: auto;
   white-space: nowrap;
 }
-/* line 7, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
 #top-bar .menu li {
   *display: inline;
 }
-/* line 62, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000362}}
 #top-bar .menu a {
   text-decoration: none;
   font-size: 1.167em;
@@ -2798,22 +2810,22 @@ a.request_group:visited, a.request_group:link {
   vertical-align: middle;
   padding: 0 0.25em;
 }
-/* line 4, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/links/_hover-link.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_hover-link\.scss}line{font-family:\000034}}
 #top-bar .menu a:hover {
   text-decoration: underline;
 }
-/* line 69, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000369}}
 #top-bar .menu a img {
   background-color: white;
   vertical-align: middle;
   padding: 0.25em;
 }
 
-/* line 74, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000374}}
 #container {
   *zoom: 1;
 }
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000322}}
 #container:after {
   content: "\0020";
   display: block;
@@ -2823,7 +2835,7 @@ a.request_group:visited, a.request_group:link {
   visibility: hidden;
 }
 
-/* line 77, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000377}}
 #wrapper {
   width: 950px;
   margin: 0 auto;
@@ -2831,7 +2843,7 @@ a.request_group:visited, a.request_group:link {
   *zoom: 1;
   *zoom: 1;
 }
-/* line 22, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000322}}
 #wrapper:after {
   content: "\0020";
   display: block;
@@ -2841,18 +2853,18 @@ a.request_group:visited, a.request_group:link {
   visibility: hidden;
 }
 
-/* line 81, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000381}}
 #main {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 710px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #main {
   overflow-x: hidden;
 }
-/* line 84, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000384}}
 #main #block-text {
   display: inline;
   float: left;
@@ -2861,28 +2873,28 @@ a.request_group:visited, a.request_group:link {
   padding-left: 80px;
   padding-right: 80px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #main #block-text {
   overflow-x: hidden;
 }
-/* line 89, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000389}}
 #main #block-text .secondary-navigation {
   margin-bottom: 1em;
 }
-/* line 92, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000392}}
 #main #block-text .secondary-navigation .navtitle {
   margin-bottom: 0.5em;
   font-size: 1.75em;
 }
 
-/* line 96, ../../../../../app/stylesheets/themes/plain/style.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/src\/umamao\/app\/stylesheets\/themes\/plain\/style\.sass}line{font-family:\0000396}}
 #sidebar {
   display: inline;
   float: left;
   margin-right: 0;
   width: 230px;
 }
-/* line 138, ../../../../../../../.rvm/gems/ruby-1.8.7-p299@umamao/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/arthur\/\.rvm\/gems\/ruby-1\.8\.7-p302\@shapado3\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
 * html #sidebar {
   overflow-x: hidden;
 }

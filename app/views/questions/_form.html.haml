@@ -5,7 +5,8 @@
   .description
     = current_group.question_prompt
 
-.group
+
+#question-details.group{:style => @question.new? ? "display: none;" : ""}
   = f.label :body, t(:body, :scope => "activerecord.attributes.question"), :class => "label"
   = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
   %label.label
@@ -14,6 +15,10 @@
 
   %script{:type => "text/javascript", :charset => "utf-8"}
     $().ready(function() { $("#question-input").wmdMath({preview: "question-preview"}); });
+
+- if @question.new?
+  .controls
+    = link_to t("questions.new.add_details.show"), "#", :id => "toggle-details", "data-undo" => t("questions.new.add_details.hide")
 
 - if current_group.language.nil? && AppConfig.enable_i18n
   .group
