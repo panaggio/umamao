@@ -1,6 +1,12 @@
 require 'mm-paginate'
 
-MongoMapper.setup(YAML.load(ENV["DATABASE_YML"]),
+config_file = "#{Rails.root}/config/database.yml"
+
+options = (File::exists?(config_file) ?
+           YAML.load_file(config_file) :
+           YAML.load(ENV["DATABASE_YML"]))
+
+MongoMapper.setup(options,
                   Rails.env, { :logger => Rails.logger, :passenger => false })
 
 MongoMapperExt.init
