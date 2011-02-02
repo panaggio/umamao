@@ -13,9 +13,6 @@
     = t("global.preview")
   #question-preview.markdown
 
-  %script{:type => "text/javascript", :charset => "utf-8"}
-    $().ready(function() { $("#question-input").wmdMath({preview: "question-preview"}); });
-
 - if @question.new?
   .controls
     = link_to t("questions.new.add_details.show"), "#", :id => "toggle-details", "data-undo" => t("questions.new.add_details.hide")
