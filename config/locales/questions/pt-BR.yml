@@ -119,7 +119,7 @@ pt-BR:
           sua conta. Você retornará ao site ao final do processo de
           autorização.
       needs_permission: |
-        Aparentemente, sua conta do Facebook não está conectada com
+        Aparentemente, sua conta do %{site} não está conectada com
         as permissões necessárias para permitir essa ação. Clique em
         "Conectar" para habilitá-las.
       request_closing: Pedir para fechar
