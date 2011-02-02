@@ -1,9 +1,13 @@
--content_for :subtabs do
+- content_for :js do
+  = render :partial => "shared/layout/javascript/show"
+  = javascript_include_tag "modules/edit_question"
+
+- content_for :subtabs do
   .navtitle
     = t(".title")
 
--form_for(@question, :url => question_path(@question), :html => {:class => "form"}) do |f|
-  =render :partial => "form", :locals => {:f => f}
+- form_for(@question, :url => question_path(@question), :html => {:class => "form"}) do |f|
+  = render :partial => "form", :locals => {:f => f}
   .group.navform
     = f.submit t('scaffold.update')
     = t("global.or")
