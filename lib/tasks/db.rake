@@ -8,6 +8,10 @@ namespace :db do
     `mongo --eval 'db.copyDatabase("#{cfg["database"]}", "shapado-development", "#{cfg["host"]}:#{cfg["port"]}", "#{cfg["username"]}", "#{cfg["password"]}")'`
     puts "Exporting binary dump..."
     `mongodump -db shapado-development`
+
+    umamao = Group.first
+    umamao.domain = "localhost.lan"
+    umamao.save!
   end
 
   desc "Imports mongodb dump from dump/"
