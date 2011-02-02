@@ -72,6 +72,10 @@ pt-BR:
     new:
       how_to_ask: Como perguntar
       title: Fazer pergunta
+      add_details:
+        show: Adicionar detalhes
+        hide: Esconder detalhes
+      ask: Perguntar
     question:
       accepted_tooltip: Esta pergunta tem uma resposta aceita
     retag:
