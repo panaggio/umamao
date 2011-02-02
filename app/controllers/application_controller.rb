@@ -9,20 +9,22 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  after_filter :flash_to_session
   before_filter :find_group
   before_filter :check_group_access
   before_filter :set_locale
   before_filter :find_languages
-  before_filter :flash_to_session
   layout :set_layout
 
   protected
 
   def flash_to_session
     if flash[:error] 
-      cookies[:flash_message] = flash[:error]
+      cookies[:flash_error] = flash[:error]
+    elsif flash[:warn]
+      cookies[:flash_warn] = flash[:warn]
     elsif flash[:notice]
-      cookies[:flash_message] = flash[:notice]
+      cookies[:flash_notice] = flash[:notice]
     end
   end
 

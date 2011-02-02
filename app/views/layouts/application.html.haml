@@ -62,7 +62,6 @@
                 =yield :subtabs
 
             .content
-              %p= show_flash_messages(:class => "flash", :markdown => true)
               .inner
                 = content_for?(:content) ? yield(:content) : yield
 
