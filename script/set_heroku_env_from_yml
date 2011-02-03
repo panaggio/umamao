@@ -4,7 +4,5 @@
 # app.
 
 heroku config:add SHAPADO_YML="$(< config/shapado.yml)" \
-    SHAPADO_YML_SAMPLE="$(< config/shapado.yml.sample)" \
-    DEFAULT_REPUTATION_YML="$(< config/default_reputation.yml)" \
     DATABASE_YML="$(< config/database.yml)"
 

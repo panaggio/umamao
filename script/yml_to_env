@@ -3,6 +3,4 @@
 # Export configuration files to environment variables.
 
 export SHAPADO_YML=$(< config/shapado.yml)
-export SHAPADO_YML_SAMPLE=$(< config/shapado.yml.sample)
-export DEFAULT_REPUTATION_YML=$(< config/default_reputation.yml)
 export DATABASE_YML=$(< config/database.yml)
