@@ -85,6 +85,7 @@ class UsersController < ApplicationController
                          preferred_languages website language timezone
                          identity_url bio invitation_token
                          affiliation_token], params[:user])
+    @user.new_user = true
 
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
@@ -265,6 +266,14 @@ class UsersController < ApplicationController
                                             :count => followers_count)
                }.to_json)
       }
+    end
+  end
+
+  def set_not_new
+    current_user.new_user = false
+    current_user.save
+    respond_to do |format|
+      format.js  { head :ok }
     end
   end
 
