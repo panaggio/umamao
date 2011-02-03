@@ -5,15 +5,17 @@
   .description
     = current_group.question_prompt
 
-.group
-  = f.label :body, t(:body, :scope => "activerecord.attributes.question"), :class => "label"
+
+#question-details.group{:style => @question.new? ? "display: none;" : ""}
+  = f.label :body, t("questions.form.details"), :class => "label"
   = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
   %label.label
     = t("global.preview")
   #question-preview.markdown
 
-  %script{:type => "text/javascript", :charset => "utf-8"}
-    $().ready(function() { $("#question-input").wmdMath({preview: "question-preview"}); });
+- if @question.new?
+  .controls
+    = link_to t("questions.new.add_details"), "#", :id => "show-details"
 
 - if current_group.language.nil? && AppConfig.enable_i18n
   .group

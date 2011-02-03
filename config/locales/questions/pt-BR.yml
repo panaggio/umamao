@@ -37,6 +37,7 @@ pt-BR:
     form:
       adult_content: Esta pergunta envolve conteúdo adulto.
       body_tip: Qual é a sua pergunta?
+      details: Detalhes sobre a pergunta (opcional)
       language_tip: Selecione o idioma da pergunta.
       tags_tip: Use tópicos para fornecer mais informação sobre a sua pergunta.
     index:
@@ -72,6 +73,8 @@ pt-BR:
     new:
       how_to_ask: Como perguntar
       title: Fazer pergunta
+      add_details: Adicionar detalhes
+      ask: Perguntar
     question:
       accepted_tooltip: Esta pergunta tem uma resposta aceita
     retag:
