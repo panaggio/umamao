@@ -10,6 +10,19 @@ $(document).ready(function() {
     return false;
   });
 
+  $("#body").live("keyup", function() {
+    var t = $(this);
+    var len = t.val().length;
+    var maxlen = t.attr('maxlength');
+    var charsleft = $('.charsleft');
+    if (len < maxlen)
+      charsleft.html(maxlen - len);
+    else {
+      t.val(t.val().substr(0,maxlen));
+      charsleft.html(0);
+    }
+  });
+
   // Send shared question to Facebook.
   Utils.clickObject(".share-question-widget input[type=submit]", function () {
     return {
