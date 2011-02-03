@@ -9,11 +9,21 @@ class ShareQuestionController < ApplicationController
     @question = Question.find_by_id(params[:question])
     respond_to do |format|
       format.js do
+        html = {
+          :question => @question,
+          :where => params[:where]
+        }
+        case params[:where]
+        when"twitter"
+          bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
+          html[:link] = bitly.shorten(question_url(@question)).short_url
+          html[:maxlength] = 140
+        when "facebook"
+          html[:maxlength] = 420
+        end
         render :json => {
           :success => true,
-          :html => (render_cell :share_question, :display,
-                    :question => @question,
-                    :where => params[:where])
+          :html => (render_cell :share_question, :display, html)
         }
       end
     end
@@ -42,8 +52,7 @@ class ShareQuestionController < ApplicationController
     when "twitter"
       begin
         client = current_user.twitter_client
-        bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
-        client.update(@body + bitly.shorten(@link).short_url)
+        client.update(@body)
         status = :success
         message = I18n.t("questions.show.share_success", :site => "Twitter")
         track_event(:shared_question, :where => "twitter")

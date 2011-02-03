@@ -5,6 +5,8 @@ class ShareQuestionCell < Cell::Rails
   def display
     @question = options[:question]
     @where = options[:where]
+    @link = options[:link]
+    @maxlength = options[:maxlength]
     render
   end
 
