@@ -350,6 +350,39 @@ SearchItem.prototype = {
 
 Utils.extend(SearchItem, Item);
 
+function solrConversion(data) {
+
+  data = $.extend({}, data);
+
+  var makeLi = function (inner) {
+    return "<li class=\"autocomplete-entry\">" + inner + "</li>";
+  };
+
+  var makeDesc = function (inner) {
+    return " <span class=\"desc\">" + inner + "</span>";
+  };
+
+  switch (data.entry_type) {
+  case "User":
+    data.url = "/users/" + data.id;
+    data.html = makeLi(data.photo_url + " " +
+                       data.title + makeDesc("Usuário"));
+    break;
+  case "Topic":
+    var question = data.question_count == 1 ? " pergunta" : " perguntas";
+    data.url = "/topics/" + data.id;
+    data.html = makeLi(data.title +
+                       makeDesc(data.question_count + question));
+    break;
+  case "Question":
+    data.url = "/questions/" + data.id;
+    data.html = makeLi(data.title + makeDesc(data.topic));
+    break;
+  }
+
+  return data;
+}
+
 // The all-purpose search box. Looks for questions, topics and users.
 // Clicking a search result will take to the page of the corresponding
 // entity. Also, displays an item that when clicked takes the user to the
@@ -361,16 +394,12 @@ function initSearchBox() {
                                       "http://localhost.lan:8983/solr/select/?wt=json");
 
   searchBox.makeRequest = function (query) {
-    var callback = this.requestCallback();
     var request = $.ajax({
       url: this.url,
       dataType: "jsonp",
       jsonp: "json.wrf",
       data: {q: query},
-      success: function (data) {
-        console.log(data);
-        callback(data);
-      }
+      success: this.requestCallback()
     });
     return request;
   };
@@ -378,35 +407,8 @@ function initSearchBox() {
   searchBox.processData = function (data) {
     var items = [];
 
-    var makeLi = function (inner) {
-      return "<li class=\"autocomplete-entry\">" + inner + "</li>";
-    };
-
-    var makeDesc = function (inner) {
-      return " <span class=\"desc\">" + inner + "</span>";
-    };
-
     data.response.docs.forEach(function (result) {
-      item = result;
-
-      switch (result.entry_type) {
-      case "User":
-        item.url = "/users/" + result.id;
-        item.html = makeLi(result.photo_url + " " +
-                           result.title + makeDesc("Usuário"));
-        break;
-      case "Topic":
-        var question = result.question_count == 1 ? " pergunta" : " perguntas";
-        item.url = "/topics/" + result.id;
-        item.html = makeLi(result.title +
-                           makeDesc(result.question_count + question));
-        break;
-      case "Question":
-        item.url = "/questions/" + result.id;
-        item.html = makeLi(result.title + makeDesc(result.topic));
-        break;
-      }
-      items.push(new UrlItem(item));
+      items.push(new UrlItem(solrConversion(result)));
     });
     items.push(new SearchItem(this.input));
     return items;
