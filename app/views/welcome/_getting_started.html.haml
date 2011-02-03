@@ -1,0 +1,13 @@
+- title = h(getting_started.title)
+- owner = nil
+<!-- faffbf #feff9e -->
+
+- content_for :css do
+  = stylesheet_link_tag 'welcome'
+
+#getting_started
+  %li.entry.item.getting_started
+    -# Question Summary
+    = link_to image_tag("getting_started_close.png", :class => "close-image"), set_not_new_user_path(current_user), {:class => 'close-link'}
+    %h3= link_to title, question_path(getting_started), {:title => truncate(getting_started.body, :length => 200), :class => "question"}
+    .clear

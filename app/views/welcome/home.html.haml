@@ -8,14 +8,13 @@
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
 
+- if current_user.new_user
+  #getting_started_div
+    %ul.items#getting_started
+      = render :partial => "welcome/getting_started", :object => @getting_started, :question => @getting_started
+
 %ul.items#news_items
   - if @news_items.empty?
-
-    = t('.empty_news_feed_explanation',
-        :users => link_to(t('.users'), users_path),
-        :topics => link_to(t('.topics'), topics_path))
-
-    %hr
 
     %ul.items#questions
       - @questions.each do |question|
