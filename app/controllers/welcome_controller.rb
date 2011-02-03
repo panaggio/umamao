@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
 
     @news_items = NewsItem.paginate({:recipient_id => current_user.id,
                                       :recipient_type => "User",
-                                      :per_page => 30,
+                                      :per_page => 15,
                                       :page => params[:page] || 1,
                                       :order => :created_at.desc})
     @questions = Question.latest.limit(10) || [] if @news_items.empty?

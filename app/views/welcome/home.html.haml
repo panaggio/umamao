@@ -8,33 +8,32 @@
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
 
-- cache("user_news_items_#{current_user.id}") do
-  %ul.items#news_items
-    - if @news_items.empty?
+%ul.items#news_items
+  - if @news_items.empty?
 
-      = t('.empty_news_feed_explanation',
-          :users => link_to(t('.users'), users_path),
-          :topics => link_to(t('.topics'), topics_path))
+    = t('.empty_news_feed_explanation',
+        :users => link_to(t('.users'), users_path),
+        :topics => link_to(t('.topics'), topics_path))
 
-      %hr
+    %hr
 
-      %ul.items#questions
-        - @questions.each do |question|
-          = render :partial => "questions/question", :object => question
+    %ul.items#questions
+      - @questions.each do |question|
+        = render :partial => "questions/question", :object => question
 
-    - else
-      - @news_items.each do |news_item|
-        = render :partial => "news_item", :object => news_item
-      = will_paginate @news_items
+  - else
+    - @news_items.each do |news_item|
+      = render :partial => "news_item", :object => news_item
+    = will_paginate @news_items
 
-    #additional_info
-      #help_us
-        = t(".browse_all_or_by_tags", :full_list_of_questions => link_to(t('.full_list_of_questions'), questions_path), :browse_by_tags => link_to(t('.browse_by_topics'), topics_path))
-        %br
-        = t("questions.index.help_to_answer")
-        = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
+  #additional_info
+    #help_us
+      = t(".browse_all_or_by_tags", :full_list_of_questions => link_to(t('.full_list_of_questions'), questions_path), :browse_by_tags => link_to(t('.browse_by_topics'), topics_path))
+      %br
+      = t("questions.index.help_to_answer")
+      = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
 
-      .clear
+    .clear
 
 - content_for :sidebar do
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
