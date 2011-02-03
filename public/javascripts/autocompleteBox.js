@@ -267,20 +267,30 @@ AutocompleteBox.prototype = {
     });
   },
 
+  // Make an ajax request to fetch the data corresponding to a given query.
+  makeRequest: function (query) {
+    return $.getJSON(this.url, {q: query}, this.requestCallback());
+  },
+
+  // Returns a callback to be executed after the request completes.
+  requestCallback: function () {
+    var box = this;
+    return function (data) {
+      if (data) {
+        box.itemBox.setItems(box.processData(data));
+        box.itemBox.show();
+      }
+    };
+  },
+
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
     if (query.length < this.minChars ||
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
-    var box = this;
     this.abortRequest();
-    this.ajaxRequest = $.getJSON(this.url, {q: query}, function (data) {
-      if (data) {
-        box.itemBox.setItems(box.processData(data));
-        box.itemBox.show();
-      }
-    });
+    this.ajaxRequest = this.makeRequest(query);
   },
 
   // Clears current input, hides selection box.
@@ -348,11 +358,54 @@ function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
                                       "#search-results",
-                                      "/search/autocomplete");
+                                      "http://localhost.lan:8983/solr/select/?wt=json");
+
+  searchBox.makeRequest = function (query) {
+    var callback = this.requestCallback();
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: query},
+      success: function (data) {
+        console.log(data);
+        callback(data);
+      }
+    });
+    return request;
+  };
 
   searchBox.processData = function (data) {
     var items = [];
-    data.forEach(function (item) {
+
+    var makeLi = function (inner) {
+      return "<li class=\"autocomplete-entry\">" + inner + "</li>";
+    };
+
+    var makeDesc = function (inner) {
+      return " <span class=\"desc\">" + inner + "</span>";
+    };
+
+    data.response.docs.forEach(function (result) {
+      item = result;
+
+      switch (result.entry_type) {
+      case "User":
+        item.url = "/users/" + result.id;
+        item.html = makeLi(result.photo_url + " " +
+                           result.title + makeDesc("Usuário"));
+        break;
+      case "Topic":
+        var question = result.question_count == 1 ? " pergunta" : " perguntas";
+        item.url = "/topics/" + result.id;
+        item.html = makeLi(result.title +
+                           makeDesc(result.question_count + question));
+        break;
+      case "Question":
+        item.url = "/questions/" + result.id;
+        item.html = makeLi(result.title + makeDesc(result.topic));
+        break;
+      }
       items.push(new UrlItem(item));
     });
     items.push(new SearchItem(this.input));
