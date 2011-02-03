@@ -11,22 +11,16 @@ $(document).ready(function() {
   });
 
   // Display/hide question details when asking a new question.
-  $("#ask_question #toggle-details").click(function () {
+  $("#ask_question #show-details").click(function () {
+    var link = $(this);
     var details = $("#question-details");
-    if (details.is(":hidden")) {
-      details.slideDown("slow", function () {
-        if (!wmdInit) {
-          $("#question-input").wmdMath({preview: "question-preview"});
-          wmdInit = true;
-        }
-      });
-    } else {
-      details.slideUp("slow");
-    }
-    var text = $(this).text();
-    var undo = $(this).attr("data-undo");
-    $(this).attr("data-undo", text);
-    $(this).text(undo);
+    details.slideDown("slow", function () {
+      if (!wmdInit) {
+        $("#question-input").wmdMath({preview: "question-preview"});
+        wmdInit = true;
+      }
+    });
+    link.fadeOut("slow", function () { link.remove(); });
   });
 
 });
