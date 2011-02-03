@@ -7,7 +7,7 @@
 
 
 #question-details.group{:style => @question.new? ? "display: none;" : ""}
-  = f.label :body, t(:body, :scope => "activerecord.attributes.question"), :class => "label"
+  = f.label :body, t("questions.form.details"), :class => "label"
   = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
   %label.label
     = t("global.preview")
@@ -15,7 +15,7 @@
 
 - if @question.new?
   .controls
-    = link_to t("questions.new.add_details.show"), "#", :id => "toggle-details", "data-undo" => t("questions.new.add_details.hide")
+    = link_to t("questions.new.add_details"), "#", :id => "show-details"
 
 - if current_group.language.nil? && AppConfig.enable_i18n
   .group
