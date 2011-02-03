@@ -13,13 +13,9 @@ class ShareQuestionController < ApplicationController
           :question => @question,
           :where => params[:where]
         }
-        case params[:where]
-        when"twitter"
+        if params[:where] == "twitter"
           bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
           html[:link] = bitly.shorten(question_url(@question)).short_url
-          html[:maxlength] = 140
-        when "facebook"
-          html[:maxlength] = 420
         end
         render :json => {
           :success => true,

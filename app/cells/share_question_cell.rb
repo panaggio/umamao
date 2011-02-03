@@ -6,7 +6,12 @@ class ShareQuestionCell < Cell::Rails
     @question = options[:question]
     @where = options[:where]
     @link = options[:link]
-    @maxlength = options[:maxlength]
+    @maxlength = case @where
+    when"twitter"
+      140
+    when "facebook"
+      420
+    end
     render
   end
 
