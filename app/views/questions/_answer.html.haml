@@ -40,11 +40,7 @@
             %strong.published{:title => answer.created_at, :class => "relativetime"}
               = t("time.ago", :time => time_ago_in_words(answer.created_at))
         .clear
-        .forms
-          - if current_user != answer.user
-            - flag = Flag.new
-            - flag.flaggeable = answer
-            = render :partial => "flags/form", :locals => {:flag => flag, :source => source }
+        #answer_flag_div
     .clear
 
     - if !hide_controls
