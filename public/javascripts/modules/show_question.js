@@ -26,20 +26,7 @@ $(document).ready(function() {
   });
 
   // Open modal box to share question.
-  Utils.clickObject("#sidebar .share .facebook", function () {
-    return {
-      success: function (data) {
-        Utils.modal({html: data.html});
-      },
-
-      error: function (data) {
-        if (data.status == "needs_connection") {
-          Utils.modal({html: data.html});
-        }
-      }
-    };
-  });
-  Utils.clickObject("#sidebar .share .twitter", function () {
+  Utils.clickObject("#sidebar .share .facebook,#sidebar .share .twitter", function () {
     return {
       success: function (data) {
         Utils.modal({html: data.html});
