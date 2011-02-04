@@ -85,7 +85,6 @@ class UsersController < ApplicationController
                          preferred_languages website language timezone
                          identity_url bio invitation_token
                          affiliation_token], params[:user])
-    @user.new_user = true
 
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
