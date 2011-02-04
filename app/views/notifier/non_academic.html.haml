@@ -6,4 +6,9 @@
   - @open_universities.each do |u|
     %li=  u.short_name+" - "+u.name
 
-= simple_format(t('.goodbye'))
+%p= simple_format(t('.message2'))
+
+%p= simple_format(t('notifier.global.signature'))
+
+
+%p= simple_format(t('.goodbye'))

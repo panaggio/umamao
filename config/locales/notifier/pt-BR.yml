@@ -3,6 +3,9 @@ pt-BR:
     global:
       hi: "Oi %{user},"
       user_page: "perfil"
+      signature: |
+        Abraço,
+        Equipe Umamão
     favorited:
       message1: "%{user} adicionou sua pergunta as suas favoritas no %{group}"
       message2: "O texto da sua pergunta é:"
@@ -38,27 +41,40 @@ pt-BR:
       message8: "Visite o site em %{link}"
     signup:
       greeting: "Olá,"
-      message: "Obrigado por se juntar ao %{link}! Para
-  completar seu cadastro, precisamos confirmar seu endereço de email
-  acadêmico. Para fazer isso, é só clicar no link abaixo: "
-      goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
+      message: "Obrigado por se juntar ao %{link}! Para completar seu cadastro, precisamos confirmar seu endereço de email acadêmico. Para fazer isso, é só clicar no link abaixo: "
+      goodbye: "P.S.: Caso não tenha se cadastrado no site, por favor, desconsidere este email."
     wait:
       greeting: "Olá,"
-      message: "Aparentemente o email %{email} não pertence a nenhuma
-  universidade aberta para cadastro no momento. Entretanto pode ser que
-  sua universide esteja liberada e nosso sistema não tenha reconhecido seu e-mail.
-  Verifique na lista abaixo se consta o nome de sua universidade e, caso
-  conste, avise-nos pelo email %{contact} para que possamos liberar seu cadastro."
+      message: |
+
+        Aparentemente o email %{email} não pertence a nenhuma
+        universidade aberta para cadastro no momento. Entretanto pode
+        ser que sua universide esteja liberada e nosso sistema não
+        tenha reconhecido seu e-mail.  Verifique na lista abaixo se
+        consta o nome de sua universidade e avise-nos pelo email
+        %{contact} para que possamos liberar seu cadastro.
+
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
     closed_for_signup:
       greeting: "Olá,"
-      message: "Ainda não abrimos o cadastro para %{university}.
-                Seu e-mail foi guardado e você será avisado quando abrirmos para sua universidade.
-                Se esta não for sua universidade, por favor, nos avise pelo %{contact}!"
+      message: |
+
+        Ainda não abrimos o cadastro para %{university}.  Seu e-mail
+        foi guardado e você será avisado quando abrirmos para sua
+        universidade.  Se esta não for sua universidade, por favor,
+        nos avise pelo %{contact}!
+
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."
     non_academic:
       greeting: "Olá,"
-      message: "Ainda não abrimos o cadastro para usuários que não estejam vinculados a universidades.
-                Seu e-mail foi guardado e você será avisado quando puder se cadastrar.
-                Caso este seja um e-mail acadêmico, por favor, nos avise pelo %{contact}."
+      message: |
+
+        Ainda não abrimos o cadastro para usuários que não estejam
+        vinculados a universidades.  Seu e-mail foi guardado e você
+        será avisado(a) quando puder se cadastrar.  Caso este seja um
+        e-mail acadêmico, por favor, avise-nos pelo %{contact}. A
+        lista de universidades para as quais estamos abertos no
+        momento é:
+
+      message2: "Para sugerir uma nova universidade, visite http://feedback.umamao.com ou envie-nos um email."
       goodbye: "Caso não tenha se cadastrado no site, por favor, desconsidere este email."

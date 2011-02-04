@@ -8,3 +8,5 @@
   = shapado_auto_link(markdown(@answer.body, :group => @group))
 %p
   = t('.question', :question => question)
+
+%p= simple_format(t('notifier.global.signature'))
