@@ -2,9 +2,6 @@ class Answer < Comment
   include MongoMapper::Document
   include MongoMapperExt::Filter
   include Support::Versionable
-  extend Sweepers
-
-  after_save { |answer| delay.sweep_news_items(answer.question) }
 
   key :_id, String
 
