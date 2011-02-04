@@ -446,12 +446,34 @@ TopicAutocomplete.prototype = {
     return item;
   },
 
+  makeRequest: function (query) {
+    var callback = this.requestCallback();
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: "title:" + query + " AND entry\\_type:Topic"},
+      success: function (data) {
+        var docs = data.response.docs;
+        var hasExactMatch = false;
+        docs.forEach(function (doc) {
+          if (doc.title == query) hasExactMatch = true;
+        });
+        if (!hasExactMatch) {
+          docs.push({title: query, entry_type: "Topic", question_count: "0"});
+        }
+        callback(docs);
+      }
+    });
+    return request;
+  },
+
   // Populates the suggestion box when data is received.
   processData: function (data) {
     var items = [];
     var me = this;
     data.forEach(function (it) {
-      items.push(me.makeItem(it));
+      items.push(me.makeItem(solrConversion(it)));
     });
     return items;
   },
@@ -477,7 +499,7 @@ Utils.extend(TopicAutocomplete, AutocompleteBox);
 function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
                                        "#reclassify-suggestions",
-                                       "/topics/autocomplete");
+                                       "http://localhost.lan:8983/solr/select/?wt=json");
   var topicsUl = $("#question .body-col ul.topic-list");
 
   var questionUrl = location.href;
@@ -549,9 +571,10 @@ function initTopicAutocompleteForReclassifying() {
 }
 
 function initTopicAutocompleteForFollowing() {
-  var topicBox = new TopicAutocomplete("#follow-topics-autocomplete",
-                                       "#follow-topics-suggestions",
-                                       "/topics/autocomplete?follow=t");
+  var topicBox =
+    new TopicAutocomplete("#follow-topics-autocomplete",
+                          "#follow-topics-suggestions",
+                          "http://localhost.lan:8983/solr/select/?wt=json");
 
   var topicsUl = $("#followed-topics");
 
