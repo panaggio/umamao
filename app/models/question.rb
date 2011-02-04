@@ -6,13 +6,10 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
-  extend Sweepers
   include Scopes
 
   ensure_index :tags
   ensure_index :language
-
-  after_save { |question| delay.sweep_news_items(question) }
 
   key :_id, String
   key :title, String, :required => true
