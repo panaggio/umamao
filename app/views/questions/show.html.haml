@@ -9,7 +9,7 @@
 
 - @current_class = 'question hentry entry post'
 
-- question_body = find_and_preserve(shapado_auto_link(markdown(@question.body.present? ? @question.body : '')))
+- question_body = find_and_preserve(shapado_auto_link(Rails.cache.fetch("rendered_question_#{@question.id}_#{@question.updated_at}"){ markdown(@question.body.present? ? @question.body : '') }))
 
 - source = question_path(@question)
 
@@ -85,7 +85,8 @@
 #answers
   .hentry
     - @answers.each do |answer|
-      = render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
+      = cache("rendered_answer_#{answer.id}_#{answer.updated_at}") do
+        = render :partial=> "answer", :locals=> {:question => @question, :answer => answer}
   = will_paginate(@answers)
 
 -# New answer form
