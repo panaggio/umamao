@@ -1,0 +1,17 @@
+li.getting_started.item.entry{
+  border: 1px solid #ffea00;
+  background-color: #faffbf;
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 20px;
+}
+
+.close-image{
+  position: relative;
+  top: -6px;
+  right: -265px;
+}
+ 
+a.question{
+  color: #19558d;
+}

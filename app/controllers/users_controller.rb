@@ -268,6 +268,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_not_new
+    current_user.new_user = false
+    current_user.save
+    respond_to do |format|
+      format.js  { head :ok }
+    end
+  end
+
   def destroy
     if false && current_user.delete # FIXME We need a better way to delete users
       flash[:notice] = t("destroyed", :scope => "devise.registrations")

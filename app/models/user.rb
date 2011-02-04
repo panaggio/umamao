@@ -21,6 +21,7 @@ class User
   key :birthday,                  Time
   key :gender,                    String, :limit => 1, :in => ['m', 'f', nil]
   key :description,               String, :limit => 500
+  key :new_user,                  Boolean, :default => true
 
   key :identity_url,              String
   key :role,                      String, :default => "user"
