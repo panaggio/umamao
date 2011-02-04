@@ -10,7 +10,8 @@
     .user_data
       = render :partial => "users/user_mini", :locals => {:user => answer.user}
     .markdown.entry-content
-      = find_and_preserve(shapado_auto_link(markdown(answer.body)))
+      = cache("rendered_answer_#{answer.id}_#{answer.updated_at}") do
+        = find_and_preserve(shapado_auto_link(markdown(answer.body)))
     - if !hide_controls && logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group)) && answer.flags_count > 0
       %h3
         = t(:flags, :scope => "activerecord.models")
