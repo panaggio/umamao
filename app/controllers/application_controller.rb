@@ -21,10 +21,13 @@ class ApplicationController < ActionController::Base
   def flash_to_session
     if flash[:error] 
       cookies[:flash_error] = flash[:error]
+      flash.delete(:error)
     elsif flash[:warn]
       cookies[:flash_warn] = flash[:warn]
+      flash.delete(:warn)
     elsif flash[:notice]
       cookies[:flash_notice] = flash[:notice]
+      flash.delete(:notice)
     end
   end
 
