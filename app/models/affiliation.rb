@@ -3,6 +3,7 @@ class Affiliation
   include Support::TokenConfirmable
 
   @@token_confirmable_key = :affiliation_token
+  token_confirmable_key :affiliation_token
 
   key :confirmed_at, Time, :default => nil
   key :user_id, String
@@ -10,8 +11,6 @@ class Affiliation
   key :email, String, :limit => 40, :default => nil
   key :affiliation_token, String, :index => true
   key :sent_at, Time
-  
-  token_confirmable_key :affiliation_token
 
   belongs_to :university
   belongs_to :user
@@ -29,6 +28,19 @@ class Affiliation
   before_validation :strip_email
   after_create :send_confirmation
 
+  # This method is for debugging porpouses only.
+  # creates an random affiliation and retrieves a url
+  # I've used glue instead of gu (get url) just to
+  # get a more stickie name =]
+  def self.glue
+    a = Affiliation.new
+    a.university_id = University.where(:short_name => "USP").first.id
+    a.email = (0...12).map{ ('a'..'z').to_a[rand(26)] }.join+"@usp.br"
+    a.save
+    "localhost.lan:3000/users/new?affiliation_token="+
+      a.affiliation_token
+  end
+
   def send_confirmation
     return if self.confirmed_at.present? # We don't need to confirm this.
     if self.university.open_for_signup
@@ -40,7 +52,7 @@ class Affiliation
   end
   
   def self.resend_confirmation(email)
-    where(:email=>email).first.send_confirmation
+    where(:email => email).first.send_confirmation
   end
 
   def strip_email
