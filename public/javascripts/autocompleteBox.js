@@ -18,6 +18,8 @@
 // - Factor this into multiple files that are only loaded when needed.
 //
 
+Utils.searchAddress =
+  "http://ec2-50-16-110-254.compute-1.amazonaws.com:8983/solr/select?wt=json";
 
 // Data item in an item box.
 function Item(data) {
@@ -391,7 +393,7 @@ function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
                                       "#search-results",
-                                      "http://localhost.lan:8983/solr/select/?wt=json");
+                                      Utils.searchAddress);
 
   searchBox.makeRequest = function (query) {
     var request = $.ajax({
@@ -499,7 +501,8 @@ Utils.extend(TopicAutocomplete, AutocompleteBox);
 function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
                                        "#reclassify-suggestions",
-                                       "http://localhost.lan:8983/solr/select/?wt=json");
+                                       Utils.searchAddress);
+
   var topicsUl = $("#question .body-col ul.topic-list");
 
   var questionUrl = location.href;
@@ -574,7 +577,7 @@ function initTopicAutocompleteForFollowing() {
   var topicBox =
     new TopicAutocomplete("#follow-topics-autocomplete",
                           "#follow-topics-suggestions",
-                          "http://localhost.lan:8983/solr/select/?wt=json");
+                          Utils.searchAddress);
 
   var topicsUl = $("#followed-topics");
 
