@@ -4,7 +4,7 @@ require 'fancy-buttons'
 
 project_type = :rails
 project_path = Compass::AppIntegration::Rails.root
-environment = Compass::AppIntegration::Rails.env
+environment = AppConfig.compass_environment.to_sym
 line_comments = false
 # Set this to the root of your project when deployed:
 http_path = "/"
