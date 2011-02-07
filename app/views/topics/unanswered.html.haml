@@ -14,7 +14,7 @@
     &= @topic.title
   - tabs_tag :namespace => :topic_show do |tab|
     = tab.all t('.all_tab'), @topic
-    = tab.unanswered t('.unanswered_tab') + " (" + @topic.unanswered_questions_count.to_s  + ")" , unanswered_topic_path(@topic)
+    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
 %br
 .markdown
   = markdown(@topic.description)
