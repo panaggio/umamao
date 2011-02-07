@@ -9,11 +9,17 @@ class ShareQuestionController < ApplicationController
     @question = Question.find_by_id(params[:question])
     respond_to do |format|
       format.js do
+        html = {
+          :question => @question,
+          :where => params[:where]
+        }
+        if params[:where] == "twitter"
+          bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
+          html[:link] = bitly.shorten(question_url(@question)).short_url
+        end
         render :json => {
           :success => true,
-          :html => (render_cell :share_question, :display,
-                    :question => @question,
-                    :where => params[:where])
+          :html => (render_cell :share_question, :display, html)
         }
       end
     end
@@ -39,6 +45,14 @@ class ShareQuestionController < ApplicationController
         status = :needs_permission
         session["omniauth_return_url"] = question_path(@question)
       end
+    when "twitter"
+      begin
+        client = current_user.twitter_client
+        client.update(@body)
+        status = :success
+        message = I18n.t("questions.show.share_success", :site => "Twitter")
+        track_event(:shared_question, :where => "twitter")
+      end
     end
 
     respond_to do |format|
@@ -58,7 +72,7 @@ class ShareQuestionController < ApplicationController
             :success => false,
             :status => "needs_permission",
             :html => (render_cell :external_accounts, :needs_permission,
-                      :provider => "facebook")
+                      :provider => params[:where])
           }.to_json
         end
       end
@@ -75,6 +89,8 @@ class ShareQuestionController < ApplicationController
       if !current_user.facebook_account
         status = :needs_connection
       end
+    when "twitter"
+      status = :needs_connection if !current_user.twitter_client
     else
       status = :unknown_destination
     end

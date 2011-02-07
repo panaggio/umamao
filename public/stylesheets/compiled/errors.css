@@ -1,20 +1,4 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/errors\.sass}line{font-family:\000034}}
-.error-dialog {
-  text-align: center;
-  width: 60%;
-  margin: auto;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/errors\.sass}line{font-family:\000039}}
-.error-dialog #dialog-content img {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/errors\.sass}line{font-family:\0000311}}
-.error-dialog .error-options {
-  text-align: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/errors\.sass}line{font-family:\0000313}}
-.error-dialog .error-options ul {
-  line-height: 20px;
-  list-style: disc inside;
-  padding: 4px;
-}
+.error-dialog { text-align: center; width: 60%; margin: auto; }
+.error-dialog #dialog-content img { float: left; }
+.error-dialog .error-options { text-align: left; }
+.error-dialog .error-options ul { line-height: 20px; list-style: disc inside; padding: 4px; }

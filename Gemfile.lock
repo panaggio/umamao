@@ -122,6 +122,10 @@ GEM
     autotest-rails (4.1.0)
       ZenTest
     bcrypt-ruby (2.1.4)
+    bitly (0.6.1)
+      crack (>= 0.1.4)
+      httparty (>= 0.5.2)
+      oauth2 (>= 0.1.1)
     bson (1.2.0)
     bson_ext (1.2.0)
     builder (2.1.2)
@@ -147,6 +151,7 @@ GEM
     compass-colors (0.3.1)
       compass (>= 0.8.7)
     configuration (1.2.0)
+    crack (0.1.8)
     cucumber (0.8.5)
       builder (~> 2.1.2)
       diff-lcs (~> 1.1.2)
@@ -192,6 +197,8 @@ GEM
     hoptoad_notifier (2.4.4)
       activesupport
       builder
+    httparty (0.7.3)
+      crack (= 0.1.8)
     i18n (0.5.0)
     johnson (2.0.0.pre3)
       stackdeck (~> 0.2)
@@ -328,6 +335,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth (~> 4.1.1)
   autotest-rails
+  bitly
   bson_ext
   capybara
   capybara-envjs

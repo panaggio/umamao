@@ -1,1743 +1,382 @@
 @charset "UTF-8";
 /* incase an inverted custom gradient isn't specified */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_nav_menu\.sass}line{font-family:\000031}}
-ul#nav {
-  padding: 10px 20px;
-  background-color: #ebebeb;
-  border: 1px solid black;
-  text-decoration: none;
-  list-style-type: none;
-  font-size: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_nav_menu\.sass}line{font-family:\000038}}
-ul#nav li {
-  padding: 4px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\000031}}
-* {
-  margin: 0;
-  padding: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\000036}}
-.clear {
-  clear: both;
-  height: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000311}}
-h1 {
-  margin: 15px 0;
-  font-size: 22px;
-  font-weight: normal;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000317}}
-h2 {
-  font-size: 22px;
-  margin: 15px 0;
-  font-weight: normal;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000323}}
-h3 {
-  font-size: 18px;
-  margin: 10px 0;
-  font-weight: normal;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000329}}
-h4 {
-  font-size: 16px;
-  margin: 10px 0;
-  font-weight: normal;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000335}}
-hr {
-  height: 1px;
-  border: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000340}}
-p {
-  margin: 15px 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000344}}
-a img {
-  border: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000348}}
-body {
-  font-size: 12px;
-  font-family: sans-serif;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000353}}
-#container {
-  min-width: 960px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000357}}
-#wrapper {
-  padding: 0 20px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000361}}
-.actions-bar {
-  padding: 10px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000364}}
-.actions-bar .actions {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000367}}
-.actions-bar .pagination {
-  float: right;
-  padding: 1px 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000374}}
-#sidebar h3 {
-  padding: 10px 15px;
-  margin: 0;
-  margin-bottom: 3px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000379}}
-#sidebar .block {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  clear: both;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000384}}
-#sidebar .block .content {
-  padding: 0 15px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000388}}
-#sidebar ul.navigation li a:link, #sidebar ul.navigation li a:visited {
-  display: block;
-  padding: 10px 15px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000392}}
-#sidebar .block .sidebar-block, #sidebar .notice, #sidebar .help {
-  padding: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\0000396}}
-#sidebar .help h4 {
-  margin: 5px 0;
-  font-size: 17px;
-  font-weight: bold;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003102}}
-#wrapper {
-  padding-top: 20px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003107}}
-#main .block {
-  margin-bottom: 20px;
-  padding-top: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003111}}
-#main .block .content .inner {
-  padding: 0 15px 15px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003114}}
-#main .main p.first {
-  margin-top: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003118}}
-#user-navigation {
-  position: absolute;
-  top: 0px;
-  right: 20px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003124}}
-#main-navigation {
-  width: 100%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003128}}
-#user-navigation ul, #main-navigation ul, .secondary-navigation ul, #sidebar ul.navigation {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003134}}
-#user-navigation ul li, #main-navigation ul li, .secondary-navigation ul li {
-  float: left;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003137}}
-#main-navigation ul li {
-  margin-right: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003141}}
-#user-navigation ul li {
-  padding: 5px 10px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003146}}
-#main-navigation ul li a:link, #main-navigation ul li a:visited, #main-navigation ul li a:hover, #main-navigation ul li a:active {
-  text-decoration: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003151}}
-.secondary-navigation ul li a:link, .secondary-navigation ul li a:visited, .secondary-navigation ul li a:hover, .secondary-navigation ul li a:active {
-  text-decoration: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003154}}
-h1.navtitle {
-  margin: 0;
-  font-size: 21px;
-  line-height: 26px;
-  margin-bottom: 13px;
-  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003161}}
-.secondary-navigation .navtitle {
-  font-family: Trebuchet MS, Helvetica, sans-serif;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003164}}
-#main .content .secondary-navigation .navtitle {
-  text-transform: capitalize;
-  line-height: 14px;
-  margin-top: 4px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003170}}
-#user-navigation ul li a:link, #user-navigation ul li a:visited, #user-navigation ul li a:hover, #user-navigation ul li a:active {
-  text-decoration: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003174}}
-#main-navigation ul li a {
-  font-size: 15px;
-  display: block;
-  padding: 8px 15px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003180}}
-.secondary-navigation {
-  font-size: 13px;
-  padding-top: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003184}}
-.secondary-navigation ul li a {
-  display: block;
-  padding: 10px 15px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003189}}
-.ccontrol {
-  padding-top: 5px;
-  padding-bottom: 6px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003193}}
-#footer {
-  padding-bottom: 20px;
-  padding-top: 1em;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003198}}
-.pagination a {
-  padding: 2px 5px;
-  margin-right: 5px;
-  display: block;
-  float: left;
-  border-style: solid;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003206}}
-.pagination span {
-  padding: 2px 5px;
-  margin-right: 5px;
-  display: block;
-  float: left;
-  border-style: solid;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003214}}
-.pagination span.current {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003217}}
-.pagination a {
-  text-decoration: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003221}}
-.title .counter {
-  font-size: 25px;
-  color: #666666;
-  display: inline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003226}}
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003231}}
-.table th {
-  padding: 10px;
-  font-weight: bold;
-  text-align: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003236}}
-.table th.first {
-  width: 30px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003239}}
-.table th.last {
-  width: 200px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003242}}
-.table .checkbox {
-  margin-left: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003245}}
-.table td {
-  padding: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003248}}
-.table td.last {
-  text-align: right;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003252}}
-input.checkbox {
-  margin: 0;
-  padding: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003258}}
-.form .group {
-  margin-bottom: 13px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003262}}
-.form div.left {
-  width: 20%;
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003266}}
-.form div.right {
-  width: 75%;
-  float: right;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003271}}
-.form .columns .column {
-  width: 48%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003274}}
-.form .columns .left {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003277}}
-.form .columns .right {
-  float: right;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003280}}
-.form textarea.comment_text_area {
-  font-size: 13px;
-  line-height: 26px;
-  margin: -2px 0 -1px 0;
-  height: auto;
-  width: 100%;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003288}}
-.form label.label, .form input.text_field, .form textarea.text_area {
-  font-size: 1.2em;
-  padding: 1px 0;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003293}}
-.form label.right {
-  text-align: right;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003297}}
-.form input.checkbox, .form input.radio {
-  margin-right: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003301}}
-.form label.checkbox, .form label.radio {
-  line-height: 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003304}}
-.form label.label {
-  display: block;
-  padding-bottom: 2px;
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003309}}
-.form div.fieldWithErrors label.label {
-  display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003312}}
-.form .fieldWithErrors .error {
-  color: red;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003315}}
-.form input.text_field, .form textarea.text_area {
-  width: 100%;
-  border-width: 1px;
-  border-style: solid;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003319}}
-.form input.text_field.filter_field, .form textarea.text_area.filter_field {
-  width: 30%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003322}}
-ul.share {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003326}}
-ul.share li {
-  margin: 0 4px 0 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003329}}
-ul.list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003334}}
-ul.list li {
-  clear: left;
-  padding-bottom: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003338}}
-ul.list li .left {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003341}}
-ul.list li .left .avatar {
-  width: 50px;
-  height: 50px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003345}}
-ul.list li .item {
-  margin-left: 80px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003348}}
-ul.list li .item .avatar {
-  float: left;
-  margin: 0 5px 5px 0;
-  width: 30px;
-  height: 30px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003355}}
-#box {
-  width: 500px;
-  margin: 50px auto;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003359}}
-#box .block {
-  margin-bottom: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003362}}
-#box .block h2 {
-  padding: 10px 15px;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003366}}
-#box .block .content {
-  padding: 10px 20px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003372}}
-#additional_info, .additional_info {
-  margin-top: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003375}}
-#additional_info .pagination, .additional_info .pagination {
-  float: left;
-  width: 50%;
-  font-size: 12px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003380}}
-#additional_info #help_us, .additional_info #help_us {
-  float: left;
-  font-family: Trebuchet MS, Helvetica, sans-serif;
-  font-size: 16px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003385}}
-.microblogging {
-  float: left;
-  margin: 5px 5px 5px 0px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003389}}
-.video_thumbnail {
-  width: 130px;
-  height: 97px;
-  cursor: pointer;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003394}}
-.thumb {
-  position: relative;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003397}}
-.play_button {
-  opacity: 0.7;
-  position: absolute;
-  left: 50px;
-  top: 35px;
-  border: medium none;
-  cursor: pointer;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003405}}
-.highlight {
-  background: #ffffe3;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003408}}
-ol.manage-domain {
-  margin-left: 3em;
-  margin-bottom: 2em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003411}}
-ol.manage-domain li {
-  font-size: 18px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_base\.sass}line{font-family:\00003414}}
-span.persistent_message {
-  background-color: #ffff88;
-  display: block;
-  margin: auto;
-  position: relative;
-  text-align: center;
-  top: -26px;
-  width: 100%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\000031}}
-.clear {
-  clear: both;
-  height: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\000035}}
-.hide {
-  display: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\000038}}
-.left {
-  float: left;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000311}}
-.right {
-  float: right;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000314}}
-.italic {
-  font-style: italic !important;
-  display: inline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000318}}
-.bold {
-  font-weight: bold !important;
-  display: inline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000322}}
-a.tag {
-  display: inline;
-  margin: 2px;
-  padding: 2px 4px;
-  background-color: #ebebeb;
-  color: #445566;
-  font-weight: bold;
-  font-size: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000330}}
-a.tag:hover {
-  background-color: #9cc3ea;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000333}}
-.inline {
-  display: inline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_basic\.sass}line{font-family:\0000336}}
-.bignum {
-  font-size: 36pt;
-  color: #888888;
-  line-height: 25px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_feeds\.sass}line{font-family:\000032}}
-.feeds .feed_entry {
-  display: block;
-  margin-bottom: 4px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_feeds\.sass}line{font-family:\000035}}
-.feeds .feed_entry a {
-  font-size: 14px;
-  color: #666666;
-  text-decoration: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_feeds\.sass}line{font-family:\000036}}
-.feeds .feed_entry a span {
-  margin-bottom: -4px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_feeds\.sass}line{font-family:\0000311}}
-.feeds .feed_entry a:hover {
-  text-decoration: underline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000031}}
-#external_accounts {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000036}}
-#external_accounts li {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #dddddd;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000311}}
-#external_accounts a.connect, #external_accounts a.disconnect {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  margin: 0.7em 0.5em 0.7em 0;
-  border-width: 1px;
-  border-style: solid;
-  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  font-size: 100%;
-  line-height: 130%;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  width: auto;
-  overflow: visible;
-  padding: 4px 10px 3px 7px;
-  background-color: #f5f5f5;
-  border-color: #eeeeee #dedede #dedede #eeeeee;
-  color: #565656;
-  width: 80px;
-  text-align: center;
-  margin-left: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
-#external_accounts a.connect, #external_accounts a.disconnect {
-  *display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
-#external_accounts a.connect img, #external_accounts a.disconnect img {
-  margin: 0 3px -3px 0 !important;
-  padding: 0;
-  border: none;
-  width: 16px;
-  height: 16px;
-  float: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
-#external_accounts a.connect[type], #external_accounts a.disconnect[type] {
-  padding: 4px 10px 4px 7px;
-  line-height: 17px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
-*:first-child + html #external_accounts a.connect[type], *:first-child + html #external_accounts a.disconnect[type] {
-  padding: 4px 10px 3px 7px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
-#external_accounts a.connect:hover, #external_accounts a.disconnect:hover {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
-#external_accounts a.connect:active, #external_accounts a.disconnect:active {
-  background-color: #a80000;
-  border-color: #b81010 #a80000 #a80000 #b81010;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
-#external_accounts a.connect.current, #external_accounts a.disconnect.current {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000317}}
-#external_accounts .controls {
-  float: right;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\000033}}
-.markdown {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\000036}}
-.markdown p {
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  margin: 0 0 13px;
-  font-size: 13px;
-  line-height: 22px;
-  font-family: Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000313}}
-.markdown p + p, .markdown ul + p, .markdown ol + p {
-  margin-top: 0.8em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000316}}
-.markdown p + ul {
-  margin-top: 0.8em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000319}}
-.markdown strong {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000321}}
-.markdown em {
-  font-style: italic;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000324}}
-.markdown ul {
-  list-style: disc;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000327}}
-.markdown ol {
-  list-style: decimal;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000333}}
-.markdown li {
-  line-height: 22px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000336}}
-.markdown li + li {
-  margin-top: 0.9em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000340}}
-.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  color: #222222;
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000345}}
-.markdown h1 {
-  font-size: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000347}}
-.markdown h2 {
-  font-size: 17px;
-  line-height: 30px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000350}}
-.markdown h3 {
-  font-size: 15px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000352}}
-.markdown h4 {
-  font-size: 14px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000354}}
-.markdown h5 {
-  font-size: 14px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000357}}
-.markdown code {
-  background-color: #f0f0f0;
-  max-height: 600px;
-  overflow: auto;
-  width: auto;
-  display: inline;
-  font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000366}}
-.markdown pre code {
-  display: block;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown\.sass}line{font-family:\0000370}}
-.markdown blockquote {
-  width: 95%;
-  margin: 1em;
-  display: block;
-  background-color: #f0f0f0;
-  word-wrap: break-word;
-  quotes: none;
-  vertical-align: baseline;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\000031}}
-.markdown_toolbar {
-  position: relative;
-  list-style: none;
-  border: 1px solid #d7d7d7;
-  background-color: #f6f6f6;
-  margin: 0;
-  padding: 0;
-  height: 18px;
-  margin-bottom: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000311}}
-.markdown_toolbar li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000317}}
-.markdown_toolbar li a {
-  width: 24px;
-  height: 16px;
-  float: left;
-  display: block;
-  background-image: url(/images/markdown_icons.gif);
-  border: 1px solid white;
-  border-right-color: #d7d7d7;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000326}}
-.markdown_toolbar li a:hover {
-  border-color: #990000;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000329}}
-.markdown_toolbar li span {
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000332}}
-.markdown_toolbar li a#markdown_help_button {
-  position: absolute;
-  top: 0;
-  rightright: 0;
-  border-left-color: #d7d7d7;
-  border-right-color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000339}}
-.markdown_toolbar li a#markdown_help_button:hover {
-  border-left-color: #990000;
-  border-right-color: #990000;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000344}}
-#markdown_italics_button {
-  background-position: 0 -119px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000348}}
-#markdown_bold_button {
-  background-position: 0 -102px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000352}}
-#markdown_link_button {
-  background-position: 0 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000356}}
-#markdown_image_button {
-  background-position: 0 -170px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000360}}
-#markdown_unordered_list_button {
-  background-position: 0 -34px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000364}}
-#markdown_ordered_list_button {
-  background-position: 0 -51px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000368}}
-#markdown_quote_button {
-  background-position: 0 -68px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000372}}
-#markdown_code_button {
-  background-position: 0 -136px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000376}}
-#markdown_help_button {
-  background-position: 0 -153px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000380}}
-#markdown_heading_button {
-  background-position: 0 -85px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000383}}
-#markdown_latex_button {
-  background-position: 0 -306px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_markdown_editor\.sass}line{font-family:\0000386}}
-.resizeHandle {
-  overflow: hidden;
-  width: 22px;
-  height: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url(/images/handle.png);
-  cursor: n-resize;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_validation\.sass}line{font-family:\000031}}
-.errorExplanation {
-  margin-bottom: 10px;
-  padding: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_validation\.sass}line{font-family:\000036}}
-.errorExplanation ul {
-  list-style-type: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_validation\.sass}line{font-family:\000038}}
-.errorExplanation ul li {
-  padding-left: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #666666;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_validation\.sass}line{font-family:\0000314}}
-.fieldWithErrors {
-  padding: 5px;
-  background: #ffdddd;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\000032}}
-ul.combobox {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  list-style-position: outside;
-  display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\000038}}
-ul.combobox li {
-  float: left;
-  margin-right: 0.7em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000311}}
-ul.combobox li:hover ul {
-  left: auto;
-  z-index: 2;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000315}}
-ul.combobox li ul {
-  position: absolute;
-  background-color: #ebebeb;
-  display: block;
-  border: 1px solid #dcdcdc;
-  left: -999em;
-  list-style: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000322}}
-ul.combobox li ul li {
-  width: 100%;
-  display: block;
-  clear: both;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000326}}
-ul.combobox li ul li:hover {
-  background-color: #e0e0e0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000328}}
-ul.combobox li ul li a {
-  padding: 4px;
-  color: #666666;
-  text-decoration: none;
-  display: block;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_menu\.sass}line{font-family:\0000335}}
-ul.combobox li:hover ul, ul.combobox li.sfhover ul {
-  left: auto;
-  max-height: 40em;
-  overflow: auto;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\000036}}
-#cboxOverlay {
-  background-color: black;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\000039}}
-#cboxContent .modal {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  border-color: #da242b;
-  border-width: 5px;
-  border-style: solid;
-  padding: 20px;
-  background-color: white;
-  width: 400px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\0000318}}
-#cboxContent .modal h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\0000323}}
-#cboxContent .modal .controls {
-  margin-top: 30px;
-  float: right;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\0000327}}
-#cboxContent .modal .controls a, #cboxContent .modal .controls input[type=submit] {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  margin: 0.7em 0.5em 0.7em 0;
-  border-width: 1px;
-  border-style: solid;
-  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  font-size: 100%;
-  line-height: 130%;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  width: auto;
-  overflow: visible;
-  padding: 4px 10px 3px 7px;
-  background-color: #f5f5f5;
-  border-color: #eeeeee #dedede #dedede #eeeeee;
-  color: #565656;
-  margin: 0 0 0 3px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
-#cboxContent .modal .controls a, #cboxContent .modal .controls input[type=submit] {
-  *display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
-#cboxContent .modal .controls a img, #cboxContent .modal .controls input[type=submit] img {
-  margin: 0 3px -3px 0 !important;
-  padding: 0;
-  border: none;
-  width: 16px;
-  height: 16px;
-  float: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
-#cboxContent .modal .controls a[type], #cboxContent .modal .controls input[type=submit][type] {
-  padding: 4px 10px 4px 7px;
-  line-height: 17px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
-*:first-child + html #cboxContent .modal .controls a[type], *:first-child + html #cboxContent .modal .controls input[type=submit][type] {
-  padding: 4px 10px 3px 7px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
-#cboxContent .modal .controls a:hover, #cboxContent .modal .controls input[type=submit]:hover {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
-#cboxContent .modal .controls a:active, #cboxContent .modal .controls input[type=submit]:active {
-  background-color: #a80000;
-  border-color: #b81010 #a80000 #a80000 #b81010;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
-#cboxContent .modal .controls a.current, #cboxContent .modal .controls input[type=submit].current {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\0000332}}
-#cboxContent .modal.share-question-widget textarea[name=body] {
-  width: 100%;
-  height: 50px;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_modal\.sass}line{font-family:\0000337}}
-#cboxContent .modal.share-question-widget .message {
-  margin-bottom: 10px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_announcements\.sass}line{font-family:\000031}}
-#announcement {
-  background-color: #b2ffa4;
-  margin-bottom: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_announcements\.sass}line{font-family:\000035}}
-#announcement #announcement_message {
-  text-align: center;
-  color: #3f3a2f;
-  margin: 4px 20px;
-  float: left;
-  width: 90%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_announcements\.sass}line{font-family:\0000311}}
-#announcement #announcement_message p {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_announcements\.sass}line{font-family:\0000315}}
-#announcement a#hide_announcement {
-  float: left;
-  width: 5%;
-  text-align: center;
-  margin-top: 6px;
-  font-weight: bold;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/_tag_cloud\.sass}line{font-family:\000031}}
-.tag_cloud {
-  font-size: 1.2em;
-  line-height: 1.44em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\000035}}
-.tag_cloud .xxs, .tag_cloud .xs, .tag_cloud .s, .tag_cloud .l, .tag_cloud .xl, .tag_cloud .xxl {
-  line-height: 1.44em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\000037}}
-.tag_cloud .xxs {
-  font-size: 0.6em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\000039}}
-.tag_cloud .xs {
-  font-size: 0.8em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\0000311}}
-.tag_cloud .s {
-  font-size: 0.9em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\0000313}}
-.tag_cloud .l {
-  font-size: 1.6em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\0000315}}
-.tag_cloud .xl {
-  font-size: 1.8em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_tag-cloud\.scss}line{font-family:\0000317}}
-.tag_cloud .xxl {
-  font-size: 2.4em;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000325}}
-span.persistent_message {
-  text-align: center;
-  background-color: #ffff88;
-  width: 100%;
-  padding: 3px 8px;
-  position: relative;
-  top: -26px;
-  display: block;
-  margin: auto;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000336}}
-#messages li {
-  list-style: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000339}}
-textarea.text_area {
-  height: 120px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000342}}
-textarea.comment_text_area {
-  height: 60px;
-  border-bottom: 1px solid #dddddd;
-  border-left: 2px solid #cccccc;
-  border-right: 1px solid #dddddd;
-  border-top: 2px solid #cccccc;
-  width: 99%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000350}}
-#main-doc {
-  background-color: white;
-  text-align: center;
-  padding-top: 1em;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000355}}
-a.big_cancel_button {
-  padding: 10px;
-  margin-bottom: 15px;
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1294145765') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
-  border-width: 1px;
-  background-color: #d90000;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000));
-  background-image: -moz-linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  border-color: #8d0000;
-  text-shadow: #5a0000 0px 1px 1px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
-  border-width: 1px;
-  color: white !important;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003172}}
-a.big_cancel_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003175}}
-a.big_cancel_button:focus {
-  outline: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003178}}
-a.big_cancel_button.disabled, a.big_cancel_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003183}}
-a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:focus, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:focus {
-  cursor: default;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-a.big_cancel_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] {
-  padding: 5px 18px;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
-a.big_cancel_button, a.big_cancel_button:visited {
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000326}}
-a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:hover, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:hover {
-  background-color: #d90000;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000));
-  background-image: -moz-linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  border-color: #8d0000;
-  text-shadow: #5a0000 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
-a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:active:visited, a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:hover:visited, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:active:visited, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:hover:visited {
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000328}}
-a.big_cancel_button:hover, a.big_cancel_button:focus {
-  background-color: #ca0000;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff1818), color-stop(100%, #ab0000));
-  background-image: -moz-linear-gradient(top, #ff1818 0%, #ab0000 100%);
-  background-image: linear-gradient(top, #ff1818 0%, #ab0000 100%);
-  border-color: #7e0000;
-  text-shadow: #4a0000 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
-a.big_cancel_button:hover, a.big_cancel_button:hover:visited, a.big_cancel_button:focus, a.big_cancel_button:focus:visited {
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000333}}
-a.big_cancel_button:active {
-  background-color: #ba0000;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b40000), color-stop(40%, #c40000), color-stop(85%, #c40000), color-stop(100%, #e70000));
-  background-image: -moz-linear-gradient(top, #b40000 0%, #c40000 40%, #c40000 85%, #e70000 100%);
-  background-image: linear-gradient(top, #b40000 0%, #c40000 40%, #c40000 85%, #e70000 100%);
-  border-color: #6e0000;
-  text-shadow: #3a0000 0px -1px -1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000398}}
-a.big_cancel_button:active, a.big_cancel_button:active:visited {
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-a.big_cancel_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000363}}
-a.big_confirm_button {
-  padding: 10px;
-  margin-bottom: 15px;
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1294145765') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
-  border-width: 1px;
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
-  border-width: 1px;
-  color: #00527e;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003172}}
-a.big_confirm_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003175}}
-a.big_confirm_button:focus {
-  outline: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003178}}
-a.big_confirm_button.disabled, a.big_confirm_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003183}}
-a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:focus, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:focus {
-  cursor: default;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-a.big_confirm_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] {
-  padding: 5px 18px;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-a.big_confirm_button, a.big_confirm_button:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000326}}
-a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:hover, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:hover {
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:active:visited, a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:hover:visited, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:active:visited, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:hover:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000328}}
-a.big_confirm_button:hover, a.big_confirm_button:focus {
-  background-color: #f5f5f5;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #b3b3b3));
-  background-image: -moz-linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%);
-  background-image: linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%);
-  border-color: #9c9c9c;
-  text-shadow: white 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-a.big_confirm_button:hover, a.big_confirm_button:hover:visited, a.big_confirm_button:focus, a.big_confirm_button:focus:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000333}}
-a.big_confirm_button:active {
-  background-color: #eeeeee;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b9b9b9), color-stop(40%, #c0c0c0), color-stop(85%, #c0c0c0), color-stop(100%, #d2d2d2));
-  background-image: -moz-linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
-  background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
-  border-color: #959595;
-  text-shadow: white 0px -1px -1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-a.big_confirm_button:active, a.big_confirm_button:active:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-a.big_confirm_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000372}}
-a.missing_page:link, a.missing_page:visited, a.missing_page:hover, a.missing_page:active {
-  color: red;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000375}}
-#retag {
-  margin-left: 1em;
-  font-size: 12px;
-  position: relative;
-  color: #666666;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000381}}
-a.important {
-  color: #ce0000 !important;
-  font-weight: bold;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000385}}
-.comment-form {
-  width: 91%;
-  margin-left: 51px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000389}}
-#default_footer {
-  margin: 10px 0;
-  font-size: 9px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000394}}
-.widget#users {
-  white-space: nowrap;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\0000397}}
-.add_answer_comment_link {
-  color: #666666;
-  padding-left: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003102}}
-form.share_content label.label {
-  display: inline;
-  width: auto;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003105}}
-form.share_content .submit_button {
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1294145765') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
-  border-width: 1px;
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
-  font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003172}}
-form.share_content .submit_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003175}}
-form.share_content .submit_button:focus {
-  outline: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003178}}
-form.share_content .submit_button.disabled, form.share_content .submit_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003183}}
-form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:focus, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:focus {
-  cursor: default;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-form.share_content .submit_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] {
-  padding: 5px 18px;
-  border-width: 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-form.share_content .submit_button, form.share_content .submit_button:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000326}}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:hover, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:hover {
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:active:visited, form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:hover:visited, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:active:visited, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:hover:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000328}}
-form.share_content .submit_button:hover, form.share_content .submit_button:focus {
-  background-color: #f5f5f5;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #b3b3b3));
-  background-image: -moz-linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%);
-  background-image: linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%);
-  border-color: #9c9c9c;
-  text-shadow: white 0px 1px 1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-form.share_content .submit_button:hover, form.share_content .submit_button:hover:visited, form.share_content .submit_button:focus, form.share_content .submit_button:focus:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\0000333}}
-form.share_content .submit_button:active {
-  background-color: #eeeeee;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b9b9b9), color-stop(40%, #c0c0c0), color-stop(85%, #c0c0c0), color-stop(100%, #d2d2d2));
-  background-image: -moz-linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
-  background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
-  border-color: #959595;
-  text-shadow: white 0px -1px -1px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003102}}
-form.share_content .submit_button:active, form.share_content .submit_button:active:visited {
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003152}}
-form.share_content .submit_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/\.rvm\/gems\/ruby-1\.8\.7-p302\/gems\/fancy-buttons-0\.5\.5\/lib\/stylesheets\/_fancy-buttons\.sass}line{font-family:\00003156}}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003110}}
-.center {
-  text-align: center;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003114}}
-#news_items .origin {
-  color: #333333;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003117}}
-#news_items .origin .description {
-  color: #999999;
-  margin-top: 0.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003121}}
-#news_items .answer {
-  margin-top: 1em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003125}}
-#news_items .answer.own .votes_average {
-  display: block !important;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003127}}
-#news_items .answer.own img {
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003130}}
-#news_items .answer .markdown.entry-content {
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003133}}
-#news_items .answer .body-col {
-  margin: 0 10%;
-  width: 80%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003137}}
-#news_items .answer .body-col .user_data {
-  border-bottom: 1px dotted #aaaaaa;
-  display: inline-block;
-  margin-bottom: 0.5em;
-  padding-bottom: 0.25em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003143}}
-#news_items .answer .vote-col {
-  float: left;
-  width: 5%;
-  margin-left: 4%;
-  text-align: center;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003149}}
-#news_items .answer .vote-col button {
-  display: block;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003152}}
-#news_items .answer .vote-col .vote_box {
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003155}}
-#news_items .answer .vote-col .votes_average {
-  margin-right: 0.25em;
-  padding: 0.25em;
-  background-color: #eeeeee;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 0.8em;
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003163}}
-#news_items .answer.large {
-  height: 85px;
-  position: relative;
-  overflow: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003168}}
-#news_items .answer.large .votes_average {
-  display: block;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003171}}
-#news_items .answer.large button {
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003174}}
-#news_items .answer.large .more {
-  background-color: white;
-  bottom: 0;
-  position: absolute;
-  width: 80%;
-  text-align: center;
-  cursor: pointer;
-  color: #538dc2;
-  padding-top: 5px;
-  left: 10%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003185}}
-#news_items .answer.large .more .more-link {
-  display: block;
-  border-top: 2px dashed #eeeeee;
-  border-top-width: 90%;
-  border-top-margin: 0 auto;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003191}}
-#news_items .answer.large.expanded {
-  height: auto;
-  overflow: visible;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003195}}
-#news_items .answer.large.expanded .votes_average {
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003198}}
-#news_items .answer.large.expanded button {
-  display: block;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/pedro\/Ruby\%20on\%20Rails\/umamao\/app\/stylesheets\/application\.sass}line{font-family:\00003201}}
-#news_items .answer.large.expanded .more {
-  display: none;
-}
+ul#nav { padding: 10px 20px; background-color: #ebebeb; border: 1px solid black; text-decoration: none; list-style-type: none; font-size: 20px; }
+ul#nav li { padding: 4px; }
+
+* { margin: 0; padding: 0; }
+
+.clear { clear: both; height: 0; }
+
+h1 { margin: 15px 0; font-size: 22px; font-weight: normal; }
+
+h2 { font-size: 22px; margin: 15px 0; font-weight: normal; }
+
+h3 { font-size: 18px; margin: 10px 0; font-weight: normal; }
+
+h4 { font-size: 16px; margin: 10px 0; font-weight: normal; }
+
+hr { height: 1px; border: 0; }
+
+p { margin: 15px 0; }
+
+a img { border: none; }
+
+body { font-size: 12px; font-family: sans-serif; }
+
+#container { min-width: 960px; }
+
+#wrapper { padding: 0 20px; }
+
+.actions-bar { padding: 10px 1px; }
+.actions-bar .actions { float: left; }
+.actions-bar .pagination { float: right; padding: 1px 0; }
+
+#sidebar h3 { padding: 10px 15px; margin: 0; margin-bottom: 3px; }
+#sidebar .block { margin-bottom: 20px; padding-bottom: 10px; clear: both; }
+#sidebar .block .content { padding: 0 15px; }
+#sidebar ul.navigation li a:link, #sidebar ul.navigation li a:visited { display: block; padding: 10px 15px; }
+#sidebar .block .sidebar-block, #sidebar .notice, #sidebar .help { padding: 10px; }
+#sidebar .help h4 { margin: 5px 0; font-size: 17px; font-weight: bold; }
+
+#wrapper { padding-top: 20px; }
+
+#main .block { margin-bottom: 20px; padding-top: 1px; }
+#main .block .content .inner { padding: 0 15px 15px; }
+#main .main p.first { margin-top: 0; }
+
+#user-navigation { position: absolute; top: 0px; right: 20px; }
+
+#main-navigation { width: 100%; }
+
+#user-navigation ul, #main-navigation ul, .secondary-navigation ul, #sidebar ul.navigation { margin: 0; padding: 0; list-style-type: none; }
+
+#user-navigation ul li, #main-navigation ul li, .secondary-navigation ul li { float: left; }
+
+#main-navigation ul li { margin-right: 5px; }
+
+#user-navigation ul li { padding: 5px 10px; }
+
+#main-navigation ul li a:link, #main-navigation ul li a:visited, #main-navigation ul li a:hover, #main-navigation ul li a:active { text-decoration: none; }
+
+.secondary-navigation ul li a:link, .secondary-navigation ul li a:visited, .secondary-navigation ul li a:hover, .secondary-navigation ul li a:active { text-decoration: none; }
+
+h1.navtitle { margin: 0; font-size: 21px; line-height: 26px; margin-bottom: 13px; font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif; }
+
+.secondary-navigation .navtitle { font-family: Trebuchet MS, Helvetica, sans-serif; }
+
+#main .content .secondary-navigation .navtitle { text-transform: capitalize; line-height: 14px; margin-top: 4px; }
+
+#user-navigation ul li a:link, #user-navigation ul li a:visited, #user-navigation ul li a:hover, #user-navigation ul li a:active { text-decoration: none; }
+
+#main-navigation ul li a { font-size: 15px; display: block; padding: 8px 15px; }
+
+.secondary-navigation { font-size: 13px; padding-top: 2px; }
+.secondary-navigation ul li a { display: block; padding: 10px 15px; }
+
+.ccontrol { padding-top: 5px; padding-bottom: 6px; }
+
+#footer { padding-bottom: 20px; padding-top: 1em; }
+
+.pagination a { padding: 2px 5px; margin-right: 5px; display: block; float: left; border-style: solid; border-width: 1px; }
+.pagination span { padding: 2px 5px; margin-right: 5px; display: block; float: left; border-style: solid; border-width: 1px; }
+.pagination span.current { font-weight: bold; }
+.pagination a { text-decoration: none; }
+
+.title .counter { font-size: 25px; color: #666666; display: inline; }
+
+.table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+.table th { padding: 10px; font-weight: bold; text-align: left; }
+.table th.first { width: 30px; }
+.table th.last { width: 200px; }
+.table .checkbox { margin-left: 10px; }
+.table td { padding: 10px; }
+.table td.last { text-align: right; }
+
+input.checkbox { margin: 0; padding: 0; }
+
+.form .group { margin-bottom: 13px; }
+.form div.left { width: 20%; float: left; }
+.form div.right { width: 75%; float: right; }
+.form .columns .column { width: 48%; }
+.form .columns .left { float: left; }
+.form .columns .right { float: right; }
+.form textarea.comment_text_area { font-size: 13px; line-height: 26px; margin: -2px 0 -1px 0; height: auto; width: 100%; padding: 0; }
+.form label.label, .form input.text_field, .form textarea.text_area { font-size: 1.2em; padding: 1px 0; margin: 0; }
+.form label.right { text-align: right; }
+.form input.checkbox, .form input.radio { margin-right: 5px; }
+.form label.checkbox, .form label.radio { line-height: 1.5em; }
+.form label.label { display: block; padding-bottom: 2px; font-weight: bold; }
+.form div.fieldWithErrors label.label { display: inline; }
+.form .fieldWithErrors .error { color: red; }
+.form input.text_field, .form textarea.text_area { width: 100%; border-width: 1px; border-style: solid; }
+.form input.text_field.filter_field, .form textarea.text_area.filter_field { width: 30%; }
+
+ul.share { margin: 0; padding: 0; list-style-type: none; }
+ul.share li { margin: 0 4px 0 0; }
+
+ul.list { margin: 0; padding: 0; list-style-type: none; }
+ul.list li { clear: left; padding-bottom: 5px; }
+ul.list li .left { float: left; }
+ul.list li .left .avatar { width: 50px; height: 50px; }
+ul.list li .item { margin-left: 80px; }
+ul.list li .item .avatar { float: left; margin: 0 5px 5px 0; width: 30px; height: 30px; }
+
+#box { width: 500px; margin: 50px auto; }
+#box .block { margin-bottom: 20px; }
+#box .block h2 { padding: 10px 15px; margin: 0; }
+#box .block .content { padding: 10px 20px; }
+
+#additional_info, .additional_info { margin-top: 10px; }
+#additional_info .pagination, .additional_info .pagination { float: left; width: 50%; font-size: 12px; }
+#additional_info #help_us, .additional_info #help_us { float: left; font-family: Trebuchet MS, Helvetica, sans-serif; font-size: 16px; }
+
+.microblogging { float: left; margin: 5px 5px 5px 0px; }
+
+.video_thumbnail { width: 130px; height: 97px; cursor: pointer; }
+
+.thumb { position: relative; }
+
+.play_button { opacity: 0.7; position: absolute; left: 50px; top: 35px; border: medium none; cursor: pointer; }
+
+.highlight { background: #ffffe3; }
+
+ol.manage-domain { margin-left: 3em; margin-bottom: 2em; }
+ol.manage-domain li { font-size: 18px; }
+
+span.persistent_message { background-color: #ffff88; display: block; margin: auto; position: relative; text-align: center; top: -26px; width: 100%; }
+
+.clear { clear: both; height: 0; }
+
+.hide { display: none; }
+
+.left { float: left; }
+
+.right { float: right; }
+
+.italic { font-style: italic !important; display: inline; }
+
+.bold { font-weight: bold !important; display: inline; }
+
+a.tag { display: inline; margin: 2px; padding: 2px 4px; background-color: #ebebeb; color: #445566; font-weight: bold; font-size: 10px; }
+a.tag:hover { background-color: #9cc3ea; }
+
+.inline { display: inline; }
+
+.bignum { font-size: 36pt; color: #888888; line-height: 25px; margin-bottom: 10px; margin-top: 10px; }
+
+.feeds .feed_entry { display: block; margin-bottom: 4px; }
+.feeds .feed_entry a { font-size: 14px; color: #666666; text-decoration: none; }
+.feeds .feed_entry a span { margin-bottom: -4px; }
+.feeds .feed_entry a:hover { text-decoration: underline; }
+
+#external_accounts { list-style: none; padding: 0; margin: 0; }
+#external_accounts li { padding-top: 10px; padding-bottom: 10px; border-bottom: 1px dotted #dddddd; }
+#external_accounts a.connect, #external_accounts a.disconnect { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; width: 80px; text-align: center; margin-left: 10px; }
+#external_accounts a.connect, #external_accounts a.disconnect { *display: inline; }
+#external_accounts a.connect img, #external_accounts a.disconnect img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+#external_accounts a.connect[type], #external_accounts a.disconnect[type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+*:first-child + html #external_accounts a.connect[type], *:first-child + html #external_accounts a.disconnect[type] { padding: 4px 10px 3px 7px; }
+#external_accounts a.connect:hover, #external_accounts a.disconnect:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+#external_accounts a.connect:active, #external_accounts a.disconnect:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+#external_accounts a.connect.current, #external_accounts a.disconnect.current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+#external_accounts .controls { float: right; }
+
+.markdown { color: #222222; }
+.markdown p { font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; margin: 0 0 13px; font-size: 13px; line-height: 22px; font-family: Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; }
+.markdown p + p, .markdown ul + p, .markdown ol + p { margin-top: 0.8em; }
+.markdown p + ul { margin-top: 0.8em; }
+.markdown strong { font-weight: bold; }
+.markdown em { font-style: italic; }
+.markdown ul { list-style: disc; }
+.markdown ol { list-style: decimal; }
+.markdown li { line-height: 22px; }
+.markdown li + li { margin-top: 0.9em; }
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 { font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; color: #222222; font-weight: bold; }
+.markdown h1 { font-size: 20px; }
+.markdown h2 { font-size: 17px; line-height: 30px; }
+.markdown h3 { font-size: 15px; }
+.markdown h4 { font-size: 14px; }
+.markdown h5 { font-size: 14px; }
+.markdown code { background-color: #f0f0f0; max-height: 600px; overflow: auto; width: auto; display: inline; font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace; }
+.markdown pre code { display: block; }
+.markdown blockquote { width: 95%; margin: 1em; display: block; background-color: #f0f0f0; word-wrap: break-word; quotes: none; vertical-align: baseline; }
+
+.markdown_toolbar { position: relative; list-style: none; border: 1px solid #d7d7d7; background-color: #f6f6f6; margin: 0; padding: 0; height: 18px; margin-bottom: 2px; }
+.markdown_toolbar li { list-style: none; margin: 0; padding: 0; float: left; }
+.markdown_toolbar li a { width: 24px; height: 16px; float: left; display: block; background-image: url(/images/markdown_icons.gif); border: 1px solid white; border-right-color: #d7d7d7; }
+.markdown_toolbar li a:hover { border-color: #990000; }
+.markdown_toolbar li span { display: none; }
+.markdown_toolbar li a#markdown_help_button { position: absolute; top: 0; rightright: 0; border-left-color: #d7d7d7; border-right-color: white; }
+.markdown_toolbar li a#markdown_help_button:hover { border-left-color: #990000; border-right-color: #990000; }
+
+#markdown_italics_button { background-position: 0 -119px; }
+
+#markdown_bold_button { background-position: 0 -102px; }
+
+#markdown_link_button { background-position: 0 0; }
+
+#markdown_image_button { background-position: 0 -170px; }
+
+#markdown_unordered_list_button { background-position: 0 -34px; }
+
+#markdown_ordered_list_button { background-position: 0 -51px; }
+
+#markdown_quote_button { background-position: 0 -68px; }
+
+#markdown_code_button { background-position: 0 -136px; }
+
+#markdown_help_button { background-position: 0 -153px; }
+
+#markdown_heading_button { background-position: 0 -85px; }
+
+#markdown_latex_button { background-position: 0 -306px; }
+
+.resizeHandle { overflow: hidden; width: 22px; height: 5px; margin-left: auto; margin-right: auto; background-image: url(/images/handle.png); cursor: n-resize; }
+
+.errorExplanation { margin-bottom: 10px; padding: 10px; }
+.errorExplanation ul { list-style-type: none; }
+.errorExplanation ul li { padding-left: 20px; font-size: 18px; font-weight: bold; color: #666666; }
+
+.fieldWithErrors { padding: 5px; background: #ffdddd; }
+
+ul.combobox { padding: 0; margin: 0; list-style: none; list-style-position: outside; display: inline; }
+ul.combobox li { float: left; margin-right: 0.7em; }
+ul.combobox li:hover ul { left: auto; z-index: 2; }
+ul.combobox li ul { position: absolute; background-color: #ebebeb; display: block; border: 1px solid #dcdcdc; left: -999em; list-style: none; }
+ul.combobox li ul li { width: 100%; display: block; clear: both; }
+ul.combobox li ul li:hover { background-color: #e0e0e0; }
+ul.combobox li ul li a { padding: 4px; color: #666666; text-decoration: none; display: block; }
+
+ul.combobox li:hover ul, ul.combobox li.sfhover ul { left: auto; max-height: 40em; overflow: auto; }
+
+#cboxOverlay { background-color: black; }
+
+#cboxContent .modal { -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border-color: #da242b; border-width: 5px; border-style: solid; padding: 20px; background-color: white; width: 400px; }
+#cboxContent .modal h1 { font-size: 20px; margin-bottom: 10px; }
+#cboxContent .modal .controls { margin-top: 30px; float: right; }
+#cboxContent .modal .controls a, #cboxContent .modal .controls input[type=submit] { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; margin: 0 0 0 3px; }
+#cboxContent .modal .controls a, #cboxContent .modal .controls input[type=submit] { *display: inline; }
+#cboxContent .modal .controls a img, #cboxContent .modal .controls input[type=submit] img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+#cboxContent .modal .controls a[type], #cboxContent .modal .controls input[type=submit][type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+*:first-child + html #cboxContent .modal .controls a[type], *:first-child + html #cboxContent .modal .controls input[type=submit][type] { padding: 4px 10px 3px 7px; }
+#cboxContent .modal .controls a:hover, #cboxContent .modal .controls input[type=submit]:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+#cboxContent .modal .controls a:active, #cboxContent .modal .controls input[type=submit]:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+#cboxContent .modal .controls a.current, #cboxContent .modal .controls input[type=submit].current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+
+#cboxContent .modal.share-question-widget textarea[name=body] { width: 100%; height: 50px; margin: 0; }
+#cboxContent .modal.share-question-widget .message { margin-bottom: 10px; }
+#cboxContent .modal.share-question-widget .charcount { margin-top: 10px; text-align: right; }
+
+#announcement { background-color: #b2ffa4; margin-bottom: 5px; }
+#announcement #announcement_message { text-align: center; color: #3f3a2f; margin: 4px 20px; float: left; width: 90%; }
+#announcement #announcement_message p { font-family: Arial, Helvetica, sans-serif; font-size: 16px; margin: 0; }
+#announcement a#hide_announcement { float: left; width: 5%; text-align: center; margin-top: 6px; font-weight: bold; }
+
+.tag_cloud { font-size: 1.2em; line-height: 1.44em; }
+.tag_cloud .xxs, .tag_cloud .xs, .tag_cloud .s, .tag_cloud .l, .tag_cloud .xl, .tag_cloud .xxl { line-height: 1.44em; }
+.tag_cloud .xxs { font-size: 0.6em; }
+.tag_cloud .xs { font-size: 0.8em; }
+.tag_cloud .s { font-size: 0.9em; }
+.tag_cloud .l { font-size: 1.6em; }
+.tag_cloud .xl { font-size: 1.8em; }
+.tag_cloud .xxl { font-size: 2.4em; }
+
+span.persistent_message { text-align: center; background-color: #ffff88; width: 100%; padding: 3px 8px; position: relative; top: -26px; display: block; margin: auto; }
+
+#messages li { list-style: none; }
+
+textarea.text_area { height: 120px; }
+
+textarea.comment_text_area { height: 60px; border-bottom: 1px solid #dddddd; border-left: 2px solid #cccccc; border-right: 1px solid #dddddd; border-top: 2px solid #cccccc; width: 99%; }
+
+#main-doc { background-color: white; text-align: center; padding-top: 1em; }
+
+a.big_cancel_button { padding: 10px; margin-bottom: 15px; font-family: "Lucida Grande", Lucida, Arial, sans_serif; background: url('/images/button_bg.png?1291138098') repeat-x bottom left; margin: 0; width: auto; overflow: visible; display: inline-block; cursor: pointer; text-decoration: none; border-style: solid; font-weight: bold; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 18px; line-height: 21.6px; padding: 5px 18px; border-width: 1px; background-color: #d90000; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000)); background-image: -moz-linear-gradient(top, #ff2626 0%, #ba0000 100%); background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%); border-color: #8d0000; text-shadow: #5a0000 0px 1px 1px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 15px; line-height: 18px; padding: 3px 12px; border-width: 1px; color: white !important; }
+a.big_cancel_button::-moz-focus-inner { border: none; padding: 0; }
+a.big_cancel_button:focus { outline: none; }
+a.big_cancel_button.disabled, a.big_cancel_button[disabled] { opacity: 0.7; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); }
+a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:focus, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:focus { cursor: default; }
+a.big_cancel_button:active { padding: 4px 17px; border-width: 2px; }
+a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] { padding: 5px 18px; border-width: 1px; }
+a.big_cancel_button, a.big_cancel_button:visited { color: white; }
+a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:hover, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:hover { background-color: #d90000; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000)); background-image: -moz-linear-gradient(top, #ff2626 0%, #ba0000 100%); background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%); border-color: #8d0000; text-shadow: #5a0000 0px 1px 1px; }
+a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:active:visited, a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:hover:visited, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:active:visited, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:hover:visited { color: white; }
+a.big_cancel_button:hover, a.big_cancel_button:focus { background-color: #ca0000; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff1818), color-stop(100%, #ab0000)); background-image: -moz-linear-gradient(top, #ff1818 0%, #ab0000 100%); background-image: linear-gradient(top, #ff1818 0%, #ab0000 100%); border-color: #7e0000; text-shadow: #4a0000 0px 1px 1px; }
+a.big_cancel_button:hover, a.big_cancel_button:hover:visited, a.big_cancel_button:focus, a.big_cancel_button:focus:visited { color: white; }
+a.big_cancel_button:active { background-color: #ba0000; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b40000), color-stop(40%, #c40000), color-stop(85%, #c40000), color-stop(100%, #e70000)); background-image: -moz-linear-gradient(top, #b40000 0%, #c40000 40%, #c40000 85%, #e70000 100%); background-image: linear-gradient(top, #b40000 0%, #c40000 40%, #c40000 85%, #e70000 100%); border-color: #6e0000; text-shadow: #3a0000 0px -1px -1px; }
+a.big_cancel_button:active, a.big_cancel_button:active:visited { color: white; }
+a.big_cancel_button:active { padding: 2px 11px; border-width: 2px; }
+a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] { padding: 3px 12px; border-width: 1px; }
+
+a.big_confirm_button { padding: 10px; margin-bottom: 15px; font-family: "Lucida Grande", Lucida, Arial, sans_serif; background: url('/images/button_bg.png?1291138098') repeat-x bottom left; margin: 0; width: auto; overflow: visible; display: inline-block; cursor: pointer; text-decoration: none; border-style: solid; font-weight: bold; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 18px; line-height: 21.6px; padding: 5px 18px; border-width: 1px; background-color: #fdfdfd; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb)); background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); border-color: #a4a4a4; text-shadow: white 0px 1px 1px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 15px; line-height: 18px; padding: 3px 12px; border-width: 1px; color: #00527e; }
+a.big_confirm_button::-moz-focus-inner { border: none; padding: 0; }
+a.big_confirm_button:focus { outline: none; }
+a.big_confirm_button.disabled, a.big_confirm_button[disabled] { opacity: 0.7; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); }
+a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:focus, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:focus { cursor: default; }
+a.big_confirm_button:active { padding: 4px 17px; border-width: 2px; }
+a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] { padding: 5px 18px; border-width: 1px; }
+a.big_confirm_button, a.big_confirm_button:visited { color: #222222; }
+a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:hover, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:hover { background-color: #fdfdfd; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb)); background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); border-color: #a4a4a4; text-shadow: white 0px 1px 1px; }
+a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:active:visited, a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:hover:visited, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:active:visited, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:hover:visited { color: #222222; }
+a.big_confirm_button:hover, a.big_confirm_button:focus { background-color: #f5f5f5; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #b3b3b3)); background-image: -moz-linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%); background-image: linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%); border-color: #9c9c9c; text-shadow: white 0px 1px 1px; }
+a.big_confirm_button:hover, a.big_confirm_button:hover:visited, a.big_confirm_button:focus, a.big_confirm_button:focus:visited { color: #222222; }
+a.big_confirm_button:active { background-color: #eeeeee; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b9b9b9), color-stop(40%, #c0c0c0), color-stop(85%, #c0c0c0), color-stop(100%, #d2d2d2)); background-image: -moz-linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%); background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%); border-color: #959595; text-shadow: white 0px -1px -1px; }
+a.big_confirm_button:active, a.big_confirm_button:active:visited { color: #222222; }
+a.big_confirm_button:active { padding: 2px 11px; border-width: 2px; }
+a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] { padding: 3px 12px; border-width: 1px; }
+
+a.missing_page:link, a.missing_page:visited, a.missing_page:hover, a.missing_page:active { color: red; }
+
+#retag { margin-left: 1em; font-size: 12px; position: relative; color: #666666; }
+
+a.important { color: #ce0000 !important; font-weight: bold; }
+
+.comment-form { width: 91%; margin-left: 51px; }
+
+#default_footer { margin: 10px 0; font-size: 9px; }
+
+.widget#users { white-space: nowrap; }
+
+.add_answer_comment_link { color: #666666; padding-left: 5px; }
+
+form.share_content label.label { display: inline; width: auto; }
+form.share_content .submit_button { font-family: "Lucida Grande", Lucida, Arial, sans_serif; background: url('/images/button_bg.png?1291138098') repeat-x bottom left; margin: 0; width: auto; overflow: visible; display: inline-block; cursor: pointer; text-decoration: none; border-style: solid; font-weight: bold; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 18px; line-height: 21.6px; padding: 5px 18px; border-width: 1px; background-color: #fdfdfd; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb)); background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); border-color: #a4a4a4; text-shadow: white 0px 1px 1px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 15px; line-height: 18px; padding: 3px 12px; border-width: 1px; }
+form.share_content .submit_button::-moz-focus-inner { border: none; padding: 0; }
+form.share_content .submit_button:focus { outline: none; }
+form.share_content .submit_button.disabled, form.share_content .submit_button[disabled] { opacity: 0.7; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); }
+form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:focus, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:focus { cursor: default; }
+form.share_content .submit_button:active { padding: 4px 17px; border-width: 2px; }
+form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] { padding: 5px 18px; border-width: 1px; }
+form.share_content .submit_button, form.share_content .submit_button:visited { color: #222222; }
+form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:hover, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:hover { background-color: #fdfdfd; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb)); background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%); border-color: #a4a4a4; text-shadow: white 0px 1px 1px; }
+form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:active:visited, form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:hover:visited, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:active:visited, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:hover:visited { color: #222222; }
+form.share_content .submit_button:hover, form.share_content .submit_button:focus { background-color: #f5f5f5; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #b3b3b3)); background-image: -moz-linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%); background-image: linear-gradient(top, #e8e8e8 0%, #b3b3b3 100%); border-color: #9c9c9c; text-shadow: white 0px 1px 1px; }
+form.share_content .submit_button:hover, form.share_content .submit_button:hover:visited, form.share_content .submit_button:focus, form.share_content .submit_button:focus:visited { color: #222222; }
+form.share_content .submit_button:active { background-color: #eeeeee; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b9b9b9), color-stop(40%, #c0c0c0), color-stop(85%, #c0c0c0), color-stop(100%, #d2d2d2)); background-image: -moz-linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%); background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%); border-color: #959595; text-shadow: white 0px -1px -1px; }
+form.share_content .submit_button:active, form.share_content .submit_button:active:visited { color: #222222; }
+form.share_content .submit_button:active { padding: 2px 11px; border-width: 2px; }
+form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] { padding: 3px 12px; border-width: 1px; }
+
+.center { text-align: center; }
+
+#news_items .origin { color: #333333; }
+#news_items .origin .description { color: #999999; margin-top: 0.5em; }
+#news_items .answer { margin-top: 1em; }
+#news_items .answer.own .votes_average { display: block !important; }
+#news_items .answer.own img { display: none; }
+#news_items .answer .markdown.entry-content { margin: 0; }
+#news_items .answer .body-col { margin: 0 10%; width: 80%; }
+#news_items .answer .body-col .user_data { border-bottom: 1px dotted #aaaaaa; display: inline-block; margin-bottom: 0.5em; padding-bottom: 0.25em; }
+#news_items .answer .vote-col { float: left; width: 5%; margin-left: 4%; text-align: center; }
+#news_items .answer .vote-col button { display: block; }
+#news_items .answer .vote-col .vote_box { padding: 0; }
+#news_items .answer .vote-col .votes_average { margin-right: 0.25em; padding: 0.25em; background-color: #eeeeee; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; font-size: 0.8em; display: none; }
+#news_items .answer.large { height: 85px; position: relative; overflow: hidden; }
+#news_items .answer.large .votes_average { display: block; }
+#news_items .answer.large button { display: none; }
+#news_items .answer.large .more { background-color: white; bottom: 0; position: absolute; width: 80%; text-align: center; cursor: pointer; color: #538dc2; padding-top: 5px; left: 10%; }
+#news_items .answer.large .more .more-link { display: block; border-top: 2px dashed #eeeeee; border-top-width: 90%; border-top-margin: 0 auto; }
+#news_items .answer.large.expanded { height: auto; overflow: visible; }
+#news_items .answer.large.expanded .votes_average { display: none; }
+#news_items .answer.large.expanded button { display: block; }
+#news_items .answer.large.expanded .more { display: none; }

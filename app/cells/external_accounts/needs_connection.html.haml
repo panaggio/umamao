@@ -1,10 +1,11 @@
 .modal
   %h1= t("questions.show.needs_connection.title")
+  - provider = @provider.capitalize
   - if @needs_permission
-    %p= t("questions.show.needs_permission")
+    %p= t("questions.show.needs_permission", :site => provider)
   - else
-    %p= t("questions.show.needs_connection.message")
+    %p= t("questions.show.needs_connection.message", :site => provider)
   .controls
     = link_to t("scaffold.cancel"), "#", :class => "close"
-    = link_to t("external_accounts.connect"), "/auth/facebook"
+    = link_to t("external_accounts.connect"), "/auth/#{@provider}"
   .clear
