@@ -52,9 +52,6 @@ class ShareQuestionController < ApplicationController
         status = :success
         message = I18n.t("questions.show.share_success", :site => "Twitter")
         track_event(:shared_question, :where => "twitter")
-#      rescue
-#        status = :needs_permission
-#        session["omniauth_return_url"] = question_path(@question)
       end
     end
 
