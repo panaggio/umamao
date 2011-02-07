@@ -78,15 +78,7 @@
 
         = link_to t('.add_follow_up_question'), new_question_path(:question => @follow_up_question), :target => '_blank', :id => 'add_follow_up_question'
 
-      .forms
-        - flag = Flag.new
-        - flag.flaggeable = @question
-        = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
-
-    .forms
-      - flag = Flag.new
-      - flag.flaggeable = @question
-      = render :partial => "flags/form", :locals => {:flag => flag, :source => source, :form_id => "question_flag_form" }
+        #question_flag_div
 
   = render :partial => "shared/comments", :locals => {:commentable => @question, :source => source, :path_scope => [@question]}
 
