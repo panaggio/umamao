@@ -5,7 +5,6 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   include Subdomains
-  include Sweepers
 
   protect_from_forgery
 

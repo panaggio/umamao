@@ -210,8 +210,6 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        sweep_question_views
-
         current_user.on_activity(:ask_question, current_group)
         current_group.on_activity(:ask_question)
 
@@ -242,8 +240,6 @@ class QuestionsController < ApplicationController
       @question.send(:generate_slug)
 
       if @question.valid? && @question.save
-        sweep_question_views
-
         format.html do
           flash[:notice] = t(:flash_notice, :scope => "questions.update")
           redirect_to(question_path(@question))
@@ -262,7 +258,6 @@ class QuestionsController < ApplicationController
     if @question.user_id == current_user.id
       @question.user.update_reputation(:delete_question, current_group)
     end
-    sweep_question_views
     @question.destroy
 
     respond_to do |format|
@@ -303,8 +298,8 @@ class QuestionsController < ApplicationController
       format.js do
         render :json => {:status => :ok,
          :html => render_to_string(:partial => "flags/form",
-                                   :locals => {:flag => @flag, 
-                                               :source => params[:source], 
+                                   :locals => {:flag => @flag,
+                                               :source => params[:source],
                                                :form_id => "question_flag_form" })
         }
      end

@@ -1,12 +1,5 @@
 class Vote
   include MongoMapper::Document
-  extend Sweepers
-
-  after_save do |vote|
-    question = vote.voteable.is_a?(Answer) ?
-      vote.voteable.question : vote.voteable
-    delay.sweep_news_items(question)
-  end
 
   timestamps!
 

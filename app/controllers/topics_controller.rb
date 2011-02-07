@@ -52,7 +52,6 @@ class TopicsController < ApplicationController
 
     Question.all(:topic_ids => @topic.id,
                  :select => [:id, :updated_at]).each do |question|
-      sweep_question(question)
     end
 
     respond_with @topic
