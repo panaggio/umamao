@@ -5,6 +5,19 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Recalculate votes average"
+    task :recalculate_votes_average => :environment do
+      Comment.query.each do |voteable|
+        score = 0
+        voteable.votes.each do |v|
+          score += v.value
+        end
+        voteable.votes_count = voteable.votes.count
+        voteable.votes_average = score
+        voteable.save :validate => false
+      end
+    end
+
     desc "Add default topics to each university"
     task :add_default_topics_to_universities => :environment do
 
