@@ -5,6 +5,7 @@ coverage
 config/*.yml
 data/*.dat
 config/database.yml
+config/deploy.rb
 base_packaged.*
 landing_packaged.*
 .directory
