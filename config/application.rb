@@ -53,9 +53,5 @@ module Shapado
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-
-    config.after_initialize do 
-      Devise::Mailer.handle_asynchronously :confirmation_instructions
-    end
   end
 end
