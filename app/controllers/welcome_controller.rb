@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   helper :questions
   tabs :default => :welcome
@@ -22,7 +23,9 @@ class WelcomeController < ApplicationController
                                       :order => :created_at.desc})
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
     @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
+
     render 'home'
+
   end
 
   def about

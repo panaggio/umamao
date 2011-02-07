@@ -37,7 +37,7 @@ pt-BR:
     confirmations:
       link: Não recebeu o email de confirmação?
       send_instructions: 'Você vai receber um email com instruções para confirmar seu endereço acadêmico em alguns minutos.'
-      confirmed: 'Seu endereço acadêmico foi confirmado. Bem-vindo(a) ao Umamão!'
+      confirmed: 'Seu e-mail foi confirmado. Bem-vindo(a) ao Umamão!'
       new:
         resend_confirmation_instructions: Reenviar instruções de confirmação
         submit: Mande-me instruções

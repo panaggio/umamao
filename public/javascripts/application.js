@@ -1,9 +1,15 @@
 $(document).ready(function() {
 
+  if($('a#resend_confirmation_email').length > 0 ) {
+    Utils.clickObject('a#resend_confirmation_email', resendConfirmationAjaxRequest);
+  }
+  
+  Utils.showInlineMessage();
+
   // TODO: place this somewhere else
   if ($("#landing_signup").length > 0 ) {
     Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);
-  }
+  };
 
   if ($("#email-help").length > 0) {
     emailtooltip();
@@ -115,3 +121,15 @@ function highlightEffect(object) {
     });
   }
 }
+
+// Initializer for resend confirmation email
+function resendConfirmationAjaxRequest() {
+    $("#ajax-loader").removeClass('hide');
+    
+    return {
+      url: "/resend_confirmation_email",
+      complete: function() {
+        $("#ajax-loader").addClass('hide');
+      }
+    };
+ }

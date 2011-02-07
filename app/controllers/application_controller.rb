@@ -1,3 +1,4 @@
+# -*- coding: undecided -*-
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
@@ -8,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  after_filter :flash_to_session
   before_filter :find_group
   before_filter :check_group_access
   before_filter :set_locale
@@ -15,6 +17,19 @@ class ApplicationController < ActionController::Base
   layout :set_layout
 
   protected
+
+  def flash_to_session
+    if flash[:error] 
+      cookies[:flash_error] = flash[:error]
+      flash.delete(:error)
+    elsif flash[:warn]
+      cookies[:flash_warn] = flash[:warn]
+      flash.delete(:warn)
+    elsif flash[:notice]
+      cookies[:flash_notice] = flash[:notice]
+      flash.delete(:notice)
+    end
+  end
 
   def track_event(event, properties = {})
     user_id = current_user ? current_user.id : properties.delete(:user_id)

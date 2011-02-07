@@ -30,7 +30,19 @@ class UsersController < ApplicationController
         render :json => {:html => html, :pagination => pagination }
       }
     end
+  end
 
+  def resend_confirmation_email
+    current_user.resend_confirmation_token
+
+    respond_to do |format|
+      format.js {
+        render :json => {
+          :success => true, 
+          :message => t('users.annoying.resent_confirmation')
+        }
+      }
+    end
   end
 
   def new

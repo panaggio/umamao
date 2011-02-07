@@ -29,6 +29,28 @@ window.Utils = {
     });
   },
 
+  //  Searches for a given flash_message cookies, call showMessage (above)
+  // with its contents and delete it
+  showInlineMessage: function() {
+    var message = readCookie("flash_error");
+    if(message)
+      Utils.showMessage(message, "error");
+    else {
+      message = readCookie("flash_warn");
+      if(message)
+        Utils.showMessage(message, "warn");
+      else {
+        message = readCookie("flash_notice");
+        if(message)
+          Utils.showMessage(message, "notice");	    
+      }
+    }
+
+    eraseCookie("flash_error");
+    eraseCookie("flash_notice");
+    eraseCookie("flash_warn");
+  },
+
   // Associates with objects of a given selector AJAX behavior when clicked.
   // prepare is a callback of no arguments that returns parameters to be used in
   // a jQuery.ajax() call. All fields returned by prepare behave exactly as the options

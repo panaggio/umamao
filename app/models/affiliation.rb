@@ -1,11 +1,16 @@
 class Affiliation
   include MongoMapper::Document
+  include Support::TokenConfirmable
+
+  @@token_confirmable_key = :affiliation_token
+  token_confirmable_key :affiliation_token
 
   key :confirmed_at, Time, :default => nil
   key :user_id, String
   key :university_id, ObjectId
   key :email, String, :limit => 40, :default => nil
   key :affiliation_token, String, :index => true
+  key :sent_at, Time
 
   belongs_to :university
   belongs_to :user
@@ -21,26 +26,19 @@ class Affiliation
   validates_presence_of :email
 
   before_validation :strip_email
-  before_create :generate_affiliation_token
   after_create :send_confirmation
 
-  # stolen from devise (TODO place this somewhere common to affiliation
-  # and invitation)
-  def self.generate_token
-    loop do
-      token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip.
-        delete("\n")
-      break token unless self.where(:affiliation_token => token).count > 0
-    end
-  end
-
-  def generate_affiliation_token
-    self.affiliation_token = nil
-    self.affiliation_token = self.class.generate_token
-  end
-
-  def generate_affiliation_token!
-    generate_affiliation_token && save(:validate => false)
+  # This method is for debugging porpouses only.
+  # creates an random affiliation and retrieves a url
+  # I've used glue instead of gu (get url) just to
+  # get a more stickie name =]
+  def self.glue
+    a = Affiliation.new
+    a.university_id = University.where(:short_name => "USP").first.id
+    a.email = (0...12).map{ ('a'..'z').to_a[rand(26)] }.join+"@usp.br"
+    a.save
+    "localhost.lan:3000/users/new?affiliation_token="+
+      a.affiliation_token
   end
 
   def send_confirmation
@@ -52,9 +50,9 @@ class Affiliation
       Notifier.delay.closed_for_signup(self)
     end
   end
-
+  
   def self.resend_confirmation(email)
-    where(:email=>email).first.send_confirmation
+    where(:email => email).first.send_confirmation
   end
 
   def strip_email
