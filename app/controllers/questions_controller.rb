@@ -151,7 +151,7 @@ class QuestionsController < ApplicationController
     @open_sharing_widget = flash[:connected_to]
 
     options = {:per_page => 25, :page => params[:page] || 1,
-               :order => current_order, :banned => false}
+               :order => [:votes, "votes_average desc"], :banned => false}
     @answers = @question.answers.paginate(options)
 
     @answer = Answer.new(params[:answer])
