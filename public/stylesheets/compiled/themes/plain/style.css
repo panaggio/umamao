@@ -263,6 +263,7 @@ ul.items li.item .summary .tag-list, ul.list li.item .summary .tag-list { float:
 ul.items li.item .summary .owner-data, ul.list li.item .summary .owner-data { float: right; padding-top: 4px; }
 ul.items li.item .summary .owner-data .reputation, ul.list li.item .summary .owner-data .reputation { font-weight: bold; color: #666666; }
 ul.items li.item .summary .time_ago, ul.items li.item .summary .metadata, ul.list li.item .summary .time_ago, ul.list li.item .summary .metadata { color: #999999; float: right; padding-top: 4px; }
+ul.items li.item .summary .time_ago a, ul.items li.item .summary .metadata a, ul.list li.item .summary .time_ago a, ul.list li.item .summary .metadata a { color: #999999; font-weight: normal; }
 ul.items li.item .summary .info .bio, ul.list li.item .summary .info .bio { line-height: inherit; float: left; width: 45%; }
 ul.items li.item .summary .info .metadata, ul.list li.item .summary .info .metadata { font-size: 80%; vertical-align: text-bottom; }
 ul.items li.item .actions, ul.list li.item .actions { padding: 5px; margin: 6px; background: #eeeeee; }
