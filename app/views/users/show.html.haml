@@ -9,12 +9,12 @@
   .follow-info.block
     - if current_user != @user
       - if logged_in? && current_user.following?(@user)
-        = link_to t("followable.unfollow"), unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user)
+        = link_to t("followable.unfollow"), unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user), "data-entry-type" => "user"
       - else
-        = link_to t("followable.follow"), follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user)
+        = link_to t("followable.follow"), follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user), "data-entry-type" => "user"
 
   .user-info.block
-    = avatar_for(@user, :size => 128) 
+    = avatar_for(@user, :size => 128)
     %br
     - if @user.facebook_account
       = link_to image_tag("facebook.gif"), 'http://www.facebook.com/' + @user.facebook_account.user_info["nickname"]
@@ -24,7 +24,7 @@
 
   -# Followers
   - if @user.followers.count > 0
-    .block.followers
+    .block.followers{"data-entry-type" => "user"}
       %h2.title.count
         = t('followable.followers', :count => @user.followers.count)
       .friend_list

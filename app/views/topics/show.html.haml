@@ -4,7 +4,7 @@
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   - if @topic.followers.count > 0
-    .block.followers
+    .block.followers{"data-entry-type" => "topic"}
       %h2.title.count
         = t('followable.followers', :count => @topic.followers.count)
       .friend_list
