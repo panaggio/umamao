@@ -12,10 +12,9 @@
 - content_for :subtabs do
   .navtitle
     &= @topic.title
-    == (#{@topic.questions_count})
   - tabs_tag :namespace => :topic_show do |tab|
     = tab.all t('.all_tab'), @topic
-    = tab.unanswered t('.unanswered_tab'), unanswered_topic_path(@topic)
+    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
 %br
 .markdown
   = markdown(@topic.description)
@@ -32,9 +31,5 @@
 
 #additional_info
   = will_paginate @questions
-
-  #help_us
-    = t("questions.index.help_to_answer")
-    = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
 
   .clear

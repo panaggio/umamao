@@ -128,4 +128,9 @@ class Topic
   end
   after_destroy :remove_from_suggestions
 
+  def unanswered_questions_count
+    return Question.count(:topic_ids => self.id, :banned => false,
+                           :closed => false, :answered_with_id => nil, 
+                           :exercise.ne => true)
+  end
 end
