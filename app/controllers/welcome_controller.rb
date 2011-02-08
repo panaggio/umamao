@@ -1,6 +1,9 @@
 class WelcomeController < ApplicationController
   helper :questions
-  tabs :default => :welcome
+  tabs :default => :welcome,
+       :unanswered => :unanswered
+  subtabs :index => [[:newest, "created_at desc"]],
+          :unanswered => [[:newest, "created_at desc"]]
   layout 'application'
 
   def index
@@ -13,7 +16,7 @@ class WelcomeController < ApplicationController
   end
 
   def home
-    @active_subtab = params.fetch(:tab, "activity")
+    # @active_subtab = params.fetch(:tab, "activity")
 
     @news_items = NewsItem.paginate({:recipient_id => current_user.id,
                                       :recipient_type => "User",
@@ -23,6 +26,34 @@ class WelcomeController < ApplicationController
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
     @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
     render 'home'
+  end
+
+  def unanswered
+    # @active_subtab = params.fetch(:tab, "activity")
+
+=begin
+    @news_items = NewsItem.all(:recipient_id => current_user.id,
+                               :recipient_type => "User",
+                               :per_page => 15,
+                               :page => params[:page] || 1,
+                               :order => :created_at.desc}
+                              ).fields(:news_update)
+    @question_ids = @news_items.reduce do |t,nu| 
+      q = nu.entry
+      if nu.entry_type == "Question" and q.answered_with_id.nil? and q.banned == false and q.closed == false and exercise != true
+        t << q.id
+      end
+    end
+    @questions = Question.find
+=end
+    conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
+                                   :closed => false, :exercise.ne => true)
+
+    @questions = Question.paginate({:banned => false,
+                                   :order => :activity_at.desc, :per_page => 25,
+                                   :page => params[:page] || 1}.merge(conditions))
+    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
+    render 'unanswered'
   end
 
   def about
