@@ -116,7 +116,8 @@ class Topic
     save
   end
 
-  # Removes topic from user suggestions and ignored topics.
+  # Removes topic from user suggestions and ignored topics. This
+  # method is delayed in production and staging environments.
   def remove_from_suggestions
     Suggestion.query(:entry_id => self.id,
                      :entry_type => "Topic").each do |suggestion|
