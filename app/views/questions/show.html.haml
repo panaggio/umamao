@@ -47,18 +47,7 @@
       .post-text.entry-content
         = question_body
 
-    %ul.topic-list
-      - @question.topics.each do |topic|
-        = render :partial => "topics/box", :locals => {:topic => topic, :question => @question}
-      - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
-        %li.retag
-          %a.reclassify{:href => "#"}
-            %span.empty= t(".tag")
-            %span.not-empty= t(".retag")
-    = text_field "topics", "", :class => "", :id => "reclassify-autocomplete", :value => t("searches.form.select_topics")
-    %a.add-topic{:href => "#"}= t("scaffold.add")
-    %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
-    %ul#reclassify-suggestions.autocomplete-list
+    = render :partial => "classify", :locals => {:question => @question}
 
     .controls
       .actions

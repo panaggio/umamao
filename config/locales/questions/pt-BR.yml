@@ -127,7 +127,6 @@ pt-BR:
         "Conectar" para habilitá-las.
       request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
-      retag: Editar tópicos
       retract_request: Já colocou um pedido. Quer retirá-lo?
       share: Compartilhar pergunta
       share_on: Compartilhar esta pergunta em %{site}
@@ -135,7 +134,6 @@ pt-BR:
       post_on_facebook: Postar no Facebook
       post_on_twitter: Postar no Twitter
       solution: Resposta aceita
-      tag: Adicionar tópicos
       to_answer_question: para responder a esta pergunta
       unauthenticated_retag: Você precisa de uma conta para editar tópicos
       unfavorite_tooltip: Remover esta pergunta das suas favoritas
@@ -147,6 +145,8 @@ pt-BR:
       flash_notice: Resposta aceita.
     tags:
       filter: Pesquisar tópicos
+      retag: Editar tópicos
+      tag: Adicionar tópicos
       title: Tópicos
       tooltip: Mostrar perguntas no tópico %{tag}
     unanswered:
