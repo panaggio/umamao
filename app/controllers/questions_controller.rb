@@ -179,9 +179,10 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.xml
   def new
-    #topics = Topic.from_titles!(params[:question].try(:delete, :topics))
     @question = Question.new(params[:question])
-    #@question.topics = topics
+    if @question.parent_question_id.present?
+      @question.topics = Question.find_by_id(@question.parent_question_id).topics
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -201,6 +202,7 @@ class QuestionsController < ApplicationController
                           params[:question])
     @question.group = current_group
     @question.user = current_user
+    @question.topics = Topic.from_titles!(params[:question][:topics])
 
     if !logged_in?
       draft = Draft.create!(:question => @question)

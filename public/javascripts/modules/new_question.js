@@ -10,7 +10,7 @@ function initTopicAutocomplete() {
     return false;
   });
 
-  $("#ask_question a.remove").live("click", function () {
+  $("#ask_question .topic .remove").live("click", function () {
     $(this).closest("li").remove();
     return false;
   });
