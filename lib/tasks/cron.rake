@@ -1,4 +1,9 @@
-namespace :cron do
+task :cron => :environment do
+  Rake::Task["cron_tasks:refresh_related_topics"].execute
+  Rake::Task["cron_tasks:refresh_suggestions"].execute
+end
+
+namespace :cron_tasks do
   desc "Refreshes suggestions for all users"
   task :refresh_suggestions => :environment do
     Rails.logger.info "Refreshing suggestions for users..."
