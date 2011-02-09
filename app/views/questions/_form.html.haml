@@ -5,16 +5,18 @@
   .description
     = current_group.question_prompt
 
-#question-details.group{:style => @question.new? ? "display: none;" : ""}
+#question-details{:style => @question.new? ? "display: none;" : ""}
+  .group
+    = f.label :body, t("questions.form.details"), :class => "label"
+    = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
+    %label.label
+      = t("global.preview")
+    #question-preview.markdown
+
   - if @question.new?
+    %hr
     .group
       = render :partial => "classify", :locals => {:question => @question}
-
-  = f.label :body, t("questions.form.details"), :class => "label"
-  = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
-  %label.label
-    = t("global.preview")
-  #question-preview.markdown
 
 - if @question.new?
   .controls
