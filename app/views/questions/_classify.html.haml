@@ -1,3 +1,5 @@
+-# Autocomplete box used for adding topics to questions.
+
 %ul.topic-list
   - question.topics.each do |topic|
     = render :partial => "topics/box", :locals => {:topic => topic, :question => question}
@@ -6,7 +8,7 @@
       %a.reclassify{:href => "#"}
         %span.empty= t("questions.tags.tag")
         %span.not-empty= t("questions.tags.retag")
-= text_field "topics", "", :class => "", :id => "reclassify-autocomplete", :value => t("searches.form.select_topics")
+= text_field "topics", "", :class => "", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics")
 %a.add-topic{:href => "#"}= t("scaffold.add")
 %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
-%ul#reclassify-suggestions.autocomplete-list
+%ul#topic-autocomplete-suggestions.autocomplete-list
