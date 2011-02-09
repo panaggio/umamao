@@ -15,12 +15,12 @@
 - content_for :subtabs do
   .navtitle
     &= @topic.title
+  .markdown
+    = markdown(@topic.description)
   - tabs_tag :namespace => :topic_show do |tab|
     = tab.all t('.all_tab'), @topic
     = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
 %br
-.markdown
-  = markdown(@topic.description)
 
 %p
   = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
