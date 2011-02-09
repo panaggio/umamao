@@ -7,7 +7,8 @@
 
 #question-details.group{:style => @question.new? ? "display: none;" : ""}
   - if @question.new?
-    = render :partial => "classify", :locals => {:question => @question}
+    .group
+      = render :partial => "classify", :locals => {:question => @question}
 
   = f.label :body, t("questions.form.details"), :class => "label"
   = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
