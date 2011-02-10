@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js {
         render :json => {
-          :success => true, 
+          :success => true,
           :message => t('users.annoying.resent_confirmation')
         }
       }
@@ -122,6 +122,18 @@ class UsersController < ApplicationController
         @affiliation.confirmed_at ||= Time.now
         @user.affiliations << @affiliation
         @user.bio = @affiliation.university.short_name
+        @user.save
+      end
+
+      # FIXME: this is temporary code only for the incoming Unicamp students.
+      # It should be removed after the occasion has passed.
+      if @group_invitation && @group_invitation.slug == 'bixounicamp'
+        unicamp = University.find_by_short_name('Unicamp')
+        affiliation = Affiliation.new(:user => @user, :university => unicamp,
+                                      :confirmed_at => Time.now)
+        affiliation.save(:validate => false)
+        @user.affiliations << affiliation
+        @user.bio = affiliation.university.short_name + ' 2011'
         @user.save
       end
 
