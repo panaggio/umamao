@@ -3,7 +3,7 @@ $(document).ready(function() {
   if($('a#resend_confirmation_email').length > 0 ) {
     Utils.clickObject('a#resend_confirmation_email', resendConfirmationAjaxRequest);
   }
-  
+
   Utils.showInlineMessage();
 
   // TODO: place this somewhere else
@@ -81,11 +81,6 @@ $(document).ready(function() {
 function initAutocomplete() {
   initSearchBox();
 
-  // TODO: load for each right page with the HTML.
-  if ($("#reclassify-autocomplete").length > 0) {
-    initTopicAutocompleteForReclassifying();
-  }
-
   if ($("#follow-topics-autocomplete").length > 0) {
     initTopicAutocompleteForFollowing();
   }
@@ -125,7 +120,7 @@ function highlightEffect(object) {
 // Initializer for resend confirmation email
 function resendConfirmationAjaxRequest() {
     $("#ajax-loader").removeClass('hide');
-    
+
     return {
       url: "/resend_confirmation_email",
       complete: function() {
