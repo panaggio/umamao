@@ -19,6 +19,10 @@ pt-BR:
           title: "Você veio a convite de %{user}:"
       affiliation_message: "Seu e-mail acadêmico %{email} foi confirmado!
        Agora basta terminar seu cadastro preenchendo o formulário abaixo."
+      agree: |
+        Li e concordo com a <a href="%{privacy}" target="_blank">política de
+        segurança</a> e com os <a href="%{tos}" target="_blank">termos de
+        uso</a> do site.
     edit:
       title: Configurações
       submit: Salvar

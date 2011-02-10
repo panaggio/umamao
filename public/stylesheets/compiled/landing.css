@@ -246,6 +246,8 @@ ul#team .avatar { margin-right: 20px; }
 
 .inviter_name { font-weight: bold; }
 
+#new_user .submit { margin-top: 10px; }
+
 #signup-wizard { width: 550px; margin: 0 auto; padding: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border: 1px solid #eeeeee; }
 #signup-wizard #introduction { font-size: 13px; border-width: 1px; border-color: #222222; border-style: dashed; padding: 10px; background-color: #ddffaa; }
 #signup-wizard #interaction { width: 550px; }

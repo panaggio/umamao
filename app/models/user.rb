@@ -75,6 +75,10 @@ class User
   # external accounts, receive suggestions, etc.
   key :has_been_through_wizard, Boolean, :default => false
 
+  # Whether or not the user has agreed with our privacy policy and
+  # terms of service during signup.
+  key :agrees_with_terms_of_use, Boolean, :default => false
+
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
 
