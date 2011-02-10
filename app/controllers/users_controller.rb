@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js {
         render :json => {
-          :success => true, 
+          :success => true,
           :message => t('users.annoying.resent_confirmation')
         }
       }
@@ -98,6 +98,9 @@ class UsersController < ApplicationController
                          identity_url bio invitation_token
                          affiliation_token], params[:user])
 
+    @user.agrees_with_terms_of_use =
+      !!params[:user][:agrees_with_terms_of_use]
+
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
     end
@@ -141,8 +144,8 @@ class UsersController < ApplicationController
       end
       sign_in_and_redirect(:user, @user) # !! now logged in
     else
-      flash[:error]  = t("flash_error", :scope => "users.create")
-      render :action => 'new'
+      flash[:error]  = t("users.create.flash_error")
+      render :action => 'new', :layout => 'welcome'
     end
   end
 

@@ -96,6 +96,10 @@ class User
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
 
+  validates_true_for :agrees_with_terms_of_use,
+    :logic => lambda { agrees_with_terms_of_use? },
+    :message => lambda { I18n.t("users.validation.errors.did_not_agree") }
+
   before_create :logged!
   after_create :accept_invitation
   after_create :create_suggestion_list

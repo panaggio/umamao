@@ -1,5 +1,8 @@
 pt-BR:
   users:
+    validation:
+      errors:
+        did_not_agree: Você deve concordar com os termos de uso
     index:
       title: Todos os usuários
       empty: "Este site não tem nenhum usuário. Participe cadastrando-se neste site."
@@ -51,7 +54,9 @@ pt-BR:
       resend_confirmation_email: "Reenviar e-mail de confirmação."
       resent_confirmation: "Verifique seu e-mail pessoal!"
     create:
-      flash_error: "Desculpe, não foi possível criar sua conta. Tente de novo, ou entre em contato conosco (no link de feedback na base da página)."
+      flash_error: |
+        Desculpe, não foi possível criar sua conta. Por favor, verifique
+        os erros.
       welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
       confirm: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
     messages:
