@@ -30,6 +30,8 @@ class Topic
 
   before_save :generate_slug
 
+  after_destroy :remove_from_suggestions
+
   # Takes array of strings and returns array of topics with matching
   # titles, creating new topics for titles that are not found.
   def self.from_titles!(titles)
@@ -114,23 +116,29 @@ class Topic
     save
   end
 
-  # Removes topic from user suggestions and ignored topics.
+  # Removes topic from user suggestions and ignored topics. This
+  # method is delayed in production and staging environments.
   def remove_from_suggestions
-    SuggestionList.query(:suggested_topic_ids => self.id).each do |list|
-      list.suggested_topic_ids.delete(self.id)
-      list.save!
+    Suggestion.query(:entry_id => self.id,
+                     :entry_type => "Topic").each do |suggestion|
+      suggestion.user.remove_suggestion(suggestion)
+      suggestion.user.save
     end
 
-    SuggestionList.query(:uninteresting_topic_ids => self.id).each do |list|
-      list.uninteresting_topic_ids.delete(self.id)
-      list.save!
+    # TODO: We should replace this with a better query, but this would
+    # incur on changes in the models. Right now this isn't too much of
+    # an issue since topics are rarely deleted.
+    User.query(:select => :suggestion_list).each do |user|
+      if user.suggestion_list
+        user.suggestion_list.uninteresting_topic_ids.delete(self.id)
+        user.save
+      end
     end
   end
-  after_destroy :remove_from_suggestions
 
   def unanswered_questions_count
     return Question.count(:topic_ids => self.id, :banned => false,
-                           :closed => false, :answered_with_id => nil, 
+                           :closed => false, :answered_with_id => nil,
                            :exercise.ne => true)
   end
 end
