@@ -83,14 +83,17 @@
 
 -# New answer form
 - unless @question.closed
-  - if logged_in?
+  - if logged_in? && current_user.can_post_more_answers_on?(@question)
     #new-answer-wrapper
       = form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm bp"} do |f|
         = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
         .group.navform
           = submit_tag t("answers.form.submit"), :class => "button"
   - else
-    %p= t("answers.form.not_logged", :link => new_user_session_path)
+    - if not logged_in?
+      %p= t("answers.form.not_logged", :link => new_user_session_path)
+    - else
+      = render :partial => "questions/already_answered", :locals => {:answer => @question.answers.select{ |a| a.user.id == current_user.id }[0]}
 
 - content_for :sidebar do
   - if logged_in? && current_user != @question.user

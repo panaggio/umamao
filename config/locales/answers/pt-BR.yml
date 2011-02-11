@@ -6,6 +6,7 @@ pt-BR:
       comment_submit: Comentar
       submit: Responder
       not_logged: "É necessário <a href=\"%{link}\">se identificar</a> para responder à questão."
+      already_answered: "Você já respondeu essa questão. Se deseja contribuir com mais informações, <a href=\"%{link}\">edite sua resposta</a>."
     edit:
       title: Editando resposta
     create:
