@@ -13,6 +13,16 @@ namespace :data do
       end
     end
 
+    desc "Regenerate Questions NewsItems"
+    task :regenerate_questions_news_items => :environment do
+      Question.query.each do |q|
+        nu = q.news_update
+        if nu != nil and nu.news_items.nil? and nu.entry_type == "Question"
+          NewsItem.from_news_update! nu
+        end
+      end
+    end
+
     desc "Recalculate votes average"
     task :recalculate_votes_average => :environment do
       Comment.query.each do |voteable|
