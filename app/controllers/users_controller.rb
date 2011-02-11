@@ -98,8 +98,8 @@ class UsersController < ApplicationController
                          identity_url bio invitation_token
                          affiliation_token], params[:user])
 
-    @user.agrees_with_terms_of_use =
-      case params[:user][:agrees_with_terms_of_use]
+    @user.agrees_with_terms_of_service =
+      case params[:user][:agrees_with_terms_of_service]
       when "1"
         true
       when "0"
