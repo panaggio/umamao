@@ -5,6 +5,14 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+
+    desc "Remove \"empty\" Questions"
+    task :remove_empty_questions => :environment do
+      Question.query.each do |q|
+        q.destroy if q.title.nil?
+      end
+    end
+
     desc "Recalculate votes average"
     task :recalculate_votes_average => :environment do
       Comment.query.each do |voteable|
