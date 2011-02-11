@@ -223,6 +223,7 @@ AutocompleteBox.prototype = {
         }
     }).blur(function () {
       if ($(this).val() == "") {
+        $(this).addClass("lighter_text");
         $(this).val(box.startText);
       }
       if (!box.selectionClicked) {
@@ -233,6 +234,7 @@ AutocompleteBox.prototype = {
         box.interval = null;
       }
     }).keydown(function (e) {
+      $(this).removeClass("lighter_text");
       switch (e.keyCode) {
       case 38: // up
         e.preventDefault();
