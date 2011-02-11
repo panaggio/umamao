@@ -139,12 +139,6 @@ class Answer < Comment
   end
 
   def create_news_update
-    # We ought to remove old news items related to the question
-    # creation.
-    NewsItem.query(:news_update_id => self.question.news_update.id).each do |item|
-      item.delete
-    end
-
     NewsUpdate.create(:author => self.user, :entry => self,
                       :created_at => self.created_at, :action => 'created')
   end
