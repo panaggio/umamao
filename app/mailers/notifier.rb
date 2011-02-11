@@ -40,17 +40,17 @@ class Notifier < ActionMailer::Base
       subject = I18n.t("subject_owner",
                        :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.name)
+                       :name => answer.user.name)
     elsif following
       subject = I18n.t("subject_friend",
                        :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.name)
+                       :name => answer.user.name)
     else
       subject = I18n.t("subject_other",
                        :scope => scope,
                        :title => answer.question.title,
-                       :login => answer.user.name)
+                       :name => answer.user.name)
     end
 
     mail(:to => user.email, :subject => subject)
@@ -65,7 +65,7 @@ class Notifier < ActionMailer::Base
     @domain = group.domain
 
     subject = I18n.t("mailers.notifications.new_comment.subject",
-                     :login => comment.user.login, :group => group.name)
+                     :name => comment.user.name, :group => group.name)
 
     mail(:to => user.email, :subject => subject)
   end
@@ -88,7 +88,7 @@ class Notifier < ActionMailer::Base
     @followed = followed
 
     subject = I18n.t("mailers.notifications.follow.subject",
-                     :login => user.name, :app => AppConfig.application_name)
+                     :name => user.name, :app => AppConfig.application_name)
 
     mail(:to => followed.email, :subject => subject)
   end
@@ -99,7 +99,7 @@ class Notifier < ActionMailer::Base
     @question = question
 
     subject = I18n.t("mailers.notifications.favorited.subject",
-                     :login => user.login)
+                     :name => user.name)
 
     mail(:to => question.user.email, :subject => subject)
   end

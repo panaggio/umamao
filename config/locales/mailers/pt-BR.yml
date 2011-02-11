@@ -2,18 +2,18 @@ pt-BR:
   mailers:
     notifications:
       new_answer:
-        subject_owner: "%{login} respondeu à sua pergunta \"%{title}\""
-        subject_friend: "%{login} respondeu à pergunta \"%{title}\""
-        subject_other: "%{login} respondeu à pergunta \"%{title}\""
+        subject_owner: "%{name} respondeu à sua pergunta \"%{title}\""
+        subject_friend: "%{name} respondeu à pergunta \"%{title}\""
+        subject_other: "%{name} respondeu à pergunta \"%{title}\""
       new_comment:
-        subject: "%{login} comentou no %{group}"
+        subject: "%{name} comentou no %{group}"
       give_advice:
         subject: "Precisamos da sua ajuda em: %{question_title}"
         friend_subject: "Precisamos da sua ajuda em: %{question_title}"
       follow:
-        subject: "%{login} está te seguindo no %{app}"
+        subject: "%{name} está te seguindo no %{app}"
       favorited:
-        subject: "%{login} adicionou sua pergunta às favoritas!"
+        subject: "%{name} adicionou sua pergunta às favoritas!"
       report:
         subject: "Relatório do %{app}"
       signup:
