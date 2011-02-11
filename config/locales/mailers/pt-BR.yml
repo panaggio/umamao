@@ -17,4 +17,6 @@ pt-BR:
       report:
         subject: "Relatório do %{app}"
       signup:
-        subject: "Confirme seu cadastro no Umamão."
+        subject: "Confirme seu cadastro no Umamão"
+      closed_for_signup:
+        subject: "Seu cadastro no Umamão"

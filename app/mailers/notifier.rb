@@ -123,18 +123,18 @@ class Notifier < ActionMailer::Base
   def closed_for_signup(affiliation)
     @university = affiliation.university
     @email = affiliation.email
-    mail(:to => affiliation.email, :subject => t("mailers.notifications.signup.subject"))
+    mail(:to => affiliation.email, :subject => t("mailers.notifications.closed_for_signup.subject"))
   end
 
   def wait(waiting_user)
     @open_universities = University.open_for_signup
     @email = waiting_user.email
-    mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
+    mail(:to => waiting_user.email, :subject => t("mailers.notifications.closed_for_signup.subject"))
   end
 
   def non_academic(waiting_user)
     @open_universities = University.open_for_signup
     @email = waiting_user.email
-    mail(:to => waiting_user.email, :subject => t("mailers.notifications.signup.subject"))
+    mail(:to => waiting_user.email, :subject => t("mailers.notifications.closed_for_signup.subject"))
   end
 end
