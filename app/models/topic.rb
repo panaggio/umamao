@@ -28,9 +28,18 @@ class Topic
 
   versionable_keys :title, :description
 
+  before_validation :trim_spaces
+
   before_save :generate_slug
 
   after_destroy :remove_from_suggestions
+
+  # Removes spaces from the beginning, the end and inbetween words
+  # from the title
+  def trim_spaces
+    self.title.strip!
+    self.title.sub!(/\s+/, " ")
+  end
 
   # Takes array of strings and returns array of topics with matching
   # titles, creating new topics for titles that are not found.
