@@ -204,4 +204,18 @@ namespace :dac do
       add_student_classes_by_intitute institute[0], semester, year
     end
   end
+
+  desc 'Import courses from Unicamp into topics'
+  task :clean => :base do
+    Course.delete_all
+    Program.delete_all
+    ProgramCourse.delete_all
+    Student.delete_all
+    Offer.delete_all
+  end
+
+
+  task :import_all => [:import_unicamp_programs, :import_unicamp_courses,
+   :import_unicamp_programs_courses, :import_unicamp_students_classes  ] do
+  end
 end
