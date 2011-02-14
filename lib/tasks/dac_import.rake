@@ -44,4 +44,71 @@ namespace :dac do
     puts "\n"
   end
 
+  def save_course_dac(course)
+    return if not course
+    course.summary = course.code
+
+    pre_req_links = (not course.prereqs.empty?) ?
+      "<strong>Pré-requisitos</strong>: " + course.prereqs.map { |r|
+    r.code ? "<a href=\"/topics/#{r.code.tr(' ', '-')}-Unicamp\">#{r.code}</a>" : ''
+    }.join(', ') + "\n\n" : ''
+
+    course.description = "# #{course.code}: #{course.name}\n\n"
+    course.description << pre_req_links + (course.summary || '')
+    course.save!
+  end
+
+  def find_or_save_course_by_code(code, name)
+    c = Course.find_or_create_by_code(code)
+    if not c.title:
+      c.title = "#{code} (Unicamp)"
+      c.university = UNICAMP
+      c.name = name
+      c.save!
+    end
+    return c
+  end
+
+  desc 'Import courses from Unicamp into topics'
+  task :import_unicamp_courses => :base do#, :year do |t, args|
+    year = ENV['year'] || 2011
+    agent = Mechanize.new
+    pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/ementas/")
+
+    pagelist.links.select{|l| l.href.include?('todas')}.each do |link|
+      link.click
+
+      # the first 4 items are just page header information
+      text_items = agent.page.search('font[size="-1"]').map{|el| el.text.strip}[4..-1]
+      course = nil
+      text_items.each do |item|
+        case item
+        when /^(\w[\w ]\d+) (.*)/ # e.g.: AD012 Ateliê de Prática em Dança II
+          if course:
+            save_course_dac course
+          end
+
+          course = Course.find_or_initialize_by_code($1)
+          course.title = "#{course.code} (Unicamp)"
+          course.name = $2
+          course.university = UNICAMP
+
+        when /^Pré-Req\.: (.*)/ # e.g.: Pré-Req.: AD011 F 429
+          $1.scan(/([A-Za-z]+\d+)|([fF] \d+)/).each do |pre_req|
+            if $1
+              course.prereqs << find_or_save_course_by_code($1, $1)
+            end
+          end
+        when /^Ementa: (.*)/
+          course.save!
+        end
+      end
+      save_course_dac course
+
+      print '-' # progress indicator
+
+      sleep 1
+    end
+    puts "\n"
+  end
 end
