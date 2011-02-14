@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $("#signup-wizard .topic-title a").attr("target", "_blank");
 
   $(".close-link").click(function(event) {
     event.preventDefault();
