@@ -13,12 +13,13 @@ class ApplicationController < ActionController::Base
   before_filter :check_group_access
   before_filter :set_locale
   before_filter :find_languages
+  before_filter :check_agreement_to_tos
   layout :set_layout
 
   protected
 
   def flash_to_session
-    if flash[:error] 
+    if flash[:error]
       cookies[:flash_error] = flash[:error]
       flash.delete(:error)
     elsif flash[:warn]
@@ -27,6 +28,13 @@ class ApplicationController < ActionController::Base
     elsif flash[:notice]
       cookies[:flash_notice] = flash[:notice]
       flash.delete(:notice)
+    end
+  end
+
+  # Redirects user to the ToS page if he hasn't agreed with it yet.
+  def check_agreement_to_tos
+    if logged_in? && !current_user.agrees_with_terms_of_service?
+      redirect_to agreement_path
     end
   end
 
