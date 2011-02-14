@@ -111,4 +111,30 @@ namespace :dac do
     end
     puts "\n"
   end
+
+  desc 'Import undergrad programs\' courses from Unicamp'
+  task :import_unicamp_programs_courses => :base do#, :year  do |t, args|
+    year = ENV['year'] || 2011
+    agent = Mechanize.new
+    Program.all.select{|p| p.university.id == UNICAMP.id}.each do |program|
+      next if EXCLUDE_LIST.include? program.code
+      pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/cursos/sug#{program.code}.html")
+      semesters = pagelist.body.split("Semestre")
+      indexSemester = 0
+      semesters.each do |semester|
+        convert_string(semester).scan(/<a href="..\/ementas\/todas.*">(\w[\w ]\d\d\d)/).each do |course|
+          c = find_or_save_course_by_code(course[0], course[0])
+          pc = ProgramCourse.new()
+          pc.semester = indexSemester
+          pc.year_catalog = year
+          pc.course = c
+          pc.program = program
+          pc.save
+        end
+        indexSemester = indexSemester + 1
+      end
+      print "-"
+    end
+    puts "\n"
+  end
 end
