@@ -99,12 +99,7 @@ class UsersController < ApplicationController
                          affiliation_token], params[:user])
 
     @user.agrees_with_terms_of_service =
-      case params[:user][:agrees_with_terms_of_service]
-      when "1"
-        true
-      when "0"
-        false
-      end
+      params[:user][:agrees_with_terms_of_service] == "1"
 
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
