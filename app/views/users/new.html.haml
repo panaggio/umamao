@@ -18,7 +18,14 @@
 
     %hr
   - @user.password = @user.password_confirmation = nil
-  = error_messages_for :user
+  - if @user.errors.present?
+    - @user.translate_errors
+    #errorExplanation.errorExplanation
+      %ul
+        - @user.errors.each do |field, errors|
+          - errors.each do |error|
+            %li= error
+
   = form_for @user, :url => users_path, :html => {:class => "form"} do |f|
     = f.hidden_field :invitation_token
     = f.hidden_field :affiliation_token

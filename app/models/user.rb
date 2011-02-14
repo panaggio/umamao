@@ -89,9 +89,11 @@ class User
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
 
-  validates_presence_of     :name
-  validates_length_of       :name, :maximum => 100
-  filterable_keys           :name
+  validates_presence_of :name,
+    :message => lambda { I18n.t("users.validation.errors.empty_name") }
+  validates_length_of :name, :maximum => 100,
+    :message => lambda { I18n.t("users.validation.errors.long_name") }
+  filterable_keys :name
 
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
@@ -591,6 +593,40 @@ Time.zone.now ? 1 : 0)
     end
 
     topics
+  end
+
+  # HACK - As we cannot provide translations for validatable
+  # validations set up by devise, we translate them by hand.
+  def translate_errors
+    if self.errors[:email].present?
+      self.errors[:email].map! do |error|
+        case error
+        when "can't be empty"
+          I18n.t("users.validation.errors.empty_email")
+        when "has already been taken"
+          I18n.t("users.validation.errors.dup_email")
+        when "is invalid"
+          I18n.t("users.validation.errors.invalid_email")
+        else
+          error
+        end
+      end
+    end
+
+    if self.errors[:password].present?
+      self.errors[:password].map! do |error|
+        case error
+        when "doesn't match confirmation"
+          I18n.t("users.validation.errors.password_match")
+        when "is invalid"
+          I18n.t("users.validation.errors.invalid_password")
+        when "can't be empty"
+          I18n.t("users.validation.errors.empty_password")
+        else
+          error
+        end
+      end
+    end
   end
 
   protected

@@ -2,7 +2,16 @@ pt-BR:
   users:
     validation:
       errors:
-        did_not_agree: Você deve concordar com os termos de uso e a política de privacidade
+        did_not_agree: |
+          Você deve concordar com os termos de uso e a política de privacidade
+        empty_name: O nome não pode ser vazio
+        long_name: O nome é grande demais
+        empty_email: O email não pode ser vazio
+        dup_email: O email já existe no site
+        invalid_email: O email é inválido
+        password_match: A senha não confere
+        invalid_password: A senha é inválida
+        empty_password: A senha não pode ser vazia
     index:
       title: Todos os usuários
       empty: "Este site não tem nenhum usuário. Participe cadastrando-se neste site."
