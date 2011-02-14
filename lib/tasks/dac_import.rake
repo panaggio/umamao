@@ -137,4 +137,71 @@ namespace :dac do
     end
     puts "\n"
   end
+
+  def find_or_save_program_by_code(code, name)
+    p = Program.find_or_initialize_by_code(convert_program_code code)
+    if not p.name:
+      puts "saving new program #{code}"
+      p.name = "#{code} (Unicamp)"
+      p.university = UNICAMP
+      p.save!
+    end
+    return p
+  end
+
+  def add_matriculados_turma_grad(a, o, token)
+    puts "#{o.course.code} #{o.code}"
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
+    html_page = convert_string(page.body)
+    regex_aluno = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
+    html_page.scan(regex_aluno).each do |aluno|
+      s = Student.find_or_initialize_by_code(aluno[0])
+      s.name = aluno[1]
+      s.registered_courses << o
+      s.program = find_or_save_program_by_code(aluno[2], aluno[2])
+      s.save!
+    end
+    m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
+    if m:
+      professor = m[1]
+    end
+  end
+
+  def add_matriculados_undergrad(course, semester, year)
+    a = Mechanize.new
+    page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
+    token = page.body.match(/var token = "([0-9a-f]{32,32})";/)[1]
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course.code}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
+    regex_turmas = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
+    page.body.scan(regex_turmas).each do |turma|
+      o = Offer.new()
+      o.course = course
+      o.code = turma[0]
+      o.semester = semester
+      o.year = year
+      o.title = "#{course.code}#{o.code}-#{semester}s#{year}"
+      add_matriculados_turma_grad a, o, token
+    end
+  end
+
+  def add_student_classes_by_intitute(institute, semester, year)
+    a = Mechanize.new
+    page = a.get("http://www.dac.unicamp.br/sistemas/horarios/grad/G#{semester}S0/#{institute }.htm", {})
+    regex_disc = /<a href=".*.htm">([A-Z][A-Z ][0-9]{3,3})(.*)  /
+    convert_string(page.body).scan(regex_disc).each do |course|
+      c = find_or_save_course_by_code(course[0], course[1])
+      add_matriculados_undergrad c, semester, year
+    end
+  end
+
+  desc 'Import students and classes from Unicamp into topics'
+  task :import_unicamp_students_classes => :base do#, :semester, :year do |t, args|
+    year = ENV['year'] || 2011
+    semester = ENV['semester'] || 1
+    a = Mechanize.new
+    page = a.get("http://www.dac.unicamp.br/sistemas/horarios/grad/G#{semester}S0/indiceP.htm", {})
+    page.body.scan(/<a href="(\w*).htm/).each do |institute|
+      add_student_classes_by_intitute institute[0], semester, year
+    end
+  end
 end
