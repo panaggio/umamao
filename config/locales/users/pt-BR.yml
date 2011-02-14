@@ -2,7 +2,7 @@ pt-BR:
   users:
     validation:
       errors:
-        did_not_agree: Você deve concordar com os termos de uso
+        did_not_agree: Você deve concordar com os termos de uso e a política de privacidade
     index:
       title: Todos os usuários
       empty: "Este site não tem nenhum usuário. Participe cadastrando-se neste site."
@@ -24,7 +24,7 @@ pt-BR:
        Agora basta terminar seu cadastro preenchendo o formulário abaixo."
       agree: |
         Li e concordo com a <a href="%{privacy}" target="_blank">política de
-        segurança</a> e com os <a href="%{tos}" target="_blank">termos de
+        privacidade</a> e com os <a href="%{tos}" target="_blank">termos de
         uso</a> do site.
     edit:
       title: Configurações
