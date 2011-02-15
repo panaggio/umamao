@@ -3,10 +3,7 @@
   %head
     %title
       &= page_title
-
-    - content_for :css do
-      = render :partial => "shared/layout/css/landing"
-
+    = include_stylesheets :landing, :media => 'all'
     = yield :css
 
     = render :partial => "shared/layout/meta"
