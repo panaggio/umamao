@@ -6,7 +6,7 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
-  include Support::Searchable
+  include Support::Search::Searchable
   include Scopes
 
   ensure_index :tags
@@ -458,5 +458,8 @@ class Question
     }
   end
 
+  def needs_to_update_search_index?
+    true
+  end
 end
 

@@ -3,7 +3,7 @@ class Topic
   include MongoMapperExt::Slugizer
   include MongoMapperExt::Filter
   include Support::Versionable
-  include Support::Searchable
+  include Support::Search::Searchable
 
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
@@ -159,5 +159,9 @@ class Topic
       :entry_type => "Topic",
       :question_count => self.questions_count
     }
+  end
+
+  def needs_to_update_search_index?
+    true
   end
 end

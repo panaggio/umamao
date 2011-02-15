@@ -1,10 +1,11 @@
 require 'digest/sha1'
 
+include GravatarHelper::PublicMethods
 include UsersHelper
 
 class User
   include MongoMapper::Document
-  include Support::Searchable
+  include Support::Search::Searchable
   include Scopes
   include MongoMapperExt::Filter
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
@@ -599,6 +600,10 @@ Time.zone.now ? 1 : 0)
       :photo_url => avatar_for(self),
       :entry_type => "User"
     }
+  end
+
+  def needs_to_update_search_index?
+    true
   end
 
   protected
