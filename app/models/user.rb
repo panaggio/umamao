@@ -585,6 +585,11 @@ Time.zone.now ? 1 : 0)
     topics
   end
 
+  def can_post_more_answers_on?(question)
+    return question.group.forum ||
+           Answer.first(:question_id => question.id, :user_id => self.id).nil?
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)
