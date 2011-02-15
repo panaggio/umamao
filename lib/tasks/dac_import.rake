@@ -35,7 +35,7 @@ namespace :dac do
        p = Program.find_or_create_by_code(convert_program_code m[1])
        p.name = link.text.gsub(/\n/, ' ')
        p.university = UNICAMP
-       p.title = "#{p.name} - #{p.university.short_name}"
+       p.title = "#{p.name} #{p.university.short_name}"
        p.save!
        sleep 1
       end
@@ -143,14 +143,14 @@ namespace :dac do
     if not p.name:
       puts "saving new program #{code}"
       p.name = "#{code} (Unicamp)"
+      p.title = p.name
       p.university = UNICAMP
       p.save!
     end
     return p
   end
 
-  def add_matriculados_turma_grad(a, o, token)
-    puts "#{o.course.code} #{o.code}"
+  def add_registered_students_offer(a, o, token)
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
     regex_aluno = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
@@ -167,7 +167,7 @@ namespace :dac do
     end
   end
 
-  def add_matriculados_undergrad(course, semester, year)
+  def add_registered_students(course, semester, year)
     a = Mechanize.new
     page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
     token = page.body.match(/var token = "([0-9a-f]{32,32})";/)[1]
@@ -180,7 +180,7 @@ namespace :dac do
       o.semester = semester
       o.year = year
       o.title = "#{course.code}#{o.code}-#{semester}s#{year}"
-      add_matriculados_turma_grad a, o, token
+      add_registered_students_offer a, o, token
     end
   end
 
@@ -190,7 +190,7 @@ namespace :dac do
     regex_disc = /<a href=".*.htm">([A-Z][A-Z ][0-9]{3,3})(.*)  /
     convert_string(page.body).scan(regex_disc).each do |course|
       c = find_or_save_course_by_code(course[0], course[1])
-      add_matriculados_undergrad c, semester, year
+      add_registered_students c, semester, year
     end
   end
 
