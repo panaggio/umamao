@@ -19,7 +19,7 @@
 //
 
 Utils.searchAddress =
-  "http://ec2-50-16-110-254.compute-1.amazonaws.com:8983/solr/select?wt=json";
+  "http://ec2-50-16-38-109.compute-1.amazonaws.com:8983/solr/select?wt=json";
 
 // Data item in an item box.
 function Item(data) {
