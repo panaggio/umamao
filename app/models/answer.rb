@@ -37,6 +37,8 @@ class Answer < Comment
 
   after_create :create_news_update, :new_answer_notification
 
+  ensure_index([[:user_id, 1], [:question_id, 1]])
+
   def title
     self.question.title
   end

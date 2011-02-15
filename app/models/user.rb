@@ -586,8 +586,7 @@ Time.zone.now ? 1 : 0)
   end
 
   def can_post_more_answers_on?(question)
-    return question.group.forum ||
-           Answer.first(:question_id => question.id, :user_id => self.id).nil?
+    return Answer.count(:question_id => question.id, :user_id => self.id) == 0
   end
 
   protected

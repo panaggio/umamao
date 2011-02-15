@@ -195,11 +195,7 @@ $(document).ready(function() {
         answer.find(".comments_wrapper").hide();
         answers.append(answer);
         highlightEffect(answer);
-        if(!data.answer_form_enabled){
-          $('#new-answer-wrapper').html(data.form_message);
-        }
-        else
-          form.find("textarea").val("");
+        $('#new-answer-wrapper').html(data.form_message);
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, answer[0]]);
       },
 
