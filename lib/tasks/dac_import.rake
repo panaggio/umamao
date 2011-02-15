@@ -59,14 +59,26 @@ namespace :dac do
   end
 
   def find_or_save_course_by_code(code, name)
-    c = Course.find_or_create_by_code(code)
-    if not c.title:
-      c.title = "#{code} (Unicamp)"
-      c.university = UNICAMP
-      c.name = name
-      c.save!
+    t = Topic.find_by_title "#{code} (Unicamp)"
+
+    if t and t.type == Course
+      return t
     end
-    return c
+
+    if not t
+      t = Course.new()
+      t.title = "#{code} (Unicamp)"
+    else
+      Topic.set(t.id, :_type => "Course")
+      t = Course.find_by_title("#{code} (Unicamp)")
+    end
+
+    t.code = code
+    t.university = UNICAMP
+    t.name = name
+    t.prereqs = []
+    t.save!
+    return t
   end
 
   desc 'Import courses from Unicamp into topics'
@@ -88,10 +100,7 @@ namespace :dac do
             save_course_dac course
           end
 
-          course = Course.find_or_initialize_by_code($1)
-          course.title = "#{course.code} (Unicamp)"
-          course.name = $2
-          course.university = UNICAMP
+          course = find_or_save_course_by_code($1, $2)
 
         when /^Pré-Req\.: (.*)/ # e.g.: Pré-Req.: AD011 F 429
           $1.scan(/([A-Za-z]+\d+)|([fF] \d+)/).each do |pre_req|
@@ -141,7 +150,6 @@ namespace :dac do
   def find_or_save_program_by_code(code, name)
     p = Program.find_or_initialize_by_code(convert_program_code code)
     if not p.name:
-      puts "saving new program #{code}"
       p.name = "#{code} (Unicamp)"
       p.title = p.name
       p.university = UNICAMP
