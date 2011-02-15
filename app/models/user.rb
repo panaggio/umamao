@@ -1,7 +1,10 @@
 require 'digest/sha1'
 
+include UsersHelper
+
 class User
   include MongoMapper::Document
+  include Support::Searchable
   include Scopes
   include MongoMapperExt::Filter
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
@@ -589,6 +592,15 @@ Time.zone.now ? 1 : 0)
     return Answer.count(:question_id => question.id, :user_id => self.id) == 0
   end
 
+  def search_entry
+    {
+      :id => self.id,
+      :title => self.name,
+      :photo_url => avatar_for(self),
+      :entry_type => "User"
+    }
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)
@@ -615,5 +627,4 @@ Time.zone.now ? 1 : 0)
     self.suggestion_list = SuggestionList.new(:user => self)
     self.save :validate => false
   end
-
 end

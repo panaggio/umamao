@@ -6,6 +6,7 @@ class Question
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
+  include Support::Searchable
   include Scopes
 
   ensure_index :tags
@@ -445,6 +446,16 @@ class Question
 
   def add_question_author_to_watchers
     self.watchers = [self.user_id]
+  end
+
+  def search_entry
+    topic = self.topics.first
+    {
+      :id => self.id,
+      :title => self.title,
+      :topic => topic ? topic.title : "",
+      :entry_type => "Question"
+    }
   end
 
 end

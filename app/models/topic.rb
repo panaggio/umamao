@@ -3,6 +3,7 @@ class Topic
   include MongoMapperExt::Slugizer
   include MongoMapperExt::Filter
   include Support::Versionable
+  include Support::Searchable
 
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
@@ -149,5 +150,14 @@ class Topic
     return Question.count(:topic_ids => self.id, :banned => false,
                            :closed => false, :answered_with_id => nil,
                            :exercise.ne => true)
+  end
+
+  def search_entry
+    {
+      :id => self.id,
+      :title => self.title,
+      :entry_type => "Topic",
+      :question_count => self.questions_count
+    }
   end
 end
