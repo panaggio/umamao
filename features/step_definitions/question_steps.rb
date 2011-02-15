@@ -1,8 +1,9 @@
 When /^I post a question "([^"]*)"$/ do |question|
   fill_in "search-field", :with => question
   And 'I press "Perguntar"'
-  And 'I press "Criar"'
+  And 'I press "question_submit"'
   @question = Question.find_by_title(question)
+  assert(@question)
 end
 
 Given /^I follow a question$/ do

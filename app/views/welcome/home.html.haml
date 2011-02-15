@@ -8,7 +8,7 @@
   .navtitle
     = t(".recent_activities", :default => "Recent Activities")
 
-- if current_user.new_user
+- if current_user.new_user && @getting_started
   #getting_started_div
     %ul.items#getting_started
       = render :partial => "welcome/getting_started", :object => @getting_started, :question => @getting_started

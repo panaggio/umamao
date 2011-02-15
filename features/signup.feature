@@ -34,4 +34,4 @@ Feature: Signup
     And I press "Criar conta"
     And I follow "Próxima"
     And I follow "Terminar"
-    Then I should see "fluxo"
+    Then I should see "Fluxo"
