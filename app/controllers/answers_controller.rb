@@ -98,7 +98,6 @@ class AnswersController < ApplicationController
           format.js do
             render(:json => {
                      :success => true,
-                     :answer_form_enabled => current_user.can_post_more_answers_on?(@question),
                      :form_message => render_to_string(:partial => "questions/already_answered",
                                                        :object => @answer,
                                                        :locals => {:answer => @answer}),
