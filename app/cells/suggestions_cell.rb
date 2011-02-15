@@ -7,7 +7,6 @@ class SuggestionsCell < Cell::Rails
 
   def topics
     @topic_suggestions = current_user.topic_suggestions[0 .. 6]
-    @render_links = @opts[:render_links]
     render
   end
 
