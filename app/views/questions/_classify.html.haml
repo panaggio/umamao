@@ -8,7 +8,7 @@
       %a.reclassify{:href => "#"}
         %span.empty= t("questions.tags.tag")
         %span.not-empty= t("questions.tags.retag")
-= text_field "topics", "", :class => "", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics")
+= text_field "topics", "", :class => "lighter_text", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics")
 %a.add-topic{:href => "#"}= t("scaffold.add")
 - if !question.new?
   %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
