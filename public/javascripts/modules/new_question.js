@@ -1,7 +1,7 @@
 function initTopicAutocomplete() {
   var topicBox = new TopicAutocomplete("#topic-autocomplete-input",
                                        "#topic-autocomplete-suggestions",
-                                       "/topics/autocomplete");
+                                       Utils.searchAddress);
   var topicsUl = $("#ask_question ul.topic-list");
 
   $(".add-topic").live("click", function() {
