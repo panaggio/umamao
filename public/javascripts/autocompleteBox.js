@@ -18,9 +18,6 @@
 // - Factor this into multiple files that are only loaded when needed.
 //
 
-Utils.searchAddress =
-  "http://ec2-50-16-38-109.compute-1.amazonaws.com:8983/solr/select?wt=json";
-
 // Data item in an item box.
 function Item(data) {
   this.data = data;
@@ -291,6 +288,7 @@ AutocompleteBox.prototype = {
     if (query.length < this.minChars ||
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
+    query = query.replace(Utils.solrSyntaxRegExp, "\\$&");
     this.abortRequest();
     this.ajaxRequest = this.makeRequest(query);
   },
@@ -352,6 +350,7 @@ SearchItem.prototype = {
 
 Utils.extend(SearchItem, Item);
 
+// Convert the JSON data as returned by solr to the format we expect.
 function solrConversion(data) {
 
   data = $.extend({}, data);

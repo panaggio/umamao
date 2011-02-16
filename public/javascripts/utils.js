@@ -42,7 +42,7 @@ window.Utils = {
       else {
         message = readCookie("flash_notice");
         if(message)
-          Utils.showMessage(message, "notice");	    
+          Utils.showMessage(message, "notice");
       }
     }
 
@@ -166,6 +166,11 @@ window.Utils = {
       "data-class": linkClass
     });
     link.text(dataTitle);
-  }
+  },
+
+  searchAddress:
+    "http://ec2-50-16-38-109.compute-1.amazonaws.com:8983/solr/select?wt=json",
+
+  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g
 
 };
