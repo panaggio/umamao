@@ -1,8 +1,8 @@
 - content_for :head do
-  %meta{:name => "description", :content => markdown(current_group.description, :process_latex => false).gsub(/<\/?[^>]*>/, "")[0, 255] }
+  %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
 
 - content_for :js do
-  = include_javascripts :suggestions
+  = javascript_include_tag "modules/suggestions"
 
 - content_for :subtabs do
   .navtitle
@@ -10,11 +10,6 @@
   - tabs_tag :namespace => :welcome_home do |tab|
     = tab.all t('.all_tab'), root_path
     = tab.unanswered t('.unanswered_tab'), unanswered_path
-
-- if current_user.new_user && @getting_started
-  #getting_started_div
-    %ul.items#getting_started
-      = render :partial => "welcome/getting_started", :object => @getting_started, :question => @getting_started
 
 %ul.items#news_items
   - if @news_items.empty?
@@ -28,25 +23,17 @@
       = render :partial => "news_item", :object => news_item
     = will_paginate @news_items
 
-  #additional_info
-    #help_us
-      = t(".browse_all_or_by_tags", :full_list_of_questions => link_to(t('.full_list_of_questions'), questions_path), :browse_by_tags => link_to(t('.browse_by_topics'), topics_path))
-      %br
-      = t("questions.index.help_to_answer")
-      = link_to t("questions.index.unanswered_questions"), unanswered_questions_path
-
     .clear
 
 - content_for :sidebar do
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
     = link_to t('invitations.invite'), invitations_path
-    - if Affiliation.count(:user_id => current_user.id) > 0
-      %hr{:style => 'margin-top: 1em'}
-      = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
+    %hr{:style => 'margin-top: 1em'}
+    = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
 
   -# Topic suggestions
   - if logged_in?
-    = render_cell :suggestions, :topics, :single_column => true
+    = render_cell :suggestions, :topics
 
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}

@@ -13,19 +13,28 @@ class WelcomeController < ApplicationController
     render 'landing', :layout => 'welcome'
   end
 
+  def filter_news_items(options = {})
+    @news_items = NewsItem.paginate({
+      :recipient_id => current_user.id, :recipient_type => "User",
+      :per_page => 15, :page => params[:page] || 1,
+      :order => :created_at.desc}.merge options)
+    @questions = Question.latest.limit(10) || [] if @news_items.empty?
+    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
+  end
+
   def home
     @active_subtab = params.fetch(:tab, "activity")
 
-    @news_items = NewsItem.paginate({:recipient_id => current_user.id,
-                                      :recipient_type => "User",
-                                      :per_page => 15,
-                                      :page => params[:page] || 1,
-                                      :order => :created_at.desc})
-    @questions = Question.latest.limit(10) || [] if @news_items.empty?
-    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
+    filter_news_items
 
     render 'home'
+  end
 
+  def unanswered
+    filter_news_items :news_update_entry_type => "Question",
+      :open_question => true
+
+    render 'unanswered'
   end
 
   def about

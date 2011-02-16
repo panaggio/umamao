@@ -6,7 +6,33 @@ pt-BR:
       feedback_title: "Assunto:"
       title: Críticas, sugestões, elogios?
       feedback_email: "Email (opcional):"
+    unanswered:
+      all_tab: Leia
+      unanswered_tab: Responda
+      active: Ativo
+      hot: Popular
+      quick_question: Faça uma pergunta
+      recent_activities: Fluxo de notícias
+      empty_news_feed_explanation: |
+        Este é o seu fluxo de notícias: você escolhe %{users}
+        e %{topics} para seguir;
+        quando há novo conteúdo deles, você é
+        notificado aqui. Desta forma, a sua
+        página inicial fica personalizada para mostrar conteúdo que
+        <i>você</i> acha relevante.
+
+        <p>(Enquanto não há nada no seu fluxo, exibimos abaixo as últimas perguntas.)</p>
+
+      users: usuários
+      topics: tópicos
+      browse_all_or_by_tags: "Veja a %{full_list_of_questions} ou %{browse_by_tags}"
+      full_list_of_questions: "lista completa de perguntas"
+      browse_by_topics: "navegue por tópicos"
+      looking_for: "Procurando %{link}?"
+      exercises: resoluções de exercícios
     home:
+      all_tab: Leia
+      unanswered_tab: Responda
       active: Ativo
       hot: Popular
       quick_question: Faça uma pergunta
