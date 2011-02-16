@@ -170,14 +170,23 @@ class Topic
     }
   end
 
-  # Since updates in questions_count are done via mongo, we update
-  # this on questions.
   def needs_to_update_search_index?
+    # Normally, we would need to check here whether questions_count
+    # has changed or not, but since updates in questions_count are
+    # done via mongo's atomic operations, we update this on questions.
+
     if self.title_changed?
-      Question.query(:topic_ids => self.id).each do |question|
-        question.update_search_index(true)
-      end
+      self.update_questions_search_entries
       true
     end
   end
+
+  # Change the topic field on the search entries of this topic's
+  # questions.
+  def update_questions_search_entries
+    Question.query(:topic_ids => self.id).each do |question|
+      question.update_search_index(true)
+    end
+  end
+  handle_asynchronously :update_questions_search_entries
 end

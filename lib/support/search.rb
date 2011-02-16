@@ -57,7 +57,7 @@ module Support::Search
       def update_search_index(force = false)
         if !@will_be_removed_from_search_index &&
             (force || self.needs_to_update_search_index?)
-          Support::Search.
+          Support::Search.delay.
             send_command_to_search_server self.serialize_for_search_server
         end
         @needs_to_update_search_index = false
@@ -70,7 +70,7 @@ module Support::Search
           command.id self.id
           commant.query "entry_type:#{self.class}"
         }
-        Support::Search.send_command_to_search_server command
+        Support::Search.delay.send_command_to_search_server command
       end
 
       # We mark this to avoid unnecessary updates from being sent when
