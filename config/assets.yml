@@ -16,6 +16,7 @@ javascripts:
     - public/javascripts/modules/welcome.js
     - public/javascripts/modules/follow_link.js
     - public/javascripts/modules/cookies.js
+    - public/javascripts/modules/inline_edition.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:
@@ -26,6 +27,7 @@ javascripts:
     - public/javascripts/modules/single/question.js
     - public/javascripts/modules/show_question.js
     - public/javascripts/jquery.colorbox-min.js
+    - public/javascripts/modules/votes.js
   questions_edit_revert:
     - public/javascripts/modules/edit_question.js
   signup_follow:
