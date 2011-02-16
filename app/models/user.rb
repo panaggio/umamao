@@ -99,7 +99,7 @@ class User
   validates_length_of       :description, :maximum => 500
 
   validates_true_for :agrees_with_terms_of_service,
-    :logic => lambda { agrees_with_terms_of_service? },
+    :logic => lambda { self.agrees_with_terms_of_service? },
     :message => lambda { I18n.t("users.validation.errors.did_not_agree") }
 
   before_create :logged!
