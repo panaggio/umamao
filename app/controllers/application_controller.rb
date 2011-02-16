@@ -13,7 +13,23 @@ class ApplicationController < ActionController::Base
   before_filter :check_group_access
   before_filter :set_locale
   before_filter :find_languages
+  before_filter :ensure_domain
   layout :set_layout
+
+  UmamaoDomain = 'umamao.com'
+  DevDomain    = 'localhost.lan'
+
+  def ensure_domain
+    current_domain = request.env['HTTP_HOST']
+
+    # bypass development mode (any port)
+    return if current_domain.include? DevDomain
+
+    # redirect anydomain.com:anyport/anypath to umamao.com/anypath
+    if current_domain != UmamaoDomain
+      redirect_to request.url.gsub(current_domain, UmamaoDomain), :status => 301
+    end
+  end
 
   protected
 
