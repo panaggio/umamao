@@ -170,7 +170,6 @@ namespace :dac do
       s.save!
       o.students << s
     end
-    o.save!
     m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
     if m:
       professor = m[1]
@@ -184,14 +183,16 @@ namespace :dac do
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course.code}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
     regex_turmas = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
     page.body.scan(regex_turmas).each do |turma|
-      o = CourseOffer.new()
+      o = CourseOffer.find_or_initialize_by_title("#{course.code}#{turma[0]}-#{semester}s#{year}")
       o.course = course
       o.code = turma[0]
       o.semester = semester
       o.year = year
-      o.title = "#{course.code}#{o.code}-#{semester}s#{year}"
       add_registered_students_offer a, o, token
+      o.save!
+      print '-'
     end
+    print "\n"
   end
 
   def add_student_classes_by_intitute(institute, semester, year)
