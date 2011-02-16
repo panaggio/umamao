@@ -5,8 +5,9 @@ require 'builder'
 
 module Support::Search
 
-  # Send a post request to the server updating the entry.
-  def self.update_search_index(data)
+  # Send a command via a post request to the server. The command must
+  # be in XML form.
+  def self.send_command_to_search_server(data)
     Net::HTTP.start(AppConfig.search["host"],
                     AppConfig.search["port"]) do |http|
       req = Net::HTTP::Post.new("/solr/update?commit=true")
@@ -30,6 +31,9 @@ module Support::Search
       klass.class_eval do
         include InstanceMethods
         after_save :update_search_index
+
+        before_destroy :will_be_removed_from_search_index
+        after_destroy :remove_from_search_index
       end
     end
 
@@ -51,9 +55,37 @@ module Support::Search
       # the search index when needed. If called with true, forces the
       # update.
       def update_search_index(force = false)
-        if force || self.needs_to_update_search_index?
-          Support::Search.update_search_index self.serialize_for_search_server
+        if !@will_be_removed_from_search_index &&
+            (force || self.needs_to_update_search_index?)
+          Support::Search.
+            send_command_to_search_server self.serialize_for_search_server
         end
+        @needs_to_update_search_index = false
+      end
+
+      # Removes entry from search index.
+      def remove_from_search_index
+        command = Builder::XmlMarkup.new
+        comment.delete {
+          command.id self.id
+          commant.query "entry_type:#{self.class}"
+        }
+        Support::Search.send_command_to_search_server command
+      end
+
+      # We mark this to avoid unnecessary updates from being sent when
+      # e.g. a destroyed external account tries to update the search
+      # index for its user.
+      def will_be_removed_from_search_index
+        @will_be_removed_from_search_index = true
+      end
+
+      def needs_to_update_search_index
+        @needs_to_update_search_index = true
+      end
+
+      def needs_to_update_search_index?
+        @needs_to_update_search_index
       end
     end
   end

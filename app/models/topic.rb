@@ -152,6 +152,15 @@ class Topic
                            :exercise.ne => true)
   end
 
+  # WARNING: The search index update isn't atomic: the models will be
+  # consistent, but the search index might not reflect the actual
+  # questions_count.
+  def increment_questions_count(step = 1)
+    self.increment(:questions_count => step)
+    self.questions_count += step
+    self.update_search_index(true)
+  end
+
   def search_entry
     {
       :id => self.id,
@@ -161,7 +170,14 @@ class Topic
     }
   end
 
+  # Since updates in questions_count are done via mongo, we update
+  # this on questions.
   def needs_to_update_search_index?
-    true
+    if self.title_changed?
+      Question.query(:topic_ids => self.id).each do |question|
+        question.update_search_index(true)
+      end
+      true
+    end
   end
 end

@@ -9,7 +9,8 @@ class Buffer
   end
 
   def flush
-    Support::Search.update_search_index("<update>#{@buf.join ""}</update>")
+    Support::Search.
+      send_command_to_search_server("<update>#{@buf.join ""}</update>")
     @buf = []
   end
 end
@@ -19,7 +20,8 @@ namespace :search do
   desc "Empty the search index"
   task :clear => :environment do
     puts "Clearing index..."
-    Support::Search.update_search_index("<delete><query>*</query></delete>")
+    Support::Search.
+      send_command_to_search_server("<delete><query>*</query></delete>")
   end
 
   desc "Cleans data in the search index and repopulates it"

@@ -357,6 +357,8 @@ class Question
     if !topic_ids.include? topic.id
       topics << topic
 
+      self.needs_to_update_search_index
+
       # Notify followers of new topic and the topic itself. We give
       # them the current timestamp so they will appear on top of the
       # news feed.
@@ -383,7 +385,7 @@ class Question
       end
 
       if !banned
-        topic.increment(:questions_count => 1)
+        topic.increment_questions_count
       end
 
       save
@@ -396,8 +398,9 @@ class Question
   def unclassify!(topic)
     if topic_ids.include? topic.id
       topic_ids.delete topic.id
+      self.needs_to_update_search_index
       if !banned
-        topic.increment(:questions_count => -1)
+        topic.increment_questions_count -1
       end
 
       # Remove related news items
@@ -459,7 +462,7 @@ class Question
   end
 
   def needs_to_update_search_index?
-    true
+    self.title_changed? || super
   end
 end
 

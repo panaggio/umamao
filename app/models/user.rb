@@ -597,13 +597,15 @@ Time.zone.now ? 1 : 0)
     {
       :id => self.id,
       :title => self.name,
-      :photo_url => avatar_for(self),
+      :photo_url => avatar_for(self, :size => 20),
       :entry_type => "User"
     }
   end
 
+  # Updates caused by changes in external accounts are handled by the
+  # external accounts class.
   def needs_to_update_search_index?
-    true
+    self.name_changed?
   end
 
   protected

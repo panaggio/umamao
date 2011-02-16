@@ -17,6 +17,9 @@ class ExternalAccount
   validates_uniqueness_of :uid, :scope => :provider
   validates_uniqueness_of :user_id, :scope => :provider
 
+  after_save :update_search_index
+  after_destroy :update_search_index
+
   def self.find_from_hash(hash)
     self.first(:provider => hash['provider'], :uid => hash['uid'])
   end
@@ -30,4 +33,9 @@ class ExternalAccount
     self.create(hash.merge(:user => user))
   end
 
+  # We force an update on the search index if the user's external
+  # accounts change.
+  def update_search_index
+    self.user.update_search_index(true)
+  end
 end
