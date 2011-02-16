@@ -6,13 +6,13 @@ require 'builder'
 module Support::Search
 
   # Send a post request to the server updating the entry.
-  def self.update_search_index(entry)
+  def self.update_search_index(data)
     Net::HTTP.start(AppConfig.search["host"],
                     AppConfig.search["port"]) do |http|
       req = Net::HTTP::Post.new("/solr/update?commit=true")
       req.basic_auth AppConfig.search["user"], AppConfig.search["password"]
       req.content_type = "app/xml"
-      response = http.request(req, entry)
+      response = http.request(req, data)
     end
   end
 
@@ -48,9 +48,10 @@ module Support::Search
       end
 
       # after_save callback that propagates changes to the object to
-      # the search index when needed.
-      def update_search_index
-        if self.needs_to_update_search_index?
+      # the search index when needed. If called with true, forces the
+      # update.
+      def update_search_index(force = false)
+        if force || self.needs_to_update_search_index?
           Support::Search.update_search_index self.serialize_for_search_server
         end
       end
