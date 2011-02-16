@@ -98,6 +98,9 @@ class UsersController < ApplicationController
                          identity_url bio invitation_token
                          affiliation_token], params[:user])
 
+    @user.agrees_with_terms_of_service =
+      params[:user][:agrees_with_terms_of_service] == "1"
+
     if params[:user]["birthday(1i)"]
       @user.birthday = build_date(params[:user], "birthday")
     end
@@ -153,8 +156,8 @@ class UsersController < ApplicationController
       end
       sign_in_and_redirect(:user, @user) # !! now logged in
     else
-      flash[:error]  = t("flash_error", :scope => "users.create")
-      render :action => 'new'
+      flash[:error]  = t("users.create.flash_error")
+      render :action => 'new', :layout => 'welcome'
     end
   end
 

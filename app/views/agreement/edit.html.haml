@@ -1,0 +1,23 @@
+- content_for :css do
+  = stylesheet_link_tag "compiled/agreement"
+
+#agreement-explanation
+  = render :partial => "explanation"
+
+#agreement-terms
+  = render :partial => "doc/tos"
+
+  %hr
+
+  = render :partial => "doc/privacy"
+
+#agreement-control
+  #accept-agreement-form
+    - form_tag agreement_path do
+      = check_box_tag :agrees_with_terms_of_service
+      = t("agreement.agree")
+      = submit_tag t("agreement.continue")
+
+  #refuse-agreement
+    = link_to t("agreement.do_not_agree"), refuse_agreement_path
+  .clear

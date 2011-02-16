@@ -31,6 +31,7 @@ Feature: Signup
     And I fill in "user[password]" with "asdfasdf"
     And I fill in "user[password_confirmation]" with "asdfasdf"
     And I fill in "user[name]" with "Fulano"
+    And I check "user[agrees_with_terms_of_service]"
     And I press "Criar conta"
     And I follow "Próxima"
     And I follow "Terminar"

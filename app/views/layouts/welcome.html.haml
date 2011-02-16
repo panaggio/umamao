@@ -4,7 +4,10 @@
     %title
       &= page_title
 
-    = render :partial => "shared/layout/css/landing"
+    - content_for :css do
+      = render :partial => "shared/layout/css/landing"
+
+    = yield :css
 
     = render :partial => "shared/layout/meta"
     <!--[if lt IE 8]><link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/ie7.css"><![endif]-->

@@ -194,6 +194,14 @@ ul#team
 .inviter_name
   font-weight: bold
 
+#new_user
+  .submit
+    margin-top: 10px
+
+  .field.agree .field_with_errors
+    // Quick and dirty way of avoiding the text to go to the next line
+    display: inline
+
 #signup-wizard
   width: 550px
   margin: 0 auto
@@ -227,3 +235,16 @@ ul#team
   a.skip
     clear: both
     float: right
+
+#errorExplanation
+  padding: 10px
+  margin-bottom: 20px
+  +border-radius
+  border: 1px solid #fbc2c4
+  background-color: #ffe3e4
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+    li + li
+      margin-top: 10px

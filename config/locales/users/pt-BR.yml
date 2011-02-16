@@ -1,5 +1,17 @@
 pt-BR:
   users:
+    validation:
+      errors:
+        did_not_agree: |
+          Você deve concordar com os termos de uso e a política de privacidade
+        empty_name: O nome não pode ser vazio
+        long_name: O nome é grande demais
+        empty_email: O email não pode ser vazio
+        dup_email: O email já existe no site
+        invalid_email: O email é inválido
+        password_match: A senha não confere
+        invalid_password: A senha é inválida
+        empty_password: A senha não pode ser vazia
     index:
       title: Todos os usuários
       empty: "Este site não tem nenhum usuário. Participe cadastrando-se neste site."
@@ -19,6 +31,10 @@ pt-BR:
           title: "Você veio a convite de %{user}:"
       affiliation_message: "Seu e-mail acadêmico %{email} foi confirmado!
        Agora basta terminar seu cadastro preenchendo o formulário abaixo."
+      agree: |
+        Li e concordo com a <a href="%{privacy}" target="_blank">política de
+        privacidade</a> e com os <a href="%{tos}" target="_blank">termos de
+        uso</a> do site.
     edit:
       title: Configurações
       submit: Salvar
@@ -47,7 +63,9 @@ pt-BR:
       resend_confirmation_email: "Reenviar e-mail de confirmação."
       resent_confirmation: "Verifique seu e-mail pessoal!"
     create:
-      flash_error: "Desculpe, não foi possível criar sua conta. Tente de novo, ou entre em contato conosco (no link de feedback na base da página)."
+      flash_error: |
+        Desculpe, não foi possível criar sua conta. Por favor, verifique
+        os erros.
       welcome: "Cadastro feito. Bem-vindo(a) ao Umamão!"
       confirm: "Obrigado por se cadastrar! Antes de entrar, você precisa confirmar seu email acadêmico. Em breve você deve receber um email com o link de confirmação."
     messages:

@@ -37,6 +37,10 @@ Shapado::Application.routes.draw do
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
 
+  get '/agreement' => 'agreement#edit', :as => :agreement
+  post '/agreement' => 'agreement#update'
+  get '/agreement/refuse' => 'agreement#refuse', :as => :refuse_agreement
+
   match '/auth/:provider/callback' => 'settings/external_accounts#create'
   match '/auth/failure' => 'settings/external_accounts#failure'
 

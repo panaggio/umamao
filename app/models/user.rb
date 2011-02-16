@@ -75,6 +75,10 @@ class User
   # external accounts, receive suggestions, etc.
   key :has_been_through_wizard, Boolean, :default => false
 
+  # Whether or not the user has agreed with our privacy policy and
+  # terms of service during signup.
+  key :agrees_with_terms_of_service, Boolean, :default => false
+
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
 
@@ -85,12 +89,18 @@ class User
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_inclusion_of :role,  :within => ROLES
 
-  validates_presence_of     :name
-  validates_length_of       :name, :maximum => 100
-  filterable_keys           :name
+  validates_presence_of :name,
+    :message => lambda { I18n.t("users.validation.errors.empty_name") }
+  validates_length_of :name, :maximum => 100,
+    :message => lambda { I18n.t("users.validation.errors.long_name") }
+  filterable_keys :name
 
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
+
+  validates_true_for :agrees_with_terms_of_service,
+    :logic => lambda { self.agrees_with_terms_of_service? },
+    :message => lambda { I18n.t("users.validation.errors.did_not_agree") }
 
   before_create :logged!
   after_create :accept_invitation
@@ -587,6 +597,40 @@ Time.zone.now ? 1 : 0)
 
   def can_post_more_answers_on?(question)
     return Answer.count(:question_id => question.id, :user_id => self.id) == 0
+  end
+
+  # HACK - As we cannot provide translations for validatable
+  # validations set up by devise, we translate them by hand.
+  def translate_errors
+    if self.errors[:email].present?
+      self.errors[:email].map! do |error|
+        case error
+        when "can't be empty"
+          I18n.t("users.validation.errors.empty_email")
+        when "has already been taken"
+          I18n.t("users.validation.errors.dup_email")
+        when "is invalid"
+          I18n.t("users.validation.errors.invalid_email")
+        else
+          error
+        end
+      end
+    end
+
+    if self.errors[:password].present?
+      self.errors[:password].map! do |error|
+        case error
+        when "doesn't match confirmation"
+          I18n.t("users.validation.errors.password_match")
+        when "is invalid"
+          I18n.t("users.validation.errors.invalid_password")
+        when "can't be empty"
+          I18n.t("users.validation.errors.empty_password")
+        else
+          error
+        end
+      end
+    end
   end
 
   protected

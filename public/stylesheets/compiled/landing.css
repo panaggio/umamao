@@ -246,6 +246,9 @@ ul#team .avatar { margin-right: 20px; }
 
 .inviter_name { font-weight: bold; }
 
+#new_user .submit { margin-top: 10px; }
+#new_user .field.agree .field_with_errors { display: inline; }
+
 #signup-wizard { width: 550px; margin: 0 auto; padding: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border: 1px solid #eeeeee; }
 #signup-wizard #introduction { font-size: 13px; border-width: 1px; border-color: #222222; border-style: dashed; padding: 10px; background-color: #ddffaa; }
 #signup-wizard #interaction { width: 550px; }
@@ -280,3 +283,7 @@ ul#team .avatar { margin-right: 20px; }
 #signup-wizard #navigation a:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
 #signup-wizard #navigation a.current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
 #signup-wizard a.skip { clear: both; float: right; }
+
+#errorExplanation { padding: 10px; margin-bottom: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border: 1px solid #fbc2c4; background-color: #ffe3e4; }
+#errorExplanation ul { margin: 0; padding: 0; list-style: none; }
+#errorExplanation ul li + li { margin-top: 10px; }
