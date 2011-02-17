@@ -24,9 +24,9 @@ namespace :dac do
     (code.to_i < 10 and code[0,1] != "0") ? "0#{code}" : code
   end
 
-
   desc 'Import undergraduation programs from Unicamp into topics'
   task :import_unicamp_programs => :base do
+    puts "Importing Unicamp programs"
     agent = Mechanize.new
     pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/cursos.html')
     pagelist.links.select{|l| l.href.include?('cur')}.each do |link|
@@ -35,7 +35,7 @@ namespace :dac do
        p = Program.find_or_create_by_code(convert_program_code m[1])
        p.name = link.text.gsub(/\n/, ' ')
        p.university = UNICAMP
-       p.title = "#{p.name} #{p.university.short_name}"
+       p.title = "#{p.name} (#{p.university.short_name})"
        p.save!
        sleep 1
       end
@@ -46,7 +46,6 @@ namespace :dac do
 
   def save_course_dac(course)
     return if not course
-    course.summary = course.code
 
     pre_req_links = (not course.prereqs.empty?) ?
       "<strong>Pré-requisitos</strong>: " + course.prereqs.map { |r|
@@ -82,7 +81,8 @@ namespace :dac do
   end
 
   desc 'Import courses from Unicamp into topics'
-  task :import_unicamp_courses => :base do#, :year do |t, args|
+  task :import_unicamp_courses => :base do
+    puts "Import Unicamp courses"
     year = ENV['year'] || 2011
     agent = Mechanize.new
     pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/ementas/")
@@ -109,7 +109,7 @@ namespace :dac do
             end
           end
         when /^Ementa: (.*)/
-          course.save!
+          course.summary = $1
         end
       end
       save_course_dac course
@@ -122,7 +122,8 @@ namespace :dac do
   end
 
   desc 'Import undergrad programs\' courses from Unicamp'
-  task :import_unicamp_programs_courses => :base do#, :year  do |t, args|
+  task :import_unicamp_programs_courses => :base do
+    puts "Import Unicamp programs' courses"
     year = ENV['year'] || 2011
     agent = Mechanize.new
     Program.all.select{|p| p.university.id == UNICAMP.id}.each do |program|
@@ -154,7 +155,33 @@ namespace :dac do
       p.title = p.name
       p.university = UNICAMP
       p.save!
+      for year in 2005..2011 do
+        find_or_create_program_class(p, year)
+      end
     end
+    return p
+  end
+
+  def fix_student_code(code)
+    "#{"0"*(6-(code.length))}#{code}"
+  end
+
+  def admission_year(code)
+    year = code[0,2].to_i
+    return 1900+year if year > 20
+    return 2000+year
+  end
+
+  def find_or_create_program_class(program, year)
+    if p = ProgramClass.first(:program_id => program.id.to_s, :year => year)
+      return p
+    end
+
+    p = ProgramClass.new()
+    p.program = program
+    p.year = year
+    p.title = "#{program.name} #{year} (#{program.university.short_name})"
+    p.save!
     return p
   end
 
@@ -163,11 +190,14 @@ namespace :dac do
     html_page = convert_string(page.body)
     regex_aluno = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
     html_page.scan(regex_aluno).each do |aluno|
-      s = Student.find_or_initialize_by_code(aluno[0])
+      s = Student.find_or_initialize_by_code(fix_student_code aluno[0])
+      program = find_or_save_program_by_code(aluno[2], aluno[2])
+      s.program_class = find_or_create_program_class(program, admission_year(s.code))
       s.name = aluno[1]
       s.registered_courses << o
-      s.program = find_or_save_program_by_code(aluno[2], aluno[2])
       s.save!
+      s.program_class.students << s
+      s.program_class.save!
       o.students << s
     end
     m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
@@ -192,7 +222,6 @@ namespace :dac do
       o.save!
       print '-'
     end
-    print "\n"
   end
 
   def add_student_classes_by_intitute(institute, semester, year)
@@ -207,6 +236,7 @@ namespace :dac do
 
   desc 'Import students and classes from Unicamp into topics'
   task :import_unicamp_students_classes => :base do#, :semester, :year do |t, args|
+    puts "Import Unicamp students' classes"
     year = ENV['year'] || 2011
     semester = ENV['semester'] || 1
     a = Mechanize.new
@@ -221,6 +251,7 @@ namespace :dac do
     Course.delete_all
     Program.delete_all
     ProgramCourse.delete_all
+    ProgramClass.delete_all
     Student.delete_all
     CourseOffer.delete_all
   end
