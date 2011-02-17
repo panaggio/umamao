@@ -8,6 +8,9 @@ class CourseOffer < Topic
   key :course_id, String
   belongs_to :course
 
+  key :student_ids, Array
+  has_many :students, :class_name => 'Student', :in => :student_ids
+
   validates_uniqueness_of   :code, :scope => [:year, :semester]
 
   timestamps!
