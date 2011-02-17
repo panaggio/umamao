@@ -1,4 +1,4 @@
-class Offer < Topic
+class CourseOffer < Topic
   include MongoMapper::Document
 
   key :code, String, :limit => 15, :null => false, :index => true

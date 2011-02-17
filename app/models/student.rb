@@ -8,8 +8,8 @@ class Student
   belongs_to :program
 
   key :registered_course_ids, Array
-  has_many :registered_courses, :class_name => 'Offer', :in => :registered_course_ids
-  
+  has_many :registered_courses, :class_name => 'CourseOffer', :in => :registered_course_ids
+
   validates_presence_of     :code
   validates_length_of       :code, :maximum => 15
 
