@@ -16,7 +16,7 @@ namespace :suggestions do
     User.query.each do |user|
       puts user.name
       user.refresh_suggestions
-      user.save!
+      user.save :validate => false
     end
   end
 end
