@@ -9,18 +9,22 @@
           %span{"data-user-id" => follower.id}
             = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
 
-- content_for :subtabs do
+.secondary-navigation
   .navtitle
     &= @topic.title
-  - tabs_tag :namespace => :topic_show do |tab|
-    = tab.all t('.all_tab'), @topic
-    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
 %br
+
 .markdown
   = markdown(@topic.description)
 
 %p
   = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
+
+.secondary-navigation
+  - tabs_tag :namespace => :topic_show do |tab|
+    = tab.all t('.all_tab'), @topic
+    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
+%br
 
 %ul.items#questions
   - if @questions.blank?
