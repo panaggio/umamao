@@ -1,19 +1,9 @@
 task :cron => :environment do
   Rake::Task["cron_tasks:refresh_related_topics"].execute
-  Rake::Task["cron_tasks:refresh_suggestions"].execute
+  Rake::Task["suggestions:refresh"].execute
 end
 
 namespace :cron_tasks do
-  desc "Refreshes suggestions for all users"
-  task :refresh_suggestions => :environment do
-    Rails.logger.info "Refreshing suggestions for users..."
-    User.query.each do |user|
-      puts user.name
-      user.refresh_suggestions
-      user.save :validate => false
-    end
-  end
-
   desc "Refreshes each topic's list of related topics"
   task :refresh_related_topics => :environment do
     Rails.logger.info "Refreshing list of related topics..."

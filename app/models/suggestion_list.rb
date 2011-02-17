@@ -82,18 +82,19 @@ class SuggestionList
   def remove_suggestion(suggestion_or_entry)
     if suggestion_or_entry.is_a?(Suggestion)
       suggestion = suggestion_or_entry
-      entry = suggestion.entry
+      entry_type = suggestion.entry_type
     else
-      entry = suggestion_or_entry
-      suggestion = Suggestion.first(:entry_id => entry.id,
-                                    :entry_type => entry.class.to_s,
+      entry_id = suggestion.entry_id
+      entry_type = suggestion_or_entry.class.to_s
+      suggestion = Suggestion.first(:entry_id => entry_id,
+                                    :entry_type => entry_type,
                                     :user_id => self.user.id)
     end
     return if !suggestion
 
-    if entry.is_a?(Topic)
+    if entry_type == "Topic"
       self.topic_suggestions.delete(suggestion)
-    elsif entry.is_a?(User)
+    elsif entry_type == "User"
       self.user_suggestions.delete(suggestion)
     end
     suggestion.destroy
@@ -167,7 +168,8 @@ class SuggestionList
     kept_suggestions = []
 
     self.topic_suggestions.each do |topic_suggestion|
-      if ["external", "university"].include?(topic_suggestion.reason)
+      if ["external", "university"].include?(topic_suggestion.reason) &&
+          topic_suggestion.entry.present?
         kept_suggestions << topic_suggestion
       else
         topic_suggestion.destroy
