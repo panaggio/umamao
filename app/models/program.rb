@@ -20,4 +20,6 @@ class Program < Topic
   validates_presence_of     :university_id
 
   validates_uniqueness_of   :code, :scope => :university_id
+  
+  slug_key :title, :unique => true, :min_length => 3
 end

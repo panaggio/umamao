@@ -16,7 +16,9 @@ class CourseOffer < Topic
   validates_presence_of     :semester
   validates_presence_of     :course_id
 
-  validates_uniqueness_of   :code, :scope => [:year, :semester]
+  validates_uniqueness_of   :code, :scope => [:year, :semester, :course_id]
+
+  slug_key :title, :unique => true, :min_length => 3
 
   timestamps!
 

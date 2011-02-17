@@ -4,8 +4,8 @@ class Student
   key :code, String, :index => true
   key :name, String
 
-  key :program_id, String
-  belongs_to :program
+  key :program_class_id, String
+  belongs_to :program_class
 
   key :registered_course_ids, Array
   has_many :registered_courses, :class_name => 'CourseOffer', :in => :registered_course_ids

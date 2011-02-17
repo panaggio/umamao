@@ -17,8 +17,10 @@ class Course < Topic
 
   validates_presence_of     :name
   validates_length_of       :name, :maximum => 100
-  
+
   validates_presence_of     :university_id
+
+  slug_key :title, :unique => true, :min_length => 3
 
   timestamps!
 
