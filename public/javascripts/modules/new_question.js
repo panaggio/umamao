@@ -4,7 +4,7 @@ function initTopicAutocomplete() {
   var topicsUl = $("#ask_question ul.topic-list");
 
   $(".add-topic").live("click", function() {
-    if (topicBox.input.val() != topicBox.startText)
+    if (topicBox.isActive)
       topicBox.returnDefault();
     return false;
   });

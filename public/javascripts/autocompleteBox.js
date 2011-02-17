@@ -183,6 +183,9 @@ function AutocompleteBox(inputField, itemBoxContainer) {
 
 AutocompleteBox.prototype = {
 
+  // Whether or not this has been clicked.
+  isActive: false,
+
   startText: "",
   minChars: 2,
   ajaxRequest: null,
@@ -210,7 +213,9 @@ AutocompleteBox.prototype = {
     var itemBox = this.itemBox;
     this.input.attr("autocomplete", "off").
       focus(function () {
-        if ($(this).val() == box.startText) {
+        if (!box.isActive) {
+          box.isActive = true;
+          $(this).removeClass("lighter_text");
           $(this).val("");
         } else if ($(this).val() != "") {
           itemBox.show();
@@ -224,6 +229,7 @@ AutocompleteBox.prototype = {
       if ($(this).val() == "") {
         $(this).addClass("lighter_text");
         $(this).val(box.startText);
+        box.isActive = false;
       }
       if (!box.selectionClicked) {
         itemBox.hide();
@@ -392,6 +398,11 @@ function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
                                       "#search-results");
+
+  $("#search-field").closest("form").find("input[type=submit]").
+    click(function () {
+      return searchBox.isActive;
+    });
 
   searchBox.makeRequest = function (query) {
     var request = $.ajax({

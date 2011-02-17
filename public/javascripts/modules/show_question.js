@@ -39,7 +39,7 @@ function initTopicAutocompleteForReclassifying() {
   });
 
   $(".add-topic").live("click", function() {
-    if (topicBox.input.val() != topicBox.startText)
+    if (topicBox.isActive)
       topicBox.returnDefault();
     return false;
   });
