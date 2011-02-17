@@ -4,7 +4,7 @@
   = t(".title")
 = error_messages_for :user
 
-%input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics")}
+%input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics"), "data-autocomplete-url" => autocomplete_url}
 %ul.autocomplete-list#follow-topics-suggestions
 
 %hr

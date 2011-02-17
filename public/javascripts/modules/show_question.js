@@ -1,7 +1,6 @@
 function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#topic-autocomplete-input",
-                                       "#topic-autocomplete-suggestions",
-                                       Utils.searchAddress);
+                                       "#topic-autocomplete-suggestions");
 
   var topicsUl = $("#question .body-col ul.topic-list");
 

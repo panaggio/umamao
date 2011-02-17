@@ -166,7 +166,7 @@ ItemBox.prototype = {
 };
 
 // Input field that contacts a server to look for suggestions.
-function AutocompleteBox(inputField, itemBoxContainer, url) {
+function AutocompleteBox(inputField, itemBoxContainer) {
 
   var box = this;
 
@@ -176,7 +176,7 @@ function AutocompleteBox(inputField, itemBoxContainer, url) {
   this.itemBox.itemsContainer.mousedown(function () {
     box.selectionClicked = true;
   });
-  this.url = url;
+  this.url = this.input.attr("data-autocomplete-url");
   this.initInputField();
 
 };
@@ -391,8 +391,7 @@ function solrConversion(data) {
 function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
-                                      "#search-results",
-                                      Utils.searchAddress);
+                                      "#search-results");
 
   searchBox.makeRequest = function (query) {
     var request = $.ajax({
@@ -427,8 +426,8 @@ function initSearchBox() {
 };
 
 // Topic autocomplete for several boxes in the website.
-function TopicAutocomplete(inputField, itemBoxContainer, url) {
-  AutocompleteBox.call(this, inputField, itemBoxContainer, url);
+function TopicAutocomplete(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
 TopicAutocomplete.prototype = {
@@ -500,8 +499,7 @@ Utils.extend(TopicAutocomplete, AutocompleteBox);
 function initTopicAutocompleteForFollowing() {
   var topicBox =
     new TopicAutocomplete("#follow-topics-autocomplete",
-                          "#follow-topics-suggestions",
-                          Utils.searchAddress);
+                          "#follow-topics-suggestions");
 
   var topicsUl = $("#followed-topics");
 

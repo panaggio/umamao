@@ -168,9 +168,6 @@ window.Utils = {
     link.text(dataTitle);
   },
 
-  searchAddress:
-    "http://ec2-50-16-38-109.compute-1.amazonaws.com:8983/solr/select?wt=json",
-
   solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g
 
 };

@@ -1,4 +1,9 @@
 module SearchesHelper
+  def autocomplete_url
+    "http://#{AppConfig.search["host"]}:#{AppConfig.search["port"]}" +
+      "/solr/select?wt=json"
+  end
+
   def excerpt_with_regexp(text, regexp, *args)
     options = args.extract_options!
     unless args.empty?
