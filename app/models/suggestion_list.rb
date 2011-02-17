@@ -80,6 +80,7 @@ class SuggestionList
   # Remove a suggestion from the list of suggestions. Destroy the
   # suggestion.
   def remove_suggestion(suggestion_or_entry)
+    return if suggestion_or_entry.blank?
     if suggestion_or_entry.is_a?(Suggestion)
       suggestion = suggestion_or_entry
       entry_type = suggestion.entry_type
