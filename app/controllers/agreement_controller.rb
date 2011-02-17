@@ -3,7 +3,6 @@
 # not.
 
 class AgreementController < ApplicationController
-  before_filter :login_required
   layout "welcome"
 
   def edit
@@ -28,7 +27,7 @@ class AgreementController < ApplicationController
   end
 
   def check_agreement_to_tos
-    if current_user.agrees_with_terms_of_service?
+    if !needs_to_agree_with_tos?
       redirect_to root_path
     end
   end

@@ -31,10 +31,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def needs_to_agree_with_tos?
+    logged_in? && !current_user.agrees_with_terms_of_service?
+  end
+
   # Redirects user to the ToS page if he hasn't agreed with it yet.
   def check_agreement_to_tos
-    if logged_in? && !request.xhr? &&
-        !current_user.agrees_with_terms_of_service?
+    if needs_to_agree_with_tos? && !request.xhr?
       redirect_to agreement_path
     end
   end
