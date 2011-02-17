@@ -456,7 +456,7 @@ class Question
     {
       :id => self.id,
       :title => self.title,
-      :topic => topic ? topic.title : "",
+      :topic => topic ? topic.title : '',
       :entry_type => "Question"
     }
   end

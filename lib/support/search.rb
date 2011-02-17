@@ -23,21 +23,23 @@ module Support::Search
   #  - search_entry : returns a hash with the fields that should go into
   #    the search server.
   #
-  #  - needs_to_update_search_index? : whether or not a search index
-  #    update is needed.
-  #
   module Searchable
     def self.included(klass)
       klass.class_eval do
         include InstanceMethods
         after_save :update_search_index
 
-        before_destroy :will_be_removed_from_search_index
+        before_destroy :will_be_removed_from_search_index!
         after_destroy :remove_from_search_index
       end
     end
 
     module InstanceMethods
+
+      def search_entry
+        raise NotImplementedError
+      end
+
       # Convert the hash representation of the object returned by
       # #search_entry into the format understood by Solr.
       def serialize_for_search_server
@@ -49,6 +51,7 @@ module Support::Search
             end
           }
         }
+        data.target!
       end
 
       # after_save callback that propagates changes to the object to
@@ -66,17 +69,16 @@ module Support::Search
       # Removes entry from search index.
       def remove_from_search_index
         command = Builder::XmlMarkup.new
-        comment.delete {
-          command.id self.id
-          commant.query "entry_type:#{self.class}"
+        command.delete {
+          command.query "id:#{self.id} AND entry_type:#{self.class}"
         }
-        Support::Search.delay.send_command_to_search_server command
+        Support::Search.delay.send_command_to_search_server(command.target!)
       end
 
       # We mark this to avoid unnecessary updates from being sent when
       # e.g. a destroyed external account tries to update the search
       # index for its user.
-      def will_be_removed_from_search_index
+      def will_be_removed_from_search_index!
         @will_be_removed_from_search_index = true
       end
 
