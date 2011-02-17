@@ -186,14 +186,14 @@ namespace :dac do
   end
 
   def add_registered_students_offer(a, o, token)
-    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinacourse_offer.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
-    regex_aluno = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
-    html_page.scan(regex_aluno).each do |aluno|
-      s = Student.find_or_initialize_by_code(fix_student_code aluno[0])
-      program = find_or_save_program_by_code(aluno[2], aluno[2])
+    regex_student = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
+    html_page.scan(regex_student).each do |student|
+      s = Student.find_or_initialize_by_code(fix_student_code student[0])
+      program = find_or_save_program_by_code(student[2], student[2])
       s.program_class = find_or_create_program_class(program, admission_year(s.code))
-      s.name = aluno[1]
+      s.name = student[1]
       s.registered_courses << o
       s.save!
       s.program_class.students << s
@@ -211,11 +211,11 @@ namespace :dac do
     page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
     token = page.body.match(/var token = "([0-9a-f]{32,32})";/)[1]
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course.code}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
-    regex_turmas = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
-    page.body.scan(regex_turmas).each do |turma|
-      o = CourseOffer.find_or_initialize_by_title("#{course.code}#{turma[0]}-#{semester}s#{year}")
+    regex_course_offers = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
+    page.body.scan(regex_course_offers).each do |course_offer|
+      o = CourseOffer.find_or_initialize_by_title("#{course.code}#{course_offer[0]}-#{semester}s#{year} (#{course.university.short_name})")
       o.course = course
-      o.code = turma[0]
+      o.code = course_offer[0]
       o.semester = semester
       o.year = year
       add_registered_students_offer a, o, token
