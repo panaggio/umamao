@@ -98,8 +98,15 @@ class User
   validates_length_of       :bio, :maximum => 140
   validates_length_of       :description, :maximum => 500
 
+  # We need to be careful with the validation if the user is trying to
+  # reset his password. If the user isn't able to login, he won't be
+  # able to agree with our ToS, but if he hasn't agreed yet, a naive
+  # validation would fail.
   validates_true_for :agrees_with_terms_of_service,
-    :logic => lambda { self.agrees_with_terms_of_service? },
+    :logic => lambda {
+      (!self.new? && self.password.present? &&
+       self.password_confirmation.present?) ||
+       self.agrees_with_terms_of_service? },
     :message => lambda { I18n.t("users.validation.errors.did_not_agree") }
 
   before_create :logged!
