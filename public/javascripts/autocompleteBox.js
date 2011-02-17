@@ -18,7 +18,6 @@
 // - Factor this into multiple files that are only loaded when needed.
 //
 
-
 // Data item in an item box.
 function Item(data) {
   this.data = data;
@@ -167,7 +166,7 @@ ItemBox.prototype = {
 };
 
 // Input field that contacts a server to look for suggestions.
-function AutocompleteBox(inputField, itemBoxContainer, url) {
+function AutocompleteBox(inputField, itemBoxContainer) {
 
   var box = this;
 
@@ -177,7 +176,7 @@ function AutocompleteBox(inputField, itemBoxContainer, url) {
   this.itemBox.itemsContainer.mousedown(function () {
     box.selectionClicked = true;
   });
-  this.url = url;
+  this.url = this.input.attr("data-autocomplete-url");
   this.initInputField();
 
 };
@@ -267,20 +266,31 @@ AutocompleteBox.prototype = {
     });
   },
 
+  // Make an ajax request to fetch the data corresponding to a given query.
+  makeRequest: function (query) {
+    return $.getJSON(this.url, {q: query}, this.requestCallback());
+  },
+
+  // Returns a callback to be executed after the request completes.
+  requestCallback: function () {
+    var box = this;
+    return function (data) {
+      if (data) {
+        box.itemBox.setItems(box.processData(data));
+        box.itemBox.show();
+      }
+    };
+  },
+
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
     if (query.length < this.minChars ||
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
-    var box = this;
+    query = query.replace(Utils.solrSyntaxRegExp, "\\$&");
     this.abortRequest();
-    this.ajaxRequest = $.getJSON(this.url, {q: query}, function (data) {
-      if (data) {
-        box.itemBox.setItems(box.processData(data));
-        box.itemBox.show();
-      }
-    });
+    this.ajaxRequest = this.makeRequest(query);
   },
 
   // Clears current input, hides selection box.
@@ -340,6 +350,40 @@ SearchItem.prototype = {
 
 Utils.extend(SearchItem, Item);
 
+// Convert the JSON data as returned by solr to the format we expect.
+function solrConversion(data) {
+
+  data = $.extend({}, data);
+
+  var makeLi = function (inner) {
+    return "<li class=\"autocomplete-entry\">" + inner + "</li>";
+  };
+
+  var makeDesc = function (inner) {
+    return " <span class=\"desc\">" + inner + "</span>";
+  };
+
+  switch (data.entry_type) {
+  case "User":
+    data.url = "/users/" + data.id;
+    data.html = makeLi(data.photo_url + " " +
+                       data.title + makeDesc("Usuário"));
+    break;
+  case "Topic":
+    var question = data.question_count == 1 ? " pergunta" : " perguntas";
+    data.url = "/topics/" + data.id;
+    data.html = makeLi(data.title +
+                       makeDesc(data.question_count + question));
+    break;
+  case "Question":
+    data.url = "/questions/" + data.id;
+    data.html = makeLi(data.title + makeDesc(data.topic));
+    break;
+  }
+
+  return data;
+}
+
 // The all-purpose search box. Looks for questions, topics and users.
 // Clicking a search result will take to the page of the corresponding
 // entity. Also, displays an item that when clicked takes the user to the
@@ -347,13 +391,24 @@ Utils.extend(SearchItem, Item);
 function initSearchBox() {
 
   var searchBox = new AutocompleteBox("#search-field",
-                                      "#search-results",
-                                      "/search/autocomplete");
+                                      "#search-results");
+
+  searchBox.makeRequest = function (query) {
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: query},
+      success: this.requestCallback()
+    });
+    return request;
+  };
 
   searchBox.processData = function (data) {
     var items = [];
-    data.forEach(function (item) {
-      items.push(new UrlItem(item));
+
+    data.response.docs.forEach(function (result) {
+      items.push(new UrlItem(solrConversion(result)));
     });
     items.push(new SearchItem(this.input));
     return items;
@@ -371,8 +426,8 @@ function initSearchBox() {
 };
 
 // Topic autocomplete for several boxes in the website.
-function TopicAutocomplete(inputField, itemBoxContainer, url) {
-  AutocompleteBox.call(this, inputField, itemBoxContainer, url);
+function TopicAutocomplete(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
 TopicAutocomplete.prototype = {
@@ -391,12 +446,34 @@ TopicAutocomplete.prototype = {
     return item;
   },
 
+  makeRequest: function (query) {
+    var callback = this.requestCallback();
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: "title:" + query + " AND entry\\_type:Topic"},
+      success: function (data) {
+        var docs = data.response.docs;
+        var hasExactMatch = false;
+        docs.forEach(function (doc) {
+          if (doc.title == query) hasExactMatch = true;
+        });
+        if (!hasExactMatch) {
+          docs.push({title: query, entry_type: "Topic", question_count: "0"});
+        }
+        callback(docs);
+      }
+    });
+    return request;
+  },
+
   // Populates the suggestion box when data is received.
   processData: function (data) {
     var items = [];
     var me = this;
     data.forEach(function (it) {
-      items.push(me.makeItem(it));
+      items.push(me.makeItem(solrConversion(it)));
     });
     return items;
   },
@@ -419,84 +496,10 @@ TopicAutocomplete.prototype = {
 
 Utils.extend(TopicAutocomplete, AutocompleteBox);
 
-function initTopicAutocompleteForReclassifying() {
-  var topicBox = new TopicAutocomplete("#reclassify-autocomplete",
-                                       "#reclassify-suggestions",
-                                       "/topics/autocomplete");
-  var topicsUl = $("#question .body-col ul.topic-list");
-
-  var questionUrl = location.href;
-
-  // Hides the autocomplete.
-  function turnOff() {
-    topicsUl.find(".remove").hide();
-    $("#reclassify-autocomplete").hide();
-    $(".add-topic").hide();
-    $(".cancel-reclassify").hide();
-    if (topicsUl.find("li").length == 0) {
-      $(".reclassify .empty").show();
-      $(".reclassify .not-empty").hide();
-    } else {
-      $(".reclassify .empty").hide();
-      $(".reclassify .not-empty").show();
-    }
-    $(".retag").show();
-  }
-
-  // Shows the autocomplete.
-  function turnOn() {
-    topicsUl.find(".remove").show();
-    $("#reclassify-autocomplete").show();
-    $(".add-topic").show();
-    $(".cancel-reclassify").show();
-    $(".retag").hide();
-  }
-
-  turnOff();
-
-  $(".reclassify").click(function () {
-    turnOn();
-    return false;
-  });
-
-  $(".add-topic").live("click", function() {
-    if (topicBox.input.val() != topicBox.startText)
-      topicBox.returnDefault();
-    return false;
-  });
-
-  $(".cancel-reclassify").live("click", function () {
-    turnOff();
-    return false;
-  });
-
-  $("a.remove", topicsUl).live("click", function () {
-    var link = $(this);
-    $.getJSON(link.attr("href"), function (data) {
-      link.closest("li").remove();
-    });
-    return false;
-  });
-
-  // Classifies the current question under topic named title.
-  topicBox.action = function (title) {
-    // FIXME: does this always work?
-    $.getJSON(questionUrl + "/classify?topic=" +
-              encodeURIComponent(title),
-              function (data) {
-                if (data.success) {
-                  topicsUl.find(".retag").before(data.box);
-                }
-              });
-    topicBox.clear();
-  };
-
-}
-
 function initTopicAutocompleteForFollowing() {
-  var topicBox = new TopicAutocomplete("#follow-topics-autocomplete",
-                                       "#follow-topics-suggestions",
-                                       "/topics/autocomplete?follow=t");
+  var topicBox =
+    new TopicAutocomplete("#follow-topics-autocomplete",
+                          "#follow-topics-suggestions");
 
   var topicsUl = $("#followed-topics");
 

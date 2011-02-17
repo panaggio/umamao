@@ -3,6 +3,7 @@ class Topic
   include MongoMapperExt::Slugizer
   include MongoMapperExt::Filter
   include Support::Versionable
+  include Support::Search::Searchable
 
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
@@ -150,4 +151,42 @@ class Topic
                            :closed => false, :answered_with_id => nil,
                            :exercise.ne => true)
   end
+
+  # WARNING: The search index update isn't atomic: the models will be
+  # consistent, but the search index might not reflect the actual
+  # questions_count.
+  def increment_questions_count(step = 1)
+    self.increment(:questions_count => step)
+    self.questions_count += step
+    self.update_search_index(true)
+  end
+
+  def search_entry
+    {
+      :id => self.id,
+      :title => self.title,
+      :entry_type => "Topic",
+      :question_count => self.questions_count
+    }
+  end
+
+  def needs_to_update_search_index?
+    # Normally, we would need to check here whether questions_count
+    # has changed or not, but since updates in questions_count are
+    # done via mongo's atomic operations, we update this on questions.
+
+    if self.title_changed?
+      self.update_questions_search_entries
+      true
+    end
+  end
+
+  # Change the topic field on the search entries of this topic's
+  # questions.
+  def update_questions_search_entries
+    Question.query(:topic_ids => self.id).each do |question|
+      question.update_search_index(true)
+    end
+  end
+  handle_asynchronously :update_questions_search_entries
 end

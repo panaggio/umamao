@@ -1,7 +1,11 @@
 require 'digest/sha1'
 
+include GravatarHelper::PublicMethods
+include UsersHelper
+
 class User
   include MongoMapper::Document
+  include Support::Search::Searchable
   include Scopes
   include MongoMapperExt::Filter
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
@@ -640,6 +644,21 @@ Time.zone.now ? 1 : 0)
     end
   end
 
+  def search_entry
+    {
+      :id => self.id,
+      :title => self.name,
+      :photo_url => avatar_for(self, :size => 20),
+      :entry_type => "User"
+    }
+  end
+
+  # Updates caused by changes in external accounts are handled by the
+  # external accounts class.
+  def needs_to_update_search_index?
+    self.name_changed?
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)
@@ -666,5 +685,4 @@ Time.zone.now ? 1 : 0)
     self.suggestion_list = SuggestionList.new(:user => self)
     self.save :validate => false
   end
-
 end

@@ -1,7 +1,7 @@
 function initTopicAutocompleteForReclassifying() {
   var topicBox = new TopicAutocomplete("#topic-autocomplete-input",
-                                       "#topic-autocomplete-suggestions",
-                                       "/topics/autocomplete");
+                                       "#topic-autocomplete-suggestions");
+
   var topicsUl = $("#question .body-col ul.topic-list");
 
   var questionUrl = location.href;

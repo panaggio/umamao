@@ -42,7 +42,7 @@ window.Utils = {
       else {
         message = readCookie("flash_notice");
         if(message)
-          Utils.showMessage(message, "notice");	    
+          Utils.showMessage(message, "notice");
       }
     }
 
@@ -166,6 +166,8 @@ window.Utils = {
       "data-class": linkClass
     });
     link.text(dataTitle);
-  }
+  },
+
+  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g
 
 };
