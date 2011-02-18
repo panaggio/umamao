@@ -3,7 +3,7 @@ require 'digest/sha1'
 class ProgramClass < Topic
   include MongoMapper::Document
 
-  key :program_id, String
+  key :program_id, ObjectId
   belongs_to :program
 
   key :year, Integer

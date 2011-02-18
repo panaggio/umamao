@@ -5,10 +5,10 @@ class Student
   key :name, String
   key :undergrad, Boolean, :default => true
 
-  key :university_id, String
+  key :university_id, ObjectId
   belongs_to :university
 
-  key :program_class_id, String
+  key :program_class_id, ObjectId
   belongs_to :program_class
 
   key :registered_course_ids, Array

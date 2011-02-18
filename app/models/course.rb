@@ -6,7 +6,7 @@ class Course < Topic
   key :summary, String
   key :undergrad, Boolean, :default => true
 
-  key :university_id, String
+  key :university_id, ObjectId
   belongs_to :university
 
   key :prereq_ids, Array, :index => true
@@ -17,7 +17,7 @@ class Course < Topic
   validates_length_of       :code, :maximum => 15
 
   validates_presence_of     :name
-  validates_length_of       :name, :maximum => 100
+  validates_length_of       :name, :maximum => 500
 
   validates_presence_of     :university_id
 

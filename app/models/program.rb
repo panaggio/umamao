@@ -7,7 +7,7 @@ class Program < Topic
   key :name, String, :limit => 100, :null => false
   key :undergrad, Boolean, :default => true
 
-  key :university_id, String, :null => false
+  key :university_id, ObjectId, :null => false
   belongs_to :university
 
   timestamps!
