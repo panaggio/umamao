@@ -168,7 +168,9 @@ namespace :dac do
       s.registered_courses << o
       s.program = find_or_save_program_by_code(aluno[2], aluno[2])
       s.save!
+      o.students << s
     end
+    o.save!
     m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
     if m:
       professor = m[1]
