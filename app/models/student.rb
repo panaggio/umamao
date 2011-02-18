@@ -3,6 +3,7 @@ class Student
 
   key :code, String, :index => true
   key :name, String
+  key :undergrad, Boolean, :default => true
 
   key :program_class_id, String
   belongs_to :program_class

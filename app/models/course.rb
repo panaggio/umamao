@@ -4,6 +4,7 @@ class Course < Topic
   key :code, String, :limit => 15, :null => false, :index => true
   key :name, String, :limit => 100, :null => false, :index => true
   key :summary, String
+  key :undergrad, Boolean, :default => true
 
   key :university_id, String
   belongs_to :university
