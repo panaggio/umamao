@@ -459,6 +459,7 @@ TopicAutocomplete.prototype = {
 
   makeRequest: function (query) {
     var callback = this.requestCallback();
+    var input = this.input;
     var request = $.ajax({
       url: this.url,
       dataType: "jsonp",
@@ -471,7 +472,11 @@ TopicAutocomplete.prototype = {
           if (doc.title == query) hasExactMatch = true;
         });
         if (!hasExactMatch) {
-          docs.push({title: query, entry_type: "Topic", question_count: "0"});
+          docs.push({
+            title: input.val(),
+            entry_type: "Topic",
+            question_count: "0"
+          });
         }
         callback(docs);
       }
