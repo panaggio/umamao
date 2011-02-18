@@ -173,7 +173,7 @@ namespace :dac do
   end
 
   def find_or_create_program_class(program, year)
-    if p = ProgramClass.first(:program_id => program.id.to_s, :year => year)
+    if p = ProgramClass.first(:program_id => program.id, :year => year)
       return p
     end
 
