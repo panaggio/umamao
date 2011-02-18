@@ -85,7 +85,7 @@ class SuggestionList
       suggestion = suggestion_or_entry
       entry_type = suggestion.entry_type
     else
-      entry_id = suggestion.entry_id
+      entry_id = suggestion_or_entry.id
       entry_type = suggestion_or_entry.class.to_s
       suggestion = Suggestion.first(:entry_id => entry_id,
                                     :entry_type => entry_type,
