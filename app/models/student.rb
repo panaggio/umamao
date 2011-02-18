@@ -8,8 +8,8 @@ class Student
   key :university_id, ObjectId
   belongs_to :university
 
-  key :program_class_id, ObjectId
-  belongs_to :program_class
+  key :academic_program_class_id, ObjectId
+  belongs_to :academic_program_class
 
   key :registered_course_ids, Array
   has_many :registered_courses, :class_name => 'CourseOffer', :in => :registered_course_ids

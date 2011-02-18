@@ -1,6 +1,6 @@
 require 'digest/sha1'
 
-class Program < Topic
+class AcademicProgram < Topic
   include MongoMapper::Document
 
   key :code, String, :limit => 15, :null => false
@@ -17,10 +17,9 @@ class Program < Topic
 
   validates_presence_of     :code
   validates_length_of       :code, :maximum => 15
+  validates_uniqueness_of   :code, :scope => :university_id
 
   validates_presence_of     :university_id
 
-  validates_uniqueness_of   :code, :scope => :university_id
-  
   slug_key :title, :unique => true, :min_length => 3
 end
