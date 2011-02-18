@@ -182,7 +182,7 @@ namespace :dac do
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course.code}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
     regex_turmas = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
     page.body.scan(regex_turmas).each do |turma|
-      o = Offer.new()
+      o = CourseOffer.new()
       o.course = course
       o.code = turma[0]
       o.semester = semester
@@ -219,7 +219,7 @@ namespace :dac do
     Program.delete_all
     ProgramCourse.delete_all
     Student.delete_all
-    Offer.delete_all
+    CourseOffer.delete_all
   end
 
 
