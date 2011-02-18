@@ -194,6 +194,7 @@ namespace :dac do
       program = find_or_save_program_by_code(student[2], student[2])
       s.program_class = find_or_create_program_class(program, admission_year(s.code))
       s.name = student[1]
+      s.university = UNICAMP
       s.registered_courses << o
       s.save!
       s.program_class.students << s
