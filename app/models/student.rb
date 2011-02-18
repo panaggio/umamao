@@ -5,6 +5,9 @@ class Student
   key :name, String
   key :undergrad, Boolean, :default => true
 
+  key :university_id, String
+  belongs_to :university
+
   key :program_class_id, String
   belongs_to :program_class
 
