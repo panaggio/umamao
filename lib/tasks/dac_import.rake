@@ -32,7 +32,7 @@ namespace :dac do
     pagelist.links.select{|l| l.href.include?('cur')}.each do |link|
       m = link.href.match(/cur*(\d*).html/)
       if m:
-       p = Program.find_or_create_by_code(convert_program_code m[1])
+       p = Program.find_or_initialize_by_code(convert_program_code m[1])
        p.name = link.text.gsub(/\n/, ' ')
        p.university = UNICAMP
        p.title = "#{p.name} (#{p.university.short_name})"
@@ -186,7 +186,7 @@ namespace :dac do
   end
 
   def add_registered_students_offer(a, o, token)
-    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinacourse_offer.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
     regex_student = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
     html_page.scan(regex_student).each do |student|
