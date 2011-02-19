@@ -7,6 +7,7 @@ require 'cgi'
 require 'nokogiri'
 
 
+# Fix encoding problems
 def convert_string(str)
   i = Iconv.new('UTF-8','LATIN1')
   return Nokogiri::HTML.fragment(i.iconv(str)).to_s
@@ -17,9 +18,11 @@ namespace :dac do
 
   task :base => :environment do
     UNICAMP = University.find_by_short_name("Unicamp")
-    EXCLUDE_LIST = ["51"]
+    # Courses like 'Cursão' do not exist really
+    COURSE_EXCLUDE_LIST = ["51"]
   end
 
+  # Fix "1" to "01" like DAC main page
   def convert_academic_program_code(code)
     (code.to_i < 10 and code[0,1] != "0") ? "0#{code}" : code
   end
@@ -27,6 +30,8 @@ namespace :dac do
   desc 'Import undergraduation academic_programs from Unicamp into topics'
   task :import_unicamp_academic_programs => :base do
     puts "Importing Unicamp academic_programs"
+
+    #Get DAC page course and finds/creates them
     agent = Mechanize.new
     pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/cursos.html')
     pagelist.links.select{|l| l.href.include?('cur')}.each do |link|
@@ -44,6 +49,7 @@ namespace :dac do
     puts "\n"
   end
 
+  # Save the course, updating its topic description
   def save_course_dac(course)
     return if not course
 
@@ -57,6 +63,7 @@ namespace :dac do
     course.save!
   end
 
+  # Find if there is already a topic or course, otherwise create one
   def find_or_save_course_by_code(code, name)
     t = Topic.find_by_title "#{code} (Unicamp)"
 
@@ -84,6 +91,8 @@ namespace :dac do
   task :import_unicamp_courses => :base do
     puts "Import Unicamp courses"
     year = ENV['year'] || 2011
+
+    # Search all courses in DAC webpages and create or update its information
     agent = Mechanize.new
     pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/ementas/")
 
@@ -121,13 +130,14 @@ namespace :dac do
     puts "\n"
   end
 
-  desc 'Import undergrad academic_programs\' courses from Unicamp'
+  desc 'Import Unicamp undergrad academic_programs\' catalog'
   task :import_unicamp_academic_programs_courses => :base do
     puts "Import Unicamp academic_programs' courses"
     year = ENV['year'] || 2011
     agent = Mechanize.new
+
     AcademicProgram.all.select{|p| p.university.id == UNICAMP.id}.each do |academic_program|
-      next if EXCLUDE_LIST.include? academic_program.code
+      next if COURSE_EXCLUDE_LIST.include? academic_program.code
       pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/cursos/sug#{academic_program.code}.html")
       semesters = pagelist.body.split("Semestre")
       indexSemester = 0
@@ -150,6 +160,7 @@ namespace :dac do
     puts "\n"
   end
 
+  # Searches an acamdemic course and if it does not exist, create it
   def find_or_save_academic_program_by_code(code, name)
     p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code code)
     if not p.name:
@@ -164,16 +175,20 @@ namespace :dac do
     return p
   end
 
+  # Change 70018 to 070018 to uniform RAs
   def fix_student_code(code)
     "#{"0"*(6-(code.length))}#{code}"
   end
 
+  # Takes the first 2 characters of RA and find out admission year
   def admission_year(code)
     year = code[0,2].to_i
     return 1900+year if year > 20
     return 2000+year
   end
 
+  # If the academic program class does not exist already, create it, otherwise
+  # return it
   def find_or_create_academic_program_class(academic_program, year)
     if p = AcademicProgramClass.first(:academic_program_id => academic_program.id, :year => year)
       return p
@@ -187,11 +202,13 @@ namespace :dac do
     return p
   end
 
+  # For a course offer, retrieves all registered students
   def add_registered_students_offer(a, o, token)
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
     regex_student = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
     html_page.scan(regex_student).each do |student|
+      # Create or retrieve and update the student information
       s = Student.find_or_initialize_by_code(fix_student_code student[0])
       academic_program = find_or_save_academic_program_by_code(student[2], student[2])
       s.academic_program_class = find_or_create_academic_program_class(academic_program, admission_year(s.code))
@@ -209,6 +226,8 @@ namespace :dac do
     end
   end
 
+  # Retrieve all current course offers and for each one retrieve the students
+  # registered in it
   def add_registered_students(course, semester, year)
     a = Mechanize.new
     page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
@@ -227,6 +246,7 @@ namespace :dac do
     end
   end
 
+  # Retrieves all courses offered in the current semester
   def add_student_classes_by_intitute(institute, semester, year)
     a = Mechanize.new
     page = a.get("http://www.dac.unicamp.br/sistemas/horarios/grad/G#{semester}S0/#{institute }.htm", {})
