@@ -20,19 +20,19 @@ namespace :dac do
     EXCLUDE_LIST = ["51"]
   end
 
-  def convert_program_code(code)
+  def convert_academic_program_code(code)
     (code.to_i < 10 and code[0,1] != "0") ? "0#{code}" : code
   end
 
-  desc 'Import undergraduation programs from Unicamp into topics'
-  task :import_unicamp_programs => :base do
-    puts "Importing Unicamp programs"
+  desc 'Import undergraduation academic_programs from Unicamp into topics'
+  task :import_unicamp_academic_programs => :base do
+    puts "Importing Unicamp academic_programs"
     agent = Mechanize.new
     pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/cursos.html')
     pagelist.links.select{|l| l.href.include?('cur')}.each do |link|
       m = link.href.match(/cur*(\d*).html/)
       if m:
-       p = Program.find_or_initialize_by_code(convert_program_code m[1])
+       p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code m[1])
        p.name = link.text.gsub(/\n/, ' ')
        p.university = UNICAMP
        p.title = "#{p.name} (#{p.university.short_name})"
@@ -121,25 +121,27 @@ namespace :dac do
     puts "\n"
   end
 
-  desc 'Import undergrad programs\' courses from Unicamp'
-  task :import_unicamp_programs_courses => :base do
-    puts "Import Unicamp programs' courses"
+  desc 'Import undergrad academic_programs\' courses from Unicamp'
+  task :import_unicamp_academic_programs_courses => :base do
+    puts "Import Unicamp academic_programs' courses"
     year = ENV['year'] || 2011
     agent = Mechanize.new
-    Program.all.select{|p| p.university.id == UNICAMP.id}.each do |program|
-      next if EXCLUDE_LIST.include? program.code
-      pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/cursos/sug#{program.code}.html")
+    AcademicProgram.all.select{|p| p.university.id == UNICAMP.id}.each do |academic_program|
+      next if EXCLUDE_LIST.include? academic_program.code
+      pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo#{year}/cursos/sug#{academic_program.code}.html")
       semesters = pagelist.body.split("Semestre")
       indexSemester = 0
       semesters.each do |semester|
         convert_string(semester).scan(/<a href="..\/ementas\/todas.*">(\w[\w ]\d\d\d)/).each do |course|
           c = find_or_save_course_by_code(course[0], course[0])
-          pc = ProgramCourse.new()
-          pc.semester = indexSemester
-          pc.year_catalog = year
-          pc.course = c
-          pc.program = program
-          pc.save
+          if CourseSuggestion.count(:semester => indexSemester, :catalog_year => year, :course_id => c.id, :academic_program_id => academic_program.id) == 0
+            pc = CourseSuggestion.new()
+            pc.semester = indexSemester
+            pc.catalog_year = year
+            pc.course = c
+            pc.academic_program = academic_program
+            pc.save
+          end
         end
         indexSemester = indexSemester + 1
       end
@@ -148,15 +150,15 @@ namespace :dac do
     puts "\n"
   end
 
-  def find_or_save_program_by_code(code, name)
-    p = Program.find_or_initialize_by_code(convert_program_code code)
+  def find_or_save_academic_program_by_code(code, name)
+    p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code code)
     if not p.name:
       p.name = "#{code} (Unicamp)"
       p.title = p.name
       p.university = UNICAMP
       p.save!
       for year in 2005..2011 do
-        find_or_create_program_class(p, year)
+        find_or_create_academic_program_class(p, year)
       end
     end
     return p
@@ -172,15 +174,15 @@ namespace :dac do
     return 2000+year
   end
 
-  def find_or_create_program_class(program, year)
-    if p = ProgramClass.first(:program_id => program.id, :year => year)
+  def find_or_create_academic_program_class(academic_program, year)
+    if p = AcademicProgramClass.first(:academic_program_id => academic_program.id, :year => year)
       return p
     end
 
-    p = ProgramClass.new()
-    p.program = program
+    p = AcademicProgramClass.new()
+    p.academic_program = academic_program
     p.year = year
-    p.title = "#{program.name} #{year} (#{program.university.short_name})"
+    p.title = "#{academic_program.name} #{year} (#{academic_program.university.short_name})"
     p.save!
     return p
   end
@@ -191,14 +193,14 @@ namespace :dac do
     regex_student = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
     html_page.scan(regex_student).each do |student|
       s = Student.find_or_initialize_by_code(fix_student_code student[0])
-      program = find_or_save_program_by_code(student[2], student[2])
-      s.program_class = find_or_create_program_class(program, admission_year(s.code))
+      academic_program = find_or_save_academic_program_by_code(student[2], student[2])
+      s.academic_program_class = find_or_create_academic_program_class(academic_program, admission_year(s.code))
       s.name = student[1]
       s.university = UNICAMP
       s.registered_courses << o
       s.save!
-      s.program_class.students << s
-      s.program_class.save!
+      s.academic_program_class.students << s
+      s.academic_program_class.save!
       o.students << s
     end
     m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
@@ -250,15 +252,15 @@ namespace :dac do
   desc 'Import courses from Unicamp into topics'
   task :clean => :base do
     Course.delete_all
-    Program.delete_all
-    ProgramCourse.delete_all
-    ProgramClass.delete_all
+    AcademicProgram.delete_all
+    CourseSuggestion.delete_all
+    AcademicProgramClass.delete_all
     Student.delete_all
     CourseOffer.delete_all
   end
 
 
-  task :import_all => [:import_unicamp_programs, :import_unicamp_courses,
-   :import_unicamp_programs_courses, :import_unicamp_students_classes  ] do
+  task :import_all => [:import_unicamp_academic_programs, :import_unicamp_courses,
+   :import_unicamp_academic_programs_courses, :import_unicamp_students_classes  ] do
   end
 end
