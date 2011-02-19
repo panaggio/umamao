@@ -1,0 +1,31 @@
+#topic-suggestions.block.suggestions.suggestions-two-columns
+  - if @suggested_topics_left.present?
+    %h3.title
+      = t("followable.suggestions.topics")
+    .suggestion-left
+      %ul.topic-list
+        - @suggested_topics_left.each do |topic|
+          %li
+            .topic.info
+              %span.topic-title
+                = link_to topic.title, topic_path(topic), :title => topic.title
+            .controls
+              .follow-info
+                = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
+              .refuse-suggestion
+                = link_to "✕", refuse_suggestion_path(:topic => topic.id), :method => :post
+            .clear
+  - if !@suggested_topics_right.blank?
+    .suggestion-right
+      %ul.topic-list
+        - @suggested_topics_right.each do |topic|
+          %li
+            .topic.info
+              %span.topic-title
+                = link_to topic.title, topic_path(topic), :title => topic.title
+            .controls
+              .follow-info
+                = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
+              .refuse-suggestion
+                = link_to "✕", refuse_suggestion_path(:topic => topic.id), :method => :post
+            .clear
