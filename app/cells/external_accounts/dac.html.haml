@@ -1,0 +1,16 @@
+- if @affiliation.present? || @student.present?
+  = javascript_include_tag "modules/dac_external_account"
+
+  %li.item
+    .summary
+      .title
+        = image_tag "dac.gif"
+        %strong= "DAC-Unicamp"
+        .controls
+          - if @affiliation.present?
+            = t('external_accounts.connected_as', :name => @affiliation.student.code)
+          - elsif @student.present?
+            .dac_form
+              = render :partial => "dac_form"
+            = link_to t('external_accounts.connect'), "", :class => "connect connect_dac"
+      .clear

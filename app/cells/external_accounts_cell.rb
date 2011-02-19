@@ -28,6 +28,18 @@ class ExternalAccountsCell < Cell::Rails
     render :view => 'external_account'
   end
 
+  def dac
+
+    @student = nil
+    @affiliation = Affiliation.first(:user_id => current_user.id, :email => /dac.unicamp.br/)
+    if @affiliation and not @affiliation.student
+      @affiliation = nil
+      @student = Student.new
+    end
+
+    render :view => 'dac'
+  end
+
   # Display a message telling the user that he needs to connect his
   # external account.
   def needs_connection

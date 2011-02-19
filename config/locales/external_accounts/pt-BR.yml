@@ -8,3 +8,9 @@ pt-BR:
     connection_error: |
       Houve um erro durante a autenticação. Por favor, tente
       novamente mais tarde.
+    dac:
+      code: RA
+      submit: Enviar
+      cancel: Cancelar
+      invalid_code: O RA informado está inválido.
+      not_registered_student: Você não está matriculado em nenhuma disciplina neste semestre.
