@@ -111,7 +111,7 @@ class AffiliationsController < ApplicationController
       return
     end
 
-    unless affiliation = Affiliation.first(:user_id => current_user.id.to_s, :university_ud => unicamp.id)
+    unless affiliation = Affiliation.first(:user_id => current_user.id.to_s, :university_id => unicamp.id)
        affiliation = Affiliation.new(:university_id => unicamp.id, :user_id => current_user.id.to_s)
     end
     email = "#{current_user.name[0,1].downcase}#{student.code}@dac.unicamp.br"
