@@ -6,7 +6,6 @@ require 'iconv'
 require 'cgi'
 require 'nokogiri'
 
-
 # Fix encoding problems
 def convert_string(str)
   i = Iconv.new('UTF-8','LATIN1')
@@ -24,20 +23,20 @@ namespace :dac do
 
   # Fix "1" to "01" like DAC main page
   def convert_academic_program_code(code)
-    (code.to_i < 10 and code[0,1] != "0") ? "0#{code}" : code
+    (code.to_i < 10 && code[0,1] != "0") ? "0#{code}" : code
   end
 
-  desc 'Import undergraduation academic_programs from Unicamp into topics'
+  desc 'Import undergraduate academic_programs from Unicamp into topics'
   task :import_unicamp_academic_programs => :base do
     puts "Importing Unicamp academic_programs"
 
-    #Get DAC page course and finds/creates them
+    # Get DAC page course and finds/creates them
     agent = Mechanize.new
     pagelist = agent.get('http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/cursos.html')
     pagelist.links.select{|l| l.href.include?('cur')}.each do |link|
       m = link.href.match(/cur*(\d*).html/)
-      if m:
-       p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code m[1])
+      if m
+       p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code(m[1]))
        p.name = link.text.gsub(/\n/, ' ')
        p.university = UNICAMP
        p.title = "#{p.name} (#{p.university.short_name})"
@@ -51,12 +50,15 @@ namespace :dac do
 
   # Save the course, updating its topic description
   def save_course_dac(course)
-    return if not course
+    return if course.nil?
 
-    pre_req_links = (not course.prereqs.empty?) ?
-      "<strong>Pré-requisitos</strong>: " + course.prereqs.map { |r|
-    r.code ? "<a href=\"/topics/#{r.code.tr(' ', '-')}-Unicamp\">#{r.code}</a>" : ''
-    }.join(', ') + "\n\n" : ''
+    if course.prereqs.empty?
+      pre_req_links = ''
+    else
+      pre_req_links = "<strong>Pré-requisitos</strong>: " + course.prereqs.map { |r|
+      r.code ? "<a href=\"/topics/#{r.code}-Unicamp\">#{r.code}</a>" : ''
+      }.join(', ') + "\n\n"
+    end
 
     course.description = "# #{course.code}: #{course.name}\n\n"
     course.description << pre_req_links + (course.summary || '')
@@ -65,18 +67,20 @@ namespace :dac do
 
   # Find if there is already a topic or course, otherwise create one
   def find_or_save_course_by_code(code, name)
+    # Remove spaces from course code
+    code.gsub!(" ", "")
     t = Topic.find_by_title "#{code} (Unicamp)"
 
-    if t and t.type == Course
+    if t && t.type == Course
       return t
     end
 
-    if not t
-      t = Course.new()
+    if t.nil?
+      t = Course.new
       t.title = "#{code} (Unicamp)"
     else
       Topic.set(t.id, :_type => "Course")
-      t = Course.find_by_title("#{code} (Unicamp)")
+      t = Course.find_by_id(t.id)
     end
 
     t.code = code
@@ -105,7 +109,7 @@ namespace :dac do
       text_items.each do |item|
         case item
         when /^(\w[\w ]\d+) (.*)/ # e.g.: AD012 Ateliê de Prática em Dança II
-          if course:
+          if course
             save_course_dac course
           end
 
@@ -163,7 +167,7 @@ namespace :dac do
   # Searches an acamdemic course and if it does not exist, create it
   def find_or_save_academic_program_by_code(code, name)
     p = AcademicProgram.find_or_initialize_by_code(convert_academic_program_code code)
-    if not p.name:
+    if p.name.nil?
       p.name = "#{code} (Unicamp)"
       p.title = p.name
       p.university = UNICAMP
@@ -183,6 +187,7 @@ namespace :dac do
   # Takes the first 2 characters of RA and find out admission year
   def admission_year(code)
     year = code[0,2].to_i
+    year = 11 if year == 12
     return 1900+year if year > 20
     return 2000+year
   end
@@ -202,9 +207,17 @@ namespace :dac do
     return p
   end
 
+  # "F129" => "F 129"
+  def course_code_for_search(code)
+    if m = code.match(/F(\d\d\d)/)
+      return "F #{m[1]}"
+    end
+    return code
+  end
+
   # For a course offer, retrieve all students registered for it
   def add_registered_students_offer(a, o, token)
-    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course_code_for_search(o.course.code)}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
     regex_student = /<td.*>([0-9]{5,7})<\/td>.*\n.*<td[^>]*>[^\w]*(\w.*\w) *<\/td>.*\n.*.*\n.*<td[^>]*>[^\d]*(\d*)<\/td>/
     html_page.scan(regex_student).each do |student|
@@ -221,7 +234,7 @@ namespace :dac do
       o.students << s
     end
     m = html_page.match(/Docente:<\/span>[^\w]*(\w[^<]*\w)/)
-    if m:
+    if m
       professor = m[1]
     end
   end
@@ -232,10 +245,15 @@ namespace :dac do
     a = Mechanize.new
     page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
     token = page.body.match(/var token = "([0-9a-f]{32,32})";/)[1]
-    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course.code}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
+    page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_situacaovagaspordisciplina.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{course_code_for_search(course.code)}&txtTurma=V&cboSubG=#{semester}&cboSubP=#{'0'}&cboAno=#{year}&btnAcao=Continuar")
     regex_course_offers = /<td height="18" bgcolor="white" width="100" align="center" class="corpo">([A-Z1-9#])  <\/td>/
     page.body.scan(regex_course_offers).each do |course_offer|
-      o = CourseOffer.find_or_initialize_by_title("#{course.code}#{course_offer[0]}-#{semester}s#{year} (#{course.university.short_name})")
+      if course_offer[0] == "#"
+        offer_title = ' Turma Especial'
+      else
+        offer_title = course_offer[0]
+      end
+      o = CourseOffer.find_or_initialize_by_title("#{course.code}#{offer_title}-#{semester}s#{year} (#{course.university.short_name})")
       o.course = course
       o.code = course_offer[0]
       o.semester = semester
@@ -247,7 +265,7 @@ namespace :dac do
   end
 
   # Retrieves all courses offered in the current semester
-  def add_student_classes_by_intitute(institute, semester, year)
+  def add_student_classes_by_institute(institute, semester, year)
     a = Mechanize.new
     page = a.get("http://www.dac.unicamp.br/sistemas/horarios/grad/G#{semester}S0/#{institute }.htm", {})
     regex_disc = /<a href=".*.htm">([A-Z][A-Z ][0-9]{3,3})(.*)  /
@@ -258,14 +276,14 @@ namespace :dac do
   end
 
   desc 'Import students and classes from Unicamp into topics'
-  task :import_unicamp_students_classes => :base do#, :semester, :year do |t, args|
+  task :import_unicamp_students_classes => :base do
     puts "Import Unicamp students' classes"
     year = ENV['year'] || 2011
     semester = ENV['semester'] || 1
     a = Mechanize.new
     page = a.get("http://www.dac.unicamp.br/sistemas/horarios/grad/G#{semester}S0/indiceP.htm", {})
     page.body.scan(/<a href="(\w*).htm/).each do |institute|
-      add_student_classes_by_intitute institute[0], semester, year
+      add_student_classes_by_institute institute[0], semester, year
     end
   end
 
@@ -278,7 +296,6 @@ namespace :dac do
     Student.delete_all
     CourseOffer.delete_all
   end
-
 
   task :import_all => [:import_unicamp_academic_programs, :import_unicamp_courses,
    :import_unicamp_academic_programs_catalog, :import_unicamp_students_classes  ] do
