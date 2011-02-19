@@ -138,6 +138,12 @@ class SuggestionList
                  :reason => "popular")
   end
 
+  def suggest_from_dac
+    if affiliation = Affiliation.first(:user_id => self.user.id.to_s, :email => /dac.unicamp.br/) and student = affiliation.student
+      self.suggest([student.academic_program_class, student.academic_program_class.academic_program] + student.registered_courses.map(&:course) + student.registered_courses , :reason => "dac")
+    end
+  end
+
   # Suggest topics related to the user's affiliations.
   def suggest_university_topics
     if self.user.affiliations.present?
@@ -152,6 +158,7 @@ class SuggestionList
     if self.topic_suggestions.blank? &&
         self.user_suggestions.blank?
       self.suggest_university_topics
+      self.suggest_from_dac
       self.suggest_from_outside
       if self.topic_suggestion_ids.size < 20
         self.suggest_popular_topics(20 - self.topic_suggestion_ids.size)
