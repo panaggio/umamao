@@ -131,7 +131,7 @@ namespace :dac do
   end
 
   desc 'Import Unicamp undergrad academic_programs\' catalog'
-  task :import_unicamp_academic_programs_courses => :base do
+  task :import_unicamp_academic_programs_catalog => :base do
     puts "Import Unicamp academic_programs' courses"
     year = ENV['year'] || 2011
     agent = Mechanize.new
@@ -202,7 +202,7 @@ namespace :dac do
     return p
   end
 
-  # For a course offer, retrieves all registered students
+  # For a course offer, retrieve all students registered for it
   def add_registered_students_offer(a, o, token)
     page = a.get("http://www.daconline.unicamp.br/altmatr/conspub_matriculadospordisciplinaturma.do?org.apache.struts.taglib.html.TOKEN=#{token}&txtDisciplina=#{o.course.code}&txtTurma=#{o.code}&cboSubG=#{o.semester}&cboSubP=#{'0'}&cboAno=#{o.year}&btnAcao=Continuar")
     html_page = convert_string(page.body)
@@ -227,7 +227,7 @@ namespace :dac do
   end
 
   # Retrieve all current course offers and for each one retrieve the students
-  # registered in it
+  # registered for it
   def add_registered_students(course, semester, year)
     a = Mechanize.new
     page = a.get("http://www.daconline.unicamp.br/altmatr/menupublico.do")
@@ -281,6 +281,6 @@ namespace :dac do
 
 
   task :import_all => [:import_unicamp_academic_programs, :import_unicamp_courses,
-   :import_unicamp_academic_programs_courses, :import_unicamp_students_classes  ] do
+   :import_unicamp_academic_programs_catalog, :import_unicamp_students_classes  ] do
   end
 end
