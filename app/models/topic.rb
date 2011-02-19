@@ -8,14 +8,14 @@ class Topic
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
   key :description, String
-  key :questions_count, :default => 0
+  key :questions_count, :default => 0, :index => true
 
   key :updated_by_id, String
   belongs_to :updated_by, :class_name => "User"
 
   key :follower_ids, Array, :index => true
   has_many :followers, :class_name => 'User', :in => :follower_ids
-  key :followers_count, :default => 0
+  key :followers_count, :default => 0, :index => true
 
   slug_key :title, :unique => true, :min_length => 3
 
