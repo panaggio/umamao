@@ -14,9 +14,26 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :find_languages
   before_filter :check_agreement_to_tos
+  before_filter :ensure_domain
   layout :set_layout
 
+  DEVELOPMENT_DOMAIN = 'localhost.lan'
+
   protected
+
+  def ensure_domain
+    current_domain = request.env['HTTP_HOST']
+
+    # bypass development mode (any port)
+    return if current_domain.include? DEVELOPMENT_DOMAIN
+
+    # redirect anydomain.com:anyport/anypath to example.com/anypath
+    # (the app's domain)
+    if current_domain != AppConfig.domain
+      redirect_to(request.url.sub(current_domain, AppConfig.domain),
+                  :status => 301)
+    end
+  end
 
   def flash_to_session
     if flash[:error]
