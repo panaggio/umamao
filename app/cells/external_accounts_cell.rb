@@ -29,10 +29,9 @@ class ExternalAccountsCell < Cell::Rails
   end
 
   def dac
-
-    @student = nil
-    @affiliation = Affiliation.first(:user_id => current_user.id.to_s, :university_id => University.find_by_short_name("Unicamp").id)
-    if @affiliation and not @affiliation.student
+    @affiliation = Affiliation.first(:user_id => current_user.id.to_s,
+                    :university_id => University.find_by_short_name("Unicamp").id)
+    if @affiliation && !@affiliation.student
       @affiliation = nil
       @student = Student.new
     end

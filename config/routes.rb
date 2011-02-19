@@ -42,7 +42,7 @@ Shapado::Application.routes.draw do
   get '/agreement/refuse' => 'agreement#refuse', :as => :refuse_agreement
 
   match '/auth/:provider/callback' => 'settings/external_accounts#create'
-  match '/auth/dac' => 'affiliations#add_student_dac'
+  match '/auth/dac' => 'affiliations#add_dac_student', :via => :post
   match '/auth/failure' => 'settings/external_accounts#failure'
 
   namespace :settings do

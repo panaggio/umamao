@@ -127,10 +127,18 @@ class UsersController < ApplicationController
         @user.bio = @affiliation.university.short_name
 
         # If student's code is known, link the affiliation to student model
-        m = @affiliation.email.match(/[a-z](\d*).*unicamp.br/)
-        if m and (student = Student.first(:code => m[1], :university_id => University.find_by_short_name("Unicamp").id))
-            @affiliation.student = student
-            @affiliation.save
+        code = @affiliation.email.match(/[a-z](\d{6})@dac.unicamp.br/)
+        if code
+          unicamp = University.find_by_short_name("Unicamp")
+          unless (student = Student.first(:code => code[1], :university_id => unicamp.id))
+            student = Student.new
+            student.code = code[1]
+            student.university = unicamp
+            student.name = @user.name
+            student.save
+          end
+          @affiliation.student = student
+          @affiliation.save
         end
 
         @user.save

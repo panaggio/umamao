@@ -12,5 +12,4 @@ pt-BR:
       code: RA
       submit: Enviar
       cancel: Cancelar
-      invalid_code: O RA informado está inválido.
-      not_registered_student: Você não está matriculado em nenhuma disciplina neste semestre.
+      invalid_code: RA inválido.
