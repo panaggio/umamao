@@ -8,3 +8,8 @@ pt-BR:
     connection_error: |
       Houve um erro durante a autenticação. Por favor, tente
       novamente mais tarde.
+    dac:
+      code: RA
+      submit: Enviar
+      cancel: Cancelar
+      invalid_code: RA inválido.

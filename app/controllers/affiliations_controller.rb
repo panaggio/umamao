@@ -90,4 +90,45 @@ class AffiliationsController < ApplicationController
     end
   end
 
+  def add_dac_student
+    fake_student = Student.new
+    fake_student.safe_update("code", params[:student])
+    unicamp = University.find_by_short_name("Unicamp")
+
+    if !fake_student.code =~ /(\d){6,6}/
+      respond_to do |format|
+        flash[:error] = I18n.t("external_accounts.dac.invalid_code")
+        format.html { redirect_to session["omniauth_return_url"] }
+      end
+      return
+    end
+
+    unless (student = Student.first(:code => fake_student.code, :university_id => unicamp.id))
+      fake_student.name = current_user.name
+      fake_student.university = unicamp
+      fake_student.save
+      student = fake_student
+    end
+
+    unless affiliation = Affiliation.first(:user_id => current_user.id.to_s, :university_id => unicamp.id)
+       affiliation = Affiliation.new(:university_id => unicamp.id, :user_id => current_user.id.to_s)
+    end
+    email = "#{current_user.name[0,1].downcase}#{student.code}@dac.unicamp.br"
+    affiliation.email = email
+    affiliation.student_id = student.id
+
+    unless affiliation.save
+      respond_to do |format|
+        flash[:error] = I18n.t("external_accounts.dac.invalid_code")
+        format.html { redirect_to session["omniauth_return_url"] }
+      end
+      return
+    end
+
+    current_user.affiliations << affiliation
+    current_user.save
+    respond_to do |format|
+      format.html { redirect_to session["omniauth_return_url"] }
+    end
+  end
 end

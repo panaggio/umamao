@@ -1,0 +1,5 @@
+= form_for @student, :url => "/auth/dac", :html => {:class => "form"} do |f|
+  = f.label :code, t(:code, :scope => "external_accounts.dac")
+  = f.text_field :code, :class => "dac_input"
+  = submit_tag t(:submit, :scope => "external_accounts.dac"), :class => "dac_connect"
+  = link_to t(:cancel, :scope => "external_accounts.dac"), "", :class => "dac_connect cancel_dac"
