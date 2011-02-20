@@ -144,6 +144,7 @@ class Answer < Comment
     NewsUpdate.create(:author => self.user, :entry => self,
                       :created_at => self.created_at, :action => 'created')
   end
+  handle_asynchronously :create_news_update
 
   def new_answer_notification
     # only if the answer wasn't created by question author and
@@ -153,10 +154,11 @@ class Answer < Comment
       user = User.find_by_id(watcher)
       if user != self.user &&
           user.notification_opts.new_answer
-        Notifier.delay.new_answer(user, self.group, self, true)
+        Notifier.new_answer(user, self.group, self, true)
       end
     end
   end
+  handle_asynchronously :new_answer_notification
 
   # Returns the (only) associated news update.
   # We need this because has_one doesn't work.
