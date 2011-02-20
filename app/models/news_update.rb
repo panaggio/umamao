@@ -19,4 +19,6 @@ class NewsUpdate
   def create_news_items
     NewsItem.from_news_update!(self)
   end
+  handle_asynchronously :create_news_items
+
 end
