@@ -512,6 +512,7 @@ Time.zone.now ? 1 : 0)
       end
     end
   end
+  handle_asynchronously :populate_news_feed!
 
   # Return the user's associated Facebook account, if there is one,
   # and nil otherwise.
