@@ -149,8 +149,7 @@ class Topic
 
   def unanswered_questions_count
     return Question.count(:topic_ids => self.id, :banned => false,
-                           :closed => false, :answered_with_id => nil,
-                           :exercise.ne => true)
+                           :closed => false, :answered_with_id => nil)
   end
 
   # WARNING: The search index update isn't atomic: the models will be

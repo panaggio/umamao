@@ -34,8 +34,6 @@ class Question
   key :closed, Boolean, :default => false
   key :closed_at, Time
 
-  key :exercise, Boolean, :default => false, :index => true
-
   key :parent_question_id, String, :index => true
   belongs_to :parent_question, :class_name => 'Question'
   scope :children_of, lambda { |question|
@@ -107,7 +105,7 @@ class Question
   filterable_keys :title, :body
   language :language
 
-  before_save :update_activity_at, :update_exercise
+  before_save :update_activity_at
   before_save :update_autocomplete_keywords
   before_create :add_question_author_to_watchers
   after_create :create_news_update
@@ -203,11 +201,6 @@ class Question
     update_activity_at if bring_to_front
     self.collection.update({:_id => self._id}, {:$inc => {:hotness => 1}},
                                                          :upsert => true)
-  end
-
-  # FIXME: Is this still working?
-  def update_exercise
-    self.exercise = self.tags.include?('resolução-de-exercício')
   end
 
   def update_activity_at

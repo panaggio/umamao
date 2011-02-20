@@ -23,9 +23,6 @@ class QuestionsController < ApplicationController
   def index
     set_page_title(t("questions.index.title"))
     conditions = scoped_conditions(:banned => false)
-    unless params[:tags] && params[:tags].include?('resolução-de-exercício')
-      conditions.merge!(:exercise.ne => true)
-    end
 
     if params[:sort] == "hot"
       conditions[:activity_at] = {"$gt" => 5.days.ago}
@@ -121,7 +118,7 @@ class QuestionsController < ApplicationController
   def unanswered
     set_page_title(t("questions.unanswered.title"))
     conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
-                                   :closed => false, :exercise.ne => true)
+                                   :closed => false)
 
     @questions = Question.paginate({:order => current_order,
                                     :per_page => 25,

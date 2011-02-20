@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
       raise Goalie::NotFound
     end
     set_page_title(@topic.title)
-    
+
     set_tab :all, :topic_show
 
     @news_items = NewsItem.paginate(:recipient_id => @topic.id,
@@ -130,7 +130,7 @@ class TopicsController < ApplicationController
       end
     end
   end
-  
+
   def unanswered
     begin
       @topic = Topic.find_by_slug_or_id(params[:id])
@@ -140,9 +140,9 @@ class TopicsController < ApplicationController
     set_page_title(@topic.title)
 
     set_tab :unanswered, :topic_show
-     
+
     conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
-                                   :closed => false, :exercise.ne => true)
+                                   :closed => false)
 
     @questions = Question.paginate({:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
