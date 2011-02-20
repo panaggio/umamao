@@ -8,7 +8,8 @@ class Topic
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
   key :description, String
-  key :questions_count, :default => 0, :index => true
+  key :questions_count, :default => 0
+  ensure_index([[:questions_count, -1]])
 
   key :updated_by_id, String
   belongs_to :updated_by, :class_name => "User"
