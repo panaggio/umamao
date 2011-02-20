@@ -16,6 +16,8 @@ Shapado::Application.routes.draw do
     end
   end
 
+  match "/courses/:id", :to => redirect("/topics/%{id}"), :as => :course
+
   resources :invitations, :only => [:index, :create]
 
   resources :waiting_users, :only => :create
