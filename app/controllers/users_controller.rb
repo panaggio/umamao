@@ -177,17 +177,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def wizard
-    track_event("wizard_#{params[:current_step]}".to_sym)
-    if ["skip", "finish"].include?(params[:current_step])
-      current_user.has_been_through_wizard = true
-      current_user.save!
-      redirect_to root_path
-    else
-      render :layout => "welcome"
-    end
-  end
-
   def show
     @user = User.find_by_login_or_id(params[:id])
     raise Goalie::NotFound unless @user
