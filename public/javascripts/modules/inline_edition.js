@@ -9,7 +9,8 @@
  * 
  *     Note: You may notice that data-inline-object-key is an empty string in the profile example. This
  *   is because we can optimize the case for profile edition since we have the 'current_user' variable.
- *   Usually this variable will contain the id for the edited object.
+ *   Usually this variable will contain the id for the edited object. However, this is needed because
+ *   we want to be able to place the data-inline-object-key as high as we want in the DOM.
  * 
  *     The double-click version is completely untested and out of date. It was left here as a TODO and
  *   will be refactored in future when needed ( Probably by the university/affiliation administration
