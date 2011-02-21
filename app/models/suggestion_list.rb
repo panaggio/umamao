@@ -179,7 +179,7 @@ class SuggestionList
     kept_suggestions = []
 
     self.topic_suggestions.each do |topic_suggestion|
-      if ["external", "university"].include?(topic_suggestion.reason) &&
+      if ["external", "university", "dac"].include?(topic_suggestion.reason) &&
           topic_suggestion.entry.present?
         kept_suggestions << topic_suggestion
       else
