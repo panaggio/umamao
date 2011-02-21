@@ -565,7 +565,7 @@ Time.zone.now ? 1 : 0)
         graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
         ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
         external_contacts += ExternalAccount.query(:provider => "facebook",
-                                                 :uid.in => ids).map(&:user)
+                                                   :uid.in => ids).map(&:user)
       end
     rescue Koala::Facebook::APIError
       # Ignore

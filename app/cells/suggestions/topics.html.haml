@@ -4,8 +4,7 @@
     %h3.title
       = t("followable.suggestions.topics")
     %ul.topic-list
-      - @topic_suggestions.each do |suggestion|
-        - topic = suggestion.entry
+      - @suggested_topics.each do |topic|
         %li
           .topic.info
             %span.topic-title
@@ -14,5 +13,5 @@
             .follow-info
               = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
             .refuse-suggestion
-              = link_to "✕", refuse_suggestion_path(:suggestion => suggestion.id), :method => :post
+              = link_to "✕", refuse_suggestion_path(:topic => topic.id), :method => :post
           .clear

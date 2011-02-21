@@ -12,11 +12,15 @@
     %h2
       = "#{t("signup_wizard.#{@current_step}")} (#{@steps.index(@current_step) + 1}/#{@steps.length})"
 
-    - case @current_step
-    - when "connect"
-      = render_cell "external_accounts", :display
-    - when "follow"
-      = render :state => :follow
+    #content
+      - case @current_step
+      - when "connect"
+        = render_cell "external_accounts", :display
+      - when "follow"
+        #wait-notice
+          #loader
+            = image_tag "ajax-loader-big.gif"
+          = t("signup_wizard.wait")
 
     #navigation
       - if @previous_step

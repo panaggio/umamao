@@ -4,8 +4,7 @@
     = t("followable.suggestions.users")
 
   %ul
-    - @user_suggestions.each do |suggestion|
-      - user = suggestion.entry
+    - @suggested_users.each do |user|
       %li
         .user.info
           = avatar_for(user, :size => 32)
@@ -14,6 +13,6 @@
           .follow-info
             = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link", :method => :post
           .refuse-suggestion
-            = link_to "✕", refuse_suggestion_path(:suggestion => suggestion.id), :method => :post
+            = link_to "✕", refuse_suggestion_path(:user => user.id), :method => :post
         .clear
 
