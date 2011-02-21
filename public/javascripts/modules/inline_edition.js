@@ -98,17 +98,7 @@ window.inlineEdition = {
       $('.save_link').live('click',
         function(event) {
           var sentRequest = inlineEdition.save($(':input', $(event.target).parent()), settings,
-	    function(elem) { //error
-	      elem.siblings('.inactive_edit_link')
-	        .removeClass('inactive_edit_link')
-                .addClass('edit_link');
-
-              $('.active_ajax_waiting_image', elem.parent())
-                .removeClass('.active_ajax_waiting_image')
-                .addClass('ajax_waiting_image');  
-	    },
-
-	    function(elem) { //success
+	    function(elem) { //beforeChange
 	      elem.parent().siblings('.inactive_edit_link')
                 .removeClass('inactive_edit_link')
                 .addClass('edit_link');
@@ -180,7 +170,7 @@ window.inlineEdition = {
       elem.parent().html(elem.attr("data-previous-value"));
   },
 
-  save: function(elem, settings, error, success) {
+  save: function(elem, settings, beforeChange) {
     if(elem.val() == elem.attr('data-previous-value') || 
         (elem.parent().hasClass('empty_inline_editable_field') &&
 	 elem.val()=='')) {
@@ -207,8 +197,8 @@ window.inlineEdition = {
       error: function(data) {
 	Utils.showMessage('sorry, something went wrong.', 'error');
 
-	if(typeof(error) == "function")
-	  error.call(null, elem);
+	if(typeof(beforeChange) == "function")
+	  beforeChange.call(null, elem);
 
 	elem.parent().html(elem.attr('data-previous-value'));
       },
@@ -227,8 +217,8 @@ window.inlineEdition = {
         if(elem.parent().attr("data-inline-edition-editable-content"))
 	  elem.parent().attr("data-inline-edition-editable-content", data.value);
 
-	if(typeof(success) == "function")
-	  success.call(null, elem);
+	if(typeof(beforeChange) == "function")
+	  beforeChange.call(null, elem);
 
         if(elem.parent().attr('data-inline-edition-markdown') &&
           !elem.parent().hasClass('empty_inline_editable_field')) {
