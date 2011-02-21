@@ -118,6 +118,11 @@ class User
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
 
+  def description=(description)
+    debugger
+    self[:description] = description.strip
+  end
+
   def self.find_for_authentication(conditions={})
     first(conditions) || first(:login => conditions["email"])
   end

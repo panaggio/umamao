@@ -325,7 +325,7 @@ class UsersController < ApplicationController
     errors = u.errors
     u = User.find(params[:inline_object_key])
 
-    empty_field = u[params[:name]].nil? ||  u[params[:name]].length == 0
+    empty_field = u[params[:name]].blank?
     value = if empty_field then
       t('users.inline_edition.empty_'+params[:name])
     else
