@@ -3,9 +3,12 @@ namespace :suggestions do
   task :prune => :environment do
     Suggestion.query.each do |suggestion|
       if suggestion.entry.blank?
-        puts "Removing blank suggestion #{suggestion.id} " +
-          "of #{suggestion.entry_type} #{suggestion.entry_id}"
         suggestion.user.remove_suggestion(suggestion)
+      elsif !suggestion.user.suggestion_list.
+          topic_suggestion_ids.include?(suggestion.id) &&
+          !suggestion.user.suggestion_list.user_suggestion_ids.
+          include?(suggestion.id)
+        suggestion.destroy
       end
     end
   end

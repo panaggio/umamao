@@ -9,10 +9,12 @@ class SuggestionsController < ApplicationController
       @suggestion = Suggestion.find_by_id(params[:suggestion])
     elsif params[:topic].present?
       @suggestion = Suggestion.first(:entry_id => BSON::ObjectId(params[:topic]),
-                                     :entry_type => "Topic")
+                                     :entry_type => "Topic",
+                                     :user_id => current_user.id)
     elsif params[:user].present?
       @suggestion = Suggestion.first(:entry_id => params[:user],
-                                     :entry_type => "User")
+                                     :entry_type => "User",
+                                     :user_id => current_user.id)
     end
 
     if @suggestion
