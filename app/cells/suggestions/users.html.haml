@@ -4,7 +4,7 @@
     = t("followable.suggestions.users")
 
   %ul
-    - User.query(:id.in => @user_suggestions.map(&:entry_id)).each do |user|
+    - @suggested_users.each do |user|
       %li
         .user.info
           = avatar_for(user, :size => 32)

@@ -4,7 +4,7 @@
     %h3.title
       = t("followable.suggestions.topics")
     %ul.topic-list
-      - Topic.query(:id.in => @topic_suggestions.map(&:entry_id)).each do |topic|
+      - @suggested_topics.each do |topic|
         %li
           .topic.info
             %span.topic-title
