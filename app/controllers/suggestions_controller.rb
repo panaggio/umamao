@@ -28,7 +28,7 @@ class SuggestionsController < ApplicationController
       format.js do
         request_answer = {:success => !!@suggestion}
         if type
-          request_answer[:suggestions] = render_cell :suggestions, type
+          request_answer[:suggestions] = render_cell :suggestions, type, :one_column => params[:one_column]
         end
         render :json => request_answer.to_json
       end
