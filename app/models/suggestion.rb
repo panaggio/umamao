@@ -8,6 +8,8 @@ class Suggestion
   key :entry_type, :required => true
   belongs_to :entry, :polymorphic => true
 
+  ensure_index([[:entry_id, 1], [:entry_type, 1]])
+
   key :reason, String
 
   timestamps!

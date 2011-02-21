@@ -4,13 +4,23 @@ class SuggestionsController < ApplicationController
   # Refuse suggestions.
   def refuse
     type = nil
-    if @suggestion = Suggestion.find_by_id(params[:suggestion])
+
+    if params[:suggestion].present?
+      @suggestion = Suggestion.find_by_id(params[:suggestion])
+    elsif params[:topic].present?
+      @suggestion = Suggestion.first(:entry_id => BSON::ObjectId(params[:topic]),
+                                     :entry_type => "Topic")
+    elsif params[:user].present?
+      @suggestion = Suggestion.first(:entry_id => params[:user],
+                                     :entry_type => "User")
+    end
+
+    if @suggestion
       type = (@suggestion.entry_type.downcase + "s").to_sym
       current_user.refuse_suggestion(@suggestion)
       current_user.save!
+      track_event(:refused_suggestion)
     end
-
-    track_event(:refused_suggestion)
 
     respond_to do |format|
       format.js do

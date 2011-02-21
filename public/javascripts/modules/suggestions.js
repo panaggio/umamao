@@ -3,10 +3,11 @@
 Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a", function () {
   var li = $(this).closest("li");
   var suggestionsDiv = $(this).closest(".suggestions");
+  var isFollow = $(this).is(".follow_link");
 
   return {
 
-    data: {suggestion: true},
+    data: isFollow ? {suggestion: true} : {},
 
     success: function (data) {
       li.slideUp(800, function () {
