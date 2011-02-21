@@ -5,6 +5,15 @@
  *   app/controllers/users.rb          def inline_edition
  *   app/views/user/show.html.haml     .profile_inline_editable{ "data-inline-object-key" =>
  *   config/locales/users/*.yml        users.inline_edition.{empty_bio,empty_description}
+ *   this file                         function profileInlineEdition
+ * 
+ *     Note: You may notice that data-inline-object-key is an empty string in the profile example. This
+ *   is because we can optimize the case for profile edition since we have the 'current_user' variable.
+ *   Usually this variable will contain the id for the edited object.
+ * 
+ *     The double-click version is completely untested and out of date. It was left here as a TODO and
+ *   will be refactored in future when needed ( Probably by the university/affiliation administration
+ *   system ).
  * 
  *************************************************************************************************/
 
@@ -127,7 +136,8 @@ window.inlineEdition = {
     }
 	    
     /* When we want the inline edition to be controlled by "double click"
-     * "enter" and "blur" */
+     * "enter" and "blur"
+     * TODO: dblclick needs refactoring */
     if(settings.method == "dblclick")
     {
       $(settings.selector).live("dblclick", function(event) {
@@ -179,8 +189,8 @@ window.inlineEdition = {
     }
 
     var parent = elem;
-    while(!parent.attr("data-inline-object-key"))
-      parent = parent.parent();
+    while(parent.attr("data-inline-object-key") == undefined)
+	parent = parent.parent();
 
     elem.attr('readonly','readonly');
 
@@ -195,7 +205,7 @@ window.inlineEdition = {
       type: "POST",
 
       error: function(data) {
-	Utils.showMessage('sorry, something went wrong.', "error");
+	Utils.showMessage('sorry, something went wrong.', 'error');
 
 	if(typeof(error) == "function")
 	  error.call(null, elem);
@@ -266,7 +276,7 @@ window.inlineEdition = {
 
 function universityInlineEdition() {
   return {
-    //Can be either 'links' or 'dblclick'
+    //Can be either 'links' or 'dblclick' TODO: dblclick needs refactoring
     method: "dblclick",
 	    
     //The url that will be called to handle the edition
@@ -276,7 +286,7 @@ function universityInlineEdition() {
 
 function profileInlineEdition() {
   return {
-    // Can be either 'links' or 'dblclick'
+    // Can be either 'links' or 'dblclick' TODO: dblclick needs refactoring
     method: "links",
 	    
     // The url that will be called to handle the edition

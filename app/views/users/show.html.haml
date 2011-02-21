@@ -3,7 +3,7 @@
   -@profile_owner = (current_user && current_user.id == @user.id)
 
   -if @profile_owner
-    .profile_inline_editable{ "data-inline-object-key" => @user._id }
+    .profile_inline_editable{ "data-inline-object-key" => "" }
       %div
         %span.navtitle{ "data-inline-name" => "name" }&= @user.name
       %div
@@ -35,11 +35,11 @@
 
     -if @profile_owner
       -if @user.description.blank?
-        .profile_inline_editable.markdown.empty_inline_editable_field{ "data-inline-object-key" => @user.id,  "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-markdown" => "markdown", "data-inline-edition-editable-content" => "" }
+        .profile_inline_editable.markdown.empty_inline_editable_field{ "data-inline-object-key" => "",  "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-markdown" => "markdown", "data-inline-edition-editable-content" => "" }
           = t("users.inline_edition.empty_description")
 
       -else
-        .profile_inline_editable.markdown{ "data-inline-object-key" => @user.id, "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-editable-content" => @user.description, "data-inline-edition-markdown" => "markdown"}
+        .profile_inline_editable.markdown{ "data-inline-object-key" => "", "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-editable-content" => @user.description, "data-inline-edition-markdown" => "markdown"}
           = markdown(@user.description)
     -else
       = markdown(@user.description)

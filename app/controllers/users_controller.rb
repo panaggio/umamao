@@ -313,32 +313,36 @@ class UsersController < ApplicationController
   end
 
   def inline_edition
-    u = User.find(params[:inline_object_key])
-    u[params[:name]] = params[:value]
+    unless(!["name", "bio", "description"].include?(params[:name]))
 
-    u.save
-    error_message = ''
-    if u.errors[params[:name]].present?
-      error_message = u.errors[params[:name]][0]
-    end
+      current_user[params[:name]] = params[:value]
+      current_user.save
 
-    errors = u.errors
-    u = User.find(params[:inline_object_key])
+      error_message = if current_user.errors[params[:name]].present? then
+                        current_user.errors[params[:name]][0]
+                      else
+                        ''
+                      end
 
-    empty_field = u[params[:name]].blank?
-    value = if empty_field then
-      t('users.inline_edition.empty_'+params[:name])
-    else
-      u[params[:name]]
-    end
+      errors = current_user.errors
 
-    respond_to do |format|
-      format.json {
-        render :json => {:value => value,
-                         :errors => errors,
-                         :error  => error_message,
-                         :empty_field => empty_field}.to_json
-      }
+      current_user.reload
+
+      empty_field = current_user[params[:name]].blank?
+      value = if empty_field then
+        t('users.inline_edition.empty_'+params[:name])
+      else
+        current_user[params[:name]]
+      end
+
+      respond_to do |format|
+        format.json {
+          render :json => {:value => value,
+                           :errors => errors,
+                           :error  => error_message,
+                           :empty_field => empty_field}.to_json
+        }
+      end
     end
   end
 

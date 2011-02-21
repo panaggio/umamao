@@ -119,8 +119,7 @@ class User
   scope :unconfirmed, where(:confirmed_at => nil)
 
   def description=(description)
-    debugger
-    self[:description] = description.strip
+    super(description.strip)
   end
 
   def self.find_for_authentication(conditions={})

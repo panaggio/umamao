@@ -29,7 +29,7 @@ window.Utils = {
     });
   },
 
-  //  Searches for a given flash_message cookies, call showMessage (above)
+  //  Searches for a given flash_message cookie, call showMessage (above)
   // with its contents and delete it
   showInlineMessage: function() {
     var message = readCookie("flash_error");
