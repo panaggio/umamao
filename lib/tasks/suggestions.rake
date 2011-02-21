@@ -4,7 +4,8 @@ namespace :suggestions do
     Suggestion.query.each do |suggestion|
       if suggestion.entry.blank?
         suggestion.user.remove_suggestion(suggestion)
-      elsif !suggestion.user.suggestion_list.
+      elsif suggestion.user &&
+          !suggestion.user.suggestion_list.
           topic_suggestion_ids.include?(suggestion.id) &&
           !suggestion.user.suggestion_list.user_suggestion_ids.
           include?(suggestion.id)
