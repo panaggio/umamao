@@ -94,9 +94,9 @@ class SuggestionList
     return if !suggestion
 
     if entry_type == "Topic"
-      self.topic_suggestions.delete(suggestion)
+      self.topic_suggestion_ids.delete(suggestion.id)
     elsif entry_type == "User"
-      self.user_suggestions.delete(suggestion)
+      self.user_suggestion_ids.delete(suggestion.id)
     end
     suggestion.destroy
   end
@@ -132,9 +132,10 @@ class SuggestionList
   end
 
   # Suggest the 20 most followed topics.
-  def suggest_popular_topics
-    self.suggest(Topic.query(:order => :followers_count.desc),
-                 :limit => 20, :reason => "popular")
+  def suggest_popular_topics(limit)
+    self.suggest(Topic.query(:order => :followers_count.desc,
+                             :limit => limit),
+                 :reason => "popular")
   end
 
   # Suggest topics related to the user's affiliations.
@@ -152,7 +153,9 @@ class SuggestionList
         self.user_suggestions.blank?
       self.suggest_university_topics
       self.suggest_from_outside
-      self.suggest_popular_topics
+      if self.topic_suggestion_ids.size < 20
+        self.suggest_popular_topics(20 - self.topic_suggestion_ids.size)
+      end
     end
   end
 
