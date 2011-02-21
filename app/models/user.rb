@@ -95,8 +95,10 @@ class User
     :message => lambda { I18n.t("users.validation.errors.long_name") }
   filterable_keys :name
 
-  validates_length_of       :bio, :maximum => 140
-  validates_length_of       :description, :maximum => 500
+  validates_length_of       :bio, :maximum => 140,
+    :message => lambda { I18n.t("users.validation.errors.long_bio") }
+  validates_length_of       :description, :maximum => 500,
+    :message => lambda { I18n.t("users.validation.errors.long_description") }
 
   # We need to be careful with the validation if the user is trying to
   # reset his password. If the user isn't able to login, he won't be

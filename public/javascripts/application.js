@@ -6,6 +6,14 @@ $(document).ready(function() {
 
   Utils.showInlineMessage();
 
+  // Inline editions
+  if(typeof inlineEdition == 'object') {
+    if(typeof profileInlineEdition == 'function') {
+      inlineEdition
+        .makeInlineEditable(profileInlineEdition);
+    }
+  }
+
   // TODO: place this somewhere else
   if ($("#landing_signup").length > 0 ) {
     Utils.clickObject("input#affiliation_submit", signUpAjaxRequest);

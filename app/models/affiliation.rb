@@ -25,6 +25,7 @@ class Affiliation
   validates_uniqueness_of :email
   validates_presence_of :email
 
+  before_validation :strip_email
   after_create :send_confirmation
 
   # This method is for debugging porpouses only.
@@ -52,5 +53,10 @@ class Affiliation
 
   def self.resend_confirmation(email)
     where(:email => email).first.send_confirmation
+  end
+
+
+  def strip_email
+    self.email = self.email.strip
   end
 end

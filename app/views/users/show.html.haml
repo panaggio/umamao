@@ -1,8 +1,20 @@
 
 - content_for :subtabs do
-  .navtitle
-    &= @user.name
-  = shapado_auto_link(@user.bio)
+  -@profile_owner = (current_user && current_user.id == @user.id)
+
+  -if @profile_owner
+    .profile_inline_editable{ "data-inline-object-key" => @user._id }
+      %div
+        %span.navtitle{ "data-inline-name" => "name" }&= @user.name
+      %div
+        - if @user.bio && @user.bio.length > 0
+          %span{"data-inline-name" => "bio" }= @user.bio
+        - else
+          %span{"data-inline-name" => "bio", "class" => "empty_inline_editable_field" }= t("users.inline_edition.empty_bio")
+  - else
+    %div.navtitle= @user.name
+    %div= @user.bio
+
   %hr
 
 - content_for :sidebar do
@@ -20,7 +32,17 @@
       = link_to image_tag("facebook.gif"), 'http://www.facebook.com/' + @user.facebook_account.user_info["nickname"]
     - if @user.twitter_account
       = link_to image_tag("twitter.gif"), 'http://twitter.com/' + @user.twitter_account.user_info["nickname"]
-    = shapado_auto_link(markdown(@user.description))
+
+    -if @profile_owner
+      -if @user.description && @user.description.length > 0
+        .profile_inline_editable.markdown{ "data-inline-object-key" => @user.id, "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-editable-content" => @user.description, "data-inline-edition-markdown" => "markdown"}
+          = markdown(@user.description)
+
+      -else
+        .profile_inline_editable.markdown.empty_inline_editable_field{ "data-inline-object-key" => @user.id,  "data-inline-name" => "description", "data-inline-edition-input" => "textarea", "data-inline-edition-markdown" => "markdown", "data-inline-edition-editable-content" => "" }
+          = t("users.inline_edition.empty_description")
+    -else
+      = markdown(@user.description)
 
   -# Followers
   - if @user.followers.count > 0
