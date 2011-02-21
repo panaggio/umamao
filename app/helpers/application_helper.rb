@@ -75,21 +75,31 @@ module ApplicationHelper
 
   # Modified Markdown syntax that understands LaTeX math
   def markdown(txt, options = {})
-    escaped_math = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
-      open  = $1
-      math  = $2
-      close = $3
-      "\\\\" + open + math.gsub(/([_\*\\])/){|m| '\\' + $1} + "\\\\" + close
+    options.merge! :process_latex => true
+
+    if options[:process_latex]
+      txt = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
+        open  = $1
+        math  = $2
+        close = $3
+        "\\\\" + open + math.gsub(/([_\*\\])/){|m| '\\' + $1} + "\\\\" + close
+      end
     end
 
     processed_markdown =
-      Nokogiri::HTML(RDiscount.new(render_page_links(escaped_math, options), :strict).to_html)
-    processed_markdown.css("code").each do |c|
-      c.content = c.content.gsub /\\\\([\(\[])(.*?)\\\\([\]\)])/m do |match|
-        match.gsub(/\\([_\*\\\[\]\(\)])/, '\1')
+      RDiscount.new(render_page_links(txt, options), :strict).to_html
+
+    if options[:process_latex]
+      processed_markdown = Nokogiri::HTML(processed_markdown)
+      processed_markdown.css("code").each do |c|
+        c.content = c.content.gsub /\\\\([\(\[])(.*?)\\\\([\]\)])/m do |match|
+          match.gsub(/\\([_\*\\\[\]\(\)])/, '\1')
+        end
       end
+      res = processed_markdown.to_html
+    else
+      res = processed_markdown
     end
-    res = processed_markdown.to_html
 
     if options[:sanitize] != false
       res = Sanitize.clean(res, SANITIZE_CONFIG)
