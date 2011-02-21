@@ -1,3 +1,13 @@
+/************************************************************************************************
+ * To undestand the usage by example, visit these files and search for the content that follows
+ *
+ *   public/javascripts/application.js // Inline editions
+ *   app/controllers/users.rb          def inline_edition
+ *   app/views/user/show.html.haml     .profile_inline_editable{ "data-inline-object-key" =>
+ *   config/locales/users/*.yml        users.inline_edition.{empty_bio,empty_description}
+ * 
+ *************************************************************************************************/
+
 window.inlineEdition = {
     
   /* this variable is used to provide communication between 'blur' and
