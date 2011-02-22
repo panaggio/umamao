@@ -154,7 +154,7 @@ class Answer < Comment
       user = User.find_by_id(watcher)
       if user != self.user &&
           user.notification_opts.new_answer
-        Notifier.new_answer(user, self.group, self, true)
+        Notifier.delay.new_answer(user, self.group, self, true)
       end
     end
   end
