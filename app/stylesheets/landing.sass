@@ -4,6 +4,7 @@
 @import buttons
 @import follow
 @import suggestions
+@import compass/css3
 @import compass/css3/border-radius
 @import compass/css3/gradient
 @import topic_container
@@ -13,7 +14,7 @@
 
 body.bp
   a, a:visited, a:hover
-    color: $logo-color
+    color: #0077CC
     text-decoration: none
 
 #container
@@ -71,19 +72,47 @@ hr#colruler
   p
     margin: 0
 
+#title_landingpage
+  text-align: center
+  margin-top: 25px
+  margin-bottom: 30px
+
 #content
-  +column(13)
+  +column(14)
   margin-bottom: 20px
   padding-top: 20px
+  font-size: 1.2em
+  a
+    color: #0077CC
 
+.quote
+  background: url("/images/quote.gif") no-repeat scroll 0 0 transparent
+  padding-left: 45px
+  margin-top: 40px
+  font-size: 1.2em
+  font-style: italic
+  +text-shadow(#BBBBBB, 1px, 1px, 1px)
+.quote_author
+  font-size: 0.8em
+  margin-top: -15px
+  padding-left: 125px
+  
+#content_msg
+  float: left
+  font-size: 1.5em
+  margin-left: 30px
+  text-align: center
+  width: 350px
+  
 #signup
-  $signup-columns: 10
+  $signup-columns: 9
   // true means it's the last column in the row
   +column($signup-columns, true)
   +border-radius(8px)
   background-color: #F5F5F5
-  padding: 20px
+  padding: 10px
   margin-bottom: 20px
+  margin-left: 20px
 
   form
     +blueprint-form-sizes(258px)
@@ -109,7 +138,9 @@ hr#colruler
 
   .field
     margin-left: 60px
-
+  #mamao_singup
+    margin-left: 58px
+    margin-top: 20px
   .submit
     float: right
     padding-right: 52px
