@@ -19,12 +19,15 @@
 - content_for :js do
   = render :partial => "shared/layout/javascript/landing"
 
+#title_landingpage
+
+  %h1 Qualquer pergunta, não qualquer resposta.
+
 #content
-  %h3 Qualquer pergunta, não qualquer resposta.
 
   %p
 
-    O Umamão é uma base de conhecimento em língua portuguesa
+    O Umamão é uma base de perguntas e respostas
     expandida e melhorada constantemente por acadêmicos e
     profissionais. Temos orgulho de produzir conteúdo de
     qualidade.
@@ -34,6 +37,22 @@
 
       Se você é curioso e gosta de compartilhar conhecimento, o
       Umamão é para você.
+    
+  %p
+    %a{ :href => 'http://umamao.com/questions' }
+      Veja as últimas perguntas feitas no Umamão
+      
+  %p
+    .quote
+      O Umamão é uma ótima oportunidade para tirar suas dúvidas
+      e ajudar seus amigos respondendo às deles. Aproveitem
+      as explicações de aluno para aluno!
+  %p
+    .quote_author
+      %strong
+        Rodolfo Azevedo
+      , professor do Instituto de Computação da Unicamp e usuário do Umamão
+
 
 #signup
   %h3  #{ t('layouts.application.signup') }
@@ -55,7 +74,14 @@
             fazer login e receber atualizações depois).  Se você não
             possui um, deixe o seu email pessoal que entraremos em
             contato.
-
+      = image_tag("mamaopq.png", :id => "mamao_singup")    
       .submit
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hidden")
         = f.submit t('layouts.application.signup_button'), :tabindex => 6
+        
+#content_msg
+  %p
+    Alunos da 
+    %strong 
+      Usp, Unicamp, Unesp, UFRJ, UFMG, UFBA, Puc-Rio 
+    e de muitas outras já estão usando o Umamão!
