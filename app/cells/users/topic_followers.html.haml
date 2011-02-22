@@ -1,5 +1,0 @@
-- if @users.count > 0
-  .block.followers{"data-entry-type" => "topic"}
-    %h2.title.count
-      = t('followable.followers', :count => @users.count)
-    = render :state => :list

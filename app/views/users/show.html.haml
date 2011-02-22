@@ -23,10 +23,10 @@
     = shapado_auto_link(markdown(@user.description))
 
   -# Followers
-  = render_cell :users, :followers, :user => @user
+  = render_cell :users, :followers, :followed => @user
 
   -# Followed users
-  = render_cell :users, :following, :user => @user
+  = render_cell :users, :following, :follower => @user
 
   -# Followed topics
   - if @topics.count == 0

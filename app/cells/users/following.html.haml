@@ -1,5 +1,5 @@
-- if @user.following.count > 0
+- if @total_followed > 0
   .block
     %h2.title
-      = t('followable.following', :count => @user.following.count)
+      = t('followable.following', :count => @total_followed)
     = render :state => :list

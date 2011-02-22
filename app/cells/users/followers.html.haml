@@ -1,5 +1,5 @@
-- if @user.followers.count > 0
-  .block.followers{"data-entry-type" => "user"}
+- if @total_followers > 0
+  .block.followers{"data-entry-type" => @type}
     %h2.title.count
-      = t("followable.followers", :count => @user.followers.count)
+      = t("followable.followers", :count => @total_followers)
     = render :state => :list

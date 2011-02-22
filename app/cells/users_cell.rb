@@ -4,43 +4,34 @@ class UsersCell < Cell::Rails
   helper UsersHelper
 
   cache :followers do |cell, options|
-    user = cell.options[:user]
-    "#{user.id}/#{user.followers.count}"
+    followed = cell.options[:followed]
+    "#{followed.class.to_s.downcase}/#{followed.id}" +
+      "/#{followed.followers.count}"
   end
 
   cache :following do |cell, options|
-    user = cell.options[:user]
-    "#{user.id}/#{user.following.count}"
+    follower = cell.options[:follower]
+    "#{follower.id}/#{follower.following.count}"
   end
 
   def followers
-    @user = options[:user]
-    @users = @user.followers
+    @followed = options[:followed]
+    @users = @followed.followers
+    @total_followers = @followed.followers.count
+    @type = @followed.class.to_s.downcase
     render
   end
 
   def following
-    @user = options[:user]
-    @users = @user.following
-    render
-  end
-
-  def topic_followers
-    @topic = options[:topic]
-    @users = @topic.followers
-    render
-  end
-
-  def question_followers
-    @question = options[:question]
-    @users = User.query(:id.in => @question.watchers)
+    @follower = options[:follower]
+    @users = @follower.following
+    @total_followed = @follower.following.count
     render
   end
 
   # List of users with small avatars.
   def list
     @users ||= options[:users]
-    @title ||= options[:title]
     render
   end
 

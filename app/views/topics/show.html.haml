@@ -3,7 +3,7 @@
 
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
-  = render_cell :users, :topic_followers, :topic => @topic
+  = render_cell :users, :followers, :followed => @topic
 
 .secondary-navigation
   .navtitle
