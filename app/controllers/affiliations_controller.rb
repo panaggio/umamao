@@ -95,7 +95,7 @@ class AffiliationsController < ApplicationController
     fake_student.safe_update("code", params[:student])
     unicamp = University.find_by_short_name("Unicamp")
 
-    if !fake_student.code =~ /(\d){6,6}/
+    if !(fake_student.code =~ /(\d){6,6}/)
       respond_to do |format|
         flash[:error] = I18n.t("external_accounts.dac.invalid_code")
         format.html { redirect_to session["omniauth_return_url"] }
