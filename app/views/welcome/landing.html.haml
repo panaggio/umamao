@@ -37,11 +37,10 @@
 
       Se você é curioso e gosta de compartilhar conhecimento, o
       Umamão é para você.
-    
+
   %p
-    %a{ :href => 'http://umamao.com/questions' }
-      Veja as últimas perguntas feitas no Umamão
-      
+    = link_to 'Veja as últimas perguntas feitas no Umamão!', questions_path
+
   %p
     .quote
       O Umamão é uma ótima oportunidade para tirar suas dúvidas
@@ -74,14 +73,17 @@
             fazer login e receber atualizações depois).  Se você não
             possui um, deixe o seu email pessoal que entraremos em
             contato.
-      = image_tag("mamaopq.png", :id => "mamao_singup")    
+      = image_tag("mamaopq.png", :id => "mamao_signup")
       .submit
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hidden")
         = f.submit t('layouts.application.signup_button'), :tabindex => 6
-        
+
 #content_msg
   %p
-    Alunos da 
-    %strong 
-      Usp, Unicamp, Unesp, UFRJ, UFMG, UFBA, Puc-Rio 
-    e de muitas outras já estão usando o Umamão!
+    Alunos e professores da
+    %strong
+      = %w[USP Unicamp Unesp UFRJ UFMG UFBA PUC-Rio].map{ |uni| link_to(uni, topic_path(uni), :target => '_blank') }.join(', ')
+    e de muitas outras universidades já estão usando o Umamão!
+    %br
+    Junte-se a nós!
+

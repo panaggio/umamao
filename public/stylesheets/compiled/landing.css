@@ -1,1509 +1,581 @@
 @charset "UTF-8";
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000034}}
-html, body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000034}}
+html, body { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000036}}
-html {
-  font-size: 100.01%;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\000036}}
+html { font-size: 100.01%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000316}}
-div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
-pre, a, abbr, acronym, address, code, del, dfn, em, img,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000316}}
+div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, pre, a, abbr, acronym, address, code, del, dfn, em, img, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000318}}
-blockquote, q {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  quotes: "" "";
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000345}}
-blockquote:before, blockquote:after, q:before, q:after {
-  content: "";
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000318}}
+blockquote, q { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; quotes: "" ""; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000345}}
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000320}}
-th, td, caption {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000320}}
+th, td, caption { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; text-align: left; font-weight: normal; vertical-align: middle; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000322}}
-table {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000322}}
+table { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; border-collapse: separate; border-spacing: 0; vertical-align: middle; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000324}}
-a img {
-  border: none;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/reset\/_utilities\.scss}line{font-family:\0000324}}
+a img { border: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/partials\/_page\.scss}line{font-family:\000039}}
-body.bp {
-  line-height: 1.5;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #333333;
-  font-size: 75%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000365}}
-body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
-  font-weight: normal;
-  color: #222222;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000366}}
-body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img {
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000367}}
-body.bp h1 {
-  font-size: 3em;
-  line-height: 1;
-  margin-bottom: 0.50em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000368}}
-body.bp h2 {
-  font-size: 2em;
-  margin-bottom: 0.75em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000369}}
-body.bp h3 {
-  font-size: 1.5em;
-  line-height: 1;
-  margin-bottom: 1.00em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000370}}
-body.bp h4 {
-  font-size: 1.2em;
-  line-height: 1.25;
-  margin-bottom: 1.25em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000371}}
-body.bp h5 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 1.50em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000372}}
-body.bp h6 {
-  font-size: 1em;
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000373}}
-body.bp p {
-  margin: 0 0 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000374}}
-body.bp p img.left {
-  display: inline;
-  float: left;
-  margin: 1.5em 1.5em 1.5em 0;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000375}}
-body.bp p img.right {
-  display: inline;
-  float: right;
-  margin: 1.5em 0 1.5em 1.5em;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000377}}
-body.bp a {
-  text-decoration: underline;
-  color: #000099;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000318}}
-body.bp a:visited {
-  color: #000066;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000321}}
-body.bp a:focus {
-  color: black;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000324}}
-body.bp a:hover {
-  color: black;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000327}}
-body.bp a:active {
-  color: #cc0099;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000378}}
-body.bp blockquote {
-  margin: 1.5em;
-  color: #666666;
-  font-style: italic;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000379}}
-body.bp strong {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000380}}
-body.bp em {
-  font-style: italic;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000381}}
-body.bp dfn {
-  font-style: italic;
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000382}}
-body.bp sup, body.bp sub {
-  line-height: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000383}}
-body.bp abbr, body.bp acronym {
-  border-bottom: 1px dotted #666666;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000384}}
-body.bp address {
-  margin: 0 0 1.5em;
-  font-style: italic;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000385}}
-body.bp del {
-  color: #666666;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000386}}
-body.bp pre {
-  margin: 1.5em 0;
-  white-space: pre;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000387}}
-body.bp pre, body.bp code, body.bp tt {
-  font: 1em "andale mono", "lucida console", monospace;
-  line-height: 1.5;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000388}}
-body.bp li ul, body.bp li ol {
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000389}}
-body.bp ul, body.bp ol {
-  margin: 0 1.5em 1.5em 0;
-  padding-left: 3.333em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000390}}
-body.bp ul {
-  list-style-type: disc;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000391}}
-body.bp ol {
-  list-style-type: decimal;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000392}}
-body.bp dl {
-  margin: 0 0 1.5em 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000393}}
-body.bp dl dt {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000394}}
-body.bp dd {
-  margin-left: 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000395}}
-body.bp table {
-  margin-bottom: 1.4em;
-  width: 100%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000396}}
-body.bp th {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000397}}
-body.bp thead th {
-  background: #c3d9ff;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000398}}
-body.bp th, body.bp td, body.bp caption {
-  padding: 4px 10px 4px 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000399}}
-body.bp tr.even td {
-  background: #e5ecf9;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003100}}
-body.bp tfoot {
-  font-style: italic;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003101}}
-body.bp caption {
-  background: #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003102}}
-body.bp .quiet {
-  color: #666666;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003103}}
-body.bp .loud {
-  color: #111111;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\000039}}
-body.bp .clear {
-  clear: both;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000312}}
-body.bp .nowrap {
-  white-space: nowrap;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000316}}
-body.bp .clearfix {
-  overflow: hidden;
-  *zoom: 1;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000318}}
-body.bp .small {
-  font-size: 0.8em;
-  margin-bottom: 1.875em;
-  line-height: 1.875em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000322}}
-body.bp .large {
-  font-size: 1.2em;
-  line-height: 2.5em;
-  margin-bottom: 1.25em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000326}}
-body.bp .first {
-  margin-left: 0;
-  padding-left: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000329}}
-body.bp .last {
-  margin-right: 0;
-  padding-right: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000332}}
-body.bp .top {
-  margin-top: 0;
-  padding-top: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000335}}
-body.bp .bottom {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_debug\.scss}line{font-family:\000038}}
-body.bp .showgrid {
-  background: url('/images/grid.png?1294235137');
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000034}}
-body.bp .error {
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border: 2px solid #dddddd;
-  background: #fbe3e4;
-  color: #8a1f11;
-  border-color: #fbc2c4;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000329}}
-body.bp .error a {
-  color: #8a1f11;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000036}}
-body.bp .notice {
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border: 2px solid #dddddd;
-  background: #fff6bf;
-  color: #514721;
-  border-color: #ffd324;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000337}}
-body.bp .notice a {
-  color: #514721;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000038}}
-body.bp .success {
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border: 2px solid #dddddd;
-  background: #e6efc2;
-  color: #264409;
-  border-color: #c6d880;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000345}}
-body.bp .success a {
-  color: #264409;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000310}}
-body.bp .hide {
-  display: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000312}}
-body.bp .highlight {
-  background: yellow;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000314}}
-body.bp .added {
-  background: #006600;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000316}}
-body.bp .removed {
-  background: #990000;
-  color: white;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/partials\/_page\.scss}line{font-family:\000039}}
+body.bp { line-height: 1.5; font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; color: #333333; font-size: 75%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000365}}
+body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 { font-weight: normal; color: #222222; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000366}}
+body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img { margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000367}}
+body.bp h1 { font-size: 3em; line-height: 1; margin-bottom: 0.50em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000368}}
+body.bp h2 { font-size: 2em; margin-bottom: 0.75em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000369}}
+body.bp h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1.00em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000370}}
+body.bp h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000371}}
+body.bp h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.50em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000372}}
+body.bp h6 { font-size: 1em; font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000373}}
+body.bp p { margin: 0 0 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000374}}
+body.bp p img.left { display: inline; float: left; margin: 1.5em 1.5em 1.5em 0; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000375}}
+body.bp p img.right { display: inline; float: right; margin: 1.5em 0 1.5em 1.5em; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000377}}
+body.bp a { text-decoration: underline; color: #000099; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000318}}
+body.bp a:visited { color: #000066; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000321}}
+body.bp a:focus { color: black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000324}}
+body.bp a:hover { color: black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/links\/_link-colors\.scss}line{font-family:\0000327}}
+body.bp a:active { color: #cc0099; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000378}}
+body.bp blockquote { margin: 1.5em; color: #666666; font-style: italic; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000379}}
+body.bp strong { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000380}}
+body.bp em { font-style: italic; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000381}}
+body.bp dfn { font-style: italic; font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000382}}
+body.bp sup, body.bp sub { line-height: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000383}}
+body.bp abbr, body.bp acronym { border-bottom: 1px dotted #666666; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000384}}
+body.bp address { margin: 0 0 1.5em; font-style: italic; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000385}}
+body.bp del { color: #666666; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000386}}
+body.bp pre { margin: 1.5em 0; white-space: pre; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000387}}
+body.bp pre, body.bp code, body.bp tt { font: 1em "andale mono", "lucida console", monospace; line-height: 1.5; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000388}}
+body.bp li ul, body.bp li ol { margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000389}}
+body.bp ul, body.bp ol { margin: 0 1.5em 1.5em 0; padding-left: 3.333em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000390}}
+body.bp ul { list-style-type: disc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000391}}
+body.bp ol { list-style-type: decimal; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000392}}
+body.bp dl { margin: 0 0 1.5em 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000393}}
+body.bp dl dt { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000394}}
+body.bp dd { margin-left: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000395}}
+body.bp table { margin-bottom: 1.4em; width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000396}}
+body.bp th { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000397}}
+body.bp thead th { background: #c3d9ff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000398}}
+body.bp th, body.bp td, body.bp caption { padding: 4px 10px 4px 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\0000399}}
+body.bp tr.even td { background: #e5ecf9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003100}}
+body.bp tfoot { font-style: italic; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003101}}
+body.bp caption { background: #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003102}}
+body.bp .quiet { color: #666666; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_typography\.scss}line{font-family:\00003103}}
+body.bp .loud { color: #111111; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\000039}}
+body.bp .clear { clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000312}}
+body.bp .nowrap { white-space: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000316}}
+body.bp .clearfix { overflow: hidden; *zoom: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000318}}
+body.bp .small { font-size: 0.8em; margin-bottom: 1.875em; line-height: 1.875em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000322}}
+body.bp .large { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000326}}
+body.bp .first { margin-left: 0; padding-left: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000329}}
+body.bp .last { margin-right: 0; padding-right: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000332}}
+body.bp .top { margin-top: 0; padding-top: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_utilities\.scss}line{font-family:\0000335}}
+body.bp .bottom { margin-bottom: 0; padding-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_debug\.scss}line{font-family:\000038}}
+body.bp .showgrid { background: url('/images/grid.png?1291139106'); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000034}}
+body.bp .error { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000329}}
+body.bp .error a { color: #8a1f11; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000036}}
+body.bp .notice { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fff6bf; color: #514721; border-color: #ffd324; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000337}}
+body.bp .notice a { color: #514721; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\000038}}
+body.bp .success { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #e6efc2; color: #264409; border-color: #c6d880; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000345}}
+body.bp .success a { color: #264409; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000310}}
+body.bp .hide { display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000312}}
+body.bp .highlight { background: yellow; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000314}}
+body.bp .added { background: #006600; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_interaction\.scss}line{font-family:\0000316}}
+body.bp .removed { background: #990000; color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000341}}
-body.bp .box {
-  padding: 1.5em;
-  margin-bottom: 1.5em;
-  background: #e5ecf9;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000344}}
-body.bp div.border {
-  padding-right: 4px;
-  margin-right: 5px;
-  border-right: 1px solid #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000347}}
-body.bp div.colborder {
-  padding-right: 24px;
-  margin-right: 25px;
-  border-right: 1px solid #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000349}}
-body.bp hr {
-  background: #dddddd;
-  color: #dddddd;
-  clear: both;
-  float: none;
-  width: 100%;
-  height: 0.1em;
-  margin: 0 0 1.45em;
-  border: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000351}}
-body.bp hr.space {
-  background: #dddddd;
-  color: #dddddd;
-  clear: both;
-  float: none;
-  width: 100%;
-  height: 0.1em;
-  margin: 0 0 1.45em;
-  border: none;
-  background: white;
-  color: white;
-  visibility: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000353}}
-body.bp form.inline {
-  line-height: 3;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
-body.bp form.inline p {
-  margin-bottom: 0;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000341}}
+body.bp .box { padding: 1.5em; margin-bottom: 1.5em; background: #e5ecf9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000344}}
+body.bp div.border { padding-right: 4px; margin-right: 5px; border-right: 1px solid #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000347}}
+body.bp div.colborder { padding-right: 24px; margin-right: 25px; border-right: 1px solid #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000349}}
+body.bp hr { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%; height: 0.1em; margin: 0 0 1.45em; border: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000351}}
+body.bp hr.space { background: #dddddd; color: #dddddd; clear: both; float: none; width: 100%; height: 0.1em; margin: 0 0 1.45em; border: none; background: white; color: white; visibility: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_scaffolding\.scss}line{font-family:\0000353}}
+body.bp form.inline { line-height: 3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
+body.bp form.inline p { margin-bottom: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
-form.bp label {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
-form.bp fieldset {
-  padding: 1.4em;
-  margin: 0 0 1.5em 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
-form.bp legend {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
-form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] {
-  margin: 0.5em 0;
-  background-color: white;
-  padding: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
-form.bp input.title {
-  font-size: 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
-form.bp input[type=checkbox], form.bp input.checkbox, form.bp input[type=radio], form.bp input.radio {
-  position: relative;
-  top: 0.25em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
-form.bp textarea {
-  margin: 0.5em 0;
-  padding: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
-form.bp select {
-  margin: 0.5em 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
-form.bp fieldset {
-  border: 1px solid #cccccc;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
-form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password],
-form.bp textarea, form.bp select {
-  border: 1px solid #bbbbbb;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
-form.bp input.text:focus, form.bp input.title:focus, form.bp input[type=email]:focus, form.bp input[type=text]:focus, form.bp input[type=password]:focus,
-form.bp textarea:focus, form.bp select:focus {
-  border: 1px solid #666666;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] {
-  width: 300px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-form.bp textarea {
-  width: 390px;
-  height: 250px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
+form.bp label { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
+form.bp fieldset { padding: 1.4em; margin: 0 0 1.5em 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
+form.bp legend { font-weight: bold; font-size: 1.2em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
+form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] { margin: 0.5em 0; background-color: white; padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
+form.bp input.title { font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
+form.bp input[type=checkbox], form.bp input.checkbox, form.bp input[type=radio], form.bp input.radio { position: relative; top: 0.25em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
+form.bp textarea { margin: 0.5em 0; padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
+form.bp select { margin: 0.5em 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
+form.bp fieldset { border: 1px solid #cccccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
+form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password], form.bp textarea, form.bp select { border: 1px solid #bbbbbb; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
+form.bp input.text:focus, form.bp input.title:focus, form.bp input[type=email]:focus, form.bp input[type=text]:focus, form.bp input[type=password]:focus, form.bp textarea:focus, form.bp select:focus { border: 1px solid #666666; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+form.bp input.text, form.bp input.title, form.bp input[type=email], form.bp input[type=text], form.bp input[type=password] { width: 300px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+form.bp textarea { width: 390px; height: 250px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000325}}
-body.two-col #container {
-  width: 950px;
-  margin: 0 auto;
-  overflow: hidden;
-  *zoom: 1;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000327}}
-body.two-col #header, body.two-col #footer {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 950px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html body.two-col #header, * html body.two-col #footer {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000329}}
-body.two-col #sidebar {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 310px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html body.two-col #sidebar {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000333}}
-body.two-col #content {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 630px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html body.two-col #content {
-  overflow-x: hidden;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000325}}
+body.two-col #container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000327}}
+body.two-col #header, body.two-col #footer { display: inline; float: left; margin-right: 10px; width: 950px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html body.two-col #header, * html body.two-col #footer { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000329}}
+body.two-col #sidebar { display: inline; float: left; margin-right: 10px; width: 310px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html body.two-col #sidebar { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/partials\/_two_col\.scss}line{font-family:\0000333}}
+body.two-col #content { display: inline; float: left; margin-right: 0; width: 630px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html body.two-col #content { overflow-x: hidden; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000031}}
-#external_accounts {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000036}}
-#external_accounts li {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #dddddd;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000311}}
-#external_accounts a.connect, #external_accounts a.disconnect {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  margin: 0.7em 0.5em 0.7em 0;
-  border-width: 1px;
-  border-style: solid;
-  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  font-size: 100%;
-  line-height: 130%;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  width: auto;
-  overflow: visible;
-  padding: 4px 10px 3px 7px;
-  background-color: #f5f5f5;
-  border-color: #eeeeee #dedede #dedede #eeeeee;
-  color: #565656;
-  width: 80px;
-  text-align: center;
-  margin-left: 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
-#external_accounts a.connect, #external_accounts a.disconnect {
-  *display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
-#external_accounts a.connect img, #external_accounts a.disconnect img {
-  margin: 0 3px -3px 0 !important;
-  padding: 0;
-  border: none;
-  width: 16px;
-  height: 16px;
-  float: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
-#external_accounts a.connect[type], #external_accounts a.disconnect[type] {
-  padding: 4px 10px 4px 7px;
-  line-height: 17px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
-*:first-child + html #external_accounts a.connect[type], *:first-child + html #external_accounts a.disconnect[type] {
-  padding: 4px 10px 3px 7px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
-#external_accounts a.connect:hover, #external_accounts a.disconnect:hover {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
-#external_accounts a.connect:active, #external_accounts a.disconnect:active {
-  background-color: #a80000;
-  border-color: #b81010 #a80000 #a80000 #b81010;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
-#external_accounts a.connect.current, #external_accounts a.disconnect.current {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000317}}
-#external_accounts .controls {
-  float: right;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000031}}
+#external_accounts { list-style: none; padding: 0; margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\000036}}
+#external_accounts li { padding-top: 10px; padding-bottom: 10px; border-bottom: 1px dotted #dddddd; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000311}}
+#external_accounts a.connect, #external_accounts a.disconnect { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; width: 80px; text-align: center; margin-left: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
+#external_accounts a.connect, #external_accounts a.disconnect { *display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
+#external_accounts a.connect img, #external_accounts a.disconnect img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
+#external_accounts a.connect[type], #external_accounts a.disconnect[type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
+*:first-child + html #external_accounts a.connect[type], *:first-child + html #external_accounts a.disconnect[type] { padding: 4px 10px 3px 7px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
+#external_accounts a.connect:hover, #external_accounts a.disconnect:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
+#external_accounts a.connect:active, #external_accounts a.disconnect:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
+#external_accounts a.connect.current, #external_accounts a.disconnect.current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000317}}
+#external_accounts .controls { float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000320}}
+#external_accounts .dac_input { display: inline; width: 70px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000324}}
+#external_accounts .dac_form { display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_external_accounts\.sass}line{font-family:\0000327}}
+#external_accounts a.dac_connect, #external_accounts input[type='submit'].dac_connect { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; width: 60px; text-align: center; background-color: whiteSmoke; border-color: #eeeeee; color: #565656; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
+#external_accounts a.dac_connect, #external_accounts input[type='submit'].dac_connect { *display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
+#external_accounts a.dac_connect img, #external_accounts input[type='submit'].dac_connect img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
+#external_accounts a.dac_connect[type], #external_accounts input[type='submit'].dac_connect[type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
+*:first-child + html #external_accounts a.dac_connect[type], *:first-child + html #external_accounts input[type='submit'].dac_connect[type] { padding: 4px 10px 3px 7px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
+#external_accounts a.dac_connect:hover, #external_accounts input[type='submit'].dac_connect:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
+#external_accounts a.dac_connect:active, #external_accounts input[type='submit'].dac_connect:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
+#external_accounts a.dac_connect.current, #external_accounts input[type='submit'].dac_connect.current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000033}}
-* {
-  margin: 0;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000033}}
+* { margin: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000036}}
-html, body, #container {
-  height: 100%;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\000036}}
+html, body, #container { height: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000316}}
-#footer, .push {
-  height: 130px;
-  padding: 15px 10px 0 10px;
-  margin-top: 20px;
-  clear: both;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000316}}
+#footer, .push { height: 130px; padding: 15px 10px 0 10px; margin-top: 20px; clear: both; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000326}}
-#footer {
-  text-align: center;
-  background: white;
-  color: #444444;
-  border-top: 1px solid #cccccc;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000332}}
-#footer p {
-  margin-bottom: 5px;
-  clear: both;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000337}}
-#footer ul {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  overflow: hidden;
-  *zoom: 1;
-  margin: 0 0 10px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000356}}
-#footer ul li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0px;
-  white-space: nowrap;
-  display: inline;
-  float: left;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000345}}
-#footer ul li:first-child, #footer ul li.first {
-  padding-left: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000346}}
-#footer ul li:last-child, #footer ul li.last {
-  padding-right: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000340}}
-#footer ul li {
-  float: none;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000326}}
+#footer { text-align: center; background: white; color: #444444; border-top: 1px solid #cccccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000332}}
+#footer p { margin-bottom: 5px; clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000337}}
+#footer ul { margin: 0; padding: 0; border: 0; outline: 0; overflow: hidden; *zoom: 1; margin: 0 0 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000356}}
+#footer ul li { list-style-image: none; list-style-type: none; margin-left: 0px; white-space: nowrap; display: inline; float: left; padding-left: 4px; padding-right: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000345}}
+#footer ul li:first-child, #footer ul li.first { padding-left: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/utilities\/lists\/_horizontal-list\.scss}line{font-family:\0000346}}
+#footer ul li:last-child, #footer ul li.last { padding-right: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_footer\.sass}line{font-family:\0000340}}
+#footer ul li { float: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000316}}
-body.bp a, body.bp a:visited, body.bp a:hover {
-  color: #0077cc;
-  text-decoration: none;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000316}}
+body.bp a, body.bp a:visited, body.bp a:hover { color: #0077cc; text-decoration: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000320}}
-#container {
-  width: 950px;
-  margin: 0 auto;
-  overflow: hidden;
-  *zoom: 1;
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -166px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000320}}
+#container { width: 950px; margin: 0 auto; overflow: hidden; *zoom: 1; min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -166px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000323}}
-#header {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 950px;
-  padding: 20px 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #header {
-  overflow-x: hidden;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000323}}
+#header { display: inline; float: left; margin-right: 10px; width: 950px; padding: 20px 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #header { overflow-x: hidden; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000327}}
-#login_form {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 390px;
-  line-height: 3;
-  float: right;
-  font-size: 11px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
-#login_form p {
-  margin-bottom: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-#login_form input.text, #login_form input.title, #login_form input[type=email], #login_form input[type=text], #login_form input[type=password] {
-  width: 142px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-#login_form textarea {
-  width: 390px;
-  height: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000335}}
-#login_form .label {
-  line-height: 1;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000338}}
-#login_form #email_label {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 150px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #email_label {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000340}}
-#login_form #password_label {
-  padding-right: 160px;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 70px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #password_label {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000344}}
-#login_form #email_field {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 150px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #email_field {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000346}}
-#login_form #password_field {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 150px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #password_field {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000348}}
-#login_form #submit_button {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 70px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #submit_button {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000350}}
-#login_form #remember_me {
-  padding-right: 160px;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 230px;
-  line-height: 1;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #login_form #remember_me {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000355}}
-#login_form input[type=submit] {
-  width: 70px;
-  margin-top: 6px;
-  margin-bottom: 7px;
-  padding: 5px 10px 5px 7px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000327}}
+#login_form { display: inline; float: left; margin-right: 0; width: 390px; line-height: 3; float: right; font-size: 11px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
+#login_form p { margin-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+#login_form input.text, #login_form input.title, #login_form input[type=email], #login_form input[type=text], #login_form input[type=password] { width: 142px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+#login_form textarea { width: 390px; height: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000335}}
+#login_form .label { line-height: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000338}}
+#login_form #email_label { display: inline; float: left; margin-right: 10px; width: 150px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #email_label { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000340}}
+#login_form #password_label { padding-right: 160px; display: inline; float: left; margin-right: 0; width: 70px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #password_label { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000344}}
+#login_form #email_field { display: inline; float: left; margin-right: 10px; width: 150px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #email_field { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000346}}
+#login_form #password_field { display: inline; float: left; margin-right: 10px; width: 150px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #password_field { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000348}}
+#login_form #submit_button { display: inline; float: left; margin-right: 0; width: 70px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #submit_button { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000350}}
+#login_form #remember_me { padding-right: 160px; display: inline; float: left; margin-right: 0; width: 230px; line-height: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #login_form #remember_me { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000355}}
+#login_form input[type=submit] { width: 70px; margin-top: 6px; margin-bottom: 7px; padding: 5px 10px 5px 7px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000361}}
-hr#colruler {
-  background: #eeeeee;
-  color: #eeeeee;
-  clear: both;
-  float: none;
-  width: 100%;
-  height: 0.1em;
-  margin: 0 0 1.45em;
-  border: none;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000361}}
+hr#colruler { background: #eeeeee; color: #eeeeee; clear: both; float: none; width: 100%; height: 0.1em; margin: 0 0 1.45em; border: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000364}}
-#help-box {
-  background-color: #eef5e9;
-  border: 1pt dashed #da242b;
-  font-size: 1em;
-  display: none;
-  padding: 10px;
-  position: absolute;
-  width: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000372}}
-#help-box p {
-  margin: 0;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000364}}
+#help-box { background-color: #eef5e9; border: 1pt dashed #da242b; font-size: 1em; display: none; padding: 10px; position: absolute; width: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000372}}
+#help-box p { margin: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000375}}
-#title_landingpage {
-  text-align: center;
-  margin-top: 25px;
-  margin-bottom: 30px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000375}}
+#title_landingpage { text-align: center; margin-top: 25px; margin-bottom: 30px; font-size: 0.8em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000380}}
-#content {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 550px;
-  margin-bottom: 20px;
-  padding-top: 20px;
-  font-size: 1.2em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #content {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000385}}
-#content a {
-  color: #0077cc;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000381}}
+#content { display: inline; float: left; margin-right: 10px; width: 550px; margin-bottom: 20px; padding-top: 20px; font-size: 1.2em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #content { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000386}}
+#content a { color: #0077cc; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000388}}
-.quote {
-  background: url("/images/quote.gif") no-repeat scroll 0 0 transparent;
-  padding-left: 45px;
-  margin-top: 40px;
-  font-size: 1.2em;
-  font-style: italic;
-  text-shadow: #bbbbbb 1px 1px 1px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000389}}
+.quote { background: url("/images/quote.gif") no-repeat scroll 0 0 transparent; padding-left: 45px; margin-top: 40px; font-size: 1.2em; font-style: italic; text-shadow: #bbbbbb 1px 1px 1px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000395}}
-.quote_author {
-  font-size: 0.8em;
-  margin-top: -15px;
-  padding-left: 125px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\0000396}}
+.quote_author { font-size: 0.8em; margin-top: -15px; padding-left: 125px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003100}}
-#content_msg {
-  float: left;
-  font-size: 1.5em;
-  margin-left: 30px;
-  text-align: center;
-  width: 350px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003101}}
+#content_msg { float: left; font-size: 1.2em; margin-left: 30px; margin-top: 20px; text-align: center; width: 350px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003107}}
-#signup {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 350px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -o-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -khtml-border-radius: 8px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  padding: 10px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #signup {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-#signup form input.text, #signup form input.title, #signup form input[type=email], #signup form input[type=text], #signup form input[type=password] {
-  width: 258px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-#signup form textarea {
-  width: 390px;
-  height: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003119}}
-#signup .label {
-  text-align: left;
-  line-height: 1;
-  height: 39px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003124}}
-#signup .label label {
-  height: 39px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003127}}
-#signup .label label[for=user_email] {
-  vertical-align: -100%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003129}}
-#signup .label label[for=user_password] {
-  vertical-align: -100%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003131}}
-#signup .label label[for=user_password_confirmation] {
-  vertical-align: -100%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003133}}
-#signup .label label[for=user_name] {
-  padding: 6px 0px 0px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003135}}
-#signup .label img {
-  margin-bottom: -2px;
-  margin-right: 2px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003139}}
-#signup .field {
-  margin-left: 60px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003141}}
-#signup #mamao_singup {
-  margin-left: 58px;
-  margin-top: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003144}}
-#signup .submit {
-  float: right;
-  padding-right: 52px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003148}}
-#signup .submit #user_submit {
-  width: 133px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003109}}
+#signup { display: inline; float: left; margin-right: 0; width: 350px; -moz-border-radius: 8px; -webkit-border-radius: 8px; -o-border-radius: 8px; -ms-border-radius: 8px; -khtml-border-radius: 8px; border-radius: 8px; background-color: #f5f5f5; padding: 10px; margin-bottom: 20px; margin-left: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #signup { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+#signup form input.text, #signup form input.title, #signup form input[type=email], #signup form input[type=text], #signup form input[type=password] { width: 258px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+#signup form textarea { width: 390px; height: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003121}}
+#signup .label { text-align: left; line-height: 1; height: 39px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003126}}
+#signup .label label { height: 39px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003129}}
+#signup .label label[for=user_email] { vertical-align: -100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003131}}
+#signup .label label[for=user_password] { vertical-align: -100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003133}}
+#signup .label label[for=user_password_confirmation] { vertical-align: -100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003135}}
+#signup .label label[for=user_name] { padding: 6px 0px 0px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003137}}
+#signup .label img { margin-bottom: -2px; margin-right: 2px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003141}}
+#signup .field { margin-left: 60px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003143}}
+#signup #mamao_signup { margin-left: 58px; margin-top: 20px; float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003147}}
+#signup .submit { float: right; margin-top: 20px; margin-right: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003151}}
-input[type=submit] {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  margin: 0.7em 0.5em 0.7em 0;
-  border-width: 1px;
-  border-style: solid;
-  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  font-size: 100%;
-  line-height: 130%;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  width: auto;
-  overflow: visible;
-  padding: 4px 10px 3px 7px;
-  background-color: #f5f5f5;
-  border-color: #eeeeee #dedede #dedede #eeeeee;
-  color: #565656;
-  background-color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
-input[type=submit] {
-  *display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
-input[type=submit] img {
-  margin: 0 3px -3px 0 !important;
-  padding: 0;
-  border: none;
-  width: 16px;
-  height: 16px;
-  float: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
-input[type=submit][type] {
-  padding: 4px 10px 4px 7px;
-  line-height: 17px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
-*:first-child + html input[type=submit][type] {
-  padding: 4px 10px 3px 7px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
-input[type=submit]:hover {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
-input[type=submit]:active {
-  background-color: #a80000;
-  border-color: #b81010 #a80000 #a80000 #b81010;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
-input[type=submit].current {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003152}}
+input[type=submit] { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; background-color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
+input[type=submit] { *display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
+input[type=submit] img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
+input[type=submit][type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
+*:first-child + html input[type=submit][type] { padding: 4px 10px 3px 7px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
+input[type=submit]:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
+input[type=submit]:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
+input[type=submit].current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003156}}
-form#waiting_list {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 550px;
-  line-height: 3;
-  font-size: 11px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
-form#waiting_list p {
-  margin-bottom: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-form#waiting_list input.text, form#waiting_list input.title, form#waiting_list input[type=email], form#waiting_list input[type=text], form#waiting_list input[type=password] {
-  width: 180px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-form#waiting_list textarea {
-  width: 390px;
-  height: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003163}}
-form#waiting_list .label {
-  line-height: 1;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003166}}
-form#waiting_list #email_label {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 190px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list #email_label {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003168}}
-form#waiting_list #university_label {
-  padding-right: 200px;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 150px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list #university_label {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003172}}
-form#waiting_list #email_field {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 190px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list #email_field {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003174}}
-form#waiting_list #university_field {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 190px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list #university_field {
-  overflow-x: hidden;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003176}}
-form#waiting_list #submit_button {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 150px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html form#waiting_list #submit_button {
-  overflow-x: hidden;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003157}}
+form#waiting_list { display: inline; float: left; margin-right: 0; width: 550px; line-height: 3; font-size: 11px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\000036}}
+form#waiting_list p { margin-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+form#waiting_list input.text, form#waiting_list input.title, form#waiting_list input[type=email], form#waiting_list input[type=text], form#waiting_list input[type=password] { width: 180px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+form#waiting_list textarea { width: 390px; height: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003164}}
+form#waiting_list .label { line-height: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003167}}
+form#waiting_list #email_label { display: inline; float: left; margin-right: 10px; width: 190px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list #email_label { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003169}}
+form#waiting_list #university_label { padding-right: 200px; display: inline; float: left; margin-right: 0; width: 150px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list #university_label { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003173}}
+form#waiting_list #email_field { display: inline; float: left; margin-right: 10px; width: 190px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list #email_field { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003175}}
+form#waiting_list #university_field { display: inline; float: left; margin-right: 10px; width: 190px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list #university_field { overflow-x: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003177}}
+form#waiting_list #submit_button { display: inline; float: left; margin-right: 0; width: 150px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html form#waiting_list #submit_button { overflow-x: hidden; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
-form label {
-  font-weight: bold;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
-form fieldset {
-  padding: 1.4em;
-  margin: 0 0 1.5em 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
-form legend {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
-form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] {
-  margin: 0.5em 0;
-  background-color: white;
-  padding: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
-form input.title {
-  font-size: 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
-form input[type=checkbox], form input.checkbox, form input[type=radio], form input.radio {
-  position: relative;
-  top: 0.25em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
-form textarea {
-  margin: 0.5em 0;
-  padding: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
-form select {
-  margin: 0.5em 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
-form fieldset {
-  border: 1px solid #cccccc;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
-form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password],
-form textarea, form select {
-  border: 1px solid #bbbbbb;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
-form input.text:focus, form input.title:focus, form input[type=email]:focus, form input[type=text]:focus, form input[type=password]:focus,
-form textarea:focus, form select:focus {
-  border: 1px solid #666666;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] {
-  width: 300px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-form textarea {
-  width: 390px;
-  height: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
-form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] {
-  width: 379px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
-form textarea {
-  width: 390px;
-  height: 250px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003183}}
-form textarea {
-  width: 379px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000318}}
+form label { font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000319}}
+form fieldset { padding: 1.4em; margin: 0 0 1.5em 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000320}}
+form legend { font-weight: bold; font-size: 1.2em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000326}}
+form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] { margin: 0.5em 0; background-color: white; padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000327}}
+form input.title { font-size: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000331}}
+form input[type=checkbox], form input.checkbox, form input[type=radio], form input.radio { position: relative; top: 0.25em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000333}}
+form textarea { margin: 0.5em 0; padding: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000334}}
+form select { margin: 0.5em 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000359}}
+form fieldset { border: 1px solid #cccccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000362}}
+form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password], form textarea, form select { border: 1px solid #bbbbbb; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000364}}
+form input.text:focus, form input.title:focus, form input[type=email]:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus, form select:focus { border: 1px solid #666666; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] { width: 300px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+form textarea { width: 390px; height: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000348}}
+form input.text, form input.title, form input[type=email], form input[type=text], form input[type=password] { width: 379px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_form\.scss}line{font-family:\0000350}}
+form textarea { width: 390px; height: 250px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003184}}
+form textarea { width: 379px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003187}}
-body.bp a:hover {
-  text-decoration: underline;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003188}}
+body.bp a:hover { text-decoration: underline; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003190}}
-ul#team {
-  list-style-type: none;
-  padding: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003193}}
-ul#team li {
-  clear: both;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003195}}
-ul#team .bio, ul#team .avatar {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003198}}
-ul#team .bio {
-  width: 70%;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003201}}
-ul#team .avatar {
-  margin-right: 20px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003191}}
+ul#team { list-style-type: none; padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003194}}
+ul#team li { clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003196}}
+ul#team .bio, ul#team .avatar { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003199}}
+ul#team .bio { width: 70%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003202}}
+ul#team .avatar { margin-right: 20px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003205}}
-#main {
-  padding-left: 240px;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 390px;
-  padding-right: 320px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
-* html #main {
-  overflow-x: hidden;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003206}}
+#main { padding-left: 240px; display: inline; float: left; margin-right: 0; width: 390px; padding-right: 320px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_grid\.scss}line{font-family:\00003138}}
+* html #main { overflow-x: hidden; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003210}}
-.inviter_avatar {
-  margin-right: 10px;
-  float: left;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003211}}
+.inviter_avatar { margin-right: 10px; float: left; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003214}}
-#invitation_introduction {
-  margin-bottom: 5px;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003215}}
+#invitation_introduction { margin-bottom: 5px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003217}}
-#invitation_message {
-  width: 391px;
-  text-align: justify;
-  margin-bottom: 1.5em;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003222}}
-#invitation_message p {
-  margin: 0;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003218}}
+#invitation_message { width: 391px; text-align: justify; margin-bottom: 1.5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003223}}
+#invitation_message p { margin: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003225}}
-.inviter_name {
-  font-weight: bold;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003226}}
+.inviter_name { font-weight: bold; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003228}}
-#signup-wizard {
-  width: 550px;
-  margin: 0 auto;
-  padding: 20px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003235}}
-#signup-wizard #introduction {
-  font-size: 13px;
-  border-width: 1px;
-  border-color: #222222;
-  border-style: dashed;
-  padding: 10px;
-  background-color: #ddffaa;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003243}}
-#signup-wizard #interaction {
-  width: 550px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\000037}}
-#signup-wizard #interaction .suggestions ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000312}}
-#signup-wizard #interaction .suggestions ul .controls {
-  float: right;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000035}}
-#signup-wizard #interaction .suggestions ul .follow-info a {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: black;
-  padding: 1px 8px;
-  border: 1px solid #758c1a;
-  text-align: center;
-  text-decoration: none !important;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000038}}
-#signup-wizard #interaction .suggestions ul .follow-info a.follow_link {
-  background-color: #d6e989;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
-  background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
-  background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000312}}
-#signup-wizard #interaction .suggestions ul .follow-info a.follow_link:hover {
-  background-color: #bfdd48;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
-  background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
-  background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000316}}
-#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link {
-  background-color: #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000319}}
-#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link:hover {
-  background-color: #bbbbbb;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000317}}
-#signup-wizard #interaction .suggestions ul .follow-info {
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000320}}
-#signup-wizard #interaction .suggestions ul .refuse-suggestion {
-  float: right;
-  margin-left: 3px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000323}}
-#signup-wizard #interaction .suggestions ul .refuse-suggestion a {
-  color: #0077cc;
-  text-decoration: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
-#signup-wizard #interaction .suggestions .topic {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  padding: 4px;
-  background: #f7f7f7;
-  overflow: hidden;
-  margin: 0 5px 5px 0;
-  font-weight: normal;
-  font-size: 10px;
-  line-height: 13px;
-  height: 13px;
-  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
-#signup-wizard #interaction .suggestions .topic .topic-title {
-  white-space: nowrap;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
-#signup-wizard #interaction .suggestions .topic .remove {
-  cursor: pointer;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
-#signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .suggestions .topic a {
-  color: #444444;
-  font-weight: normal;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
-#signup-wizard #interaction .suggestions .topic:hover, #signup-wizard #interaction .suggestions .topic a:hover {
-  background: #eeeeee;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
-#signup-wizard #interaction .suggestions .topic a:link, #signup-wizard #interaction .suggestions .topic a:active, #signup-wizard #interaction .suggestions .topic a:visited, #signup-wizard #interaction .suggestions .topic a a:link, #signup-wizard #interaction .suggestions .topic a a:active, #signup-wizard #interaction .suggestions .topic a a:visited {
-  cursor: pointer;
-  text-align: center;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
-#signup-wizard #interaction .suggestions .topic a:hover, #signup-wizard #interaction .suggestions .topic a a:hover {
-  text-decoration: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000330}}
-#signup-wizard #interaction .suggestions .info {
-  margin: 0;
-  float: left;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000333}}
-#signup-wizard #interaction .suggestions .info img {
-  vertical-align: middle;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000336}}
-#signup-wizard #interaction .suggestions li + li {
-  margin-top: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003247}}
-#signup-wizard #interaction .suggestions {
-  width: 300px;
-  margin: 0 auto 20px auto;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003252}}
-#signup-wizard #navigation {
-  float: right;
-  margin-bottom: 5px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003253}}
-#signup-wizard #navigation a {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  margin: 0.7em 0.5em 0.7em 0;
-  border-width: 1px;
-  border-style: solid;
-  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  font-size: 100%;
-  line-height: 130%;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  width: auto;
-  overflow: visible;
-  padding: 4px 10px 3px 7px;
-  background-color: #f5f5f5;
-  border-color: #eeeeee #dedede #dedede #eeeeee;
-  color: #565656;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
-#signup-wizard #navigation a {
-  *display: inline;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
-#signup-wizard #navigation a img {
-  margin: 0 3px -3px 0 !important;
-  padding: 0;
-  border: none;
-  width: 16px;
-  height: 16px;
-  float: none;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
-#signup-wizard #navigation a[type] {
-  padding: 4px 10px 4px 7px;
-  line-height: 17px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
-*:first-child + html #signup-wizard #navigation a[type] {
-  padding: 4px 10px 3px 7px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
-#signup-wizard #navigation a:hover {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/\.rvm\/gems\/ruby-1\.8\.7-p330\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
-#signup-wizard #navigation a:active {
-  background-color: #a80000;
-  border-color: #b81010 #a80000 #a80000 #b81010;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
-#signup-wizard #navigation a.current {
-  background-color: #f84249;
-  border-color: #ff5259 #f84249 #f84249 #ff5259;
-  color: white;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/ana\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003258}}
-#signup-wizard a.skip {
-  clear: both;
-  float: right;
-}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003230}}
+#new_user .submit { margin-top: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003233}}
+#new_user .field.agree .field_with_errors { display: inline; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003237}}
+#signup-wizard { width: 550px; margin: 0 auto; padding: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border: 1px solid #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003244}}
+#signup-wizard #introduction { font-size: 13px; border-width: 1px; border-color: #222222; border-style: dashed; padding: 10px; background-color: #ddffaa; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003252}}
+#signup-wizard #interaction { width: 550px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\000037}}
+#signup-wizard #interaction .suggestions ul { list-style: none; padding: 0; margin: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000312}}
+#signup-wizard #interaction .suggestions ul .controls { float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000035}}
+#signup-wizard #interaction .suggestions ul .follow-info a { -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; font-weight: bold; color: black; padding: 1px 8px; border: 1px solid #758c1a; text-align: center; text-decoration: none !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\000038}}
+#signup-wizard #interaction .suggestions ul .follow-info a.follow_link { background-color: #d6e989; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573)); background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%); background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000312}}
+#signup-wizard #interaction .suggestions ul .follow-info a.follow_link:hover { background-color: #bfdd48; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e)); background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%); background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000316}}
+#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link { background-color: #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_follow\.sass}line{font-family:\0000319}}
+#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link:hover { background-color: #bbbbbb; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000317}}
+#signup-wizard #interaction .suggestions ul .follow-info { float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000320}}
+#signup-wizard #interaction .suggestions ul .refuse-suggestion { float: right; margin-left: 3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000323}}
+#signup-wizard #interaction .suggestions ul .refuse-suggestion a { color: #0077cc; text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\000035}}
+#signup-wizard #interaction .suggestions .topic { -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; padding: 4px; background: #f7f7f7; overflow: hidden; margin: 0 5px 5px 0; font-weight: normal; font-size: 10px; line-height: 13px; height: 13px; font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000317}}
+#signup-wizard #interaction .suggestions .topic .topic-title { white-space: nowrap; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000320}}
+#signup-wizard #interaction .suggestions .topic .remove { cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000323}}
+#signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .suggestions .topic a { color: #444444; font-weight: normal; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000326}}
+#signup-wizard #interaction .suggestions .topic:hover, #signup-wizard #interaction .suggestions .topic a:hover { background: #eeeeee; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000329}}
+#signup-wizard #interaction .suggestions .topic a:link, #signup-wizard #interaction .suggestions .topic a:active, #signup-wizard #interaction .suggestions .topic a:visited, #signup-wizard #interaction .suggestions .topic a a:link, #signup-wizard #interaction .suggestions .topic a a:active, #signup-wizard #interaction .suggestions .topic a a:visited { cursor: pointer; text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_topic_container\.sass}line{font-family:\0000332}}
+#signup-wizard #interaction .suggestions .topic a:hover, #signup-wizard #interaction .suggestions .topic a a:hover { text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000330}}
+#signup-wizard #interaction .suggestions .info { margin: 0; float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000333}}
+#signup-wizard #interaction .suggestions .info img { vertical-align: middle; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_suggestions\.sass}line{font-family:\0000336}}
+#signup-wizard #interaction .suggestions li + li { margin-top: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003256}}
+#signup-wizard #interaction .suggestions { width: 300px; margin: 0 auto 20px auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003260}}
+#signup-wizard #interaction #wait-notice { margin: 0 auto 20px auto; text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003263}}
+#signup-wizard #interaction #wait-notice #loader { margin-bottom: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003266}}
+#signup-wizard #navigation { float: right; margin-bottom: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003267}}
+#signup-wizard #navigation a { display: -moz-inline-box; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; *vertical-align: auto; margin: 0.7em 0.5em 0.7em 0; border-width: 1px; border-style: solid; font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size: 100%; line-height: 130%; font-weight: bold; text-decoration: none; cursor: pointer; width: auto; overflow: visible; padding: 4px 10px 3px 7px; background-color: #f5f5f5; border-color: #eeeeee #dedede #dedede #eeeeee; color: #565656; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/compass\/stylesheets\/compass\/css3\/_inline-block\.scss}line{font-family:\000037}}
+#signup-wizard #navigation a { *display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000375}}
+#signup-wizard #navigation a img { margin: 0 3px -3px 0 !important; padding: 0; border: none; width: 16px; height: 16px; float: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000395}}
+#signup-wizard #navigation a[type] { padding: 4px 10px 4px 7px; line-height: 17px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000398}}
+*:first-child + html #signup-wizard #navigation a[type] { padding: 4px 10px 3px 7px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000362}}
+#signup-wizard #navigation a:hover { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/\.rvm\/gems\/ruby-1\.8\.7-p299\@umamao\/gems\/compass-0\.10\.6\/frameworks\/blueprint\/stylesheets\/blueprint\/_buttons\.scss}line{font-family:\0000347}}
+#signup-wizard #navigation a:active { background-color: #a80000; border-color: #b81010 #a80000 #a80000 #b81010; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/_buttons\.sass}line{font-family:\0000317}}
+#signup-wizard #navigation a.current { background-color: #f84249; border-color: #ff5259 #f84249 #f84249 #ff5259; color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003272}}
+#signup-wizard a.skip { clear: both; float: right; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003276}}
+#errorExplanation { padding: 10px; margin-bottom: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; border: 1px solid #fbc2c4; background-color: #ffe3e4; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003282}}
+#errorExplanation ul { margin: 0; padding: 0; list-style: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/helder\/code\/umamao\/app\/stylesheets\/landing\.sass}line{font-family:\00003286}}
+#errorExplanation ul li + li { margin-top: 10px; }

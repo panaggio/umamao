@@ -76,6 +76,7 @@ hr#colruler
   text-align: center
   margin-top: 25px
   margin-bottom: 30px
+  font-size: 0.8em
 
 #content
   +column(14)
@@ -96,14 +97,15 @@ hr#colruler
   font-size: 0.8em
   margin-top: -15px
   padding-left: 125px
-  
+
 #content_msg
   float: left
-  font-size: 1.5em
+  font-size: 1.2em
   margin-left: 30px
+  margin-top: 20px
   text-align: center
   width: 350px
-  
+
 #signup
   $signup-columns: 9
   // true means it's the last column in the row
@@ -138,15 +140,14 @@ hr#colruler
 
   .field
     margin-left: 60px
-  #mamao_singup
+  #mamao_signup
     margin-left: 58px
     margin-top: 20px
+    float: left
   .submit
     float: right
-    padding-right: 52px
-
-    #user_submit
-      width: 133px
+    margin-top: 20px
+    margin-right: 14px
 
 input[type=submit]
   // The +button-button mixin is just like the +anchor-button mixin, but for <button> elements.
