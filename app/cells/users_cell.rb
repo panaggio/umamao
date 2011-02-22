@@ -25,6 +25,18 @@ class UsersCell < Cell::Rails
     render
   end
 
+  def topic_followers
+    @topic = options[:topic]
+    @users = @topic.followers
+    render
+  end
+
+  def question_followers
+    @question = options[:question]
+    @users = User.query(:id.in => @question.watchers)
+    render
+  end
+
   # List of users with small avatars.
   def list
     @users ||= options[:users]

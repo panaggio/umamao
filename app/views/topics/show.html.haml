@@ -3,14 +3,7 @@
 
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
-  - if @topic.followers.count > 0
-    .block.followers{"data-entry-type" => "topic"}
-      %h2.title.count
-        = t('followable.followers', :count => @topic.followers.count)
-      .friend_list
-        - @topic.followers.each do |follower|
-          %span{"data-user-id" => follower.id}
-            = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
+  = render_cell :users, :topic_followers, :topic => @topic
 
 .secondary-navigation
   .navtitle
