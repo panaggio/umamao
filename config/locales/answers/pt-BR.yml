@@ -2,11 +2,11 @@ pt-BR:
   answers:
     form:
       comment_label: Comentar nesta resposta
-      answer_label: Responder a pergunta
+      answer_label: Responder à pergunta
       comment_submit: Comentar
       submit: Responder
       not_logged: "É necessário <a href=\"%{link}\">se identificar</a> para responder à pergunta."
-      already_answered: "Você já respondeu essa pergunta. Se deseja contribuir com mais informações, <a href=\"%{link}\">edite sua resposta</a>."
+      already_answered: "Você já respondeu a essa pergunta. Se deseja contribuir com mais informações, <a href=\"%{link}\">edite sua resposta</a>."
     edit:
       title: Editando resposta
     create:

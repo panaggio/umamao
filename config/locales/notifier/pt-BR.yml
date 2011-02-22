@@ -12,7 +12,7 @@ pt-BR:
       message3: "Você pode vê-la aqui:"
     follow:
       message1: "%{user} está te seguindo no %{app}."
-      message2: 'Você pode seguí-lo(a) clicando "Seguir" no seu %{user_page}.'
+      message2: 'Você pode segui-lo(a) clicando "Seguir" no seu %{user_page}.'
     give_advice:
       message1: "%{user} fez uma pergunta que talvez você saiba responder:"
       message2: "Para responder, responda aqui:"
