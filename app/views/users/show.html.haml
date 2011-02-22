@@ -23,19 +23,10 @@
     = shapado_auto_link(markdown(@user.description))
 
   -# Followers
-  - if @user.followers.count > 0
-    .block.followers{"data-entry-type" => "user"}
-      %h2.title.count
-        = t('followable.followers', :count => @user.followers.count)
-      = render_cell :users, :list, :users => @user.followers, :cache_key => "user_followers_#{@user.id}_#{@user.followers.count}"
+  = render_cell :users, :followers, :user => @user
 
   -# Followed users
-  - if @user.following.count > 0
-    .block
-      %h2.title
-        = t('followable.following', :count => @user.following.count)
-      .friend_list
-        = render_cell :users, :list, :users => @user.following, :cache_key => "user_following_#{@user.id}_#{@user.following.count}"
+  = render_cell :users, :following, :user => @user
 
   -# Followed topics
   - if @topics.count == 0
