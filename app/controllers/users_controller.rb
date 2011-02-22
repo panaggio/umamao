@@ -146,7 +146,7 @@ class UsersController < ApplicationController
 
       # FIXME: this is temporary code only for the incoming Unicamp students.
       # It should be removed after the occasion has passed.
-      if @group_invitation && @group_invitation.slug == 'bixounicamp'
+      if @group_invitation && (@group_invitation.slug == 'bixounicamp' || @group_invitation.slug == 'tci')
         unicamp = University.find_by_short_name('Unicamp')
         affiliation = Affiliation.new(:user => @user, :university => unicamp,
                                       :confirmed_at => Time.now)
