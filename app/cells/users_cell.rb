@@ -31,7 +31,7 @@ class UsersCell < Cell::Rails
 
   # List of users with small avatars.
   def list
-    @users ||= options[:users]
+    @users = (@users || options[:users]).paginate :per_page => 14
     render
   end
 
