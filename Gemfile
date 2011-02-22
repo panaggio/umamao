@@ -8,7 +8,7 @@ group :development do
   gem 'ruby-prof'
 end
 
-gem 'rails', '~>3.0.0'
+gem 'rails', '3.0.3'
 
 gem 'bson_ext', :require => 'bson'
 gem 'mongo'
