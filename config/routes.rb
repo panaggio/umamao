@@ -16,11 +16,6 @@ Shapado::Application.routes.draw do
     end
   end
 
-  match "/course/:id", :to => redirect("/topics/%{id}"), :as => :course
-  match "/course_offer/:id", :to => redirect("/topics/%{id}"), :as => :course_offer
-  match "/academic_program/:id", :to => redirect("/topics/%{id}"), :as => :academic_program
-  match "/academic_program_class/:id", :to => redirect("/topics/%{id}"), :as => :academic_program_class
-
   resources :invitations, :only => [:index, :create]
 
   resources :waiting_users, :only => :create
@@ -183,5 +178,11 @@ Shapado::Application.routes.draw do
   match '/search/autocomplete' => 'searches#autocomplete'
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
+
+  match "/course/:id", :to => redirect("/topics/%{id}"), :as => :course
+  match "/course_offer/:id", :to => redirect("/topics/%{id}"), :as => :course_offer
+  match "/academic_program/:id", :to => redirect("/topics/%{id}"), :as => :academic_program
+  match "/academic_program_class/:id", :to => redirect("/topics/%{id}"), :as => :academic_program_class
+
   root :to => 'welcome#index'
 end
