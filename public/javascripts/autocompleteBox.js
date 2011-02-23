@@ -295,10 +295,6 @@ AutocompleteBox.prototype = {
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
     query = query.replace(Utils.solrSyntaxRegExp, "\\$&");
-
-    // Hack to return some results when searching for Unicamp courses.
-    query = query.replace(/^(\w\w)(\d{3})/, "$1 $2");
-
     this.abortRequest();
     this.ajaxRequest = this.makeRequest(query);
   },
