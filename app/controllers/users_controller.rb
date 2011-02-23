@@ -205,8 +205,6 @@ class UsersController < ApplicationController
 
     @favorite_questions = Question.find(@favorites.map{|f| f.question_id })
 
-    @topics = Topic.query(:follower_ids => @user.id)
-
     add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
 
     @user.viewed_on!(current_group) if @user != current_user && !is_bot?

@@ -1,0 +1,15 @@
+- if @topics.count == 0
+  %h2.title
+    = t("followable.topics.none")
+- else
+  .block
+    %h2.title
+      = t("followable.topics", :count => @topics.count)
+    %ul.topic-list
+      - @topics.each do |topic|
+        %li
+          .topic
+            %span.topic-title
+              = link_to topic.title, topic_path(topic), :title => topic.title
+          = render :partial => "follow", :locals => {:topic => topic}
+          .clear

@@ -29,22 +29,7 @@
   = render_cell :users, :following, :follower => @user
 
   -# Followed topics
-  - if @topics.count == 0
-    %h2.title
-      = t("followable.topics.none")
-  - else
-    .block
-      %h2.title
-        = t("followable.topics", :count => @topics.count)
-      - cache("user_topics_#{@user.id}_#{@topics.count}", :expires_in => 2.hours) do
-        %ul.topic-list
-          - @topics.each do |topic|
-            %li
-              .topic
-                %span.topic-title
-                  = link_to topic.title, topic_url(topic), :title => topic.title
-              = render :partial => "topics/follow", :locals => {:topic => topic}
-              .clear
+  = render_cell :topics, :small_list, :user => @user
 
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}
