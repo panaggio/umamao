@@ -306,6 +306,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def followers
+    @user = User.find_by_id(params[:id])
+    @users = @user.followers.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html { render "users" }
+    end
+  end
+
+  def following
+    @user = User.find_by_id(params[:id])
+    @users = @user.following.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html { render "users" }
+    end
+  end
+
+  def topics
+    @user = User.find_by_id(params[:id])
+    @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
+                                                              :page => params[:page])
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def destroy
     if false && current_user.delete # FIXME We need a better way to delete users
       flash[:notice] = t("destroyed", :scope => "devise.registrations")

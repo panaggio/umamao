@@ -65,6 +65,9 @@ Shapado::Application.routes.draw do
       post :unfollow
       post :follow
       get  :set_not_new
+      get  :followers
+      get  :following
+      get  :topics
     end
   end
 
