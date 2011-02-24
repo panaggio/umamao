@@ -86,8 +86,9 @@ class TopicsController < ApplicationController
           :message => notice,
           :follower => (render_cell :users, :small_picture,
                         :user => current_user),
-          :followers_count => I18n.t("followable.followers",
-                                     :count => followers_count)
+          :followers_count => I18n.t("followable.followers.link",
+                                     :count => followers_count,
+                                     :link => followers_topic_path(@topic))
         }
 
         if params[:answer]
@@ -124,8 +125,10 @@ class TopicsController < ApplicationController
                  :success => true,
                  :message => notice,
                  :user_id => current_user.id,
-                 :followers_count => I18n.t("followable.followers",
-                                            :count => followers_count)
+                 :followers_count =>
+                 I18n.t("followable.followers.link",
+                        :count => followers_count,
+                        :link => followers_topic_path(@topic.id))
                }.to_json)
       end
     end

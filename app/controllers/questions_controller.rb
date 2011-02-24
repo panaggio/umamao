@@ -389,8 +389,10 @@ class QuestionsController < ApplicationController
                  :message => notice,
                  :follower => (render_cell :users, :small_picture,
                                :user => current_user),
-                 :followers_count => I18n.t("followable.followers.question",
-                                            :count => followers_count)
+                 :followers_count =>
+                 I18n.t("followable.followers.question.link",
+                        :count => followers_count,
+                        :link => followers_question_path(@question))
                }.to_json)
       end
       format.json { head :ok }
@@ -414,8 +416,10 @@ class QuestionsController < ApplicationController
                  :success => true,
                  :message => notice,
                  :user_id => current_user.id,
-                 :followers_count => I18n.t("followable.followers.question",
-                                            :count => followers_count)
+                 :followers_count =>
+                 I18n.t("followable.followers.question.link",
+                        :count => followers_count,
+                        :link => followers_question_path(@question))
                }.to_json)
       end
       format.json { head :ok }

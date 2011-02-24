@@ -18,7 +18,12 @@ class UsersCell < Cell::Rails
     @followed = options[:followed]
     @users = @followed.followers
     @total_followers = @followed.followers.count
-    @type = @followed.class.to_s.downcase
+    @type =
+      if @followed.is_a?(Topic)
+        "topic"
+      else
+        @followed.class.to_s.downcase
+      end
     @path =
       case @followed
       when User
@@ -41,12 +46,13 @@ class UsersCell < Cell::Rails
     @follower = options[:follower]
     @users = @follower.following
     @total_followed = @follower.following.count
+    @path = following_user_path @follower
     render
   end
 
   # List of users with small avatars.
   def list
-    @users = (@users || options[:users]).paginate :per_page => 14
+    @users = (@users || options[:users]).paginate :per_page => 21
     render
   end
 

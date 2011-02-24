@@ -11,14 +11,14 @@ $(document).ready(function() {
         var followers =
           $("#sidebar .followers[data-entry-type=" + entryType + "]");
         if (followers.size() > 0) {
-          if (data.follower) {
+          if (data.follower && followers.find(".friend_list span").size() < 14) {
             element = $(data.follower);
             element.hide();
             followers.find(".friend_list").append(element);
             element.fadeIn("slow");
           }
           if (data.followers_count) {
-            followers.find(".count").text(data.followers_count);
+            followers.find(".count").html(data.followers_count);
           }
         }
         Utils.toggleFollowLink(link);
@@ -51,7 +51,7 @@ $(document).ready(function() {
             element.fadeOut("slow", function () { element.remove(); });
           }
           if (data.followers_count) {
-            followers.find(".count").text(data.followers_count);
+            followers.find(".count").html(data.followers_count);
           }
         }
         Utils.toggleFollowLink(link);
