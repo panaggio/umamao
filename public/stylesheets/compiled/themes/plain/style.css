@@ -81,7 +81,7 @@ body.bp .first { margin-left: 0; padding-left: 0; }
 body.bp .last { margin-right: 0; padding-right: 0; }
 body.bp .top { margin-top: 0; padding-top: 0; }
 body.bp .bottom { margin-bottom: 0; padding-bottom: 0; }
-body.bp .showgrid { background: url('/images/grid.png?1294235137'); }
+body.bp .showgrid { background: url('/images/grid.png?1291138098'); }
 body.bp .error { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 body.bp .error a { color: #8a1f11; }
 body.bp .notice { padding: 0.8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fff6bf; color: #514721; border-color: #ffd324; }
@@ -404,7 +404,7 @@ ul.topic-list .follow-info a { color: #444444; font-size: 0.785em; }
 
 #groups .actions { float: right; }
 
-a.request_group { font-family: "Lucida Grande", Lucida, Arial, sans_serif; background: url('/images/button_bg.png?1294235137') repeat-x bottom left; margin: 0; width: auto; overflow: visible; display: inline-block; cursor: pointer; text-decoration: none; border-style: solid; font-weight: bold; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 18px; line-height: 21.6px; padding: 5px 18px; border-width: 1px; background-color: #26b82b; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b)); background-image: -moz-linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%); background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%); border-color: #365c37; text-shadow: #104e12 0px 1px 1px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; font-size: 24px; line-height: 30px; padding: 6px 24px; border-width: 2px; margin-top: 20px; float: right; }
+a.request_group { font-family: "Lucida Grande", Lucida, Arial, sans_serif; background: url('/images/button_bg.png?1291138098') repeat-x bottom left; margin: 0; width: auto; overflow: visible; display: inline-block; cursor: pointer; text-decoration: none; border-style: solid; font-weight: bold; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; -ms-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; font-size: 18px; line-height: 21.6px; padding: 5px 18px; border-width: 1px; background-color: #26b82b; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b)); background-image: -moz-linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%); background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%); border-color: #365c37; text-shadow: #104e12 0px 1px 1px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; font-size: 24px; line-height: 30px; padding: 6px 24px; border-width: 2px; margin-top: 20px; float: right; }
 a.request_group::-moz-focus-inner { border: none; padding: 0; }
 a.request_group:focus { outline: none; }
 a.request_group.disabled, a.request_group[disabled] { opacity: 0.7; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); }
@@ -524,6 +524,7 @@ a.request_group:visited, a.request_group:link { color: white; }
 #sidebar .follow-info.block { display: inline; float: left; margin-right: 10px; width: 150px; margin-top: 2px; }
 * html #sidebar .follow-info.block { overflow-x: hidden; }
 #sidebar .follow-info.block a { display: block; padding: 2px 10px; font-size: 16px; line-height: 20px; }
+#sidebar h2 { margin-bottom: 15px; }
 
 #header { margin: 0 0 2em; clear: both; overflow: visible; background: url(/images/bgheader.png) repeat-x 0 0 #f5f5f5; border-bottom: 1pt solid #cccccc; margin: 0 0 2em; padding-bottom: 0.5em; padding-top: 0.5em; }
 
@@ -558,3 +559,5 @@ a.request_group:visited, a.request_group:link { color: white; }
 
 #sidebar { display: inline; float: left; margin-right: 0; width: 230px; }
 * html #sidebar { overflow-x: hidden; }
+
+#profile-display h3 { font-size: 1.2em; margin-bottom: 20px; }
