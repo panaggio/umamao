@@ -42,6 +42,7 @@ pt-BR:
     show:
       title: "%{user}"
       views: visitas
+      profile: Perfil
     form:
       change_password: Trocar de senha
       email: "Email pessoal:"

@@ -4,7 +4,7 @@
 - else
   .block
     %h2.title
-      = t("followable.topics", :count => @topics.count)
+      = t("followable.topics.link", :count => @topics.count, :link => @path)
     %ul.topic-list
       - @topics.each do |topic|
         %li

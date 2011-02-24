@@ -19,6 +19,15 @@ class UsersCell < Cell::Rails
     @users = @followed.followers
     @total_followers = @followed.followers.count
     @type = @followed.class.to_s.downcase
+    @path =
+      case @followed
+      when User
+        followers_user_path @followed
+      when Question
+        followers_question_path @followed
+      when Topic
+        followers_topic_path @followed
+      end
     render
   end
 

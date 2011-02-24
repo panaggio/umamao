@@ -2,11 +2,15 @@
 
 = render :partial => "profile_common"
 
-%h3= t("followable.topics", :count => @topics.total_entries)
+- content_for :sidebar do
+  = link_to t("users.show.profile"), user_path(@user)
 
-%ul#topics.items
-  - @topics.each do |topic|
-    = render :partial => "topics/topic", :locals => {:topic => topic}
+#profile-display
+  %h3= t("followable.topics", :count => @topics.total_entries)
 
-#additional_info
-  = will_paginate @topics
+  %ul#topics.items
+    - @topics.each do |topic|
+      = render :partial => "topics/topic", :locals => {:topic => topic}
+
+  #additional_info
+    = will_paginate @topics
