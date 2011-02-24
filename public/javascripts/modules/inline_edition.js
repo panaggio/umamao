@@ -6,24 +6,24 @@
  *   app/views/user/show.html.haml     .profile_inline_editable{ "data-inline-object-key" =>
  *   config/locales/users/*.yml        users.inline_edition.{empty_bio,empty_description}
  *   this file                         function profileInlineEdition
- * 
+ *
  *     Note: You may notice that data-inline-object-key is an empty string in the profile example. This
  *   is because we can optimize the case for profile edition since we have the 'current_user' variable.
  *   Usually this variable will contain the id for the edited object. However, this is needed because
  *   we want to be able to place the data-inline-object-key as high as we want in the DOM.
- * 
+ *
  *     The double-click version is completely untested and out of date. It was left here as a TODO and
  *   will be refactored in future when needed ( Probably by the university/affiliation administration
  *   system ).
- * 
+ *
  *************************************************************************************************/
 
 window.inlineEdition = {
-    
+
   /* this variable is used to provide communication between 'blur' and
    * 'keyup' events. */
   inline_edition_control : false,
-  
+
   makeInlineEditable: function (prepare)
   {
     var settings = prepare.call(this);
@@ -52,7 +52,7 @@ window.inlineEdition = {
 	  $(event.target).siblings('a.inline_link')
             .addClass("active_inline_link")
 	    .removeClass("inline_link");
-			     
+
 	  // Making the input
 	  var inp = inlineEdition.replaceByInput($(event.target)
 	    .siblings('.inline_editable'));
@@ -95,7 +95,7 @@ window.inlineEdition = {
             .addClass('edit_link');
       });
 
-      // Save link		   
+      // Save link
       $('.save_link').live('click',
         function(event) {
           var sentRequest = inlineEdition.save($(':input', $(event.target).parent()), settings,
@@ -121,11 +121,11 @@ window.inlineEdition = {
           $(event.target).siblings('.active_inline_link')
 	    .add(event.target)
 	    .removeClass("active_inline_link")
-	    .addClass('inline_link'); 
+	    .addClass('inline_link');
         }
       );
     }
-	    
+
     /* When we want the inline edition to be controlled by "double click"
      * "enter" and "blur"
      * TODO: dblclick needs refactoring */
@@ -134,7 +134,7 @@ window.inlineEdition = {
       $(settings.selector).live("dblclick", function(event) {
         inlineEdition.replaceByInput($(event.target));
       }).addClass('inline_dblclick_editable');
-		
+
       // Second, set the blur event (Will this be here?)
       $(settings.selector).live("blur", function(event) {
         if(inlineEdition.inline_edition_control)
@@ -142,14 +142,14 @@ window.inlineEdition = {
         else
 	  $(event.target).parent().text($(event.target).attr("data-previous-value"));
         });
-		
+
       // Third, set the keyup for save on enter
       $(settings.selector).live("keyup", function(event) {
 	if(event.keyCode == "13") { //keyCode 13 is an enter
 	  // Control to prevent onblur event to overwrite this results
 	  inlineEdition.inline_edition_control = true;
-			 
-          // Sets locally          
+
+          // Sets locally
 	  inlineEdition.save($(event.target), settings);
 
           // Show ajax waiting image
@@ -172,7 +172,7 @@ window.inlineEdition = {
   },
 
   save: function(elem, settings, beforeChange) {
-    if(elem.val() == elem.attr('data-previous-value') || 
+    if(elem.val() == elem.attr('data-previous-value') ||
         (elem.parent().hasClass('empty_inline_editable_field') &&
 	 elem.val()=='')) {
       inlineEdition.cancel(elem, settings);
@@ -232,11 +232,11 @@ window.inlineEdition = {
 	else
 	  elem.parent().html(data.value);
       }
-    }
+    };
     $.ajax(ajaxParams);
     return true;
   },
-	
+
   replaceByInput: function(elem) {
     var text = elem.attr("data-inline-edition-editable-content") || elem.text();
 
@@ -259,27 +259,27 @@ window.inlineEdition = {
     return $(":input ", elem).attr("data-previous-value", text).focus();
   },
 
-  resetView: function() {    
+  resetView: function() {
     $('.active_inline_link').removeClass('active_inline_link');
     $('.active_ajax_waiting_image').removeClass('.active_ajax_waiting_image').addClass('ajax_waiting_image');
   }
-}
+};
 
 function universityInlineEdition() {
   return {
     //Can be either 'links' or 'dblclick' TODO: dblclick needs refactoring
     method: "dblclick",
-	    
+
     //The url that will be called to handle the edition
     url: "/universities/inline_edition"
-  }
+  };
 }
 
 function profileInlineEdition() {
   return {
     // Can be either 'links' or 'dblclick' TODO: dblclick needs refactoring
     method: "links",
-	    
+
     // The url that will be called to handle the edition
     url: "/users/inline_edition",
 
@@ -308,6 +308,8 @@ function profileInlineEdition() {
        elem.siblings('a.cancel_link')
 	 .css("left", e_left + s_width + spacing);
 
+      return false;
+
     }
-  }
+  };
 }
