@@ -2,9 +2,25 @@
 require 'mechanize'
 require 'rubygems'
 require 'ccsv'
+require 'lib/freebase'
 
 namespace :data do
   namespace :migrate do
+    desc "Download Freebase simple topic dump"
+    task :download_freebase_topics do
+      Freebase.download_simple_topic_dump
+    end
+
+    desc "Extract mid's from Freebase simple topic dump"
+    task :extract_freebase_mids do
+      Freebase.extract_mids_file_from_simple_topic_dump
+    end
+
+    desc "Import Freebase topics"
+    task :import_freebase_topics => :environment do
+      mids = Freebase.read_mids_file
+      Freebase.create_topics mids
+    end
 
     desc "Remove \"empty\" Questions"
     task :remove_empty_questions => :environment do
