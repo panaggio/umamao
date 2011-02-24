@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/apotonick/cells.git
-  revision: 42c77019730c0d917b1afb8f053aadf010933227
+  revision: f4a18e540b9318fbb92b2c6fd3dafdee484a03bb
   specs:
-    cells (3.5.0.beta1)
-      rails (~> 3.0)
+    cells (3.5.4)
+      rails (~> 3.0.0)
 
 GIT
   remote: git://github.com/thoughtbot/factory_girl.git
@@ -118,7 +118,7 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     addressable (2.2.4)
-    arel (2.0.7)
+    arel (2.0.8)
     autotest-rails (4.1.0)
       ZenTest
     bcrypt-ruby (2.1.4)
@@ -368,7 +368,7 @@ DEPENDENCIES
   omniauth!
   postmark (~> 0.9.0)
   postmark-rails (~> 0.4.0)
-  rails (~> 3.0.0)
+  rails (= 3.0.3)
   rdiscount (~> 1.6.3.1)
   responders
   rpm_contrib

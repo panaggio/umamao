@@ -1,66 +1,14 @@
+= render :partial => "profile_common"
 
-- content_for :subtabs do
-  .navtitle
-    &= @user.name
-  = shapado_auto_link(@user.bio)
-  %hr
-
-- content_for :sidebar do
-  .follow-info.block
-    - if current_user != @user
-      - if logged_in? && current_user.following?(@user)
-        = link_to t("followable.unfollow"), unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user), "data-entry-type" => "user"
-      - else
-        = link_to t("followable.follow"), follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user), "data-entry-type" => "user"
-
-  .user-info.block
-    = avatar_for(@user, :size => 128)
-    %br
-    - if @user.facebook_account
-      = link_to image_tag("facebook.gif"), 'http://www.facebook.com/' + @user.facebook_account.user_info["nickname"]
-    - if @user.twitter_account
-      = link_to image_tag("twitter.gif"), 'http://twitter.com/' + @user.twitter_account.user_info["nickname"]
-    = shapado_auto_link(markdown(@user.description))
-
+= content_for :sidebar do
   -# Followers
-  - if @user.followers.count > 0
-    .block.followers{"data-entry-type" => "user"}
-      %h2.title.count
-        = t('followable.followers', :count => @user.followers.count)
-      .friend_list
-        - cache("user_followers_#{@user.id}_#{@user.followers.count}") do
-          - @user.followers.each do |follower|
-            %span{"data-user-id" => follower.id}
-              = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
+  = render_cell :users, :followers, :followed => @user
 
   -# Followed users
-  - if @user.following.count > 0
-    .block
-      %h2.title
-        = t('followable.following', :count => @user.following.count)
-      .friend_list
-        - cache("user_following_#{@user.id}_#{@user.following.count}") do
-          - @user.following.each do |follower|
-            %span
-              = link_to avatar_for(follower, :size => 24).html_safe, user_path(follower)
+  = render_cell :users, :following, :follower => @user
 
   -# Followed topics
-  - if @topics.count == 0
-    %h2.title
-      = t("followable.topics.none")
-  - else
-    .block
-      %h2.title
-        = t("followable.topics", :count => @topics.count)
-      - cache("user_topics_#{@user.id}_#{@topics.count}", :expires_in => 2.hours) do
-        %ul.topic-list
-          - @topics.each do |topic|
-            %li
-              .topic
-                %span.topic-title
-                  = link_to topic.title, topic_url(topic), :title => topic.title
-              = render :partial => "topics/follow", :locals => {:topic => topic}
-              .clear
+  = render_cell :topics, :small_list, :user => @user
 
 #users_show
   .secondary-navigation{:class => @q_sort||"votes"}

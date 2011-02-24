@@ -212,8 +212,6 @@ class UsersController < ApplicationController
 
     @favorite_questions = Question.find(@favorites.map{|f| f.question_id })
 
-    @topics = Topic.query(:follower_ids => @user.id)
-
     add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
 
     @user.viewed_on!(current_group) if @user != current_user && !is_bot?
@@ -268,8 +266,9 @@ class UsersController < ApplicationController
           :message => notice,
           :follower => (render_cell :users, :small_picture,
                         :user => current_user),
-          :followers_count => I18n.t("followable.followers",
-                                     :count => followers_count)
+          :followers_count => I18n.t("followable.followers.link",
+                                     :count => followers_count,
+                                     :link => followers_user_path(@user))
         }
         if params[:suggestion]
           response[:suggestions] =
@@ -300,8 +299,9 @@ class UsersController < ApplicationController
                  :success => true,
                  :message => notice,
                  :user_id => current_user.id,
-                 :followers_count => I18n.t("followable.followers",
-                                            :count => followers_count)
+                 :followers_count => I18n.t("followable.followers.link",
+                                            :count => followers_count,
+                                            :link => followers_user_path(@user))
                }.to_json)
       }
     end
@@ -312,6 +312,31 @@ class UsersController < ApplicationController
     current_user.save
     respond_to do |format|
       format.js  { head :ok }
+    end
+  end
+
+  def followers
+    @user = User.find_by_id(params[:id])
+    @users = @user.followers.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html { render "users" }
+    end
+  end
+
+  def following
+    @user = User.find_by_id(params[:id])
+    @users = @user.following.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html { render "users" }
+    end
+  end
+
+  def topics
+    @user = User.find_by_id(params[:id])
+    @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
+                                                              :page => params[:page])
+    respond_to do |format|
+      format.html
     end
   end
 

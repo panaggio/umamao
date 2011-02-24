@@ -281,6 +281,10 @@ class Question
     watchers.include?(user._id)
   end
 
+  def followers
+    User.query(:id.in => self.watchers)
+  end
+
   def disable_limits?
     self.user.present? && self.user.can_post_whithout_limits_on?(self.group)
   end

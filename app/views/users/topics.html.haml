@@ -1,0 +1,16 @@
+-# Long list of followers/followed users in profile.
+
+= render :partial => "profile_common"
+
+- content_for :sidebar do
+  = link_to t("users.show.profile"), user_path(@user)
+
+#profile-display
+  %h3= t("followable.topics", :count => @topics.total_entries)
+
+  %ul#topics.items
+    - @topics.each do |topic|
+      = render :partial => "topics/topic", :locals => {:topic => topic}
+
+  #additional_info
+    = will_paginate @topics

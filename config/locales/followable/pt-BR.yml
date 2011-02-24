@@ -5,12 +5,21 @@ pt-BR:
     following:
       one: "Seguindo 1 pessoa"
       other: "Seguindo %{count} pessoas"
+      link:
+        one: "Seguindo <a href=\"%{link}\">1 pessoa</a>"
+        other: "Seguindo <a href=\"%{link}\">%{count} pessoas</a>"
     followers:
       one: "Seguido por 1 pessoa"
       other: "Seguido por %{count} pessoas"
+      link:
+        one: "Seguido por <a href=\"%{link}\">1 pessoa</a>"
+        other: "Seguido por <a href=\"%{link}\">%{count} pessoas</a>"
       question:
         one: "Seguida por 1 pessoa"
         other: "Seguida por %{count} pessoas"
+        link:
+          one: "Seguida por <a href=\"%{link}\">1 pessoa</a>"
+          other: "Seguida por <a href=\"%{link}\">%{count} pessoas</a>"
     flash:
       follow: "Você está seguindo %{followable}"
       unfollow: "Você parou de seguir %{followable}"
@@ -18,6 +27,9 @@ pt-BR:
       one: "Seguindo 1 tópico"
       other: "Seguindo %{count} tópicos"
       none: "Nenhum tópico seguido"
+      link:
+        one: "Seguindo <a href=\"%{link}\">1 tópico</a>"
+        other: "Seguindo <a href=\"%{link}\">%{count} tópicos</a>"
     suggestions:
       users: "Sugestões de usuários"
       topics: "Sugestões de tópicos"
