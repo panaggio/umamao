@@ -124,7 +124,6 @@ class UsersController < ApplicationController
           find_by_affiliation_token(@user.affiliation_token)
         @affiliation.confirmed_at ||= Time.now
         @user.affiliations << @affiliation
-        @user.bio = @affiliation.university.short_name
 
         # If student's code is known, link the affiliation to student model
         code = @affiliation.email.match(/[a-z](\d{6})@dac.unicamp.br/)
@@ -139,6 +138,12 @@ class UsersController < ApplicationController
           end
           @affiliation.student = student
           @affiliation.save
+        end
+
+        if (student = @affiliation.student) && student.academic_program_class
+          @user.bio = "#{student.academic_program_class.academic_program.name} #{student.academic_program_class.year} #{student.university.short_name}"
+        else
+          @user.bio = @affiliation.university.short_name
         end
 
         @user.save
