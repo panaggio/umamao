@@ -170,7 +170,14 @@ class UsersController < ApplicationController
       else
         flash[:notice] = t("confirm", :scope => "users.create")
       end
-      sign_in_and_redirect(:user, @user) # !! now logged in
+
+      # FIXME: temporary hack to allow as many users to signup as
+      # quick as possible on the same machine during an event
+      if @group_invitation && @group_invitation.slug == 'tci'
+        redirect_to '/tci'
+      else
+        sign_in_and_redirect(:user, @user) # !! now logged in
+      end
     else
       flash[:error]  = t("users.create.flash_error")
       render :action => 'new', :layout => 'welcome'
