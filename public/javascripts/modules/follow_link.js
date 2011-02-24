@@ -11,7 +11,7 @@ $(document).ready(function() {
         var followers =
           $("#sidebar .followers[data-entry-type=" + entryType + "]");
         if (followers.size() > 0) {
-          if (data.follower && followers.find(".friend_list span").size() < 14) {
+          if (data.follower && followers.find(".friend_list span").size() < 21) {
             element = $(data.follower);
             element.hide();
             followers.find(".friend_list").append(element);
