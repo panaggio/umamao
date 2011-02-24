@@ -1,0 +1,12 @@
+%h1.navtitle= @question.title
+
+%h2= t("followable.followers.question", :count => @followers.total_entries)
+
+%ul#users.items
+  - @followers.each do |user|
+    = render :partial => "users/user", :locals => {:user => user}
+
+= will_paginate @followers
+
+- content_for :sidebar do
+  = link_to t("questions.show.view"), question_path(@question)

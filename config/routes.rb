@@ -9,6 +9,7 @@ Shapado::Application.routes.draw do
       post :follow
       post :unfollow
       get :unanswered
+      get :followers
     end
 
     collection do
@@ -120,6 +121,7 @@ Shapado::Application.routes.draw do
       get :retag
       put :retag_to
       post :close
+      get :followers
     end
 
     resources :comments

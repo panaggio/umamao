@@ -185,4 +185,13 @@ class TopicsController < ApplicationController
     end
   end
 
+  def followers
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @followers =
+      @topic.followers.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html
+    end
+  end
+
 end

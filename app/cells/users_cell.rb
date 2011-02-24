@@ -26,7 +26,13 @@ class UsersCell < Cell::Rails
       when Question
         followers_question_path @followed
       when Topic
-        followers_topic_path @followed
+        followers_topic_path @followed.id
+      end
+    @i18n_class =
+      if @followed.is_a?(Question)
+        "followable.followers.question"
+      else
+        "followable.followers"
       end
     render
   end

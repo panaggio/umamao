@@ -532,6 +532,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def followers
+    @question = Question.find_by_slug_or_id(params[:id])
+    @followers =
+      @question.followers.paginate :per_page => 15, :page => params[:page]
+    respond_to do |format|
+      format.html
+    end
+  end
+
   protected
   def check_permissions
     @question = Question.find_by_slug_or_id(params[:id])

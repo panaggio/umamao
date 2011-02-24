@@ -4,11 +4,6 @@ class TopicsCell < Cell::Rails
   helper ApplicationHelper
   helper_method :current_user
 
-  cache :small_list do |cell, options|
-    user = cell.options[:user]
-    "user/#{user.id}/topics/#{Topic.query(:follower_ids => user.id).count}"
-  end
-
   # Used in settings page.
   def followed
     @topic = options[:topic]
