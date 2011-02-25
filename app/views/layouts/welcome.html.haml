@@ -3,15 +3,13 @@
   %head
     %title
       &= page_title
-
-    - content_for :css do
-      = render :partial => "shared/layout/css/landing"
-
+    = include_stylesheets :landing, :media => 'all'
     = yield :css
 
     = render :partial => "shared/layout/meta"
     <!--[if lt IE 8]><link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/ie7.css"><![endif]-->
-    = render :partial => "shared/layout/javascript"
+    = include_javascripts :base
+    = yield :js
 
   %body.bp
     #container

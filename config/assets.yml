@@ -1,0 +1,46 @@
+embed_assets: datauri
+
+javascripts:
+  base:
+    - public/javascripts/i18n/pt-BR.js
+    - public/javascripts/jquery.min.js
+    - public/javascripts/rails.js
+    - public/javascripts/jquery.tools.min.js
+    - public/javascripts/jquery-ui.js
+    - public/javascripts/jquery.notifyBar.js
+    - public/javascripts/jquery.hotkeys.js
+    - public/javascripts/showdown.js
+    - public/javascripts/utils.js
+    - public/javascripts/autocompleteBox.js
+    - public/javascripts/application.js
+    - public/javascripts/modules/welcome.js
+    - public/javascripts/modules/follow_link.js
+    - public/javascripts/modules/cookies.js
+    - public/javascripts/modules/inline_edition.js
+    - public/javascripts/modules/votes.js
+  landing:
+    - public/javascripts/modules/landing.js
+  suggestions:
+    - public/javascripts/modules/suggestions.js
+  content_show:
+    - public/javascripts/modules/single/question.js
+    - public/javascripts/modules/show_question.js
+    - public/javascripts/modules/new_question.js
+    - public/javascripts/jquery.colorbox-min.js
+  questions_edit_revert:
+    - public/javascripts/modules/edit_question.js
+  signup_follow:
+    - public/javascripts/modules/signup_follow.js
+
+stylesheets:
+  base:
+    - public/stylesheets/jquery-ui.css
+    - public/stylesheets/compiled/application.css
+    - public/stylesheets/autocomplete.css
+    - public/stylesheets/colorbox.css
+    - public/stylesheets/compiled/themes/plain/style.css
+    - public/stylesheets/compiled/themes/plain/style.css
+    - public/stylesheets/welcome.css
+  landing:
+    - public/stylesheets/autocomplete_landing.css
+    - public/stylesheets/compiled/landing.css
