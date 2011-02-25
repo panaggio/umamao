@@ -29,7 +29,7 @@ class UsersCell < Cell::Rails
       when User
         followers_user_path @followed
       when Question
-        followers_question_path @followed
+        followers_question_path @followed.id
       when Topic
         followers_topic_path @followed.id
       end
