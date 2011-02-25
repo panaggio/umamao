@@ -69,7 +69,7 @@ class Question
   key :last_target_date, Time
 
   # is_open is true if answer doesn't have any question with
-  # posivite vote count
+  # positive vote count
   key :is_open, Boolean, :default => true
   # max_vote and min_vote are respectively the maximum and minimum
   # number of votes of all answers of self
