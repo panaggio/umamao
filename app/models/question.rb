@@ -197,6 +197,7 @@ class Question
   def on_answer_votes_balance_up(answer)
     all_votes = self.answers.map{ |a| a.votes_average }
     self.min_votes = all_votes.empty? ? 0 : all_votes.min
+
     if answer.votes_average > self.max_votes
       self.max_votes = answer.votes_average
       if self.max_votes > 0
@@ -206,6 +207,7 @@ class Question
         end
       end
     end
+
     self.save
   end
 
@@ -214,6 +216,7 @@ class Question
   def on_answer_votes_balance_down(answer)
     all_votes = self.answers.map{ |a| a.votes_average }
     self.max_votes = all_votes.empty? ? 0 : all_votes.max
+
     if answer.votes_average < self.min_votes
       self.min_votes = answer.votes_average
       if self.max_votes < 1
@@ -223,6 +226,7 @@ class Question
         end
       end
     end
+
     self.save
   end
 
