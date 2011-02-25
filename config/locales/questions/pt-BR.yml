@@ -93,11 +93,11 @@ pt-BR:
       flag: Reportar
     show:
       topic_followers:
-        one: '1 pessoa seguindo os tópicos'
-        other: '%{count} pessoas seguindo os tópicos'
+        one: 'e é seguida por 1 pessoas'
+        other: 'e é seguida por %{count} pessoas'
       question_views:
-        one: '1 visualização'
-        other: '%{count} visualizações'
+        one: 'Esta pergunta foi visualizado 1 vez'
+        other: 'Esta pergunta foi visualizada %{count} vezes'
       accepted_tooltip: Uma das respostas foi aceita
       another_answers: Outras respostas
       answers: Respostas

@@ -145,6 +145,5 @@
     .audience-size
       = t('.question_views',
           :count => @question.views_count)
-    .audience-size
       = t('.topic_followers',
           :count => @question.topics.map{|t| t.follower_ids.size }.inject(0) {|sum, count| sum + count})
