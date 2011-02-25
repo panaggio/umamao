@@ -1,1 +1,1 @@
-Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a",function(){var a=$(this).closest("li");var b=$(this).closest(".suggestions");return{data:{suggestion:true},success:function(c){a.slideUp(800,function(){b.replaceWith(c.suggestions)})}}});
+Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a",function(){var a=$(this).closest("li");var c=$(this).closest(".suggestions");var b=$(this).is(".follow_link");return{data:b?{suggestion:true}:{},success:function(d){a.slideUp(800,function(){c.replaceWith(d.suggestions)})}}});
