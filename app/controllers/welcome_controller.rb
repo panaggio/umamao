@@ -18,6 +18,9 @@ class WelcomeController < ApplicationController
 
     filter_news_items
 
+    @questions = Question.latest.limit(10) || [] if @news_items.empty?
+    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
+
     render 'home'
   end
 
@@ -79,8 +82,6 @@ class WelcomeController < ApplicationController
       :recipient_id => current_user.id, :recipient_type => "User",
       :per_page => 15, :page => params[:page] || 1,
       :order => :created_at.desc}.merge(options))
-    @questions = Question.latest.limit(10) || [] if @news_items.empty?
-    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
   end
 end
 
