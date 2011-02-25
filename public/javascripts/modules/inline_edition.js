@@ -58,7 +58,7 @@ window.inlineEdition = {
 	    .siblings('.inline_editable'));
 
 	  if(typeof(settings.placeSaveAndCancelLinks) != "function" ||
-             settings.placeSaveAndCancelLinks($(event.target), inp) == false) {
+             !settings.placeSaveAndCancelLinks($(event.target), inp)) {
 
 	    // Positioning "save" and "cancel" buttons.
 	    var spacing = 16; //Spacing between input and inline_links
@@ -244,9 +244,9 @@ window.inlineEdition = {
     if(inputType == "textarea")
     {
       if(elem.hasClass('empty_inline_editable_field'))
-        elem.html('<textarea resizable="resizable"></textarea>');
+        elem.html('<textarea resizable="resizable" style="height: 80px; width: 225px;"></textarea>');
       else
-        elem.html('<textarea resizable="resizable" style="height'+elem.css('height')+'">'+text+'</textarea>');
+        elem.html('<textarea resizable="resizable" style="height: 80px; width: 225px;">'+text+'</textarea>');
     }
     else
     {
@@ -308,7 +308,7 @@ function profileInlineEdition() {
        elem.siblings('a.cancel_link')
 	 .css("left", e_left + s_width + spacing);
 
-      return false;
+      return true;
 
     }
   };

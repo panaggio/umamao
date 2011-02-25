@@ -271,6 +271,8 @@ ul.combobox li:hover ul, ul.combobox li.sfhover ul { left: auto; max-height: 40e
 #cboxContent .modal.share-question-widget .message { margin-bottom: 10px; }
 #cboxContent .modal.share-question-widget .charcount { margin-top: 10px; text-align: right; }
 
+.profile_inline_editable.markdown p { margin: 0; }
+
 .inline_editable_container a.inline_link, .inline_editable_container img.ajax_waiting_image { display: none; }
 .inline_editable_container a.edit_link { display: inline; position: relative; padding: 0 3px; margin-left: 10px; margin-top: 1px; z-index: 1; font-size: 9px; }
 .inline_editable_container a.edit_link:hover, .inline_editable_container a.cancel_link:hover { color: #0088ee; text-decoration: underline !important; }
