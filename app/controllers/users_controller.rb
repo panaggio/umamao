@@ -354,6 +354,40 @@ class UsersController < ApplicationController
     return redirect_to(:root)
   end
 
+  def inline_edition
+    unless(!["name", "bio", "description"].include?(params[:name]))
+
+      current_user[params[:name]] = params[:value]
+      current_user.save
+
+      error_message = if current_user.errors[params[:name]].present? then
+                        current_user.errors[params[:name]][0]
+                      else
+                        ''
+                      end
+
+      errors = current_user.errors
+
+      current_user.reload
+
+      empty_field = current_user[params[:name]].blank?
+      value = if empty_field then
+        t('users.inline_edition.empty_'+params[:name])
+      else
+        current_user[params[:name]]
+      end
+
+      respond_to do |format|
+        format.json {
+          render :json => {:value => value,
+                           :errors => errors,
+                           :error  => error_message,
+                           :empty_field => empty_field}.to_json
+        }
+      end
+    end
+  end
+
   protected
   def active_subtab(param)
     key = params.fetch(param, "votes")
@@ -372,5 +406,3 @@ class UsersController < ApplicationController
   end
 
 end
-
-

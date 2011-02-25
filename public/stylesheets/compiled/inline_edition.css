@@ -1,0 +1,20 @@
+.profile_inline_editable.markdown p { margin: 0; }
+
+.inline_editable_container a.inline_link, .inline_editable_container img.ajax_waiting_image { display: none; }
+.inline_editable_container a.edit_link { display: inline; position: relative; padding: 0 3px; margin-left: 10px; margin-top: 1px; z-index: 1; font-size: 9px; }
+.inline_editable_container a.edit_link:hover, .inline_editable_container a.cancel_link:hover { color: #0088ee; text-decoration: underline !important; }
+
+a.active_inline_link { position: absolute; z-index: 1; margin-top: 1px; }
+
+a.save_link { -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; font-weight: bold; color: black; padding: 1px 8px; border: 1px solid #758c1a; text-align: center; text-decoration: none !important; }
+a.save_link:hover { background-color: #f8f8f8; color: #0055aa; }
+
+a.cancel_link { padding-top: 2px; font-size: 12px; }
+
+.inline_editable { position: relative; }
+
+.inline_dblclick_editable:hover { background-color: #dddddd; cursor: pointer; }
+
+img.active_ajax_waiting_image { padding-left: 5px; }
+
+.empty_inline_editable_field { color: #999999 !important; font-size: 11px !important; }

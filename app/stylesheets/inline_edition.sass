@@ -1,0 +1,52 @@
+@import "buttons"
+
+.profile_inline_editable.markdown p
+  margin: 0
+
+.inline_editable_container
+  a.inline_link, img.ajax_waiting_image
+    display: none
+
+  a.edit_link
+    display: inline
+    position: relative
+    padding: 0 3px
+    margin-left: 10px
+    margin-top: 1px
+    z-index: 1
+    font-size: 9px
+
+  a.edit_link:hover, a.cancel_link:hover
+    color: #08e
+    text-decoration: underline !important
+
+a.active_inline_link
+  display:inline
+  position: absolute
+  z-index: 1
+  margin-top: 1px
+
+a.save_link
+  +button
+
+  &:hover
+    background-color: #f8f8f8
+    color: #05a
+
+a.cancel_link
+  padding-top: 2px
+  font-size: 12px
+
+.inline_editable
+  position: relative
+
+.inline_dblclick_editable:hover
+  background-color: #ddd
+  cursor: pointer
+
+img.active_ajax_waiting_image
+  padding-left: 5px
+
+.empty_inline_editable_field
+  color: #999 !important
+  font-size: 11px !important

@@ -72,6 +72,8 @@ Shapado::Application.routes.draw do
     end
   end
 
+  match '/users/inline_edition' => 'users#inline_edition'
+
   post "/suggestions/refuse" => "suggestions#refuse",
     :as => :refuse_suggestion
 
