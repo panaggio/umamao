@@ -13,15 +13,6 @@ class WelcomeController < ApplicationController
     render 'landing', :layout => 'welcome'
   end
 
-  def filter_news_items(options = {})
-    @news_items = NewsItem.paginate({
-      :recipient_id => current_user.id, :recipient_type => "User",
-      :per_page => 15, :page => params[:page] || 1,
-      :order => :created_at.desc}.merge(options))
-    @questions = Question.latest.limit(10) || [] if @news_items.empty?
-    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
-  end
-
   def home
     @active_subtab = params.fetch(:tab, "activity")
 
@@ -80,6 +71,16 @@ class WelcomeController < ApplicationController
     end
 
     redirect_to params[:source].to_s[0,1]=="/" ? params[:source] : root_path
+  end
+
+  protected
+  def filter_news_items(options = {})
+    @news_items = NewsItem.paginate({
+      :recipient_id => current_user.id, :recipient_type => "User",
+      :per_page => 15, :page => params[:page] || 1,
+      :order => :created_at.desc}.merge(options))
+    @questions = Question.latest.limit(10) || [] if @news_items.empty?
+    @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
   end
 end
 
