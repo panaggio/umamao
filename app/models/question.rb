@@ -208,7 +208,6 @@ class Question
       end
     end
     self.save
-    logger.debug "q=#{self.id}; q.max_votes=#{self.max_votes}, q.min_votes=#{self.min_votes}, q.is_open=#{self.is_open.to_s};   upvote; answers votes=#{all_votes.join ", "}"
   end
 
   # keep max_votes, min_votes and is_open up to date when a user
@@ -226,7 +225,6 @@ class Question
       end
     end
     self.save
-    logger.debug "q=#{self.id}; q.max_votes=#{self.max_votes}, q.min_votes=#{self.min_votes}, q.is_open=#{self.is_open.to_s}; downvote; answers votes=#{all_votes.join ", "}"
   end
 
   def add_favorite!(fav, user)
