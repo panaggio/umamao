@@ -96,7 +96,7 @@ pt-BR:
         one: 'e é seguida por 1 pessoas'
         other: 'e é seguida por %{count} pessoas'
       question_views:
-        one: 'Esta pergunta foi visualizado 1 vez'
+        one: 'Esta pergunta foi visualizada 1 vez'
         other: 'Esta pergunta foi visualizada %{count} vezes'
       accepted_tooltip: Uma das respostas foi aceita
       another_answers: Outras respostas
