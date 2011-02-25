@@ -37,8 +37,9 @@
 - content_for :sidebar do
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
     = link_to t('invitations.invite'), invitations_path
-    %hr{:style => 'margin-top: 1em'}
-    = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
+    - if Affiliation.exists?(:user_id => current_user.id, :university_id => {"$ne" => nil})
+      %hr{:style => 'margin-top: 1em'}
+      = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
 
   -# Topic suggestions
   - if logged_in?
