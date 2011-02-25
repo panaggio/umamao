@@ -95,9 +95,6 @@ pt-BR:
       topic_followers:
         one: '1 pessoa seguindo os tópicos'
         other: '%{count} pessoas seguindo os tópicos'
-      question_followers:
-        one: '1 pessoa seguindo a pergunta'
-        other: '%{count} pessoas seguindo a pergunta'
       question_views:
         one: '1 visualização'
         other: '%{count} visualizações'
