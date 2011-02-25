@@ -59,6 +59,6 @@ class Affiliation
 
 
   def strip_email
-    self.email = self.email.strip
+    self.email = self.email.strip if self.email
   end
 end
