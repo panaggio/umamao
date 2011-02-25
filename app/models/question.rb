@@ -199,7 +199,6 @@ class Question
     self.min_votes = all_votes.empty? ? 0 : all_votes.min
     if answer.votes_average > self.max_votes
       self.max_votes = answer.votes_average
-      self.is_open = false
       if self.max_votes > 0
         self.is_open = false
         if self.news_update_id
