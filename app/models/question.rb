@@ -68,9 +68,9 @@ class Question
   key :last_target_id, String
   key :last_target_date, Time
 
-  # is_opened is true if answer doesn't have any question with
+  # is_open is true if answer doesn't have any question with
   # posivite vote count
-  key :is_opened, Boolean, :default => true
+  key :is_open, Boolean, :default => true
   # max_vote and min_vote are respectively the maximum and minimum
   # number of votes of all answers of self
   key :max_vote, Integer, :default => 0
@@ -192,26 +192,26 @@ class Question
     on_activity(false)
   end
 
-  # keep max_vote, min_vote and is_opened up to date when a user
+  # keep max_vote, min_vote and is_open up to date when a user
   # votes up an answer of self
   def on_answer_add_vote(answer)
     all_votes = self.answers.map{ |a| a.votes_average }
     self.min_vote = all_votes.empty? ? 0 : all_votes.min
     if answer.votes_average > self.max_vote
       self.max_vote = answer.votes_average
-      self.is_opened = false
+      self.is_open = false
       if self.max_vote > 0
-        self.is_opened = false
+        self.is_open = false
         if self.news_update
           self.news_update.on_question_status_change false
         end
       end
     end
     self.save
-    logger.debug "q=#{self.id}; q.max_vote=#{self.max_vote}, q.min_vote=#{self.min_vote}, q.is_opened=#{self.is_opened.to_s};   upvote; answers votes=#{all_votes.join ", "}"
+    logger.debug "q=#{self.id}; q.max_vote=#{self.max_vote}, q.min_vote=#{self.min_vote}, q.is_open=#{self.is_open.to_s};   upvote; answers votes=#{all_votes.join ", "}"
   end
 
-  # keep max_vote, min_vote and is_opened up to date when a user
+  # keep max_vote, min_vote and is_open up to date when a user
   # votes down an answer of self
   def on_answer_remove_vote(answer)
     all_votes = self.answers.map{ |a| a.votes_average }
@@ -219,14 +219,14 @@ class Question
     if answer.votes_average < self.min_vote
       self.min_vote = answer.votes_average
       if self.max_vote < 1
-        self.is_opened = true
+        self.is_open = true
         if self.news_update
           self.news_update.on_question_status_change true
         end
       end
     end
     self.save
-    logger.debug "q=#{self.id}; q.max_vote=#{self.max_vote}, q.min_vote=#{self.min_vote}, q.is_opened=#{self.is_opened.to_s}; downvote; answers votes=#{all_votes.join ", "}"
+    logger.debug "q=#{self.id}; q.max_vote=#{self.max_vote}, q.min_vote=#{self.min_vote}, q.is_open=#{self.is_open.to_s}; downvote; answers votes=#{all_votes.join ", "}"
   end
 
   def add_favorite!(fav, user)

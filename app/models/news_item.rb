@@ -28,9 +28,9 @@ class NewsItem
       ni.news_update_entry_type = news_update.entry_type
       case ni.news_update_entry_type
       when "Question"
-        ni.open_question = news_update.entry.is_opened
+        ni.open_question = news_update.entry.is_open
       #when "Answer"
-      #  ni.open_question = news_update.entry.question.is_opened
+      #  ni.open_question = news_update.entry.question.is_open
       end
       ni.save
     end

@@ -5,11 +5,11 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
-    desc "Add max_vote, min_vote and is_opened fields to Questions"
-    task :add_votes_and_is_opened_to_questions => :environment do
+    desc "Add max_vote, min_vote and is_open fields to Questions"
+    task :add_votes_and_is_open_to_questions => :environment do
       Question.query.each do |q|
         q.max_vote, q.min_vote = 0, 0
-        q.is_opened = true
+        q.is_open = true
 
         q.answers.each do |a|
           v = a.votes_count
@@ -17,7 +17,7 @@ namespace :data do
           q.min_vote = v if v < q.min_vote
 
           if q.max_vote > 0
-            q.is_opened = false
+            q.is_open = false
             q.news_update.on_question_status_change false
           else
             q.news_update.on_question_status_change true
