@@ -24,8 +24,6 @@ javascripts:
     - public/javascripts/modules/suggestions.js
   content_show:
     - public/javascripts/modules/single/question.js
-    - public/javascripts/modules/show_question.js
-    - public/javascripts/modules/new_question.js
     - public/javascripts/jquery.colorbox-min.js
   questions_edit_revert:
     - public/javascripts/modules/edit_question.js
