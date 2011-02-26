@@ -15,3 +15,4 @@ javascripts_dir = "public/javascripts"
 http_images_path = "/images"
 http_stylesheets_path = "/stylesheets"
 http_javascripts_path = "/javascripts"
+sass_options = {:debug_info => false}
