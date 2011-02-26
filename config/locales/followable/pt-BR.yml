@@ -15,11 +15,11 @@ pt-BR:
         one: "Seguido por <a href=\"%{link}\">1 pessoa</a>"
         other: "Seguido por <a href=\"%{link}\">%{count} pessoas</a>"
       question:
-        one: "Seguida por 1 pessoa"
-        other: "Seguida por %{count} pessoas"
+        one: "1 pessoa segue esta pergunta."
+        other: "%{count} pessoas seguem esta pergunta."
         link:
-          one: "Seguida por <a href=\"%{link}\">1 pessoa</a>"
-          other: "Seguida por <a href=\"%{link}\">%{count} pessoas</a>"
+          one: " <a href=\"%{link}\">1 pessoa</a> segue esta pergunta."
+          other: "<a href=\"%{link}\">%{count} pessoas</a> seguem esta pergunta."
     flash:
       follow: "Você está seguindo %{followable}"
       unfollow: "Você parou de seguir %{followable}"
