@@ -93,8 +93,8 @@ pt-BR:
       flag: Reportar
     show:
       topic_followers:
-        one: 'e é seguida por 1 pessoas'
-        other: 'e é seguida por %{count} pessoas'
+        one: 'e seus tópicos são seguidos por 1 pessoa'
+        other: 'e seus tópicos são seguidos por %{count} pessoas'
       question_views:
         one: 'Esta pergunta foi visualizada 1 vez'
         other: 'Esta pergunta foi visualizada %{count} vezes'
