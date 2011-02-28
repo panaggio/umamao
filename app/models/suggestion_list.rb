@@ -86,7 +86,7 @@ class SuggestionList
       entry_type = suggestion.entry_type
     else
       entry_id = suggestion_or_entry.id
-      entry_type = suggestion_or_entry.class < Topic ? "Topic" : "User"
+      entry_type = suggestion_or_entry.class <= Topic ? "Topic" : "User"
       suggestion = Suggestion.first(:entry_id => entry_id,
                                     :entry_type => entry_type,
                                     :user_id => self.user.id)
