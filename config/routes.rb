@@ -186,55 +186,21 @@ Shapado::Application.routes.draw do
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
 
-  resources :courses, :only => [:index, :show, :edit, :update], :controller => 'topics' do
-    member do
-      post :follow
-      post :unfollow
-      get :unanswered
-      get :followers
-    end
+  [:courses, :course_offers,
+   :academic_programs, :academic_program_classes].each do |submodel|
 
-    collection do
-      post :follow
-    end
-  end
+    resources submodel, :only => [:index, :show, :edit, :update],
+    :controller => 'topics' do
+      member do
+        post :follow
+        post :unfollow
+        get :unanswered
+        get :followers
+      end
 
-  resources :course_offers, :only => [:index, :show, :edit, :update], :controller => 'topics' do
-    member do
-      post :follow
-      post :unfollow
-      get :unanswered
-      get :followers
-    end
-
-    collection do
-      post :follow
-    end
-  end
-
-  resources :academic_programs, :only => [:index, :show, :edit, :update], :controller => 'topics' do
-    member do
-      post :follow
-      post :unfollow
-      get :unanswered
-      get :followers
-    end
-
-    collection do
-      post :follow
-    end
-  end
-
-  resources :academic_program_classes, :only => [:index, :show, :edit, :update], :controller => 'topics' do
-    member do
-      post :follow
-      post :unfollow
-      get :unanswered
-      get :followers
-    end
-
-    collection do
-      post :follow
+      collection do
+        post :follow
+      end
     end
   end
 
