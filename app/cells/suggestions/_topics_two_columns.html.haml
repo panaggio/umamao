@@ -4,8 +4,8 @@
       = t("followable.suggestions.topics")
     .suggestion-left
       %ul.topic-list
-        = render :partial => "topic_list", :locals => {:topics => @suggested_topics_left, :one_column => false}
+        = render :partial => "topic_list", :locals => {:topics => @suggested_topics_left, :single_column => false}
   - if !@suggested_topics_right.blank?
     .suggestion-right
       %ul.topic-list
-        = render :partial => "topic_list", :locals => {:topics => @suggested_topics_right, :one_column => false}
+        = render :partial => "topic_list", :locals => {:topics => @suggested_topics_right, :single_column => false}

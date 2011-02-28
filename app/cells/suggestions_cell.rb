@@ -6,7 +6,7 @@ class SuggestionsCell < Cell::Rails
   helper UsersHelper
 
   def topics
-    if options.present? and options[:one_column]
+    if options.present? and options[:single_column]
       topic_suggestions = current_user.topic_suggestions[0 .. 6]
       @suggested_topics =
         Topic.query(:id.in => topic_suggestions.map(&:entry_id))

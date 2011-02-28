@@ -96,7 +96,7 @@ class TopicsController < ApplicationController
           res[:html] = render_cell :topics, :followed, :topic => @topic
         elsif params[:suggestion]
           # We need to redraw the topics suggestions
-          res[:suggestions] = render_cell :suggestions, :topics, :one_column => params[:one_column]
+          res[:suggestions] = render_cell :suggestions, :topics, :single_column => params[:single_column]
         end
 
         render :json => res.to_json
