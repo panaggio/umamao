@@ -17,6 +17,16 @@ module WithinHelpers
     }
   end
 
+  def find_answer_notification_email_to(address)
+    sleep 1
+    Delayed::Worker.new.work_off
+    sleep 1
+    ActionMailer::Base.deliveries.find{|message|
+      message.to == [address] &&
+      message.subject =~
+      /^#{@answer.user.name} respondeu .*#{Regexp.escape @answer.question.title}"$/
+    }
+  end
 end
 World(WithinHelpers)
 

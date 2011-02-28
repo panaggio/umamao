@@ -9,6 +9,7 @@ describe 'NewsItem.from_titles!' do
       NewsItem.delete_all
       User.delete_all
       Group.delete_all
+      Delayed::Job.delete_all
 
       @user1 = Factory(:user, :name => "John")
       @user2 = Factory(:user, :name => "Jack")
@@ -20,6 +21,8 @@ describe 'NewsItem.from_titles!' do
 
       @question = Question.create!(:title => 'What does X mean?',
                                   :user => @user1, :group => @group)
+
+      Delayed::Worker.new.work_off
     end
 
     it 'should create news items for followers' do

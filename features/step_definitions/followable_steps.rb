@@ -1,23 +1,24 @@
 require File.dirname(__FILE__) + "/step_helper"
 
 Then /^I should see my picture in the followers box$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should receive an email$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should not receive an email$/ do
-  pending # express the regexp above with the code you wish you had
+  assert has_css?(".followers[data-entry-type=question] " +
+                  "img[alt=\"#{@my_user.name}\"]")
 end
 
 Given /^I do not follow a question$/ do
-  pending # express the regexp above with the code you wish you had
+  @question =
+    Question.all.find{|question| !question.watchers.include?(@my_user.id)}
+  if !@question
+    user = User.first(:id.ne => @my_user.id)
+    @question = Question.create!(:title => "What does Y mean?",
+                                 :user => user, :group => Group.first)
+  end
+  assert(@question)
 end
 
 Then /^I should not see my picture in the followers box$/ do
-  pending # express the regexp above with the code you wish you had
+  assert !has_css?(".followers[data-entry-type=question] " +
+                   "img[alt=\"#{@my_user.name}\"]")
 end
 
 Given /^I don't follow the user Adam$/ do

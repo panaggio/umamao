@@ -32,4 +32,3 @@ When /^I post an answer to that question$/ do
                            :user => @my_user,
                            :group => Group.first)
 end
-

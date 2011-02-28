@@ -18,22 +18,22 @@ Feature: Signup
   Scenario: When I follow a question I should get it's updates
     Given I follow a question
     When "Jose" posts an answer to that question
-    Then I should receive an email
+    Then I should receive an answer notification email
 
   Scenario: I shouldn't get my own updates
     Given I follow a question
     When I post an answer to that question
-    Then I should not receive an email
+    Then I should not receive an answer notification email
 
   Scenario: I shouldn't get updates for questions I don't follow
     Given I do not follow a question
     When "Jose" posts an answer to that question
-    Then I should not receive an email
+    Then I should not receive an answer notification email
 
   Scenario: I should be able to follow a question
     Given I do not follow a question
     When I go to the question's page
-    And I follow "seguir"
+    And I follow "Seguir"
     And I go to the question's page
     Then I should see my picture in the followers box
 
