@@ -3,8 +3,10 @@ require "curl"
 require "json"
 
 module Wikipedia
+  DOWNLOAD_DIRECTORY = "tmp/"
+
   DUMP_URL = "http://dumps.wikimedia.org/ptwiki/latest/"
-  ARTICLES_XML = "http://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles.xml"
+  ARTICLES_XML = "ptwiki-latest-pages-articles.xml"
   BZIPED_ARTICLES_XML = "#{ARTICLES_XML}.bz2"
 
   def self.download_wikipedia_articles_dump

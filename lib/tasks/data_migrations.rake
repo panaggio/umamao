@@ -3,6 +3,7 @@ require 'mechanize'
 require 'rubygems'
 require 'ccsv'
 require 'lib/freebase'
+require 'lib/wikipedia_parser'
 
 namespace :data do
   namespace :migrate do
@@ -19,7 +20,7 @@ namespace :data do
     desc "Import Wikipedia articles as topics"
     task :import_wikipedia_articles do
       parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
-      parser.parse(File.open(Wikipedia::ARTICLES_XML)) do |article|
+      parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}")) do |article|
         title = article["title"]
         Topic.from_titles([title]).each do |topic|
           q = MidQuery[article["id"]].results[0]
