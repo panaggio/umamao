@@ -1,17 +1,4 @@
--# Topic suggestions
-#topic-suggestions.block.suggestions
-  - if !@topic_suggestions.blank?
-    %h3.title
-      = t("followable.suggestions.topics")
-    %ul.topic-list
-      - @suggested_topics.each do |topic|
-        %li
-          .topic.info
-            %span.topic-title
-              = link_to topic.title, topic_path(topic), :title => topic.title
-          .controls
-            .follow-info
-              = link_to "#{t("followable.follow")}", follow_topic_path(topic), :class => "follow_link", :method => :post
-            .refuse-suggestion
-              = link_to "✕", refuse_suggestion_path(:topic => topic.id), :method => :post
-          .clear
+- if @suggested_topics
+  = render :partial => "topics_single_column"
+- elsif @suggested_topics_left
+  = render :partial => "topics_two_columns"

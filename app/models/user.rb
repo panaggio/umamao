@@ -559,6 +559,22 @@ Time.zone.now ? 1 : 0)
 
     return nil
   end
+  
+  # Return the user's associated DAC account, if there is one, and
+  # nil otherwise.
+  def dac_account
+    self.external_accounts.first(:provider => "dac")
+  end
+
+  # Return a Student object to access the user's DAC account, or
+  # nil if the user doesn't have an associated account.
+  def dac_client
+    if account = self.dac_account
+      return Student.find_by_id(account.user_info['student'])
+    end
+
+    return nil
+  end
 
   # Find users using self's external accounts. We simply ignore errors
   # when we stumble upon them.
