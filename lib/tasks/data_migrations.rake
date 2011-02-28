@@ -20,19 +20,7 @@ namespace :data do
     desc "Import Wikipedia articles as topics"
     task :import_wikipedia_articles do
       parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
-      parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}")) do |article|
-        title = article["title"]
-        Topic.from_titles([title]).each do |topic|
-          q = MidQuery[article["id"]].results[0]
-
-          topic.freebase_mids = q.mids
-          topic.wikipedia_pt_id = article["id"]
-          topic.wikipedia_pt_key = q.pt_article.slug
-          topic.description = q.pt_article.description
-
-          topic.save
-        end
-      end
+      parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}"))
     end
 
     desc "Extract mid's from Freebase simple topic dump"
