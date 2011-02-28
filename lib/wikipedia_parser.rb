@@ -6,7 +6,7 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
   end
 
   def end_document
-    set_internals nil, nil
+    set_internals nil
   end
 
   def start_element(element, attributes = [])
