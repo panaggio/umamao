@@ -48,7 +48,7 @@ class SuggestionList
           !self.uninteresting_topic_ids.include?(thing.id)
         suggestion = Suggestion.new(:user => self.user,
                                     :entry_id => thing.id,
-                                    :entry_type => "Topic",
+                                    :entry_type => thing.class.to_s,
                                     :reason => reason)
         self.topic_suggestions << suggestion
         return 1
@@ -86,14 +86,14 @@ class SuggestionList
       entry_type = suggestion.entry_type
     else
       entry_id = suggestion_or_entry.id
-      entry_type = suggestion_or_entry.class.to_s
+      entry_type = suggestion_or_entry.class < Topic ? "Topic" : "User"
       suggestion = Suggestion.first(:entry_id => entry_id,
                                     :entry_type => entry_type,
                                     :user_id => self.user.id)
     end
     return if !suggestion
 
-    if entry_type == "Topic"
+    if entry_type.constantize < Topic
       self.topic_suggestion_ids.delete(suggestion.id)
     elsif entry_type == "User"
       self.user_suggestion_ids.delete(suggestion.id)
