@@ -228,7 +228,7 @@ module Freebase
     end
 
     def pt_article
-      @pt_article ||= WikipediaPtArticle(pt_key)
+      @pt_article ||= WikipediaPtArticle.new(pt_key)
     end
 
     protected

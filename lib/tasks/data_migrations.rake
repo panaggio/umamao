@@ -18,7 +18,7 @@ namespace :data do
     end
 
     desc "Import Wikipedia articles as topics"
-    task :import_wikipedia_articles do
+    task :import_wikipedia_articles => :environment do
       parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
       parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}"))
     end

@@ -25,7 +25,6 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
     case element
     when "page"
       unless @topic.nil?
-        title  = @topic.delete "title"
         send_outside @topic
         @topic = nil
       end
@@ -58,7 +57,7 @@ end
 module WikipediaTopicCreator
   def self.create_topic(article)
     title = article["title"]
-    Topic.from_titles([title]).each do |topic|
+    Topic.from_titles!([title]).each do |topic|
       q = Freebase::MidQuery[article["id"]].results[0]
 
       topic.freebase_mids = q.mids
