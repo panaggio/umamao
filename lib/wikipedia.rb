@@ -43,9 +43,9 @@ class WikipediaArticle
   def url
     @url ||= 
       if @slug
-        "#{self.class.url}#{slug}"
+        "#{self.class.url}#{@slug}"
       else
-        "#{self.class.id_url}#{id}"
+        "#{self.class.id_url}#{@id}"
       end
   end
 
