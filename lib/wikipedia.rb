@@ -2,6 +2,19 @@ require "nokogiri"
 require "curl"
 require "json"
 
+module Wikipedia
+  DUMP_URL = "http://dumps.wikimedia.org/ptwiki/latest/"
+  ARTICLES_XML = "http://dumps.wikimedia.org/ptwiki/latest/ptwiki-latest-pages-articles.xml"
+  BZIPED_ARTICLES_XML = "#{ARTICLES_XML}.bz2"
+
+  def self.download_wikipedia_articles_dump
+    `curl #{DUMP_URL}#{BZIPED_ARTICLES_XML} -o #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
+    exit($?.exitstatus) unless $?.success?
+    `bunzip2 #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
+    exit($?.exitstatus) unless $?.success?
+  end
+end
+
 class WikipediaArticle
   WIKIPEDIA_URL = "http://en.wikipedia.org/wiki/"
   WIKIPEDIA_CURID_URL = "http://en.wikipedia.org/w/index.php?curid="

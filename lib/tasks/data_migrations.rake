@@ -11,6 +11,11 @@ namespace :data do
       Freebase.download_simple_topic_dump
     end
 
+    desc "Download Wikipedia article dump"
+    task :download_wikipedia_articles do
+      Wikipedia.download_wikipedia_articles_dump
+    end
+
     desc "Extract mid's from Freebase simple topic dump"
     task :extract_freebase_mids do
       Freebase.extract_mids_file_from_simple_topic_dump
