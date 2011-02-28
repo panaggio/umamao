@@ -1,0 +1,11 @@
+- topics.each do |topic|
+  %li
+    .topic.info
+      %span.topic-title
+        = link_to topic.title, topic_path(topic), :title => topic.title
+    .controls
+      .follow-info
+        = link_to "#{t("followable.follow")}", follow_topic_path(topic, :one_column => one_column), :class => "follow_link", :method => :post
+      .refuse-suggestion
+        = link_to "✕", refuse_suggestion_path(:topic => topic.id, :one_column => one_column), :method => :post
+    .clear
