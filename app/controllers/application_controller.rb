@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   layout :set_layout
 
   DEVELOPMENT_DOMAIN = 'localhost.lan'
+  TEST_DOMAIN = '127.0.0.1'
 
   protected
 
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
     current_domain = request.env['HTTP_HOST']
 
     # bypass development mode (any port)
-    return if current_domain.include? DEVELOPMENT_DOMAIN
+    return if current_domain.include?(DEVELOPMENT_DOMAIN) or current_domain.include?(TEST_DOMAIN)
 
     # redirect anydomain.com:anyport/anypath to example.com/anypath
     # (the app's domain)
