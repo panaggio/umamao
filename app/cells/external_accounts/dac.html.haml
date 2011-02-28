@@ -1,5 +1,5 @@
 - if @affiliation.present? || @student.present?
-  = javascript_include_tag "modules/dac_external_account"
+  = include_javascripts :external_accounts
 
   %li.item
     .summary

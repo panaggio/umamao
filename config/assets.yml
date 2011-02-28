@@ -22,13 +22,19 @@ javascripts:
     - public/javascripts/modules/landing.js
   suggestions:
     - public/javascripts/modules/suggestions.js
-  content_show:
+  content_edit:
     - public/javascripts/modules/single/question.js
-    - public/javascripts/jquery.colorbox-min.js
   questions_edit_revert:
     - public/javascripts/modules/edit_question.js
   signup_follow:
     - public/javascripts/modules/signup_follow.js
+  new_question:
+    - public/javascripts/modules/new_question.js
+  show_question:
+    - public/javascripts/jquery.colorbox-min.js
+    - public/javascripts/modules/show_question.js
+  external_accounts:
+    - public/javascripts/modules/dac_external_account.js
 
 stylesheets:
   base:

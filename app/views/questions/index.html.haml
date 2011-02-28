@@ -1,6 +1,3 @@
-- content_for :js do
-  = include_javascripts :content_show
-
 - feed_url = url_for(:format => "atom", :tags => params[:tags])
 
 - content_for :rss do
