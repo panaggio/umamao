@@ -139,7 +139,7 @@ class SuggestionList
   end
 
   def suggest_from_dac
-    if affiliation = Affiliation.first(:user_id => self.user.id.to_s, :email => /dac.unicamp.br/) and student = affiliation.student
+    if affiliation = Affiliation.first(:user_id => self.user.id.to_s, :email => /@dac.unicamp.br$/) and student = affiliation.student
       self.suggest([student.academic_program_class, student.academic_program_class.academic_program] + student.registered_courses.map(&:course) + student.registered_courses , :reason => "dac")
     end
   end
