@@ -1,6 +1,7 @@
 require 'curb'
 require 'json'
 require 'nokogiri'
+require "lib/wikipedia"
 
 module Freebase
   API_URI = 'https://api.freebase.com/api'
@@ -168,7 +169,11 @@ module Freebase
     protected
     def parse_sub
       @results = @results.map do |k,v|
-        SubQuery.new(v)
+        if block_given?
+          yield v
+        else
+          SubQuery.new(v)
+        end
       end
     end
 
@@ -186,7 +191,6 @@ module Freebase
   end
 
   class WikipediaSubQuery < SubQuery
-    WIKIPEDIA_PT_URL = "http://pt.wikipedia.org/wiki/"
     def pt_title
       return @pt_title if @pt_title
 
@@ -219,11 +223,11 @@ module Freebase
     end
 
     def pt_description
-      @pt_description ||= pt_article.search("#bodyContent > p:first").text.gsub(/\[.*?\]/, "")
+      pt_article.description
     end
 
     def pt_article
-      @pt_article ||= Nokogiri::HTML(Curl::Easy.http_get("#{WIKIPEDIA_PT_URL}#{pt_key}").body_str)
+      @pt_article ||= WikipediaPtArticle(pt_key)
     end
 
     protected
@@ -251,26 +255,54 @@ module Freebase
     #   "key": [{"namespace": null, "value": null}],
     #   "name": [{"lang": null, "value": null}]
     # }]
+    def _single_query(id_or_hash)
+      case id_or_hash
+      when Hash
+        super
+      else
+        super({
+          "id" => id,
+          "mid" => [{"value" => nil}],
+          "guid" => [{"value" => nil}],
+          "key" => [{
+            "namespace" => nil,
+            "value" => nil
+          }],
+          "name" => [{
+            "lang" => nil,
+            "value" => nil
+          }]
+        })
+      end
+    end
+
+    def parse_sub
+      super { |v| WikipediaSubQuery.new(v) }
+    end
+  end
+
+  class MidQuery < Query
+    protected
+    # creates a query to get the freebase mid
+    # based on the wikipedia pt id
+    # example of query:
+    #
+    # "query": [{
+    #   "mid": [{"value": null}],
+    #   "key": [{"namespace": "/wikipedia/pt_id", "value": 220}],
+    # }]
     def _single_query(id)
       super({
-        "id" => id,
         "mid" => [{"value" => nil}],
-        "guid" => [{"value" => nil}],
         "key" => [{
-          "namespace" => nil,
-          "value" => nil
-        }],
-        "name" => [{
-          "lang" => nil,
-          "value" => nil
+          "namespace" => "/wikipedia/pt_id",
+          "value" => "#{id}"
         }]
       })
     end
 
     def parse_sub
-      @results = @results.map do |k,v|
-        WikipediaSubQuery.new(v)
-      end
+      super { |v| WikipediaSubQuery.new(v) }
     end
   end
 end
