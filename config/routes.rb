@@ -186,10 +186,57 @@ Shapado::Application.routes.draw do
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
 
-  match "/course/:id", :to => redirect("/topics/%{id}"), :as => :course
-  match "/course_offer/:id", :to => redirect("/topics/%{id}"), :as => :course_offer
-  match "/academic_program/:id", :to => redirect("/topics/%{id}"), :as => :academic_program
-  match "/academic_program_class/:id", :to => redirect("/topics/%{id}"), :as => :academic_program_class
+  resources :courses, :only => [:index, :show, :edit, :update], :controller => 'topics' do
+    member do
+      post :follow
+      post :unfollow
+      get :unanswered
+      get :followers
+    end
+
+    collection do
+      post :follow
+    end
+  end
+
+  resources :course_offers, :only => [:index, :show, :edit, :update], :controller => 'topics' do
+    member do
+      post :follow
+      post :unfollow
+      get :unanswered
+      get :followers
+    end
+
+    collection do
+      post :follow
+    end
+  end
+
+  resources :academic_programs, :only => [:index, :show, :edit, :update], :controller => 'topics' do
+    member do
+      post :follow
+      post :unfollow
+      get :unanswered
+      get :followers
+    end
+
+    collection do
+      post :follow
+    end
+  end
+
+  resources :academic_program_classes, :only => [:index, :show, :edit, :update], :controller => 'topics' do
+    member do
+      post :follow
+      post :unfollow
+      get :unanswered
+      get :followers
+    end
+
+    collection do
+      post :follow
+    end
+  end
 
   root :to => 'welcome#index'
 end

@@ -10,7 +10,7 @@
   .navtitle
     = t(".title")
 
-- form_for(@topic, :html => {:class => "form"}) do |f|
+- form_for(@topic, :html => {:class => "form"}, :as => :topic) do |f|
   .group
     = f.label :title, t('.name'), :class => "label"
     = f.text_field :title, :class => "text_field"
