@@ -41,6 +41,7 @@ module Freebase
     File.read("#{DOWNLOAD_DIRECTORY}#{MIDS_FILE}").split("\n")
   end
 
+  # FIXME: This methods is not fully tested
   def self.create_topics(mids)
     window_size = [(mids.size.to_f / DAILY_MAX_REQS).ceil, MIN_REQS].max
 

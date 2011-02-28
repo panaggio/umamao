@@ -21,6 +21,7 @@ namespace :data do
       Freebase.extract_mids_file_from_simple_topic_dump
     end
 
+    # This task is not fully tested
     desc "Import Freebase topics"
     task :import_freebase_topics => :environment do
       mids = Freebase.read_mids_file
