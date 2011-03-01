@@ -416,5 +416,49 @@ namespace :data do
       end
 
     end
+
+    def get_university(old_university)
+      if t = Topic.find_by_title(old_university["short_name"])
+        Topic.set(t.id, :_type => "University")
+        u = University.find_by_id(t.id)
+      else
+        u = University.new()
+        u.title = old_university["short_name"]
+      end
+      u.safe_update(%w[name short_name state open_for_signup university_topic_ids affiliation], old_university)
+      u.save!
+      u
+    end
+
+    desc "Make Universities be topics"
+    task :make_university_as_topic => :environment do
+      # Import Universities
+      puts University.count
+      MongoMapper.database['universities'].find({}).to_a.each do |old_university|
+        puts old_university['short_name']
+        u = get_university(old_university)
+
+        AcademicProgram.query(:university_id => old_university.id).each do |ap|
+          ap.university_id = u.id
+          a.save!
+        end
+
+        Affiliation.query(:university_id => old_university.id).each do |a|
+          a.university_id = u.id
+          a.save!
+        end
+
+        Course.query(:university_id => old_university.id).each do |c|
+          c.university_id = u.id
+          c.save!
+        end
+
+        Student.query(:university_id => old_university.id).each do |s|
+          s.university_id = u.id
+          s.save!
+        end
+
+      end
+    end
   end
 end
