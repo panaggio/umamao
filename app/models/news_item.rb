@@ -26,11 +26,8 @@ class NewsItem
     logger.debug "news_items.news_update_entry_type=#{news_update.entry_type}"
     news_update.news_items.each do |ni|
       ni.news_update_entry_type = news_update.entry_type
-      case ni.news_update_entry_type
-      when "Question"
+      if  ni.news_update_entry_type == "Question"
         ni.open_question = news_update.entry.is_open
-      #when "Answer"
-      #  ni.open_question = news_update.entry.question.is_open
       end
       ni.save
     end
