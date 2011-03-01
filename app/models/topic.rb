@@ -48,11 +48,11 @@ class Topic
   # and by article_name using
   # http://pt.wikipedia.org/wiki/#{article_name}
   def wikipedia_pt_url
-    "http://pt.wikipedia.org/wiki/#{wikipedia_pt_key}"
+    "http://pt.wikipedia.org/wiki/#{wikipedia_pt_key}" if wikipedia_pt_key
   end
 
   def wikipedia_pt_id_url
-    "http://pt.wikipedia.org/w/index.php?curid=#{wikipedia_pt_id}"
+    "http://pt.wikipedia.org/w/index.php?curid=#{wikipedia_pt_id}" if wikipedia_pt_id
   end
 
   # Removes spaces from the beginning, the end and inbetween words
