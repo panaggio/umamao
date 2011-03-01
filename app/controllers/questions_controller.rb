@@ -234,6 +234,10 @@ class QuestionsController < ApplicationController
       @question.safe_update(%w[title body language wiki adult_content version_message], params[:question])
       @question.updated_by = current_user
       @question.last_target = @question
+      if params[:question][:topics]
+        @question.topic_ids_will_change!
+        @question.topics = Topic.from_titles!(params[:question][:topics])
+      end
 
       @question.slugs << @question.slug
       @question.send(:generate_slug)
@@ -451,7 +455,8 @@ class QuestionsController < ApplicationController
         res[:box] = render_to_string(:partial => "topics/box.html",
                                      :locals => {
                                        :topic => @topic,
-                                       :question => @question
+                                       :question => @question,
+                                       :ajax_add => true
                                      }) if status
         render :json => res.to_json
       end
