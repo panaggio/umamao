@@ -1,15 +1,4 @@
-- content_for :head do
-  %meta{:name => "description", :content => markdown(current_group.description).gsub(/<\/?[^>]*>/, "")[0, 255] }
-
-- content_for :js do
-  = include_javascripts :suggestions
-
-- content_for :subtabs do
-  .navtitle
-    = t(".recent_activities", :default => "Recent Activities")
-  - tabs_tag :namespace => :welcome_home do |tab|
-    = tab.all t('.all_tab'), root_path
-    = tab.unanswered t('.unanswered_tab'), unanswered_path
+= render :partial => "header"
 
 %ul.items#news_items
   - if @news_items.empty?
