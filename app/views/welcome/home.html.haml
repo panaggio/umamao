@@ -24,26 +24,4 @@
 
     .clear
 
-- content_for :sidebar do
-  .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
-    = link_to t('invitations.invite'), invitations_path
-    - if Affiliation.count(:user_id => current_user.id) > 0
-      %hr{:style => 'margin-top: 1em'}
-      = t('.looking_for', :link => link_to(t('.exercises'), topic_path('Resolução-de-exercício')))
-
-  -# Topic suggestions
-  - if logged_in?
-    = render_cell :suggestions, :topics, :single_column => true
-
-  - current_group.widgets.each do |widget|
-    .widget.block{:id => widget.name}
-      = render :partial => widget.partial_name, :locals => {:widget => widget}
-
-  - if AppConfig.enable_i18n
-    = render :partial => "shared/language_filter"
-
-  - if !current_group.isolate && AppConfig.enable_groups
-    .block{:style => "background: transparent"}
-      .content
-        = link_to t(".create_own_site"), new_group_path, :id => "create_own_site"
-
+= render :partial => "sidebar"
