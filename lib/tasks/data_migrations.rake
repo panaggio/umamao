@@ -5,6 +5,16 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Replace :topics by :topic_ids in question versions"
+    task :migrate_question_versions => :environment do
+      Question.query.each do |question|
+        question.versions.each do |version|
+          version.data.delete :topics
+          version.data[:topic_ids] = []
+        end
+        question.save!
+      end
+    end
 
     desc "Remove \"empty\" Questions"
     task :remove_empty_questions => :environment do

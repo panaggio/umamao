@@ -101,7 +101,7 @@ class Question
                   end
                 }
 
-  versionable_keys :title, :body, :tags, :topic_ids
+  versionable_keys :title, :body, :topic_ids
   filterable_keys :title, :body
   language :language
 

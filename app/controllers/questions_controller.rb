@@ -438,6 +438,7 @@ class QuestionsController < ApplicationController
       @topic.save
     end
 
+    @question.updated_by = current_user
     status = @question.classify! @topic
 
     respond_to do |format|
@@ -462,6 +463,7 @@ class QuestionsController < ApplicationController
     @question = Question.find_by_slug_or_id(params[:id])
 
     @topic = Topic.find_by_title(params[:topic])
+    @question.updated_by = current_user
     status = @question.unclassify! @topic
 
     respond_to do |format|
