@@ -438,24 +438,24 @@ namespace :data do
         puts old_university['short_name']
         u = get_university(old_university)
 
-        AcademicProgram.query(:university_id => old_university.id).each do |ap|
+        AcademicProgram.query(:university_id => old_university['_id']).each do |ap|
           ap.university_id = u.id
-          a.save!
+          ap.save(:validate => false)
         end
 
-        Affiliation.query(:university_id => old_university.id).each do |a|
+        Affiliation.query(:university_id => old_university['_id']).each do |a|
           a.university_id = u.id
-          a.save!
+          a.save(:validate => false)
         end
 
-        Course.query(:university_id => old_university.id).each do |c|
+        Course.query(:university_id => old_university['_id']).each do |c|
           c.university_id = u.id
-          c.save!
+          c.save(:validate => false)
         end
 
-        Student.query(:university_id => old_university.id).each do |s|
+        Student.query(:university_id => old_university['_id']).each do |s|
           s.university_id = u.id
-          s.save!
+          s.save(:validate => false)
         end
 
       end
