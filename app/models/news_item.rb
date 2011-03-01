@@ -23,7 +23,6 @@ class NewsItem
   # Notifies each recipient of a news update. The creation date will
   # be the same as the news update's.
   def self.from_news_update!(news_update)
-    logger.debug "news_items.news_update_entry_type=#{news_update.entry_type}"
     news_update.news_items.each do |ni|
       ni.news_update_entry_type = news_update.entry_type
       if  ni.news_update_entry_type == "Question"
