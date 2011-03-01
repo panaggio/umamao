@@ -7,6 +7,7 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
 
   def end_document
     set_internals nil
+    finish_processing
   end
 
   def start_element(element, attributes = [])
@@ -50,22 +51,41 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
   end
 
   def send_outside article
-    WikipediaTopicCreator.create_topic article
+    WikipediaTopicCreator.enqueue_topic article
+  end
+
+  def finish_processing
+    WikipediaTopicCreator.pull_topics
   end
 end
 
 module WikipediaTopicCreator
-  def self.create_topic(article)
-    title = article["title"]
-    Topic.from_titles!([title]).each do |topic|
-      q = Freebase::MidQuery[article["id"]].results[0]
+  WINDOW_SIZE = 100
 
-      topic.freebase_mids = q.mids
+  def self.enqueue_topic(article)
+    @topics ||= {}
+    title = article.delete("title")
+    @topics["title"] = article
+    create_topics if @topics.size > WINDOW_SIZE
+  end
+
+  def self.pull_topics
+    create_topics unless @topics.empty?
+  end
+
+  def self.create_topics
+    Topic.from_titles!(@topics).each do |topic|
       topic.wikipedia_pt_id = article["id"]
-      topic.wikipedia_pt_key = q.pt_article.slug
-      topic.description = q.pt_article.description
+
+      #q = Freebase::MidQuery[article["id"]].results[0]
+      #topic.freebase_mids = q.mids
+      #topic.wikipedia_pt_key = q.pt_article.slug
+      #topic.description = q.pt_article.description
 
       topic.save
     end
+    p "created #{@topics.size} topics @ #{Time.now}"
+
+    @topics = {}
   end
 end
