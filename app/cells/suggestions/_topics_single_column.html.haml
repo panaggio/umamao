@@ -2,5 +2,5 @@
   - if !@suggested_topics.blank?
     %h3.title
       = t("followable.suggestions.topics")
-      %ul.topic-list
-        = render :partial => "topic_list", :locals => {:topics => @suggested_topics, :single_column => true}
+    %ul.topic-list
+      = render :partial => "topic_list", :locals => {:topics => @suggested_topics, :single_column => true}
