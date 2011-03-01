@@ -13,9 +13,7 @@
         = render :partial => "questions/question", :object => question
 
   - else
-    - @news_items.each do |news_item|
-      = render :partial => "news_item", :object => news_item
-    = will_paginate @news_items
+    = render :partial => "news_items"
 
   #additional_info
     #help_us

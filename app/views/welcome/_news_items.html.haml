@@ -1,0 +1,3 @@
+- @news_items.each do |news_item|
+  = render :partial => "news_item", :object => news_item
+= will_paginate @news_items

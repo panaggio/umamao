@@ -1,18 +1,9 @@
 = render :partial => "header"
 
 %ul.items#news_items
-  - if @news_items.empty?
+  = render :partial => "news_items"
 
-    %ul.items#questions
-      - @questions.each do |question|
-        = render :partial => "questions/question", :object => question
-
-  - else
-    - @news_items.each do |news_item|
-      = render :partial => "news_item", :object => news_item
-    = will_paginate @news_items
-
-    .clear
+  .clear
 
 - content_for :sidebar do
   .block{:style => 'font-size: 1.1em; font-weight: bold; text-align: center'}
