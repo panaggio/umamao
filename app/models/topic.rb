@@ -31,6 +31,7 @@ class Topic
 
   key :wikipedia_pt_id, String
   key :wikipedia_pt_key, String
+  key :wikipedia_import_status, String
 
   timestamps!
 
