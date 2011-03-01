@@ -210,6 +210,7 @@ class Question
 
     self.save
   end
+  handle_asynchronously :on_answer_votes_balance_up
 
   # keep max_votes, min_votes and is_open up to date when a user
   # votes down an answer of self
@@ -229,6 +230,7 @@ class Question
 
     self.save
   end
+  handle_asynchronously :on_answer_votes_balance_down
 
   def add_favorite!(fav, user)
     self.collection.update({:_id => self._id}, {:$inc => {:favorites_count => 1}},
