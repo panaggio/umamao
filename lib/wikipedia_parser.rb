@@ -90,7 +90,7 @@ module WikipediaTopicCreator
         topic.save
       end
 
-      self.delay.fillin_topics(topic, article)
+      self.delay(:priority => 20).fillin_topics(topic, article)
     end
 
     @articles = {}
