@@ -186,7 +186,7 @@ Shapado::Application.routes.draw do
   match '/about' => 'groups#show', :as => :about
   match '/:group_invitation' => 'users#new'
 
-  [:courses, :course_offers,
+  [:universities, :courses, :course_offers,
    :academic_programs, :academic_program_classes].each do |submodel|
 
     resources submodel, :only => [:index, :show, :edit, :update],
