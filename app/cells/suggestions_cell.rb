@@ -27,9 +27,21 @@ class SuggestionsCell < Cell::Rails
   end
 
   def users
-    @user_suggestions = current_user.user_suggestions[0 .. 6]
-    @suggested_users =
-      User.query(:id.in => @user_suggestions.map(&:entry_id))
+    if options.present? and options[:single_column]
+      user_suggestions = current_user.user_suggestions[0 .. 6]
+      @suggested_users =
+        User.query(:id.in => user_suggestions.map(&:entry_id))
+    else
+      left_last = [3, (current_user.user_suggestions.length/2.0).ceil - 1].min
+      right_first = [4, (current_user.user_suggestions.length/2.0).ceil].min
+      right_last = [7, current_user.user_suggestions.length, right_first + left_last].min
+      user_suggestions_left = current_user.user_suggestions[0 .. left_last]
+      user_suggestions_right = current_user.user_suggestions[right_first .. right_last]
+      @suggested_users_left =
+        User.query(:id.in => user_suggestions_left.map(&:entry_id))
+      @suggested_users_right =
+        User.query(:id.in => user_suggestions_right.map(&:entry_id))
+    end
     render
   end
 end

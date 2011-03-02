@@ -1,0 +1,14 @@
+-# User suggestions
+#user-suggestions.block.suggestions.suggestions-two-columns
+  %h3
+    = t("followable.suggestions.users")
+  - if !@suggested_users_left.blank?
+    .suggestion-left
+      %ul
+        = render :partial => "user_list", :locals => {:users => @suggested_users_left}
+
+  - if !@suggested_users_right.blank?
+    .suggestion-right
+      %ul
+        = render :partial => "user_list", :locals => {:users => @suggested_users_right}
+  .clear

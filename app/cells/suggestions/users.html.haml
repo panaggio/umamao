@@ -1,18 +1,5 @@
 -# User suggestions
-#user-suggestions.block.suggestions
-  %h3
-    = t("followable.suggestions.users")
-
-  %ul
-    - @suggested_users.each do |user|
-      %li
-        .user.info
-          = avatar_for(user, :size => 32)
-          = user.name
-        .controls
-          .follow-info
-            = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link", :method => :post
-          .refuse-suggestion
-            = link_to "✕", refuse_suggestion_path(:user => user.id), :method => :post
-        .clear
-
+- if @suggested_users.present?
+  = render :partial => "users_single_column"
+- elsif @suggested_users_left.present?
+  = render :partial => "users_two_columns"

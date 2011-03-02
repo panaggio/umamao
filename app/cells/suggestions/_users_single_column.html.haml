@@ -1,0 +1,7 @@
+-# User suggestions
+#user-suggestions.block.suggestions
+  %h3
+    = t("followable.suggestions.users")
+
+  %ul
+    = render :partial => "user_list", :locals => {:users => @suggested_users}
