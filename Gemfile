@@ -28,6 +28,7 @@ gem 'differ', '~>0.1.1'
 gem 'dynamic_form'
 gem 'fancy-buttons', '~>0.5.1'
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
+gem 'jquery-rails'
 gem 'haml', '~> 3.0.13'
 gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
