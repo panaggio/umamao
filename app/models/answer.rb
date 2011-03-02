@@ -159,6 +159,12 @@ class Answer < Comment
       if user != self.user &&
           user.notification_opts.new_answer
         Notifier.delay.new_answer(user, self.group, self, true)
+        Notification.create!(:user => user,
+                             :event_type => "new_answer",
+                             :data => {
+                               :user_id => self.user.id,
+                               :question_id => self.question.id
+                             })
       end
     end
   end

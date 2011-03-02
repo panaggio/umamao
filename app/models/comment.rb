@@ -24,6 +24,8 @@ class Comment
 
   validate :disallow_spam
 
+  after_create :new_comment_notification
+
   def ban
     self.collection.update({:_id => self.id}, {:$set => {:banned => true}},
                                                :upsert => true)
@@ -88,4 +90,23 @@ class Comment
       self.errors.add(:body, "Your comment looks like spam.")
     end
   end
+
+  def new_comment_notification
+    if (question = self.find_question) && (recipient = self.find_recipient)
+      email = recipient.email
+      if !email.blank? && self.user.id != recipient.id
+        if recipient.notification_opts.new_answer
+          Notifier.delay.new_comment(recipient, question.group, self, question)
+        end
+        Notification.create!(:user => recipient,
+                             :event_type => "new_comment",
+                             :data => {
+                               :user_id => self.user.id,
+                               :question_id => question.id
+                             })
+      end
+    end
+  end
+  handle_asynchronously :new_comment_notification
+
 end

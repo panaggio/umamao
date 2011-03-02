@@ -70,6 +70,7 @@ Shapado::Application.routes.draw do
       get  :followers
       get  :following
       get  :topics
+      get  :notifications
     end
   end
 

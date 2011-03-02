@@ -57,6 +57,7 @@ class User
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :topic_suggestions, :user_suggestions, :suggest,
@@ -559,7 +560,7 @@ Time.zone.now ? 1 : 0)
 
     return nil
   end
-  
+
   # Return the user's associated DAC account, if there is one, and
   # nil otherwise.
   def dac_account

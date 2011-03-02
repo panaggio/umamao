@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
-                                           :follow, :unfollow]
+                                           :follow, :unfollow, :notifications]
 
   tabs :default => :users
 
@@ -257,6 +257,11 @@ class UsersController < ApplicationController
 
     if @user.notification_opts.activities
       Notifier.delay.follow(current_user, @user)
+      Notification.create!(:user => @user,
+                           :event_type => "follow",
+                           :data => {
+                             :user_id => current_user.id
+                           })
     end
 
     respond_to do |format|
@@ -386,6 +391,9 @@ class UsersController < ApplicationController
         }
       end
     end
+  end
+
+  def notifications
   end
 
   protected
