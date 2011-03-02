@@ -1289,6 +1289,9 @@ ul#team .avatar {
 #signup-wizard #interaction .suggestions.suggestions-two-columns ul.topic-list .topic {
   max-width: 60%;
 }
+#signup-wizard #interaction .suggestions.suggestions-two-columns a.follow_link {
+  font-size: 0.785em;
+}
 #signup-wizard #navigation {
   float: right;
   margin-bottom: 5px;
