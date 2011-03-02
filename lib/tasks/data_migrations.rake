@@ -425,7 +425,8 @@ namespace :data do
         u = University.new()
         u.title = old_university["short_name"]
       end
-      u.safe_update(%w[name short_name state open_for_signup university_topic_ids affiliation], old_university)
+      old_university.delete "_id"
+      u.update_attributes(old_university)
       u.save!
       u
     end
@@ -436,24 +437,26 @@ namespace :data do
       puts University.count
       MongoMapper.database['universities'].find({}).to_a.each do |old_university|
         puts old_university['short_name']
+
+        old_id = old_university["_id"]
         u = get_university(old_university)
 
-        AcademicProgram.query(:university_id => old_university['_id']).each do |ap|
+        AcademicProgram.query(:university_id => old_id).each do |ap|
           ap.university_id = u.id
           ap.save(:validate => false)
         end
 
-        Affiliation.query(:university_id => old_university['_id']).each do |a|
+        Affiliation.query(:university_id => old_id).each do |a|
           a.university_id = u.id
           a.save(:validate => false)
         end
 
-        Course.query(:university_id => old_university['_id']).each do |c|
+        Course.query(:university_id => old_id).each do |c|
           c.university_id = u.id
           c.save(:validate => false)
         end
 
-        Student.query(:university_id => old_university['_id']).each do |s|
+        Student.query(:university_id => old_id).each do |s|
           s.university_id = u.id
           s.save(:validate => false)
         end
