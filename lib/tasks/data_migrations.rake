@@ -39,9 +39,19 @@ namespace :data do
     task :regenerate_questions_news_items => :environment do
       Question.query.each do |q|
         nu = q.news_update
+
         if nu != nil and nu.entry_type == "Question"
-          NewsItem.from_news_update! nu
+          if nu.news_items.nil?
+            NewsItem.from_news_update! nu
+          else
+            nu.news_items.each do |ni|
+              ni.open_question = nu.entry.is_open
+              ni.news_update_entry_type = "Question"
+              ni.save
+            end
+          end
         end
+
       end
     end
 
