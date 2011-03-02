@@ -434,9 +434,9 @@ namespace :data do
     desc "Make Universities be topics"
     task :make_university_as_topic => :environment do
       # Import Universities
-      puts University.count
       MongoMapper.database['universities'].find({}).to_a.each do |old_university|
-        puts old_university['short_name']
+        # Print a status information
+        print '-'
 
         old_id = old_university["_id"]
         u = get_university(old_university)
@@ -462,6 +462,7 @@ namespace :data do
         end
 
       end
+      print "\n"
     end
   end
 end
