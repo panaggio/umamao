@@ -1,0 +1,3 @@
+.notification{:class => notification.unread? ? "unread" : ""}
+  = avatar_for(notification.info[:user])
+  = notification_message notification

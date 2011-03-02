@@ -121,4 +121,15 @@ module UsersHelper
     end
   end
 
+  # Abbreviate an user name giving only first and last name.
+  def short_name(user)
+    uname = user.name.split
+    if uname.size == 0
+      ""
+    elsif uname.size == 1
+      uname
+    else
+      uname.first + ' ' + uname.last
+    end
+  end
 end

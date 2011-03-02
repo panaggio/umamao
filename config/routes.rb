@@ -39,6 +39,7 @@ Shapado::Application.routes.draw do
   match '/send_feedback' => 'welcome#send_feedback', :as => :send_feedback
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
+  get '/notifications' => 'users#notifications', :as => :notifications
 
   get '/agreement' => 'agreement#edit', :as => :agreement
   post '/agreement' => 'agreement#update'
@@ -70,7 +71,6 @@ Shapado::Application.routes.draw do
       get  :followers
       get  :following
       get  :topics
-      get  :notifications
     end
   end
 

@@ -394,6 +394,8 @@ class UsersController < ApplicationController
   end
 
   def notifications
+    @user = current_user
+    @notifications = @user.notifications
   end
 
   protected
