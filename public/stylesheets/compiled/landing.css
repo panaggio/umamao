@@ -1258,15 +1258,15 @@ ul#team .avatar {
 #signup-wizard #interaction .suggestions .info img {
   vertical-align: middle;
 }
-#signup-wizard #interaction .suggestions .suggestion-left { 
-  float: left; 
-  width: 40%; 
-  margin-left: 20px; 
+#signup-wizard #interaction .suggestions .suggestion-left {
+  float: left;
+  width: 40%;
+  margin-left: 20px;
 }
-#signup-wizard #interaction .suggestions .suggestion-right { 
-  float: right; 
-  width: 40%; 
-  margin-right: 20px; 
+#signup-wizard #interaction .suggestions .suggestion-right {
+  float: right;
+  width: 40%;
+  margin-right: 20px;
 }
 #signup-wizard #interaction .suggestions li + li {
   margin-top: 5px;
@@ -1283,11 +1283,14 @@ ul#team .avatar {
   margin-bottom: 10px;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns {
-  width: 100%; 
+  width: 100%;
   margin: 0 0 20px 0;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns ul.topic-list .topic {
   max-width: 60%;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns a.follow_link {
+  font-size: 0.785em;
 }
 #signup-wizard #navigation {
   float: right;
