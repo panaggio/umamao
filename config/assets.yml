@@ -6,7 +6,7 @@ javascripts:
     - public/javascripts/jquery.min.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.tools.min.js
-    - public/javascripts/jquery-ui.js
+    - public/javascripts/jquery-ui.min.js
     - public/javascripts/jquery.notifyBar.js
     - public/javascripts/jquery.hotkeys.js
     - public/javascripts/showdown.js
