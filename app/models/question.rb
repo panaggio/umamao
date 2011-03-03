@@ -202,7 +202,7 @@ class Question
       self.max_votes = answer.votes_average
       if self.max_votes > 0
         self.is_open = false
-        if self.news_update_id
+        if self.news_update
           self.news_update.on_question_status_change false
         end
       end
@@ -222,7 +222,7 @@ class Question
       self.min_votes = answer.votes_average
       if self.max_votes < 1
         self.is_open = true
-        if self.news_update_id
+        if self.news_update
           self.news_update.on_question_status_change true
         end
       end
