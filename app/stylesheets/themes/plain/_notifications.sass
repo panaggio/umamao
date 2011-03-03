@@ -1,0 +1,23 @@
+@import "compass/utilities/general/clearfix"
+
+#notifications
+  margin-top: 25px
+
+  img.gravatar
+    float: left
+    margin-right: 8px
+
+  .notification
+    .message
+      padding-top: 5px
+    +clearfix
+
+  .notification + .notification
+    margin-top: 17px
+    padding-top: 17px
+    border-top: 1px #ccc solid
+
+  .date
+    color: #aaa
+    font-size: 10px
+    float: right

@@ -1,3 +1,6 @@
 .notification{:class => notification.unread? ? "unread" : ""}
-  = avatar_for(notification.info[:user])
-  = notification_message notification
+  = avatar_for(notification.info[:user], :size => 40)
+  .message
+    = notification_message notification
+  .date
+    = t("time.ago", :time => time_ago_in_words(notification.created_at))
