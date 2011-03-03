@@ -5,6 +5,28 @@ require 'ccsv'
 
 namespace :data do
   namespace :migrate do
+    desc "Add max_votes, min_votes and is_open fields to Questions"
+    task :add_votes_and_is_open_to_questions => :environment do
+      Question.query.each do |q|
+        q.max_votes, q.min_votes = 0, 0
+        q.is_open = true
+
+        q.answers.each do |a|
+          v = a.votes_count
+          q.max_votes = v if v > q.max_votes
+          q.min_votes = v if v < q.min_votes
+
+          if q.max_votes > 0
+            q.is_open = false
+            q.news_update.on_question_status_change false
+          else
+            q.news_update.on_question_status_change true
+          end
+        end
+
+        q.save
+      end
+    end
 
     desc "Remove \"empty\" Questions"
     task :remove_empty_questions => :environment do
@@ -17,9 +39,19 @@ namespace :data do
     task :regenerate_questions_news_items => :environment do
       Question.query.each do |q|
         nu = q.news_update
-        if nu != nil and nu.news_items.nil? and nu.entry_type == "Question"
-          NewsItem.from_news_update! nu
+
+        if nu != nil and nu.entry_type == "Question"
+          if nu.news_items.nil?
+            NewsItem.from_news_update! nu
+          else
+            nu.news_items.each do |ni|
+              ni.open_question = nu.entry.is_open
+              ni.news_update_entry_type = "Question"
+              ni.save
+            end
+          end
         end
+
       end
     end
 

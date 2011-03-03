@@ -16,6 +16,13 @@ class NewsUpdate
 
   after_create :create_news_items
 
+  def on_question_status_change(status)
+    self.news_items.each do |ni|
+      ni.open_question = status
+      ni.save
+    end
+  end
+
   def create_news_items
     NewsItem.from_news_update!(self)
   end

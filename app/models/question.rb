@@ -68,6 +68,14 @@ class Question
   key :last_target_id, String
   key :last_target_date, Time
 
+  # is_open is true if answer doesn't have any question with
+  # positive vote count
+  key :is_open, Boolean, :default => true
+  # max_votes and min_votes are respectively the maximum and minimum
+  # number of votes of all answers of self
+  key :max_votes, Integer, :default => 0
+  key :min_votes, Integer, :default => 0
+
   belongs_to :last_target, :polymorphic => true
 
   has_many :answers, :dependent => :destroy
@@ -183,6 +191,46 @@ class Question
     end
     on_activity(false)
   end
+
+  # keep max_votes, min_votes and is_open up to date when a user
+  # votes up an answer of self
+  def on_answer_votes_balance_up(answer)
+    all_votes = self.answers.map{ |a| a.votes_average }
+    self.min_votes = all_votes.empty? ? 0 : all_votes.min
+
+    if answer.votes_average > self.max_votes
+      self.max_votes = answer.votes_average
+      if self.max_votes > 0
+        self.is_open = false
+        if self.news_update_id
+          self.news_update.on_question_status_change false
+        end
+      end
+    end
+
+    self.save
+  end
+  handle_asynchronously :on_answer_votes_balance_up
+
+  # keep max_votes, min_votes and is_open up to date when a user
+  # votes down an answer of self
+  def on_answer_votes_balance_down(answer)
+    all_votes = self.answers.map{ |a| a.votes_average }
+    self.max_votes = all_votes.empty? ? 0 : all_votes.max
+
+    if answer.votes_average < self.min_votes
+      self.min_votes = answer.votes_average
+      if self.max_votes < 1
+        self.is_open = true
+        if self.news_update_id
+          self.news_update.on_question_status_change true
+        end
+      end
+    end
+
+    self.save
+  end
+  handle_asynchronously :on_answer_votes_balance_down
 
   def add_favorite!(fav, user)
     self.collection.update({:_id => self._id}, {:$inc => {:favorites_count => 1}},

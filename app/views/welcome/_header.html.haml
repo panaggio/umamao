@@ -1,0 +1,12 @@
+- content_for :head do
+  %meta{:name => "description", :content => markdown(current_group.description, :process_latex => false).gsub(/<\/?[^>]*>/, "")[0, 255] }
+
+- content_for :js do
+  = include_javascripts :suggestions
+
+- content_for :subtabs do
+  .navtitle
+    = t("welcome.home.recent_activities")
+  - tabs_tag :namespace => :welcome_home do |tab|
+    = tab.all t('welcome.home.all_tab'), root_path
+    = tab.unanswered t('welcome.home.unanswered_tab'), unanswered_path

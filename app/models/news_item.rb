@@ -7,6 +7,8 @@ class NewsItem
 
   key :news_update_id, ObjectId, :required => true
   belongs_to :news_update
+  key :news_update_entry_type, String
+  key :open_question, Boolean
 
   # origin is the reason why this update made its way to the
   # recipient: a user, topic or question she was following.
@@ -21,6 +23,14 @@ class NewsItem
   # Notifies each recipient of a news update. The creation date will
   # be the same as the news update's.
   def self.from_news_update!(news_update)
+    news_update.news_items.each do |ni|
+      ni.news_update_entry_type = news_update.entry_type
+      if  ni.news_update_entry_type == "Question"
+        ni.open_question = news_update.entry.is_open
+      end
+      ni.save
+    end
+
     origins = [news_update.author] + news_update.entry.topics
     notify!(news_update, news_update.author,
             news_update.author, news_update.created_at)

@@ -76,9 +76,11 @@ class Answer < Comment
     if v > 0
       self.user.update_reputation(:answer_receives_up_vote, self.group)
       voter.on_activity(:vote_up_answer, self.group)
+      self.question.on_answer_votes_balance_up self
     else
       self.user.update_reputation(:answer_receives_down_vote, self.group)
       voter.on_activity(:vote_down_answer, self.group)
+      self.question.on_answer_votes_balance_down self
     end
 
     update_question_answered_with
@@ -88,9 +90,11 @@ class Answer < Comment
     if v > 0
       self.user.update_reputation(:answer_undo_up_vote, self.group)
       voter.on_activity(:undo_vote_up_answer, self.group)
+      self.question.on_answer_votes_balance_down self
     else
       self.user.update_reputation(:answer_undo_down_vote, self.group)
       voter.on_activity(:undo_vote_down_answer, self.group)
+      self.question.on_answer_votes_balance_up self
     end
 
     update_question_answered_with
