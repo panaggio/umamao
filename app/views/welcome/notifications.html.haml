@@ -1,5 +1,9 @@
-.secondary-navigation
-  .navtitle= t("notifications.title")
+= render :partial => "header"
+
 #notifications
   - @notifications.each do |notification|
     = render :partial => "notifications/notification", :locals => {:notification => notification}
+
+= will_paginate @notifications
+
+= render :partial => "sidebar"

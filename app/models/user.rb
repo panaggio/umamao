@@ -84,6 +84,8 @@ class User
   # terms of service during signup.
   key :agrees_with_terms_of_service, Boolean, :default => false
 
+  key :last_read_notifications_at, Time
+
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
 

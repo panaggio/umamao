@@ -2088,7 +2088,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 }
 
 #notifications {
-  margin-top: 25px;
+  margin: 25px 0 30px 0;
 }
 #notifications img.gravatar {
   float: left;
@@ -2097,14 +2097,14 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #notifications .notification {
   overflow: hidden;
   *zoom: 1;
+  padding: 17px 0 17px 0;
+  border-bottom: 1px #cccccc solid;
 }
 #notifications .notification .message {
   padding-top: 5px;
 }
-#notifications .notification + .notification {
-  margin-top: 17px;
-  padding-top: 17px;
-  border-top: 1px #cccccc solid;
+#notifications .notification:last-of-type {
+  border-bottom-style: none;
 }
 #notifications .date {
   color: #aaaaaa;

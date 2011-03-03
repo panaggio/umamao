@@ -2,6 +2,7 @@ Shapado::Application.routes.draw do
 
   match '/topics/autocomplete' => 'topics#autocomplete'
   match '/unanswered' => 'welcome#unanswered', :as => :unanswered
+  get '/notifications' => 'welcome#notifications', :as => :notifications
 
   resources :affiliations
 
@@ -39,7 +40,6 @@ Shapado::Application.routes.draw do
   match '/send_feedback' => 'welcome#send_feedback', :as => :send_feedback
   match '/tos' => 'doc#tos', :as => :tos
   match '/privacy' => 'doc#privacy', :as => :privacy
-  get '/notifications' => 'users#notifications', :as => :notifications
 
   get '/agreement' => 'agreement#edit', :as => :agreement
   post '/agreement' => 'agreement#update'

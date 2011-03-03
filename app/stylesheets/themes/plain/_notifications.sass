@@ -1,7 +1,7 @@
 @import "compass/utilities/general/clearfix"
 
 #notifications
-  margin-top: 25px
+  margin: 25px 0 30px 0
 
   img.gravatar
     float: left
@@ -11,11 +11,11 @@
     .message
       padding-top: 5px
     +clearfix
+    padding: 17px 0 17px 0
+    border-bottom: 1px #ccc solid
 
-  .notification + .notification
-    margin-top: 17px
-    padding-top: 17px
-    border-top: 1px #ccc solid
+  .notification:last-of-type
+    border-bottom-style: none
 
   .date
     color: #aaa

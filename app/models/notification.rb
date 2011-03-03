@@ -11,14 +11,13 @@ class Notification
 
   key :data, Hash, :required => true
 
-  key :unread, Boolean, :default => true
-
-  def read
-    self.unread = false
+  def unread?
+    !self.user.last_read_notifications_at ||
+      self.user.last_read_notifications_at < self.created_at
   end
 
   def info
-    @info ||= 
+    @info ||=
       begin
         info = {}
         info[:user] = User.find_by_id(self.data[:user_id])
