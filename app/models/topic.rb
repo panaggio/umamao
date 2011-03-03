@@ -26,6 +26,13 @@ class Topic
   has_many :related_topics, :class_name => "Topic",
     :in => :related_topic_ids
 
+  key :freebase_mids, Array
+  key :freebase_guid, String
+
+  key :wikipedia_pt_id, String
+  key :wikipedia_pt_key, String
+  key :wikipedia_import_status, String
+
   timestamps!
 
   versionable_keys :title, :description
@@ -35,6 +42,18 @@ class Topic
   before_save :generate_slug
 
   after_destroy :remove_from_suggestions
+
+  # Wikipedia can be accessed by article_id using
+  # http://pt.wikipedia.org/w/index.php?curid=#{wikipedia_pt_id}
+  # and by article_name using
+  # http://pt.wikipedia.org/wiki/#{article_name}
+  def wikipedia_pt_url
+    "http://pt.wikipedia.org/wiki/#{wikipedia_pt_key}" if wikipedia_pt_key
+  end
+
+  def wikipedia_pt_id_url
+    "http://pt.wikipedia.org/w/index.php?curid=#{wikipedia_pt_id}" if wikipedia_pt_id
+  end
 
   # Removes spaces from the beginning, the end and inbetween words
   # from the title

@@ -2,6 +2,8 @@
 require 'mechanize'
 require 'rubygems'
 require 'ccsv'
+require 'lib/freebase'
+require 'lib/wikipedia_parser'
 
 namespace :data do
   namespace :migrate do
@@ -26,6 +28,33 @@ namespace :data do
 
         q.save
       end
+
+    desc "Download Freebase simple topic dump"
+    task :download_freebase_topics do
+      Freebase.download_simple_topic_dump
+    end
+
+    desc "Download Wikipedia article dump"
+    task :download_wikipedia_articles do
+      Wikipedia.download_wikipedia_articles_dump
+    end
+
+    desc "Import Wikipedia articles as topics"
+    task :import_wikipedia_articles => :environment do
+      parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
+      parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}"))
+    end
+
+    desc "Extract mid's from Freebase simple topic dump"
+    task :extract_freebase_mids do
+      Freebase.extract_mids_file_from_simple_topic_dump
+    end
+
+    # This task is not fully tested
+    desc "Import Freebase topics"
+    task :import_freebase_topics => :environment do
+      mids = Freebase.read_mids_file
+      Freebase.create_topics mids
     end
 
     desc "Remove \"empty\" Questions"
