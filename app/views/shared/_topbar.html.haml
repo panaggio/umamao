@@ -12,14 +12,6 @@
                   %li
                     = link_to h(group.name), domain_url(:custom => group.domain)
 
-      - if current_user.owner_of?(current_group)
-        %li.menu-item
-          = link_to t(".admin"), manage_properties_path, :class => "manage_link"
-
-      - if current_user.mod_of?(current_group)
-        %li.menu-item
-          = link_to t("layouts.application.moderate"), moderate_path, :class => "moderate_link"
-
       %li.menu-item
         = link_to(avatar_for(current_user, :size => 20).html_safe, user_path(current_user))
         - uname = current_user.name.split

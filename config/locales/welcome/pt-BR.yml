@@ -30,6 +30,9 @@ pt-BR:
       browse_by_topics: "navegue por tópicos"
       looking_for: "Procurando %{link}?"
       exercises: resoluções de exercícios
+    sidebar:
+      admin: Administrar
+      moderate: Moderar
     about:
       title: Quem são vocês?
     news_item:
