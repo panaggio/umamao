@@ -1294,9 +1294,51 @@ ul#team .avatar {
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info {
   max-height: 33px;
-  max-width: 60%;
+  width: 68%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info img {
+  float: left;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul {
+  max-width: 90%;
+  overflow: hidden;
+  float: left;
+  margin-left: 3px;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-name {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  margin-top: -3px;
+  font-size: 90%;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-name {
+  *display: inline;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-description {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  margin-top: -7px;
+  font-size: 70%;
+  padding-bottom: 7px;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-description {
+  *display: inline;
 }
 #signup-wizard #navigation {
   float: right;
