@@ -7,6 +7,21 @@ require 'lib/wikipedia_parser'
 
 namespace :data do
   namespace :migrate do
+
+    desc "Create a DJ to import Wikipedia"
+    task :launch_wp => :environment do
+      Rails.logger.info "Trying to launch"
+      Rake::Task["data:migrate:do_launch_wp"].delay.invoke
+    end
+
+    desc "Actually execute the Wikipedia import"
+    task :do_launch_wp => :environment do
+      Rails.logger.info "Downloading Wikipedia"
+      Rake::Task["data:migrate:download_wikipedia_articles"].invoke
+      Rails.logger.info "Exporting Wikipedia"
+      Rake::Task["data:migrate:import_wikipedia_articles"].invoke
+    end
+
     desc "Add max_votes, min_votes and is_open fields to Questions"
     task :add_votes_and_is_open_to_questions => :environment do
       Question.query.each do |q|
@@ -28,6 +43,7 @@ namespace :data do
 
         q.save
       end
+    end
 
     desc "Download Freebase simple topic dump"
     task :download_freebase_topics do
