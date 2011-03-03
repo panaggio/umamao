@@ -6,7 +6,6 @@ group :development do
   gem 'RedCloth', '~> 4.1.1'
   gem 'ruby-debug'
   gem 'ruby-prof'
-  gem 'nokogiri'
 end
 
 gem 'rails', '3.0.3'
@@ -22,6 +21,7 @@ gem 'ccsv', '~> 0.1'
 gem 'cells', :git => 'git://github.com/apotonick/cells.git'
 gem 'compass', '~> 0.10.2'
 gem 'compass-colors', '~> 0.3.1'
+gem 'curb'
 gem 'dalli'
 gem 'delayed_job'
 gem 'delayed_job_mongo_mapper'
@@ -33,6 +33,7 @@ gem 'haml', '~> 3.0.13'
 gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
 gem 'mechanize', :require => false
+gem 'nokogiri'
 gem 'omniauth', :git => 'git://github.com/umamao/omniauth.git'
 gem 'postmark', '~>0.9.0'
 gem 'postmark-rails', '~>0.4.0'
