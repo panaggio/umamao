@@ -1,6 +1,6 @@
 class Buffer
 
-  BUFFER_SIZE = 10_000
+  BUFFER_SIZE = 100
 
   def initialize
     @buf = []
