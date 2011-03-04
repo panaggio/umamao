@@ -32,9 +32,10 @@ class WelcomeController < ApplicationController
 
   def notifications
     @user = current_user
-    @notifications = @user.notifications.paginate(:per_page => 2,
+    @notifications = @user.notifications.paginate(:per_page => 20,
                                                   :page => params[:page],
                                                   :order => :created_at.desc)
+    set_tab :notifications, :welcome_home
     render
 
     if @notifications.present?

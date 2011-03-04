@@ -1,6 +1,9 @@
 .notification{:class => notification.unread? ? "unread" : ""}
-  = avatar_for(notification.info[:user], :size => 40)
+  = avatar_for(notification.info[:user], :size => 32)
   .message
     = notification_message notification
-  .date
-    = t("time.ago", :time => time_ago_in_words(notification.created_at))
+  .metadata
+    - if notification.event_type == "follow"
+      = follow_button notification.info[:user]
+    .date
+      = t("time.ago", :time => time_ago_in_words(notification.created_at))
