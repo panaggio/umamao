@@ -324,7 +324,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296569083');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1606,7 +1606,7 @@ ul.topic-list .follow-info a {
 
 a.request_group {
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -2050,6 +2050,59 @@ a.request_group:visited, a.request_group:link {
 }
 .secondary-navigation ul li.current a, .secondary-navigation ul li.current a:active, .secondary-navigation ul li.current a:visited, .secondary-navigation ul li.current a:link {
   color: #333333;
+}
+
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs {
+  *zoom: 1;
+  border-bottom: 1pt solid #666666;
+  width: 100%;
+  margin-bottom: 15px;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li {
+  background-color: #efefef;
+  margin: 0 1px 0 0;
+  padding: 3px;
+  -moz-border-radius: 7px 7px 0 0;
+  -webkit-border-radius: 7px 7px 0 0;
+  -o-border-radius: 7px 7px 0 0;
+  -ms-border-radius: 7px 7px 0 0;
+  -khtml-border-radius: 7px 7px 0 0;
+  border-radius: 7px 7px 0 0;
+  border: 1pt solid #aaaaaa;
+  border-bottom: none;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li:hover {
+  background-color: white;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li a {
+  color: #666666;
+  text-decoration: none;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li a, html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li span {
+  font-family: trebuchet MS, sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+  padding: 5px 10px;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li.current {
+  background-color: white;
+  border-left: 1pt solid #666666;
+  border-right: 1pt solid #666666;
+  border-top: 1pt solid #666666;
+  border-bottom: 1pt solid white;
+  margin-bottom: -1px;
+}
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li.current span {
+  display: block;
+  font-weight: normal;
 }
 
 #search {

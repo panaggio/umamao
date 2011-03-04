@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   helper :questions
-  tabs :default => :welcome
   layout 'application'
 
   def index
@@ -14,13 +13,12 @@ class WelcomeController < ApplicationController
   end
 
   def home
-    @active_subtab = params.fetch(:tab, "activity")
-
     @news_items = filter_news_items
 
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
     @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")
 
+    set_tab :all, :welcome_home
     render 'home'
   end
 
@@ -28,6 +26,7 @@ class WelcomeController < ApplicationController
     @news_items = filter_news_items :news_update_entry_type => "Question",
       :open_question => true
 
+    set_tab :unanswered, :welcome_home
     render 'unanswered'
   end
 
