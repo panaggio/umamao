@@ -1,3 +1,6 @@
+@import "compass/css3/border-radius"
+@import "compass/utilities/general/clearfix"
+
 =active_tab
   background-color: $logo-color
   color: white
@@ -57,3 +60,40 @@
 
 .secondary-navigation ul li.current
   +active_subtab
+
+html body div#container div#wrapper div#main div#block-text div.secondary-navigation
+  ul.tabs
+    +pie-clearfix
+    border-bottom: 1pt solid #666666
+    width: 100%
+    margin-bottom: 15px
+    li
+      background-color: #EFEFEF
+      margin: 0 1px 0 0
+      padding: 3px
+
+      +border-radius(7px 7px 0 0)
+      border: 1pt solid #AAAAAA
+      border-bottom: none
+
+      &:hover
+        background-color: #FFFFFF    
+      a
+        color: #666666
+        text-decoration: none
+      a, span
+        font-family: trebuchet MS,sans-serif
+        font-size: 1em
+        font-weight: normal
+        padding: 5px 10px
+        
+    li.current
+      background-color: white
+      border-left: 1pt solid #666666
+      border-right: 1pt solid #666666
+      border-top: 1pt solid #666666
+      border-bottom: 1pt solid white
+      margin-bottom: -1px
+      span
+        display: block
+        font-weight: normal

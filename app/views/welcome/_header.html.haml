@@ -5,8 +5,6 @@
   = include_javascripts :suggestions
 
 - content_for :subtabs do
-  .navtitle
-    = t("welcome.home.recent_activities")
-  - tabs_tag :namespace => :welcome_home do |tab|
+  - tabs_tag :namespace => :welcome_home, :open_tabs => {:class => :tabs} do |tab|
     = tab.all t('welcome.home.all_tab'), root_path
     = tab.unanswered t('welcome.home.unanswered_tab'), unanswered_path
