@@ -1,11 +1,14 @@
 class Buffer
+
+  BUFFER_SIZE = 10_000
+
   def initialize
     @buf = []
   end
 
   def send(entry)
     @buf << entry.serialize_for_search_server
-    self.flush if @buf.size > 100
+    self.flush if @buf.size > BUFFER_SIZE
   end
 
   def flush
