@@ -46,3 +46,28 @@ pt-BR:
           created: "%{origin} adicionou uma resposta."
         topic:
           created: "Resposta adicionada ao tópico %{origin}."
+      academicprogram:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      course:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      university:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      academicprogramclass:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      courseoffer:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
