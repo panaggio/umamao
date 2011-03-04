@@ -143,6 +143,8 @@ module Freebase
           x = _multi_query(ids)
         when String
           x = { "q" => _single_query(ids) }
+        when Fixnum
+          x = { "q" => _single_query(ids) }
         end
       @query = q.to_json
     end

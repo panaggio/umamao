@@ -8,6 +8,13 @@ require 'lib/wikipedia_parser'
 namespace :data do
   namespace :migrate do
 
+    desc "Remove erroneously added topics from Wikipedia articles"
+    task :remove_non_global_wikipedia_articles => :environment do
+      Topic.where(:created_at.gt => (Time.now - 12.hour), :followers_count => 0, :questions_count => 0).find_each do |t|
+        t.destroy
+      end
+    end
+
     desc "Create a DJ to import Wikipedia"
     task :launch_wp => :environment do
       Rails.logger.info "Trying to launch"
