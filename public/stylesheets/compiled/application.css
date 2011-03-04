@@ -1,7 +1,7 @@
 /* incase an inverted custom gradient isn't specified */
 .fancy-button-reset-base-class, a.big_cancel_button, a.big_confirm_button, form.share_content .submit_button {
   font-family: "Lucida Grande", Lucida, Arial, sans-serif;
-  background: url('/images/button_bg.png?1279768283') repeat-x bottom left;
+  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
