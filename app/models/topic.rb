@@ -59,7 +59,7 @@ class Topic
   # from the title
   def trim_spaces
     self.title.strip!
-    self.title.sub!(/\s+/, " ")
+    self.title.gsub!(/\s+/, " ")
   end
 
   # Takes array of strings and returns array of topics with matching
