@@ -32,11 +32,11 @@ namespace :search do
     buffer = Buffer.new
     Rake::Task["search:clear"].invoke
     puts "Exporting topics..."
-    Topic.query.each{|topic| buffer.send(topic)}
+    Topic.find_each{ |topic| buffer.send(topic) }
     puts "Exporting users..."
-    User.query.each{|user| buffer.send(user)}
+    User.find_each{ |user| buffer.send(user) }
     puts "Exporting questions..."
-    Question.query.each{|question| buffer.send(question)}
+    Question.find_each{ |question| buffer.send(question) }
     buffer.flush
   end
 
