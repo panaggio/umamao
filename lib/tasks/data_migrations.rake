@@ -10,7 +10,7 @@ namespace :data do
 
     desc "Remove erroneously added topics from Wikipedia articles"
     task :remove_non_global_wikipedia_articles => :environment do
-      Topic.where(:created_at.gt => (Time.now - 12.hour), :followers_count => 0, :questions_count => 0).find_each do |t|
+      Topic.find_each(:created_at.gt => (Time.now - 12.hour), :followers_count => 0, :questions_count => 0) do |t|
         t.destroy
       end
     end
