@@ -6,20 +6,10 @@
 
 - content_for :subtabs do
   .navtitle
-    = t(".title")
-    - if @questions
-      == (#{@questions.total_entries})
-
-  %ul
-    %li.newest
-      = link_to t("questions.index.newest"), questions_path(:sort=>"newest"), :title => t("questions.index.newest_tooltip")
-    %li.hot
-      = link_to t("questions.index.hot"), questions_path(:sort=>"hot"), :title => t("questions.index.hot_tooltip"), :rel => "nofollow"
-    %li.votes
-      = link_to t("questions.index.votes"), questions_path(:sort=>"votes"), :title =>  t("questions.index.votes_tooltip"), :rel => "nofollow"
-    %li.activity
-      = link_to t("questions.index.active"), questions_path(:sort=>"activity"), :title => t("questions.index.active_tooltip"), :rel => "nofollow"
-
+  - tabs_tag :namespace => :questions_index, :open_tabs => { :class => :tabs } do |tab|
+    = tab.all t('questions.index.all_tab'), questions_path
+    - unanswered_counter = @unanswered_questions_count > 0 ? " (#{@unanswered_questions_count})" : ""
+    = tab.unanswered t('questions.index.unanswered_tab') << unanswered_counter, unanswered_questions_path
 
 - content_for :sidebar do
   - if logged_in?

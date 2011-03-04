@@ -33,6 +33,8 @@ class QuestionsController < ApplicationController
                                    :fields => (Question.keys.keys - ["_keywords", "watchers"])}.
                                                merge(conditions))
 
+    @unanswered_questions_count = calculate_unanswered_count
+
     @langs_conds = scoped_conditions[:language][:$in]
 
     if logged_in?
@@ -46,6 +48,8 @@ class QuestionsController < ApplicationController
       add_feeds_url(url_for({:format => "atom", :tags => params[:tags]}.merge(feed_params)),
                     "#{t("feeds.tag")} #{params[:tags].inspect}")
     end
+
+    set_tab :all, :questions_index
 
     respond_to do |format|
       format.html # index.html.erb
@@ -126,8 +130,12 @@ class QuestionsController < ApplicationController
                                     :fields => (Question.keys.keys - ["_keywords", "watchers"])
                                    }.merge(conditions))
 
+    @unanswered_questions_count = calculate_unanswered_count
+
+    set_tab :unanswered, :questions_index
+
     respond_to do |format|
-      format.html # unanswered.html.erb
+      format.html { render 'index' } # unanswered.html.erb
       format.json  { render :json => @questions.to_json(:except => %w[_keywords slug watchers]) }
     end
   end
@@ -553,6 +561,10 @@ class QuestionsController < ApplicationController
   end
 
   protected
+  def calculate_unanswered_count
+    Question.count :is_open => true
+  end
+
   def check_permissions
     @question = Question.find_by_slug_or_id(params[:id])
 
