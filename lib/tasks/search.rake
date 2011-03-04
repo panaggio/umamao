@@ -12,9 +12,10 @@ class Buffer
   end
 
   def flush
-    Support::Search.
+    Support::Search.delay.
       send_command_to_search_server("<update>#{@buf.join ""}</update>")
     @buf = []
+    print '.'
   end
 end
 
