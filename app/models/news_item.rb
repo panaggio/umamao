@@ -40,7 +40,7 @@ class NewsItem
       notify!(news_update, topic, topic, news_update.created_at)
     end
 
-    self.update_is_open(news_update)
+    self.delay.update_is_open(news_update)
   end
 
   def self.update_is_open(news_update)
@@ -52,7 +52,6 @@ class NewsItem
       ni.save
     end
   end
-  NewsItem.handle_asynchronously :update_is_open
 
   # Notifies a single recipient. Allows us to specify when the item
   # was created.
