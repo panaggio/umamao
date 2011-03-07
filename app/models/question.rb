@@ -40,6 +40,9 @@ class Question
     where(:parent_question_id => question.id)
   }
 
+  has_many :children_questions, :class_name => 'Question',
+    :foreign_key => 'parent_question_id', :dependent => :nullify
+
   key :answered_with_id, String
   belongs_to :answered_with, :class_name => "Answer"
 
