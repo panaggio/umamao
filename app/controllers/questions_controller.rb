@@ -121,8 +121,7 @@ class QuestionsController < ApplicationController
 
   def unanswered
     set_page_title(t("questions.unanswered.title"))
-    conditions = scoped_conditions(:answered_with_id => nil, :banned => false,
-                                   :closed => false)
+    conditions = scoped_conditions(:is_open => true)
 
     @questions = Question.paginate({:order => current_order,
                                     :per_page => 25,
