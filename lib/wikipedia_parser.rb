@@ -105,6 +105,8 @@ module WikipediaTopicCreator
             "unkown error"
           end
         topic.save
+      ensure
+        topic.wikipedia_import_status ||= "imported"
       end
     end
 
