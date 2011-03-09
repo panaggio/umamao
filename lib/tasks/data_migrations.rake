@@ -581,5 +581,38 @@ namespace :data do
       end
 
     end
+
+    desc 'Remove html code from Topic\'s description'
+    task :remove_html_code_topic_description => :environment do
+      Topic.all(:description => {"$ne" => nil}).each do |t|
+        if t.description.present?
+          t.description.gsub!(/<strong>([^<]*)<\/strong>/, '**\1**')
+
+          t.description.gsub!(/<code>([^<]*)<\/code>/, '`\1`')
+
+          if /<a/ =~ t.description
+            # Find the greatest index for link
+            max = 0
+            t.description.scan(/\[(\d*)\]: .*/).each do |number|
+              if number.to_i > max
+                max = number.to_i
+              end
+            end
+
+            # Change the anchor to markdown format
+            new_links = ""
+            t.description.scan(/<a href="([^"]*)">([^<]*)<\/a>/).each do |link|
+              max = max + 1
+              t.description.gsub!("<a href=\"#{link[0]}\">#{link[1]}</a>", "[#{link[1]}][#{max}]")
+              new_links += "\n  [#{max}]: #{link[0]}"
+            end
+            t.description += new_links
+
+          end
+
+          t.save(:validate => false)
+        end
+      end
+    end
   end
 end
