@@ -35,4 +35,4 @@ Feature: Signup
     And I press "Criar conta"
     And I follow "Próxima"
     And I follow "Terminar"
-    Then I should see "Fluxo"
+    Then I should see "Leia"
