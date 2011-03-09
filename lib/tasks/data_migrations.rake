@@ -8,6 +8,49 @@ require 'lib/wikipedia_parser'
 namespace :data do
   namespace :migrate do
 
+    desc "Create notifications for old events"
+    task :create_old_notifications => :environment do
+
+      # Notify old answers
+      puts "Notifying answers"
+      Answer.query.each do |answer|
+        User.query(:id.in => answer.question.watchers).each do |watcher|
+          next if watcher == answer.user
+          Notification.create!(:user => watcher,
+                               :event_type => "new_answer",
+                               :origin => answer.user,
+                               :question => answer.question,
+                               :created_at => answer.created_at)
+
+        end
+      end
+
+      # Notify old comments
+      puts "Notifying comments"
+      Comment.query(:_type.ne => "Answer").each do |comment|
+        next if comment.find_recipient == comment.user
+        Notification.create!(:user => comment.find_recipient,
+                             :event_type => "new_comment",
+                             :origin => comment.user,
+                             :question => comment.find_question,
+                             :created_at => comment.created_at)
+      end
+
+      # Notify old followers
+      puts "Notifying old followers"
+      User.query.each do |user|
+        user.followers.each do |follower|
+          Notification.create!(:user => user,
+                               :event_type => "follow",
+                               :origin => follower,
+                               :created_at => follower.created_at)
+        end
+
+        user.last_read_notifications_at = Time.now
+        user.save :validate => false
+      end
+    end
+
     desc "Create a DJ to import Wikipedia"
     task :launch_wp => :environment do
       Rails.logger.info "Trying to launch"

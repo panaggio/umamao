@@ -38,7 +38,8 @@ class WelcomeController < ApplicationController
     set_tab :notifications, :welcome_home
     render
 
-    if @notifications.present?
+    if @notifications.present? &&
+        @notifications.first.created_at > @user.last_read_notifications_at
       @user.last_read_notifications_at = @notifications.first.created_at
       @user.save!
     end
