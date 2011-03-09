@@ -9,6 +9,17 @@ module Wikipedia
   ARTICLES_XML = "ptwiki-latest-pages-articles.xml"
   BZIPED_ARTICLES_XML = "#{ARTICLES_XML}.bz2"
 
+  OFFICIAL_NAMESPACES = [
+    'Discussão', 'Usuário', 'Usuário_Discussão', 'Wikipédia', 'Wikipédia_Discussão',
+    'Ficheiro', 'Ficheiro_Discussão', 'MediaWiki', 'MediaWiki_Discussão',
+    'Predefinição', 'Predefinição_Discussão', 'Ajuda', 'Ajuda_Discussão', 'Categoria',
+    'Categoria_Discussão', 'Portal', 'Portal_Discussão', 'Anexo', 'Anexo_Discussão'
+  ]
+
+  OFFICIAL_PSEUDO_NAMESPACES = [ 'WP', 'A', 'C', 'P', 'U' ]
+
+  NAMESPACES = OFFICIAL_NAMESPACES + OFFICIAL_PSEUDO_NAMESPACES + [ 'Wikipedia', 'Wp' ]
+
   def self.download_wikipedia_articles_dump
     `curl #{DUMP_URL}#{BZIPED_ARTICLES_XML} -o #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
     exit($?.exitstatus) unless $?.success?
