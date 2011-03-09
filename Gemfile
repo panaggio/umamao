@@ -8,7 +8,7 @@ group :development do
   gem 'ruby-prof'
 end
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.5'
 
 gem 'bson_ext', :require => 'bson'
 gem 'mongo'
@@ -29,6 +29,7 @@ gem 'differ', '~>0.1.1'
 gem 'dynamic_form'
 gem 'fancy-buttons', '~>0.5.1'
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
+gem 'jquery-rails'
 gem 'haml', '~> 3.0.13'
 gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
