@@ -59,6 +59,10 @@ class NewsItem
     news_item = create(:news_update => news_update,
                :recipient => recipient,
                :origin => origin)
+    if recipient.is_a? Topic
+      news_item.recipient_type = "Topic"
+      news_item.save
+    end
     if created_at
       news_item.created_at = created_at
       news_item.save
