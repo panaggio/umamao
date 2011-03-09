@@ -42,6 +42,8 @@ pt-BR:
       language_tip: Selecione o idioma da pergunta.
       tags_tip: Use tópicos para fornecer mais informação sobre a sua pergunta.
     index:
+      all_tab: Todas as perguntas
+      unanswered_tab: Perguntas em aberto
       active: Ativas
       active_tooltip: Perguntas atualizadas recentemente
       ask_question: Fazer pergunta
