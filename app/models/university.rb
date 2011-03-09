@@ -5,25 +5,19 @@ class University
   include Scopes
   include MongoMapperExt::Filter
 
-  key :name, String, :limit => 500, :null => false, :index => true
-  key :short_name, String, :limit => 500, :null => false, :index => true
-  key :state, String, :limit => 20,  :null =>false
-  key :open_for_signup, Boolean
-  key :validation_type, String
+  key :name, String, :length => 500, :index => true, :required => true,
+    :unique => true
+  key :short_name, String, :length => 500, :index => true, :required => true
+  key :state, String, :length => 20
+  key :open_for_signup, Boolean, :default => true
+  key :validation_type, String, :default => 'email'
   key :domains, Array
 
   has_many :affiliation, :dependent => :destroy
 
   timestamps!
 
-  validates_presence_of     :name
-  validates_uniqueness_of   :name
-  validates_length_of       :name, :maximum => 100
   filterable_keys           :name, :short_name
-
-  validates_presence_of     :short_name
-  validates_length_of       :short_name, :maximum => 20
-  validates_length_of       :state, :maximum => 20
 
   # Topics we want to suggest to affiliated users initially. We do not
   # include here subject topics, only topics of general

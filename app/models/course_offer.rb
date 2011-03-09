@@ -1,9 +1,9 @@
 class CourseOffer < Topic
   include MongoMapper::Document
 
-  key :code, String, :limit => 15, :null => false
-  key :year, Integer, :null => false
-  key :semester, Integer, :null => false
+  key :code, String, :length => 15
+  key :year, Integer
+  key :semester, Integer
 
   key :course_id, ObjectId
   belongs_to :course

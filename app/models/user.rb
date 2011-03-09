@@ -16,15 +16,15 @@ class User
   LOGGED_OUT_LANGUAGE_FILTERS = %w[any] + AVAILABLE_LANGUAGES
 
   key :_id,                       String
-  key :login,                     String, :limit => 40, :index => true
-  key :name,                      String, :limit => 100, :null => false, :index => true
+  key :login,                     String, :index => true
+  key :name,                      String, :index => true
 
-  key :bio,                       String, :limit => 140
-  key :website,                   String, :limit => 200
-  key :location,                  String, :limit => 200
+  key :bio,                       String
+  key :website,                   String
+  key :location,                  String
   key :birthday,                  Time
-  key :gender,                    String, :limit => 1, :in => ['m', 'f', nil]
-  key :description,               String, :limit => 500
+  key :gender,                    String, :length => 1, :in => ['m', 'f', nil]
+  key :description,               String
   key :new_user,                  Boolean, :default => true
 
   key :identity_url,              String
@@ -559,7 +559,7 @@ Time.zone.now ? 1 : 0)
 
     return nil
   end
-  
+
   # Return the user's associated DAC account, if there is one, and
   # nil otherwise.
   def dac_account
