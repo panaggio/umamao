@@ -27,14 +27,30 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
     @inside = nil
     case element
     when "page"
-      if not @redirects and @article
+      if not @redirects and not @namespaced and not @desambiguation and @article
         send_outside @article
         @article = nil
       end
       @redirects = false
       @inside_page = false
+      @namespaced = false
+      @desambiguation = false
     when "revision"
       @inside_revision = false
+    when "title"
+
+      if @inside_page and not @inside_revision
+        Wikipedia::NAMESPACES.each do |ns|
+          if @article["title"].match(/^#{ns}:/)
+            @namespaced = true
+            break
+          elsif @article["title"].match(/[dD]esambigua((c|ç)(a|ã)o|ción)/)
+            @desambiguation = true
+            break
+          end
+        end
+      end
+
     end
   end
   
@@ -46,7 +62,8 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
 
   protected
   def set_internals(status)
-    @inside_page, @inside_revision, @redirects = status, status, status
+    @inside_page, @inside_revision, @redirects,
+      @namespaced, @desambiguation = [status] * 5
   end
 
   def send_outside article
