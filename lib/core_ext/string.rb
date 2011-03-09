@@ -50,7 +50,7 @@ class String
      self.tr!('ÂÊÎÔÛ', 'âêîôû')
      self.tr!('ÃẼĨÕŨ', 'ãẽĩõũ')
    end
-   
+
   def phrase_ucfirst
 	a = self.split(' ').map {|x| if x == "da" or x == "de" or x == "do" then x else x.capitalize end}
 	a.join(' ')
@@ -58,6 +58,19 @@ class String
 
   def capitalize_with_accents
     self[0..0] + self[1..-1].downcase
+  end
+
+  # Handles (almost) only portuguese accented letters.
+  def strip_accents
+    norm = self.clone
+    norm.tr!("ÁÉÍÓÚ", "AEIOU")
+    norm.tr!("áéíóú", "aeiou")
+    norm.tr!("ÂÊÎÔÛ", "AEIOU")
+    norm.tr!("âêîôû", "aeiou")
+    norm.tr!("ÃẼĨÕŨ", "AEIOU")
+    norm.tr!("ãẽĩõũ", "aeiou")
+    norm.tr!("Çç", "Cc")
+    norm
   end
 
 end

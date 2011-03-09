@@ -7,6 +7,87 @@ require 'lib/wikipedia_parser'
 
 namespace :data do
   namespace :migrate do
+    desc "Fully migrate question versions"
+    task :migrate_question_versions do
+      Rake::Task["data:migrate:replace_topics_in_versions"].invoke
+      Rake::Task["data:migrate:migrate_tags_in_versions"].invoke
+    end
+
+    desc "Convert :tags in old versions to topics"
+    task :migrate_tags_in_versions => :environment do
+
+      # Look for all tags occuring in versions
+      versions_count = 0
+      found_tags = Set.new
+      Question.query.each do |question|
+        question.versions.each do |version|
+          if version.data[:tags].present?
+            found_tags += version.data[:tags].map(&:strip)
+            versions_count += 1
+          end
+        end
+      end
+      puts "Found #{versions_count} versions with tag content"
+
+      # Look for an equivalent topic for each tag
+      tag_mapping = {}
+      look_later = {}
+      found_tags.each do |tag|
+        if tag == "c"
+          # Hacky, but necessary
+          new_tag = "C (Linguagem de programação)"
+        else
+          new_tag = tag
+        end
+        new_tag = new_tag.gsub(/(\w)-(\w)/, '\\1 \\2')
+        new_tag = new_tag.gsub(/(\w)(cao)\b/, '\\1ção')
+        new_tag_re = /^#{Regexp.escape new_tag}/i
+        topics = Topic.query(:title.in => [new_tag_re]).all
+        if topics.present?
+          tag_mapping[tag] = topics.first.id
+        else
+          look_later[tag] = new_tag_re
+        end
+      end
+
+      puts "Look harder..."
+      # Tags we haven't found should be looked ignoring accents
+      Topic.query.each do |topic|
+        no_accents = topic.title.strip_accents
+        look_later.each do |tag, re|
+          if no_accents =~ re
+            tag_mapping[tag] = topic.id
+          end
+        end
+      end
+
+      puts "Rebuilding versions..."
+      Question.query.each do |question|
+        changed = false
+        question.versions.each do |version|
+          if version.data[:tags].present?
+            changed = true
+            version.data[:topic_ids] =
+              version.data[:tags].map{ |tag| tag_mapping[tag] }.compact
+            version.data.delete :tags
+          end
+        end
+        if changed
+          question.save!
+        end
+      end
+    end
+
+    desc "Replace :topics by :topic_ids in question versions"
+    task :replace_topics_in_versions => :environment do
+      Question.query.each do |question|
+        question.versions.each do |version|
+          version.data.delete :topics
+          version.data[:topic_ids] = []
+        end
+        question.save!
+      end
+    end
 
     desc "Remove erroneously added topics from Wikipedia articles"
     task :remove_non_global_wikipedia_articles => :environment do

@@ -13,10 +13,10 @@
       = t("global.preview")
     #question-preview.markdown
 
-  - if @question.new?
+  - if topics
     %hr
     .group
-      = render :partial => "classify", :locals => {:question => @question}
+      = render :partial => "classify", :locals => {:question => @question, :ajax_add => false}
 
 - if @question.new?
   .controls

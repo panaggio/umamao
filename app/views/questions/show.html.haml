@@ -51,7 +51,7 @@
       .post-text.entry-content
         = question_body
 
-    = render :partial => "classify", :locals => {:question => @question}
+    = render :partial => "classify", :locals => {:question => @question, :ajax_add => true}
 
     .controls
       .actions

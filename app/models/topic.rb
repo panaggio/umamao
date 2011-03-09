@@ -41,6 +41,7 @@ class Topic
 
   before_save :generate_slug
 
+  after_destroy :remove_from_question_versions
   after_destroy :remove_from_suggestions
 
   # Wikipedia can be accessed by article_id using
@@ -127,6 +128,22 @@ class Topic
       q.classify! self
     end
 
+    # Update questions' history
+    Question.query.each do |q|
+      changed = false
+      q.versions.each do |v|
+        topic_ids = v.data[:topic_ids]
+        if topic_ids.include? other.id
+          topic_ids.delete(other.id)
+          unless topic_ids.include?(other.id)
+            topic_ids << self.id
+            changed = true
+          end
+        end
+      end
+      q.save! if changed
+    end
+
     # TODO: check whether this is actually safe.
     other.news_items.each do |item|
       if NewsItem.query(:recipient_id => id,
@@ -144,6 +161,24 @@ class Topic
 
     other.destroy
     save
+  end
+
+  # Iterates through each question removing this topic from every past
+  # version. This is very slow and should be used with care, but as
+  # topics aren't deleted that often, this is not too much of an
+  # issue.
+  def remove_from_question_versions
+    Question.query.each do |question|
+      next if question.versions.blank?
+      changed = false
+      question.versions.each do |version|
+        if version.data[:topic_ids].include? self.id
+          changed = true
+          version.data[:topic_ids].delete self.id
+        end
+      end
+      question.save! if changed
+    end
   end
 
   # Removes topic from user suggestions and ignored topics. This

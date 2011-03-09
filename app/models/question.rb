@@ -112,7 +112,7 @@ class Question
                   end
                 }
 
-  versionable_keys :title, :body, :tags, :topics
+  versionable_keys :title, :body, :topic_ids
   filterable_keys :title, :body
   language :language
 
@@ -403,7 +403,8 @@ class Question
   # Classifies self under topic topic.
   def classify!(topic)
     if !topic_ids.include? topic.id
-      topics << topic
+      self.topic_ids_will_change!
+      self.topic_ids << topic.id
 
       self.needs_to_update_search_index
 
@@ -436,7 +437,7 @@ class Question
         topic.increment_questions_count
       end
 
-      save
+      save!
     else
       false
     end
@@ -445,7 +446,8 @@ class Question
   # Removes self from topic topic.
   def unclassify!(topic)
     if topic_ids.include? topic.id
-      topic_ids.delete topic.id
+      self.topic_ids_will_change!
+      self.topic_ids.delete topic.id
       self.needs_to_update_search_index
       if !banned
         topic.increment_questions_count -1
@@ -467,7 +469,7 @@ class Question
         end
       end
 
-      save
+      save!
     else
       false
     end

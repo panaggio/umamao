@@ -1,7 +1,7 @@
 function initTopicAutocomplete() {
   var topicBox = new TopicAutocomplete("#topic-autocomplete-input",
                                        "#topic-autocomplete-suggestions");
-  var topicsUl = $("#ask_question ul.topic-list");
+  var topicsUl = $("ul.topic-list");
 
   $(".add-topic").live("click", function() {
     if (topicBox.isActive)
@@ -9,7 +9,7 @@ function initTopicAutocomplete() {
     return false;
   });
 
-  $("#ask_question .topic .remove").live("click", function () {
+  $(".topic .remove").live("click", function () {
     $(this).closest("li").remove();
     return false;
   });

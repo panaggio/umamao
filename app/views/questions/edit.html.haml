@@ -11,7 +11,7 @@
     = t(".title")
 
 - form_for(@question, :url => question_path(@question), :html => {:class => "form"}) do |f|
-  = render :partial => "form", :locals => {:f => f}
+  = render :partial => "form", :locals => {:f => f, :topics => false}
   .group.navform
     = f.submit t("scaffold.update")
     = t("global.or")

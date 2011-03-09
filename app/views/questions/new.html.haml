@@ -17,7 +17,7 @@
       = current_group.question_help
 
 - form_for(@question, :html=>{:class => "form", :id => "ask_question"}) do |f|
-  = render :partial => "form", :locals => {:f => f}
+  = render :partial => "form", :locals => {:f => f, :topics => true}
 
   .group.navform
 

@@ -2,14 +2,14 @@
 
 %ul.topic-list
   - question.topics.each do |topic|
-    = render :partial => "topics/box", :locals => {:topic => topic, :question => question}
-  - if logged_in? && !question.new? && (current_user.can_modify?(question) || current_user.can_retag_others_questions_on?(current_group))
+    = render :partial => "topics/box", :locals => {:topic => topic, :question => question, :ajax_add => ajax_add}
+  - if logged_in? && ajax_add && (current_user.can_modify?(question) || current_user.can_retag_others_questions_on?(current_group))
     %li.retag
       %a.reclassify{:href => "#"}
         %span.empty= t("questions.tags.tag")
         %span.not-empty= t("questions.tags.retag")
 = text_field "topics", "", :class => "lighter_text", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
 %a.add-topic{:href => "#"}= t("scaffold.add")
-- if !question.new?
+- if ajax_add
   %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
 %ul#topic-autocomplete-suggestions.autocomplete-list

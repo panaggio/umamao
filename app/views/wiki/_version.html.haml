@@ -4,9 +4,9 @@
     = radio_button_tag("curr", number, curr.to_s == number.to_s)
     .diff_actions
       = render :partial => "diff_actions", :locals => {:post => post, :number => number}
-    =t("wiki.history.version")
+    = t("wiki.history.version")
     %span.version
-      &=number
+      &= number
   %h3.version_message
     = version.message
   .changes
