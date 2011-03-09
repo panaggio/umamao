@@ -161,10 +161,8 @@ class Answer < Comment
         Notifier.delay.new_answer(user, self.group, self, true)
         Notification.create!(:user => user,
                              :event_type => "new_answer",
-                             :data => {
-                               :user_id => self.user.id,
-                               :question_id => self.question.id
-                             })
+                             :origin => self.user,
+                             :question => self.question)
       end
     end
   end

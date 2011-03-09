@@ -403,6 +403,13 @@ Time.zone.now ? 1 : 0)
     User.increment(self.id, :following_count => 1)
     User.increment(user.id, :followers_count => 1)
 
+    if user.notification_opts.activities
+      Notifier.delay.follow(self, user)
+      Notification.create!(:user => user,
+                           :event_type => "follow",
+                           :origin => self)
+    end
+
     self.remove_suggestion(user)
     true
   end
@@ -683,6 +690,15 @@ Time.zone.now ? 1 : 0)
   # external accounts class.
   def needs_to_update_search_index?
     self.name_changed?
+  end
+
+  # Return all unread notifications
+  def unread_notifications
+    if date = self.last_read_notifications_at
+      self.notifications.query(:created_at.gt => date)
+    else
+      self.notifications
+    end
   end
 
   protected

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
-                                           :follow, :unfollow, :notifications]
+                                           :follow, :unfollow]
 
   tabs :default => :users
 
@@ -255,15 +255,6 @@ class UsersController < ApplicationController
 
     notice = t("followable.flash.follow", :followable => @user.name)
 
-    if @user.notification_opts.activities
-      Notifier.delay.follow(current_user, @user)
-      Notification.create!(:user => @user,
-                           :event_type => "follow",
-                           :data => {
-                             :user_id => current_user.id
-                           })
-    end
-
     respond_to do |format|
       format.html do
         flash[:notice] = notice
@@ -391,11 +382,6 @@ class UsersController < ApplicationController
         }
       end
     end
-  end
-
-  def notifications
-    @user = current_user
-    @notifications = @user.notifications
   end
 
   protected

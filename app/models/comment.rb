@@ -100,10 +100,8 @@ class Comment
         end
         Notification.create!(:user => recipient,
                              :event_type => "new_comment",
-                             :data => {
-                               :user_id => self.user.id,
-                               :question_id => question.id
-                             })
+                             :origin => self.user,
+                             :question => question)
       end
     end
   end
