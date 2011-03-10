@@ -1,0 +1,5 @@
+pt-BR:
+  notifications:
+    new_answer: "%{user} respondeu à pergunta \"%{question}\""
+    new_comment: "%{user} comentou na pergunta \"%{question}\""
+    follow: "%{user} está seguindo você no Umamão"

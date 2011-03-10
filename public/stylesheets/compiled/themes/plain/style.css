@@ -694,6 +694,8 @@ input.checkbox {
 }
 
 .secondary-navigation {
+  overflow: hidden;
+  *zoom: 1;
   background: white;
   color: #222222;
   margin-bottom: -4px;
@@ -2038,7 +2040,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   *zoom: 1;
   border-bottom: 1pt solid #666666;
   width: 100%;
-  margin-bottom: 15px;
 }
 html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs:after {
   content: "\0020";
@@ -2085,6 +2086,46 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 html body div#container div#wrapper div#main div#block-text div.secondary-navigation ul.tabs li.current span {
   display: block;
   font-weight: normal;
+}
+
+#notifications {
+  margin-bottom: 30px;
+}
+#notifications img.gravatar {
+  float: left;
+  margin-right: 8px;
+}
+#notifications .notification {
+  overflow: hidden;
+  *zoom: 1;
+  padding: 17px 12px;
+  border-bottom: 1px #cccccc dotted;
+  font-size: 11px;
+}
+#notifications .notification .message {
+  padding-top: 5px;
+}
+#notifications .notification.unread {
+  background-color: #f5f5f5;
+}
+#notifications .notification:last-of-type {
+  border-bottom-style: none;
+}
+#notifications .metadata {
+  font-size: 10px;
+  float: right;
+}
+#notifications .metadata > * {
+  padding-right: 5px;
+  border-right: 1px solid #aaaaaa;
+  display: inline;
+}
+#notifications .metadata > *:last-child {
+  padding-right: 0;
+  border: none;
+}
+#notifications .metadata, #notifications .metadata a {
+  color: #aaaaaa;
 }
 
 #search {

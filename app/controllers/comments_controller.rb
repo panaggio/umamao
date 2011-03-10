@@ -23,14 +23,6 @@ class CommentsController < ApplicationController
       error = @comment.errors.full_messages.join(", ")
     end
 
-    # TODO: use magent to do it
-    if (question = @comment.find_question) && (recipient = @comment.find_recipient)
-      email = recipient.email
-      if !email.blank? && current_user.id != recipient.id && recipient.notification_opts.new_answer
-        Notifier.delay.new_comment(recipient, current_group, @comment, question)
-      end
-    end
-
     respond_to do |format|
       if saved
         format.html do

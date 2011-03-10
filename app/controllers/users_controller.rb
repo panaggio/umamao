@@ -255,10 +255,6 @@ class UsersController < ApplicationController
 
     notice = t("followable.flash.follow", :followable => @user.name)
 
-    if @user.notification_opts.activities
-      Notifier.delay.follow(current_user, @user)
-    end
-
     respond_to do |format|
       format.html do
         flash[:notice] = notice

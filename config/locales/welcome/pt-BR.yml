@@ -9,6 +9,7 @@ pt-BR:
     home:
       all_tab: Leia
       unanswered_tab: Responda
+      notifications_tab: Notificações
       active: Ativo
       hot: Popular
       quick_question: Faça uma pergunta

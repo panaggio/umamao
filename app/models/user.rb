@@ -57,6 +57,7 @@ class User
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :topic_suggestions, :user_suggestions, :suggest,
@@ -82,6 +83,8 @@ class User
   # Whether or not the user has agreed with our privacy policy and
   # terms of service during signup.
   key :agrees_with_terms_of_service, Boolean, :default => false
+
+  key :last_read_notifications_at, Time
 
   before_create :create_friend_list, :create_notification_opts
   before_create :generate_uuid
@@ -400,6 +403,13 @@ Time.zone.now ? 1 : 0)
     User.increment(self.id, :following_count => 1)
     User.increment(user.id, :followers_count => 1)
 
+    if user.notification_opts.activities
+      Notifier.delay.follow(self, user)
+      Notification.create!(:user => user,
+                           :event_type => "follow",
+                           :origin => self)
+    end
+
     self.remove_suggestion(user)
     true
   end
@@ -680,6 +690,15 @@ Time.zone.now ? 1 : 0)
   # external accounts class.
   def needs_to_update_search_index?
     self.name_changed?
+  end
+
+  # Return all unread notifications
+  def unread_notifications
+    if date = self.last_read_notifications_at
+      self.notifications.query(:created_at.gt => date)
+    else
+      self.notifications
+    end
   end
 
   protected

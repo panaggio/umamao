@@ -8,3 +8,7 @@
   - tabs_tag :namespace => :welcome_home, :open_tabs => {:class => :tabs} do |tab|
     = tab.all t('welcome.home.all_tab'), root_path
     = tab.unanswered t('welcome.home.unanswered_tab'), unanswered_path
+
+    - unread_count = current_user.unread_notifications.count
+    - notification_info = unread_count == 0 ? "" : " (#{unread_count})"
+    = tab.notifications "#{t('welcome.home.notifications_tab')}#{notification_info}", notifications_path

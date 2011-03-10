@@ -30,6 +30,22 @@ class WelcomeController < ApplicationController
     render 'unanswered'
   end
 
+  def notifications
+    @user = current_user
+    @notifications = @user.notifications.paginate(:per_page => 20,
+                                                  :page => params[:page],
+                                                  :order => :created_at.desc)
+    set_tab :notifications, :welcome_home
+    render
+
+    if @notifications.present? &&
+        (@user.last_read_notifications_at.blank? ||
+         @notifications.first.created_at > @user.last_read_notifications_at)
+      @user.last_read_notifications_at = @notifications.first.created_at
+      @user.save!
+    end
+  end
+
   def about
     set_page_title(t('.welcome.about.title'))
     @users = AppConfig.about['users']

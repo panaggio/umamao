@@ -24,6 +24,8 @@ class Comment
 
   validate :disallow_spam
 
+  after_create :new_comment_notification
+
   def ban
     self.collection.update({:_id => self.id}, {:$set => {:banned => true}},
                                                :upsert => true)
@@ -70,10 +72,26 @@ class Comment
     question_id
   end
 
-  def find_recipient
-    if self.commentable.respond_to?(:user)
-      self.commentable.user
-    end
+  # List all users that should be notified about this comment. If the
+  # commented entry is a question, we notify the author and every
+  # commenter of that question. Otherwise, the entry is an answer, and
+  # we notify the related question's author, the answer's author and
+  # every commenter of that answer.
+  def users_to_notify
+    Set.new.tap{ |users|
+      if self.commentable.is_a? Question
+        users << self.commentable.user
+        users.merge self.commentable.comments.map(&:user)
+      else
+        if (question = self.find_question)
+          users << question.user
+        end
+        users << self.commentable.user
+        users.merge self.commentable.comments.map(&:user)
+      end
+
+      users.delete self.user
+    }
   end
 
   protected
@@ -88,4 +106,21 @@ class Comment
       self.errors.add(:body, "Your comment looks like spam.")
     end
   end
+
+  def new_comment_notification
+    if (question = self.find_question)
+      self.users_to_notify.each do |recipient|
+        email = recipient.email
+        if email.present? && recipient.notification_opts.new_answer
+          Notifier.delay.new_comment(recipient, question.group, self, question)
+        end
+        Notification.create!(:user => recipient,
+                             :event_type => "new_comment",
+                             :origin => self.user,
+                             :reason => self)
+      end
+    end
+  end
+  handle_asynchronously :new_comment_notification
+
 end

@@ -96,6 +96,59 @@ namespace :data do
       end
     end
 
+    desc "Create notifications for old events"
+    task :create_old_notifications => :environment do
+
+      # Notify old answers
+      puts "Notifying answers"
+      Answer.query.each do |answer|
+        User.query(:id.in => answer.question.watchers).each do |watcher|
+          next if watcher == answer.user ||
+            Notification.first(:user_id => watcher.id,
+                               :reason_id => answer.id,
+                               :reason_type => "Answer")
+          Notification.create!(:user => watcher,
+                               :event_type => "new_answer",
+                               :origin => answer.user,
+                               :reason => answer,
+                               :created_at => answer.created_at)
+
+        end
+      end
+
+      # Notify old comments
+      puts "Notifying comments"
+      Comment.query(:_type.ne => "Answer").each do |comment|
+        comment.users_to_notify.each do |recipient|
+          next if Notification.first(:user_id => recipient.id,
+                                     :reason_id => comment.id,
+                                     :reason_type => "Comment")
+          Notification.create!(:user => recipient,
+                               :event_type => "new_comment",
+                               :origin => comment.user,
+                               :reason => comment,
+                               :created_at => comment.created_at)
+        end
+      end
+
+      # Notify old followers
+      puts "Notifying old followers"
+      User.query.each do |user|
+        user.followers.each do |follower|
+          next if Notification.first(:user_id => user.id,
+                                     :origin_id => follower.id,
+                                     :event_type => "follow")
+          Notification.create!(:user => user,
+                               :event_type => "follow",
+                               :origin => follower,
+                               :created_at => follower.created_at)
+        end
+
+        user.last_read_notifications_at = Time.now
+        user.save :validate => false
+      end
+    end
+
     desc "Create a DJ to import Wikipedia"
     task :launch_wp => :environment do
       Rails.logger.info "Trying to launch"
