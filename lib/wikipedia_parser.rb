@@ -102,7 +102,7 @@ module WikipediaTopicCreator
           if article.nil?
             "parse error: empty article"
           else
-            "unkown error"
+            "unknown error"
           end
         topic.save
       ensure
