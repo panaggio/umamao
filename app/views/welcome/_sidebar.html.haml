@@ -12,6 +12,8 @@
   - if logged_in?
     = render_cell :suggestions, :topics, :single_column => true
 
+  = link_to(image_tag('trofeugenteboa.png', :alt => 'Troféu Gente Boa Umamão', :style => 'margin-bottom: 15px;'), 'http://blog.umamao.com/trofeugenteboa', :target => '_blank')
+
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
       = render :partial => widget.partial_name, :locals => {:widget => widget}

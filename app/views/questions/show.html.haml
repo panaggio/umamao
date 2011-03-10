@@ -142,6 +142,9 @@
       = link_to(image_tag("facebook.gif") + " Facebook", new_share_question_path(:question => @question.id, :where => "facebook"), :class => "facebook")
       = link_to(image_tag("twitter.gif") + " Twitter", new_share_question_path(:question => @question.id, :where => "twitter"), :class => "twitter")
 
+  - if !logged_in?
+    = link_to(image_tag('trofeugenteboa.png', :alt => 'Troféu Gente Boa Umamão', :style => 'margin-bottom: 15px;'), 'http://blog.umamao.com/trofeugenteboa', :target => '_blank')
+
   .question-stats
     %h3= t("questions.show.stats")
     .audience-size
