@@ -74,13 +74,16 @@ module Freebase
   #   :id: freebase id of the topic
   #   :guid: freebase guid of the topic
   #   :mid: freebase mid of the topic
-  #   :pt_name or :en_name: Name (title?) of the topic
-  #   :wikipedia_pt_id, :wikipedia_en_id:
+  #   :pt_name: Name (title?) of the topic
+  #   :wikipedia_pt_id:
   #     Wikipedia's id of the topic
-  #   :wikipedia_pt, :wikipedia_en:
+  #   :wikipedia_pt:
   #     Wikipedia slug of the topic
+  #
+  # only one of wikipedia_pt_id and wikipedia_pt
+  # should be used at once
   def self.query(pseudo_query)
-    case raw_query
+    case pseudo_query
     when Array
       query = pseudo_query.map! { |pq| self.process_pseudo_query pq }
     when Hash
@@ -95,29 +98,24 @@ module Freebase
     query = {}
 
     pseudo_query.each do |key, expected_value|
-      case key.to_s
+      skey = key.to_s
+      case skey
       when 'id'
         query['id'] = expected_value
       when 'guid', 'mid'
-        query[key] = [{'value' => expected_value}]
-      when '(pt|en)_name'
-        query['name'] = [
-          if query['name']
-            {'lang' => nil, 'value' => nil}
-          else
-            {
-              'lang' => "/lang/#{key[0..1]}",
-              'value' => expected_value
-            }
-          end
-        ]
-      when /^wikipedia_(pt|en)(_id)?$/
+        query[skey] = [{'value' => expected_value}]
+      when 'pt_name'
+        query['name'] = [{
+          'lang' => "/lang/#{skey[0..1]}",
+          'value' => expected_value
+        }]
+      when /^wikipedia_pt(_id)?$/
         query['key'] = [
           if query['key']
             {'namespace' => nil, 'value' => nil}
           else
             {
-              'namespace' => "/wikipedia#{key.sub('wikipedia_','')}",
+              'namespace' => "/wikipedia/#{skey.sub('wikipedia_','')}",
               'value' => expected_value
             }
           end
@@ -162,9 +160,59 @@ module Freebase
   #     }]
   #   }
   # }
+  #
+  #
+  # Examples of queries that may be of interest:
+  #
+  # Query Wikipedia content:
+  #   creates a query to get wikipedia info
+  #
+  # example of query (in JSON):
+  # "query": [{
+  #   "id": "/m/0h1lf",
+  #   "guid": [{"value": null}],
+  #   "mid": [{"value": null}],
+  #   "key": [{"namespace": null, "value": null}],
+  #   "name": [{"lang": null, "value": null}]
+  # }]
+  #
+  # the same query, as a Ruby hash:
+  # {
+  #   "id" => "/m/0h1lf",
+  #   "mid" => [{"value" => nil}],
+  #   "guid" => [{"value" => nil}],
+  #   "key" => [{
+  #     "namespace" => nil,
+  #     "value" => nil
+  #   }],
+  #   "name" => [{
+  #     "lang" => nil,
+  #     "value" => nil
+  #   }]
+  # }
+  #
+  # Query Freebase content:
+  #   creates a query to get the freebase mid
+  #   based on the wikipedia pt id
+  #
+  # example of query (in JSON):
+  # "query": [{
+  #   "mid": [{"value": null}],
+  #   "key": [{"namespace": "/wikipedia/pt_id", "value": 220}],
+  # }]
+  #
+  # the same query, as a Ruby hash:
+  # {
+  #   "mid" => [{"value" => nil}],
+  #   "key" => [{
+  #     "namespace" => "/wikipedia/pt_id",
+  #     "value" => "220"
+  #   }]
+  # }
 
   class StubQuery
     OK_CODE   = "/api/status/ok"
+    @@q_id = 0
 
     attr_reader :code
 
@@ -178,14 +226,79 @@ module Freebase
   end
 
   class SubQuery < StubQuery
-    def result
-      return nil if @result.nil? or @result["result"].nil? or @result["result"][0].nil?
-      @result["result"][0]
+    def initialize(id, hash)
+      @result = hash
+      @q_id = id
+      @code = hash.delete("code")
     end
 
-    def initialize(hash)
-      @result = hash
-      @code = hash["code"]
+    def ok?
+      super and @result.any? and @result['result'].any? and @result['result'][0].any?
+    end
+
+    def result
+      @result['result'][0]
+    end
+
+    def id
+      @id ||= self.result['id']
+    end
+
+    def pt_title
+      return @pt_title if @pt_title
+
+      self.fillin_titles
+      @pt_title
+    end
+
+    def mids
+      @mids ||= self.result['mid'][0]['value']
+    end
+
+    def guid
+      @guid ||= self.result['guid'][0]['value']
+    end
+
+    def pt_key
+      return @pt_key if @pt_key
+      fillin_keys
+      @pt_key
+    end
+
+    def pt_id
+      return @pt_id if @pt_id
+      fillin_keys
+      @pt_id
+    end
+
+    protected
+    def fillin_titles
+      names = self.result['name']
+
+      if names.any?
+        names.each do |h|
+          case h['lang']
+          when '/lang/pt'
+            @pt_title = h['value'] if self.pt_id
+          end
+        end
+      end
+    end
+
+    def fillin_keys
+      keys = result['key']
+      if keys
+        keys.each do |h|
+          case h['namespace']
+          when '/wikipedia/pt'
+            @pt_key = h['value']
+          when '/wikipedia/pt_id'
+            @pt_id = h['value']
+          end
+        end
+      end
+
+      nil
     end
   end
 
@@ -198,17 +311,16 @@ module Freebase
       self.new ids
     end
 
-    def initialize(ids)
-      q =
-        case ids
+    def initialize(raw_query)
+      @query =
+        case raw_query
         when Array
-          x = _multi_query(ids)
-        when String
-          x = { "q" => _single_query(ids) }
-        when Fixnum
-          x = { "q" => _single_query(ids) }
-        end
-      @query = q.to_json
+          multi_query(raw_query)
+        when Hash
+          multi_query([raw_query])
+        end.to_json
+
+      results
     end
 
     def results
@@ -224,150 +336,23 @@ module Freebase
       @code, @status, = @results["code"], @results["status"]
       @transaction_id = @results["transaction_id"]
       @results.reject!{ |k,v| ["code", "status", "transaction_id"].include? k }
-      parse_sub
+      @results = @results.map do |k,v|
+        SubQuery.new(k,v)
+      end
     end
 
     def ok?
-      @status == OK_STATUS and super
+      @status == OK_STATUS and super and results.any?
     end
 
     protected
-    def parse_sub
-      @results = @results.map do |k,v|
-        if block_given?
-          yield v
-        else
-          SubQuery.new(v)
-        end
-      end
-    end
-
-    def _multi_query(ids)
+    def multi_query(array_of_queries)
       queries = {}
-      ids.each_with_index do |id,i|
-        queries["q#{i}"] = _single_query(id)
+      array_of_queries.each do |q|
+        queries["q#{@@q_id}"] = { 'query' => [q] }
+        @@q_id += 1
       end
       queries
-    end
-
-    def _single_query(hash)
-      { "query" => [hash] }
-    end
-  end
-
-  class WikipediaSubQuery < SubQuery
-    def pt_title
-      return @pt_title if @pt_title
-
-      names = result["name"] if result
-      if names
-        names.each do |h|
-          return @pt_title = h["value"] if h["lang"] == "/lang/pt" and pt_id
-        end
-      end
-
-      if pt_key and pt_article
-        @pt_title = pt_article.search("h1").text
-      end
-    end
-
-    def mids
-      @mids ||= result["mid"] if result
-    end
-
-    def guid
-      @guid ||= result["guid"] if result
-    end
-
-    def pt_key
-      @pt_key ||= _pt_key "/wikipedia/pt"
-    end
-
-    def pt_id
-      @pt_id ||= _pt_key "/wikipedia/pt_id"
-    end
-
-    def pt_description
-      pt_article.description
-    end
-
-    def pt_article
-      @pt_article ||= WikipediaPtArticle.new(pt_key || pt_id.to_i)
-    end
-
-    protected
-    def _pt_key(key)
-      keys = result["key"] if result
-      if keys
-        keys.each do |h|
-          return h["value"] if h["namespace"] == key
-        end
-      end
-
-      nil
-    end
-  end
-
-  class WikipediaQuery < Query
-    protected
-    # creates a query to get wikipedia info
-    # example of query:
-    #
-    # "query": [{
-    #   "id": "/m/0h1lf",
-    #   "guid": [{"value": null}],
-    #   "mid": [{"value": null}],
-    #   "key": [{"namespace": null, "value": null}],
-    #   "name": [{"lang": null, "value": null}]
-    # }]
-    def _single_query(id_or_hash)
-      case id_or_hash
-      when Hash
-        super
-      else
-        super({
-          "id" => id,
-          "mid" => [{"value" => nil}],
-          "guid" => [{"value" => nil}],
-          "key" => [{
-            "namespace" => nil,
-            "value" => nil
-          }],
-          "name" => [{
-            "lang" => nil,
-            "value" => nil
-          }]
-        })
-      end
-    end
-
-    def parse_sub
-      super { |v| WikipediaSubQuery.new(v) }
-    end
-  end
-
-  class MidQuery < Query
-    protected
-    # creates a query to get the freebase mid
-    # based on the wikipedia pt id
-    # example of query:
-    #
-    # "query": [{
-    #   "mid": [{"value": null}],
-    #   "key": [{"namespace": "/wikipedia/pt_id", "value": 220}],
-    # }]
-    def _single_query(id)
-      super({
-        "mid" => [{"value" => nil}],
-        "key" => [{
-          "namespace" => "/wikipedia/pt_id",
-          "value" => "#{id}"
-        }]
-      })
-    end
-
-    def parse_sub
-      super { |v| WikipediaSubQuery.new(v) }
     end
   end
 end
