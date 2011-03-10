@@ -1,8 +1,5 @@
 require 'digest/sha1'
 
-include GravatarHelper::PublicMethods
-include UsersHelper
-
 class User
   include MongoMapper::Document
   include Support::Search::Searchable
@@ -14,6 +11,12 @@ class User
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
   LOGGED_OUT_LANGUAGE_FILTERS = %w[any] + AVAILABLE_LANGUAGES
+
+  class Helper
+    include Singleton
+    include GravatarHelper::PublicMethods
+    include UsersHelper
+  end
 
   key :_id,                       String
   key :login,                     String, :index => true
@@ -681,7 +684,7 @@ Time.zone.now ? 1 : 0)
     {
       :id => self.id,
       :title => self.name,
-      :photo_url => avatar_for(self, :size => 20),
+      :photo_url => Helper.instance.avatar_for(self, :size => 20),
       :entry_type => "User"
     }
   end
