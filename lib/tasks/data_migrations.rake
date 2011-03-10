@@ -198,8 +198,15 @@ namespace :data do
 
     desc "Import Wikipedia articles as topics"
     task :import_wikipedia_articles => :environment do
+      # Add new topics 'off the record' for search
+      # Do not add new topics to the search index
+      Support::Search.disable
       parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
       parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}"))
+      Support::Search.enable
+
+      # Regenerate search index, as it isn't up-to-date
+      Rake::Task["search:reset"].invoke
     end
 
     desc "Extract mid's from Freebase simple topic dump"
