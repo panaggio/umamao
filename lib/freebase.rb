@@ -66,6 +66,45 @@ module Freebase
     end
   end
 
+  # query_hash should have keys and values for the information that
+  # is known and keys and nils as values for the information that
+  # is desired
+  #
+  # known keys are:
+  #   :id: freebase id of the topic
+  #   :guid: freebase guid of the topic
+  #   :mid: freebase mid of the topic
+  #   :pt_name or :en_name: Name (title?) of the topic
+  #   :wikipedia_pt_id, :wikipedia_en_id:
+  #     Wikipedia's id of the topic
+  #   :wikipedia_pt, :wikipedia_en:
+  #     Wikipedia slug of the topic
+  def self.query(raw_query)
+    query = {}
+
+    raw_query.each do |key, expected_value|
+      case key.to_s
+      when 'id'
+        query['id'] = expected_value
+      when 'guid', 'mid'
+        query[key] = [{'value' => expected_value}]
+      when '(pt|en)_name'
+        query['name'] = [{
+          'lang' => "/lang/#{key[0..1]}",
+          'value' => expected_value
+        }]
+      when /^wikipedia_(pt|en)(_id)?$/
+        raise if query['key']
+        query['key'] = [{
+          'namespace' => "/wikipedia#{key.sub('wikipedia_','')}",
+          'value' => expected_value
+        }]
+      end
+    end
+
+    Query.new(query)
+  end
+
   # query examples (from http://www.freebase.com/docs/mqlread)
   #
   # single query example:
