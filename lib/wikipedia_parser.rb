@@ -112,14 +112,4 @@ module WikipediaTopicCreator
 
     @articles = {}
   end
-
-  def self.fillin_topics(topic, article)
-    q = Freebase::MidQuery[article["id"].to_i].results[0]
-
-    topic.freebase_mids = q.mids
-    topic.wikipedia_pt_key = q.pt_article.slug
-    topic.description = q.pt_article.description
-
-    topic.save
-  end
 end
