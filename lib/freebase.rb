@@ -66,9 +66,9 @@ module Freebase
     end
   end
 
-  # query_hash should have keys and values for the information that
-  # is known and keys and nils as values for the information that
-  # is desired
+  # pseudo_query should have keys and values for the information
+  # that is known and keys and nils as values for the information
+  # that is desired
   #
   # known keys are:
   #   :id: freebase id of the topic
@@ -79,30 +79,53 @@ module Freebase
   #     Wikipedia's id of the topic
   #   :wikipedia_pt, :wikipedia_en:
   #     Wikipedia slug of the topic
-  def self.query(raw_query)
+  def self.query(pseudo_query)
+    case raw_query
+    when Array
+      query = pseudo_query.map! { |pq| self.process_pseudo_query pq }
+    when Hash
+      query = self.process_pseudo_query(pseudo_query)
+    end
+
+    Query.new(query)
+  end
+
+  protected
+  def self.process_pseudo_query(pseudo_query)
     query = {}
 
-    raw_query.each do |key, expected_value|
+    pseudo_query.each do |key, expected_value|
       case key.to_s
       when 'id'
         query['id'] = expected_value
       when 'guid', 'mid'
         query[key] = [{'value' => expected_value}]
       when '(pt|en)_name'
-        query['name'] = [{
-          'lang' => "/lang/#{key[0..1]}",
-          'value' => expected_value
-        }]
+        query['name'] = [
+          if query['name']
+            {'lang' => nil, 'value' => nil}
+          else
+            {
+              'lang' => "/lang/#{key[0..1]}",
+              'value' => expected_value
+            }
+          end
+        ]
       when /^wikipedia_(pt|en)(_id)?$/
-        raise if query['key']
-        query['key'] = [{
-          'namespace' => "/wikipedia#{key.sub('wikipedia_','')}",
-          'value' => expected_value
-        }]
+        query['key'] = [
+          if query['key']
+            {'namespace' => nil, 'value' => nil}
+          else
+            {
+              'namespace' => "/wikipedia#{key.sub('wikipedia_','')}",
+              'value' => expected_value
+            }
+          end
+        ]
       end
     end
 
-    Query.new(query)
+    query
   end
 
   # query examples (from http://www.freebase.com/docs/mqlread)
