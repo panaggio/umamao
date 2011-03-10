@@ -41,31 +41,6 @@ module Freebase
     File.read("#{DOWNLOAD_DIRECTORY}#{MIDS_FILE}").split("\n")
   end
 
-  # FIXME: This methods is not fully tested
-  def self.create_topics(mids)
-    window_size = [(mids.size.to_f / DAILY_MAX_REQS).ceil, MIN_REQS].max
-
-    while mids.any?
-      window_mids = mids.shift(window_size)
-      pt_titles = {}
-      WikipediaQuery[window_mids].results.each do |r|
-        pt_titles[r.pt_title] = r if r.ok? and r.pt_title.present?
-      end
-
-      size = pt_titles.size
-      Topic.from_titles!(pt_titles.keys).each do |topic|
-        q = pt_titles[topic.title]
-
-        topic.freebase_mids = q.mids
-        topic.freebase_guid = q.guid
-        topic.wikipedia_pt_id = q.pt_id
-        topic.wikipedia_pt_key = q.pt_key
-        topic.description = q.pt_description
-        topic.save
-      end
-    end
-  end
-
   # pseudo_query should have keys and values for the information
   # that is known and keys and nils as values for the information
   # that is desired
