@@ -1,6 +1,6 @@
 require 'digest/sha1'
 
-class University
+class University < Topic
   include MongoMapper::Document
   include Scopes
   include MongoMapperExt::Filter
@@ -25,6 +25,8 @@ class University
   key :university_topic_ids, Array, :default => []
   has_many :university_topics, :class_name => "Topic",
     :in => :university_topic_ids
+
+  slug_key :title, :unique => true, :min_length => 3
 
   # It's short_name.desc, not .asc, because it's a quick heuristic for
   # now to show good Brazilian universities (Unicamp, Usp) first and
