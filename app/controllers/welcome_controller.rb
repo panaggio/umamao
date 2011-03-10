@@ -39,7 +39,8 @@ class WelcomeController < ApplicationController
     render
 
     if @notifications.present? &&
-        @notifications.first.created_at > @user.last_read_notifications_at
+        (@user.last_read_notifications_at.blank? ||
+         @notifications.first.created_at > @user.last_read_notifications_at)
       @user.last_read_notifications_at = @notifications.first.created_at
       @user.save!
     end

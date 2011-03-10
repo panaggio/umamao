@@ -13,8 +13,6 @@ class Notification
 
   belongs_to :question
 
-  key :data, Hash, :required => true
-
   def unread?
     !self.user.last_read_notifications_at ||
       self.user.last_read_notifications_at < self.created_at

@@ -28,12 +28,13 @@ namespace :data do
       # Notify old comments
       puts "Notifying comments"
       Comment.query(:_type.ne => "Answer").each do |comment|
-        next if comment.find_recipient == comment.user
-        Notification.create!(:user => comment.find_recipient,
-                             :event_type => "new_comment",
-                             :origin => comment.user,
-                             :question => comment.find_question,
-                             :created_at => comment.created_at)
+        comment.users_to_notify.each do |recipient|
+          Notification.create!(:user => recipient,
+                               :event_type => "new_comment",
+                               :origin => comment.user,
+                               :question => comment.find_question,
+                               :created_at => comment.created_at)
+        end
       end
 
       # Notify old followers
