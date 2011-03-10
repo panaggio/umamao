@@ -15,11 +15,14 @@ namespace :data do
       puts "Notifying answers"
       Answer.query.each do |answer|
         User.query(:id.in => answer.question.watchers).each do |watcher|
-          next if watcher == answer.user
+          next if watcher == answer.user ||
+            Notification.first(:user_id => watcher.id,
+                               :reason_id => answer.id,
+                               :reason_type => "Answer")
           Notification.create!(:user => watcher,
                                :event_type => "new_answer",
                                :origin => answer.user,
-                               :question => answer.question,
+                               :reason => answer,
                                :created_at => answer.created_at)
 
         end
@@ -29,10 +32,13 @@ namespace :data do
       puts "Notifying comments"
       Comment.query(:_type.ne => "Answer").each do |comment|
         comment.users_to_notify.each do |recipient|
+          next if Notification.first(:user_id => recipient.id,
+                                     :reason_id => comment.id,
+                                     :reason_type => "Comment")
           Notification.create!(:user => recipient,
                                :event_type => "new_comment",
                                :origin => comment.user,
-                               :question => comment.find_question,
+                               :reason => comment,
                                :created_at => comment.created_at)
         end
       end
@@ -41,6 +47,9 @@ namespace :data do
       puts "Notifying old followers"
       User.query.each do |user|
         user.followers.each do |follower|
+          next if Notification.first(:user_id => user.id,
+                                     :origin_id => follower.id,
+                                     :event_type => "follow")
           Notification.create!(:user => user,
                                :event_type => "follow",
                                :origin => follower,

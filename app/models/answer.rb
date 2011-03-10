@@ -162,7 +162,7 @@ class Answer < Comment
         Notification.create!(:user => user,
                              :event_type => "new_answer",
                              :origin => self.user,
-                             :question => self.question)
+                             :reason => self)
       end
     end
   end

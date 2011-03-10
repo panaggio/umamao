@@ -83,7 +83,9 @@ class Comment
         users << self.commentable.user
         users.merge self.commentable.comments.map(&:user)
       else
-        users << self.find_question.user
+        if (question = self.find_question)
+          users << question.user
+        end
         users << self.commentable.user
         users.merge self.commentable.comments.map(&:user)
       end
@@ -115,7 +117,7 @@ class Comment
         Notification.create!(:user => recipient,
                              :event_type => "new_comment",
                              :origin => self.user,
-                             :question => question)
+                             :reason => self)
       end
     end
   end
