@@ -14,7 +14,7 @@ module Support::Search
     @@enabled = true
   end
 
-  def enabled?
+  def self.enabled?
     @@enabled
   end
 
