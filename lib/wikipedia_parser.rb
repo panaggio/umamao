@@ -51,11 +51,13 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
         end
       end
 
+    when "text"
+      @desambiguation = true if @article['text'] and @article['text'].match(/\{\{[Dd]esambiguação\}\}/)
     end
   end
   
   def characters(text)
-    if ["title", "id"].include? @inside and @inside_page and not @inside_revision
+    if (["title", "id"].include? @inside and @inside_page and not @inside_revision) or (@inside == "text")
       @article[@inside] = (@article[@inside] || "") << text
     end
   end
@@ -96,17 +98,17 @@ module WikipediaTopicCreator
       begin
         article = @articles.delete(topic.title)
         topic.wikipedia_pt_id = article["id"]
-        topic.save
       rescue
         topic.wikipedia_import_status =
           if article.nil?
-            EMPTY_ARTICLE
+            Wikipedia::ImportStatus::EMPTY_ARTICLE
           else
-            UNKNOWN_ERROR
+            Wikipedia::ImportStatus::UNKNOWN_ERROR
           end
-        topic.save
-      ensure
+      else
         topic.wikipedia_import_status ||= Wikipedia::ImportStatus::OK
+      ensure
+        topic.save
       end
     end
 
