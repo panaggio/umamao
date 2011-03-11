@@ -146,6 +146,7 @@ GEM
     childprocess (0.1.6)
       ffi (~> 0.6.3)
     closure-compiler (1.0.0)
+    cloudsponge (0.9.6)
     columnize (0.3.2)
     compass (0.10.6)
       haml (>= 3.0.4)
@@ -350,6 +351,7 @@ DEPENDENCIES
   capybara-envjs
   ccsv (~> 0.1)
   cells!
+  cloudsponge
   compass (~> 0.10.2)
   compass-colors (~> 0.3.1)
   cucumber-rails

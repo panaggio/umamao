@@ -21,6 +21,13 @@ Shapado::Application.routes.draw do
 
   resources :invitations, :only => [:index, :create]
 
+  resources :contacts, :only => [:index] do
+    collection do
+      get :import
+      get :import_callback
+    end
+  end
+
   resources :waiting_users, :only => :create
 
   devise_for(:users,
