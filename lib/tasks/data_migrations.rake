@@ -4,6 +4,7 @@ require 'rubygems'
 require 'ccsv'
 require 'lib/freebase'
 require 'lib/wikipedia_parser'
+require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
@@ -213,7 +214,7 @@ namespace :data do
     task :import_freebase_content => :environment do
       n_topics = Topic.count
 
-      reqs = [n_topics.to_f/Freebase::DAILY_MAX_REQS, MIN_REQS].max
+      reqs = [n_topics.to_f/Freebase::DAILY_MAX_REQS, Freebase::MIN_REQS].max
 
       paginate_opts = {
         :per_page => reqs,
@@ -224,6 +225,7 @@ namespace :data do
 
       while paginated_topics.any?
         FreebaseImporter.fillin_topics(paginated_topics)
+        break if paginated_topics.next_page.nil?
         paginated_topics =
           Topic.paginate(paginate_opts.merge(:page => paginated_topics.next_page))
       end
