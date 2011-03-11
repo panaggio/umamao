@@ -37,7 +37,7 @@ end
 class WikipediaArticle
   WIKIPEDIA_URL = "http://en.wikipedia.org/wiki/"
   WIKIPEDIA_CURID_URL = "http://en.wikipedia.org/w/index.php?curid="
-  
+
   def self.url
     WIKIPEDIA_URL
   end
@@ -58,7 +58,6 @@ class WikipediaArticle
   end
 
   def url
-    @url ||= 
       if @slug
         "#{self.class.url}#{@slug}"
       else
@@ -83,7 +82,42 @@ class WikipediaArticle
 
   def description
     # grab the first paragraph from wikipedia article and remove note references from it
-    @description ||= parsed_article.search("#bodyContent > p:first").text.gsub(/\[.*?\]/, "")
+    return @description if @description
+
+    self.slug
+
+    nodes = []
+    parsed_article.search("#bodyContent > *").each do |node|
+      break if node.name =='h2'
+
+      if node.name == 'p'
+        node.search('a').each do |a|
+          case a['href']
+          when /^#/
+            a['href'] = self.url << a['href']
+          when /^\/wiki\//
+            a['href'] = "http://pt.wikipedia.org" << a['href']
+          end
+        end
+        nodes << node.to_html
+      end
+
+    end
+
+    @description = nodes.join <<
+      Nokogiri::HTML::Builder.new do |doc|
+        doc.p {
+          doc.text "Fonte: "
+          doc.a('href' => self.class.url, 'target' => '_blank') {
+            doc.text "Wikipédia"
+          }
+          doc.text ". Leia o "
+          doc.a('href' => self.url, 'target' => '_blank') {
+            doc.text "artigo completo"
+          }
+          doc.text "."
+        }
+      end.to_html
   end
 
   def id
@@ -91,14 +125,14 @@ class WikipediaArticle
   end
 
   def slug
-    @slug ||= (@media_wiki_info["wgPageName"] if @media_wiki_info) || 
+    @slug ||= (@media_wiki_info["wgPageName"] if @media_wiki_info) ||
       parsed_article.search(".printfooter > a").text.sub(/.*\//, "")
       # http://pt.wikipedia.org/wiki/Astronomia => Astronomia
   end
 
   protected
   def curl(url)
-    Curl::Easy.http_get(url){ |easy| 
+    Curl::Easy.http_get(url){ |easy|
       easy.useragent = "UmamãoBot/0.1 (+http://umamao.com/)"
     }.body_str
   end
@@ -107,7 +141,7 @@ end
 class WikipediaPtArticle < WikipediaArticle
   WIKIPEDIA_PT_URL = "http://pt.wikipedia.org/wiki/"
   WIKIPEDIA_PT_CURID_URL = "http://pt.wikipedia.org/w/index.php?curid="
-  
+
   def self.url
     WIKIPEDIA_PT_URL
   end
