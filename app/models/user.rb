@@ -9,7 +9,7 @@ class User
   include Scopes
   include MongoMapperExt::Filter
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-         :token_authenticatable, :validatable, :confirmable
+         :token_authenticatable, :validatable, :confirmable, :trackable
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
