@@ -1,5 +1,6 @@
 pt-BR:
   invitations:
+    external: Importar contatos
     form:
       title: Convidar por email
       labels:

@@ -13,6 +13,12 @@
     = render invitation
 
 - content_for :sidebar do
+  .block
+    %h3= t("invitations.external")
+    = image_tag "icons/google.png", :size => "40x40"
+    = image_tag "icons/yahoo.png", :size => "40x40"
+    = image_tag "icons/windows.png", :size => "40x40"
+
   .invitation_form
     %h3= t('invitations.form.title')
 
