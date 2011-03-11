@@ -1,9 +1,11 @@
 - form_tag invite_contacts_path do
   = label_tag "message", "Mensagem"
   = text_field_tag "message", ""
-  %ul
+  %ul.contacts
     - @contacts.first.each do |contact|
       %li
         = check_box_tag "emails[]", contact.email
-        = label_tag "emails[]", contact.name
+        - if contact.name
+          .name= contact.name
+        .email= contact.email
   = submit_tag

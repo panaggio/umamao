@@ -3,7 +3,7 @@
 class ContactsController < ApplicationController
   before_filter :login_required
 
-  VALID_PROVIDERS = ["GMAIL", "YAHOO"]
+  VALID_PROVIDERS = ["GMAIL", "YAHOO", "WINDOWSLIVE"]
 
   def index
   end
