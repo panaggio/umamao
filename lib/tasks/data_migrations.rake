@@ -209,6 +209,36 @@ namespace :data do
       Rake::Task["search:reset"].invoke
     end
 
+    desc "Import Freebase information for each topic"
+    task :import_freebase_content => :environment do
+      n_topics = Topic.count
+
+      reqs = [n_topics.to_f/Freebase::DAILY_MAX_REQS, MIN_REQS].max
+
+      paginate_opts = {
+        :per_page => reqs,
+        :wikipedia_import_status => Wikipedia::ImportStatus::OK
+      }
+
+      paginated_topics = Topic.paginate(paginate_opts)
+
+      while paginated_topics.any?
+        FreebaseImporter.fillin_topics(paginated_topics)
+        paginated_topics =
+          Topic.paginate(paginate_opts.merge(:page => paginated_topics.next_page))
+      end
+    end
+
+    desc "Import Wikipedia description for each topic"
+    task :import_wikipedia_description => :environment do
+      query_opts = {
+        :wikipedia_import_status => Wikipedia::ImportStatus::OK
+      }
+      Topic.find_each(query_opts) do |topic|
+        WikipediaImporter.fillin_topic topic
+      end
+    end
+
     desc "Extract mid's from Freebase simple topic dump"
     task :extract_freebase_mids do
       Freebase.extract_mids_file_from_simple_topic_dump
