@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296478317');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1214,6 +1214,10 @@ ul#team .avatar {
   color: #0077cc;
   text-decoration: none;
 }
+#signup-wizard #interaction .suggestions ul li {
+  overflow: hidden;
+  *zoom: 1;
+}
 #signup-wizard #interaction .suggestions .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1284,7 +1288,9 @@ ul#team .avatar {
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns {
   width: 100%;
-  margin: 0 0 20px 0;
+  margin: 0 0 40px 0;
+  overflow: hidden;
+  *zoom: 1;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns ul.topic-list .topic {
   max-width: 60%;
@@ -1323,6 +1329,9 @@ ul#team .avatar {
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-name {
   *display: inline;
 }
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-name a {
+  color: #333333;
+}
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-description {
   list-style-image: none;
   list-style-type: none;
@@ -1339,6 +1348,9 @@ ul#team .avatar {
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-description {
   *display: inline;
+}
+#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-description a {
+  color: #777777;
 }
 #signup-wizard #navigation {
   float: right;

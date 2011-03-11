@@ -252,6 +252,8 @@ ul#team
       width: 100%
       margin: 0 0 40px 0
 
+      +clearfix
+
       ul.topic-list .topic
         max-width: 60%
       a.follow_link
@@ -275,11 +277,15 @@ ul#team
             +inline-block-list-item
             margin-top: -3px
             font-size: 90%
+            a
+              color: #333
           li.user-description
             +inline-block-list-item
             margin-top: -7px
             font-size: 70%
             padding-bottom: 7px
+            a
+              color: #777
 
   #navigation
     a

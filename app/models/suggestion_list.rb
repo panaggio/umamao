@@ -140,20 +140,29 @@ class SuggestionList
   end
 
   def suggest_users_from_dac(student_class)
-    self.suggest(student_class.students.map{|s| Affiliation.first(:student_id => s.id)}.select{|a| a}.map(&:user), :reason => "dac")
+    self.suggest(Affiliation.query(
+      :student_id.in => student_class.students.map(&:id),
+      :user_id.ne => nil).map(&:user),
+      :reason => "dac")
+
     previous_year = AcademicProgramClass.first(
               :academic_program_id => student_class.academic_program_id,
               :year => student_class.year - 1)
     if previous_year
-      self.suggest(previous_year.students.map{|s| Affiliation.first(
-          :student_id => s.id)}.select{|a| a}.map(&:user), :reason => "dac")
+      self.suggest(Affiliation.query(
+        :student_id.in => previous_year.students.map(&:id),
+        :user_id.ne => nil).map(&:user),
+        :reason => "dac")
     end
+
     next_year = AcademicProgramClass.first(
               :academic_program_id => student_class.academic_program_id,
               :year => student_class.year + 1)
     if next_year
-      self.suggest(next_year.students.map{|s| Affiliation.first(
-          :student_id => s.id)}.select{|a| a}.map(&:user), :reason => "dac")
+      self.suggest(Affiliation.query(
+        :student_id.in => next_year.students.map(&:id),
+        :user_id.ne => nil).map(&:user),
+        :reason => "dac")
     end
   end
 

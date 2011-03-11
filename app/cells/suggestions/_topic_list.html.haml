@@ -8,4 +8,3 @@
         = link_to "#{t("followable.follow")}", follow_topic_path(topic, :single_column => single_column), :class => "follow_link", :method => :post
       .refuse-suggestion
         = link_to "✕", refuse_suggestion_path(:topic => topic.id, :single_column => single_column), :method => :post
-    .clear
