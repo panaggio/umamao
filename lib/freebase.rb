@@ -18,7 +18,7 @@ module Freebase
   # we can do 100_000 requests per day according to
   # http://wiki.freebase.com/wiki/FAQ#What_are_the_limits_on_use_of_your_API.3F
   DAILY_MAX_REQS = 100_000
-  MIN_REQS = 10_000
+  MIN_REQS = 1_000
 
   def self.download_simple_topic_dump
     `curl #{DUMP_URL}#{BZIPED_SIMPLE_TOPIC_DUMP_FILE} -o #{DOWNLOAD_DIRECTORY}#{BZIPED_SIMPLE_TOPIC_DUMP_FILE}`
