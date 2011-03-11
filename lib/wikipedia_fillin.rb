@@ -38,6 +38,7 @@ module WikipediaImporter
   def self.fillin_topic(topic)
     article = WikipediaPtArticle.new(topic.wikipedia_pt_id.to_i)
     topic.description = article.description
+    topic.wikipedia_pt_key = article.slug
     topic.save
   end
 
