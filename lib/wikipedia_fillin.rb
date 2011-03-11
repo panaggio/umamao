@@ -1,8 +1,8 @@
 module FreebaseImporter
   def self.build_query_from_topic(topic)
     {
-      :pt_title => topic.title,
-      :mid => nil, :guid => :guid,
+      :pt_name => topic.title,
+      :mid => nil, :guid => nil,
       :wikipedia_pt => nil
     }
   end
@@ -18,11 +18,12 @@ module FreebaseImporter
 
     q = Freebase.query(query)
     if q.ok?
-      topic.each_with_index do |topic, i|
-        if q[i].ok? and topic.wikipedia_import_status == Wikipedia::ImportStatus::OK
-          topic.freebase_mids     = q[i].mids
-          topic.freebase_guid     = q[i].guid
-          topic.wikipedia_pt_key  = q[i].pt_key
+      r = q.results.sort_by{|q| q.q_id[1..-1].to_i}
+      topics.each_with_index do |topic, i|
+        if r[i].ok?
+          topic.freebase_mids     = r[i].mids
+          topic.freebase_guid     = r[i].guid
+          topic.wikipedia_pt_key  = Freebase.decode r[i].pt_key
 
           topic.save
         else
@@ -37,6 +38,7 @@ module WikipediaImporter
   def self.fillin_topic(topic)
     article = WikipediaPtArticle.new(topic.wikipedia_pt_id.to_i)
     topic.description = article.description
+    topic.save
   end
 
   def self.fillin_topics(topics)
