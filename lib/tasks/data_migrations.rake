@@ -614,5 +614,14 @@ namespace :data do
         end
       end
     end
+
+    desc 'Convert last_logged_at attribute to last_sign_in_at'
+    task :change_logged_track_attribute => :environment do
+      User.all(:last_logged_at => {"$ne" => nil}).each do |u|
+        u.last_sign_in_at = u.last_logged_at.utc
+        u.save(:validate => false)
+      end
+    end
+
   end
 end
