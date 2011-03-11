@@ -41,6 +41,10 @@ module Freebase
     File.read("#{DOWNLOAD_DIRECTORY}#{MIDS_FILE}").split("\n")
   end
 
+  def self.decode(str)
+    str.gsub(/\$[0-9a-fA-F]{4}/){|s| [s[1..-1].to_i(16)].pack("U*")}
+  end
+
   # pseudo_query should have keys and values for the information
   # that is known and keys and nils as values for the information
   # that is desired
@@ -201,6 +205,8 @@ module Freebase
   end
 
   class SubQuery < StubQuery
+    attr_reader :q_id
+
     def initialize(id, hash)
       @result = hash
       @q_id = id
