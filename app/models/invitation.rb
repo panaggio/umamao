@@ -34,6 +34,14 @@ class Invitation
     Inviter.delay.invitation(self)
   end
 
+  def self.invite_emails!(sender, message, emails)
+    emails.each do |email|
+      Invitation.create(:sender_id => sender.id,
+                        :message => message,
+                        :recipient_email => email)
+    end
+  end
+
   private
   def recipient_is_not_user
     if User.find_by_email(self.recipient_email)

@@ -25,6 +25,7 @@ Shapado::Application.routes.draw do
     collection do
       get :import
       get :import_callback
+      post :invite
     end
   end
 

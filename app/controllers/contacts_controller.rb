@@ -1,6 +1,7 @@
 # Import contacts from user's external accounts.
 
 class ContactsController < ApplicationController
+  before_filter :login_required
 
   VALID_PROVIDERS = ["GMAIL", "YAHOO"]
 
@@ -23,6 +24,15 @@ class ContactsController < ApplicationController
         break
       end
     end
+  end
+
+  def invite
+    @message = params[:message]
+    @emails = params[:emails]
+
+    Invitation.invite_emails! current_user, @message, @emails
+
+    redirect_to invitations_path
   end
 
   protected
