@@ -3,6 +3,12 @@ require "curl"
 require "json"
 
 module Wikipedia
+  module ImportStatus
+    OK = 'imported'
+    UNKNOWN_ERROR = 'unknown error'
+    EMPTY_ARTICLE = 'parse error: empty article'
+  end
+
   DOWNLOAD_DIRECTORY = "tmp/"
 
   DUMP_URL = "http://dumps.wikimedia.org/ptwiki/latest/"

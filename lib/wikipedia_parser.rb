@@ -100,13 +100,13 @@ module WikipediaTopicCreator
       rescue
         topic.wikipedia_import_status =
           if article.nil?
-            "parse error: empty article"
+            EMPTY_ARTICLE
           else
-            "unknown error"
+            UNKNOWN_ERROR
           end
         topic.save
       ensure
-        topic.wikipedia_import_status ||= "imported"
+        topic.wikipedia_import_status ||= Wikipedia::ImportStatus::OK
       end
     end
 
