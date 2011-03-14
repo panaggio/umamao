@@ -234,7 +234,11 @@ namespace :data do
     desc "Import Wikipedia description for each topic"
     task :import_wikipedia_description => :environment do
       query_opts = {
-        :wikipedia_import_status => Wikipedia::ImportStatus::OK
+        :wikipedia_import_status => Wikipedia::ImportStatus::OK,
+        :$or => [
+          :wikipedia_description_imported_at => { :$lt => 15.days.ago.utc },
+          :wikipedia_description_imported_at => nil
+        ]
       }
       Topic.find_each(query_opts) do |topic|
         WikipediaImporter.fillin_topic topic
