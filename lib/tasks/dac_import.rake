@@ -300,4 +300,28 @@ namespace :dac do
   task :import_all => [:import_unicamp_academic_programs, :import_unicamp_courses,
    :import_unicamp_academic_programs_catalog, :import_unicamp_students_classes  ] do
   end
+
+  task :correct_course_name => :base do
+    Course.all(:name => /\w\w\d\d\d/).each do |c|
+      code = c.name[0..1].downcase
+      agent = Mechanize.new
+      begin
+        pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/ementas/todas#{code}.html")
+      rescue
+        puts "Problem retrieving page for #{c.name}"
+        next
+      end
+      m = pagelist.body.gsub("\n", "").match(/<a name="#{c.name.downcase}">#{c.name} ([^<]*)/)
+      if m
+        c.name = convert_string(m[1])
+        if c.description
+          c.description.sub! "#{code}: #{code}", "#{code}: #{c.name}"
+        end
+        c.save!
+      else
+        puts "Problem with name #{c.name}"
+      end
+      sleep 0.5
+    end
+  end
 end
