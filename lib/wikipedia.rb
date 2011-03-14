@@ -28,9 +28,9 @@ module Wikipedia
 
   def self.download_wikipedia_articles_dump
     `curl #{DUMP_URL}#{BZIPED_ARTICLES_XML} -o #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
-    exit($?.exitstatus) unless $?.success?
+    raise "Download failed with status #{$?.exitstatus}" unless $?.success?
     `bunzip2 #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
-    exit($?.exitstatus) unless $?.success?
+    raise "bunzip2 failed with status #{$?.exitstatus}" unless $?.success?
   end
 end
 
