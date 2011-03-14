@@ -134,8 +134,8 @@ class WikipediaArticle
   end
 
   def slug
-    @slug ||= (@media_wiki_info["wgPageName"] if @media_wiki_info) ||
-      parsed_article.search(".printfooter > a").text.sub(/.*\//, "")
+    @slug ||= Wikipedia.decode((@media_wiki_info["wgPageName"] if @media_wiki_info) ||
+      parsed_article.search(".printfooter > a").text.sub(/.*\//, ""))
       # http://pt.wikipedia.org/wiki/Astronomia => Astronomia
   end
 
