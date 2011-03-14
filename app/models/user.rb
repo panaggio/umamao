@@ -61,6 +61,7 @@ class User
   has_many :votes, :dependent => :destroy
   has_many :external_accounts, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
+  has_many :contacts, :dependent => :destroy
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :topic_suggestions, :user_suggestions, :suggest,
@@ -702,6 +703,40 @@ Time.zone.now ? 1 : 0)
     else
       self.notifications
     end
+  end
+
+  # Start a contact import session with Cloudsponge.
+  def begin_contact_import(provider)
+    importer =
+      Cloudsponge::ContactImporter.new(AppConfig.cloudsponge["key"],
+                                       AppConfig.cloudsponge["password"])
+    importer.begin_import(provider)
+  end
+
+  # Fetch contacts from Cloudsponge.
+  def import_contacts!(import_id)
+    importer =
+      Cloudsponge::ContactImporter.new(AppConfig.cloudsponge["key"],
+                                       AppConfig.cloudsponge["password"])
+
+    # TODO: Use a timeout here.
+    loop do
+      contacts, owner = importer.get_contacts(import_id)
+      break if contacts
+    end
+
+    contacts.each do |contact|
+      if (c = user.contacts.first(:email => contact.email))
+        result << c
+      else
+        c = Contact.new(:user => user,
+                        :name => contact.name,
+                        :email => contact.email)
+        result << c if c.save
+      end
+    end
+
+    return true
   end
 
   protected

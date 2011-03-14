@@ -6,11 +6,11 @@ class ContactsController < ApplicationController
   VALID_PROVIDERS = ["GMAIL", "YAHOO", "WINDOWSLIVE"]
 
   def index
+    @contacts = current_user.contacts
   end
 
   def import
-    importer = init_importer
-    info = importer.begin_import(params[:provider])
+    info = current_user.begin_contact_import(params[:provider])
     session["import_id"] = info[:import_id]
     @consent_url = info[:consent_url]
 
@@ -18,13 +18,15 @@ class ContactsController < ApplicationController
   end
 
   def import_callback
-    importer = init_importer
-    loop do
-      @contacts, @owner = importer.get_contacts(session["import_id"])
-      if @contacts
-        session["import_id"] = nil
-        break
-      end
+    success = current_user.import_contacts!(session["import_id"])
+    session["import_id"] = nil
+
+    if success
+      @contacts = current_user.contacts
+      render :index
+    else
+      flash[:error] = I18n.t("contacts.import.error")
+      redirect_to invitations_path
     end
   end
 
@@ -36,11 +38,4 @@ class ContactsController < ApplicationController
 
     redirect_to invitations_path
   end
-
-  protected
-  def init_importer
-    Cloudsponge::ContactImporter.new(AppConfig.cloudsponge["key"],
-                                     AppConfig.cloudsponge["password"])
-  end
-
 end
