@@ -104,20 +104,25 @@ class WikipediaArticle
 
     end
 
-    @description = nodes.join <<
-      Nokogiri::HTML::Builder.new do |doc|
-        doc.p {
-          doc.text "Fonte: "
-          doc.a('href' => self.class.url, 'target' => '_blank') {
-            doc.text "Wikipédia"
-          }
-          doc.text ". Leia o "
-          doc.a('href' => self.url, 'target' => '_blank') {
-            doc.text "artigo completo"
-          }
-          doc.text "."
-        }
-      end.to_html
+    @description =
+      if nodes.any?
+        nodes.join <<
+          Nokogiri::HTML::Builder.new do |doc|
+            doc.p {
+              doc.text "Fonte: "
+              doc.a('href' => self.class.url, 'target' => '_blank') {
+                doc.text "Wikipédia"
+              }
+              doc.text ". Leia o "
+              doc.a('href' => self.url, 'target' => '_blank') {
+                doc.text "artigo completo"
+              }
+              doc.text "."
+            }
+          end.doc.search('p').to_html
+      else
+        ''
+      end
   end
 
   def id
