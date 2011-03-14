@@ -1,6 +1,8 @@
+require 'lib/slugizer'
+
 class Topic
   include MongoMapper::Document
-  include MongoMapperExt::Slugizer
+  include Slugizer
   include MongoMapperExt::Filter
   include Support::Versionable
   include Support::Search::Searchable

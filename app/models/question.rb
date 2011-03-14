@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+
+require 'lib/slugizer'
+
 class Question
   include MongoMapper::Document
   include MongoMapperExt::Filter
-  include MongoMapperExt::Slugizer
+  include Slugizer
   include MongoMapperExt::Tags
   include Support::Versionable
   include Support::Voteable
