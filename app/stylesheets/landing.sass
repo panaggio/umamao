@@ -11,6 +11,7 @@
 @import external_accounts
 @import compass/utilities/lists/horizontal-list
 @import footer
+@import compass/utilities/lists/inline-block-list
 
 body.bp
   a, a:visited, a:hover
@@ -249,12 +250,42 @@ ul#team
 
     .suggestions.suggestions-two-columns
       width: 100%
-      margin: 0 0 20px 0
+      margin: 0 0 40px 0
+
+      +clearfix
 
       ul.topic-list .topic
         max-width: 60%
       a.follow_link
         font-size: 0.785em
+
+      .user.info
+        max-height: 33px
+        width: 68%
+        overflow: hidden
+        text-overflow: ellipsis
+
+        img
+          float: left
+
+        ul
+          max-width: 90%
+          overflow: hidden
+          float: left
+          margin-left: 3px
+          li.user-name
+            +inline-block-list-item
+            margin-top: -3px
+            font-size: 90%
+            a
+              color: #333
+          li.user-description
+            +inline-block-list-item
+            margin-top: -7px
+            font-size: 70%
+            padding-bottom: 7px
+            a
+              color: #777
 
   #navigation
     a

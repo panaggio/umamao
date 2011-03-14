@@ -55,6 +55,7 @@ class SuggestionList
       end
     elsif thing.is_a?(User)
       if !self.has_been_suggested?(thing) &&
+          self.user.id != thing.id &&
           !self.user.following?(thing) &&
           !self.uninteresting_user_ids.include?(thing.id)
         suggestion = Suggestion.new(:user => self.user,
@@ -138,10 +139,39 @@ class SuggestionList
                  :reason => "popular")
   end
 
+  def suggest_users_from_dac(student_class)
+    self.suggest(Affiliation.query(
+      :student_id.in => student_class.students.map(&:id),
+      :user_id.ne => nil).map(&:user),
+      :reason => "dac")
+
+    previous_year = AcademicProgramClass.first(
+              :academic_program_id => student_class.academic_program_id,
+              :year => student_class.year - 1)
+    if previous_year
+      self.suggest(Affiliation.query(
+        :student_id.in => previous_year.students.map(&:id),
+        :user_id.ne => nil).map(&:user),
+        :reason => "dac")
+    end
+
+    next_year = AcademicProgramClass.first(
+              :academic_program_id => student_class.academic_program_id,
+              :year => student_class.year + 1)
+    if next_year
+      self.suggest(Affiliation.query(
+        :student_id.in => next_year.students.map(&:id),
+        :user_id.ne => nil).map(&:user),
+        :reason => "dac")
+    end
+  end
+
+
   def suggest_from_dac
     if affiliation = Affiliation.first(:user_id => self.user.id.to_s, :email => /@dac.unicamp.br$/) and student = affiliation.student
       suggestions = []
 
+      # Suggest topics
       if student.academic_program_class
         suggestions << student.academic_program_class.academic_program
       end
@@ -149,6 +179,9 @@ class SuggestionList
       self.suggest(suggestions +
                    student.registered_courses.map(&:course),
                    :reason => "dac")
+
+      # Suggest users
+      suggest_users_from_dac(student.academic_program_class) if student.academic_program_class
     end
   end
 
@@ -166,8 +199,8 @@ class SuggestionList
     if self.topic_suggestions.blank? &&
         self.user_suggestions.blank?
       self.suggest_university_topics
-      self.suggest_from_dac
       self.suggest_from_outside
+      self.suggest_from_dac
       if self.topic_suggestion_ids.size < 20
         self.suggest_popular_topics(20 - self.topic_suggestion_ids.size)
       end
