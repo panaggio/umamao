@@ -715,5 +715,25 @@ namespace :data do
       end
       print "\n"
     end
+
+    desc "Create Academic Programs topics"
+    task :create_academic_program_topics => :environment do
+
+      AcademicProgram.all.each do |ap|
+        name = ap.name.split("-")[0].strip
+        print "-"
+        if t = Topic.find_by_title(name)
+          unless t.types.include? "AcademicProgram"
+            t.types << "AcademicProgram"
+            t.save
+          end
+        else 
+          t = Topic.create(:title => name, :types => "AcademicProgram")
+        end
+      end
+
+      print "\n"
+    end
+
   end
 end
