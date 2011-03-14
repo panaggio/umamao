@@ -1,0 +1,9 @@
+pt-BR:
+  contacts:
+    import:
+      filter: Procurar contatos
+      message: Mensagem (opcional)
+      invite: Convidar
+      title: Importar contatos
+      all: Todos
+      none: Nenhum

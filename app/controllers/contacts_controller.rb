@@ -13,12 +13,14 @@ class ContactsController < ApplicationController
     info = importer.begin_import(params[:provider])
     session["import_id"] = info[:import_id]
     @consent_url = info[:consent_url]
+
+    redirect_to @consent_url
   end
 
   def import_callback
     importer = init_importer
     loop do
-      @contacts = importer.get_contacts(session["import_id"])
+      @contacts, @owner = importer.get_contacts(session["import_id"])
       if @contacts
         session["import_id"] = nil
         break

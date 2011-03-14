@@ -18,6 +18,7 @@ javascripts:
     - public/javascripts/modules/cookies.js
     - public/javascripts/modules/inline_edition.js
     - public/javascripts/modules/votes.js
+    - public/javascripts/modules/import_contacts.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:

@@ -13,11 +13,11 @@
     = render invitation
 
 - content_for :sidebar do
-  .block
+  #import-contacts.block
     %h3= t("invitations.external")
-    = image_tag "icons/google.png", :size => "40x40"
-    = image_tag "icons/yahoo.png", :size => "40x40"
-    = image_tag "icons/windows.png", :size => "40x40"
+    = link_to (image_tag "icons/google.png"), import_contacts_path(:provider => "GMAIL")
+    = link_to (image_tag "icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
+    = link_to (image_tag "icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
 
   .invitation_form
     %h3= t('invitations.form.title')
