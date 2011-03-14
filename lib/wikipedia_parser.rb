@@ -27,26 +27,45 @@ class WikipediaPagesArticleDumpParser < Nokogiri::XML::SAX::Document
     @inside = nil
     case element
     when "page"
-      if not @redirects and @article
+      if not @redirects and not @namespaced and not @desambiguation and @article
         send_outside @article
         @article = nil
       end
       @redirects = false
       @inside_page = false
+      @namespaced = false
+      @desambiguation = false
     when "revision"
       @inside_revision = false
+    when "title"
+
+      if @inside_page and not @inside_revision
+        Wikipedia::NAMESPACES.each do |ns|
+          if @article["title"].match(/^#{ns}:/)
+            @namespaced = true
+            break
+          elsif @article["title"].match(/[dD]esambigua((c|ç)(a|ã)o|ción)/)
+            @desambiguation = true
+            break
+          end
+        end
+      end
+
+    when "text"
+      @desambiguation = true if @article['text'] and @article['text'].match(/\{\{[Dd]esambiguação\}\}/)
     end
   end
   
   def characters(text)
-    if ["title", "id"].include? @inside and @inside_page and not @inside_revision
+    if (["title", "id"].include? @inside and @inside_page and not @inside_revision) or (@inside == "text")
       @article[@inside] = (@article[@inside] || "") << text
     end
   end
 
   protected
   def set_internals(status)
-    @inside_page, @inside_revision, @redirects = status, status, status
+    @inside_page, @inside_revision, @redirects,
+      @namespaced, @desambiguation = [status] * 5
   end
 
   def send_outside article
@@ -79,28 +98,20 @@ module WikipediaTopicCreator
       begin
         article = @articles.delete(topic.title)
         topic.wikipedia_pt_id = article["id"]
-        topic.save
       rescue
         topic.wikipedia_import_status =
           if article.nil?
-            "parse error: empty article"
+            Wikipedia::ImportStatus::EMPTY_ARTICLE
           else
-            "unkown error"
+            Wikipedia::ImportStatus::UNKNOWN_ERROR
           end
+      else
+        topic.wikipedia_import_status ||= Wikipedia::ImportStatus::OK
+      ensure
         topic.save
       end
     end
 
     @articles = {}
-  end
-
-  def self.fillin_topics(topic, article)
-    q = Freebase::MidQuery[article["id"].to_i].results[0]
-
-    topic.freebase_mids = q.mids
-    topic.wikipedia_pt_key = q.pt_article.slug
-    topic.description = q.pt_article.description
-
-    topic.save
   end
 end

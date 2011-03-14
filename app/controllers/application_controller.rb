@@ -23,9 +23,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def ensure_domain
+    return unless AppConfig.ensure_domain
+
     current_domain = request.env['HTTP_HOST']
 
-    # bypass development mode (any port)
+    # bypass development and test mode (any port)
     return if current_domain.include?(DEVELOPMENT_DOMAIN) or current_domain.include?(TEST_DOMAIN)
 
     # redirect anydomain.com:anyport/anypath to example.com/anypath

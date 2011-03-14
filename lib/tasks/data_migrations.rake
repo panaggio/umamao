@@ -4,6 +4,7 @@ require 'rubygems'
 require 'ccsv'
 require 'lib/freebase'
 require 'lib/wikipedia_parser'
+require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
@@ -198,20 +199,55 @@ namespace :data do
 
     desc "Import Wikipedia articles as topics"
     task :import_wikipedia_articles => :environment do
+      # Add new topics 'off the record' for search
+      # Do not add new topics to the search index
+      Support::Search.disable
       parser = Nokogiri::XML::SAX::Parser.new(WikipediaPagesArticleDumpParser.new)
       parser.parse(File.open("#{Wikipedia::DOWNLOAD_DIRECTORY}#{Wikipedia::ARTICLES_XML}"))
+      Support::Search.enable
+
+      # Regenerate search index, as it isn't up-to-date
+      Rake::Task["search:reset"].invoke
+    end
+
+    desc "Import Freebase information for each topic"
+    task :import_freebase_content => :environment do
+      n_topics = Topic.count
+
+      reqs = [n_topics.to_f/Freebase::DAILY_MAX_REQS, Freebase::MIN_REQS].max
+
+      paginate_opts = {
+        :per_page => reqs,
+        :wikipedia_import_status => Wikipedia::ImportStatus::OK
+      }
+
+      paginated_topics = Topic.paginate(paginate_opts)
+
+      while paginated_topics.any?
+        FreebaseImporter.fillin_topics(paginated_topics)
+        break if paginated_topics.next_page.nil?
+        paginated_topics =
+          Topic.paginate(paginate_opts.merge(:page => paginated_topics.next_page))
+      end
+    end
+
+    desc "Import Wikipedia description for each topic"
+    task :import_wikipedia_description => :environment do
+      query_opts = {
+        :wikipedia_import_status => Wikipedia::ImportStatus::OK,
+        :$or => [
+          :wikipedia_description_imported_at => { :$lt => 15.days.ago.utc },
+          :wikipedia_description_imported_at => nil
+        ]
+      }
+      Topic.find_each(query_opts) do |topic|
+        WikipediaImporter.fillin_topic topic
+      end
     end
 
     desc "Extract mid's from Freebase simple topic dump"
     task :extract_freebase_mids do
       Freebase.extract_mids_file_from_simple_topic_dump
-    end
-
-    # This task is not fully tested
-    desc "Import Freebase topics"
-    task :import_freebase_topics => :environment do
-      mids = Freebase.read_mids_file
-      Freebase.create_topics mids
     end
 
     desc "Remove \"empty\" Questions"

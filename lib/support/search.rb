@@ -4,10 +4,24 @@ require 'net/http'
 require 'builder'
 
 module Support::Search
+  @@enabled = true
+
+  def self.disable
+    @@enabled = false
+  end
+
+  def self.enable
+    @@enabled = true
+  end
+
+  def self.enabled?
+    @@enabled
+  end
 
   # Send a command via a post request to the server. The command must
   # be in XML form.
   def self.send_command_to_search_server(data)
+    return unless Support::Search.enabled?
     Net::HTTP.start(AppConfig.search["host"],
                     AppConfig.search["port"]) do |http|
       req = Net::HTTP::Post.new("/solr/update?commit=true")
@@ -58,6 +72,7 @@ module Support::Search
       # the search index when needed. If called with true, forces the
       # update.
       def update_search_index(force = false)
+        return unless Support::Search.enabled?
         if !@will_be_removed_from_search_index &&
             (force || self.needs_to_update_search_index?)
           Support::Search.delay.
@@ -68,6 +83,7 @@ module Support::Search
 
       # Removes entry from search index.
       def remove_from_search_index
+        return unless Support::Search.enabled?
         command = Builder::XmlMarkup.new
         command.delete {
           command.query "id:#{self.id} AND entry_type:#{self.class}"

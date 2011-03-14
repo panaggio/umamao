@@ -1,6 +1,6 @@
 class Buffer
 
-  BUFFER_SIZE = 100
+  BUFFER_SIZE = 10_000
 
   def initialize
     @buf = []
@@ -32,12 +32,12 @@ namespace :search do
   task :reset => :environment do
     buffer = Buffer.new
     Rake::Task["search:clear"].invoke
-    puts "Exporting topics..."
-    Topic.find_each{ |topic| buffer.send(topic) }
     puts "Exporting users..."
     User.find_each{ |user| buffer.send(user) }
     puts "Exporting questions..."
     Question.find_each{ |question| buffer.send(question) }
+    puts "Exporting topics..."
+    Topic.find_each{ |topic| buffer.send(topic) }
     buffer.flush
   end
 
