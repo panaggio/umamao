@@ -32,6 +32,10 @@ module Wikipedia
     `bunzip2 #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
     exit($?.exitstatus) unless $?.success?
   end
+
+  def self.decode(str)
+    str.gsub(/\%[0-9a-fA-F]{2}/){|s| s[1..-1].to_i(16).chr}
+  end
 end
 
 class WikipediaArticle
