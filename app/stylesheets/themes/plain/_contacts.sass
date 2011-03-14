@@ -5,6 +5,10 @@
 
 #select-contacts
   .controls
+    .autocomplete
+      color: #aaa
+      &.active
+        color: black
     .block-selection
       float: right
       a
@@ -25,8 +29,8 @@
     border-bottom: 1px #aaa dotted
     padding: 4px
 
-    &:last-of-type
-      border: none
+    &.no-match
+      display: none
 
   input
     float: left

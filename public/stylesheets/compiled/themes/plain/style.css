@@ -2149,6 +2149,12 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .controls {
   margin-bottom: 12px;
 }
+#select-contacts .controls .autocomplete {
+  color: #aaaaaa;
+}
+#select-contacts .controls .autocomplete.active {
+  color: black;
+}
 #select-contacts .controls .block-selection {
   float: right;
 }
@@ -2178,8 +2184,8 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   overflow: hidden;
   visibility: hidden;
 }
-#imported-contacts .contact:last-of-type {
-  border: none;
+#imported-contacts .contact.no-match {
+  display: none;
 }
 #imported-contacts input {
   float: left;
