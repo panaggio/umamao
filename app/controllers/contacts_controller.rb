@@ -18,8 +18,12 @@ class ContactsController < ApplicationController
   end
 
   def import_callback
-    success = current_user.import_contacts!(session["import_id"])
-    session["import_id"] = nil
+    begin
+      success = current_user.import_contacts!(session["import_id"])
+      session["import_id"] = nil
+    rescue
+      success = false
+    end
 
     if success
       @contacts = current_user.contacts
@@ -28,6 +32,9 @@ class ContactsController < ApplicationController
       flash[:error] = I18n.t("contacts.import.error")
       redirect_to invitations_path
     end
+  end
+
+  def search
   end
 
   def invite

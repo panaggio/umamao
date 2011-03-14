@@ -1,5 +1,6 @@
 class Contact
   include MongoMapper::Document
+  include MongoMapperExt::Filter
 
   timestamps!
 
@@ -10,4 +11,6 @@ class Contact
   belongs_to :user
 
   validates_format_of :email, :with => Devise::email_regexp
+
+  filterable_keys :name, :email
 end

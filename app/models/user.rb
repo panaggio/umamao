@@ -719,22 +719,25 @@ Time.zone.now ? 1 : 0)
       Cloudsponge::ContactImporter.new(AppConfig.cloudsponge["key"],
                                        AppConfig.cloudsponge["password"])
 
+    fetched_contacts = nil
     # TODO: Use a timeout here.
     loop do
-      contacts, owner = importer.get_contacts(import_id)
-      break if contacts
+      fetched_contacts, owner = importer.get_contacts(import_id)
+      break if fetched_contacts.present?
     end
 
-    contacts.each do |contact|
-      if (c = user.contacts.first(:email => contact.email))
-        result << c
-      else
-        c = Contact.new(:user => user,
-                        :name => contact.name,
-                        :email => contact.email)
-        result << c if c.save
+    [].tap{ |imported_contacts|
+      fetched_contacts.each do |contact|
+        if (c = self.contacts.first(:email => contact.email))
+          imported_contacts << c
+        else
+          c = Contact.new(:user => self,
+                          :name => contact.name,
+                          :email => contact.email)
+          imported_contacts << c if c.save
+        end
       end
-    end
+    }
 
     return true
   end
