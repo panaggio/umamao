@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = current_user.contacts
+    @fetching_contacts = false
   end
 
   def import
@@ -18,6 +19,12 @@ class ContactsController < ApplicationController
   end
 
   def import_callback
+    @contacts = current_user.contacts
+    @fetching_contacts = true
+    render :index
+  end
+
+  def fetch
     begin
       success = current_user.import_contacts!(session["import_id"])
       session["import_id"] = nil
@@ -25,12 +32,10 @@ class ContactsController < ApplicationController
       success = false
     end
 
-    if success
-      @contacts = current_user.contacts
-      render :index
-    else
-      flash[:error] = I18n.t("contacts.import.error")
-      redirect_to invitations_path
+    respond_to do |format|
+      format.js do
+        render :json => {:success => success}.to_json
+      end
     end
   end
 

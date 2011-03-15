@@ -23,6 +23,7 @@ Shapado::Application.routes.draw do
 
   resources :contacts, :only => [:index] do
     collection do
+      post :fetch
       get :import
       get :import_callback
       post :invite

@@ -2155,8 +2155,18 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .controls .block-selection a {
   margin-left: 5px;
 }
+#select-contacts .controls.waiting {
+  display: none;
+}
 #select-contacts input[type=submit] {
   padding: 3px 6px;
+}
+#select-contacts .wait-notice {
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+#select-contacts .wait-notice .loader {
+  margin-bottom: 10px;
 }
 
 #contacts-to-invite {
