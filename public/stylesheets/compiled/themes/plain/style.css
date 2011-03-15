@@ -2168,10 +2168,14 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .wait-notice .loader {
   margin-bottom: 10px;
 }
+#select-contacts h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
 #contacts-to-invite {
   border: 1px #aaaaaa solid;
-  height: 500px;
+  max-height: 500px;
   overflow-y: scroll;
   margin-bottom: 12px;
 }

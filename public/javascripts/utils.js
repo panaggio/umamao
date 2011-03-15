@@ -131,6 +131,10 @@ window.Utils = {
     });
   },
 
+  closeLink: function () {
+    return '<a href="javascript:void(0)" class="remove">✕</a>';
+  },
+
   // Wrapper around Colorbox to unify modal's style.
   modal: function (options) {
     var defaultOptions = {

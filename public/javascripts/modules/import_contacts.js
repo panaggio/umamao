@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
   // Unselect all contacts link
-  $("#select-contacts a.none").click(function () {
+  $("#select-contacts a.remove_all").click(function () {
     $("#contacts-to-invite .contact").remove();
   });
 
@@ -40,4 +40,43 @@ $(document).ready(function () {
 
   var contactAutocomplete = new AutocompleteBox("#search-contacts",
                                                 "#search-contacts-results");
+
+  var autocompleteTemplate = $.template(null,
+    '<li class="autocomplete-entry">${name} ' +
+    '<span class="desc">${email}</span></li>');
+
+  var invitedContactTemplate = $.template(null,
+    '<div class="contact">' + Utils.closeLink() +
+    '<input type="hidden" name="emails[]" value="${email}" />' +
+    '<div class="name">${name}</div>' +
+    '<div class="email">${name}</div></div>');
+
+
+  var ContactItem = function (contact) {
+    this.data = contact;
+    this.html = $.tmpl(autocompleteTemplate, contact);
+  };
+
+  ContactItem.prototype = {
+    click: function () {
+      var contactHtml = $.tmpl(invitedContactTemplate, this.data);
+
+      $("#contacts-to-invite").prepend(contactHtml);
+
+      contactAutocomplete.clear();
+    }
+  };
+
+  Utils.extend(ContactItem, Item);
+
+  contactAutocomplete.processData = function (data) {
+    var items = [];
+
+    data.forEach(function (result) {
+      items.push(new ContactItem(result));
+    });
+
+    return items;
+  };
+
 });

@@ -1,11 +1,11 @@
 pt-BR:
   contacts:
     import:
-      all: Todos
       error: Houve um erro. Por favor, tente novamente mais tarde.
       filter: Procurar contatos
       invite: Convidar
       message: Mensagem (opcional)
-      none: Nenhum
+      remove_all: Remover todos
+      selected: Contatos selecionados
       title: Importar contatos
       wait: Por favor, aguarde enquanto importamos seus contatos.

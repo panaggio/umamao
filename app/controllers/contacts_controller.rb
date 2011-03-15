@@ -57,7 +57,7 @@ class ContactsController < ApplicationController
 
   def invite
     @message = params[:message]
-    @emails = params[:emails]
+    @emails = params[:emails].uniq
 
     Invitation.invite_emails! current_user, @message, @emails
 
