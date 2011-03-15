@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'timeout'
 
 class User
   include MongoMapper::Document
@@ -62,6 +63,7 @@ class User
   has_many :external_accounts, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :contacts, :dependent => :destroy
+  has_many :invitations, :foreign_key => "sender_id", :dependent => :nullify
 
   has_one :suggestion_list, :dependent => :destroy
   delegate :topic_suggestions, :user_suggestions, :suggest,
@@ -125,6 +127,7 @@ class User
   before_create :logged!
   after_create :accept_invitation
   after_create :create_suggestion_list
+  after_create :create_contact_references
 
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
@@ -720,10 +723,16 @@ Time.zone.now ? 1 : 0)
                                        AppConfig.cloudsponge["password"])
 
     fetched_contacts = nil
-    # TODO: Use a timeout here.
-    loop do
-      fetched_contacts, owner = importer.get_contacts(import_id)
-      break if fetched_contacts.present?
+
+    begin
+      Timeout.timeout(180) do # 3 minute timeout
+        loop do
+          fetched_contacts, owner = importer.get_contacts(import_id)
+          break if fetched_contacts.present?
+        end
+      end
+    rescue Timeout::Error, Cloudsponge::CsException => e
+      raise Shapado::ContactImportException
     end
 
     [].tap{ |imported_contacts|
@@ -734,6 +743,13 @@ Time.zone.now ? 1 : 0)
           c = Contact.new(:user => self,
                           :name => contact.name,
                           :email => contact.email)
+
+          # Check whether this contact exists already in the DB.
+          c.corresponding_user = User.find_by_email(c.email)
+
+          # Check whether this contact was already invited by the user.
+          c.invitation = self.invitations.first(:recipient_email => c.email)
+
           imported_contacts << c if c.save
         end
       end
@@ -767,5 +783,14 @@ Time.zone.now ? 1 : 0)
   def create_suggestion_list
     self.suggestion_list = SuggestionList.new(:user => self)
     self.save :validate => false
+  end
+
+  # Search for the user in every imported external contact and create
+  # references to it.
+  def create_contact_references
+    Contact.query(:email => self.email).each do |contact|
+      contact.corresponding_user = self
+      contact.save!
+    end
   end
 end

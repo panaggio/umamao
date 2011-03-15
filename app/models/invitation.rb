@@ -34,11 +34,22 @@ class Invitation
     Inviter.delay.invitation(self)
   end
 
+  # Invite a list of emails, trying to link invitations to the user's
+  # contacts.
   def self.invite_emails!(sender, message, emails)
     emails.each do |email|
-      Invitation.create(:sender_id => sender.id,
-                        :message => message,
-                        :recipient_email => email)
+      invitation =
+        sender.invitations.first(:recipient_email => email) ||
+        Invitation.new(:sender_id => sender.id,
+                       :message => message,
+                       :recipient_email => email)
+
+      if (!invitation.new? || invitation.save) &&
+          (contact = sender.contacts.first(:email => email))
+        contact.invitation = invitation
+        contact.save!
+      end
+
     end
   end
 

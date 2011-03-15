@@ -28,7 +28,7 @@ class ContactsController < ApplicationController
     begin
       success = current_user.import_contacts!(session["import_id"])
       session["import_id"] = nil
-    rescue
+    rescue Shapado::ContactImportException => e
       success = false
     end
 
@@ -42,7 +42,10 @@ class ContactsController < ApplicationController
   def search
     @contacts =
       Contact.filter(params[:q],
-                     :fields => {:user_id => current_user.id},
+                     :fields => {
+                       :user_id => current_user.id,
+                       :corresponding_user_id => nil
+                     },
                      :per_page => 7)
 
     respond_to do |format|
