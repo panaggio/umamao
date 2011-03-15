@@ -8,6 +8,34 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    # The next two tasks do the same thing; the second one should be used
+    # while it's faster
+    desc "Recalculate Topic's questions_count"
+    task :recalculate_questions_count => :environment do
+      Topic.find_each do |topic|
+        topic.questions_count = Question.query(:topic_ids => topic.id).count
+        topic.save
+      end
+    end
+
+    # This task should be faster when you've got a large ammount of Topics
+    # (that fits on memory) and not so many questions
+    desc "Recalculate Topic's questions_count"
+    task :fast_recalculate_questions_count => :environment do
+      topic_questions_count = Hash.new(0)
+
+      Question.find_each do |q|
+        q.topic_ids.each do |t_id|
+          topic_questions_count[t_id] += 1
+        end
+      end
+
+      Topic.find_each do |topic|
+        topic.questions_count = topic_questions_count[topic.id]
+        topic.save
+      end
+    end
+
     desc "Fully migrate question versions"
     task :migrate_question_versions do
       Rake::Task["data:migrate:replace_topics_in_versions"].invoke
