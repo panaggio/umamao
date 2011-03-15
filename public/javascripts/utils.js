@@ -168,6 +168,10 @@ window.Utils = {
     link.text(dataTitle);
   },
 
-  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g
+  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g,
+
+  solrEscape: function (text) {
+    return text.replace(Utils.solrSyntaxRegExp, "\\$&");
+  }
 
 };

@@ -288,13 +288,18 @@ AutocompleteBox.prototype = {
     };
   },
 
+  // Preprocess the query before sending to server
+  preprocessQuery: function (query) {
+    return query;
+  },
+
   // Sends an AJAX request for items that match current input,
   // processes and renders them.
   fetchData: function (query) {
     if (query.length < this.minChars ||
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
-    query = query.replace(Utils.solrSyntaxRegExp, "\\$&");
+    query = this.preprocessQuery(query);
     this.abortRequest();
     this.ajaxRequest = this.makeRequest(query);
   },
@@ -410,6 +415,8 @@ function initSearchBox() {
       return searchBox.isActive;
     });
 
+  searchBox.preprocessQuery = Utils.solrEscape;
+
   searchBox.makeRequest = function (query) {
     var request = $.ajax({
       url: this.url,
@@ -470,7 +477,8 @@ TopicAutocomplete.prototype = {
       url: this.url,
       dataType: "jsonp",
       jsonp: "json.wrf",
-      data: {q: "title:" + query + " AND entry\\_type:Topic"},
+      data: {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:Topic"},
       success: function (data) {
         var docs = data.response.docs;
         var hasExactMatch = false;
