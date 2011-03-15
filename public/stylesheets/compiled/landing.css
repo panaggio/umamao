@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1296478317');
+  background: url('/images/grid.png?1300108830');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1237,9 +1237,22 @@ ul#team .avatar {
 }
 #signup-wizard #interaction .suggestions .topic .topic-title {
   white-space: nowrap;
+  display: block;
+  float: left;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+#signup-wizard #interaction .suggestions .topic .reduced {
+  max-width: 97%;
 }
 #signup-wizard #interaction .suggestions .topic .remove {
   cursor: pointer;
+  display: block;
+  float: right;
 }
 #signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .suggestions .topic a {
   color: #444444;
