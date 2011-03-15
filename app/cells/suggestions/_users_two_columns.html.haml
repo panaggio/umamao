@@ -5,9 +5,9 @@
   - if !@suggested_users_left.blank?
     .suggestion-left
       %ul
-        = render :partial => "user_list", :locals => {:users => @suggested_users_left}
+        = render :partial => "user_list", :locals => {:users => @suggested_users_left, :single_column => false}
 
   - if !@suggested_users_right.blank?
     .suggestion-right
       %ul
-        = render :partial => "user_list", :locals => {:users => @suggested_users_right}
+        = render :partial => "user_list", :locals => {:users => @suggested_users_right, :single_column => false}

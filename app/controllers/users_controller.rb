@@ -287,7 +287,7 @@ class UsersController < ApplicationController
         }
         if params[:suggestion]
           response[:suggestions] =
-            render_cell :suggestions, :users
+            render_cell :suggestions, :users, :single_column => params[:single_column]
         end
         render :json => response.to_json
       }
