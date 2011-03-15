@@ -2,15 +2,18 @@
 
 - form_tag invite_contacts_path, :id => "select-contacts" do
   .controls
-    = text_field_tag "autocomplete", t("contacts.import.filter"), :class => "autocomplete"
+    = text_field_tag "autocomplete", t("contacts.import.filter"), :id => "search-contacts", :class => "autocomplete", "data-autocomplete-url" => search_contacts_url
+    %ul#search-contacts-results.autocomplete-list
+
     .block-selection
       = link_to t("contacts.import.all"), "javascript:void(0)", :class => "all"
       = link_to t("contacts.import.none"), "javascript:void(0)", :class => "none"
 
-  #imported-contacts
+  #contacts-to-invite
     - @contacts.each do |contact|
       .contact
-        = check_box_tag "emails[]", contact.email
+        = link_to "✕", "javascript:void(0)", :class => "remove"
+        = hidden_field_tag "emails[]", contact.email
         - if contact.name
           .name= contact.name
         .email= contact.email

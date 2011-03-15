@@ -299,6 +299,12 @@ AutocompleteBox.prototype = {
     this.ajaxRequest = this.makeRequest(query);
   },
 
+  // Process data returned by query. Should be implemented by
+  // inheriting classes.
+  processData: function (data) {
+    throw new Error("Not implemented");
+  },
+
   // Clears current input, hides selection box.
   clear: function () {
     this.itemBox.hide();

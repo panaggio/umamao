@@ -2176,6 +2176,11 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-bottom: 1px #aaaaaa dotted;
   padding: 4px;
 }
+#imported-contacts .contact .remove {
+  display: block;
+  float: left;
+  color: #888888;
+}
 #imported-contacts .contact:after {
   content: "\0020";
   display: block;

@@ -35,6 +35,19 @@ class ContactsController < ApplicationController
   end
 
   def search
+    @contacts =
+      Contact.filter(params[:q],
+                     :fields => {:user_id => current_user.id},
+                     :per_page => 7)
+
+    respond_to do |format|
+      format.js do
+        render :json => @contacts.map{ |c|
+          {:name => c.name, :email => c.email}
+        }.to_json
+      end
+    end
+
   end
 
   def invite
