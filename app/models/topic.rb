@@ -117,14 +117,16 @@ class Topic
     end
   end
 
-  # Merges other to self: self receives every question, follower and
-  # news update from other. Destroys other. Cannot be undone.
+  # Merges other to self: self receives every question, questions_count, follower,
+  # followers_count and news update from other. Destroys other. Cannot be undone.
   def merge_with!(other)
     return false if id == other.id
 
     other.followers.each do |f|
       self.add_follower!(f)
     end
+
+    self.followers_count = self.follower_ids.size
 
     Question.query(:topic_ids => other.id).each do |q|
       q.classify! self
