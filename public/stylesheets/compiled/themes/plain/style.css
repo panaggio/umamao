@@ -2415,6 +2415,58 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   width: 40%;
   margin-right: 20px;
 }
+#sidebar .suggestions .user.info {
+  max-height: 33px;
+  width: 68%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#sidebar .suggestions .user.info img {
+  float: left;
+}
+#sidebar .suggestions .user.info ul {
+  max-width: 90%;
+  overflow: hidden;
+  float: left;
+  margin-left: 3px;
+}
+#sidebar .suggestions .user.info ul li.user-name {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  font-size: 90%;
+}
+#sidebar .suggestions .user.info ul li.user-name {
+  *display: inline;
+}
+#sidebar .suggestions .user.info ul li.user-name a {
+  color: #333333;
+}
+#sidebar .suggestions .user.info ul li.user-description {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  white-space: nowrap;
+  font-size: 70%;
+  padding-bottom: 7px;
+}
+#sidebar .suggestions .user.info ul li.user-description {
+  *display: inline;
+}
+#sidebar .suggestions .user.info ul li.user-description a {
+  color: #777777;
+}
 #sidebar .suggestions li + li {
   margin-top: 5px;
 }
@@ -2446,6 +2498,18 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   margin-top: 18px;
   border-top: 1px #dddddd solid;
   padding-top: 18px;
+}
+#sidebar .suggestions a.follow_link {
+  font-size: 0.785em;
+}
+#sidebar .suggestions .user.info ul {
+  max-width: 95%;
+}
+#sidebar .suggestions .user.info ul li.user-name {
+  margin-top: 3px;
+}
+#sidebar .suggestions .user.info ul li.user-description {
+  margin-top: -3px;
 }
 
 .followers .count {

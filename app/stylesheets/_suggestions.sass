@@ -39,5 +39,31 @@
       width: 40%
       margin-right: 20px
 
+    .user.info
+      max-height: 33px
+      width: 68%
+      overflow: hidden
+      text-overflow: ellipsis
+
+      img
+        float: left
+
+      ul
+        max-width: 90%
+        overflow: hidden
+        float: left
+        margin-left: 3px
+        li.user-name
+          +inline-block-list-item
+          font-size: 90%
+          a
+            color: #333
+        li.user-description
+          +inline-block-list-item
+          font-size: 70%
+          padding-bottom: 7px
+          a
+            color: #777
+
     li + li
       margin-top: 5px

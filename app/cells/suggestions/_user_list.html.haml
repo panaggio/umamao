@@ -10,6 +10,6 @@
             = link_to user.bio, user, :title => user.bio
     .controls
       .follow-info
-        = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link", :method => :post
+        = link_to "#{t("followable.follow")}", follow_user_path(user, :single_column => single_column), :class => "follow_link", :method => :post
       .refuse-suggestion
-        = link_to "✕", refuse_suggestion_path(:user => user.id), :method => :post
+        = link_to "✕", refuse_suggestion_path(:user => user.id, :single_column => single_column), :method => :post
