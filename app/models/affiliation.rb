@@ -57,6 +57,15 @@ class Affiliation
     where(:email => email).first.send_confirmation
   end
 
+  # Confirm the affiliation.
+  def confirm
+    self.confirmed_at = Time.now
+  end
+
+  # Return true if this affiliation has been confirmed.
+  def confirmed?
+    self.confirmed_at.present?
+  end
 
   def strip_email
     self.email = self.email.strip if self.email

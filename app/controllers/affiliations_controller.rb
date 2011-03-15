@@ -5,8 +5,10 @@ class AffiliationsController < ApplicationController
     status = nil
 
     if @affiliation = Affiliation.find_by_email(email)
-      # Try to see whether we have already gotten this address.
-      if @affiliation.user.present?
+      # Try to see whether we have already gotten this address. If the
+      # corresponding user isn't active, we resend a confirmation
+      # email.
+      if @affiliation.user.present? && @affiliation.user.active?
         status = :error
         message = t("affiliations.errors.duplicate_email")
       elsif @affiliation.confirmed_at.present?

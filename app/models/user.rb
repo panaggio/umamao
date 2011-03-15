@@ -178,7 +178,7 @@ class User
   end
 
   def confirmed_affiliation?
-    self.affiliations.any?{ |a| a.confirmed_at.present? }
+    self.affiliations.any?(&:confirmed?)
   end
 
   def first_name

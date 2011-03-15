@@ -74,7 +74,21 @@ class UsersController < ApplicationController
 
       if @affiliation.present?
         if @affiliation.user.present?
-          redirect_to(root_url) && return
+
+          # If the user already exists but hasn't confirmed his
+          # affiliation, we confirm it here and proceed with the sign
+          # in.
+          if @affiliation.user.active?
+            redirect_to(root_url)
+          else
+            @affiliation.confirm
+            @affiliation.save!
+            @affiliation.reload # We need to reload the user.
+            sign_in_and_redirect(:user, @affiliation.user)
+          end
+
+          return
+
         else
           @user.affiliation_token = @affiliation.affiliation_token
         end
