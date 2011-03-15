@@ -215,7 +215,7 @@ AutocompleteBox.prototype = {
       focus(function () {
         if (!box.isActive) {
           box.isActive = true;
-          $(this).removeClass("lighter_text");
+          $(this).removeClass("inactive");
           $(this).val("");
         } else if ($(this).val() != "") {
           itemBox.show();
@@ -227,7 +227,7 @@ AutocompleteBox.prototype = {
         }
     }).blur(function () {
       if ($(this).val() == "") {
-        $(this).addClass("lighter_text");
+        $(this).addClass("inactive");
         $(this).val(box.startText);
         box.isActive = false;
       }
@@ -239,7 +239,7 @@ AutocompleteBox.prototype = {
         box.interval = null;
       }
     }).keydown(function (e) {
-      $(this).removeClass("lighter_text");
+      $(this).removeClass("inactive");
       switch (e.keyCode) {
       case 38: // up
         e.preventDefault();

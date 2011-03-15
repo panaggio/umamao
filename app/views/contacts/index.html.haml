@@ -2,7 +2,7 @@
 
 - form_tag invite_contacts_path, :id => "select-contacts" do
   .controls
-    = text_field_tag "autocomplete", t("contacts.import.filter"), :id => "search-contacts", :class => "autocomplete", "data-autocomplete-url" => search_contacts_url
+    = text_field_tag "autocomplete", t("contacts.import.filter"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => search_contacts_url
     %ul#search-contacts-results.autocomplete-list
 
     .block-selection

@@ -906,7 +906,7 @@ input.checkbox {
   color: #666666;
 }
 
-.lighter_text {
+.inactive {
   color: #999999;
 }
 
@@ -2149,12 +2149,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .controls {
   margin-bottom: 12px;
 }
-#select-contacts .controls .autocomplete {
-  color: #aaaaaa;
-}
-#select-contacts .controls .autocomplete.active {
-  color: black;
-}
 #select-contacts .controls .block-selection {
   float: right;
 }
@@ -2165,23 +2159,23 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   padding: 3px 6px;
 }
 
-#imported-contacts {
+#contacts-to-invite {
   border: 1px #aaaaaa solid;
   height: 500px;
   overflow-y: scroll;
   margin-bottom: 12px;
 }
-#imported-contacts .contact {
+#contacts-to-invite .contact {
   *zoom: 1;
   border-bottom: 1px #aaaaaa dotted;
   padding: 4px;
 }
-#imported-contacts .contact .remove {
+#contacts-to-invite .contact .remove {
   display: block;
   float: left;
   color: #888888;
 }
-#imported-contacts .contact:after {
+#contacts-to-invite .contact:after {
   content: "\0020";
   display: block;
   height: 0;
@@ -2189,13 +2183,13 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   overflow: hidden;
   visibility: hidden;
 }
-#imported-contacts .contact.no-match {
+#contacts-to-invite .contact.no-match {
   display: none;
 }
-#imported-contacts input {
+#contacts-to-invite input {
   float: left;
 }
-#imported-contacts .name {
+#contacts-to-invite .name {
   float: left;
   width: 150px;
   height: 15px;
@@ -2206,7 +2200,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-#imported-contacts .email {
+#contacts-to-invite .email {
   display: inline;
   font-size: 10px;
 }
@@ -2302,12 +2296,8 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   color: #777777;
 }
 
-.lighter_text {
+.inactive {
   color: #999999;
-}
-
-.darker_text {
-  color: #333333;
 }
 
 #sidebar .follow-info a {
