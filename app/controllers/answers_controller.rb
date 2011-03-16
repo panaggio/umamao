@@ -196,31 +196,6 @@ class AnswersController < ApplicationController
 
   def check_update_permissions
     @answer = Answer.find(params[:id])
-
     allow_update = true
-    unless @answer.nil?
-      if !current_user.can_modify?(@answer)
-        if @answer.wiki
-          if !current_user.can_edit_wiki_post_on?(@answer.group)
-            allow_update = false
-            reputation = @question.group.reputation_constrains["edit_wiki_post"]
-            flash[:error] = I18n.t("users.messages.errors.reputation_needed",
-                                        :min_reputation => reputation,
-                                        :action => I18n.t("users.actions.edit_wiki_post"))
-          end
-        else
-          if !current_user.can_edit_others_posts_on?(@answer.group)
-            allow_update = false
-            reputation = @answer.group.reputation_constrains["edit_others_posts"]
-            flash[:error] = I18n.t("users.messages.errors.reputation_needed",
-                                        :min_reputation => reputation,
-                                        :action => I18n.t("users.actions.edit_others_posts"))
-          end
-        end
-        return redirect_to question_path(@answer.question) if !allow_update
-      end
-    else
-      return redirect_to questions_path
-    end
   end
 end
