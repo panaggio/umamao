@@ -2146,6 +2146,10 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   color: #aaaaaa;
 }
 
+#import-contacts .template {
+  display: none;
+}
+
 #select-contacts .controls {
   margin-bottom: 12px;
 }

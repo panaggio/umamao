@@ -13,7 +13,12 @@ pt-BR:
         accepted_at: aceito
     new:
       error: Houve um erro. Por favor, tente novamente mais tarde.
-      import: Importar contatos
+      import:
+        title: Importar contatos
+        continue: Continuar
+        notice:
+          Você será redirecionado a uma página externa
+          para autorizar o acesso a seus contatos.
       filter: Procurar contatos
       invite: Convidar
       message: Mensagem (opcional)

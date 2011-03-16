@@ -12,6 +12,14 @@ $(document).ready(function () {
     }
   });
 
+  $("#import-contacts a").click(function () {
+    var url = $(this).attr("href");
+    var template =  $("#import-contacts .template").clone();
+    template.find("a.continue").attr("href", url);
+    Utils.modal({html: template.html()});
+    return false;
+  });
+
   var controls = $("#select-contacts .controls");
 
   if (controls.is(".waiting")) {

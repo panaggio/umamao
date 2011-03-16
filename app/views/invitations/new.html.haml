@@ -2,10 +2,18 @@
 
 - content_for :sidebar do
   #import-contacts.block
-    %h3= t(".import")
+    %h3= t(".import.title")
     = link_to (image_tag "icons/google.png"), import_contacts_path(:provider => "GMAIL")
     = link_to (image_tag "icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
     = link_to (image_tag "icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
+    .template
+      .modal
+        %h1= t(".import.title")
+        = t(".import.notice")
+        .controls
+          = link_to t("scaffold.cancel"), "javascript:void(0)", :class => "close"
+          = link_to t(".import.continue"), "javascript:void(0)", :class => "continue"
+
   .block
     = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
 

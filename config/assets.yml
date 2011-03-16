@@ -10,6 +10,7 @@ javascripts:
     - public/javascripts/jquery-ui.min.js
     - public/javascripts/jquery.notifyBar.js
     - public/javascripts/jquery.hotkeys.js
+    - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/showdown.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
@@ -33,7 +34,6 @@ javascripts:
   new_question:
     - public/javascripts/modules/new_question.js
   show_question:
-    - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/modules/show_question.js
   external_accounts:
     - public/javascripts/modules/dac_external_account.js

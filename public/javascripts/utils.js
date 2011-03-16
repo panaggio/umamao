@@ -151,6 +151,11 @@ window.Utils = {
 
     var placedModal = $("#colorbox .modal");
 
+    // Default behavior for close button
+    placedModal.find("a.close").click(function () {
+      $.colorbox.close();
+    });
+
     $.colorbox.resize({width: placedModal.outerWidth()});
   },
 
