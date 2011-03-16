@@ -36,6 +36,14 @@ namespace :data do
       end
     end
 
+    desc "Recalculate Topic's followers_count"
+    task :recalculate_followers_count => :environment do
+      Topic.find_each do |topic|
+        topic.followers_count = topic.follower_ids.size
+        topic.save
+      end
+    end
+
     desc "Fully migrate question versions"
     task :migrate_question_versions do
       Rake::Task["data:migrate:replace_topics_in_versions"].invoke
