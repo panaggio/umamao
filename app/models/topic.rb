@@ -33,7 +33,11 @@ class Topic
   key :wikipedia_pt_key, String
   key :wikipedia_import_status, String
 
+
   key :wikipedia_description_imported_at, Time
+
+  key :types, Array
+
 
   timestamps!
 
