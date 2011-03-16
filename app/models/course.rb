@@ -3,8 +3,7 @@ class Course < Topic
 
   key :code, String, :length => 15, :index => true, :required => true,
     :unique => true
-  key :name, String, :length => 500, :index => true, :required => true,
-    :unique => true
+  key :name, String, :length => 500, :index => true, :required => true
   key :summary, String
   key :undergrad, Boolean, :default => true
 
