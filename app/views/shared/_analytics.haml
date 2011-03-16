@@ -9,3 +9,5 @@
 - elsif Rails.env.production? && current_group.has_custom_analytics && current_group.analytics_vendor == 'googlean' && request.domain != AppConfig.domain
 
   = googlean_script(current_group.analytics_id, current_group.domain)
+
+~ AppConfig.analytics_javascripts if Rails.env.production?
