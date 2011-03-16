@@ -1,5 +1,5 @@
 # This controller is used to share content on other websites, such as
-# posting a question on Facebook.
+# posting a question on Facebook or Twitter.
 
 class ShareQuestionController < ApplicationController
   before_filter :login_required
