@@ -8,6 +8,24 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+
+    desc "Change every inheriting class' news items to Topic"
+    task :fix_news_items_types => :environment do
+      NewsItem.query(:recipient_type.nin => ["Topic", "User"]).each do |ni|
+        if ni.recipient_type.constantize < Topic
+          ni.recipient_type = "Topic"
+          ni.save!
+        end
+      end
+
+      NewsItem.query(:origin_type.nin => ["Topic", "User"]).each do |ni|
+        if ni.origin_type.constantize < Topic
+          ni.origin_type = "Topic"
+          ni.save!
+        end
+      end
+    end
+
     desc "Fully migrate question versions"
     task :migrate_question_versions do
       Rake::Task["data:migrate:replace_topics_in_versions"].invoke
