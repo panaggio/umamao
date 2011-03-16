@@ -1,5 +1,24 @@
-@charset "UTF-8";
 /* incase an inverted custom gradient isn't specified */
+.fancy-button-reset-base-class, a.big_cancel_button, a.big_confirm_button, form.share_content .submit_button {
+  font-family: "Lucida Grande", Lucida, Arial, sans-serif;
+  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  margin: 0;
+  width: auto;
+  overflow: visible;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-style: solid;
+  font-weight: bold;
+}
+.fancy-button-reset-base-class::-moz-focus-inner, a.big_cancel_button::-moz-focus-inner, a.big_confirm_button::-moz-focus-inner, form.share_content .submit_button::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+.fancy-button-reset-base-class:focus, a.big_cancel_button:focus, a.big_confirm_button:focus, form.share_content .submit_button:focus {
+  outline: none;
+}
+
 ul#nav {
   padding: 10px 20px;
   background-color: #ebebeb;
@@ -1018,6 +1037,7 @@ ul.combobox li:hover ul, ul.combobox li.sfhover ul {
 }
 
 a.active_inline_link {
+  display: inline;
   position: absolute;
   z-index: 1;
   margin-top: 1px;
@@ -1151,16 +1171,6 @@ textarea.comment_text_area {
 a.big_cancel_button {
   padding: 10px;
   margin-bottom: 15px;
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1300108830') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1168,8 +1178,8 @@ a.big_cancel_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
   background-color: #d90000;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000));
@@ -1177,6 +1187,16 @@ a.big_cancel_button {
   background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%);
   border-color: #8d0000;
   text-shadow: #5a0000 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.43) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.43) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.43) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.43) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1184,46 +1204,12 @@ a.big_cancel_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
   color: white !important;
 }
-a.big_cancel_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-a.big_cancel_button:focus {
-  outline: none;
-}
-a.big_cancel_button.disabled, a.big_cancel_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:focus, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:focus {
-  cursor: default;
-}
-a.big_cancel_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] {
-  padding: 5px 18px;
-  border-width: 1px;
-}
 a.big_cancel_button, a.big_cancel_button:visited {
-  color: white;
-}
-a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:hover, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:hover {
-  background-color: #d90000;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ff2626), color-stop(100%, #ba0000));
-  background-image: -moz-linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  background-image: linear-gradient(top, #ff2626 0%, #ba0000 100%);
-  border-color: #8d0000;
-  text-shadow: #5a0000 0px 1px 1px;
-}
-a.big_cancel_button.disabled:active, a.big_cancel_button.disabled:active:visited, a.big_cancel_button.disabled:hover, a.big_cancel_button.disabled:hover:visited, a.big_cancel_button[disabled]:active, a.big_cancel_button[disabled]:active:visited, a.big_cancel_button[disabled]:hover, a.big_cancel_button[disabled]:hover:visited {
   color: white;
 }
 a.big_cancel_button:hover, a.big_cancel_button:focus {
@@ -1244,32 +1230,18 @@ a.big_cancel_button:active {
   background-image: linear-gradient(top, #b40000 0%, #c40000 40%, #c40000 85%, #e70000 100%);
   border-color: #6e0000;
   text-shadow: #3a0000 0px -1px -1px;
+  -moz-box-shadow: #8d0000 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #8d0000 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #8d0000 0 0.08em 0.1em 1px inset;
+  box-shadow: #8d0000 0 0.08em 0.1em 1px inset;
 }
 a.big_cancel_button:active, a.big_cancel_button:active:visited {
   color: white;
-}
-a.big_cancel_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-a.big_cancel_button.disabled:active, a.big_cancel_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
 }
 
 a.big_confirm_button {
   padding: 10px;
   margin-bottom: 15px;
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1300108830') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1277,8 +1249,8 @@ a.big_confirm_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
   background-color: #fdfdfd;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
@@ -1286,6 +1258,16 @@ a.big_confirm_button {
   background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
   border-color: #a4a4a4;
   text-shadow: white 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1293,46 +1275,12 @@ a.big_confirm_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
   color: #00527e;
 }
-a.big_confirm_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-a.big_confirm_button:focus {
-  outline: none;
-}
-a.big_confirm_button.disabled, a.big_confirm_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:focus, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:focus {
-  cursor: default;
-}
-a.big_confirm_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] {
-  padding: 5px 18px;
-  border-width: 1px;
-}
 a.big_confirm_button, a.big_confirm_button:visited {
-  color: #222222;
-}
-a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:hover, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:hover {
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-}
-a.big_confirm_button.disabled:active, a.big_confirm_button.disabled:active:visited, a.big_confirm_button.disabled:hover, a.big_confirm_button.disabled:hover:visited, a.big_confirm_button[disabled]:active, a.big_confirm_button[disabled]:active:visited, a.big_confirm_button[disabled]:hover, a.big_confirm_button[disabled]:hover:visited {
   color: #222222;
 }
 a.big_confirm_button:hover, a.big_confirm_button:focus {
@@ -1353,17 +1301,13 @@ a.big_confirm_button:active {
   background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
   border-color: #959595;
   text-shadow: white 0px -1px -1px;
+  -moz-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
 }
 a.big_confirm_button:active, a.big_confirm_button:active:visited {
   color: #222222;
-}
-a.big_confirm_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-a.big_confirm_button.disabled:active, a.big_confirm_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
 }
 
 a.missing_page:link, a.missing_page:visited, a.missing_page:hover, a.missing_page:active {
@@ -1406,16 +1350,6 @@ form.share_content label.label {
   width: auto;
 }
 form.share_content .submit_button {
-  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1300108830') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1423,8 +1357,8 @@ form.share_content .submit_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 21.6px;
-  padding: 5px 18px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
   background-color: #fdfdfd;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
@@ -1432,6 +1366,16 @@ form.share_content .submit_button {
   background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
   border-color: #a4a4a4;
   text-shadow: white 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.79) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1439,45 +1383,11 @@ form.share_content .submit_button {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 15px;
-  line-height: 18px;
-  padding: 3px 12px;
-  border-width: 1px;
-}
-form.share_content .submit_button::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-form.share_content .submit_button:focus {
-  outline: none;
-}
-form.share_content .submit_button.disabled, form.share_content .submit_button[disabled] {
-  opacity: 0.7;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-}
-form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:focus, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:focus {
-  cursor: default;
-}
-form.share_content .submit_button:active {
-  padding: 4px 17px;
-  border-width: 2px;
-}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] {
-  padding: 5px 18px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
   border-width: 1px;
 }
 form.share_content .submit_button, form.share_content .submit_button:visited {
-  color: #222222;
-}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:hover, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:hover {
-  background-color: #fdfdfd;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #bbbbbb));
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #bbbbbb 100%);
-  border-color: #a4a4a4;
-  text-shadow: white 0px 1px 1px;
-}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button.disabled:active:visited, form.share_content .submit_button.disabled:hover, form.share_content .submit_button.disabled:hover:visited, form.share_content .submit_button[disabled]:active, form.share_content .submit_button[disabled]:active:visited, form.share_content .submit_button[disabled]:hover, form.share_content .submit_button[disabled]:hover:visited {
   color: #222222;
 }
 form.share_content .submit_button:hover, form.share_content .submit_button:focus {
@@ -1498,17 +1408,13 @@ form.share_content .submit_button:active {
   background-image: linear-gradient(top, #b9b9b9 0%, #c0c0c0 40%, #c0c0c0 85%, #d2d2d2 100%);
   border-color: #959595;
   text-shadow: white 0px -1px -1px;
+  -moz-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
+  box-shadow: #a4a4a4 0 0.08em 0.1em 1px inset;
 }
 form.share_content .submit_button:active, form.share_content .submit_button:active:visited {
   color: #222222;
-}
-form.share_content .submit_button:active {
-  padding: 2px 11px;
-  border-width: 2px;
-}
-form.share_content .submit_button.disabled:active, form.share_content .submit_button[disabled] {
-  padding: 3px 12px;
-  border-width: 1px;
 }
 
 .center {

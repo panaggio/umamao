@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1300108830');
+  background: url('/images/grid.png?1291138098');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1247,7 +1247,7 @@ ul#team .avatar {
   text-overflow: ellipsis;
 }
 #signup-wizard #interaction .suggestions .topic .reduced {
-  max-width: 97%;
+  max-width: 95%;
 }
 #signup-wizard #interaction .suggestions .topic .remove {
   cursor: pointer;
