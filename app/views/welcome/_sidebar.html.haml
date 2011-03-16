@@ -4,7 +4,7 @@
       .navigation= link_to t(".admin"), manage_properties_path
     - if current_user.mod_of?(current_group)
       .navigation= link_to t(".moderate"), moderate_path
-    .navigation= link_to t('invitations.invite'), invitations_path
+    .navigation= link_to t('invitations.invite'), new_invitation_path
     - if Affiliation.count(:user_id => current_user.id) > 0
       .navigation= t('welcome.home.looking_for', :link => link_to(t('welcome.home.exercises'), topic_path('Resolução-de-exercício')))
 

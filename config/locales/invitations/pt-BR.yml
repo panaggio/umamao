@@ -1,6 +1,5 @@
 pt-BR:
   invitations:
-    external: Importar contatos
     form:
       title: Convidar por email
       labels:
@@ -10,6 +9,16 @@ pt-BR:
       attributes:
         sent_at: enviado
         accepted_at: aceito
+    new:
+      error: Houve um erro. Por favor, tente novamente mais tarde.
+      import: Importar contatos
+      filter: Procurar contatos
+      invite: Convidar
+      message: Mensagem (opcional)
+      remove_all: Remover todos
+      selected: Contatos selecionados
+      title: Importar contatos
+      wait: Por favor, aguarde enquanto importamos seus contatos.
     index:
       title: Convites
       titles:

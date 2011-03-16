@@ -1,33 +1,32 @@
 class InvitationsController < ApplicationController
   before_filter :login_required
-  before_filter :fetch_invitations
 
-  def index
-    set_page_title(t('invitations.index.title'))
-    @invitation = Invitation.new
-  end
-
-  def create
-    @invitation = Invitation.new(params[:invitation])
-    @invitation.sender_id = current_user.id
-    @invitation.group_id = current_group.id
-
-    if @invitation.save
-      track_event(:sent_invitation)
-      redirect_to invitations_path
-    else
-      render 'index'
-    end
-  end
-
-  private
-  def fetch_invitations
+  def pending
     @pending_invitations = Invitation.query(:sender_id => current_user.id,
                                             :accepted_at => nil,
                                             :order => :created_at.desc)
+  end
+
+  def accepted
     @accepted_invitations = Invitation.query(:sender_id => current_user.id,
                                              :accepted_at.ne => nil,
                                              :order => :created_at.desc)
   end
 
+  def new
+    @fetching_contacts = params[:wait].present?
+  end
+
+  def create
+    @emails = params[:emails]
+    @message = params[:message]
+
+    if Invitation.invite_emails!(current_user, current_group,
+                                 @message, @emails) > 0
+      track_event(:sent_invitation)
+      redirect_to new_invitation_path
+    else
+      render :new
+    end
+  end
 end

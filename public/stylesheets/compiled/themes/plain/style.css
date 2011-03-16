@@ -2176,13 +2176,13 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #contacts-to-invite {
   border: 1px #aaaaaa solid;
   max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 12px;
 }
 #contacts-to-invite .contact {
   *zoom: 1;
   border-bottom: 1px #aaaaaa dotted;
-  padding: 4px;
+  padding: 4px 6px;
 }
 #contacts-to-invite .contact .remove {
   display: block;
@@ -2197,8 +2197,8 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   overflow: hidden;
   visibility: hidden;
 }
-#contacts-to-invite .contact.no-match {
-  display: none;
+#contacts-to-invite .contact:last-of-type {
+  border-bottom: none;
 }
 #contacts-to-invite input {
   float: left;
@@ -2217,6 +2217,9 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #contacts-to-invite .email {
   display: inline;
   font-size: 10px;
+}
+#contacts-to-invite.empty {
+  display: none;
 }
 
 #invitation-message {

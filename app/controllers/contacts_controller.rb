@@ -5,11 +5,6 @@ class ContactsController < ApplicationController
 
   VALID_PROVIDERS = ["GMAIL", "YAHOO", "WINDOWSLIVE"]
 
-  def index
-    @contacts = current_user.contacts
-    @fetching_contacts = false
-  end
-
   def import
     info = current_user.begin_contact_import(params[:provider])
     session["import_id"] = info[:import_id]
@@ -19,9 +14,7 @@ class ContactsController < ApplicationController
   end
 
   def import_callback
-    @contacts = current_user.contacts
-    @fetching_contacts = true
-    render :index
+    redirect_to new_invitation_path(:wait => true)
   end
 
   def fetch
@@ -58,12 +51,4 @@ class ContactsController < ApplicationController
 
   end
 
-  def invite
-    @message = params[:message]
-    @emails = params[:emails].uniq
-
-    Invitation.invite_emails! current_user, @message, @emails
-
-    redirect_to invitations_path
-  end
 end

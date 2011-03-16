@@ -2,11 +2,14 @@ $(document).ready(function () {
 
   // Unselect all contacts link
   $("#select-contacts a.remove_all").click(function () {
-    $("#contacts-to-invite .contact").remove();
+    $("#contacts-to-invite").empty().addClass("empty");
   });
 
   $("#contacts-to-invite .contact .remove").live("click", function () {
     $(this).closest(".contact").remove();
+    if ($("#contacts-to-invite").is(":empty")) {
+      $("#contacts-to-invite").addClass("empty");
+    }
   });
 
   var controls = $("#select-contacts .controls");
@@ -61,7 +64,9 @@ $(document).ready(function () {
     click: function () {
       var contactHtml = $.tmpl(invitedContactTemplate, this.data);
 
-      $("#contacts-to-invite").prepend(contactHtml);
+      $("#contacts-to-invite").
+        removeClass("empty"). // The :empty selector didn't work.
+        prepend(contactHtml);
 
       contactAutocomplete.clear();
     }

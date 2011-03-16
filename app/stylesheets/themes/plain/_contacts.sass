@@ -30,7 +30,7 @@
 #contacts-to-invite
   border: 1px #aaa solid
   max-height: 500px
-  overflow-y: scroll
+  overflow-y: auto
   margin-bottom: 12px
 
   .contact
@@ -40,10 +40,9 @@
       color: #888
     +pie-clearfix
     border-bottom: 1px #aaa dotted
-    padding: 4px
-
-    &.no-match
-      display: none
+    padding: 4px 6px
+    &:last-of-type
+      border-bottom: none
 
   input
     float: left
@@ -58,6 +57,9 @@
   .email
     display: inline
     font-size: 10px
+
+  &.empty
+    display: none
 
 #invitation-message
   textarea

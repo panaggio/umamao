@@ -1,0 +1,35 @@
+%h1.navtitle= t(".title")
+
+- content_for :sidebar do
+  #import-contacts.block
+    %h3= t(".import")
+    = link_to (image_tag "icons/google.png"), import_contacts_path(:provider => "GMAIL")
+    = link_to (image_tag "icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
+    = link_to (image_tag "icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
+
+  = link_to t("invitations.index.titles.pending"), pending_invitations_path
+  = link_to t("invitations.index.titles.accepted"), accepted_invitations_path
+
+- form_tag invitations_path, :id => "select-contacts" do
+  - if @fetching_contacts
+    .wait-notice
+      .loader
+        = image_tag "ajax-loader-big.gif"
+      = t(".wait")
+
+  %h2= t(".selected")
+  - control_class = @fetching_contacts ? "waiting" : ""
+  - control_url = @fetching_contacts ? fetch_contacts_url : ""
+  .controls{:class => control_class, "data-fetch-contacts-url" => control_url, "data-error-message" => t(".error")}
+    = text_field_tag "autocomplete", t(".filter"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => search_contacts_url
+    %ul#search-contacts-results.autocomplete-list
+
+    .block-selection
+      = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
+  #contacts-to-invite.empty
+
+  #invitation-message
+    = label_tag "message", t(".message")
+    = text_area_tag "message"
+
+  = submit_tag t(".invite")

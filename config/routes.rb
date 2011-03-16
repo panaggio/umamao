@@ -19,14 +19,18 @@ Shapado::Application.routes.draw do
     end
   end
 
-  resources :invitations, :only => [:index, :create]
+  resources :invitations, :only => [:new, :create] do
+    collection do
+      get :pending
+      get :accepted
+    end
+  end
 
-  resources :contacts, :only => [:index] do
+  resources :contacts do
     collection do
       post :fetch
       get :import
       get :import_callback
-      post :invite
       get :search
     end
   end
