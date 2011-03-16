@@ -19,7 +19,7 @@
     - if !hide_controls
       .controls
         .actions
-          = link_to t('activerecord.attributes.answer.link'), question_answer_path(question, answer), :class => "bookmark"
+          = link_to t('activerecord.attributes.answer.share'), question_answer_path(question, answer), :class => "bookmark"
           - if logged_in?
             - if current_user != answer.user
               = link_to t(".flag"), flag_question_answer_path(question, answer), :class => "flag-link"

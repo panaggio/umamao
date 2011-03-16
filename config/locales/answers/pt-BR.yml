@@ -32,6 +32,6 @@ pt-BR:
         other: respostas
     attributes:
       answer:
-        link: Link
+        share: Compartilhar
         created_at: Criada
         body: Resposta
