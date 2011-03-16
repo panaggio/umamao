@@ -1,0 +1,5 @@
+- if logged_in?
+  .share.block
+    %h3= t("answers.show.share")
+    = link_to(image_tag("facebook.gif") + " Facebook", new_share_question_path(:question => @question.id, :where => "facebook"), :class => "facebook")
+    = link_to(image_tag("twitter.gif") + " Twitter", new_share_question_path(:question => @question.id, :where => "twitter"), :class => "twitter")
