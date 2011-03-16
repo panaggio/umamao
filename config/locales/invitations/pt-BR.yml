@@ -1,5 +1,7 @@
 pt-BR:
   invitations:
+    accepted:
+      title: Convites aceitos
     form:
       title: Convidar por email
       labels:
@@ -17,8 +19,16 @@ pt-BR:
       message: Mensagem (opcional)
       remove_all: Remover todos
       selected: Contatos selecionados
-      title: Importar contatos
+      title: Convidar pessoas
       wait: Por favor, aguarde enquanto importamos seus contatos.
+      pending:
+        one: 1 convite pendente
+        other: %{count} convites pendentes
+      accepted:
+        one: 1 convite aceito
+        other: %{count} convites aceitos
+    pending:
+      title: Convites pendentes
     index:
       title: Convites
       titles:

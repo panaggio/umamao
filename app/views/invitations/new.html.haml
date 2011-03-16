@@ -6,9 +6,12 @@
     = link_to (image_tag "icons/google.png"), import_contacts_path(:provider => "GMAIL")
     = link_to (image_tag "icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
     = link_to (image_tag "icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
+  .block
+    = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
 
-  = link_to t("invitations.index.titles.pending"), pending_invitations_path
-  = link_to t("invitations.index.titles.accepted"), accepted_invitations_path
+  .block
+    = link_to t(".accepted", :count => @accepted_invitations.count), accepted_invitations_path
+    = render_cell :users, :list, :users => @accepted_invitations.map(&:recipient)
 
 - form_tag invitations_path, :id => "select-contacts" do
   - if @fetching_contacts

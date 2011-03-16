@@ -14,7 +14,14 @@ class InvitationsController < ApplicationController
   end
 
   def new
+    set_page_title(t("invitations.new.title"))
     @fetching_contacts = params[:wait].present?
+
+    @pending_invitations =
+      current_user.invitations.query(:accepted_at => nil)
+
+    @accepted_invitations =
+      current_user.invitations.query(:accepted_at.ne => nil)
   end
 
   def create

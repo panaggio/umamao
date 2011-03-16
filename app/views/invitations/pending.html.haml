@@ -1,3 +1,5 @@
+%h1.navtitle= t(".title")
+
 %ul.items.invitations
   - @pending_invitations.each do |invitation|
     = render invitation
