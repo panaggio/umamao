@@ -1,6 +1,8 @@
 // Little box for holding a topic name in listings (question topics,
 // topics followed by a user, etc).
 
+@import "compass/utilities/text/ellipsis"
+
 =topic-container
   .topic
     +border-radius
@@ -15,8 +17,16 @@
     font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
     .topic-title
       white-space: nowrap
+      display: block
+      float: left
+      max-width: 100%
+      +ellipsis
+    .reduced
+      max-width: 97%
     .remove
       cursor: pointer
+      display: block
+      float: right
   .topic, .topic a
     color: #444444
     font-weight: normal

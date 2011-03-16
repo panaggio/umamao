@@ -324,7 +324,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1296478317');
+  background: url('/images/grid.png?1300108830');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1113,9 +1113,22 @@ ul#questions ul.topic-list .topic {
 }
 ul#questions ul.topic-list .topic .topic-title {
   white-space: nowrap;
+  display: block;
+  float: left;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+ul#questions ul.topic-list .topic .reduced {
+  max-width: 97%;
 }
 ul#questions ul.topic-list .topic .remove {
   cursor: pointer;
+  display: block;
+  float: right;
 }
 ul#questions ul.topic-list .topic, ul#questions ul.topic-list .topic a {
   color: #444444;
@@ -1157,9 +1170,22 @@ ul#questions ul.topic-list .topic a:hover, ul#questions ul.topic-list .topic a a
 }
 .topic-list .topic .topic-title {
   white-space: nowrap;
+  display: block;
+  float: left;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.topic-list .topic .reduced {
+  max-width: 97%;
 }
 .topic-list .topic .remove {
   cursor: pointer;
+  display: block;
+  float: right;
 }
 .topic-list .topic, .topic-list .topic a {
   color: #444444;
@@ -1201,9 +1227,22 @@ ul.topic-list .topic {
 }
 ul.topic-list .topic .topic-title {
   white-space: nowrap;
+  display: block;
+  float: left;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+ul.topic-list .topic .reduced {
+  max-width: 97%;
 }
 ul.topic-list .topic .remove {
   cursor: pointer;
+  display: block;
+  float: right;
 }
 ul.topic-list .topic, ul.topic-list .topic a {
   color: #444444;
@@ -1362,7 +1401,7 @@ ul.topic-list .follow-info a {
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
   font-weight: normal;
-  max-width: none;
+  max-width: 95%;
 }
 #question .topic-list .retag {
   float: left;
@@ -1608,7 +1647,7 @@ ul.topic-list .follow-info a {
 
 a.request_group {
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1296478317') repeat-x bottom left;
+  background: url('/images/button_bg.png?1300108830') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -2341,9 +2380,22 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 }
 #sidebar .suggestions .topic .topic-title {
   white-space: nowrap;
+  display: block;
+  float: left;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+#sidebar .suggestions .topic .reduced {
+  max-width: 97%;
 }
 #sidebar .suggestions .topic .remove {
   cursor: pointer;
+  display: block;
+  float: right;
 }
 #sidebar .suggestions .topic, #sidebar .suggestions .topic a {
   color: #444444;

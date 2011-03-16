@@ -43,7 +43,6 @@ stylesheets:
     - public/stylesheets/autocomplete.css
     - public/stylesheets/colorbox.css
     - public/stylesheets/compiled/themes/plain/style.css
-    - public/stylesheets/compiled/themes/plain/style.css
     - public/stylesheets/welcome.css
   landing:
     - public/stylesheets/autocomplete_landing.css
