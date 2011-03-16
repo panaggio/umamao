@@ -32,6 +32,10 @@ module Wikipedia
     `bunzip2 #{DOWNLOAD_DIRECTORY}#{BZIPED_ARTICLES_XML}`
     raise "bunzip2 failed with status #{$?.exitstatus}" unless $?.success?
   end
+
+  def self.decode(str)
+    str.gsub(/\%[0-9a-fA-F]{2}/){|s| s[1..-1].to_i(16).chr}
+  end
 end
 
 class WikipediaArticle
@@ -130,8 +134,8 @@ class WikipediaArticle
   end
 
   def slug
-    @slug ||= (@media_wiki_info["wgPageName"] if @media_wiki_info) ||
-      parsed_article.search(".printfooter > a").text.sub(/.*\//, "")
+    @slug ||= Wikipedia.decode((@media_wiki_info["wgPageName"] if @media_wiki_info) ||
+      parsed_article.search(".printfooter > a").text.sub(/.*\//, ""))
       # http://pt.wikipedia.org/wiki/Astronomia => Astronomia
   end
 
