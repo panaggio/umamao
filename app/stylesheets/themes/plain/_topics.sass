@@ -1,3 +1,5 @@
+@import "compass/utilities/text/ellipsis"
+
 ul#questions ul.topic-list
   +topic-container
 
@@ -16,7 +18,8 @@ ul.topic-list
   +topic-container
   .topic
     max-width: 55%
-    text-overflow: ellipsis
+    display: block
+    +ellipsis
     .remove
       margin-left: 3px
     a.remove:hover
