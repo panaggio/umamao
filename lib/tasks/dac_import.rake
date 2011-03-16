@@ -300,4 +300,25 @@ namespace :dac do
   task :import_all => [:import_unicamp_academic_programs, :import_unicamp_courses,
    :import_unicamp_academic_programs_catalog, :import_unicamp_students_classes  ] do
   end
+
+  def name_for_code(code)
+  end
+
+  task :fix_old_academic_programs_name => :base do
+    {"37" => "37 - Superior de Tec. em Construção Civil",
+     "62" => "62 - Superior de Tec. em Saneamento Ambiental",
+     "200" => "Programa de Formação Interdisciplinar Superior (ProFIS) - Integral"
+    }.each do |code, name|
+      ap = AcademicProgram.find_by_code(code)
+      ap.name = name
+      ap.title = "#{name} (Unicamp)"
+      ap.save!
+      User.all(:bio => /#{code} \(Unicamp\)/).each do |u|
+        u.bio.gsub!("#{code} (Unicamp)", "#{name}")
+        u.save!
+      end
+
+    end
+
+  end
 end
