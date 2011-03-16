@@ -2,7 +2,7 @@
   %li
     .topic.info
       %span.topic-title
-        = link_to topic.title, topic_path(topic), :title => topic_help_text(topic)
+        = link_to_topic(topic)
     .controls
       .follow-info
         = link_to "#{t("followable.follow")}", follow_topic_path(topic, :single_column => single_column), :class => "follow_link", :method => :post

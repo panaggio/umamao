@@ -7,6 +7,11 @@ module TopicsHelper
       '</span></div></li>'
   end
 
+  def link_to_topic(topic, text = nil)
+    text ||= topic.title
+    link_to h(text), topic, :title => topic_help_text(topic)
+  end
+
   def topic_help_text(topic)
     if topic.description.present?
       truncate_words(remove_links(topic.description), 100)

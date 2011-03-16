@@ -287,5 +287,27 @@ module ApplicationHelper
       result << more_string unless words.empty?
     }
   end
+
+  def link_to_model(model, text = "")
+    if model
+      if m = find_link_to_method(model.class)
+        m.call(model)
+      else
+        link_to text, url_for(model)
+      end
+    end
+  end
+
+  private
+
+  def find_link_to_method(object_class)
+    method_name = "link_to_#{object_class.name.underscore}"
+    if respond_to? method_name
+      return method(method_name)
+    end 
+    if object_super = object_class.superclass
+      find_link_to_method(object_super)
+    end
+  end
 end
 
