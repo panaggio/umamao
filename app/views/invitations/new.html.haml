@@ -23,21 +23,21 @@
 
 - form_tag invitations_path, :id => "select-contacts" do
   - if @fetching_contacts
-    .wait-notice
+    .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}
       .loader
         = image_tag "ajax-loader-big.gif"
       = t(".wait")
 
-  %h2= t(".selected")
-  - control_class = @fetching_contacts ? "waiting" : ""
-  - control_url = @fetching_contacts ? fetch_contacts_url : ""
-  .controls{:class => control_class, "data-fetch-contacts-url" => control_url, "data-error-message" => t(".error")}
+  .controls{:class => @fetching_contacts ? "waiting" : ""}
     = text_field_tag "autocomplete", t(".filter"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => search_contacts_url
     %ul#search-contacts-results.autocomplete-list
 
+  #contacts-to-invite.empty
+    %h2= t(".selected")
     .block-selection
       = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
-  #contacts-to-invite.empty
+
+    .list
 
   #invitation-message
     = label_tag "message", t(".message")

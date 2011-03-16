@@ -9,12 +9,7 @@
 
 #select-contacts
   .controls
-    .block-selection
-      float: right
-      a
-        margin-left: 5px
     margin-bottom: 12px
-
     &.waiting
       display: none
 
@@ -32,10 +27,21 @@
     margin-bottom: 8px
 
 #contacts-to-invite
-  border: 1px #aaa solid
-  max-height: 500px
-  overflow-y: auto
-  margin-bottom: 12px
+  h2
+    display: inline
+
+  .list
+    border: 1px #aaa solid
+    max-height: 500px
+    overflow-y: auto
+    margin-top: 10px
+    margin-bottom: 12px
+    clear: both
+
+  .block-selection
+    float: right
+    a
+      margin-left: 5px
 
   .contact
     .remove

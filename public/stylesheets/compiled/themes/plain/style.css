@@ -2153,12 +2153,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .controls {
   margin-bottom: 12px;
 }
-#select-contacts .controls .block-selection {
-  float: right;
-}
-#select-contacts .controls .block-selection a {
-  margin-left: 5px;
-}
 #select-contacts .controls.waiting {
   display: none;
 }
@@ -2177,11 +2171,22 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   margin-bottom: 8px;
 }
 
-#contacts-to-invite {
+#contacts-to-invite h2 {
+  display: inline;
+}
+#contacts-to-invite .list {
   border: 1px #aaaaaa solid;
   max-height: 500px;
   overflow-y: auto;
+  margin-top: 10px;
   margin-bottom: 12px;
+  clear: both;
+}
+#contacts-to-invite .block-selection {
+  float: right;
+}
+#contacts-to-invite .block-selection a {
+  margin-left: 5px;
 }
 #contacts-to-invite .contact {
   *zoom: 1;

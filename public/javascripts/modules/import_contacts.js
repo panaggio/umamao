@@ -2,12 +2,13 @@ $(document).ready(function () {
 
   // Unselect all contacts link
   $("#select-contacts a.remove_all").click(function () {
-    $("#contacts-to-invite").empty().addClass("empty");
+    $("#contacts-to-invite").addClass("empty");
+    $("#contacts-to-invite .list").empty();
   });
 
   $("#contacts-to-invite .contact .remove").live("click", function () {
     $(this).closest(".contact").remove();
-    if ($("#contacts-to-invite").is(":empty")) {
+    if ($("#contacts-to-invite .list").is(":empty")) {
       $("#contacts-to-invite").addClass("empty");
     }
   });
@@ -25,27 +26,26 @@ $(document).ready(function () {
   if (controls.is(".waiting")) {
     // Need to wait for server to fetch external contacts
 
+    var waitNotice = $("#select-contacts .wait-notice");
+
     var signalError = function () {
-      Utils.showMessage(controls.attr("data-error-message"), "error");
+      Utils.showMessage(waitNotice.attr("data-error-message"), "error");
     };
 
     $.ajax({
       dataType: "json",
       error: signalError,
       success: function (data) {
-        var waitNotice = $("#select-contacts .wait-notice");
         waitNotice.slideUp("slow", function () {
           waitNotice.remove();
-          if (data.success) {
-            controls.removeClass("waiting");
-          } else {
-            controls.remove();
+          controls.removeClass("waiting");
+          if (!data.success) {
             signalError();
           }
         });
       },
       type: "POST",
-      url: controls.attr("data-fetch-contacts-url")
+      url: waitNotice.attr("data-fetch-contacts-url")
     });
   }
 
@@ -60,7 +60,7 @@ $(document).ready(function () {
     '<div class="contact">' + Utils.closeLink() +
     '<input type="hidden" name="emails[]" value="${email}" />' +
     '<div class="name">${name}</div>' +
-    '<div class="email">${name}</div></div>');
+    '<div class="email">${email}</div></div>');
 
 
   var ContactItem = function (contact) {
@@ -72,9 +72,8 @@ $(document).ready(function () {
     click: function () {
       var contactHtml = $.tmpl(invitedContactTemplate, this.data);
 
-      $("#contacts-to-invite").
-        removeClass("empty"). // The :empty selector didn't work.
-        prepend(contactHtml);
+      $("#contacts-to-invite").removeClass("empty"); // The :empty selector didn't work.
+      $("#contacts-to-invite .list").prepend(contactHtml);
 
       contactAutocomplete.clear();
     }
