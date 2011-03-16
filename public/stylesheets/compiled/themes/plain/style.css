@@ -1280,6 +1280,11 @@ ul.topic-list .topic a:hover, ul.topic-list .topic a a:hover {
 }
 ul.topic-list .topic {
   max-width: 55%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
 ul.topic-list .topic .remove {
