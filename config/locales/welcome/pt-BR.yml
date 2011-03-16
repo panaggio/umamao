@@ -42,57 +42,8 @@ pt-BR:
           created: "%{origin} adicionou uma pergunta."
         topic:
           created: "Pergunta adicionada ao tópico %{origin}."
-        university:
-          created: "Pergunta adicionada ao tópico %{origin}."
-        course:
-          created: "Pergunta adicionada ao tópico %{origin}."
-        courseoffer:
-          created: "Pergunta adicionada ao tópico %{origin}."
-        academicprogram:
-          created: "Pergunta adicionada ao tópico %{origin}."
-        academicprogramclass:
-          created: "Pergunta adicionada ao tópico %{origin}."
-        academicprogram:
-          created: "Pergunta adicionada ao tópico %{origin}."
       answer:
         user:
           created: "%{origin} adicionou uma resposta."
         topic:
           created: "Resposta adicionada ao tópico %{origin}."
-        university:
-          created: "Resposta adicionada ao tópico %{origin}."
-        course:
-          created: "Resposta adicionada ao tópico %{origin}."
-        courseoffer:
-          created: "Resposta adicionada ao tópico %{origin}."
-        academicprogram:
-          created: "Resposta adicionada ao tópico %{origin}."
-        academicprogramclass:
-          created: "Resposta adicionada ao tópico %{origin}."
-        academicprogram:
-          created: "Resposta adicionada ao tópico %{origin}."
-      academicprogram:
-        user:
-          created: "%{origin} adicionou uma pergunta."
-        topic:
-          created: "Pergunta adicionada ao tópico %{origin}."
-      course:
-        user:
-          created: "%{origin} adicionou uma pergunta."
-        topic:
-          created: "Pergunta adicionada ao tópico %{origin}."
-      university:
-        user:
-          created: "%{origin} adicionou uma pergunta."
-        topic:
-          created: "Pergunta adicionada ao tópico %{origin}."
-      academicprogramclass:
-        user:
-          created: "%{origin} adicionou uma pergunta."
-        topic:
-          created: "Pergunta adicionada ao tópico %{origin}."
-      courseoffer:
-        user:
-          created: "%{origin} adicionou uma pergunta."
-        topic:
-          created: "Pergunta adicionada ao tópico %{origin}."
