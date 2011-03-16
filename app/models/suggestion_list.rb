@@ -228,13 +228,13 @@ class SuggestionList
       end
     end
 
-    count = {} # Scores for suggestions
+    count = Hash.new(0) # Scores for suggestions
     Topic.query(:follower_ids => self.user.id).each do |topic|
       topic.related_topics.each do |related_topic|
         next if related_topic.follower_ids.include?(self.user.id) ||
-          self.uninteresting_topic_ids.include?(self.user.id) ||
+          self.uninteresting_topic_ids.include?(related_topic.id) ||
           kept_suggestions.any?{|suggestion| suggestion.entry == related_topic}
-        count[related_topic.id] = (count[related_topic.id] || 0) + 1
+        count[related_topic.id] += 1
       end
     end
 

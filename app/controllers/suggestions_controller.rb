@@ -18,7 +18,7 @@ class SuggestionsController < ApplicationController
     end
 
     if @suggestion
-      type = (@suggestion.entry_type.downcase + "s").to_sym
+      type = @suggestion.entry_type.underscore.pluralize.to_sym
       current_user.refuse_suggestion(@suggestion)
       current_user.save!
       track_event(:refused_suggestion)
