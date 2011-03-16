@@ -3,8 +3,9 @@
 
 class SuggestionsCell < Cell::Rails
   include Devise::Controllers::Helpers
+  helper ApplicationHelper
   helper UsersHelper
-  helper TopicsHelper 
+  helper TopicsHelper
 
   def topics
     if options.present? and options[:single_column]
