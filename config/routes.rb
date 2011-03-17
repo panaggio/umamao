@@ -26,11 +26,11 @@ Shapado::Application.routes.draw do
     end
   end
 
+  match "/proxy" => "contacts#import_callback"
   resources :contacts do
     collection do
       post :fetch
       get :import
-      get :import_callback
       get :search
     end
   end

@@ -4,6 +4,7 @@ class ContactsController < ApplicationController
   before_filter :login_required
 
   VALID_PROVIDERS = ["GMAIL", "YAHOO", "WINDOWSLIVE"]
+  CLOUDSPONGE_URL = "http://api.cloudsponge.com/auth"
 
   def import
     info = current_user.begin_contact_import(params[:provider])
@@ -14,6 +15,15 @@ class ContactsController < ApplicationController
   end
 
   def import_callback
+    if request.get?
+      Net::HTTP.get(URI.parse("#{CLOUDSPONGE_URL}?#{request.query_string}"))
+    elsif request.post?
+      Net::HTTP.post_form(URI.parse(CLOUDSPONGE_URL +
+                                    "?#{request.query_string}"),
+                          request.POST)
+    else
+      raise "Couldn't proxy call"
+    end
     redirect_to new_invitation_path(:wait => true)
   end
 
