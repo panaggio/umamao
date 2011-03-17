@@ -160,6 +160,7 @@ Shapado::Application.routes.draw do
   resources :votes
   resources :flags
   resources :share_question
+  resources :share_answer
 
   scope '/manage' do
     resources :widgets do

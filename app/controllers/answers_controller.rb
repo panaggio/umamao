@@ -44,6 +44,8 @@ class AnswersController < ApplicationController
   end
 
   def show
+    @open_sharing_widget = flash[:connected_to]
+
     @answer = Answer.find(params[:id])
     raise Goalie::NotFound if @answer.nil?
     @question = @answer.question

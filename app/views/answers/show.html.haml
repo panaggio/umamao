@@ -1,9 +1,18 @@
+= render :partial => 'shared/share_header', :locals => { :opts => { :content => @answer, :class_name => Answer.to_s.underscore }, :content_url => question_answer_url(@answer.question, @answer) }
+
 - content_for :subtabs do
   %table
     %tr
       %td
         %h1.navtitle.title.entry-title
           &= @question.title
+
+- content_for :js do
+  -# FIXME: only part of :show_question should be included
+  = include_javascripts :show_question
+
+- content_for :sidebar do
+  = render :partial => 'shared/share_body', :locals => { :opts => { :content => @answer.id, :class_name => Answer.to_s.underscore } }
 
 #question-body.markdown
   = markdown(@question.body)
