@@ -3,8 +3,13 @@
 class ShareAnswerController < ShareContentController
   CONTENT_CLASS = Answer
 
+  protected
   def content_url(answer)
     question_answer_url(answer.question, answer)
+  end
+
+  def content_path(answer)
+    question_answer_path(answer.question, answer)
   end
 
   # Facebook: "Answer (by John Doe): Is this a good question?"
