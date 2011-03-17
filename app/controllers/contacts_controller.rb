@@ -45,10 +45,8 @@ class ContactsController < ApplicationController
   def search
     @contacts =
       Contact.filter(params[:q],
-                     :fields => {
-                       :user_id => current_user.id,
-                       :corresponding_user_id => nil
-                     },
+                     :user_id => current_user.id,
+                     :corresponding_user_id => nil,
                      :per_page => 7)
 
     respond_to do |format|
