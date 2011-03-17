@@ -1,12 +1,5 @@
 - if [ "facebook", "twitter" ].include? @open_sharing_widget
-  #hidden-widget{:style => "display: none"}
-    - html = opts.merge(:where => @open_sharing_widget)
-    -# TODO: Merge the next 3 lines with those on app/controllers/share_content_controller.rb elsewhere
-    - if @open_sharing_widget == "twitter"
-      - bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
-      - html[:link] = bitly.shorten(content_url).short_url
-    = render_cell :share_content, :display, html
   :javascript
     $(document).ready(function () {
-      Utils.modal({html: $("#hidden-widget").html()});
+      $(".#{@open_sharing_widget}").click();
     });
