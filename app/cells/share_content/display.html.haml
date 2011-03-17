@@ -1,5 +1,4 @@
--# FIXME: change .share-questions-widget to .share-content-widget and propagate it to the related stylesheets and javascripts
-.modal.share-question-widget
+.modal.share-content-widget
   %h1= t("#{@class_name.pluralize}.show.post_on_#{@where}")
   - if [ "facebook", "twitter" ].include? @where
     .message
