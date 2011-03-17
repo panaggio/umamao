@@ -18,3 +18,11 @@
   +button-active-colors(white, $logo-color - 50, $logo-color - 50)
   &.current
     +button-colors(white, $logo-color + 30, $logo-color + 30)
+
+=action-button
+  +button
+  background-color: lighten($affirmative, 15%)
+  +linear-gradient(color-stops(lighten($affirmative, 15%), $affirmative 50%, lighten($affirmative, 10%)), top)
+  &:hover
+    background-color: $affirmative
+    +linear-gradient(color-stops(lighten($affirmative, 25%), lighten($affirmative, 10%) 50%, lighten($affirmative, 20%)), top)

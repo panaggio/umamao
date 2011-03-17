@@ -68,6 +68,18 @@ $(document).ready(function () {
   var contactAutocomplete = new AutocompleteBox("#search-contacts",
                                                 "#search-contacts-results");
 
+  var addInputToList = function () {
+    addContactToList({name: "", email: contactAutocomplete.input.val()});
+    contactAutocomplete.clear();
+  };
+
+  controls.find(".add-contact").click(function () {
+    if (contactAutocomplete.isActive &&
+        contactAutocomplete.input.val().trim())
+      addInputToList();
+    return false;
+  });
+
   var autocompleteTemplate = $.template(null,
     '<li class="autocomplete-entry">${name} ' +
     '<span class="desc">${email}</span></li>');
@@ -97,9 +109,6 @@ $(document).ready(function () {
     return items;
   };
 
-  contactAutocomplete.returnDefault = function () {
-    addContactToList({name: "", email: this.input.val()});
-    this.clear();
-  };
+  contactAutocomplete.returnDefault = addInputToList;
 
 });

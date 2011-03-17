@@ -2,6 +2,10 @@
 
 @import "compass/utilities/general/clearfix"
 @import "compass/utilities/text/ellipsis"
+@import "buttons"
+
+=invite-inputbox
+  border: #555 1px solid
 
 #import-contacts
   .template
@@ -9,9 +13,13 @@
 
 #select-contacts
   .controls
-    margin-bottom: 12px
+    margin-bottom: 30px
     &.waiting
       display: none
+    a.add-contact
+      margin-left: 10px
+      +action-button
+      padding: 4px 12px
 
   input[type=submit]
     padding: 3px 6px
@@ -27,6 +35,7 @@
     margin-bottom: 8px
 
 #contacts-to-invite
+  margin-bottom: 30px
   h2
     display: inline
 
@@ -35,7 +44,6 @@
     max-height: 500px
     overflow-y: auto
     margin-top: 10px
-    margin-bottom: 12px
     clear: both
 
   .block-selection
@@ -74,10 +82,20 @@
   &.empty
     display: none
 
+#search-contacts
+  width: 60%
+  height: 24px
+  +invite-inputbox
+
 #invitation-message
   textarea
     margin-top: 5px
     display: block
     width: 100%
     height: 150px
+    +invite-inputbox
   margin-bottom: 24px
+
+#sidebar .pending .friend_list
+  margin-top: 10px
+
