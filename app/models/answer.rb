@@ -22,6 +22,7 @@ class Answer < Comment
   has_many :flags, :as => "flaggeable", :dependent => :destroy
 
   has_many :comments, :foreign_key => "commentable_id", :class_name => "Comment", :order => "created_at asc", :dependent => :destroy
+  has_many :notifications, :as => "reason", :dependent => :destroy
 
   # This ought to be has_one, but it wasn't working
   has_many :news_updates, :as => "entry", :dependent => :destroy

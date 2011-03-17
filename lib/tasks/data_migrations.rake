@@ -9,6 +9,17 @@ require 'lib/wikipedia_fillin'
 namespace :data do
   namespace :migrate do
 
+    desc "Remove notifications that reference objects that doesn't exist anymore"
+    task :remove_orphaned_notifications => :environment do
+      Notification.query.each do |notification|
+        if !notification.origin ||
+            notification.reason_id.present? && !notification.reason
+          notification.destroy
+          puts "Destroyed #{notification.id}"
+        end
+      end
+    end
+
     desc "Change every inheriting class' news items to Topic"
     task :fix_news_items_types => :environment do
       NewsItem.query(:recipient_type.nin => ["Topic", "User"]).each do |ni|

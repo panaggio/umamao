@@ -5,11 +5,13 @@ class Notification
 
   timestamps!
 
+  # The notification's recipient
   belongs_to :user
 
   key :event_type, String, :required => true
 
   # The user who caused the notification.
+  key :origin_id, String
   belongs_to :origin, :class_name => "User"
 
   # The entry which provoked the notification.

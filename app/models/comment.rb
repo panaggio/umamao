@@ -20,6 +20,8 @@ class Comment
   key :commentable_type, String
   belongs_to :commentable, :polymorphic => true
 
+  has_many :notifications, :as => "reason", :dependent => :destroy
+
   validates_presence_of :user
 
   validate :disallow_spam
