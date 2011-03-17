@@ -1,0 +1,17 @@
+-# FIXME: change .share-questions-widget to .share-content-widget and propagate it to the related stylesheets and javascripts
+.modal.share-question-widget
+  %h1= t("#{@class_name.pluralize}.show.post_on_#{@where}")
+  - if [ "facebook", "twitter" ].include? @where
+    .message
+      = t("external_accounts.connected_to.success", :site => @where.capitalize)
+  - form_tag "/share_#{@class_name}", :method => :post do
+    = text_area_tag "body", "#{@body[@where]}#{' ' << @link if @link}", :maxlength => @maxlength
+    .charcount
+      %span(class="charsleft") #{@maxlength - @body[@where].size}
+      %span caracteres restantes
+    = hidden_field_tag :content, @content.id
+    = hidden_field_tag "where", @where
+    .controls
+      = link_to t("scaffold.cancel"), "#", :class => "close"
+      = submit_tag t("global.share")
+    .clear

@@ -135,7 +135,7 @@ pt-BR:
       request_closing_details: Pedir para fechar esta pergunta
       retract_request: Já colocou um pedido. Quer retirá-lo?
       share: Compartilhar pergunta
-      share_on: Compartilhar esta pergunta em %{site}
+      share_on: Compartilhar esta pergunta no %{site}
       share_success: Pergunta compartilhada com sucesso no %{site}.
       post_on_facebook: Postar no Facebook
       post_on_twitter: Postar no Twitter
