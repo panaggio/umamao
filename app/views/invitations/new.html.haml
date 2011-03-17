@@ -4,8 +4,8 @@
   #import-contacts.block
     %h3= t(".import.title")
     = link_to image_tag("icons/google.png"), import_contacts_path(:provider => "GMAIL")
-    = link_to image_tag("icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
-    = link_to image_tag("icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
+    -#= link_to image_tag("icons/yahoo.png"), import_contacts_path(:provider => "YAHOO")
+    -#= link_to image_tag("icons/windows.png"), import_contacts_path(:provider => "WINDOWSLIVE")
     .template
       .modal
         %h1= t(".import.title")
