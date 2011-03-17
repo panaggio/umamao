@@ -24,8 +24,10 @@ pt-BR:
     share_body:
       facebook: Resposta
       facebook_named: Resposta por %{name}
+      facebook_self: Minha resposta
       twitter: Resposta por %{name}
       twitter_named: Resposta por %{name} no %{site}
+      twitter_self: Minha resposta no %{site}
     update:
       flash_notice: "Resposta atualizada."
     revert:
