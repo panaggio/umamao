@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+  // As the :empty pseudo-class isn't dynamic, we cannot
+  // use it in our CSS. Instead, we use a regular "empty" class and
+  // manage it in Javascript.
+
   // Unselect all contacts link
   $("#select-contacts a.remove_all").click(function () {
     $("#contacts-to-invite").addClass("empty");
@@ -49,46 +53,60 @@ $(document).ready(function () {
     });
   }
 
-  var contactAutocomplete = new AutocompleteBox("#search-contacts",
-                                                "#search-contacts-results");
-
-  var autocompleteTemplate = $.template(null,
-    '<li class="autocomplete-entry">${name} ' +
-    '<span class="desc">${email}</span></li>');
-
   var invitedContactTemplate = $.template(null,
     '<div class="contact">' + Utils.closeLink() +
     '<input type="hidden" name="emails[]" value="${email}" />' +
     '<div class="name">${name}</div>' +
     '<div class="email">${email}</div></div>');
 
-
-  var ContactItem = function (contact) {
-    this.data = contact;
-    this.html = $.tmpl(autocompleteTemplate, contact);
+  var addContactToList = function (contact) {
+    $("#contacts-to-invite").removeClass("empty");
+    $("#contacts-to-invite .list").
+      prepend($.tmpl(invitedContactTemplate, contact));
   };
 
-  ContactItem.prototype = {
-    click: function () {
-      var contactHtml = $.tmpl(invitedContactTemplate, this.data);
+  if (controls.is("[data-autocomplete=on]")) {
+    // Turn on contact autocomplete
+    var contactAutocomplete = new AutocompleteBox("#search-contacts",
+                                                  "#search-contacts-results");
 
-      $("#contacts-to-invite").removeClass("empty"); // The :empty selector didn't work.
-      $("#contacts-to-invite .list").prepend(contactHtml);
+    var autocompleteTemplate = $.template(null,
+      '<li class="autocomplete-entry">${name} ' +
+      '<span class="desc">${email}</span></li>');
 
-      contactAutocomplete.clear();
-    }
-  };
 
-  Utils.extend(ContactItem, Item);
+    var ContactItem = function (contact) {
+      this.data = contact;
+      this.html = $.tmpl(autocompleteTemplate, contact);
+    };
 
-  contactAutocomplete.processData = function (data) {
-    var items = [];
+    ContactItem.prototype = {
+      click: function () {
+        addContactToList(this.data);
+        contactAutocomplete.clear();
+      }
+    };
 
-    data.forEach(function (result) {
-      items.push(new ContactItem(result));
+    Utils.extend(ContactItem, Item);
+
+    contactAutocomplete.processData = function (data) {
+      var items = [];
+
+      data.forEach(function (result) {
+        items.push(new ContactItem(result));
+      });
+
+      return items;
+    };
+
+  } else {
+    // Regular email filling
+    $("#search-contacts").keydown(function (e) {
+      if (e.keyCode == 13) {
+        addContactToList({name: "", email: $(this).val()});
+        $(this).val("");
+        return false;
+      }
     });
-
-    return items;
-  };
-
+  }
 });

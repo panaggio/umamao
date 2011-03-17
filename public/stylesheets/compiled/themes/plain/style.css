@@ -2197,6 +2197,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   display: block;
   float: left;
   color: #888888;
+  margin-right: 12px;
 }
 #contacts-to-invite .contact:after {
   content: "\0020";
@@ -2216,12 +2217,15 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   float: left;
   width: 150px;
   height: 15px;
-  margin: 0 12px;
+  margin-right: 12px;
   white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
+}
+#contacts-to-invite .name:empty {
+  display: none;
 }
 #contacts-to-invite .email {
   display: inline;

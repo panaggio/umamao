@@ -48,6 +48,7 @@
       display: block
       float: left
       color: #888
+      margin-right: 12px
     +pie-clearfix
     border-bottom: 1px #aaa dotted
     padding: 4px 6px
@@ -61,8 +62,10 @@
     float: left
     width: 150px
     height: 15px
-    margin: 0 12px
+    margin-right: 12px
     +ellipsis
+    &:empty
+      display: none
 
   .email
     display: inline

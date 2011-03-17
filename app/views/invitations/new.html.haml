@@ -28,7 +28,8 @@
         = image_tag "ajax-loader-big.gif"
       = t(".wait")
 
-  .controls{:class => @fetching_contacts ? "waiting" : ""}
+  - enable_autocomplete = @fetching_contacts || @has_contacts
+  .controls{:class => @fetching_contacts ? "waiting" : "", "data-autocomplete" => enable_autocomplete ? "on" : "off"}
     = text_field_tag "autocomplete", t(".filter"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => search_contacts_url
     %ul#search-contacts-results.autocomplete-list
 

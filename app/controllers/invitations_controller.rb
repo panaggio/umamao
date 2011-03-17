@@ -16,6 +16,7 @@ class InvitationsController < ApplicationController
   def new
     set_page_title(t("invitations.new.title"))
     @fetching_contacts = params[:wait].present?
+    @has_contacts = current_user.contacts.count > 0
 
     @pending_invitations =
       current_user.invitations.query(:accepted_at => nil)
