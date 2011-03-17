@@ -2,7 +2,7 @@
 /* incase an inverted custom gradient isn't specified */
 .fancy-button-reset-base-class, a.request_group {
   font-family: "Lucida Grande", Lucida, Arial, sans-serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -344,7 +344,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296569083');
 }
 body.bp .error {
   padding: 0.8em;
