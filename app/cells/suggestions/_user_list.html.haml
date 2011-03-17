@@ -1,0 +1,15 @@
+- users.each do |user|
+  %li
+    .user.info
+      = link_to avatar_for(user, :size => 32).html_safe, user
+      %ul
+        %li.user-name
+          = link_to user.name, user, :title => user.name
+        - if user.bio.present?
+          %li.user-description
+            = link_to user.bio, user, :title => user.bio
+    .controls
+      .follow-info
+        = link_to "#{t("followable.follow")}", follow_user_path(user), :class => "follow_link", :method => :post
+      .refuse-suggestion
+        = link_to "✕", refuse_suggestion_path(:user => user.id), :method => :post
