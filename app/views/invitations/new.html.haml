@@ -15,13 +15,13 @@
           = link_to t(".import.continue"), "javascript:void(0)", :class => "continue"
 
   .block
-    = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
-
-  .block
     = link_to t(".accepted", :count => @accepted_invitations.count), accepted_invitations_path
     = render_cell :users, :list, :users => @accepted_invitations.map(&:recipient)
 
-- form_tag invitations_path, :id => "select-contacts" do
+  .block
+    = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
+
+#select-contacts
   - if @fetching_contacts
     .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}
       .loader
@@ -29,19 +29,21 @@
       = t(".wait")
 
   - enable_autocomplete = @fetching_contacts || @has_contacts
-  .controls{:class => @fetching_contacts ? "waiting" : "", "data-autocomplete" => enable_autocomplete ? "on" : "off"}
-    = text_field_tag "autocomplete", t(".filter"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => search_contacts_url
+  .controls{:class => @fetching_contacts ? "waiting" : ""}
+    = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
     %ul#search-contacts-results.autocomplete-list
 
-  #contacts-to-invite.empty
-    %h2= t(".selected")
-    .block-selection
-      = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
+  - form_tag invitations_path, :id => "select-contacts-form" do
 
-    .list
+    #contacts-to-invite.empty
+      %h2= t(".selected")
+      .block-selection
+        = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
 
-  #invitation-message
-    = label_tag "message", t(".message")
-    = text_area_tag "message"
+      .list
 
-  = submit_tag t(".invite")
+    #invitation-message
+      = label_tag "message", t(".message")
+      = text_area_tag "message"
+
+    = submit_tag t(".invite")

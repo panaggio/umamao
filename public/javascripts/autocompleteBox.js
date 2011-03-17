@@ -166,17 +166,21 @@ ItemBox.prototype = {
 };
 
 // Input field that contacts a server to look for suggestions.
+// If no url is given, no result box is shown and no results are fetched.
 function AutocompleteBox(inputField, itemBoxContainer) {
 
   var box = this;
 
   this.input = $(inputField);
   this.startText = this.input.val();
-  this.itemBox = new ItemBox(itemBoxContainer);
-  this.itemBox.itemsContainer.mousedown(function () {
-    box.selectionClicked = true;
-  });
   this.url = this.input.attr("data-autocomplete-url");
+  if (this.url) {
+    this.itemBox = new ItemBox(itemBoxContainer);
+    this.itemBox.itemsContainer.mousedown(function () {
+      box.selectionClicked = true;
+    });
+  }
+
   this.initInputField();
 
 };
@@ -192,6 +196,7 @@ AutocompleteBox.prototype = {
   interval: null,
   delay: 400,
   previousQuery: null,
+  itemBox: null,
 
   // Whether or not pressing <tab> should trigger activate an item.
   activateWithTab: false,
@@ -217,10 +222,10 @@ AutocompleteBox.prototype = {
           box.isActive = true;
           $(this).removeClass("inactive");
           $(this).val("");
-        } else if ($(this).val() != "") {
+        } else if ($(this).val() != "" && itemBox) {
           itemBox.show();
         }
-        if (!box.interval) {
+        if (!box.interval && box.url) {
           box.interval = setInterval(function () {
                                        box.fetchData(box.input.val());
                                      }, box.delay);
@@ -231,7 +236,7 @@ AutocompleteBox.prototype = {
         $(this).val(box.startText);
         box.isActive = false;
       }
-      if (!box.selectionClicked) {
+      if (!box.selectionClicked && itemBox) {
         itemBox.hide();
       }
       if (box.interval) {
@@ -243,14 +248,14 @@ AutocompleteBox.prototype = {
       switch (e.keyCode) {
       case 38: // up
         e.preventDefault();
-        itemBox.moveUp();
+        itemBox && itemBox.moveUp();
         break;
       case 40: // down
         e.preventDefault();
-        itemBox.moveDown();
+        itemBox && itemBox.moveDown();
         break;
       case 13: // return
-        if (itemBox.isSelected()) {
+        if (itemBox && itemBox.isSelected()) {
           itemBox.click();
         } else if (box.returnDefault) {
           box.returnDefault();
@@ -258,7 +263,7 @@ AutocompleteBox.prototype = {
         e.preventDefault();
         break;
       case 9: // tab
-        if (box.activateWithTab && itemBox.isSelected()) {
+        if (box.activateWithTab && itemBox && itemBox.isSelected()) {
           e.preventDefault();
           itemBox.click();
         }
@@ -266,7 +271,7 @@ AutocompleteBox.prototype = {
       // ignore [escape] [shift] [capslock]
       case 27:
         box.abortRequest();
-        itemBox.hide();
+        itemBox && itemBox.hide();
         break;
       }
     });
@@ -312,8 +317,10 @@ AutocompleteBox.prototype = {
 
   // Clears current input, hides selection box.
   clear: function () {
-    this.itemBox.hide();
-    this.itemBox.clear();
+    if (this.itemBox) {
+      this.itemBox.hide();
+      this.itemBox.clear();
+    }
     this.input.val("");
     this.abortRequest();
   },

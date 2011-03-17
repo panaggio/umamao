@@ -65,48 +65,41 @@ $(document).ready(function () {
       prepend($.tmpl(invitedContactTemplate, contact));
   };
 
-  if (controls.is("[data-autocomplete=on]")) {
-    // Turn on contact autocomplete
-    var contactAutocomplete = new AutocompleteBox("#search-contacts",
-                                                  "#search-contacts-results");
+  var contactAutocomplete = new AutocompleteBox("#search-contacts",
+                                                "#search-contacts-results");
 
-    var autocompleteTemplate = $.template(null,
-      '<li class="autocomplete-entry">${name} ' +
-      '<span class="desc">${email}</span></li>');
+  var autocompleteTemplate = $.template(null,
+    '<li class="autocomplete-entry">${name} ' +
+    '<span class="desc">${email}</span></li>');
 
 
-    var ContactItem = function (contact) {
-      this.data = contact;
-      this.html = $.tmpl(autocompleteTemplate, contact);
-    };
+  var ContactItem = function (contact) {
+    this.data = contact;
+    this.html = $.tmpl(autocompleteTemplate, contact);
+  };
 
-    ContactItem.prototype = {
-      click: function () {
-        addContactToList(this.data);
-        contactAutocomplete.clear();
-      }
-    };
+  ContactItem.prototype = {
+    click: function () {
+      addContactToList(this.data);
+      contactAutocomplete.clear();
+    }
+  };
 
-    Utils.extend(ContactItem, Item);
+  Utils.extend(ContactItem, Item);
 
-    contactAutocomplete.processData = function (data) {
-      var items = [];
+  contactAutocomplete.processData = function (data) {
+    var items = [];
 
-      data.forEach(function (result) {
-        items.push(new ContactItem(result));
-      });
-
-      return items;
-    };
-
-  } else {
-    // Regular email filling
-    $("#search-contacts").keydown(function (e) {
-      if (e.keyCode == 13) {
-        addContactToList({name: "", email: $(this).val()});
-        $(this).val("");
-        return false;
-      }
+    data.forEach(function (result) {
+      items.push(new ContactItem(result));
     });
-  }
+
+    return items;
+  };
+
+  contactAutocomplete.returnDefault = function () {
+    addContactToList({name: "", email: this.input.val()});
+    this.clear();
+  };
+
 });

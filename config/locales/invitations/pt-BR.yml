@@ -19,7 +19,8 @@ pt-BR:
         notice:
           Você será redirecionado a uma página externa
           para autorizar o acesso a seus contatos.
-      filter: Procurar contatos
+      email: Digite o email
+      name_or_email: Digite o nome ou email
       invite: Convidar
       message: Mensagem (opcional)
       remove_all: Remover todos
