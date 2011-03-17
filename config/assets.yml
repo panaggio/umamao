@@ -4,7 +4,7 @@ javascripts:
   base:
     - public/javascripts/i18n/pt-BR.js
     - public/javascripts/jquery.min.js
-    - public/javascripts/jquery.tmpl.min.js
+    - public/javascripts/jquery.tmpl.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.tools.min.js
     - public/javascripts/jquery-ui.min.js
