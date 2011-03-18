@@ -1301,13 +1301,13 @@ ul.topic-list .follow-info a {
   font-size: 0.785em;
 }
 
-#topic-suggestions .controls {
+#topic-suggestions .controls, #related-topics .controls {
   float: right;
 }
-#topic-suggestions .follow-info {
+#topic-suggestions .follow-info, #related-topics .follow-info {
   float: left;
 }
-#topic-suggestions .refuse-suggestion {
+#topic-suggestions .refuse-suggestion, #related-topics .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
@@ -2293,15 +2293,15 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #sidebar .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-#sidebar .suggestions ul {
+#sidebar .suggestions ul, #sidebar .related ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-#sidebar .suggestions ul .controls {
+#sidebar .suggestions ul .controls, #sidebar .related ul .controls {
   float: right;
 }
-#sidebar .suggestions ul .follow-info a {
+#sidebar .suggestions ul .follow-info a, #sidebar .related ul .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2315,40 +2315,40 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   text-align: center;
   text-decoration: none !important;
 }
-#sidebar .suggestions ul .follow-info a.follow_link {
+#sidebar .suggestions ul .follow-info a.follow_link, #sidebar .related ul .follow-info a.follow_link {
   background-color: #d6e989;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
   background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
   background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
 }
-#sidebar .suggestions ul .follow-info a.follow_link:hover {
+#sidebar .suggestions ul .follow-info a.follow_link:hover, #sidebar .related ul .follow-info a.follow_link:hover {
   background-color: #bfdd48;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
   background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
   background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
 }
-#sidebar .suggestions ul .follow-info a.unfollow_link {
+#sidebar .suggestions ul .follow-info a.unfollow_link, #sidebar .related ul .follow-info a.unfollow_link {
   background-color: #eeeeee;
 }
-#sidebar .suggestions ul .follow-info a.unfollow_link:hover {
+#sidebar .suggestions ul .follow-info a.unfollow_link:hover, #sidebar .related ul .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-#sidebar .suggestions ul .follow-info {
+#sidebar .suggestions ul .follow-info, #sidebar .related ul .follow-info {
   float: left;
 }
-#sidebar .suggestions ul .refuse-suggestion {
+#sidebar .suggestions ul .refuse-suggestion, #sidebar .related ul .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
-#sidebar .suggestions ul .refuse-suggestion a {
+#sidebar .suggestions ul .refuse-suggestion a, #sidebar .related ul .refuse-suggestion a {
   color: #0077cc;
   text-decoration: none;
 }
-#sidebar .suggestions ul li {
+#sidebar .suggestions ul li, #sidebar .related ul li {
   overflow: hidden;
   *zoom: 1;
 }
-#sidebar .suggestions .topic {
+#sidebar .suggestions .topic, #sidebar .related .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2365,7 +2365,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-#sidebar .suggestions .topic .topic-title {
+#sidebar .suggestions .topic .topic-title, #sidebar .related .topic .topic-title {
   white-space: nowrap;
   display: block;
   float: left;
@@ -2376,46 +2376,46 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-#sidebar .suggestions .topic .reduced {
+#sidebar .suggestions .topic .reduced, #sidebar .related .topic .reduced {
   max-width: 95%;
 }
-#sidebar .suggestions .topic .remove {
+#sidebar .suggestions .topic .remove, #sidebar .related .topic .remove {
   cursor: pointer;
   display: block;
   float: right;
 }
-#sidebar .suggestions .topic, #sidebar .suggestions .topic a {
+#sidebar .suggestions .topic, #sidebar .suggestions .topic a, #sidebar .related .topic, #sidebar .related .topic a {
   color: #444444;
   font-weight: normal;
 }
-#sidebar .suggestions .topic:hover, #sidebar .suggestions .topic a:hover {
+#sidebar .suggestions .topic:hover, #sidebar .suggestions .topic a:hover, #sidebar .related .topic:hover, #sidebar .related .topic a:hover {
   background: #eeeeee;
 }
-#sidebar .suggestions .topic a:link, #sidebar .suggestions .topic a:active, #sidebar .suggestions .topic a:visited, #sidebar .suggestions .topic a a:link, #sidebar .suggestions .topic a a:active, #sidebar .suggestions .topic a a:visited {
+#sidebar .suggestions .topic a:link, #sidebar .suggestions .topic a:active, #sidebar .suggestions .topic a:visited, #sidebar .suggestions .topic a a:link, #sidebar .suggestions .topic a a:active, #sidebar .suggestions .topic a a:visited, #sidebar .related .topic a:link, #sidebar .related .topic a:active, #sidebar .related .topic a:visited, #sidebar .related .topic a a:link, #sidebar .related .topic a a:active, #sidebar .related .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-#sidebar .suggestions .topic a:hover, #sidebar .suggestions .topic a a:hover {
+#sidebar .suggestions .topic a:hover, #sidebar .suggestions .topic a a:hover, #sidebar .related .topic a:hover, #sidebar .related .topic a a:hover {
   text-decoration: none;
 }
-#sidebar .suggestions .info {
+#sidebar .suggestions .info, #sidebar .related .info {
   margin: 0;
   float: left;
 }
-#sidebar .suggestions .info img {
+#sidebar .suggestions .info img, #sidebar .related .info img {
   vertical-align: middle;
 }
-#sidebar .suggestions .suggestion-left {
+#sidebar .suggestions .suggestion-left, #sidebar .related .suggestion-left {
   float: left;
   width: 40%;
   margin-left: 20px;
 }
-#sidebar .suggestions .suggestion-right {
+#sidebar .suggestions .suggestion-right, #sidebar .related .suggestion-right {
   float: right;
   width: 40%;
   margin-right: 20px;
 }
-#sidebar .suggestions li + li {
+#sidebar .suggestions li + li, #sidebar .related li + li {
   margin-top: 5px;
 }
 #sidebar .follow-info.block {

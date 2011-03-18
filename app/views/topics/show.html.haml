@@ -31,6 +31,14 @@
     - @news_items.each do |news_item|
       = render :partial => "welcome/news_item", :object => news_item
 
+- content_for :sidebar do
+  - if @topic.related_topics.any?
+    #related-topics.block.related
+      %h3.title
+        = t('.related_topics')
+      %ul.topic-list
+        = render :partial => "topics/related_topic_list"
+
 #additional_info
   - if @news_items.blank?
     = will_paginate @questions

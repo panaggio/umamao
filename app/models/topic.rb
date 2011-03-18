@@ -25,6 +25,7 @@ class Topic
   key :related_topic_ids, :default => []
   has_many :related_topics, :class_name => "Topic",
     :in => :related_topic_ids
+  key :related_topics_count, Hash, :default => {}
 
   key :freebase_mids, Array
   key :freebase_guid, String
@@ -97,8 +98,9 @@ class Topic
       end
     end
 
-    self.related_topic_ids =
-      topic_counts.to_a.sort{|a, b| -(a[1] <=> b[1])}[0 .. 9].map(&:first)
+    sorted_topics_count = topic_counts.to_a.sort{|a, b| -(a[1] <=> b[1])}[0 .. 9]
+    self.related_topic_ids = sorted_topics_count.map(&:first)
+    self.related_topics_count = Hash[sorted_topics_count.map { |k,v| [k.to_s, v] }]
 
     self.related_topics
   end

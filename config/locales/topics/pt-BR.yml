@@ -12,6 +12,7 @@ pt-BR:
     show:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
       all_tab: Todas perguntas
+      related_topics: Tópicos relacionados
       unanswered_tab: Perguntas em aberto
       view: Ver tópico
     unanswered:

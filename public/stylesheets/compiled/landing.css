@@ -1163,15 +1163,15 @@ ul#team .avatar {
 #signup-wizard #interaction {
   width: 550px;
 }
-#signup-wizard #interaction .suggestions ul {
+#signup-wizard #interaction .suggestions ul, #signup-wizard #interaction .related ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-#signup-wizard #interaction .suggestions ul .controls {
+#signup-wizard #interaction .suggestions ul .controls, #signup-wizard #interaction .related ul .controls {
   float: right;
 }
-#signup-wizard #interaction .suggestions ul .follow-info a {
+#signup-wizard #interaction .suggestions ul .follow-info a, #signup-wizard #interaction .related ul .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -1185,40 +1185,40 @@ ul#team .avatar {
   text-align: center;
   text-decoration: none !important;
 }
-#signup-wizard #interaction .suggestions ul .follow-info a.follow_link {
+#signup-wizard #interaction .suggestions ul .follow-info a.follow_link, #signup-wizard #interaction .related ul .follow-info a.follow_link {
   background-color: #d6e989;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
   background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
   background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
 }
-#signup-wizard #interaction .suggestions ul .follow-info a.follow_link:hover {
+#signup-wizard #interaction .suggestions ul .follow-info a.follow_link:hover, #signup-wizard #interaction .related ul .follow-info a.follow_link:hover {
   background-color: #bfdd48;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
   background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
   background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
 }
-#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link {
+#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link, #signup-wizard #interaction .related ul .follow-info a.unfollow_link {
   background-color: #eeeeee;
 }
-#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link:hover {
+#signup-wizard #interaction .suggestions ul .follow-info a.unfollow_link:hover, #signup-wizard #interaction .related ul .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-#signup-wizard #interaction .suggestions ul .follow-info {
+#signup-wizard #interaction .suggestions ul .follow-info, #signup-wizard #interaction .related ul .follow-info {
   float: left;
 }
-#signup-wizard #interaction .suggestions ul .refuse-suggestion {
+#signup-wizard #interaction .suggestions ul .refuse-suggestion, #signup-wizard #interaction .related ul .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
-#signup-wizard #interaction .suggestions ul .refuse-suggestion a {
+#signup-wizard #interaction .suggestions ul .refuse-suggestion a, #signup-wizard #interaction .related ul .refuse-suggestion a {
   color: #0077cc;
   text-decoration: none;
 }
-#signup-wizard #interaction .suggestions ul li {
+#signup-wizard #interaction .suggestions ul li, #signup-wizard #interaction .related ul li {
   overflow: hidden;
   *zoom: 1;
 }
-#signup-wizard #interaction .suggestions .topic {
+#signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .related .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -1235,7 +1235,7 @@ ul#team .avatar {
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-#signup-wizard #interaction .suggestions .topic .topic-title {
+#signup-wizard #interaction .suggestions .topic .topic-title, #signup-wizard #interaction .related .topic .topic-title {
   white-space: nowrap;
   display: block;
   float: left;
@@ -1246,46 +1246,46 @@ ul#team .avatar {
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-#signup-wizard #interaction .suggestions .topic .reduced {
+#signup-wizard #interaction .suggestions .topic .reduced, #signup-wizard #interaction .related .topic .reduced {
   max-width: 95%;
 }
-#signup-wizard #interaction .suggestions .topic .remove {
+#signup-wizard #interaction .suggestions .topic .remove, #signup-wizard #interaction .related .topic .remove {
   cursor: pointer;
   display: block;
   float: right;
 }
-#signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .suggestions .topic a {
+#signup-wizard #interaction .suggestions .topic, #signup-wizard #interaction .suggestions .topic a, #signup-wizard #interaction .related .topic, #signup-wizard #interaction .related .topic a {
   color: #444444;
   font-weight: normal;
 }
-#signup-wizard #interaction .suggestions .topic:hover, #signup-wizard #interaction .suggestions .topic a:hover {
+#signup-wizard #interaction .suggestions .topic:hover, #signup-wizard #interaction .suggestions .topic a:hover, #signup-wizard #interaction .related .topic:hover, #signup-wizard #interaction .related .topic a:hover {
   background: #eeeeee;
 }
-#signup-wizard #interaction .suggestions .topic a:link, #signup-wizard #interaction .suggestions .topic a:active, #signup-wizard #interaction .suggestions .topic a:visited, #signup-wizard #interaction .suggestions .topic a a:link, #signup-wizard #interaction .suggestions .topic a a:active, #signup-wizard #interaction .suggestions .topic a a:visited {
+#signup-wizard #interaction .suggestions .topic a:link, #signup-wizard #interaction .suggestions .topic a:active, #signup-wizard #interaction .suggestions .topic a:visited, #signup-wizard #interaction .suggestions .topic a a:link, #signup-wizard #interaction .suggestions .topic a a:active, #signup-wizard #interaction .suggestions .topic a a:visited, #signup-wizard #interaction .related .topic a:link, #signup-wizard #interaction .related .topic a:active, #signup-wizard #interaction .related .topic a:visited, #signup-wizard #interaction .related .topic a a:link, #signup-wizard #interaction .related .topic a a:active, #signup-wizard #interaction .related .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-#signup-wizard #interaction .suggestions .topic a:hover, #signup-wizard #interaction .suggestions .topic a a:hover {
+#signup-wizard #interaction .suggestions .topic a:hover, #signup-wizard #interaction .suggestions .topic a a:hover, #signup-wizard #interaction .related .topic a:hover, #signup-wizard #interaction .related .topic a a:hover {
   text-decoration: none;
 }
-#signup-wizard #interaction .suggestions .info {
+#signup-wizard #interaction .suggestions .info, #signup-wizard #interaction .related .info {
   margin: 0;
   float: left;
 }
-#signup-wizard #interaction .suggestions .info img {
+#signup-wizard #interaction .suggestions .info img, #signup-wizard #interaction .related .info img {
   vertical-align: middle;
 }
-#signup-wizard #interaction .suggestions .suggestion-left {
+#signup-wizard #interaction .suggestions .suggestion-left, #signup-wizard #interaction .related .suggestion-left {
   float: left;
   width: 40%;
   margin-left: 20px;
 }
-#signup-wizard #interaction .suggestions .suggestion-right {
+#signup-wizard #interaction .suggestions .suggestion-right, #signup-wizard #interaction .related .suggestion-right {
   float: right;
   width: 40%;
   margin-right: 20px;
 }
-#signup-wizard #interaction .suggestions li + li {
+#signup-wizard #interaction .suggestions li + li, #signup-wizard #interaction .related li + li {
   margin-top: 5px;
 }
 #signup-wizard #interaction .suggestions {
