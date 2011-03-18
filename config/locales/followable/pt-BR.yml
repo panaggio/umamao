@@ -9,11 +9,11 @@ pt-BR:
         one: "Seguindo <a href=\"%{link}\">1 pessoa</a>"
         other: "Seguindo <a href=\"%{link}\">%{count} pessoas</a>"
     followers:
-      one: "Seguido por 1 pessoa"
-      other: "Seguido por %{count} pessoas"
+      one: "1 seguidor(a)"
+      other: "%{count} seguidores"
       link:
-        one: "Seguido por <a href=\"%{link}\">1 pessoa</a>"
-        other: "Seguido por <a href=\"%{link}\">%{count} pessoas</a>"
+        one: "<a href=\"%{link}\">1 seguidor(a)</a>"
+        other: "<a href=\"%{link}\">%{count} seguidores</a>"
       question:
         one: "1 pessoa segue esta pergunta."
         other: "%{count} pessoas seguem esta pergunta."
