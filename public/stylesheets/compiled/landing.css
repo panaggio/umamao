@@ -1294,8 +1294,7 @@ ul#team .avatar {
 #signup-wizard #interaction .suggestions .user.info img {
   float: left;
 }
-#signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul {
-  max-width: 70%;
+#signup-wizard #interaction .suggestions .user.info ul {
   overflow: hidden;
   float: left;
   margin-left: 3px;
@@ -1364,7 +1363,7 @@ ul#team .avatar {
   font-size: 0.785em;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul {
-  max-width: 90%;
+  max-width: 70%;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul li.user-name {
   margin-top: -3px;
