@@ -4,4 +4,4 @@
     = t("followable.suggestions.users")
 
   %ul
-    = render :partial => "user_list", :locals => {:users => @suggested_users}
+    = render :partial => "user_list", :locals => {:users => @suggested_users, :single_column => true}

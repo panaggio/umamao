@@ -30,7 +30,7 @@ class SuggestionsCell < Cell::Rails
 
   def users
     if options.present? and options[:single_column]
-      user_suggestions = current_user.user_suggestions[0 .. 6]
+      user_suggestions = current_user.user_suggestions[0 .. 3]
       @suggested_users =
         User.query(:id.in => user_suggestions.map(&:entry_id))
     else
