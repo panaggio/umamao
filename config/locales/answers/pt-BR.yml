@@ -25,7 +25,7 @@ pt-BR:
       facebook: Resposta
       facebook_named: Resposta por %{name}
       facebook_self: Minha resposta
-      twitter: Resposta por %{name}
+      twitter: Resposta no %{site}
       twitter_named: Resposta por %{name} no %{site}
       twitter_self: Minha resposta no %{site}
     update:
