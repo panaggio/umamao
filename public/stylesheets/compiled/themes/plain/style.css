@@ -1,25 +1,5 @@
 @charset "UTF-8";
 /* incase an inverted custom gradient isn't specified */
-.fancy-button-reset-base-class, a.request_group {
-  font-family: "Lucida Grande", Lucida, Arial, sans-serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
-}
-.fancy-button-reset-base-class::-moz-focus-inner, a.request_group::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-.fancy-button-reset-base-class:focus, a.request_group:focus {
-  outline: none;
-}
-
 * {
   margin: 0;
 }
@@ -344,7 +324,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1300108830');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1301,13 +1281,13 @@ ul.topic-list .follow-info a {
   font-size: 0.785em;
 }
 
-#topic-suggestions .controls {
+#topic-suggestions .controls, #related-topics .controls {
   float: right;
 }
-#topic-suggestions .follow-info {
+#topic-suggestions .follow-info, #related-topics .follow-info {
   float: left;
 }
-#topic-suggestions .refuse-suggestion {
+#topic-suggestions .refuse-suggestion, #related-topics .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
@@ -1671,6 +1651,16 @@ ul.topic-list .follow-info a {
 }
 
 a.request_group {
+  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
+  background: url('/images/button_bg.png?1300108830') repeat-x bottom left;
+  margin: 0;
+  width: auto;
+  overflow: visible;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-style: solid;
+  font-weight: bold;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1678,8 +1668,8 @@ a.request_group {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 1.2em;
-  padding: 0.3em 1em;
+  line-height: 21.6px;
+  padding: 5px 18px;
   border-width: 1px;
   background-color: #26b82b;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b));
@@ -1687,16 +1677,6 @@ a.request_group {
   background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
   border-color: #365c37;
   text-shadow: #104e12 0px 1px 1px;
-  -moz-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -o-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding;
-  -o-background-clip: padding-box;
-  -ms-background-clip: padding-box;
-  -khtml-background-clip: padding-box;
-  background-clip: padding-box;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
@@ -1705,12 +1685,46 @@ a.request_group {
   border-radius: 4px;
   font-size: 24px;
   line-height: 30px;
-  padding: 0.3em 1em;
+  padding: 6px 24px;
   border-width: 2px;
   margin-top: 20px;
   float: right;
 }
+a.request_group::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+a.request_group:focus {
+  outline: none;
+}
+a.request_group.disabled, a.request_group[disabled] {
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+}
+a.request_group.disabled:hover, a.request_group.disabled:focus, a.request_group[disabled]:hover, a.request_group[disabled]:focus {
+  cursor: default;
+}
+a.request_group:active {
+  padding: 4px 17px;
+  border-width: 2px;
+}
+a.request_group.disabled:active, a.request_group[disabled] {
+  padding: 5px 18px;
+  border-width: 1px;
+}
 a.request_group, a.request_group:visited {
+  color: white;
+}
+a.request_group.disabled:active, a.request_group.disabled:hover, a.request_group[disabled]:active, a.request_group[disabled]:hover {
+  background-color: #26b82b;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b));
+  background-image: -moz-linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
+  background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
+  border-color: #365c37;
+  text-shadow: #104e12 0px 1px 1px;
+}
+a.request_group.disabled:active, a.request_group.disabled:active:visited, a.request_group.disabled:hover, a.request_group.disabled:hover:visited, a.request_group[disabled]:active, a.request_group[disabled]:active:visited, a.request_group[disabled]:hover, a.request_group[disabled]:hover:visited {
   color: white;
 }
 a.request_group:hover, a.request_group:focus {
@@ -1731,13 +1745,17 @@ a.request_group:active {
   background-image: linear-gradient(top, #477949 0%, #4b804c 30%, #447345 50%, #3e693f 50%, #569358 100%);
   border-color: #2b492b;
   text-shadow: #0b350c 0px -1px -1px;
-  -moz-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  -webkit-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  -o-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  box-shadow: #365c37 0 0.08em 0.1em 1px inset;
 }
 a.request_group:active, a.request_group:active:visited {
   color: white;
+}
+a.request_group:active {
+  padding: 5px 23px;
+  border-width: 3px;
+}
+a.request_group.disabled:active, a.request_group[disabled] {
+  padding: 6px 24px;
+  border-width: 2px;
 }
 a.request_group:visited, a.request_group:link {
   color: white;
@@ -2293,15 +2311,15 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #sidebar .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-#sidebar .suggestions ul {
+#sidebar .suggestions ul, #sidebar .related ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-#sidebar .suggestions ul .controls {
+#sidebar .suggestions ul .controls, #sidebar .related ul .controls {
   float: right;
 }
-#sidebar .suggestions ul .follow-info a {
+#sidebar .suggestions ul .follow-info a, #sidebar .related ul .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2315,40 +2333,40 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   text-align: center;
   text-decoration: none !important;
 }
-#sidebar .suggestions ul .follow-info a.follow_link {
+#sidebar .suggestions ul .follow-info a.follow_link, #sidebar .related ul .follow-info a.follow_link {
   background-color: #d6e989;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
   background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
   background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
 }
-#sidebar .suggestions ul .follow-info a.follow_link:hover {
+#sidebar .suggestions ul .follow-info a.follow_link:hover, #sidebar .related ul .follow-info a.follow_link:hover {
   background-color: #bfdd48;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
   background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
   background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
 }
-#sidebar .suggestions ul .follow-info a.unfollow_link {
+#sidebar .suggestions ul .follow-info a.unfollow_link, #sidebar .related ul .follow-info a.unfollow_link {
   background-color: #eeeeee;
 }
-#sidebar .suggestions ul .follow-info a.unfollow_link:hover {
+#sidebar .suggestions ul .follow-info a.unfollow_link:hover, #sidebar .related ul .follow-info a.unfollow_link:hover {
   background-color: #bbbbbb;
 }
-#sidebar .suggestions ul .follow-info {
+#sidebar .suggestions ul .follow-info, #sidebar .related ul .follow-info {
   float: left;
 }
-#sidebar .suggestions ul .refuse-suggestion {
+#sidebar .suggestions ul .refuse-suggestion, #sidebar .related ul .refuse-suggestion {
   float: right;
   margin-left: 3px;
 }
-#sidebar .suggestions ul .refuse-suggestion a {
+#sidebar .suggestions ul .refuse-suggestion a, #sidebar .related ul .refuse-suggestion a {
   color: #0077cc;
   text-decoration: none;
 }
-#sidebar .suggestions ul li {
+#sidebar .suggestions ul li, #sidebar .related ul li {
   overflow: hidden;
   *zoom: 1;
 }
-#sidebar .suggestions .topic {
+#sidebar .suggestions .topic, #sidebar .related .topic {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2365,7 +2383,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   height: 13px;
   font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
 }
-#sidebar .suggestions .topic .topic-title {
+#sidebar .suggestions .topic .topic-title, #sidebar .related .topic .topic-title {
   white-space: nowrap;
   display: block;
   float: left;
@@ -2376,46 +2394,46 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-#sidebar .suggestions .topic .reduced {
+#sidebar .suggestions .topic .reduced, #sidebar .related .topic .reduced {
   max-width: 95%;
 }
-#sidebar .suggestions .topic .remove {
+#sidebar .suggestions .topic .remove, #sidebar .related .topic .remove {
   cursor: pointer;
   display: block;
   float: right;
 }
-#sidebar .suggestions .topic, #sidebar .suggestions .topic a {
+#sidebar .suggestions .topic, #sidebar .suggestions .topic a, #sidebar .related .topic, #sidebar .related .topic a {
   color: #444444;
   font-weight: normal;
 }
-#sidebar .suggestions .topic:hover, #sidebar .suggestions .topic a:hover {
+#sidebar .suggestions .topic:hover, #sidebar .suggestions .topic a:hover, #sidebar .related .topic:hover, #sidebar .related .topic a:hover {
   background: #eeeeee;
 }
-#sidebar .suggestions .topic a:link, #sidebar .suggestions .topic a:active, #sidebar .suggestions .topic a:visited, #sidebar .suggestions .topic a a:link, #sidebar .suggestions .topic a a:active, #sidebar .suggestions .topic a a:visited {
+#sidebar .suggestions .topic a:link, #sidebar .suggestions .topic a:active, #sidebar .suggestions .topic a:visited, #sidebar .suggestions .topic a a:link, #sidebar .suggestions .topic a a:active, #sidebar .suggestions .topic a a:visited, #sidebar .related .topic a:link, #sidebar .related .topic a:active, #sidebar .related .topic a:visited, #sidebar .related .topic a a:link, #sidebar .related .topic a a:active, #sidebar .related .topic a a:visited {
   cursor: pointer;
   text-align: center;
 }
-#sidebar .suggestions .topic a:hover, #sidebar .suggestions .topic a a:hover {
+#sidebar .suggestions .topic a:hover, #sidebar .suggestions .topic a a:hover, #sidebar .related .topic a:hover, #sidebar .related .topic a a:hover {
   text-decoration: none;
 }
-#sidebar .suggestions .info {
+#sidebar .suggestions .info, #sidebar .related .info {
   margin: 0;
   float: left;
 }
-#sidebar .suggestions .info img {
+#sidebar .suggestions .info img, #sidebar .related .info img {
   vertical-align: middle;
 }
-#sidebar .suggestions .suggestion-left {
+#sidebar .suggestions .suggestion-left, #sidebar .related .suggestion-left {
   float: left;
   width: 40%;
   margin-left: 20px;
 }
-#sidebar .suggestions .suggestion-right {
+#sidebar .suggestions .suggestion-right, #sidebar .related .suggestion-right {
   float: right;
   width: 40%;
   margin-right: 20px;
 }
-#sidebar .suggestions li + li {
+#sidebar .suggestions li + li, #sidebar .related li + li {
   margin-top: 5px;
 }
 #sidebar .follow-info.block {
