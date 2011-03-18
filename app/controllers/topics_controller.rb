@@ -36,6 +36,9 @@ class TopicsController < ApplicationController
                                    :order => :activity_at.desc, :per_page => 25,
                                    :page => params[:page] || 1) if @news_items.blank?
 
+    @related_topics_count =
+      @topic.related_topics_count.sort_by { |k,v| -v }.map { |k,v| [Topic.find_by_id(k), v] }
+
     respond_with @topics
   end
 

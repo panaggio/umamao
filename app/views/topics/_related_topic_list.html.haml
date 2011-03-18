@@ -1,0 +1,6 @@
+- @related_topics_count.each do |topic, count|
+  %li
+    .topic.info
+      %span.topic-title
+        = link_to topic.title, topic_path(topic), :title => topic_help_text(topic)
+    = "&nbsp;✕ #{count}"

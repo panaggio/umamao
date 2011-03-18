@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1296478317');
+  background: url('/images/grid.png?1291138098');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1321,7 +1321,7 @@ ul#team .avatar {
   float: left;
 }
 #signup-wizard #interaction .suggestions.suggestions-two-columns .user.info ul {
-  max-width: 70%;
+  max-width: 90%;
   overflow: hidden;
   float: left;
   margin-left: 3px;
