@@ -86,7 +86,7 @@ module Support::Search
         return unless Support::Search.enabled?
         command = Builder::XmlMarkup.new
         command.delete {
-          command.query "id:#{self.id} AND entry_type:#{self.class}"
+          command.query "id:#{self.id}"
         }
         Support::Search.delay.send_command_to_search_server(command.target!)
       end
