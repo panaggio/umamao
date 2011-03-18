@@ -34,7 +34,7 @@ class ShareAnswerController < ShareContentController
 
       {
         'facebook' => "#{ t("answers.share_body.facebook#{"_named" if facebook[:name].present?}", facebook)}: #{@content.title}",
-        'twitter' => "#{t("answers.share_body.twitter#{"_named" if twitter[:name].present?}", twitter)}: #{@content.title}"
+        'twitter' => "#{t("answers.share_body.twitter#{"_named" if twitter[:name] != "@"}", twitter)}: #{@content.title}"
       }
     end
   end
