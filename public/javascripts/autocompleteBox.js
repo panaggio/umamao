@@ -198,6 +198,9 @@ AutocompleteBox.prototype = {
   previousQuery: null,
   itemBox: null,
 
+  // Whether or not we should show an empty result box.
+  showNoResults: false,
+
   // Whether or not pressing <tab> should trigger activate an item.
   activateWithTab: false,
 
@@ -287,8 +290,11 @@ AutocompleteBox.prototype = {
     var box = this;
     return function (data) {
       if (data) {
-        box.itemBox.setItems(box.processData(data));
-        box.itemBox.show();
+        var items = box.processData(data);
+        if (items.length > 0 || this.showNoResults) {
+          box.itemBox.setItems(items);
+          box.itemBox.show();
+        }
       }
     };
   },
