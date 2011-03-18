@@ -137,11 +137,11 @@ class ShareContentController < ApplicationController
   end
 
   def content_class_str
-    @@content_class_str ||= content_class.to_s.underscore
+    content_class.to_s.underscore
   end
 
   def content_class_sym
-    @@content_class_sym ||= content_class_str.to_sym
+    content_class_str.to_sym
   end
 
   def content_url(content)
