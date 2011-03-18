@@ -11,6 +11,8 @@ class ContactsController < ApplicationController
     session["import_id"] = info[:import_id]
     @consent_url = info[:consent_url]
 
+    track_event(:begin_contact_import, :provider => params[:provider])
+
     redirect_to @consent_url
   end
 
@@ -31,6 +33,7 @@ class ContactsController < ApplicationController
     begin
       success = current_user.import_contacts!(session["import_id"])
       session["import_id"] = nil
+      track_event(:finish_contact_import)
     rescue Shapado::ContactImportException => e
       success = false
     end

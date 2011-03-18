@@ -29,9 +29,11 @@ class InvitationsController < ApplicationController
     @emails = params[:emails]
     @message = params[:message]
 
-    if Invitation.invite_emails!(current_user, current_group,
-                                 @message, @emails) > 0
-      track_event(:sent_invitation)
+    count = Invitation.invite_emails!(current_user, current_group,
+                                      @message, @emails)
+
+    if count > 0
+      track_event(:sent_invitation, :count => count)
       redirect_to new_invitation_path
     else
       render :new
