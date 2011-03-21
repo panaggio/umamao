@@ -314,10 +314,14 @@ namespace :dac do
       ap.title = "#{name} (Unicamp)"
       ap.save!
       User.all(:bio => /#{code} \(Unicamp\)/).each do |u|
-        u.bio.gsub!("#{code} (Unicamp)", "#{name}")
+        u.bio.gsub!("#{code} (Unicamp)", name)
         u.save!
       end
 
+      AcademicProgramClass.query(:academic_program_id => ap.id).each do |apc|
+        apc.title.gsub!("#{code} \(Unicamp\)", name)
+        apc.save!
+      end
     end
 
   end
