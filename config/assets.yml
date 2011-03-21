@@ -4,11 +4,13 @@ javascripts:
   base:
     - public/javascripts/i18n/pt-BR.js
     - public/javascripts/jquery.min.js
+    - public/javascripts/jquery.tmpl.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.tools.min.js
     - public/javascripts/jquery-ui.min.js
     - public/javascripts/jquery.notifyBar.js
     - public/javascripts/jquery.hotkeys.js
+    - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/showdown.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
@@ -18,6 +20,7 @@ javascripts:
     - public/javascripts/modules/cookies.js
     - public/javascripts/modules/inline_edition.js
     - public/javascripts/modules/votes.js
+    - public/javascripts/modules/import_contacts.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:
@@ -31,7 +34,6 @@ javascripts:
   new_question:
     - public/javascripts/modules/new_question.js
   show_question:
-    - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/modules/show_question.js
   external_accounts:
     - public/javascripts/modules/dac_external_account.js

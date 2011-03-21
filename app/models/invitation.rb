@@ -24,6 +24,8 @@ class Invitation
 
   validate_on_create :recipient_is_not_user
 
+  validates_format_of :recipient_email, :with => Devise::email_regexp
+
   ensure_index([[:created_at, -1]])
 
   timestamps!
@@ -32,6 +34,35 @@ class Invitation
   def send_invitation
     generate_invitation_token! if self.invitation_token.nil?
     Inviter.delay.invitation(self)
+  end
+
+  # Invite a list of emails, trying to link invitations to the user's
+  # contacts.
+  def self.invite_emails!(sender, group, message, emails)
+    invited_count = 0
+
+    emails.each do |email|
+      invitation =
+        sender.invitations.first(:recipient_email => email) ||
+        Invitation.new(:sender_id => sender.id,
+                       :group_id => group.id,
+                       :message => message,
+                       :recipient_email => email)
+
+      saved = false
+      if invitation.new? && (saved = invitation.save)
+        invited_count += 1
+      end
+
+      if (!invitation.new? || saved) &&
+          (contact = sender.contacts.first(:email => email))
+        contact.invitation = invitation
+        contact.save!
+      end
+
+    end
+
+    invited_count
   end
 
   private

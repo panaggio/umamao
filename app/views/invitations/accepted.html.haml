@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  = link_to t("invitations.new.title"), new_invitation_path
+
+%h1.navtitle= t(".title")
+
+%ul.items.invitations
+  - @accepted_invitations.each do |invitation|
+    = render invitation

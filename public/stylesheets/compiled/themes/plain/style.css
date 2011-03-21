@@ -1,25 +1,5 @@
 @charset "UTF-8";
 /* incase an inverted custom gradient isn't specified */
-.fancy-button-reset-base-class, a.request_group {
-  font-family: "Lucida Grande", Lucida, Arial, sans-serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
-  margin: 0;
-  width: auto;
-  overflow: visible;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  border-style: solid;
-  font-weight: bold;
-}
-.fancy-button-reset-base-class::-moz-focus-inner, a.request_group::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-.fancy-button-reset-base-class:focus, a.request_group:focus {
-  outline: none;
-}
-
 * {
   margin: 0;
 }
@@ -926,7 +906,7 @@ input.checkbox {
   color: #666666;
 }
 
-.lighter_text {
+.inactive {
   color: #999999;
 }
 
@@ -1671,6 +1651,16 @@ ul.topic-list .follow-info a {
 }
 
 a.request_group {
+  font-family: "Lucida Grande", Lucida, Arial, sans_serif;
+  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  margin: 0;
+  width: auto;
+  overflow: visible;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-style: solid;
+  font-weight: bold;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -1678,8 +1668,8 @@ a.request_group {
   -khtml-border-radius: 6px;
   border-radius: 6px;
   font-size: 18px;
-  line-height: 1.2em;
-  padding: 0.3em 1em;
+  line-height: 21.6px;
+  padding: 5px 18px;
   border-width: 1px;
   background-color: #26b82b;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b));
@@ -1687,16 +1677,6 @@ a.request_group {
   background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
   border-color: #365c37;
   text-shadow: #104e12 0px 1px 1px;
-  -moz-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -o-box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  box-shadow: rgba(255, 255, 255, 0.44) 0 0 0.1em 1px inset;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding;
-  -o-background-clip: padding-box;
-  -ms-background-clip: padding-box;
-  -khtml-background-clip: padding-box;
-  background-clip: padding-box;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
@@ -1705,12 +1685,46 @@ a.request_group {
   border-radius: 4px;
   font-size: 24px;
   line-height: 30px;
-  padding: 0.3em 1em;
+  padding: 6px 24px;
   border-width: 2px;
   margin-top: 20px;
   float: right;
 }
+a.request_group::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+a.request_group:focus {
+  outline: none;
+}
+a.request_group.disabled, a.request_group[disabled] {
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+}
+a.request_group.disabled:hover, a.request_group.disabled:focus, a.request_group[disabled]:hover, a.request_group[disabled]:focus {
+  cursor: default;
+}
+a.request_group:active {
+  padding: 4px 17px;
+  border-width: 2px;
+}
+a.request_group.disabled:active, a.request_group[disabled] {
+  padding: 5px 18px;
+  border-width: 1px;
+}
 a.request_group, a.request_group:visited {
+  color: white;
+}
+a.request_group.disabled:active, a.request_group.disabled:hover, a.request_group[disabled]:active, a.request_group[disabled]:hover {
+  background-color: #26b82b;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b4d3b5), color-stop(10%, #7ab17c), color-stop(50%, #4d834e), color-stop(50%, #477948), color-stop(100%, #5a995b));
+  background-image: -moz-linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
+  background-image: linear-gradient(top, #b4d3b5 0%, #7ab17c 10%, #4d834e 50%, #477948 50%, #5a995b 100%);
+  border-color: #365c37;
+  text-shadow: #104e12 0px 1px 1px;
+}
+a.request_group.disabled:active, a.request_group.disabled:active:visited, a.request_group.disabled:hover, a.request_group.disabled:hover:visited, a.request_group[disabled]:active, a.request_group[disabled]:active:visited, a.request_group[disabled]:hover, a.request_group[disabled]:hover:visited {
   color: white;
 }
 a.request_group:hover, a.request_group:focus {
@@ -1731,13 +1745,17 @@ a.request_group:active {
   background-image: linear-gradient(top, #477949 0%, #4b804c 30%, #447345 50%, #3e693f 50%, #569358 100%);
   border-color: #2b492b;
   text-shadow: #0b350c 0px -1px -1px;
-  -moz-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  -webkit-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  -o-box-shadow: #365c37 0 0.08em 0.1em 1px inset;
-  box-shadow: #365c37 0 0.08em 0.1em 1px inset;
 }
 a.request_group:active, a.request_group:active:visited {
   color: white;
+}
+a.request_group:active {
+  padding: 5px 23px;
+  border-width: 3px;
+}
+a.request_group.disabled:active, a.request_group[disabled] {
+  padding: 6px 24px;
+  border-width: 2px;
 }
 a.request_group:visited, a.request_group:link {
   color: white;
@@ -2172,6 +2190,122 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   color: #aaaaaa;
 }
 
+#import-contacts .template {
+  display: none;
+}
+
+#select-contacts .controls {
+  margin-bottom: 30px;
+}
+#select-contacts .controls.waiting {
+  display: none;
+}
+#select-contacts .controls .add-contact {
+  margin-left: 10px;
+  padding: 4px 6px;
+}
+#select-contacts input[type=submit] {
+  padding: 3px 6px;
+}
+#select-contacts .wait-notice {
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+#select-contacts .wait-notice .loader {
+  margin-bottom: 10px;
+}
+#select-contacts h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+#contacts-to-invite {
+  margin-bottom: 30px;
+}
+#contacts-to-invite h2 {
+  display: inline;
+}
+#contacts-to-invite .list {
+  border: 1px #aaaaaa solid;
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 10px;
+  clear: both;
+}
+#contacts-to-invite .block-selection {
+  float: right;
+}
+#contacts-to-invite .block-selection a {
+  margin-left: 5px;
+}
+#contacts-to-invite .contact {
+  *zoom: 1;
+  border-bottom: 1px #aaaaaa dotted;
+  padding: 4px 6px;
+}
+#contacts-to-invite .contact .remove {
+  display: block;
+  float: left;
+  color: #888888;
+  margin-right: 12px;
+}
+#contacts-to-invite .contact:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+#contacts-to-invite .contact:last-of-type {
+  border-bottom: none;
+}
+#contacts-to-invite input {
+  float: left;
+}
+#contacts-to-invite .name {
+  float: left;
+  width: 150px;
+  height: 15px;
+  margin-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+#contacts-to-invite .name:empty {
+  display: none;
+}
+#contacts-to-invite .email {
+  display: inline;
+  font-size: 10px;
+}
+#contacts-to-invite.empty {
+  display: none;
+}
+
+#search-contacts {
+  width: 60%;
+  height: 24px;
+  border: #555555 1px solid;
+}
+
+#invitation-message {
+  margin-bottom: 24px;
+}
+#invitation-message textarea {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: #555555 1px solid;
+}
+
+#sidebar .pending .friend_list {
+  margin-top: 10px;
+}
+
 #search {
   display: inline;
   float: left;
@@ -2253,12 +2387,8 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   color: #777777;
 }
 
-.lighter_text {
+.inactive {
   color: #999999;
-}
-
-.darker_text {
-  color: #333333;
 }
 
 #sidebar .follow-info a {
@@ -2498,6 +2628,7 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-top: 1px #dddddd solid;
   padding-top: 18px;
 }
+
 #sidebar .suggestions a.follow_link {
   font-size: 0.785em;
 }
@@ -2509,6 +2640,10 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 }
 #sidebar .suggestions .user.info ul li.user-description {
   margin-top: -3px;
+}
+#sidebar #import-contacts img {
+  width: 40px;
+  height: 40px;
 }
 
 .followers .count {

@@ -19,7 +19,21 @@ Shapado::Application.routes.draw do
     end
   end
 
-  resources :invitations, :only => [:index, :create]
+  resources :invitations, :only => [:new, :create] do
+    collection do
+      get :pending
+      get :accepted
+    end
+  end
+
+  match "/proxy" => "contacts#import_callback"
+  resources :contacts do
+    collection do
+      post :fetch
+      get :import
+      get :search
+    end
+  end
 
   resources :waiting_users, :only => :create
 

@@ -1,5 +1,7 @@
 pt-BR:
   invitations:
+    accepted:
+      title: Convites aceitos
     form:
       title: Convidar por email
       labels:
@@ -9,6 +11,33 @@ pt-BR:
       attributes:
         sent_at: enviado
         accepted_at: aceito
+    new:
+      add_contact: Incluir
+      error: Houve um erro. Por favor, tente novamente mais tarde.
+      import:
+        title: Importar contatos
+        continue: Continuar
+        notice:
+          Você será redirecionado a uma página externa
+          para autorizar o acesso a seus contatos.
+      email: Digite o email
+      name_or_email: Digite o nome ou email
+      invite: Convidar
+      message: Mensagem (opcional)
+      remove_all: Remover todos
+      selected: Contatos selecionados
+      title: Convidar pessoas
+      wait:
+        Por favor, aguarde enquanto importamos seus contatos.
+        Isso pode levar alguns minutos.
+      pending:
+        one: 1 convite pendente
+        other: %{count} convites pendentes
+      accepted:
+        one: 1 convite aceito
+        other: %{count} convites aceitos
+    pending:
+      title: Convites pendentes
     index:
       title: Convites
       titles:

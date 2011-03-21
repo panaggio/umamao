@@ -166,17 +166,21 @@ ItemBox.prototype = {
 };
 
 // Input field that contacts a server to look for suggestions.
+// If no url is given, no result box is shown and no results are fetched.
 function AutocompleteBox(inputField, itemBoxContainer) {
 
   var box = this;
 
   this.input = $(inputField);
   this.startText = this.input.val();
-  this.itemBox = new ItemBox(itemBoxContainer);
-  this.itemBox.itemsContainer.mousedown(function () {
-    box.selectionClicked = true;
-  });
   this.url = this.input.attr("data-autocomplete-url");
+  if (this.url) {
+    this.itemBox = new ItemBox(itemBoxContainer);
+    this.itemBox.itemsContainer.mousedown(function () {
+      box.selectionClicked = true;
+    });
+  }
+
   this.initInputField();
 
 };
@@ -192,6 +196,10 @@ AutocompleteBox.prototype = {
   interval: null,
   delay: 400,
   previousQuery: null,
+  itemBox: null,
+
+  // Whether or not we should show an empty result box.
+  showNoResults: false,
 
   // Whether or not pressing <tab> should trigger activate an item.
   activateWithTab: false,
@@ -215,23 +223,23 @@ AutocompleteBox.prototype = {
       focus(function () {
         if (!box.isActive) {
           box.isActive = true;
-          $(this).removeClass("lighter_text");
+          $(this).removeClass("inactive");
           $(this).val("");
-        } else if ($(this).val() != "") {
+        } else if ($(this).val() != "" && itemBox) {
           itemBox.show();
         }
-        if (!box.interval) {
+        if (!box.interval && box.url) {
           box.interval = setInterval(function () {
                                        box.fetchData(box.input.val());
                                      }, box.delay);
         }
     }).blur(function () {
       if ($(this).val() == "") {
-        $(this).addClass("lighter_text");
+        $(this).addClass("inactive");
         $(this).val(box.startText);
         box.isActive = false;
       }
-      if (!box.selectionClicked) {
+      if (!box.selectionClicked && itemBox) {
         itemBox.hide();
       }
       if (box.interval) {
@@ -239,18 +247,18 @@ AutocompleteBox.prototype = {
         box.interval = null;
       }
     }).keydown(function (e) {
-      $(this).removeClass("lighter_text");
+      $(this).removeClass("inactive");
       switch (e.keyCode) {
       case 38: // up
         e.preventDefault();
-        itemBox.moveUp();
+        itemBox && itemBox.moveUp();
         break;
       case 40: // down
         e.preventDefault();
-        itemBox.moveDown();
+        itemBox && itemBox.moveDown();
         break;
       case 13: // return
-        if (itemBox.isSelected()) {
+        if (itemBox && itemBox.isSelected()) {
           itemBox.click();
         } else if (box.returnDefault) {
           box.returnDefault();
@@ -258,7 +266,7 @@ AutocompleteBox.prototype = {
         e.preventDefault();
         break;
       case 9: // tab
-        if (box.activateWithTab && itemBox.isSelected()) {
+        if (box.activateWithTab && itemBox && itemBox.isSelected()) {
           e.preventDefault();
           itemBox.click();
         }
@@ -266,7 +274,7 @@ AutocompleteBox.prototype = {
       // ignore [escape] [shift] [capslock]
       case 27:
         box.abortRequest();
-        itemBox.hide();
+        itemBox && itemBox.hide();
         break;
       }
     });
@@ -282,10 +290,18 @@ AutocompleteBox.prototype = {
     var box = this;
     return function (data) {
       if (data) {
-        box.itemBox.setItems(box.processData(data));
-        box.itemBox.show();
+        var items = box.processData(data);
+        if (items.length > 0 || this.showNoResults) {
+          box.itemBox.setItems(items);
+          box.itemBox.show();
+        }
       }
     };
+  },
+
+  // Preprocess the query before sending to server
+  preprocessQuery: function (query) {
+    return query;
   },
 
   // Sends an AJAX request for items that match current input,
@@ -294,15 +310,23 @@ AutocompleteBox.prototype = {
     if (query.length < this.minChars ||
        this.previousQuery && this.previousQuery == query) return;
     this.previousQuery = query;
-    query = query.replace(Utils.solrSyntaxRegExp, "\\$&");
+    query = this.preprocessQuery(query);
     this.abortRequest();
     this.ajaxRequest = this.makeRequest(query);
   },
 
+  // Process data returned by query. Should be implemented by
+  // inheriting classes.
+  processData: function (data) {
+    throw new Error("Not implemented");
+  },
+
   // Clears current input, hides selection box.
   clear: function () {
-    this.itemBox.hide();
-    this.itemBox.clear();
+    if (this.itemBox) {
+      this.itemBox.hide();
+      this.itemBox.clear();
+    }
     this.input.val("");
     this.abortRequest();
   },
@@ -404,6 +428,8 @@ function initSearchBox() {
       return searchBox.isActive;
     });
 
+  searchBox.preprocessQuery = Utils.solrEscape;
+
   searchBox.makeRequest = function (query) {
     var request = $.ajax({
       url: this.url,
@@ -464,7 +490,8 @@ TopicAutocomplete.prototype = {
       url: this.url,
       dataType: "jsonp",
       jsonp: "json.wrf",
-      data: {q: "title:" + query + " AND entry\\_type:Topic"},
+      data: {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:Topic"},
       success: function (data) {
         var docs = data.response.docs;
         var hasExactMatch = false;

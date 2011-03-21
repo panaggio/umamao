@@ -131,6 +131,10 @@ window.Utils = {
     });
   },
 
+  closeLink: function () {
+    return '<a href="javascript:void(0)" class="remove">✕</a>';
+  },
+
   // Wrapper around Colorbox to unify modal's style.
   modal: function (options) {
     var defaultOptions = {
@@ -146,6 +150,11 @@ window.Utils = {
     $.colorbox(options);
 
     var placedModal = $("#colorbox .modal");
+
+    // Default behavior for close button
+    placedModal.find("a.close").click(function () {
+      $.colorbox.close();
+    });
 
     $.colorbox.resize({width: placedModal.outerWidth()});
   },
@@ -168,6 +177,10 @@ window.Utils = {
     link.text(dataTitle);
   },
 
-  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g
+  solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g,
+
+  solrEscape: function (text) {
+    return text.replace(Utils.solrSyntaxRegExp, "\\$&");
+  }
 
 };
