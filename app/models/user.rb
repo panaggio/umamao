@@ -734,7 +734,7 @@ Time.zone.now ? 1 : 0)
         end
       end
     rescue Timeout::Error, Cloudsponge::CsException => e
-      raise Shapado::ContactImportException
+      raise Shapado::ContactImportException.new(e.message)
     end
 
     [].tap{ |imported_contacts|
