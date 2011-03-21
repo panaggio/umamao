@@ -201,7 +201,6 @@ Shapado::Application.routes.draw do
   match '/search' => 'searches#index', :as => :search
   match '/search/autocomplete' => 'searches#autocomplete'
   match '/about' => 'groups#show', :as => :about
-  match '/:group_invitation' => 'users#new'
 
   [:universities, :courses, :course_offers,
    :academic_programs, :academic_program_classes].each do |submodel|
@@ -220,6 +219,10 @@ Shapado::Application.routes.draw do
       end
     end
   end
+
+  match '/content-search' => 'opensearch#index', :as => :opensearch
+
+  match '/:group_invitation' => 'users#new'
 
   root :to => 'welcome#index'
 end
