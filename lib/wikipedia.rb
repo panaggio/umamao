@@ -9,6 +9,9 @@ module Wikipedia
     EMPTY_ARTICLE = 'parse error: empty article'
   end
 
+  WIKIPEDIA_URL = 'http://en.wikipedia.org'
+  PT_WIKIPEDIA_URL = 'http://pt.wikipedia.org'
+
   DOWNLOAD_DIRECTORY = "tmp/"
 
   DUMP_URL = "http://dumps.wikimedia.org/ptwiki/latest/"
@@ -114,7 +117,7 @@ class WikipediaArticle
           Nokogiri::HTML::Builder.new do |doc|
             doc.p {
               doc.text "Fonte: "
-              doc.a('href' => self.class.url, 'target' => '_blank') {
+              doc.a('href' => PT_WIKIPEDIA_URL, 'target' => '_blank') {
                 doc.text "Wikipédia"
               }
               doc.text ". Leia o "
