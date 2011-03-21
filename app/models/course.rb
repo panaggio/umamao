@@ -16,5 +16,5 @@ class Course < Topic
 
   timestamps!
 
-  validates_uniqueness_of :uid, :scope => :university_id
+  validates_uniqueness_of :code, :scope => :university_id
 end
