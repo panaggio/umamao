@@ -2,6 +2,7 @@
 
 class ContactsController < ApplicationController
   before_filter :login_required
+  before_filter :admin_required
 
   VALID_PROVIDERS = ["GMAIL", "YAHOO", "WINDOWSLIVE"]
   CLOUDSPONGE_URL = "http://api.cloudsponge.com/auth"
