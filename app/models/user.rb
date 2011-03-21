@@ -729,8 +729,14 @@ Time.zone.now ? 1 : 0)
     begin
       Timeout.timeout(180) do # 3 minute timeout
         loop do
-          fetched_contacts, owner = importer.get_contacts(import_id)
-          break if fetched_contacts.present?
+          events = importer.get_events import_id
+          if events.any?(&:is_complete?)
+            fetched_contacts, owner = importer.get_contacts(import_id)
+            break
+          elsif events.any?(&:is_error?)
+            raise Shapado::ContactImportException.
+              new("Cloudsponge returned error")
+          end
         end
       end
     rescue Timeout::Error, Cloudsponge::CsException => e
