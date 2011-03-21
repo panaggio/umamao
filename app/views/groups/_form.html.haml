@@ -88,13 +88,7 @@
     .description
       = t('.legend_legend')
 
-.group
-  = form.label :default_tags, t('default_tags', :scope => "activerecord.attributes.group"), :class => "label"
-  = form.text_field :default_tags, :value => @group.default_tags.join(", "), :class => "text_field"
-  .description
-    = t('.default_tags_legend')
-
--if AppConfig.enable_i18n
+- if AppConfig.enable_i18n
   .group
     = form.label :language, t(:language, :scope => "activerecord.attributes.group"), :class => "label"
     = form.select :language, AVAILABLE_LANGUAGES.collect {|lang| [ language_desc(lang), lang ] }+[[t(".any_language"), 'none']], :selected => @group.language || 'none', :class => "select"
