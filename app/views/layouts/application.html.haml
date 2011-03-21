@@ -1,6 +1,6 @@
 !!! Strict
 %html{"xml:lang" => I18n.locale, :lang => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml" }
-  %head
+  %head{"profile" => "http://a9.com/-/spec/opensearch/1.1/"}
     %title
       &= page_title
     = include_stylesheets :base, :media => 'all'
@@ -12,6 +12,7 @@
     = include_javascripts :base
     = javascript_include_tag AppConfig.mathjax_location
     = yield :js
+    %link{"rel" => "search", "type" => "application/opensearchdescription+xml", "href" => "/content-search.xml", "title" => "Content Search"}
 
   %body
     = render :partial => "shared/analytics"

@@ -1,0 +1,5 @@
+!!! XML
+%OpenSearchDescription{"xmlns" => "http://a9.com/-/spec/opensearch/1.1/"}
+  %ShortName #{AppConfig.application_name}
+  %Description Search at #{AppConfig.application_name}
+  %Url{"type" => "text/html", "template" => "#{search_url(:q => "")}{searchTerms}"}
