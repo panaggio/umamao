@@ -425,6 +425,10 @@ function initSearchBox() {
 
   $("#search-field").closest("form").find("input[type=submit]").
     click(function () {
+      if (!searchBox.isActive) {
+        $("#search-field").val("");
+        return true;
+      }
       return searchBox.isActive;
     });
 
