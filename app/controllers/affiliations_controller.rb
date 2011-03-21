@@ -40,7 +40,7 @@ class AffiliationsController < ApplicationController
         end
       else
         status = :error
-        if @affiliations.errors[:email].present?
+        if @affiliation.errors[:email].present?
           message = t("affiliations.errors.invalid_email")
         else
           message = t("affiliations.errors.unknown")
