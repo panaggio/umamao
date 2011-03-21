@@ -36,6 +36,7 @@ class ContactsController < ApplicationController
       session["import_id"] = nil
       track_event(:finish_contact_import)
     rescue Shapado::ContactImportException => e
+      @raised_exception = e
       success = false
     end
 
@@ -44,6 +45,8 @@ class ContactsController < ApplicationController
         render :json => {:success => success}.to_json
       end
     end
+
+    raise @raised_exception if @raised_exception
   end
 
   def search
