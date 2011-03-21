@@ -42,8 +42,9 @@ namespace :data do
     desc "Recalculate Topic's questions_count"
     task :recalculate_questions_count => :environment do
       Topic.find_each do |topic|
+        old_questions_count = topic.questions_count
         topic.questions_count = Question.query(:topic_ids => topic.id).count
-        topic.save
+        topic.save if topic.questions_count != old_questions_count
       end
     end
 
@@ -60,8 +61,9 @@ namespace :data do
       end
 
       Topic.find_each do |topic|
+        old_questions_count = topic.questions_count
         topic.questions_count = topic_questions_count[topic.id]
-        topic.save
+        topic.save if topic.questions_count != old_questions_count
       end
     end
 
