@@ -36,6 +36,6 @@ class ExternalAccount
   # We force an update on the search index if the user's external
   # accounts change.
   def update_search_index
-    self.user.update_search_index(true)
+    self.user.update_search_index(true) if self.user
   end
 end
