@@ -5,7 +5,7 @@
     %tr
       %td
         %h1.navtitle.title.entry-title
-          &= @question.title
+          = link_to @question.title, @question
 
 - content_for :js do
   = include_javascripts :show_question
