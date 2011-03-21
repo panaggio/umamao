@@ -24,6 +24,8 @@ class Invitation
 
   validate_on_create :recipient_is_not_user
 
+  validates_format_of :recipient_email, :with => Devise::email_regexp
+
   ensure_index([[:created_at, -1]])
 
   timestamps!

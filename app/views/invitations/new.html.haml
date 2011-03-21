@@ -32,7 +32,7 @@
 
     - enable_autocomplete = @fetching_contacts || @has_contacts
     .controls{:class => @fetching_contacts ? "waiting" : ""}
-      = text_field_tag "emails[]", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
+      = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
       %ul#search-contacts-results.autocomplete-list
       = link_to t(".add_contact"), "javascript:void(0)", :class => "add-contact"
 

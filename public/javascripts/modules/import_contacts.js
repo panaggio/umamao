@@ -111,4 +111,12 @@ $(document).ready(function () {
 
   contactAutocomplete.returnDefault = addInputToList;
 
+  $("#select-contacts-form").submit(function () {
+    if (!contactAutocomplete.input.is(".inactive")) {
+      var typedEmail = $('<input name="emails[]" type="hidden" />').
+        attr("value", contactAutocomplete.input.val());
+      $("#select-contacts-form").append(typedEmail);
+    }
+  });
+
 });
