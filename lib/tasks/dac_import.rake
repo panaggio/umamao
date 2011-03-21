@@ -324,4 +324,29 @@ namespace :dac do
       sleep 0.5
     end
   end
+
+  def name_for_code(code)
+  end
+
+  task :fix_old_academic_programs_name => :base do
+    {"37" => "37 - Superior de Tec. em Construção Civil",
+     "62" => "62 - Superior de Tec. em Saneamento Ambiental",
+     "200" => "Programa de Formação Interdisciplinar Superior (ProFIS) - Integral"
+    }.each do |code, name|
+      ap = AcademicProgram.find_by_code(code)
+      ap.name = name
+      ap.title = "#{name} (Unicamp)"
+      ap.save!
+      User.all(:bio => /#{code} \(Unicamp\)/).each do |u|
+        u.bio.gsub!("#{code} (Unicamp)", name)
+        u.save!
+      end
+
+      AcademicProgramClass.query(:academic_program_id => ap.id).each do |apc|
+        apc.title.gsub!("#{code} \(Unicamp\)", name)
+        apc.save!
+      end
+    end
+  end
+
 end
