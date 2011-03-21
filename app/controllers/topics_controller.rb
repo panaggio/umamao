@@ -200,4 +200,20 @@ class TopicsController < ApplicationController
     end
   end
 
+  def javascript_embedded
+    begin
+      topic = Topic.find_by_slug_or_id(params[:id])
+    rescue BSON::InvalidObjectId
+      raise Goalie::NotFound
+    end
+
+    questions = Question.paginate(:topic_ids => topic.id, :banned => false,
+                                   :order => :activity_at.desc, :per_page => 5,
+                                   :page =>  1)
+
+    @info = render_to_string :partial => "embedded.html", :locals => {:topic => topic, :questions => questions}
+    @info.gsub!("\n", "").gsub!("\"", "\\\"")
+    render :content_type => 'text/javascript'
+  end
+
 end
