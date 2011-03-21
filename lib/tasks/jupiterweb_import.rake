@@ -33,6 +33,7 @@ namespace :jupiterweb do
   end
 
   def add_prereqs(course)
+    # Retrieve course prereqs
     agent = Mechanize.new
     page = convert_string(
       agent.get(
@@ -95,6 +96,8 @@ namespace :jupiterweb do
       name = m[2]
 
       begin
+      # Retrieve content between two titles and remove html information inside
+      # it. At the end only the summary text will be present.
       summary = page.split("<b>Programa</b>")[1].split("<b>Avaliação</b>")[0].
                      gsub(/<.?br>/, "  \n").gsub(/<[^>]*>/, "").gsub(/^[ ]*/, "").
                      strip
@@ -116,20 +119,22 @@ namespace :jupiterweb do
   desc 'Import courses from USP into topics'
   task :import_usp_courses => :base do
     puts "Import USP courses"
-    # Search all courses in DAC webpages and create or update its information
     agent = Mechanize.new
     page = agent.get("http://sistemas2.usp.br/jupiterweb/jupColegiadoLista?tipo=D")
+
+    # For each institute page
     intitute_links = page.links.select{|l| l.href.include?('jupColegiadoMenu.jsp')}
     intitute_links.each do |institute_link|
       institute_link.click
 
+      # Intermediate link
       course_list = agent.page.links.select do |l|
         l.href.include?('jupDisciplinaLista')
       end
       course_list[0].click
 
+      # Verify if courses are categorized by name
       courses_by_letter = agent.page.links.select{|l| l.href.include?("letra=")}
-
       if courses_by_letter.present?
         courses_by_letter.each do |link_disc_list|
           link_disc_list.click
