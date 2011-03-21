@@ -28,13 +28,13 @@
       .loader
         = image_tag "ajax-loader-big.gif"
       = t(".wait")
-  - form_tag invitations_path, :id => "select-contacts-form" do
+  - enable_autocomplete = @fetching_contacts || @has_contacts
+  .controls{:class => @fetching_contacts ? "waiting" : ""}
+    = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
+    %ul#search-contacts-results.autocomplete-list
+    = submit_tag t(".add_contact"), :class => "add-contact"
 
-    - enable_autocomplete = @fetching_contacts || @has_contacts
-    .controls{:class => @fetching_contacts ? "waiting" : ""}
-      = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
-      %ul#search-contacts-results.autocomplete-list
-      = link_to t(".add_contact"), "javascript:void(0)", :class => "add-contact"
+  - form_tag invitations_path, :id => "select-contacts-form" do
 
     #contacts-to-invite.empty
       %h2= t(".selected")

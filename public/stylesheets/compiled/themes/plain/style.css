@@ -2156,31 +2156,9 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 #select-contacts .controls.waiting {
   display: none;
 }
-#select-contacts .controls a.add-contact {
+#select-contacts .controls .add-contact {
   margin-left: 10px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: black;
-  padding: 1px 8px;
-  border: 1px solid #758c1a;
-  text-align: center;
-  text-decoration: none !important;
-  background-color: #d6e989;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
-  background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
-  background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
-  padding: 4px 12px;
-}
-#select-contacts .controls a.add-contact:hover {
-  background-color: #bfdd48;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
-  background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
-  background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
+  padding: 4px 6px;
 }
 #select-contacts input[type=submit] {
   padding: 3px 6px;
