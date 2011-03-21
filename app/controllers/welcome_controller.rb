@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
+  before_filter :login_required, :only => [:home, :unanswered, :notifications]
   helper :questions
   layout 'application'
 
