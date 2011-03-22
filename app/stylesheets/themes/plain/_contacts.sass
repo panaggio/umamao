@@ -3,6 +3,7 @@
 @import "compass/utilities/general/clearfix"
 @import "compass/utilities/text/ellipsis"
 @import "buttons"
+@import "errors"
 
 =invite-inputbox
   border: #555 1px solid
@@ -12,6 +13,15 @@
     display: none
 
 #select-contacts
+
+  .errors
+    +errors
+    margin-bottom: 20px
+    ul
+      list-style: none
+      margin-top: 12px
+      padding-left: 8px
+
   .controls
     margin-bottom: 30px
     &.waiting

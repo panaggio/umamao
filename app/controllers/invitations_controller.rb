@@ -23,22 +23,25 @@ class InvitationsController < ApplicationController
 
     @accepted_invitations =
       current_user.invitations.query(:accepted_at.ne => nil)
+
+    @faulty_emails = flash[:faulty_emails]
   end
 
   def create
     @emails = params[:emails]
     @message = params[:message]
 
-    count =
-      if @emails.present?
-        current_user.invite!(@emails, current_group, @message)
-      else
-        0
-      end
+    count, @faulty_emails =
+      current_user.invite!(@emails, current_group, @message)
+
+    if @faulty_emails.present?
+      flash[:faulty_emails] = @faulty_emails
+    end
 
     if count && count > 0
       track_event(:sent_invitation, :count => count)
     end
+
     redirect_to new_invitation_path
 
   end

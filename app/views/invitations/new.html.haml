@@ -22,7 +22,17 @@
   .block
     = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
 
+
+
 #select-contacts
+  -# Show to the user all emails that contained errors
+  - if @faulty_emails.present?
+    .errors
+      = t("invitations.new.invalid_emails")
+      %ul
+        - @faulty_emails.each do |faulty_email|
+          %li= faulty_email
+
   - if current_user.can_invite?
     - if @fetching_contacts
       .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}

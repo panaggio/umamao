@@ -776,16 +776,17 @@ Time.zone.now ? 1 : 0)
   # enough invitations left.
   def invite!(emails, group, message)
     if self.can_invite? emails.size
-      count = Invitation.invite_emails!(self, group, message, emails)
+      count, faulty_emails =
+        Invitation.invite_emails!(self, group, message, emails)
 
       if self.invitations_left.is_a? Numeric
         self.invitations_left -= count
         self.save!
       end
 
-      count
+      [count, faulty_emails]
     else
-      nil
+      [nil, []]
     end
   end
 

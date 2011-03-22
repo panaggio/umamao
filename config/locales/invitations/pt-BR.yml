@@ -25,6 +25,8 @@ pt-BR:
           para autorizar o acesso a seus contatos.
       email: Digite o email
       name_or_email: Digite o nome ou email
+      invalid_emails:
+        "Os seguintes endereços são inválidos e não puderam ser convidados:"
       invite: Convidar
       left:
         none: Você não tem convites disponíveis.
