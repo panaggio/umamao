@@ -1,0 +1,8 @@
+.tooltip.topic-tooltip
+  .followers-count= t('followable.following', :count => topic.followers_count) 
+  = render :partial => "topics/follow", :locals => {:topic => topic, :block => "block"}
+  %hr
+  - if topic.description.present?
+    .description= topic.description
+  - else
+    = link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic), :class => "edit-link"
