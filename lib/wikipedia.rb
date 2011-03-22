@@ -117,7 +117,7 @@ class WikipediaArticle
           Nokogiri::HTML::Builder.new do |doc|
             doc.p {
               doc.text "Fonte: "
-              doc.a('href' => PT_WIKIPEDIA_URL, 'target' => '_blank') {
+              doc.a('href' => Wikipedia::PT_WIKIPEDIA_URL, 'target' => '_blank') {
                 doc.text "Wikipédia"
               }
               doc.text ". Leia o "
