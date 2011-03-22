@@ -772,6 +772,29 @@ Time.zone.now ? 1 : 0)
     return true
   end
 
+  # Invite emails for group sending message. Check whether there are
+  # enough invitations left.
+  def invite!(emails, group, message)
+    if self.can_invite? emails.size
+      count = Invitation.invite_emails!(self, group, message, emails)
+
+      if self.invitations_left.is_a? Numeric
+        self.invitations_left -= count
+        self.save!
+      end
+
+      count
+    else
+      nil
+    end
+  end
+
+  # Return true if user can invite n contacts, false otherwise.
+  def can_invite?(n = 1)
+    self.invitations_left == "unlimited" ||
+      self.invitations_left >= n
+  end
+
   protected
   def password_required?
     (encrypted_password.blank? || !password.blank?)
