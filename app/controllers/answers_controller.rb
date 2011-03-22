@@ -106,7 +106,11 @@ class AnswersController < ApplicationController
                      :message => notice,
                      :html => render_to_string(:partial => "questions/answer",
                                                :object => @answer,
-                                               :locals => {:question => @question})}.to_json)
+                                               :locals => {
+                                                 :question => @question,
+                                                 :share => true
+                                               })
+                   }.to_json)
           end
         else
           error = t(:flash_error, :scope => "answers.create")
@@ -175,8 +179,8 @@ class AnswersController < ApplicationController
       format.js do
         render :json => {:status => :ok,
          :html => render_to_string(:partial => "flags/form",
-                                   :locals => {:flag => @flag, 
-                                               :source => params[:source], 
+                                   :locals => {:flag => @flag,
+                                               :source => params[:source],
                                                :form_id => "answer_flag_form" })
         }
      end

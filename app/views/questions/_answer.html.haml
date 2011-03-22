@@ -1,6 +1,7 @@
 - solution = false
 - source = question_path(question)
 - hide_controls = local_assigns[:hide_controls]
+- share = local_assigns[:share]
 - own = (current_user == answer.user) ? "own" : ""
 
 .answer.commentable{:id => answer.id, :class => "post-#{answer.id} #{solution ? "solution" : ""} #{own}" }
@@ -18,6 +19,9 @@
       = render :partial => "flags/list", :locals => {:flaggeable => answer}
     - if !hide_controls
       .controls
+        - if share
+          .share
+            = render :partial => "shared/share_body", :locals => {:opts => {:content => answer.id, :class_name => Answer.to_s.underscore}}
         .actions
           = link_to t('activerecord.attributes.answer.share'), question_answer_path(question, answer), :class => "bookmark"
           - if logged_in?
