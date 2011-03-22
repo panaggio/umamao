@@ -304,7 +304,7 @@ module ApplicationHelper
     method_name = "link_to_#{object_class.name.underscore}"
     if respond_to? method_name
       return method(method_name)
-    end 
+    end
     if object_super = object_class.superclass
       find_link_to_method(object_super)
     end
