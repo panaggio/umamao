@@ -3,7 +3,7 @@
 %li
   .topic
     %span.topic-title
-      = link_to_topic(topic)
+      = link_to h(topic.title), topic
     - if logged_in?
       - if question && ajax_add
         %a.remove{:href => question_url(question) + "/unclassify?topic=" + h(topic.title)}
