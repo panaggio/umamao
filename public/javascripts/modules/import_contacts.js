@@ -130,10 +130,12 @@ $(document).ready(function () {
 
   // Check whether to send the value of the email box to the server.
   $("#select-contacts-form").submit(function () {
-    if (!contactAutocomplete.input.is(".inactive") && canInvite()) {
-      var typedEmail = $('<input name="emails[]" type="hidden" />').
-        attr("value", contactAutocomplete.input.val());
-      $("#select-contacts-form").append(typedEmail);
+    var typedEmail = contactAutocomplete.input.val().trim();
+    if (!contactAutocomplete.input.is(".inactive") && canInvite() &&
+        typedEmail) {
+      var typedEmailInput = $('<input name="emails[]" type="hidden" />').
+        val(typedEmail);
+      $("#select-contacts-form").append(typedEmailInput);
     }
   });
 

@@ -775,7 +775,7 @@ Time.zone.now ? 1 : 0)
   # Invite emails for group sending message. Check whether there are
   # enough invitations left.
   def invite!(emails, group, message)
-    if self.can_invite? emails.size
+    if emails.present? && self.can_invite?(emails.size)
       count, faulty_emails =
         Invitation.invite_emails!(self, group, message, emails)
 
