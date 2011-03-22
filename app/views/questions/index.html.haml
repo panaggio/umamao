@@ -7,7 +7,7 @@
 - content_for :subtabs do
   .navtitle
   - tabs_tag :namespace => :questions_index, :open_tabs => { :class => :tabs } do |tab|
-    = tab.all t('questions.index.all_tab'), questions_path
+    = tab.all "#{t('questions.index.all_tab')} (#{@questions_count})", questions_path
     - unanswered_counter = @unanswered_questions_count > 0 ? " (#{@unanswered_questions_count})" : ""
     = tab.unanswered t('questions.index.unanswered_tab') << unanswered_counter, unanswered_questions_path
 

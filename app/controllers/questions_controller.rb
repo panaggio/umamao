@@ -33,6 +33,7 @@ class QuestionsController < ApplicationController
                                    :fields => (Question.keys.keys - ["_keywords", "watchers"])}.
                                                merge(conditions))
 
+    @questions_count = Question.count
     @unanswered_questions_count = calculate_unanswered_count
 
     @langs_conds = scoped_conditions[:language][:$in]
@@ -129,6 +130,7 @@ class QuestionsController < ApplicationController
                                     :fields => (Question.keys.keys - ["_keywords", "watchers"])
                                    }.merge(conditions))
 
+    @questions_count = Question.count
     @unanswered_questions_count = calculate_unanswered_count
 
     set_tab :unanswered, :questions_index
