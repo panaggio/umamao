@@ -9,6 +9,27 @@ require 'lib/wikipedia_fillin'
 namespace :data do
   namespace :migrate do
 
+    desc "Give three initial invites to everyone"
+    task :give_first_invites => :environment do
+      User.find_each do |user|
+        user.invitations_left = 3
+        user.save!
+      end
+    end
+
+    desc "Randomly reset passwords for users that don't have one"
+    task :fill_in_missing_passwords => :environment do
+      total = 0
+      User.find_each do |user|
+        if user.encrypted_password.blank?
+          new_password = ActiveSupport::SecureRandom.hex(8)
+          user.reset_password!(new_password, new_password)
+          total += 1
+        end
+      end
+      puts total
+    end
+
     desc "Remove notifications that reference objects that doesn't exist anymore"
     task :remove_orphaned_notifications => :environment do
       Notification.query.each do |notification|
