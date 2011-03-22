@@ -172,7 +172,7 @@ function AutocompleteBox(inputField, itemBoxContainer) {
   var box = this;
 
   this.input = $(inputField);
-  this.startText = this.input.val();
+  this.startText = this.input.val() || this.input.attr("data-start-text");
   this.url = this.input.attr("data-autocomplete-url");
   if (this.url) {
     this.itemBox = new ItemBox(itemBoxContainer);
@@ -297,6 +297,21 @@ AutocompleteBox.prototype = {
         }
       }
     };
+  },
+
+  // Enable the corresponding input box.
+  enable: function () {
+    this.input.removeAttr("disabled");
+    this.input.val(this.startText);
+  },
+
+  // Disable the corresponding input box.
+  disable: function () {
+    this.input.attr("disabled", "true");
+    this.isActive = false;
+    this.input.addClass("inactive");
+    this.input.blur();
+    this.clear();
   },
 
   // Preprocess the query before sending to server

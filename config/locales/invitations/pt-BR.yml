@@ -7,6 +7,9 @@ pt-BR:
       labels:
         recipient_email: "Email da pessoa:"
         message: "Mensagem pessoal (opcional):"
+    left:
+      one: 1 convite disponível
+      other: %{count} convites disponíveis
     model:
       attributes:
         sent_at: enviado
@@ -23,6 +26,10 @@ pt-BR:
       email: Digite o email
       name_or_email: Digite o nome ou email
       invite: Convidar
+      left:
+        none: Você não tem convites disponíveis.
+        one: Você tem 1 convite restante.
+        other: Você tem %{count} convites restantes.
       message: Mensagem (opcional)
       remove_all: Remover todos
       selected: Contatos selecionados
