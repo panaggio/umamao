@@ -1487,6 +1487,7 @@ ul.topic-list .follow-info a {
 #answers .answer #body-col .controls .updated, #answers .answer .body-col .controls .updated, #answers .question #body-col .controls .updated, #answers .question .body-col .controls .updated, #questions .answer #body-col .controls .updated, #questions .answer .body-col .controls .updated, #questions .question #body-col .controls .updated, #questions .question .body-col .controls .updated {
   float: right;
   padding-top: 10px;
+  line-height: 26px;
 }
 #answers .answer #body-col .user_data, #answers .answer .body-col .user_data, #answers .question #body-col .user_data, #answers .question .body-col .user_data, #questions .answer #body-col .user_data, #questions .answer .body-col .user_data, #questions .question #body-col .user_data, #questions .question .body-col .user_data {
   margin-bottom: 5px;
