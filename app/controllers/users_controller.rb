@@ -204,37 +204,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_login_or_id(params[:id])
-    raise Goalie::NotFound unless @user
+    @tab = "news_updates"
+    common_show
 
-    set_page_title(t("users.show.title", :user => @user.name))
+    @order_info = {:will_sort => false}
 
-    @q_sort, order = active_subtab(:q_sort)
-    @questions = @user.questions.paginate(:page=>params[:questions_page],
-                                          :order => order,
-                                          :per_page => 10,
-                                          :group_id => current_group.id,
-                                          :banned => false)
-
-    @a_sort, order = active_subtab(:a_sort)
-    @answers = @user.answers.paginate(:page=>params[:answers_page],
-                                      :order => order,
-                                      :group_id => current_group.id,
-                                      :per_page => 10,
-                                      :banned => false)
-
-    @f_sort, order = active_subtab(:f_sort)
-    @favorites = @user.favorites.paginate(:page => params[:favorites_page],
-                                          :per_page => 25,
-                                          :order => order,
-                                          :group_id => current_group.id)
-
-    @favorite_questions = Question.find(@favorites.map{|f| f.question_id })
-
-    add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
-
-    @user.viewed_on!(current_group) if @user != current_user && !is_bot?
-
+    @page = params[:page] || 1
+    @items = @user.news_updates.paginate(:author_id => @user.id,
+                                         :per_page => 10,
+                                         :page => @page,
+                                         :order => :created_at.desc)
     respond_to do |format|
       format.html
       format.atom
@@ -242,6 +221,50 @@ class UsersController < ApplicationController
         render :json => @user.to_json(:only => %w[name login membership_list bio website location language])
       }
     end
+  end
+
+  def questions
+    @tab = "questions"
+    common_show
+
+    sort, order = active_subtab(:sort)
+    @order_info = {
+      :user => @user,
+      :will_sort => true,
+      :sort => sort,
+      :path_used => :questions_user_path,
+      :modes => [:use_views_count]
+    }
+
+    @page = params[:page] || 1
+    @items = @user.questions.paginate(:page => @page,
+                                      :order => order,
+                                      :per_page => 10,
+                                      :group_id => current_group.id,
+                                      :banned => false)
+    render :show
+  end
+
+  def answers
+    @tab = "answers"
+    common_show
+
+    sort, order = active_subtab(:sort)
+    @order_info = {
+      :user => @user,
+      :will_sort => true,
+      :sort => sort,
+      :path_used => :answers_user_path,
+      :modes => [:use_votes]
+    }
+
+    @page = params[:page] || 1
+    @items = @user.answers.paginate(:page => @page,
+                                    :order => order,
+                                    :group_id => current_group.id,
+                                    :per_page => 10,
+                                    :banned => false)
+    render :show
   end
 
   def change_preferred_tags
@@ -400,13 +423,13 @@ class UsersController < ApplicationController
 
   protected
   def active_subtab(param)
-    key = params.fetch(param, "votes")
-    order = "votes_average desc, created_at desc"
+    key = params.fetch(param, "newest")
+    order = "created_at desc"
     case key
       when "votes"
         order = "votes_average desc, created_at desc"
-      when "views"
-        order = "views desc, created_at desc"
+      when "views_count"
+        order = "views_count desc, created_at desc"
       when "newest"
         order = "created_at desc"
       when "oldest"
@@ -415,4 +438,16 @@ class UsersController < ApplicationController
     [key, order]
   end
 
+  def common_show
+    @user = User.find_by_login_or_id(params[:id])
+    raise Goalie::NotFound unless @user
+
+    set_page_title(t("users.show.title", :user => @user.name))
+
+    set_tab @tab, :users_show
+
+    add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
+
+    @user.viewed_on!(current_group) if @user != current_user && !is_bot?
+  end
 end

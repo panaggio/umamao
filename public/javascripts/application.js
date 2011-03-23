@@ -74,7 +74,7 @@ $(document).ready(function() {
   $('#login_form > #email_field > input').focus();
 
   // TODO: internationalize.
-  $('#news_items .answer').each(function(){
+  $('#news_items .answer, #news_updates .answer').each(function(){
     if ($(this).height() > 85) {
       $(this).addClass('large');
     }

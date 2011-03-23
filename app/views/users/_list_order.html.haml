@@ -1,0 +1,13 @@
+.secondary-navigation{:class => sort || "newest"}
+  %ul
+    %li.newest
+      = link_to t("questions.index.newest"), send(path_used, user, :sort => "newest"), :rel => "nofollow"
+    %li.oldest
+      = link_to t("questions.index.oldest"), send(path_used, user, :sort => "oldest"), :rel => "nofollow"
+    - if modes.include?(:use_views_count)
+      %li.views_count
+        = link_to t("activerecord.attributes.question.views"), send(path_used, user, :sort => "views_count"), :rel => "nofollow"
+    - if modes.include?(:use_votes)
+      %li.votes
+        = link_to t("questions.index.votes"), send(path_used, user, :sort => "votes"), :rel => "nofollow"
+  .clear
