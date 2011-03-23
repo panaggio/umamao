@@ -1,4 +1,5 @@
 class SignupWizardController < ApplicationController
+  before_filter :login_required
 
   def wizard
     track_event("wizard_#{params[:current_step]}".to_sym)
