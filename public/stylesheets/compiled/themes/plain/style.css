@@ -324,7 +324,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1300910134');
 }
 body.bp .error {
   padding: 0.8em;
@@ -1652,7 +1652,7 @@ ul.topic-list .follow-info a {
 
 a.request_group {
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1300910134') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -1949,6 +1949,7 @@ a.request_group:visited, a.request_group:link {
 }
 
 .secondary-navigation.votes ul li.votes a,
+.secondary-navigation.views_count ul li.views_count a,
 .secondary-navigation.newest ul li.newest a,
 .secondary-navigation.oldest ul li.oldest a,
 .secondary-navigation.most_active ul li.most_active a,
@@ -1977,6 +1978,7 @@ a.request_group:visited, a.request_group:link {
   color: #333333;
 }
 .secondary-navigation.votes ul li.votes a:hover,
+.secondary-navigation.views_count ul li.views_count a:hover,
 .secondary-navigation.newest ul li.newest a:hover,
 .secondary-navigation.oldest ul li.oldest a:hover,
 .secondary-navigation.most_active ul li.most_active a:hover,
@@ -2001,6 +2003,10 @@ a.request_group:visited, a.request_group:link {
   border-right: 1px solid #cccccc;
 }
 .secondary-navigation.votes ul li.votes a a, .secondary-navigation.votes ul li.votes a a:active, .secondary-navigation.votes ul li.votes a a:visited, .secondary-navigation.votes ul li.votes a a:link,
+.secondary-navigation.views_count ul li.views_count a a,
+.secondary-navigation.views_count ul li.views_count a a:active,
+.secondary-navigation.views_count ul li.views_count a a:visited,
+.secondary-navigation.views_count ul li.views_count a a:link,
 .secondary-navigation.newest ul li.newest a a,
 .secondary-navigation.newest ul li.newest a a:active,
 .secondary-navigation.newest ul li.newest a a:visited,
@@ -2628,7 +2634,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-top: 1px #dddddd solid;
   padding-top: 18px;
 }
-
 #sidebar .suggestions a.follow_link {
   font-size: 0.785em;
 }
