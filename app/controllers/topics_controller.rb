@@ -50,6 +50,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find_by_slug_or_id(params[:id])
     @topic.safe_update(%w[title description], params[:topic])
+    @topic.updated_by = current_user
     @topic.save
     track_event(:edited_topic)
 
