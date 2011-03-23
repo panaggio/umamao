@@ -49,9 +49,7 @@
             = t('activerecord.attributes.answer.created_at')
             %strong.published{:title => answer.created_at, :class => "relativetime"}
               = t("time.ago", :time => time_ago_in_words(answer.created_at))
-        .clear
         #answer_flag_div
-    .clear
 
     - if !hide_controls
       = render :partial => "shared/comments", :locals => {:commentable => answer, :path_scope => [question, answer], :source => source}
@@ -59,4 +57,3 @@
   - if !hide_controls
     .avatar
       = link_to avatar_for(answer.user, :size => 25).html_safe, user_path(answer.user)
-    .clear

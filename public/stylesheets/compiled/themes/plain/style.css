@@ -1499,6 +1499,17 @@ ul.topic-list .follow-info a {
   clear: both;
   padding-top: 15px;
 }
+#answers .answer, #questions .answer {
+  *zoom: 1;
+}
+#answers .answer:after, #questions .answer:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
 #answers .answer .share, #questions .answer .share {
   *zoom: 1;
   padding: 16px;
@@ -1539,6 +1550,9 @@ ul.topic-list .follow-info a {
 }
 #answers .answer .share a + a, #questions .answer .share a + a {
   margin-left: 3px;
+}
+#answers .answer #answer_flag_div, #questions .answer #answer_flag_div {
+  clear: both;
 }
 
 .version_message {
