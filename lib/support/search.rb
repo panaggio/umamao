@@ -35,18 +35,9 @@ module Support::Search
   # return them. Use the keys :topics, :users and :questions to access
   # each class of results.
   def self.query(q)
-    resp = Net::HTTP.get(AppConfig.search["host"],
-                         "/solr/select?wt=json&q=#{q}",
-                         AppConfig.search["port"])
-    resp = JSON.parse(resp)["response"]["docs"].
-      group_by{ |result| result["entry_type"] }
-
-    {}.tap{ |found|
-      resp.each do |k, results|
-        found[k.underscore.pluralize.to_sym] =
-          k.constantize.query(:id.in => results.map{ |r| r["id"] })
-      end
-    }
+    JSON.parse(Net::HTTP.get(AppConfig.search["host"],
+                             "/solr/select?wt=json&q=#{q}",
+                             AppConfig.search["port"]))["response"]
   end
 
   # This module expects the following methods to be implemented by the

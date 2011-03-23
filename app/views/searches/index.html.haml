@@ -1,30 +1,8 @@
 - content_for :subtabs do
   .navtitle
-    = t(".title", :default => "Search")
+    = t(".title")
 
-%ul.items#questions
-  - if @questions.empty?
-    %li.box.highlight
-      = t(".empty")
-  - else
-    - @questions.each do |question|
-      = render :partial => "questions/question", :object => question, :locals => {:query_regexp => @query_regexp}
-
-= will_paginate @questions unless @questions.empty?
-
-- content_for :sidebar do
-  - if @search_text
-    .block
-      %h3
-        = t(".search_text")
-      .content
-        = @search_text
-  - if @search_tags
-    .block
-      %h3
-        = t(".tags", :default => [:"layout.application.tags", :"activerecord.attributes.user.tags", "tags"])
-      %ul.topic-list
-        - @search_tags.each do |tag|
-          %li
-            .topic{:class => "tag_#{h(tag)}"}
-              = link_to h(tag), url_for(:controller => "questions", :action => "index", :tags => tag), :rel => "topic"
+- if @results.present?
+  %ul.items
+    - @results.each do |result|
+      %li.item= render :partial => "result", :locals => {:result => result}
