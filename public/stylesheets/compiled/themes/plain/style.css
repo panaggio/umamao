@@ -1499,6 +1499,47 @@ ul.topic-list .follow-info a {
   clear: both;
   padding-top: 15px;
 }
+#answers .answer .share, #questions .answer .share {
+  *zoom: 1;
+  padding: 16px;
+  background-color: #efefff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px solid #77b0ff;
+  width: 300px;
+  width: intrinsic;
+  width: -moz-max-content;
+  margin: 0 auto 25px;
+}
+#answers .answer .share:after, #questions .answer .share:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+#answers .answer .share .explanation, #questions .answer .share .explanation {
+  float: left;
+  margin-right: 5px;
+  line-height: 14px;
+}
+#answers .answer .share .links, #questions .answer .share .links {
+  float: right;
+  margin-left: 5px;
+}
+#answers .answer .share img, #questions .answer .share img {
+  width: 14px;
+  height: 14px;
+  vertical-align: bottom;
+}
+#answers .answer .share a + a, #questions .answer .share a + a {
+  margin-left: 3px;
+}
 
 .version_message {
   background: #eeeeff;
@@ -2629,7 +2670,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-top: 1px #dddddd solid;
   padding-top: 18px;
 }
-
 #sidebar .suggestions a.follow_link {
   font-size: 0.785em;
 }

@@ -28,6 +28,7 @@ pt-BR:
       add_comment: Adicionar comentário
       flag: Reportar
       pick_answer: Marcar como aceita
+      share_new_answer: Compartilhe sua resposta com os outros!
       unset_answer: Desmarcar como aceita?
     create:
       flash_notice: "A pergunta foi criada. Clique em 'Editar' se quiser adicionar detalhes."
