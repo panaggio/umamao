@@ -46,6 +46,10 @@ h4 {
   font-weight: normal;
 }
 
+h1 > a:hover, h2 > a:hover, h3 > a:hover, h4 > a:hover {
+  text-decoration: underline;
+}
+
 hr {
   height: 1px;
   border: 0;
@@ -1162,7 +1166,7 @@ a.big_cancel_button {
   padding: 10px;
   margin-bottom: 15px;
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -1271,7 +1275,7 @@ a.big_confirm_button {
   padding: 10px;
   margin-bottom: 15px;
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -1417,7 +1421,7 @@ form.share_content label.label {
 }
 form.share_content .submit_button {
   font-family: "Lucida Grande", Lucida, Arial, sans_serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
