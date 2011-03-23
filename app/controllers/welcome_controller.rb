@@ -10,6 +10,14 @@ class WelcomeController < ApplicationController
 
   def landing
     @affiliation = Affiliation.new
+
+    @signin_index, @signup_index =
+      if params[:focus] == "signup"
+        [3, 1]
+      else
+        [1, 5]
+      end
+
     render 'landing', :layout => 'welcome'
   end
 

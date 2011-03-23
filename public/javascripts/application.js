@@ -71,7 +71,9 @@ $(document).ready(function() {
     $('#new_user #user_password').focus();
   };
 
-  $('#login_form > #email_field > input').focus();
+  // Initial focus on landing page
+  $('#login_form > #email_field > input[tabindex=1]').focus();
+  $('#signup input[tabindex=1]').focus();
 
   // TODO: internationalize.
   $('#news_items .answer').each(function(){
