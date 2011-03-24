@@ -10,78 +10,35 @@
   -# Followed topics
   = render_cell :topics, :small_list, :user => @user
 
+- content_for :subtabs do
+  - tabs_tag :namespace => :users_show, :open_tabs => {:class => :tabs} do |tab|
+    = tab.news_updates t('users.show.tab.news_updates'), user_path(@user)
+    - questions_count = @user.questions.count
+    = tab.questions "#{t('users.show.tab.questions')} (#{questions_count})", questions_user_path(@user)
+    - answers_count = @user.answers.count
+    = tab.answers "#{t('users.show.tab.answers')} (#{answers_count})", answers_user_path(@user)
+
 #users_show
-  .secondary-navigation{:class => @q_sort||"votes"}
-    .navtitle
-      %span.counter
-        = number_with_delimiter(@questions.total_entries)
-      = t(:question_count, :scope => "activerecord.models", :count => @questions.total_entries)
-    %ul
-      %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, :q_sort=>"newest"), :rel => "nofollow"
-      %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, :q_sort=>"oldest"), :rel => "nofollow"
-      %li.views
-        = link_to t("activerecord.attributes.question.views"), user_path(@user, :q_sort=>"views"), :rel => "nofollow"
-      %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, :q_sort=>"votes"), :rel => "nofollow"
-    .clear
+  - case @tab
+  - when "news_updates"
+    - partial = "news_update"
+  - when "questions"
+    - partial = "questions/question"
+  - when "answers"
+    - partial = "answers/answer"
   .block
-    %ul.items#questions
-      - cache("user_questions_#{@user.id}_#{@questions.total_entries}") do
-        - @questions.each do |question|
-          = render :partial => "questions/question", :object => question
+    - if @items.empty?
+      = t("users.show.no_#{@tab}")
+    - else
+      - if @order_info[:will_sort]
+        - sort = @order_info[:sort]
+        = render :partial => "list_order", :locals => @order_info
+      - else
+        - sort = "newest"
+      %ul.items{:id => @tab}
+        - cache("users_show.#{@tab}.#{sort}.#{@user.id}.#{@items.current_page}.#{@items.total_entries}") do
+          - @items.each do |item|
+            = render :partial => partial, :object => item
       .additional_info
-        = will_paginate @questions, :param_name => "questions_page"
+        = will_paginate @items, :param_name => "page"
         .clear
-
-  / Favorites
-  .secondary-navigation{:class => @f_sort||"votes"}
-    .navtitle
-      %span.counter
-        = number_with_delimiter(@favorites.total_entries)
-      = t(:favorites, :scope => "activerecord.models")
-    %ul
-      %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, :f_sort=>"newest"), :rel => "nofollow"
-      %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, :f_sort=>"oldest"), :rel => "nofollow"
-      %li.views
-        = link_to t("activerecord.attributes.question.views"), user_path(@user, :f_sort=>"views"), :rel => "nofollow"
-      %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, :f_sort=>"votes"), :rel => "nofollow"
-    .clear
-  .block
-
-  %ul.items#questions
-    - @favorite_questions.each do |question|
-      = render :partial => "questions/question", :object => question
-  .additional_info
-    = will_paginate @favorites, :param_name => "favorites_page"
-    .clear
-
-  / Answers
-  .secondary-navigation{:class => @a_sort||"votes"}
-    .navtitle
-      %span.counter
-        = number_with_delimiter(@answers.total_entries)
-      = t(:answers, :scope => "activerecord.models")
-
-    %ul
-      %li.newest
-        = link_to t("questions.index.newest"), user_path(@user, :a_sort=>"newest"), :rel => "nofollow"
-      %li.oldest
-        = link_to t("questions.index.oldest"), user_path(@user, :a_sort=>"oldest"), :rel => "nofollow"
-      %li.votes
-        = link_to t("questions.index.votes"), user_path(@user, :a_sort=>"votes"), :rel => "nofollow"
-    .clear
-  .block
-
-  %ul.items#answers
-    - cache("user_answers_#{@user.id}_#{@answers.total_entries}") do
-      - @answers.each do |answer|
-        - next if answer.question.banned
-        = render :partial => "answers/answer", :object => answer
-    .additional_info
-      = will_paginate @answers, :param_name => "answers_page"
-      .clear

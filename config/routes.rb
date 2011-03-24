@@ -85,6 +85,8 @@ Shapado::Application.routes.draw do
       get  :followers
       get  :following
       get  :topics
+      get  :questions
+      get  :answers
     end
   end
 

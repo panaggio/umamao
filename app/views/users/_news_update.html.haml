@@ -1,0 +1,46 @@
+- action = news_update.action
+- author = news_update.author
+- entry = news_update.entry
+- entry_type = news_update.entry_type.downcase
+- question = (entry_type == 'question') ? entry : entry.question
+- title = h(question.title)
+
+- unless question.banned || entry.banned
+  %li.entry.item
+    -# News_update Summary
+    .summary
+      %h3= link_to title, question_path(question), :title => truncate(entry.body, :length => 200)
+      .origin
+        - if question.topics.any?
+          - topic = question.topics.first
+          .description= t(".#{entry_type}.topic.#{action}", :origin => link_to(topic.name, url_for(topic)))
+        - else
+          .description= t(".#{entry_type}.user.#{action}", :origin => link_to(author.name, url_for(author)))
+      - if entry_type == "answer"
+        = render :partial => 'questions/answer', :object => entry, :locals => {:question => question, :answer => entry, :hide_controls => true}
+
+      -# News_update Stats
+      .info
+        .metadata
+          = t("time.ago", :time => time_ago_in_words(entry.created_at))
+          \|
+          = format_number(question.answers_count)
+          = t(:answer_count, :scope => "activerecord.models", :count => question.answers_count)
+          - if logged_in? && current_user != question.user
+            -# Can watch the question
+            \|
+            - if question.watch_for?(current_user)
+              = link_to t("followable.unfollow"),
+                unwatch_question_path(question),
+                :class => "unfollow_link",
+                "data-class" => "follow_link",
+                "data-title" => t("followable.follow"),
+                "data-undo" => watch_question_path(question)
+            - else
+              = link_to t("followable.follow"),
+                watch_question_path(question),
+                :class => "follow_link",
+                "data-class" => "unfollow_link",
+                "data-title" => t("followable.unfollow"),
+                "data-undo" => unwatch_question_path(question)
+    .clear

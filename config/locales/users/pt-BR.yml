@@ -40,6 +40,17 @@ pt-BR:
         Li e concordo com a <a href="%{privacy}" target="_blank">política de
         privacidade</a> e com os <a href="%{tos}" target="_blank">termos de
         uso</a> do site.
+    news_update:
+      question:
+        user:
+          created: "%{origin} adicionou uma pergunta."
+        topic:
+          created: "Pergunta adicionada ao tópico %{origin}."
+      answer:
+        user:
+          created: "%{origin} adicionou uma resposta."
+        topic:
+          created: "Resposta adicionada ao tópico %{origin}."
     edit:
       title: Configurações
       submit: Salvar
@@ -48,6 +59,17 @@ pt-BR:
       title: "%{user}"
       views: visitas
       profile: Perfil
+      tab:
+        news_updates: Atualizações
+        questions: Perguntas
+        answers: Respostas
+      no_news_updates: Nenhuma atualização ainda.
+      no_questions: Nenhuma pergunta ainda.
+      no_answers: Nenhuma resposta ainda.
+      atom:
+        title: "%{site_name} - Atualizações de %{user}"
+        question: "Pergunta:"
+        answer: "Resposta para:"
     form:
       change_password: Trocar de senha
       email: "Email pessoal:"
