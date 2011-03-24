@@ -46,7 +46,7 @@ class ShareContentController < ApplicationController
     when "facebook"
       begin
         graph = current_user.facebook_connection
-        graph.put_wall_post(@body, :link => @link)
+        graph.put_wall_post(@body, :link => @link, :source => root_url)
         status = :success
       rescue Koala::Facebook::APIError
         status = :needs_permission
