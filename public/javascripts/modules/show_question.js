@@ -115,7 +115,7 @@ $(document).ready(function() {
   });
 
   // Open modal box to share question.
-  Utils.clickObject("#sidebar .share .facebook,#sidebar .share .twitter", function () {
+  Utils.clickObject(".share .facebook, .share .twitter", function () {
     return {
       success: function (data) {
         Utils.modal({html: data.html});

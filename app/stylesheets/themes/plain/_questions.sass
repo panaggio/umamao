@@ -124,6 +124,7 @@
         .updated
           float: right
           padding-top: 10px
+          line-height: 26px
       .user_data
         margin-bottom: 5px
         padding: 4px
@@ -132,6 +133,33 @@
       .entry-content
         clear: both
         padding-top: 15px
+
+  .answer
+    +pie-clearfix
+    .share
+      +pie-clearfix
+      padding: 16px
+      background-color: #efefff
+      +border-radius
+      border: 2px solid #77b0ff
+      +fit-content
+      margin: 0 auto 25px
+      .explanation
+        float: left
+        margin-right: 5px
+        line-height: 14px
+      .links
+        float: right
+        margin-left: 5px
+      img
+        width: 14px
+        height: 14px
+        vertical-align: bottom
+      a + a
+        margin-left: 3px
+
+    #answer_flag_div
+      clear: both
 
 .version_message
   background: #eeeeff

@@ -1,9 +1,18 @@
 - solution = false
 - source = question_path(question)
 - hide_controls = local_assigns[:hide_controls]
+- share = local_assigns[:share]
 - own = (current_user == answer.user) ? "own" : ""
 
 .answer.commentable{:id => answer.id, :class => "post-#{answer.id} #{solution ? "solution" : ""} #{own}" }
+  - if share
+    .share
+      .explanation
+        = t(".share_new_answer")
+      .links
+        = link_to image_tag("facebook.gif"), new_share_answer_path(:content => "answer", :where => "facebook", :class_name => "answer"), :class => "facebook"
+        = link_to image_tag("twitter.gif"), new_share_answer_path(:content => "answer", :where => "twitter", :class_name => "answer"), :class => "twitter"
+
   .vote-col
     = vote_box(answer, question_path(question), question.closed)
   .body-col
@@ -40,9 +49,7 @@
             = t('activerecord.attributes.answer.created_at')
             %strong.published{:title => answer.created_at, :class => "relativetime"}
               = t("time.ago", :time => time_ago_in_words(answer.created_at))
-        .clear
         #answer_flag_div
-    .clear
 
     - if !hide_controls
       = render :partial => "shared/comments", :locals => {:commentable => answer, :path_scope => [question, answer], :source => source}
@@ -50,4 +57,3 @@
   - if !hide_controls
     .avatar
       = link_to avatar_for(answer.user, :size => 25).html_safe, user_path(answer.user)
-    .clear
