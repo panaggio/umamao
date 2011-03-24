@@ -43,7 +43,7 @@ $(document).ready(function () {
 
   // Return true if more contacts can be added.
   var canInvite = function () {
-    return invitationsLeft != "unlimited" &&
+    return invitationsLeft == "unlimited" ||
       invitationsLeft > $("#contacts-to-invite .list .contact").size();
   };
 
