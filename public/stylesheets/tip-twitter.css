@@ -16,9 +16,6 @@
 	 *   set the background-image to .tip-inner instead.
 	 */
 }
-.tip-twitter .tip-inner {
-	font: 11px/14px 'Lucida Grande',sans-serif;
-}
 
 /* Configure an arrow image - the script will automatically position it on the correct side of the tip */
 .tip-twitter .tip-arrow-top {
