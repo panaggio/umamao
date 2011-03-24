@@ -209,7 +209,7 @@ window.Utils = {
   },
 
   poshytipfy: function(){
-    $("#related-topics .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
+    $("#sidebar .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_sidebar_options, Utils.poshytip_default_options)
     );
     $("#question .topic-list .topic, .question .topic-list .topic").poshytip(

@@ -67,6 +67,7 @@ function initTopicAutocompleteForReclassifying() {
               function (data) {
                 if (data.success) {
                   topicsUl.find(".retag").before(data.box);
+                  Utils.poshytipfy();
                 }
               });
     topicBox.clear();
