@@ -314,9 +314,11 @@ namespace :dac do
       end
       m = pagelist.body.gsub("\n", "").match(/<a name="#{c.name.downcase}">#{c.name} ([^<]*)/)
       if m
+        puts "Correcting name #{c.name} to #{m[1]}. Its description starts with #{c.description[0..15]}"
         c.name = convert_string(m[1])
         if c.description
           c.description.gsub!("#{c.code}: #{c.code}", "#{c.code}: #{c.name}")
+          puts "Description was changed to #{c.description[0..15]}"
         end
         c.save!
         print '-'
