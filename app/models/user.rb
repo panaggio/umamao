@@ -67,7 +67,7 @@ class User
   has_many :contacts, :dependent => :destroy
 
   # Number of invitations the user still has.
-  key :invitations_left, :required => true, :default => 0
+  key :invitations_left, :required => true, :default => 3
   has_many :invitations, :foreign_key => "sender_id", :dependent => :nullify
 
   has_one :suggestion_list, :dependent => :destroy
