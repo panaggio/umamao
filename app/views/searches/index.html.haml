@@ -6,3 +6,5 @@
   %ul.items
     - @results.each do |result|
       %li.item= render :partial => "result", :locals => {:result => result}
+
+= will_paginate @results
