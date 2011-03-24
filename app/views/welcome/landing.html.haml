@@ -6,15 +6,15 @@
       = label_tag 'user[password]', t('users.form.password')
 
     #email_field
-      = email_field_tag 'user[email]', nil, :tabindex => 1
+      = email_field_tag 'user[email]', nil, :tabindex => @signin_index
     #password_field
-      = password_field_tag 'user[password]', nil, :tabindex => 2
+      = password_field_tag 'user[password]', nil, :tabindex => @signin_index + 1
     #submit_button
-      = submit_tag t('layouts.application.log_in'), :tabindex => 4
+      = submit_tag t('layouts.application.log_in'), :tabindex => @signin_index + 3
 
     #remember_me
       = label_tag 'user[remember_me]', t("sessions.new.remember_me")
-      = check_box_tag 'user[remember_me]', '1', false, :tabindex => 3
+      = check_box_tag 'user[remember_me]', '1', false, :tabindex => @signin_index + 2
 
 - content_for :js do
   = include_javascripts :landing
@@ -63,7 +63,7 @@
           = f.label :email, "#{t('affiliations.form.email')}:"
           = image_tag('icon_question.gif', :id => 'email-help')
         .input
-          = f.email_field :email, :value => "", :tabindex => 5
+          = f.email_field :email, :value => "", :tabindex => @signup_index
         #help-box
           %p
 
@@ -76,7 +76,7 @@
       = image_tag("mamaopq.png", :id => "mamao_signup")
       .submit
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hidden")
-        = f.submit t('layouts.application.signup_button'), :tabindex => 6
+        = f.submit t('layouts.application.signup_button'), :tabindex => @signup_index + 1
 
 #content_msg
   %p
