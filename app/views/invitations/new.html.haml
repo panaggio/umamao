@@ -22,8 +22,6 @@
   .block
     = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
 
-
-
 #select-contacts
   -# Show to the user all emails that contained errors
   - if @faulty_emails.present?
