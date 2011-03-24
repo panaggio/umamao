@@ -40,8 +40,9 @@ class Invitation
   # contacts.
   def self.invite_emails!(sender, group, message, emails)
     invited_count = 0
+    faulty_emails = []
 
-    emails.each do |email|
+    emails.present? && emails.each do |email|
       invitation =
         sender.invitations.first(:recipient_email => email) ||
         Invitation.new(:sender_id => sender.id,
@@ -50,8 +51,12 @@ class Invitation
                        :recipient_email => email)
 
       saved = false
-      if invitation.new? && (saved = invitation.save)
-        invited_count += 1
+      if invitation.new?
+        if (saved = invitation.save)
+          invited_count += 1
+        elsif invitation.errors[:recipient_email].present?
+          faulty_emails << email
+        end
       end
 
       if (!invitation.new? || saved) &&
@@ -62,7 +67,7 @@ class Invitation
 
     end
 
-    invited_count
+    [invited_count, faulty_emails]
   end
 
   private

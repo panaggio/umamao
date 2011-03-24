@@ -23,28 +23,42 @@
     = link_to t(".pending", :count => @pending_invitations.count), pending_invitations_path
 
 #select-contacts
-  - if @fetching_contacts
-    .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}
-      .loader
-        = image_tag "ajax-loader-big.gif"
-      = t(".wait")
-  - enable_autocomplete = @fetching_contacts || @has_contacts
-  .controls{:class => @fetching_contacts ? "waiting" : ""}
-    = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
-    %ul#search-contacts-results.autocomplete-list
-    = submit_tag t(".add_contact"), :class => "add-contact"
+  -# Show to the user all emails that contained errors
+  - if @faulty_emails.present?
+    .errors
+      = t("invitations.new.invalid_emails")
+      %ul
+        - @faulty_emails.each do |faulty_email|
+          %li= faulty_email
 
-  - form_tag invitations_path, :id => "select-contacts-form" do
+  - if current_user.can_invite?
+    - if @fetching_contacts
+      .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}
+        .loader
+          = image_tag "ajax-loader-big.gif"
+        = t(".wait")
+    - enable_autocomplete = @fetching_contacts || @has_contacts
+    .controls{:class => @fetching_contacts ? "waiting" : ""}
+      .invitations-left{"data-invitations-left" => current_user.invitations_left}
+        - if current_user.invitations_left != "unlimited"
+          = t(".left", :count => current_user.invitations_left)
+      = text_field_tag "", t(enable_autocomplete ? ".name_or_email" : ".email"), :id => "search-contacts", :class => "inactive", "data-autocomplete-url" => enable_autocomplete ? search_contacts_url : ""
+      %ul#search-contacts-results.autocomplete-list
+      = submit_tag t(".add_contact"), :class => "add-contact"
 
-    #contacts-to-invite.empty
-      %h2= t(".selected")
-      .block-selection
-        = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
+    - form_tag invitations_path, :id => "select-contacts-form" do
 
-      .list
+      #contacts-to-invite.empty
+        %h2= t(".selected")
+        .block-selection
+          = link_to t(".remove_all"), "javascript:void(0)", :class => "remove_all"
 
-    #invitation-message
-      = label_tag "message", t(".message")
-      = text_area_tag "message"
+        .list
 
-    = submit_tag t(".invite")
+      #invitation-message
+        = label_tag "message", t(".message")
+        = text_area_tag "message"
+
+      = submit_tag t(".invite")
+  - else
+    = t(".left.none")

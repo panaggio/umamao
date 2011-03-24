@@ -2194,6 +2194,23 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   display: none;
 }
 
+#select-contacts .errors {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px solid #fbc2c4;
+  background-color: #ffe3e4;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+#select-contacts .errors ul {
+  list-style: none;
+  margin-top: 12px;
+  padding-left: 8px;
+}
 #select-contacts .controls {
   margin-bottom: 30px;
 }
@@ -2628,7 +2645,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-top: 1px #dddddd solid;
   padding-top: 18px;
 }
-
 #sidebar .suggestions a.follow_link {
   font-size: 0.785em;
 }

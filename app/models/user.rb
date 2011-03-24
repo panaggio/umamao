@@ -65,6 +65,9 @@ class User
   has_many :sent_notifications, :foreign_key => "origin_id",
     :class_name => "Notification", :dependent => :destroy
   has_many :contacts, :dependent => :destroy
+
+  # Number of invitations the user still has.
+  key :invitations_left, :required => true, :default => 0
   has_many :invitations, :foreign_key => "sender_id", :dependent => :nullify
 
   has_one :suggestion_list, :dependent => :destroy
@@ -115,16 +118,19 @@ class User
   validates_length_of       :description, :maximum => 500,
     :message => lambda { I18n.t("users.validation.errors.long_description") }
 
-  # We need to be careful with the validation if the user is trying to
-  # reset his password. If the user isn't able to login, he won't be
-  # able to agree with our ToS, but if he hasn't agreed yet, a naive
-  # validation would fail.
   validates_true_for :agrees_with_terms_of_service,
     :logic => lambda {
-      (!self.new? && self.password.present? &&
-       self.password_confirmation.present?) ||
-       self.agrees_with_terms_of_service? },
+       self.agrees_with_terms_of_service?
+    },
+    :if => lambda { |u| u.new? },
     :message => lambda { I18n.t("users.validation.errors.did_not_agree") }
+
+  validates_true_for :invitations_left,
+    :logic => lambda {
+      self.invitations_left.is_a?(Integer) &&
+      self.invitations_left >= 0 ||
+      self.invitations_left == "unlimited"
+    }
 
   before_create :logged!
   after_create :accept_invitation
@@ -764,6 +770,30 @@ Time.zone.now ? 1 : 0)
     }
 
     return true
+  end
+
+  # Invite emails for group sending message. Check whether there are
+  # enough invitations left.
+  def invite!(emails, group, message)
+    if emails.present? && self.can_invite?(emails.size)
+      count, faulty_emails =
+        Invitation.invite_emails!(self, group, message, emails)
+
+      if self.invitations_left.is_a? Numeric
+        self.invitations_left -= count
+        self.save!
+      end
+
+      [count, faulty_emails]
+    else
+      [nil, []]
+    end
+  end
+
+  # Return true if user can invite n contacts, false otherwise.
+  def can_invite?(n = 1)
+    self.invitations_left == "unlimited" ||
+      self.invitations_left >= n
   end
 
   protected
