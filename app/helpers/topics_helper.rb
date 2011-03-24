@@ -1,15 +1,43 @@
 module TopicsHelper
 
   # Small topic container used throughout the site.
-  def topic_box(topic)
-    '<li><div class="topic"><span class="topic-title">' +
-      (link_to h(topic.title), topic_url(topic)) +
-      '</span></div></li>'
+  def topic_box(topic, question = nil, ajax_add = false)
+    "<li><div class='topic'><span class='topic-title'>#{
+      if logged_in?
+        if question && ajax_add
+          "<a class='remove' href='#{question_url(question)}/unclassify?topic=#{h(topic.title)}'>✕</a>"
+        else
+          "<input type='hidden' name='question[topics][]' value='#{topic.title}'/><span class='remove'>✕</span>"
+        end
+      end
+    }#{link_to_topic(topic)}</span></div></li>"
   end
 
-  def link_to_topic(topic, text = nil)
-    text ||= topic.title
-    link_to h(text), topic, :title => topic_help_text(topic)
+  def link_to_topic(topic, options = {})
+    link_to h(topic.title), topic_url(topic), :data => h(topic_tooltip(topic, options))
+  end
+
+  def topic_tooltip(topic, options = {})
+    options.reverse_merge! :render_follow_button => true
+
+    "<div class='tooltip topic-tooltip'><span class='followers-count'>#{
+        t('followable.followers', :count => topic.followers_count)
+    }</span>#{
+      if options[:render_follow_button]
+        render(
+          :partial => "topics/follow",
+          :locals => {:topic => topic, :block => "block"})
+      end
+    }<hr/>#{
+      if topic.description.present?
+        "<div class='description'>#{
+          desc = strip_tags(markdown(topic.description, :render_links => false))
+          link_to (desc.size > 147 ? desc[0..146]+'...' : desc), topic_path(topic)
+        }</div>"
+      else
+        link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic)
+      end
+    }</div>"
   end
 
   def topic_help_text(topic)
