@@ -1,10 +1,10 @@
 module TopicsHelper
 
   # Small topic container used throughout the site.
-  def topic_box(topic, question = nil, ajax_add = false)
+  def topic_box(topic, question = nil, options = {})
     "<li><div class='topic'><span class='topic-title'>#{
-      if logged_in?
-        if question && ajax_add
+      if options[:logged_in] or (self.respond_to?(:logged_in?) and logged_in?)
+        if question && options[:ajax_add]
           "<a class='remove' href='#{question_url(question)}/unclassify?topic=#{h(topic.title)}'>✕</a>"
         else
           "<input type='hidden' name='question[topics][]' value='#{topic.title}'/><span class='remove'>✕</span>"
