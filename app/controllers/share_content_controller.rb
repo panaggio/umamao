@@ -46,9 +46,7 @@ class ShareContentController < ApplicationController
     when "facebook"
       begin
         graph = current_user.facebook_connection
-        # FIXME: how can we get an image url inside a controller?
-        graph.put_wall_post(@body, :link => @link,
-                            :picture => AppConfig.site + "/images/logosquare.png")
+        graph.put_wall_post(@body, :link => @link)
         status = :success
       rescue Koala::Facebook::APIError
         status = :needs_permission
