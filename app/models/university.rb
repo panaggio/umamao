@@ -13,7 +13,7 @@ class University < Topic
   key :validation_type, String, :default => 'email'
   key :domains, Array
 
-  has_many :affiliation, :dependent => :destroy
+  has_many :affiliations, :dependent => :destroy
 
   timestamps!
 
