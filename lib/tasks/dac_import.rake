@@ -302,7 +302,8 @@ namespace :dac do
   end
 
   task :correct_course_name => :base do
-    Course.all(:name => /\w\w\d\d\d/).each do |c|
+    Course.query('$or' => [:description => /^# \w\w\d\d\d: \w\w\d\d\d/,
+                           :name => /\w\w\d\d\d/]).each do |c|
       code = c.name[0..1].downcase
       agent = Mechanize.new
       begin
@@ -315,9 +316,10 @@ namespace :dac do
       if m
         c.name = convert_string(m[1])
         if c.description
-          c.description.sub! "#{code}: #{code}", "#{code}: #{c.name}"
+          c.description.gsub!("#{c.code}: #{c.code}", "#{c.code}: #{c.name}")
         end
         c.save!
+        print '-'
       else
         puts "Problem with name #{c.name}"
       end
