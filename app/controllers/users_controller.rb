@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update, :wizard,
                                            :follow, :unfollow]
+  before_filter :common_show, :only => [:show, :questions, :answers]
 
   tabs :default => :users
 
@@ -205,7 +206,7 @@ class UsersController < ApplicationController
 
   def show
     @tab = "news_updates"
-    common_show
+    set_tab @tab, :users_show
 
     @order_info = {:will_sort => false}
 
@@ -225,7 +226,7 @@ class UsersController < ApplicationController
 
   def questions
     @tab = "questions"
-    common_show
+    set_tab @tab, :users_show
 
     sort, order = active_subtab(:sort)
     @order_info = {
@@ -247,7 +248,7 @@ class UsersController < ApplicationController
 
   def answers
     @tab = "answers"
-    common_show
+    set_tab @tab, :users_show
 
     sort, order = active_subtab(:sort)
     @order_info = {
@@ -443,8 +444,6 @@ class UsersController < ApplicationController
     raise Goalie::NotFound unless @user
 
     set_page_title(t("users.show.title", :user => @user.name))
-
-    set_tab @tab, :users_show
 
     add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
 
