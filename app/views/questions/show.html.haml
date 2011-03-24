@@ -128,9 +128,6 @@
 
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question.id, :class_name => Question.to_s.underscore } }
 
-  - if !logged_in?
-    = link_to(image_tag('trofeugenteboa.png', :alt => 'Troféu Gente Boa Umamão', :style => 'margin-bottom: 15px;'), 'http://blog.umamao.com/trofeugenteboa', :target => '_blank')
-
   .question-stats
     %h3= t("questions.show.stats")
     .audience-size
