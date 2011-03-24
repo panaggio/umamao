@@ -461,12 +461,7 @@ class QuestionsController < ApplicationController
 
       format.js do
         res = { :success => status }
-        res[:box] = render_to_string(:partial => "topics/box.html",
-                                     :locals => {
-                                       :topic => @topic,
-                                       :question => @question,
-                                       :ajax_add => true
-                                     }) if status
+        res[:box] = topic_box(@topic, @question, true) if status
         render :json => res.to_json
       end
     end

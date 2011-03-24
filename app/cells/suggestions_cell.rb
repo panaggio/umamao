@@ -3,9 +3,18 @@
 
 class SuggestionsCell < Cell::Rails
   include Devise::Controllers::Helpers
+  include AuthenticatedSystem
   helper ApplicationHelper
   helper UsersHelper
   helper TopicsHelper
+  helper FollowableHelper
+  helper_method :current_user
+
+  before_filter :define_domain
+
+  def define_domain
+    default_url_options[:host] = request.host_with_port
+  end
 
   def topics
     if options.present? and options[:single_column]
