@@ -5,6 +5,10 @@
 - if @results.present?
   %ul.items
     - @results.each do |result|
-      %li.item= render :partial => "result", :locals => {:result => result}
-
-= will_paginate @results
+      - result_class = result.root_class.to_s.underscore
+      %li.item{:class => result_class}
+        = render(:partial => result_class,
+                 :locals => {result_class.to_sym => result})
+  = will_paginate @results
+- else
+  = t(".empty")

@@ -1,8 +1,0 @@
-%div{:class => result.class.underscore}
-  - if result.is_a? User
-    = avatar_for(result)
-    = result.name
-  - elsif result.is_a? Topic
-    = result.title
-  - elsif result.is_a? Question
-    = result.title

@@ -1,7 +1,7 @@
 pt-BR:
   searches:
     index:
-      empty: "Não encontramos nenhuma pergunta com a sua busca."
+      empty: "Não encontramos resultados para sua busca."
       tags: nestes tópicos
       search_text: Perguntas contendo
       title: Resultados
