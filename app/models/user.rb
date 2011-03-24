@@ -4,6 +4,7 @@ require 'timeout'
 class User
   include MongoMapper::Document
   include Support::Search::Searchable
+  include Support::RootAncestor
   include Scopes
   include MongoMapperExt::Filter
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,

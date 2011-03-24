@@ -4,6 +4,7 @@ class Topic
   include MongoMapperExt::Filter
   include Support::Versionable
   include Support::Search::Searchable
+  include Support::RootAncestor
 
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
