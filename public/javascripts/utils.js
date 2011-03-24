@@ -186,8 +186,11 @@ window.Utils = {
   poshytip_default_options: {
     alignTo: 'target',
     className: 'tip-twitter',
-    showAniDuration: 100,
-    hideAniDuration: 100,
+    showAniDuration: 20,
+    hideAniDuration: 20,
+    showTimeout: 0,
+    hideTimeout: 0,
+    slide: false,
     content: function() {
       return $($(this).find("a:last").attr("data"))
     }
