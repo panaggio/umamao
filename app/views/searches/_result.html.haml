@@ -1,8 +1,8 @@
-- case result["entry_type"]
-- when "User"
-  = result["photo_url"]
-  = result["title"]
-- when "Topic"
-  = result["title"]
-- when "Question"
-  = result["title"]
+%div{:class => result.class.underscore}
+  - if result.is_a? User
+    = avatar_for(result)
+    = result.name
+  - elsif result.is_a? Topic
+    = result.title
+  - elsif result.is_a? Question
+    = result.title

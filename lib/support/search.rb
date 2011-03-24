@@ -32,12 +32,15 @@ module Support::Search
   end
 
   # Look for terms matching the given query in the search server and
-  # return them. Use the keys :topics, :users and :questions to access
-  # each class of results.
+  # return them.
   def self.query(q)
-    JSON.parse(Net::HTTP.get(AppConfig.search["host"],
-                             "/solr/select?wt=json&q=#{q}",
-                             AppConfig.search["port"]))["response"]
+    solr_response = Net::HTTP.get(AppConfig.search["host"],
+                                  "/solr/select?wt=json&q=#{q}",
+                                  AppConfig.search["port"])
+
+    JSON.parse(solr_response)["response"]["docs"].
+      map{ |doc| doc["entry_type"].constantize.find_by_id(doc["id"]) }.compact
+
   end
 
   # This module expects the following methods to be implemented by the

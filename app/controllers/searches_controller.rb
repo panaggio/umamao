@@ -2,8 +2,7 @@ class SearchesController < ApplicationController
 
   def index
     if params[:q].present?
-      @response = Support::Search.query(params[:q])
-      @results = @response["docs"]
+      @results = Support::Search.query(params[:q])
     end
 
     respond_to do |format|
