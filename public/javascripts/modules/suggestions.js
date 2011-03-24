@@ -12,6 +12,7 @@ Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a
     success: function (data) {
       li.slideUp(800, function () {
         suggestionsDiv.replaceWith(data.suggestions);
+        Utils.poshytipfy();
       });
     }
 

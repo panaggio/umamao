@@ -181,6 +181,36 @@ window.Utils = {
 
   solrEscape: function (text) {
     return text.replace(Utils.solrSyntaxRegExp, "\\$&");
-  }
+  },
 
+  poshytip_default_options: {
+    alignTo: 'target',
+    className: 'tip-twitter',
+    showAniDuration: 100,
+    hideAniDuration: 100,
+    content: function() {
+      return $($(this).find("a:last").attr("data"))
+    }
+  },
+
+  poshytip_sidebar_options: {
+    alignX: 'left',
+    alignY: 'center',
+    offsetX: 7
+  },
+
+  poshytip_question_options: {
+    alignX: 'center',
+    alignY: 'bottom',
+    offsetY : 10
+  },
+
+  poshytipfy: function(){
+    $("#related-topics .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
+        $.extend(Utils.poshytip_sidebar_options, Utils.poshytip_default_options)
+    );
+    $(".question .topic-list .topic").poshytip(
+        $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
+    );
+  }
 };
