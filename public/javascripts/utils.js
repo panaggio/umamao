@@ -192,7 +192,11 @@ window.Utils = {
     hideTimeout: 60,
     slide: false,
     content: function() {
-      return $($(this).find("a:last").attr("data"));
+      button = $(this);
+      anchor = button.find("a:last");
+      if (anchor.length)
+        return $(anchor).attr("data");
+      return button.attr("data");
     }
   },
 
@@ -212,7 +216,7 @@ window.Utils = {
     $("#sidebar .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_sidebar_options, Utils.poshytip_default_options)
     );
-    $("#questions .topic-list .topic, #question .topic-list .topic, .question .topic-list .topic").poshytip(
+    $("#.entry.item .summary .origin .description a, questions .topic-list .topic, #question .topic-list .topic, .question .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
     );
   }
