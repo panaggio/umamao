@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   before_filter :login_required, :only => [:home, :unanswered, :notifications]
-  before_filter :calculate_counts, :only => [:home, :index, :unanswered, :notifications]
+  before_filter :calculate_counts, :only => [:home, :unanswered, :notifications]
   helper :questions
   layout 'application'
 
   def index
-    logged_in? ? home : landing
+    if logged_in?
+      calculate_counts
+      home
+    else
+      landing
+    end
   end
 
   def landing
