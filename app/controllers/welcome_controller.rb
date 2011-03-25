@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class WelcomeController < ApplicationController
   before_filter :login_required, :only => [:home, :unanswered, :notifications]
+  before_filter :calculate_counts, :only => [:home, :index, :unanswered, :notifications]
   helper :questions
   layout 'application'
 
@@ -106,6 +107,15 @@ class WelcomeController < ApplicationController
       :recipient_id => current_user.id, :recipient_type => "User",
       :per_page => 15, :page => params[:page] || 1,
       :order => :created_at.desc}.merge(options))
+  end
+
+  def calculate_counts
+    @unanswered_count = NewsItem.count(
+      :recipient_id => current_user.id, :recipient_type => "User",
+      :news_update_entry_type => "Question", :open_question => true
+    )
+
+    @notifications_unread_count = current_user.unread_notifications.count
   end
 end
 
