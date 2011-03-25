@@ -39,6 +39,9 @@ class Topic
 
   key :types, Array
 
+  key :email_subscriber_ids,  Array
+  has_many :email_subscribers, :class_name => 'User', :in => :email_subscriber_ids
+
 
   timestamps!
 
@@ -119,6 +122,9 @@ class Topic
   def remove_follower!(user)
     if self.followers.include?(user)
       self.follower_ids.delete(user.id)
+      if self.email_subscribers.include?(user)
+        self.email_subscriber_ids.delete(user.id)
+      end
       self.save!
       self.increment(:followers_count => -1)
     end

@@ -23,6 +23,9 @@ $(document).ready(function() {
           }
         }
         Utils.toggleFollowLink(link);
+
+        // Toggle email subscription option's visibility
+        $("#email-subscription").toggleClass('hidden');
       },
 
       error: function (data) {
@@ -56,6 +59,14 @@ $(document).ready(function() {
           }
         }
         Utils.toggleFollowLink(link);
+
+        // On unfollow, if email subscription is enabled, should be disabled.
+        var subscriptionLink = $("#toggle_email_subscription_link");
+        if (subscriptionLink.attr("status-switch") == "on") {
+          Utils.toggleEmailSubscriptionLink(subscriptionLink);
+        }
+        // Toggle email subscription option's visibility
+        $("#email-subscription").toggleClass('hidden');
       },
 
       error: function (data) {

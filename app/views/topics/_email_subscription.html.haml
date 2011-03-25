@@ -1,0 +1,16 @@
+- block = local_assigns[:block]
+-# Subscribe/unsubscribe emails for new questions
+
+- if logged_in?
+  - visible = topic.follower_ids.include?(current_user.id)
+  %div.block#email-subscription{:class => (visible ? "" : "hidden")}
+    =  t("topics.show.email_subscription.text")
+    - if topic.email_subscriber_ids.include?(current_user.id)
+      - action_text = t("topics.show.email_subscription.disable")
+      - undo_action_text = t("topics.show.email_subscription.enable")
+      - status_switch = "on"
+    - else 
+      - action_text = t("topics.show.email_subscription.enable")
+      - undo_action_text = t("topics.show.email_subscription.disable")
+      - status_switch = "off"
+    = "(#{link_to action_text, toggle_email_subscription_topic_path(topic), :id => 'toggle_email_subscription_link', 'data-text' => undo_action_text, 'status-switch' => status_switch})"
