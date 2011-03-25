@@ -32,6 +32,7 @@
           \|
           = format_number(question.answers_count)
           = t(:answer_count, :scope => "activerecord.models", :count => question.answers_count)
+          = render :partial => 'shared/stats_follow', :locals => { :question => question }
     .clear
 - else
   - cache("mini_question_on_index_#{question.id}_#{question.updated_at}") do
