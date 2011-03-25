@@ -369,7 +369,7 @@ SearchItem.prototype = {
   html: '<li class="search" />',
 
   render: function () {
-    return $(this.html).text('Buscar por perguntas com "' + this.query + '"');
+    return $(this.html).text('Buscar por "' + this.query + '"');
   },
 
   click: function () {

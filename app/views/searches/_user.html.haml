@@ -1,2 +1,7 @@
-= avatar_for(user)
-= user.name
+.picture= avatar_for(user)
+.name= link_to user.name, user_path(user)
+.bio= user.bio
+.stats
+  .questions= t(".questions", :count => user.questions.count)
+  .answers= t(".answers", :count => user.answers.count)
+  .followers= t(".followers", :count => user.followers.count)

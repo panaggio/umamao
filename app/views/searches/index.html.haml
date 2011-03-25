@@ -3,7 +3,7 @@
     = t(".title")
 
 - if @results.present?
-  %ul.items
+  %ul#long-search-results.items
     - @results.each do |result|
       - result_class = result.root_class.to_s.underscore
       %li.item{:class => result_class}

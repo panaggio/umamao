@@ -12,3 +12,27 @@ pt-BR:
       search_all: Buscar por perguntas, tópicos e usuários
       follow_topics: Buscar tópicos
       select_topics: Selecionar tópicos
+    question:
+      answers:
+        one: 1 resposta
+        other: %{count} respostas
+      followers:
+        one: 1 seguidor
+        other: %{count} seguidores
+    user:
+      answers:
+        one: 1 resposta
+        other: %{count} respostas
+      followers:
+        one: 1 seguidor
+        other: %{count} seguidores        
+      questions:
+        one: 1 pergunta
+        other: %{count} perguntas
+    topic:
+      followers:
+        one: 1 seguidor
+        other: %{count} seguidores
+      questions:
+        one: 1 pergunta
+        other: %{count} perguntas

@@ -2391,6 +2391,64 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   color: #999999;
 }
 
+ul.items#long-search-results li.item {
+  *zoom: 1;
+}
+ul.items#long-search-results li.item:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+ul.items#long-search-results li.item .title a, ul.items#long-search-results li.item .name a {
+  text-decoration: none;
+  font-size: 15px;
+}
+ul.items#long-search-results li.item .title a:hover, ul.items#long-search-results li.item .name a:hover {
+  text-decoration: underline;
+}
+ul.items#long-search-results li.item .stats > * + *:before {
+  content: "| ";
+}
+ul.items#long-search-results li.item .answers, ul.items#long-search-results li.item .followers, ul.items#long-search-results li.item .questions {
+  display: inline;
+  font-size: 10px;
+  color: #aaaaaa;
+}
+ul.items#long-search-results .user .picture {
+  float: left;
+  margin-right: 8px;
+}
+ul.items#long-search-results .user .name, ul.items#long-search-results .user .bio {
+  margin-bottom: 2px;
+}
+ul.items#long-search-results .topic .title {
+  display: inline;
+}
+ul.items#long-search-results .topic .description {
+  display: inline;
+  color: #222222;
+  font-family: "Arial";
+}
+ul.items#long-search-results .topic .stats {
+  float: none;
+  margin-top: 7px;
+}
+ul.items#long-search-results .question .details {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #222222;
+}
+ul.items#long-search-results .question .title, ul.items#long-search-results .question .details {
+  margin-bottom: 3px;
+}
+
 #sidebar .follow-info a {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -2628,7 +2686,6 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
   border-top: 1px #dddddd solid;
   padding-top: 18px;
 }
-
 #sidebar .suggestions a.follow_link {
   font-size: 0.785em;
 }
