@@ -2,7 +2,14 @@ class TopicsCell < Cell::Rails
   include Devise::Controllers::Helpers
   include AuthenticatedSystem
   helper ApplicationHelper
+  helper TopicsHelper
   helper_method :current_user
+
+  before_filter :define_domain
+
+  def define_domain
+    default_url_options[:host] = request.host_with_port
+  end
 
   # Used in settings page.
   def followed

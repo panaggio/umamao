@@ -75,7 +75,7 @@ module ApplicationHelper
 
   # Modified Markdown syntax that understands LaTeX math
   def markdown(txt, options = {})
-    options.merge! :process_latex => true
+    options.reverse_merge! :process_latex => true, :render_links => true
 
     if options[:process_latex]
       txt = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
@@ -86,8 +86,8 @@ module ApplicationHelper
       end
     end
 
-    processed_markdown =
-      RDiscount.new(render_page_links(txt, options), :strict).to_html
+    txt = render_page_links(txt, options) if options[:render_page_links]
+    processed_markdown = RDiscount.new(txt, :strict).to_html
 
     if options[:process_latex]
       processed_markdown = Nokogiri::HTML(processed_markdown)
@@ -108,8 +108,7 @@ module ApplicationHelper
   end
 
   def render_page_links(text, options = {})
-    group = options[:group]
-    group = current_group if group.nil?
+    group = options[:group] || current_group
     in_controller = respond_to?(:logged_in?)
 
     text.gsub!(/\[\[([^\,\[\'\"]+)\]\]/) do |m|
@@ -286,6 +285,28 @@ module ApplicationHelper
 
       result << more_string unless words.empty?
     }
+  end
+
+  def link_to_model(model, text = "")
+    if model
+      if m = find_link_to_method(model.class)
+        m.call(model)
+      else
+        link_to text, url_for(model)
+      end
+    end
+  end
+
+  private
+
+  def find_link_to_method(object_class)
+    method_name = "link_to_#{object_class.name.underscore}"
+    if respond_to? method_name
+      return method(method_name)
+    end
+    if object_super = object_class.superclass
+      find_link_to_method(object_super)
+    end
   end
 end
 

@@ -9,6 +9,7 @@ $(document).ready(function () {
           suggestions.css("display", "none");
           content.append(suggestions);
           suggestions.slideDown("slow");
+          Utils.poshytipfy();
         });
       }
     });

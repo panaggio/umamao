@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296569083');
 }
 body.bp .error {
   padding: 0.8em;
@@ -638,6 +638,69 @@ html, body, #container {
 }
 #footer ul li {
   float: none;
+}
+
+.tip-twitter .tooltip {
+  font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif;
+  font-size: 13px;
+  line-height: 15px;
+}
+.tip-twitter .tooltip .follow-info a {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: black;
+  padding: 1px 8px;
+  border: 1px solid #758c1a;
+  text-align: center;
+  text-decoration: none !important;
+}
+.tip-twitter .tooltip .follow-info a.follow_link {
+  background-color: #d6e989;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #d6e989), color-stop(50%, #bfdd48), color-stop(100%, #cee573));
+  background-image: -moz-linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
+  background-image: linear-gradient(top, #d6e989 0%, #bfdd48 50%, #cee573 100%);
+}
+.tip-twitter .tooltip .follow-info a.follow_link:hover {
+  background-color: #bfdd48;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5f1b4), color-stop(50%, #cee573), color-stop(100%, #dded9e));
+  background-image: -moz-linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
+  background-image: linear-gradient(top, #e5f1b4 0%, #cee573 50%, #dded9e 100%);
+}
+.tip-twitter .tooltip .follow-info a.unfollow_link {
+  background-color: #eeeeee;
+}
+.tip-twitter .tooltip .follow-info a.unfollow_link:hover {
+  background-color: #bbbbbb;
+}
+.tip-twitter .tooltip .follow-info {
+  float: right;
+}
+.tip-twitter .tooltip hr {
+  height: 1px;
+  margin-bottom: 5px;
+  margin-top: 6px;
+  background-color: #dddddd;
+  border: 0 none;
+  color: #dddddd;
+}
+.tip-twitter .tooltip .description {
+  font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif;
+  line-height: 15px;
+}
+.tip-twitter .tooltip .description a {
+  color: #bbbbbb;
+}
+.tip-twitter .tooltip a {
+  color: #bbbbbb;
+}
+.tip-twitter .tooltip a:hover {
+  text-decoration: underline;
+  color: #bbbbbb;
 }
 
 body.bp a, body.bp a:visited, body.bp a:hover {

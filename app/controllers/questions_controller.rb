@@ -16,7 +16,6 @@ class QuestionsController < ApplicationController
   subtabs :index => [[:newest, "created_at desc"], [:hot, "hotness desc, views_count desc"], [:votes, "votes_average desc"], [:activity, "activity_at desc"]],
           :unanswered => [[:newest, "created_at desc"], [:votes, "votes_average desc"]],
           :show => [[:votes, "votes_average desc"], [:oldest, "created_at asc"], [:newest, "created_at desc"]]
-  helper :votes
 
   # GET /questions
   # GET /questions.xml
@@ -461,12 +460,11 @@ class QuestionsController < ApplicationController
 
       format.js do
         res = { :success => status }
-        res[:box] = render_to_string(:partial => "topics/box.html",
-                                     :locals => {
-                                       :topic => @topic,
-                                       :question => @question,
-                                       :ajax_add => true
-                                     }) if status
+        res[:box] = render_to_string(
+          :partial => 'topics/topic_box', :locals => {
+            :topic => @topic, :question => @question,
+            :options => { :ajax_add => true, :logged_in => true }
+        }) if status
         render :json => res.to_json
       end
     end

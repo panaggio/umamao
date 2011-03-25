@@ -2,7 +2,7 @@
 
 %ul.topic-list
   - question.topics.each do |topic|
-    = render :partial => "topics/box", :locals => {:topic => topic, :question => question, :ajax_add => ajax_add}
+    = topic_box(topic, question, { :ajax_add => true })
   - if logged_in? && ajax_add && (current_user.can_modify?(question) || current_user.can_retag_others_questions_on?(current_group))
     %li.retag
       %a.reclassify{:href => "#"}

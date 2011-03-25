@@ -11,6 +11,7 @@ javascripts:
     - public/javascripts/jquery.notifyBar.js
     - public/javascripts/jquery.hotkeys.js
     - public/javascripts/jquery.colorbox-min.js
+    - public/javascripts/jquery.poshytip.js
     - public/javascripts/showdown.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
@@ -21,6 +22,7 @@ javascripts:
     - public/javascripts/modules/inline_edition.js
     - public/javascripts/modules/votes.js
     - public/javascripts/modules/import_contacts.js
+    - public/javascripts/modules/topic_tooltip.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:
@@ -46,6 +48,8 @@ stylesheets:
     - public/stylesheets/colorbox.css
     - public/stylesheets/compiled/themes/plain/style.css
     - public/stylesheets/welcome.css
+    - public/stylesheets/tip-twitter.css
   landing:
     - public/stylesheets/autocomplete_landing.css
     - public/stylesheets/compiled/landing.css
+    - public/stylesheets/tip-twitter.css

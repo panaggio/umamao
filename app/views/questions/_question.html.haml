@@ -23,7 +23,7 @@
           - question.topics[0..5].each do |topic|
             %li
               .topic
-                = link_to h(topic.title), topic_path(topic), :title => t("questions.tags.tooltip", :tag => h(topic.title))
+                = link_to_topic(topic)
 
       -# Question Stats
       .info

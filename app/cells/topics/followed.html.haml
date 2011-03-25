@@ -1,7 +1,7 @@
 %li.item
   .summary
     .title
-      = link_to h(@topic.title), topic_path(@topic)
+      = link_to_topic(@topic)
     .info
       .metadata
         = link_to "✕", unfollow_topic_path(@topic), :class => "unfollow_link"
