@@ -18,18 +18,26 @@ namespace :jupiterweb do
     USP = University.find_by_short_name("USP")
   end
 
-
-  def find_or_save_by_code(code, name)
-    c = Course.find_or_initialize_by_code code
-    if c
-      return c
+  def find_or_create_course(code, name, summary='')
+    t = Topic.find_by_title("#{code} (USP)")
+    if t && t.type == Course
+      return t
     end
 
-    c.university = USP
-    c.name = name
-    c.title = "#{code} (USP)"
-    c.save!
-    return c
+    if t.nil?
+      t = Course.new
+      t.title = "#{code} (USP)"
+    else
+      Topic.set(t.id, :_type => "Course")
+      t = Course.find_by_id(t.id)
+    end
+
+    t.name = name
+    t.code = code
+    t.university = USP
+    t.summary = summary
+    t.save!
+    return t
   end
 
   def add_prereqs(course)
@@ -43,7 +51,7 @@ namespace :jupiterweb do
       return nil
     end
     page.scan(/(\w\w\w\d\d\d\d)[ \n]*- ([^<]*)/).each do |pre_req|
-      course_prereq = find_or_save_by_code(pre_req[0], pre_req[1])
+      course_prereq = find_or_create_course(pre_req[0], pre_req[1])
       if !course.prereq_ids.include? course_prereq.id
         course.prereq_ids << course_prereq.id
       end
@@ -51,11 +59,7 @@ namespace :jupiterweb do
   end
 
   def save_course_usp(code, name, summary, url)
-    c = Course.find_or_initialize_by_code(code)
-    c.name = name
-    c.title = "#{c.code} (USP)"
-    c.university = USP
-    c.summary = summary
+    c = find_or_create_course(code, name, summary)
     add_prereqs(c)
 
     links_number = 0
@@ -63,7 +67,7 @@ namespace :jupiterweb do
     links = []
     pre_req_links = ''
 
-    if c.prereqs
+    if c.prereqs.present?
       pre_reqs = []
       c.prereqs.each do |r|
         if r.code.present?
@@ -116,15 +120,32 @@ namespace :jupiterweb do
     end
   end
 
+  def open_log()
+    links = []
+    if File.exists?("tmp/import_jupiterweb.log")
+      file = File.new("tmp/import_jupiterweb.log", "r+")
+      while line = file.gets
+        links << line.gsub!("\n", "")
+      end
+    else
+      file = File.new("tmp/import_jupiterweb.log", "w")
+    end
+    return file, links
+  end
+
   desc 'Import courses from USP into topics'
   task :import_usp_courses => :base do
     puts "Import USP courses"
     agent = Mechanize.new
     page = agent.get("http://sistemas2.usp.br/jupiterweb/jupColegiadoLista?tipo=D")
 
+    file, links = open_log
+ 
     # For each institute page
     intitute_links = page.links.select{|l| l.href.include?('jupColegiadoMenu.jsp')}
     intitute_links.each do |institute_link|
+      next if links.include? institute_link.href
+
       institute_link.click
 
       # Intermediate link
@@ -137,13 +158,17 @@ namespace :jupiterweb do
       courses_by_letter = agent.page.links.select{|l| l.href.include?("letra=")}
       if courses_by_letter.present?
         courses_by_letter.each do |link_disc_list|
+          next if links.include? link_disc_list.href
           link_disc_list.click
           get_courses(agent)
+          file.write "#{link_disc_list.href}\n"
+          file.flush
         end
       else
         get_courses(agent)
       end
-
+      
+      file.write "#{institute_link.href}\n"
     end
     puts "\n"
   end
