@@ -13,8 +13,27 @@ module TopicsHelper
     }#{link_to_topic(topic)}</span></div></li>"
   end
 
-  def link_to_topic(topic, options = {})
-    link_to h(topic.title), topic_url(topic), :data => h(topic_tooltip(topic, options))
+  # this should be defined as
+  # link_to_topic(topic, text, options)
+  # but as ruby1.8 doesn't support named parameters,
+  # this workaround was done
+  def link_to_topic(topic, *parameters)
+    case parameters.size
+    when 1:
+      if parameters[0].is_a? String
+        text = parameters[0]
+      elsif parameters[0].is_a? Hash
+        options = parameters[0]
+      end
+    when 2:
+      text = parameters[0]
+      options = parameters[1]
+    end
+
+    text ||= topic.title
+    options ||= {}
+
+    link_to h(text), topic_url(topic), :data => h(topic_tooltip(topic, options))
   end
 
   def topic_tooltip(topic, options = {})
