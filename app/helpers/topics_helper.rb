@@ -47,16 +47,14 @@ module TopicsHelper
           :partial => "topics/follow",
           :locals => {:topic => topic, :block => "block"})
       end
-    }<hr/>#{
+    }<hr/><div class='description'>#{
       if topic.description.present?
-        "<div class='description'>#{
           desc = strip_tags(markdown(topic.description, :render_links => false))
           link_to truncate_words(desc), topic_path(topic)
-        }</div>"
       else
         link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic)
       end
-    }</div>"
+    }</div></div>"
   end
 
   def topic_help_text(topic)
