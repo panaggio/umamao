@@ -51,7 +51,7 @@ module TopicsHelper
       if topic.description.present?
         "<div class='description'>#{
           desc = strip_tags(markdown(topic.description, :render_links => false))
-          link_to (desc.size > 147 ? desc[0..146]+'...' : desc), topic_path(topic)
+          link_to truncate_words(desc), topic_path(topic)
         }</div>"
       else
         link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic)
