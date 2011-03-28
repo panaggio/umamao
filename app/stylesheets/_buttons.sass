@@ -16,6 +16,10 @@
   +button-colors
   +button-hover-colors(white, $logo-color + 30, $logo-color + 30)
   +button-active-colors(white, $logo-color - 50, $logo-color - 50)
+  &[disabled]
+    cursor: auto
+    +button-colors($blueprint-button-font-color + 70, $blueprint-button-background-color, $blueprint-button-border-color)
+    +button-hover-colors($blueprint-button-font-color + 70, $blueprint-button-background-color, $blueprint-button-border-color)
   &.current
     +button-colors(white, $logo-color + 30, $logo-color + 30)
 
