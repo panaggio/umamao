@@ -4,9 +4,10 @@
     .message
       = t("external_accounts.connected_to.success", :site => @where.capitalize)
   - form_tag "/share_#{@class_name}", :method => :post do
-    = text_area_tag "body", "#{@body[@where]}#{' ' << @link if @link}", :maxlength => @maxlength
+    - body = "#{@body[@where]}#{' ' << @link if @link}"
+    = text_area_tag "body", body, :maxlength => @maxlength
     .charcount
-      %span(class="charsleft") #{@maxlength - @body[@where].size}
+      %span(class="charsleft") #{@maxlength - body.mb_chars.size}
       %span caracteres restantes
     = hidden_field_tag :content, @content.id
     = hidden_field_tag "where", @where
