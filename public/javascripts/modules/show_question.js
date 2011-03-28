@@ -92,8 +92,8 @@ $(document).ready(function() {
     var len = t.val().length;
     var maxlen = t.attr('data-maxlength');
     var charcount = $('.charcount');
-    var charcount_text = $('.charcount span:last');
-    var charsleft = $('.charsleft');
+    var charsleft = charcount.find('.charsleft');
+    var charcount_text = charcount.find('span:last');
     cl = maxlen - len;
 
     if (cl >= 0) {
