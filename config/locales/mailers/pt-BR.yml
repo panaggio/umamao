@@ -1,6 +1,8 @@
 pt-BR:
   mailers:
     notifications:
+      new_question:
+        subject: "%{name} perguntou \"%{title}\""
       new_answer:
         subject_owner: "%{name} respondeu à sua pergunta \"%{title}\""
         subject_friend: "%{name} respondeu à pergunta \"%{title}\""
