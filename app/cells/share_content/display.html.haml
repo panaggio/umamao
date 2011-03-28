@@ -6,12 +6,13 @@
   - form_tag "/share_#{@class_name}", :method => :post do
     - body = "#{@body[@where]}#{' ' << @link if @link}"
     = text_area_tag "body", body, :'data-maxlength' => @maxlength
-    .charcount
-      %span(class="charsleft") #{@maxlength - body.mb_chars.size}
-      %span caracteres restantes
+    - charsleft = @maxlength - body.mb_chars.size
+    .charcount{:class => ( charsleft < 0 ? 'negative-counter' : '' )}
+      %span(class="charsleft") #{charsleft.abs}
+      %span= (charsleft >= 0 ? t("characters_left", :count => charsleft) : t("characters_exceded", :count => -charsleft))
     = hidden_field_tag :content, @content.id
     = hidden_field_tag "where", @where
     .controls
       = link_to t("scaffold.cancel"), "#", :class => "close"
-      = submit_tag t("global.share")
+      = submit_tag t("global.share"), :disabled => (charsleft < 0)
     .clear
