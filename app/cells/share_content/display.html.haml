@@ -5,7 +5,7 @@
       = t("external_accounts.connected_to.success", :site => @where.capitalize)
   - form_tag "/share_#{@class_name}", :method => :post do
     - body = "#{@body[@where]}#{' ' << @link if @link}"
-    = text_area_tag "body", body, :maxlength => @maxlength
+    = text_area_tag "body", body, :'data-maxlength' => @maxlength
     .charcount
       %span(class="charsleft") #{@maxlength - body.mb_chars.size}
       %span caracteres restantes
