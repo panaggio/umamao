@@ -101,14 +101,14 @@ $(document).ready(function() {
         charcount_text.html("caracteres restantes");
       else
         charcount_text.html("caracter restante");
-      charcount.css("color", "black");
+      charcount.removeClass("negative-counter");
     }
     else {
       if (cl == -1)
         charcount_text.html("caracter excedente");
       else
         charcount_text.html("caracteres excedentes");
-      charcount.css("color", "red");
+      charcount.addClass("negative-counter");
       cl = -cl;
     }
 
