@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296569083');
 }
 body.bp .error {
   padding: 0.8em;
@@ -695,10 +695,7 @@ html, body, #container {
 .tip-twitter .tooltip .description a {
   color: #bbbbbb;
 }
-.tip-twitter .tooltip a {
-  color: #bbbbbb;
-}
-.tip-twitter .tooltip a:hover {
+.tip-twitter .tooltip .description:hover {
   text-decoration: underline;
   color: #bbbbbb;
 }
