@@ -269,7 +269,7 @@ body.bp .bottom {
   padding-bottom: 0;
 }
 body.bp .showgrid {
-  background: url('/images/grid.png?1291138098');
+  background: url('/images/grid.png?1296569083');
 }
 body.bp .error {
   padding: 0.8em;
@@ -510,6 +510,17 @@ body.two-col #content {
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
 }
+#external_accounts a.connect[disabled], #external_accounts a.disconnect[disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#external_accounts a.connect[disabled]:hover, #external_accounts a.disconnect[disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
 #external_accounts a.connect.current, #external_accounts a.disconnect.current {
   background-color: #f84249;
   border-color: #ff5259 #f84249 #f84249 #ff5259;
@@ -579,6 +590,17 @@ body.two-col #content {
   background-color: #a80000;
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
+}
+#external_accounts a.dac_connect[disabled], #external_accounts input[type='submit'].dac_connect[disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#external_accounts a.dac_connect[disabled]:hover, #external_accounts input[type='submit'].dac_connect[disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
 }
 #external_accounts a.dac_connect.current, #external_accounts input[type='submit'].dac_connect.current {
   background-color: #f84249;
@@ -1004,6 +1026,17 @@ input[type=submit]:active {
   background-color: #a80000;
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
+}
+input[type=submit][disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+input[type=submit][disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
 }
 input[type=submit].current {
   background-color: #f84249;
@@ -1487,6 +1520,17 @@ ul#team .avatar {
   background-color: #a80000;
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
+}
+#signup-wizard #navigation a[disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#signup-wizard #navigation a[disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
 }
 #signup-wizard #navigation a.current {
   background-color: #f84249;

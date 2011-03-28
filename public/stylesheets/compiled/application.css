@@ -1,7 +1,7 @@
 /* incase an inverted custom gradient isn't specified */
 .fancy-button-reset-base-class, a.big_cancel_button, a.big_confirm_button, form.share_content .submit_button {
   font-family: "Lucida Grande", Lucida, Arial, sans-serif;
-  background: url('/images/button_bg.png?1291138098') repeat-x bottom left;
+  background: url('/images/button_bg.png?1296569083') repeat-x bottom left;
   margin: 0;
   width: auto;
   overflow: visible;
@@ -603,6 +603,17 @@ a.tag:hover {
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
 }
+#external_accounts a.connect[disabled], #external_accounts a.disconnect[disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#external_accounts a.connect[disabled]:hover, #external_accounts a.disconnect[disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
 #external_accounts a.connect.current, #external_accounts a.disconnect.current {
   background-color: #f84249;
   border-color: #ff5259 #f84249 #f84249 #ff5259;
@@ -672,6 +683,17 @@ a.tag:hover {
   background-color: #a80000;
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
+}
+#external_accounts a.dac_connect[disabled], #external_accounts input[type='submit'].dac_connect[disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#external_accounts a.dac_connect[disabled]:hover, #external_accounts input[type='submit'].dac_connect[disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
 }
 #external_accounts a.dac_connect.current, #external_accounts input[type='submit'].dac_connect.current {
   background-color: #f84249;
@@ -1001,6 +1023,17 @@ ul.combobox li:hover ul, ul.combobox li.sfhover ul {
   border-color: #b81010 #a80000 #a80000 #b81010;
   color: white;
 }
+#cboxContent .modal .controls a[disabled], #cboxContent .modal .controls input[type=submit][disabled] {
+  cursor: auto;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
+#cboxContent .modal .controls a[disabled]:hover, #cboxContent .modal .controls input[type=submit][disabled]:hover {
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #9c9c9c;
+}
 #cboxContent .modal .controls a.current, #cboxContent .modal .controls input[type=submit].current {
   background-color: #f84249;
   border-color: #ff5259 #f84249 #f84249 #ff5259;
@@ -1026,6 +1059,9 @@ ul.combobox li:hover ul, ul.combobox li.sfhover ul {
 #cboxContent .modal.share-content-widget .charcount {
   margin-top: 10px;
   text-align: right;
+}
+#cboxContent .modal.share-content-widget .negative-counter {
+  color: red;
 }
 
 .profile_inline_editable.markdown p {
