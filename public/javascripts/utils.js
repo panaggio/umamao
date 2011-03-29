@@ -183,6 +183,13 @@ window.Utils = {
     return text.replace(Utils.solrSyntaxRegExp, "\\$&");
   },
 
+  poshytip_find: function(button) {
+    var anchor = button.find("a:last");
+    if (anchor.length)
+      return $(anchor);
+    return button;
+  },
+
   poshytip_default_options: {
     alignTo: 'target',
     className: 'tip-twitter',
@@ -192,11 +199,12 @@ window.Utils = {
     hideTimeout: 60,
     slide: false,
     content: function() {
-      button = $(this);
-      anchor = button.find("a:last");
-      if (anchor.length)
-        return $(anchor).attr("data");
-      return button.attr("data");
+      return Utils.poshytip_find($(this)).attr("data");
+    },
+
+    onmouseout: function() {
+      var html = $(".tip-twitter").html();
+      Utils.poshytip_find(this.$elm).attr("data", html);
     }
   },
 
