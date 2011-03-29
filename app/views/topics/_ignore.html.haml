@@ -5,6 +5,6 @@
   .ignore-info{:class => block}
     - if current_user.ignored_topic_ids.include?(topic.id)
       - follow = topic.follower_ids.include?(current_user.id)
-      = link_to "#{t("ignoreble.unignore")}", unignore_topic_path(topic), :class => "unignore_link", 'data-class' => "ignore_link", 'data-title' => t("ignorable.ignore"), 'data-undo' => ignore_topic_path(topic), "data-entry-type" => "topic"{ :class => 'hidden' }
+      = link_to "#{t("ignoreble.unignore")}", unignore_topic_path(topic), :class => "unignore_link", 'data-class' => "ignore_link", 'data-title' => t("ignorable.ignore"), 'data-undo' => ignore_topic_path(topic), "data-entry-type" => "topic", 'class'=> 'hidden'
     - else
       = link_to "#{t("ignorable.ignore")}", ignore_topic_path(topic), :class => "ignore_link", 'data-class' => "unignore_link", 'data-title' => t("ignorable.unignore"), 'data-undo' => unignore_topic_path(topic), "data-entry-type" => "topic"
