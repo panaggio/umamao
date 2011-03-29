@@ -55,6 +55,10 @@ class User
   key :feed_token,                String
   key :can_invite_without_confirmation, Boolean, :default => true
 
+  key :ignored_topic_ids,         Array
+  has_many :ignored_topics, :class_name => 'Topic', :in => :ignored_topic_ids
+  key :ignored_topics_count, :default => 0
+
   has_many :affiliations, :dependent => :destroy
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
