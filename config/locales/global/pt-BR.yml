@@ -58,3 +58,9 @@ pt-BR:
       zero: "Nunca"
       one: "%{count} vez"
       other: "%{count} vezes"
+  characters_left:
+    one: "caracter restante"
+    other: "caracters restantes"
+  characters_exceded:
+    one: "caracter excedente"
+    other: "caracteres excedentes"

@@ -90,14 +90,34 @@ $(document).ready(function() {
   $("#body").live("keyup", function() {
     var t = $(this);
     var len = t.val().length;
-    var maxlen = t.attr('maxlength');
-    var charsleft = $('.charsleft');
-    if (len < maxlen)
-      charsleft.html(maxlen - len);
-    else {
-      t.val(t.val().substr(0,maxlen));
-      charsleft.html(0);
+    var maxlen = t.attr('data-maxlength');
+    var charcount = $('.charcount');
+    var submit = $(".modal :submit");
+    var charsleft = charcount.find('.charsleft');
+    var charcount_text = charcount.find('span:last');
+    cl = maxlen - len;
+
+    //TODO: internationalize
+    if (cl >= 0) {
+      if (cl > 1 || cl == 0)
+        charcount_text.html("caracteres restantes");
+      else
+        charcount_text.html("caracter restante");
+      charcount.removeClass("negative-counter");
+      submit.removeAttr('disabled');
     }
+    else {
+      if (cl == -1)
+        charcount_text.html("caracter excedente");
+      else
+        charcount_text.html("caracteres excedentes");
+      charcount.addClass("negative-counter");
+      submit.attr('disabled', 'disabled');
+
+      cl = -cl;
+    }
+
+    charsleft.html(cl);
   });
 
   // Send shared question to Facebook.
