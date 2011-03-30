@@ -10,6 +10,8 @@ Shapado::Application.routes.draw do
     member do
       post :follow
       post :unfollow
+      post :ignore
+      post :unignore
       get :unanswered
       get :followers
       post :toggle_email_subscription
