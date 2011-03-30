@@ -17,8 +17,8 @@
   - form_tag search_path, :method => "get", :class => "long-search" do
     %h3= t(".form.detail")
     = text_field_tag :q, params[:q]
+    %h4= t(".form.categories")
     .options
-      %h4= t(".form.categories")
       - [:question, :topic, :user].each do |model|
         .option
           = check_box_tag "in[]", model, @in.include?(model)
