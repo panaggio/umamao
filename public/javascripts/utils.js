@@ -177,6 +177,17 @@ window.Utils = {
     link.text(dataTitle);
   },
 
+  toggleEmailSubscriptionLink: function (link) {
+    var text = link.text();
+    var dataText = link.attr("data-text");
+    var statusSwitch = link.attr("status-switch");
+    link.attr({
+      "data-text": text,
+      "status-switch": (statusSwitch == "on")?"off":"on"
+    });
+    link.text(dataText);
+  },
+
   solrSyntaxRegExp: /[\+\-&\|\(\)\{\}\[\]\^\"~\*\?:\\]/g,
 
   solrEscape: function (text) {

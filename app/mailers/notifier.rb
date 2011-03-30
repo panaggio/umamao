@@ -25,6 +25,24 @@ class Notifier < ActionMailer::Base
     mail(:to => user.email, :subject => subject)
   end
 
+  def new_question(user, group, question, topic)
+    @user = user
+    @group = group
+    @question = question
+    @domain = group.domain
+    @topic = topic
+    @disable_link = topic_path(@topic)
+
+    scope = "mailers.notifications.new_question"
+
+    subject = I18n.t("subject",
+                     :scope => scope,
+                     :title => question.title,
+                     :name => question.user.name)
+
+    mail(:to => user.email, :subject => subject)
+  end
+
   def new_answer(user, group, answer, following = false)
     @user = user     #question creator
     @group = group

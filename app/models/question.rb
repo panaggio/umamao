@@ -119,7 +119,7 @@ class Question
   before_save :update_activity_at
   before_save :update_autocomplete_keywords
   before_create :add_question_author_to_watchers
-  after_create :create_news_update
+  after_create :create_news_update, :new_question_notification
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -480,6 +480,31 @@ class Question
                       :created_at => self.created_at, :action => 'created')
   end
   handle_asynchronously :create_news_update
+
+  def new_question_notification
+    # Notifies users who subscribed to receive email notifications
+    # on at least one of the question's topics (unless the question
+    # was actually created by the user).
+    subscriber_ids = []
+    self.topics.each do |topic|
+      topic.email_subscriber_ids.each do |user_id|
+        unless subscriber_ids.include?(user_id)
+          subscriber_ids << [user_id, topic]
+        end
+      end
+    end
+
+    subscriber_ids.each do |user_id, topic|
+      user = User.find_by_id(user_id)
+      next if user == self.user
+      Notifier.delay.new_question(user, self.group, self, topic)
+      Notification.create!(:user => user,
+                           :event_type => "new_question",
+                           :origin => self.user,
+                           :reason => self)
+    end
+  end
+  handle_asynchronously :new_question_notification
 
   protected
   def update_answer_count

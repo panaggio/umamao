@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow]
+  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow, :toggle_email_subscription]
   respond_to :html
 
   tabs :default => :topics
@@ -134,6 +134,44 @@ class TopicsController < ApplicationController
                         :count => followers_count,
                         :link => followers_topic_path(@topic.id))
                }.to_json)
+      end
+    end
+  end
+
+  def toggle_email_subscription
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
+
+    user = current_user
+
+    # TODO: ignore when user does not follow topic
+    # if @topic.follower_ids.include?(user.id)
+
+    if @topic.email_subscriber_ids.include?(user.id)
+      @topic.email_subscriber_ids.delete(user.id)
+      @topic.save!
+      notice = t("topics.show.email_subscription.notice.unsubscribed", :topic => @topic.title)
+    else
+      @topic.email_subscriber_ids << user.id
+      @topic.save!
+      notice = t("topics.show.email_subscription.notice.subscribed", :topic => @topic.title)
+    end
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+      format.js do
+        res = {
+          :success => true,
+          :message => notice
+        }
+
+        render :json => res.to_json
       end
     end
   end

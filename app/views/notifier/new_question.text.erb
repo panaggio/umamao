@@ -1,0 +1,15 @@
+
+<%= t('notifier.global.hi', :user => h(@user.first_name)) %>
+
+<%= t('.author', :user => h(@question.user.name), :topic => h(@topic.name)) %>
+
+<% h(@question.title) %>
+
+---
+<%= h(@question.body) %>
+---
+
+<% t('.disable_text') %>
+<% @disable_link %>
+
+<%= simple_format(t('notifier.global.signature')) %>
