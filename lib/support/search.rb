@@ -32,10 +32,24 @@ module Support::Search
   end
 
   # Look for terms matching the given query in the search server and
-  # return them.
+  # return them in a suitable format for will_paginate.
+  #
+  # options:
+  #   :per_page - how many results per page
+  #   :page     - which page to display
+  #   :in       - an array of which categories to display
+  #               (:questions, :user, :topics). Use [] to display everything.
   def self.query(q, options = {})
 
-    page = options[:page].to_i || 1
+    types = [:user, :question, :topic] & (options[:in] || [])
+
+    # Decide whether to filter the result by type.
+    if types.present? && types.length != 3
+      q = "(#{q}) AND entry\\_type:(" +
+        types.map{ |t| t.to_s.camelcase }.join(" ") + ")"
+    end
+
+    page = (options[:page] || 1).to_i
     per_page = options[:per_page] || 25
     start = (page - 1) * per_page
 
@@ -43,10 +57,11 @@ module Support::Search
     query_path = "/solr/select?wt=json&q=#{q}&start=#{start}" +
       "&rows=#{per_page}"
 
+    solr_response_raw =
+      Net::HTTP.get(AppConfig.search["host"], URI.escape(query_path),
+                    AppConfig.search["port"])
 
-    solr_response =
-      JSON.parse(Net::HTTP.get(AppConfig.search["host"], query_path,
-                               AppConfig.search["port"]))
+    solr_response = JSON.parse(solr_response_raw)
 
     fetched_results = solr_response["response"]["docs"].
       map{ |doc| doc["entry_type"].constantize.find_by_id(doc["id"]) }.compact

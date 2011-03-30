@@ -1,18 +1,16 @@
 class SearchesController < ApplicationController
 
   def index
+    @in = (params[:in] || []).map(&:to_sym)
+
     if params[:q].present?
       @results = Support::Search.query(params[:q],
                                        :page => params[:page] || 1,
-                                       :per_page => 25)
+                                       :in => @in)
     end
 
     respond_to do |format|
       format.html
-      format.js do
-        render :json => {:html => render_to_string(:partial => "questions/question",
-                                                   :collection  => @questions)}.to_json
-      end
     end
   end
 

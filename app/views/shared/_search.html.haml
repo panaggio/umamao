@@ -1,6 +1,6 @@
 #search
   .search-form-wrap
     = form_tag new_question_path, :id => "search-form", :method => :get do
-      = text_field_tag "question[title]", params[:q] || t("searches.form.search_all"), :id => "search-field", :class => "inactive", "data-autocomplete-url" => autocomplete_url
+      = text_field_tag "question[title]", t("searches.form.search_all"), :id => "search-field", :class => "inactive", "data-autocomplete-url" => autocomplete_url
       = submit_tag 'Perguntar', :id => "search-submit"
       %ul#search-results.autocomplete-list
