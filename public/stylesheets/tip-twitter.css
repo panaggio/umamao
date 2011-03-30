@@ -1,5 +1,4 @@
 .tip-twitter {
-	opacity:0.8;
 	z-index:1000;
 	text-align:left;
 	border-radius:4px;
@@ -8,7 +7,8 @@
 	padding:8px 8px;
 	width:200px;
 	color:#fff;
-	background-color:#000;
+	background-color:#000000;
+  background-color: rgba(0, 0, 0, 0.8);
 	/**
 	 * - If you set a background-image, border/padding/background-color will be ingnored.
 	 *   You can set any padding to .tip-inner instead if you need.
@@ -19,6 +19,7 @@
 
 /* Configure an arrow image - the script will automatically position it on the correct side of the tip */
 .tip-twitter .tip-arrow-top {
+	opacity:0.8;
 	margin-top:-5px;
 	margin-left:-5px; /* approx. half the width to center it */
 	top:0;
@@ -28,6 +29,7 @@
 	background:url(/images/tip-twitter_arrows.gif) no-repeat;
 }
 .tip-twitter .tip-arrow-right {
+	opacity:0.8;
 	margin-top:-4px; /* approx. half the height to center it */
 	margin-left:0;
 	top:50%;
@@ -37,6 +39,7 @@
 	background:url(/images/tip-twitter_arrows.gif) no-repeat -9px 0;
 }
 .tip-twitter .tip-arrow-bottom {
+	opacity:0.8;
 	margin-top:0;
 	margin-left:-5px; /* approx. half the width to center it */
 	top:100%;
@@ -46,6 +49,7 @@
 	background:url(/images/tip-twitter_arrows.gif) no-repeat -18px 0;
 }
 .tip-twitter .tip-arrow-left {
+	opacity:0.8;
 	margin-top:-4px; /* approx. half the height to center it */
 	margin-left:-5px;
 	top:50%;

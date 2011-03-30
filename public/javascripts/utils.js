@@ -183,6 +183,13 @@ window.Utils = {
     return text.replace(Utils.solrSyntaxRegExp, "\\$&");
   },
 
+  poshytip_find: function(button) {
+    var anchor = button.find("a:last");
+    if (anchor.length)
+      return $(anchor);
+    return button;
+  },
+
   poshytip_default_options: {
     alignTo: 'target',
     className: 'tip-twitter',
@@ -192,7 +199,12 @@ window.Utils = {
     hideTimeout: 60,
     slide: false,
     content: function() {
-      return $($(this).find("a:last").attr("data"));
+      return Utils.poshytip_find($(this)).attr("data");
+    },
+
+    onmouseout: function() {
+      var html = $(".tip-twitter").html();
+      Utils.poshytip_find(this.$elm).attr("data", html);
     }
   },
 
@@ -212,7 +224,7 @@ window.Utils = {
     $("#sidebar .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_sidebar_options, Utils.poshytip_default_options)
     );
-    $("#question .topic-list .topic, .question .topic-list .topic").poshytip(
+    $(".entry.item .summary .origin .description a, #questions .topic-list .topic, #question .topic-list .topic, .question .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
     );
   }

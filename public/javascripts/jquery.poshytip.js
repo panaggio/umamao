@@ -101,6 +101,7 @@
 			if (this.disabled || !this.$tip.data('active'))
 				return;
 
+			this.opts.onmouseout.call(this);
 			this.display(true);
 		},
 		reset: function() {
@@ -408,7 +409,9 @@
 		slide: 			true,		// use slide animation
 		slideOffset: 		8,		// slide animation offset
 		showAniDuration: 	300,		// show animation duration - set to 0 if you don't want show animation
-		hideAniDuration: 	300		// hide animation duration - set to 0 if you don't want hide animation
+		hideAniDuration: 	300,		// hide animation duration - set to 0 if you don't want hide animation
+
+		onmouseout: null
 	};
 
 })(jQuery);
