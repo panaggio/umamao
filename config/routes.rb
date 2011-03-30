@@ -13,6 +13,7 @@ Shapado::Application.routes.draw do
       get :unanswered
       get :followers
       post :toggle_email_subscription
+      get :javascript_embedded
     end
 
     collection do
@@ -215,6 +216,7 @@ Shapado::Application.routes.draw do
         post :unfollow
         get :unanswered
         get :followers
+        get :javascript_embedded
       end
 
       collection do

@@ -32,4 +32,9 @@ pt-BR:
     models:
       topic: Tópico
       topics: Tópicos
+  embedded:
+    question:
+      link:
+        one: %{question_title} (1 resposta)
+        other: %{question_title} (%{count} respostas)
 

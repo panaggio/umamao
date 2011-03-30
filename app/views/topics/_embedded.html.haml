@@ -1,0 +1,15 @@
+.secondary-navigation
+  .navtitle
+    &= link_to topic.title, topic, :class => "umamao-topic-title", :target => "_blank"
+
+
+%ul.items#questions
+  - if questions.blank?
+    %li.highlight
+      = t(".empty")
+  - questions.each do |question|
+    %li
+      = link_to t("embedded.question.link", :count => question.answers_count,
+      :question_title => question.title), question_path(question), :class => "umamao-question-title", :target => "_blank"
+
+.clear
