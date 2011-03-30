@@ -23,10 +23,10 @@ pt-BR:
       share_success: Pergunta compartilhada com sucesso no %{site}.
     share_body:
       facebook: Resposta
-      facebook_named: Resposta por %{name}
+      facebook_named: Resposta de %{name}
       facebook_self: Minha resposta
       twitter: Resposta no %{site}
-      twitter_named: Resposta por %{name} no %{site}
+      twitter_named: Resposta de %{name} no %{site}
       twitter_self: Minha resposta no %{site}
     update:
       flash_notice: "Resposta atualizada."
