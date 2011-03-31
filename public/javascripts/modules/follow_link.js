@@ -26,6 +26,9 @@ $(document).ready(function() {
 
         // Toggle email subscription option's visibility
         $("#email-subscription").toggleClass('hidden');
+
+        // Toggle ignore button visibility
+        $(".ignore-info").toggleClass('hidden');
       },
 
       error: function (data) {
@@ -67,6 +70,9 @@ $(document).ready(function() {
         }
         // Toggle email subscription option's visibility
         $("#email-subscription").toggleClass('hidden');
+
+        // Toggle ignore button visibility
+        $(".ignore-info").toggleClass('hidden');
       },
 
       error: function (data) {
