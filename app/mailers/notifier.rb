@@ -31,7 +31,7 @@ class Notifier < ActionMailer::Base
     @question = question
     @domain = group.domain
     @topic = topic
-    @disable_link = topic_path(@topic)
+    @disable_link = topic_url(@topic)
 
     scope = "mailers.notifications.new_question"
 
