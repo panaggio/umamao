@@ -157,10 +157,12 @@ class TopicsController < ApplicationController
       @topic.email_subscriber_ids.delete(user.id)
       @topic.save!
       notice = t("topics.show.email_subscription.notice.unsubscribed", :topic => @topic.title)
+      track_event(:email_unsubscribed_topic)
     else
       @topic.email_subscriber_ids << user.id
       @topic.save!
       notice = t("topics.show.email_subscription.notice.subscribed", :topic => @topic.title)
+      track_event(:email_subscribed_topic)
     end
 
     respond_to do |format|
