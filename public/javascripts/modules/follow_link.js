@@ -25,10 +25,10 @@ $(document).ready(function() {
         Utils.toggleFollowLink(link);
 
         // Toggle email subscription option's visibility
-        $("#email-subscription").toggleClass('hidden');
+        $("#email-subscription").removeClass('hidden');
 
         // Toggle ignore button visibility
-        $(".ignore-info").toggleClass('hidden');
+        $(".ignore-info").addClass('hidden');
       },
 
       error: function (data) {
@@ -69,10 +69,10 @@ $(document).ready(function() {
           Utils.toggleEmailSubscriptionLink(subscriptionLink);
         }
         // Toggle email subscription option's visibility
-        $("#email-subscription").toggleClass('hidden');
+        $("#email-subscription").addClass('hidden');
 
         // Toggle ignore button visibility
-        $(".ignore-info").toggleClass('hidden');
+        $(".ignore-info").removeClass('hidden');
       },
 
       error: function (data) {
