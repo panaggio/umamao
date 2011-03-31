@@ -27,6 +27,7 @@ $(document).ready(function() {
         // Toggle email subscription option's visibility
         $("#email-subscription").removeClass('hidden');
 
+        Utils.setUnignoreLink($(".ignore_link, .unignore_link"));
         // Toggle ignore button visibility
         $(".ignore-info").addClass('hidden');
       },
@@ -71,6 +72,7 @@ $(document).ready(function() {
         // Toggle email subscription option's visibility
         $("#email-subscription").addClass('hidden');
 
+        Utils.setIgnoreLink($(".ignore_link, .unignore_link"));
         // Toggle ignore button visibility
         $(".ignore-info").removeClass('hidden');
       },
