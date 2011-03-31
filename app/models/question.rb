@@ -7,7 +7,6 @@ class Question
   include Support::Versionable
   include Support::Voteable
   include Support::Search::Searchable
-  include Support::RootAncestor
   include Scopes
 
   ensure_index :tags

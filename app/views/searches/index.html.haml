@@ -5,7 +5,7 @@
 - if @results.present?
   %ul#long-search-results.items
     - @results.each do |result|
-      - result_class = result.root_class.to_s.underscore
+      - result_class = result.class.collection_name.singularize
       %li.item{:class => result_class}
         = render(:partial => result_class,
                  :locals => {result_class.to_sym => result})
