@@ -2,3 +2,6 @@ pt-BR:
   ignorable:
     ignore: Ignorar
     unignore: Não ignorar
+    flash:
+      ignore: "Você não receberá mais atualizações de %{ignorable}"
+      unignore: "Você voltará a receber atualizações de %{ignorable}"
