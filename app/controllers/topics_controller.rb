@@ -140,6 +140,57 @@ class TopicsController < ApplicationController
     end
   end
 
+  def ignore
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    current_user.ignored_topics_count += 1
+    current_user.ignore_topic!(@topic)
+    current_user.mark_as_uninteresting(@topic)
+    current_user.save!
+
+    track_event(:ignored_topic)
+
+    notice = t("ignorable.flash.ignore", :ignorable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+
+      format.js do
+        render :json => {
+          :sucess => true,
+          :message => notice
+        }.to_json
+      end
+    end
+  end
+
+  def unignore
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    current_user.ignored_topics_count -= 1
+    current_user.unignore_topic!(@topic)
+    current_user.save!
+
+    track_event(:unignored_topic)
+
+    notice = t('ignorable.flash.unignore', :ignorable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+
+      format.js do
+        render :json => {
+          :sucess => true,
+          :message => notice
+        }.to_json
+      end
+    end
+  end
+
   def toggle_email_subscription
     if params[:id]
       @topic = Topic.find_by_slug_or_id(params[:id])
