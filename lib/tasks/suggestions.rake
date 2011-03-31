@@ -18,7 +18,6 @@ namespace :suggestions do
   task :refresh => :environment do
     Rails.logger.info "Refreshing suggestions for users..."
     User.query.each do |user|
-      puts user.name
       user.refresh_suggestions
       user.save :validate => false
     end
