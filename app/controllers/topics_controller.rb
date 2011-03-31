@@ -143,10 +143,7 @@ class TopicsController < ApplicationController
   def ignore
     @topic = Topic.find_by_slug_or_id(params[:id])
 
-    current_user.ignored_topics_count += 1
     current_user.ignore_topic!(@topic)
-    current_user.mark_as_uninteresting(@topic)
-    current_user.save!
 
     track_event(:ignored_topic)
 
@@ -159,7 +156,7 @@ class TopicsController < ApplicationController
 
       format.js do
         render :json => {
-          :sucess => true,
+          :success => true,
           :message => notice
         }.to_json
       end
@@ -169,9 +166,7 @@ class TopicsController < ApplicationController
   def unignore
     @topic = Topic.find_by_slug_or_id(params[:id])
 
-    current_user.ignored_topics_count -= 1
     current_user.unignore_topic!(@topic)
-    current_user.save!
 
     track_event(:unignored_topic)
 
@@ -184,7 +179,7 @@ class TopicsController < ApplicationController
 
       format.js do
         render :json => {
-          :sucess => true,
+          :success => true,
           :message => notice
         }.to_json
       end

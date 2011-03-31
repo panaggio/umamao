@@ -115,6 +115,7 @@ class Topic
       self.followers << user
       self.save!
       self.increment(:followers_count => 1)
+      user.unignore_topic!(self)
     end
   end
 

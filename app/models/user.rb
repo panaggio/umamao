@@ -451,6 +451,22 @@ Time.zone.now ? 1 : 0)
     true
   end
 
+  def ignore_topic!(topic)
+    unless self.ignored_topic_ids.include?(topic.id)
+      self.ignored_topic_ids << topic.id
+      self.save!
+      self.increment(:ignored_topics_count => 1)
+      topic.remove_follower!(self)
+    end
+  end
+
+  def unignore_topic!(topic)
+    if self.ignored_topic_ids.delete(topic.id)
+      self.save!
+      self.increment(:ignored_topics_count => -1)
+    end
+  end
+
   def followers
     self.friend_list.followers
   end
