@@ -60,7 +60,7 @@ pt-BR:
       other: "%{count} vezes"
   characters_left:
     one: "caracter restante"
-    other: "caracters restantes"
+    other: "caracteres restantes"
   characters_exceded:
     one: "caracter excedente"
     other: "caracteres excedentes"
