@@ -1,14 +1,16 @@
 #sidebar
   +follow-button
+  +ignore-button
   +suggestions
-  .follow-info.block
-    +column(4)
-    margin-top: 2px
-    a
-      display: block
-      padding: 2px 10px
-      font-size: 16px
-      line-height: 20px
+  .follow-info, .ignore-info
+    &.block
+      +column(4)
+      margin-top: 2px
+      a
+        display: block
+        padding: 2px 10px
+        font-size: 16px
+        line-height: 20px
 
   h2
     margin-bottom: 15px
