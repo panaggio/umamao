@@ -177,6 +177,11 @@ window.Utils = {
     link.text(dataTitle);
   },
 
+  // TODO: generalize toggle*Link, as they're all the same
+  toggleIgnoreLink: function (link) {
+    Utils.toggleFollowLink(link);
+  },
+
   toggleEmailSubscriptionLink: function (link) {
     var text = link.text();
     var dataText = link.attr("data-text");
