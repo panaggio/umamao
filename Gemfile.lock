@@ -188,7 +188,7 @@ GEM
     faraday (0.5.4)
       addressable (~> 2.2.2)
       multipart-post (~> 1.1.0)
-      rack (>= 1.1.0, < 2)
+      rack (< 2, >= 1.1.0)
     faraday_middleware (0.3.1)
       faraday (~> 0.5.3)
     ffi (0.6.3)
@@ -233,7 +233,6 @@ GEM
     multi_xml (0.2.0)
     multipart-post (1.1.0)
     net-ldap (0.1.1)
-    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     oauth (0.4.4)
     oauth2 (0.1.1)
@@ -275,8 +274,6 @@ GEM
     responders (0.6.2)
     rest-client (1.6.1)
       mime-types (>= 1.16)
-    rpm_contrib (1.0.13)
-      newrelic_rpm (>= 2.13.1)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
@@ -327,7 +324,7 @@ GEM
     twitter-text (1.1.8)
       actionpack
     twitter_oauth (0.3.6)
-      json (>= 1.1.9, <= 1.2.4)
+      json (<= 1.2.4, >= 1.1.9)
       mime-types (>= 1.16)
       oauth (>= 0.3.6)
     tzinfo (0.3.24)
@@ -378,7 +375,6 @@ DEPENDENCIES
   mongo
   mongo_mapper!
   mongomapper_ext!
-  newrelic_rpm
   nokogiri
   omniauth!
   postmark (~> 0.9.0)
@@ -386,7 +382,6 @@ DEPENDENCIES
   rails (= 3.0.5)
   rdiscount (~> 1.6.3.1)
   responders
-  rpm_contrib
   rspec
   rspec-rails (~> 2.0.0)
   ruby-debug

@@ -14,8 +14,6 @@ gem 'bson_ext', :require => 'bson'
 gem 'mongo'
 gem "mongo_mapper", :git => "git://github.com/umamao/mongomapper.git"
 gem 'mongomapper_ext', :git => 'git://github.com/umamao/mongomapper_ext.git'
-gem 'rpm_contrib'
-gem 'newrelic_rpm'
 gem 'devise', :git => 'git://github.com/umamao/devise.git'
 gem 'ccsv', '~> 0.1'
 gem 'cells', :git => 'git://github.com/apotonick/cells.git'
