@@ -73,16 +73,24 @@ module ApplicationHelper
     end
   end
 
-  # Modified Markdown syntax that understands LaTeX math
+  # Modified Markdown syntax that understands LaTeX math and a couple
+  # of other things.
   def markdown(txt, options = {})
-    options.reverse_merge! :process_latex => true, :render_links => true
-
+    options.reverse_merge!(:process_latex => true, :render_links => true
+                           :keep_newlines => true)
     if options[:process_latex]
       txt = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
         open  = $1
         math  = $2
         close = $3
         "\\\\" + open + math.gsub(/([_\*\\])/){|m| '\\' + $1} + "\\\\" + close
+      end
+    end
+
+    if options[:keep_newlines]
+      # Translate \n to <br />. Extracted from GitHub Flavored Markdown.
+      txt.gsub!(/(\A|^$\n)(^\w[^\n]*\n)(^\w[^\n]*$)+/m) do |x|
+        x.gsub(/^(.+)$/, "\\1  ")
       end
     end
 
