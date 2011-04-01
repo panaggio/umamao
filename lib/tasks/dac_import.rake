@@ -302,9 +302,9 @@ namespace :dac do
   end
 
   task :correct_course_name => :base do
-    Course.query('$or' => [:description => /^# \w\w\d\d\d: \w\w\d\d\d/,
-                           :name => /\w\w\d\d\d/]).each do |c|
-      code = c.name[0..1].downcase
+    Course.query('$or' => [{:description => /^# \w\w\d\d\d: \w\w\d\d\d/},
+                 {:name => /\w\w\d\d\d/}]).each do |c|
+      code = c.code[0..1].downcase
       agent = Mechanize.new
       begin
         pagelist = agent.get("http://www.dac.unicamp.br/sistemas/catalogos/grad/catalogo2011/ementas/todas#{code}.html")
@@ -312,7 +312,7 @@ namespace :dac do
         puts "Problem retrieving page for #{c.name}"
         next
       end
-      m = pagelist.body.gsub("\n", "").match(/<a name="#{c.name.downcase}">#{c.name} ([^<]*)/)
+      m = pagelist.body.gsub("\n", "").match(/<a name="#{c.code.downcase}">#{c.code} ([^<]*)/)
       if m
         puts "Correcting name #{c.name} to #{m[1]}. Its description starts with #{c.description[0..15]}"
         c.name = convert_string(m[1])
@@ -351,6 +351,7 @@ namespace :dac do
         apc.save!
       end
     end
+    sleep 0.5
   end
 
 end
