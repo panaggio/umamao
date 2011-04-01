@@ -27,6 +27,9 @@ namespace :db do
   task :import => :config do
     db = Mongo::Connection.new
 
+    puts "Dropping current DB..."
+    db.drop_database CFG['development']['database']
+
     puts "Importing binary dump..."
     db.copy_database(
       CFG['dump'],
