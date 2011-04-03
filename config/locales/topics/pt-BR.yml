@@ -11,7 +11,7 @@ pt-BR:
       description: Descrição
     show:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
-      all_tab: Todas perguntas
+      all_tab: Todas as perguntas
       email_subscription:
         notice:
           subscribed: Você reberá por email as novas perguntas do tópico %{topic}.
@@ -26,7 +26,7 @@ pt-BR:
       describe: "Ajude a descrever o tópico %{title}"
     unanswered:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
-      all_tab: Todas perguntas
+      all_tab: Todas as perguntas
       unanswered_tab: Perguntas em aberto
   activerecord:
     models:
