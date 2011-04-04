@@ -16,7 +16,7 @@ class NewsItem
   key :origin_type, :required => true
   belongs_to :origin, :polymorphic => true
 
-  key :hide, Boolean, :default => false
+  key :visible, Boolean, :default => true
 
   ensure_index([[:recipient_id, 1], [:created_at, -1]])
 
@@ -83,12 +83,12 @@ class NewsItem
   end
 
   def hide!
-    self.hide = true
+    self.visible = false
     self.save!
   end
 
   def show!
-    self.hide = false
+    self.visible = true
     self.save!
   end
 end
