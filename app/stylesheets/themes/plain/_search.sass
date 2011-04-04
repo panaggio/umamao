@@ -1,3 +1,5 @@
+// Autocomplete box style
+
 #search
   +column(9)
   margin-top: 13px
@@ -55,3 +57,55 @@
 
 .inactive
   color: #999999
+
+// Search page style
+
+ul.items#long-search-results
+  li.item
+    +pie-clearfix
+    .title, .name
+      a
+        +hover-link
+        font-size: 15px
+    .stats > * + *:before
+      content: "| "
+    .answers, .followers, .questions
+      display: inline
+      font-size: 10px
+      color: #aaa
+  .user
+    .picture
+      float: left
+      margin-right: 8px
+    .name, .bio
+      margin-bottom: 2px
+  .topic
+    .title
+      display: inline
+    .description
+      display: inline
+      color: #222
+      font-family: "Arial"
+    .stats
+      float: none
+      margin-top: 7px
+  .question
+    .details
+      +ellipsis
+      // Ought to be 2 lines
+      overflow: hidden
+      color: #222
+    .title, .details
+      margin-bottom: 3px
+
+#sidebar .long-search
+  input[type=text]
+    border: 1px solid black
+    padding: 3px
+    margin-bottom: 14px
+
+  .options
+    margin-bottom: 14px
+
+  input[type=submit]
+    +umamao-button

@@ -1,0 +1,5 @@
+.title= link_to question.title, question_path(question)
+.details.markdown= strip_tags(markdown(question.body))
+.stats
+  .answers= t(".answers", :count => question.answers.count)
+  .followers= t(".followers", :count => question.watchers.count)

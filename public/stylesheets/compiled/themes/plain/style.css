@@ -610,6 +610,13 @@ input.checkbox {
   font-size: 17px;
   line-height: 26px;
 }
+#sidebar h4 {
+  padding: 0 0 7px 0;
+  margin: 0;
+  color: #333333;
+  font-weight: bold;
+  font-size: 14px;
+}
 #sidebar ul.navigation li.last a {
   border-bottom: none;
 }
@@ -2472,6 +2479,128 @@ html body div#container div#wrapper div#main div#block-text div.secondary-naviga
 
 .inactive {
   color: #999999;
+}
+
+ul.items#long-search-results li.item {
+  *zoom: 1;
+}
+ul.items#long-search-results li.item:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+ul.items#long-search-results li.item .title a, ul.items#long-search-results li.item .name a {
+  text-decoration: none;
+  font-size: 15px;
+}
+ul.items#long-search-results li.item .title a:hover, ul.items#long-search-results li.item .name a:hover {
+  text-decoration: underline;
+}
+ul.items#long-search-results li.item .stats > * + *:before {
+  content: "| ";
+}
+ul.items#long-search-results li.item .answers, ul.items#long-search-results li.item .followers, ul.items#long-search-results li.item .questions {
+  display: inline;
+  font-size: 10px;
+  color: #aaaaaa;
+}
+ul.items#long-search-results .user .picture {
+  float: left;
+  margin-right: 8px;
+}
+ul.items#long-search-results .user .name, ul.items#long-search-results .user .bio {
+  margin-bottom: 2px;
+}
+ul.items#long-search-results .topic .title {
+  display: inline;
+}
+ul.items#long-search-results .topic .description {
+  display: inline;
+  color: #222222;
+  font-family: "Arial";
+}
+ul.items#long-search-results .topic .stats {
+  float: none;
+  margin-top: 7px;
+}
+ul.items#long-search-results .question .details {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #222222;
+}
+ul.items#long-search-results .question .title, ul.items#long-search-results .question .details {
+  margin-bottom: 3px;
+}
+
+#sidebar .long-search input[type=text] {
+  border: 1px solid black;
+  padding: 3px;
+  margin-bottom: 14px;
+}
+#sidebar .long-search .options {
+  margin-bottom: 14px;
+}
+#sidebar .long-search input[type=submit] {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  margin: 0.7em 0.5em 0.7em 0;
+  border-width: 1px;
+  border-style: solid;
+  font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size: 100%;
+  line-height: 130%;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  width: auto;
+  overflow: visible;
+  padding: 4px 10px 3px 7px;
+  background-color: #f5f5f5;
+  border-color: #eeeeee #dedede #dedede #eeeeee;
+  color: #565656;
+}
+#sidebar .long-search input[type=submit] {
+  *display: inline;
+}
+#sidebar .long-search input[type=submit] img {
+  margin: 0 3px -3px 0 !important;
+  padding: 0;
+  border: none;
+  width: 16px;
+  height: 16px;
+  float: none;
+}
+#sidebar .long-search input[type=submit][type] {
+  padding: 4px 10px 4px 7px;
+  line-height: 17px;
+}
+*:first-child + html #sidebar .long-search input[type=submit][type] {
+  padding: 4px 10px 3px 7px;
+}
+#sidebar .long-search input[type=submit]:hover {
+  background-color: #f84249;
+  border-color: #ff5259 #f84249 #f84249 #ff5259;
+  color: white;
+}
+#sidebar .long-search input[type=submit]:active {
+  background-color: #a80000;
+  border-color: #b81010 #a80000 #a80000 #b81010;
+  color: white;
+}
+#sidebar .long-search input[type=submit].current {
+  background-color: #f84249;
+  border-color: #ff5259 #f84249 #f84249 #ff5259;
+  color: white;
 }
 
 #sidebar .follow-info a {
