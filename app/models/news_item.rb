@@ -16,6 +16,8 @@ class NewsItem
   key :origin_type, :required => true
   belongs_to :origin, :polymorphic => true
 
+  key :hide, Boolean, :default => false
+
   ensure_index([[:recipient_id, 1], [:created_at, -1]])
 
   timestamps!
