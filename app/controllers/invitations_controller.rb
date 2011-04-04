@@ -67,7 +67,7 @@ class InvitationsController < ApplicationController
       invitation = Invitation.new(:sender_id => current_user.id,
                      :group_id => current_group.id,
                      :message => params[:message],
-                     :topic_id => params[:course_id],
+                     :topic_ids => [params[:course_id]],
                      :recipient_email => s.academic_email)
       invitation.save!
     end

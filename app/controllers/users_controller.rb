@@ -63,8 +63,9 @@ class UsersController < ApplicationController
 
       if @invitation
         @user.email = @invitation[:recipient_email]
-        if @invitation.student
-          @user.name = @invitation.student.name
+        if (m = @user.email.match(/^[a-z](\d{6})@dac.unicamp.br$/)) &&
+           (student = Student.find_by_code(m[1]))
+          @user.name = student.name
         end
         @user.invitation_token = @invitation.invitation_token
       end
@@ -142,7 +143,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      if invitation && invitation.student
+      if invitation && invitation.topics
         invitation.topics.each do |topic|
           topic.add_follower!(@user)
         end
