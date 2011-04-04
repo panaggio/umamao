@@ -81,4 +81,14 @@ class NewsItem
   def title
     self.news_update.entry.title
   end
+
+  def hide!
+    self.hide = true
+    self.save!
+  end
+
+  def show!
+    self.hide = false
+    self.save!
+  end
 end
