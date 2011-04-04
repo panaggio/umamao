@@ -15,3 +15,5 @@ tmp/**/*
 dump
 *.swp
 *~
+public/assets
+public/stylesheets/compiled
