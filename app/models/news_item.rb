@@ -18,6 +18,9 @@ class NewsItem
 
   key :visible, Boolean, :default => true
 
+  key :topic_ids, Array, :index => true
+  many :topics, :in => :topic_ids
+
   ensure_index([[:recipient_id, 1], [:created_at, -1]])
 
   timestamps!
