@@ -1,0 +1,12 @@
+= include_javascripts :student_invitation
+.registered-students
+  %ul
+    - students.each do |student|
+      %li
+        .student-name
+          = student.name.strip
+        .controls
+          = "(#{link_to(t("invitations.new_invitation_student.invite"), new_invitation_student_invitations_path(:id => topic.id, :student_id => student.id), :class => "student-invitation")})"
+
+  .more
+    = link_to t("scaffold.more"), students_course_path(topic)

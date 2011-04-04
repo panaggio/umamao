@@ -22,4 +22,23 @@ class Student
 
   timestamps!
 
+  def is_registered?
+    return Affiliation.count(:student_id => self.id) > 0
+  end
+
+  def user
+    a = Affiliation.find_by_student_id(self.id)
+    if a
+      return a.user
+    end
+    nil
+  end
+
+  def academic_email
+    if university.short_name == "Unicamp"
+      "#{self.name[0..0].downcase}#{self.code}@dac.unicamp.br"
+    else
+      nil
+    end
+  end
 end

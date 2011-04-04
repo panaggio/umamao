@@ -1,6 +1,9 @@
 %p= t('.greeting')
 
-%p= t('.sender', :user => h(@sender.name))
+- if @topics.present?
+  %p= t('.sender_topic', :user => h(@sender.name), :topic => @topics[0].title)
+- else
+  %p= t('.sender', :user => h(@sender.name))
 
 \---
 %p= markdown(@message, :group => @group)

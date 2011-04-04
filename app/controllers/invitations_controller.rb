@@ -45,4 +45,55 @@ class InvitationsController < ApplicationController
     redirect_to new_invitation_path
 
   end
+
+  def new_invitation_student
+    @course = Course.find_by_slug_or_id(params[:id])
+    @student = Student.find_by_id(params[:student_id])
+
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => true,
+          :html => render_to_string(:layout => false)
+        }
+      end
+      format.html
+    end
+  end
+
+  def create_invitation_student
+    s = Student.find_by_id(params[:student_id])
+    if s.academic_email
+      invitation = Invitation.new(:sender_id => current_user.id,
+                     :group_id => current_group.id,
+                     :message => params[:message],
+                     :topic_id => params[:course_id],
+                     :recipient_email => s.academic_email)
+      invitation.save!
+    end
+
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => true,
+          :message => t("invitations.sent")
+        }
+       format.html
+      end
+    end
+  end
+
+  def resend
+    invitation = Invitation.find_by_id(params[:id])
+    invitation.send_invitation
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => true,
+          :message => t("invitations.sent")
+        }
+       format.html
+      end
+    end
+  end
 end

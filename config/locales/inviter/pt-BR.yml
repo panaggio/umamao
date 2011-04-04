@@ -4,6 +4,7 @@ pt-BR:
       subject: "%{inviter} te convidou para entrar no Umamão!"
       greeting: Olá!
       sender: "%{user} acha que você deveria se juntar ao Umamão:"
+      sender_topic: "%{user} te convidou para discutir %{topic} no Umamão:"
       site_description: |
         O Umamão é uma base de conhecimento em língua portuguesa expandida e melhorada constantemente por acadêmicos e profissionais.
 

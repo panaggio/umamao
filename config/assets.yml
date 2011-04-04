@@ -41,6 +41,8 @@ javascripts:
     - public/javascripts/modules/dac_external_account.js
   topics_email_subscription:
     - public/javascripts/modules/email_subscription.js
+  student_invitation:
+    - public/javascripts/modules/invite_course.js
 
 stylesheets:
   base:

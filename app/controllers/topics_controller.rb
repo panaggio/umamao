@@ -27,6 +27,19 @@ class TopicsController < ApplicationController
 
     set_tab :all, :topic_show
 
+    if current_user.affiliations.select{|a|
+      a.university.short_name == "Unicamp"}.size > 0 &&
+      @topic.is_a?(Course) && Affiliation.first(
+      :university_id => University.find_by_short_name("Unicamp").id,
+      :user_id => current_user.id)
+
+      id_offers = CourseOffer.all(:course_id => @topic.id).map(&:id)
+      @students_course = Student.all(
+        :registered_course_ids.in => id_offers).select{|s|
+        Affiliation.first(:student_id => s.id).nil? &&
+          Invitation.count(:recipient_email => s.academic_email) == 0}[0..5]
+    end
+
     @news_items = NewsItem.paginate(:recipient_id => @topic.id,
                                     :recipient_type => "Topic",
                                     :per_page => 30,
@@ -257,4 +270,8 @@ class TopicsController < ApplicationController
     render :content_type => 'text/javascript'
   end
 
+  def students
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @course_offers = CourseOffer.query(:course_id => @topic.id)
+  end
 end
