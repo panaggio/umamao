@@ -19,6 +19,13 @@ namespace :data do
       end
     end
 
+    desc "Fillin topics for news_items"
+    task :fillin_topics_for_news_items => :environment do
+      NewsItem.find_each do |ni|
+        ni.topics = ni.news_update.entry.topics
+      end
+    end
+
     desc "Give three initial invites to everyone"
     task :give_first_invites => :environment do
       User.find_each do |user|
