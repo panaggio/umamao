@@ -76,7 +76,7 @@ module ApplicationHelper
   # Modified Markdown syntax that understands LaTeX math and a couple
   # of other things.
   def markdown(txt, options = {})
-    options.reverse_merge!(:process_latex => true, :render_links => true
+    options.reverse_merge!(:process_latex => true, :render_links => true,
                            :keep_newlines => true)
     if options[:process_latex]
       txt = txt.to_s.gsub /\\([\(\[])(.*?)\\([\]\)])/m do |match|
