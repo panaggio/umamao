@@ -42,6 +42,8 @@ class Topic
   key :email_subscriber_ids,  Array
   has_many :email_subscribers, :class_name => 'User', :in => :email_subscriber_ids
 
+  key :allow_question_lists, Boolean, :default => false
+
 
   timestamps!
 

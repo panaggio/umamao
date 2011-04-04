@@ -6,6 +6,8 @@ Shapado::Application.routes.draw do
 
   resources :affiliations
 
+  resources :question_lists, :only => [:new, :index, :create, :show]
+
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do
       post :follow

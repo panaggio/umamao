@@ -4,6 +4,9 @@
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   = render :partial => "email_subscription", :locals => {:topic => @topic, :block => "block"}
+  - if @topic.allow_question_lists
+    .clear
+    = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug)
   = render_cell :users, :followers, :followed => @topic
   - if @students_course.present?
     %h3.title

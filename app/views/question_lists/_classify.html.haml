@@ -1,0 +1,15 @@
+-# Autocomplete box used for adding topics to question lists.
+
+%ul.topic-list
+  - question_list.topics.each do |topic|
+    = topic_box(topic, question_list, { :ajax_add => true })
+  - if logged_in? && ajax_add && current_user.can_modify?(question_list)
+    %li.retag
+      %a.reclassify{:href => "#"}
+        %span.empty= t("questions.tags.tag")
+        %span.not-empty= t("questions.tags.retag")
+= text_field "topics", "", :class => "inactive", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
+%a.add-topic{:href => "#"}= t("scaffold.add")
+- if ajax_add
+  %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
+%ul#topic-autocomplete-suggestions.autocomplete-list
