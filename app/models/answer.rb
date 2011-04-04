@@ -148,6 +148,12 @@ class Answer < Comment
   def create_news_update
     NewsUpdate.create(:author => self.user, :entry => self,
                       :created_at => self.created_at, :action => 'created')
+
+    NewsUpdate.find_each(:entry => self.question) do |nu|
+      nu.news_items.each do |ni|
+        ni.hide!
+      end
+    end
   end
   handle_asynchronously :create_news_update
 
