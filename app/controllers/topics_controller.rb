@@ -27,12 +27,21 @@ class TopicsController < ApplicationController
 
     set_tab :all, :topic_show
 
-    @news_items = NewsItem.paginate(:recipient_id => @topic.id,
-                                    :recipient_type => "Topic",
-                                    :per_page => 30,
-                                    :page => params[:page] || 1,
-                                    :order => :created_at.desc,
-                                    :visible.ne => false)
+    opts = {
+      :recipient_id => @topic.id,
+      :recipient_type => "Topic",
+      :per_page => 30,
+      :page => params[:page] || 1,
+      :order => :created_at.desc,
+      :visible.ne => false
+    }
+
+    # if user ignores current topic, it should show it without filtering
+    unless current_user.ignored_topics.include? @topic
+      opts.merge(:ignored_topic_ids => current_user.ignored_topic_ids)
+    end
+
+    @news_items = NewsItem.paginate(opts)
 
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
