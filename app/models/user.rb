@@ -178,6 +178,16 @@ class User
     u ? u : []
   end
 
+  def self.ignorers(topics)
+    igs = Set.new
+
+    topics.each do |topic|
+      igs += self.query(:ignored_topic_ids => topic.id)
+    end
+
+    igs
+  end
+
   def confirm_from_invitation
     return if !self.new?
     invitation = Invitation.find_by_invitation_token(self.invitation_token)
@@ -465,6 +475,10 @@ Time.zone.now ? 1 : 0)
       self.save!
       self.increment(:ignored_topics_count => -1)
     end
+  end
+
+  def ignores?(topic)
+    self.ignored_topic_ids.include?(topic)
   end
 
   def followers
