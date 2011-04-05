@@ -1,1 +1,0 @@
-$(document).ready(function(){if($("#wait-notice").length>0){$.getJSON("/signup/find.js",function(c){if(c.success){var b=$("#interaction #content");var a=$(c.html);$("#wait-notice").slideUp("slow",function(){$(this).remove();a.css("display","none");b.append(a);a.slideDown("slow");Utils.poshytipfy()})}})}});

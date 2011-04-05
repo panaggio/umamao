@@ -1,1 +1,0 @@
-$(document).ready(function(){Utils.clickObject("#toggle_email_subscription_link",function(){var a=$(this);return{success:function(b){Utils.toggleEmailSubscriptionLink(a)},error:function(b){if(b.status=="unauthenticate"){window.location="/users/login"}},type:"POST"}})});

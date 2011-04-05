@@ -16,3 +16,5 @@ dump
 *.swp
 *~
 vendor/cache
+public/stylesheets/compiled
+public/assets
