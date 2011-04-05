@@ -20,14 +20,14 @@ namespace :jupiterweb do
 
   def find_or_create_course(code, name, summary='')
     t = Topic.find_by_title("#{code} (USP)")
-    if t && t.type == Course
+    if t && t.type == Course && t.name
       return t
     end
 
     if t.nil?
       t = Course.new
       t.title = "#{code} (USP)"
-    else
+    elsif t.type == Topic
       Topic.set(t.id, :_type => "Course")
       t = Course.find_by_id(t.id)
     end
@@ -59,6 +59,7 @@ namespace :jupiterweb do
   end
 
   def save_course_usp(code, name, summary, url)
+    puts [code, name].join(", ")
     c = find_or_create_course(code, name, summary)
     add_prereqs(c)
 
@@ -115,7 +116,6 @@ namespace :jupiterweb do
     agent.page.links.select{|l| l.href.include?("obterDisciplina")}.each do |link|
       link.click
       parse_course_page(agent.page.body, link.href)
-      print '-'
       sleep 0.5
     end
   end
