@@ -6,6 +6,7 @@ group :development do
   gem 'RedCloth', '~> 4.1.1'
   gem 'ruby-debug'
   gem 'ruby-prof'
+  gem 'grit'
 end
 
 gem 'rails', '3.0.5'
