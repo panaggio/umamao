@@ -18,7 +18,7 @@ pt-BR:
     done: Pronto
   time:
     today: hoje
-    ago: "%{time} atrás"
+    ago: "há %{time}"
   messages:
     success: "%{model} foi %{action}."
   models:

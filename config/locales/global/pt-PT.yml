@@ -2,13 +2,13 @@
 # Exported from translatewiki.net
 # Export driver: syck
 # Author: Hamilton Abreu
-pt-PT: 
-  actions: 
+pt-PT:
+  actions:
     closed: fechada
     created: criada
     deleted: apagada
     updated: actualizada
-  feeds: 
+  feeds:
     feed: Feed
     post_new_questions: Publicar perguntas novas
     question: Subscrever esta pergunta
@@ -16,7 +16,7 @@ pt-PT:
     share_on_twitter: no twitter, facebook e outros...
     tag: Subscrever a categoria
     user: Subscrever as perguntas do utilizador
-  global: 
+  global:
     by: por
     current: Actual
     from: de %{site}
@@ -27,19 +27,19 @@ pt-PT:
     preview: Antevisão
     previous: Anterior
     share: Partilhar
-  languages: 
+  languages:
     any: Qualquer
     user: As Minhas Línguas Preferidas
-  messages: 
+  messages:
     success: "%{model} foi %{action}."
-  models: 
+  models:
     question: A pergunta
-  number: 
-    x_time: 
+  number:
+    x_time:
       one: "%{count} vez"
       other: "%{count} vezes"
       zero: Nunca
-  scaffold: 
+  scaffold:
     add: Adicionar
     back: Voltar
     cancel: Cancelar
@@ -55,6 +55,6 @@ pt-PT:
     show: Mostrar
     sure: Tem a certeza de que pretende apagar este %{model}?
     update: Actualizar
-  time: 
-    ago: "%{time} atrás"
+  time:
+    ago: "há %{time}"
     today: hoje
