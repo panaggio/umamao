@@ -4,7 +4,6 @@ Capfile
 COPYING
 doc
 features
-app/stylesheets
 public/stylesheets/compiled
 spec
 test
