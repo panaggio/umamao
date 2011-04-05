@@ -94,4 +94,13 @@ class NewsItem
     self.visible = true
     self.save!
   end
+
+  # if the news_item doesn't include a ignored topic and
+  # it's not a question that should be hidden
+  def should_be_hidden?(ignored_topic_ids = [])
+    entry = self.news_update.entry
+
+    !! (entry.is_a?(Question) and entry.answers_count > 0) or
+      ( (entry.topic_ids & ignored_topic_ids).any? )
+  end
 end

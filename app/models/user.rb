@@ -466,6 +466,7 @@ Time.zone.now ? 1 : 0)
       self.ignored_topic_ids << topic.id
       self.save!
       self.increment(:ignored_topics_count => 1)
+      self.hide_ignored_news_items!
       topic.remove_follower!(self)
     end
   end
@@ -474,12 +475,31 @@ Time.zone.now ? 1 : 0)
     if self.ignored_topic_ids.delete(topic.id)
       self.save!
       self.increment(:ignored_topics_count => -1)
+      self.show_unignored_news_items!
     end
   end
 
   def ignores?(topic)
     self.ignored_topic_ids.include?(topic)
   end
+
+  def hide_ignored_news_items!
+    self.news_items.each do |ni|
+      if ni.should_be_hidden?(self.ignored_topic_ids)
+        ni.hide!
+      end
+    end
+  end
+  handle_asynchronously :hide_ignored_news_items!
+
+  def show_unignored_news_items!
+    self.news_items.each do |ni|
+      unless ni.should_be_hidden?(self.ignored_topic_ids)
+        ni.show!
+      end
+    end
+  end
+  handle_asynchronously :show_unignored_news_items!
 
   def followers
     self.friend_list.followers
