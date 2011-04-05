@@ -30,6 +30,7 @@ class NewsItem
             news_update.author, news_update.created_at)
     notified_users = Set.new [news_update.author]
 
+    # do not notify users that ignore any topic on that entry
     notified_users += User.ignorers(news_update.entry.topics)
 
     origins.each do |origin|
