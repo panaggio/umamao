@@ -59,7 +59,6 @@ namespace :jupiterweb do
   end
 
   def save_course_usp(code, name, summary, url)
-    puts [code, name].join(", ")
     c = find_or_create_course(code, name, summary)
     add_prereqs(c)
 
@@ -90,7 +89,7 @@ namespace :jupiterweb do
     c.save!
   end
 
-  def parse_course_page(page, url)
+  def parse_course_page(page, url, institute_code)
       page = convert_string(page.gsub!("\n", ""))
       m = page.match(/Disciplina: (\w\w\w\d\d\d\d) - ([^<]*)/)
       unless m
@@ -109,43 +108,35 @@ namespace :jupiterweb do
       rescue
         puts code, name
       end
+      puts [institute_code, code, name].join(", ")
       save_course_usp code, name, summary, url
   end
 
-  def get_courses(agent)
+  def get_courses(agent, institute_code)
     agent.page.links.select{|l| l.href.include?("obterDisciplina")}.each do |link|
       link.click
-      parse_course_page(agent.page.body, link.href)
+      parse_course_page(agent.page.body, link.href, institute_code)
       sleep 0.5
     end
   end
 
-  def open_log()
-    links = []
-    if File.exists?("tmp/import_jupiterweb.log")
-      file = File.new("tmp/import_jupiterweb.log", "r+")
-      while line = file.gets
-        links << line.gsub!("\n", "")
-      end
-    else
-      file = File.new("tmp/import_jupiterweb.log", "w")
-    end
-    return file, links
-  end
-
   desc 'Import courses from USP into topics'
-  task :import_usp_courses => :base do
+  task :import_usp_courses, [:last_institute_code] => :base do |t, args|
     puts "Import USP courses"
     agent = Mechanize.new
     page = agent.get("http://sistemas2.usp.br/jupiterweb/jupColegiadoLista?tipo=D")
 
-    file, links = open_log
- 
+    last_institute_code = args[:last_institute_code]
+    import_started = !last_institute_code
+
     # For each institute page
     intitute_links = page.links.select{|l| l.href.include?('jupColegiadoMenu.jsp')}
     intitute_links.each do |institute_link|
-      next if links.include? institute_link.href
+      import_started = import_started ||
+        institute_link.href.include?("codcg=#{last_institute_code}&")
+      next unless import_started
 
+      institute_code = institute_link.href.match(/codcg=(\d*)/)[1]
       institute_link.click
 
       # Intermediate link
@@ -158,17 +149,13 @@ namespace :jupiterweb do
       courses_by_letter = agent.page.links.select{|l| l.href.include?("letra=")}
       if courses_by_letter.present?
         courses_by_letter.each do |link_disc_list|
-          next if links.include? link_disc_list.href
           link_disc_list.click
-          get_courses(agent)
-          file.write "#{link_disc_list.href}\n"
-          file.flush
+          get_courses(agent, institute_code)
         end
       else
-        get_courses(agent)
+        get_courses(agent, institute_code)
       end
-      
-      file.write "#{institute_link.href}\n"
+
     end
     puts "\n"
   end
