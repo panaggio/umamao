@@ -62,6 +62,22 @@
 .secondary-navigation ul li.current
   +active_subtab
 
+.tertiary-navigation
+  float: right
+  color: #666666
+  span.menu-item
+    a
+      font-family: "trebuchet MS",sans-serif
+      font-size: 13px
+      color: #666666
+      padding-left: 5px
+    &.active
+      a
+        color: #000000
+  span.menu-item + span.menu-item:before
+    content: '·'
+    font-weight: bold
+
 html body div#container div#wrapper div#main div#block-text div.secondary-navigation
   ul.tabs
     +pie-clearfix
