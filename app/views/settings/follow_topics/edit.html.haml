@@ -1,8 +1,10 @@
 -# Bulk-following of topics in user settings.
 
-%h2.title
-  = t(".title")
 = error_messages_for :user
+
+.tertiary-navigation
+  %span.menu-item.followed&= link_to t('.followed'), settings_follow_topics_path
+  %span.menu-item.ignored&= link_to t('.ignored'), settings_ignore_topics_path
 
 %input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics"), "data-autocomplete-url" => autocomplete_url}
 %ul.autocomplete-list#follow-topics-suggestions

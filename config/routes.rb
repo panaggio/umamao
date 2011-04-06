@@ -78,6 +78,7 @@ Shapado::Application.routes.draw do
     match 'account' => 'account#edit', :via => :get
     match 'account' => 'account#update', :via => :put
     match 'follow_topics' => 'follow_topics#edit', :via => :get
+    match 'ignore_topics' => 'ignore_topics#edit', :via => :get
     resources :external_accounts, :only => [:index, :destroy]
   end
 

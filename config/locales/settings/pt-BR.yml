@@ -19,4 +19,5 @@ pt-BR:
         submit: Atualizar
     follow_topics:
       edit:
-        title: Tópicos seguidos
+        followed: Tópicos seguidos
+        ignored: Tópicos ignorados
