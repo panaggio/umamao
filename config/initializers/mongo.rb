@@ -3,7 +3,7 @@ require 'mm-paginate'
 MongoMapper.setup(YAML.load(ENV["DATABASE_YML"]),
                   Rails.env, { :logger => Rails.logger, :passenger => false })
 
-MongoMapperExt.init
+MongoMapperExt.init(:enable_magic => false)
 
 if defined?(PhusionPassenger)
   PhusionPassenger.on_event(:starting_worker_process) do |forked|
