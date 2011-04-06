@@ -5,7 +5,7 @@
 %p
   = t('.author', :user => h(@question.user.name), :topic => h(@topic.name))
 %p
-  = @question.title
+  = question
 %p
   = shapado_auto_link(markdown(@question.body, :group => @group))
 %p

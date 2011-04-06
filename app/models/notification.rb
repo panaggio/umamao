@@ -19,6 +19,9 @@ class Notification
   key :reason_type
   belongs_to :reason, :polymorphic => true
 
+  key :topic_id, ObjectId
+  belongs_to :topic
+
   def unread?
     !self.user.last_read_notifications_at ||
       self.user.last_read_notifications_at < self.created_at
@@ -31,6 +34,8 @@ class Notification
       self.reason.question
     when "new_comment"
       self.reason.find_question
+    when "new_question"
+      self.reason
     end
   end
 end
