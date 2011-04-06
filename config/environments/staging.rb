@@ -52,6 +52,9 @@ Shapado::Application.configure do
   config.after_initialize do
     Topic.handle_asynchronously :remove_from_suggestions
   end
+
+  config.active_support.deprecation = :notify
+
 end
 
 class ActionDispatch::Request
