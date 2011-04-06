@@ -2,6 +2,10 @@ pt-BR:
   ignorable:
     ignore: Ignorar
     unignore: Não ignorar
+    text: Ignorar atualizações desse tópico
+    link:
+      activate: ativa
+      deactivate: desativar
     flash:
       ignore: "Você não receberá mais atualizações de %{ignorable}"
       unignore: "Você voltará a receber atualizações de %{ignorable}"
