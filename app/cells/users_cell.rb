@@ -17,6 +17,12 @@ class UsersCell < Cell::Rails
   def followers
     @followed = options[:followed]
     @users = @followed.followers
+    if @followed.is_a?(Question)
+      author = @followed.user
+      @users = @users.to_a
+      @users.delete(author)
+      @users.unshift(author)
+    end
     @total_followers = @followed.followers.count
     @type = @followed.collection.name.singularize
     @path =
