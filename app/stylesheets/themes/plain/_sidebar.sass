@@ -1,20 +1,17 @@
 #sidebar
   +follow-button
-  +ignore-button
   +suggestions
-  .email-subscribe-info.hidden
-    display: none
-  .follow-info, .ignore-info
-    &.block
-      +column(4)
-      &.hidden
-        display: none
-      margin-top: 2px
-      a
-        display: block
-        padding: 2px 10px
-        font-size: 16px
-        line-height: 20px
+  .email-subscribe-info, .ignore-info
+    &.hidden
+      display: none
+  .follow-info.block
+    +column(4)
+    margin-top: 2px
+    a
+      display: block
+      padding: 2px 10px
+      font-size: 16px
+      line-height: 20px
 
   h2
     margin-bottom: 15px
