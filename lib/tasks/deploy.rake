@@ -1,3 +1,9 @@
+desc "Deploy app based on current master branch."
+task :deploy do
+  Rake::Task["deploy:update_production_branch"].invoke
+  Rake::Task["deploy:push_production_branch"].invoke
+end
+
 namespace :deploy do
 
   task :environment do
@@ -5,6 +11,7 @@ namespace :deploy do
     Repo = Grit::Repo.new '.'
   end
 
+  desc "Prepare production branch with latest changes in master."
   task :update_production_branch => :environment do
     master = Repo.commits("master").first
     production = Repo.commits("production").first
@@ -41,6 +48,12 @@ namespace :deploy do
 
     idx.commit("Based on #{master.id}.", :head => "production",
                :parents => [production])
+  end
+
+  desc "Send the production branch to heroku."
+  task :push_production_branch do
+    puts "Pushing production branch."
+    `git push -f heroku production:master`
   end
 
 end
