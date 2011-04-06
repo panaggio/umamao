@@ -1,7 +1,7 @@
 - block = local_assigns[:block]
 -# Subscribe/unsubscribe emails for new questions
 
-- if logged_in? and current_user.admin?
+- if logged_in?
   - visible = topic.follower_ids.include?(current_user.id)
   %div.block#email-subscription{:class => (visible ? "" : "hidden")}
     =  t("topics.show.email_subscription.text")
