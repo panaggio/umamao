@@ -16,6 +16,8 @@ class NewsItem
   key :origin_type, :required => true
   belongs_to :origin, :polymorphic => true
 
+  key :visible, Boolean, :default => true
+
   ensure_index([[:recipient_id, 1], [:created_at, -1]])
 
   timestamps!
@@ -78,5 +80,15 @@ class NewsItem
 
   def title
     self.news_update.entry.title
+  end
+
+  def hide!
+    self.visible = false
+    self.save!
+  end
+
+  def show!
+    self.visible = true
+    self.save!
   end
 end

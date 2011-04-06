@@ -28,7 +28,7 @@ class WelcomeController < ApplicationController
   end
 
   def home
-    @news_items = filter_news_items
+    @news_items = filter_news_items(:visible.ne => false)
 
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
     @getting_started = Question.find_by_slug_or_id("4d404ee779de4f25ff000507")

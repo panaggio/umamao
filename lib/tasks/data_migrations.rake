@@ -8,6 +8,17 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Initialize news_item's visibility flag"
+    task :initialize_news_items_visibility_flag => :environment do
+      NewsItem.find_each do |ni|
+        if ni.news_update_entry_type == "Question" and
+          ni.news_update.entry.answers_count > 0
+          ni.hide!
+        else
+          ni.show!
+        end
+      end
+    end
 
     desc "Give three initial invites to everyone"
     task :give_first_invites => :environment do

@@ -37,6 +37,7 @@ class Answer < Comment
   validate :check_unique_answer, :if => lambda { |a| (!a.group.forum && !a.disable_limits?) }
 
   after_create :create_news_update, :new_answer_notification
+  before_destroy :unhide_news_update
 
   ensure_index([[:user_id, 1], [:question_id, 1]])
 
@@ -148,8 +149,19 @@ class Answer < Comment
   def create_news_update
     NewsUpdate.create(:author => self.user, :entry => self,
                       :created_at => self.created_at, :action => 'created')
+
+    hide_news_update
   end
   handle_asynchronously :create_news_update
+
+  def hide_news_update
+    self.question.news_update.hide!
+  end
+
+  def unhide_news_update
+    # if this is the last question, reshow question's news_update
+    self.question.news_update.show! if self.question.answers_count == 1
+  end
 
   def new_answer_notification
     # only if the answer wasn't created by question author and

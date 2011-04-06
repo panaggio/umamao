@@ -31,7 +31,9 @@ class TopicsController < ApplicationController
                                     :recipient_type => "Topic",
                                     :per_page => 30,
                                     :page => params[:page] || 1,
-                                    :order => :created_at.desc)
+                                    :order => :created_at.desc,
+                                    :visible.ne => false)
+
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
                                    :page => params[:page] || 1) if @news_items.blank?

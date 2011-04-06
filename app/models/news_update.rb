@@ -28,4 +28,15 @@ class NewsUpdate
   end
   handle_asynchronously :create_news_items
 
+  def hide!
+    self.news_items.each do |ni|
+      ni.hide!
+    end
+  end
+
+  def show!
+    self.news_items.each do |ni|
+      ni.show!
+    end
+  end
 end
