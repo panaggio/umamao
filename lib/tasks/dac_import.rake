@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'mechanize'
 require 'rubygems'
-require 'ccsv'
 require 'iconv'
 require 'cgi'
 require 'nokogiri'

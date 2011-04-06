@@ -3,6 +3,7 @@
 source 'http://gemcutter.org'
 
 group :development do
+  gem 'ccsv', '~> 0.1'
   gem 'compass', '~> 0.10.2'
   gem 'compass-colors', '~> 0.3.1'
   gem 'fancy-buttons', '~>0.5.1'
@@ -19,7 +20,6 @@ gem 'mongo'
 gem "mongo_mapper", :git => "git://github.com/umamao/mongomapper.git"
 gem 'mongomapper_ext', :git => 'git://github.com/umamao/mongomapper_ext.git'
 gem 'devise', :git => 'git://github.com/umamao/devise.git'
-gem 'ccsv', '~> 0.1'
 gem 'cells', :git => 'git://github.com/apotonick/cells.git'
 gem 'cloudsponge'
 gem 'curb'

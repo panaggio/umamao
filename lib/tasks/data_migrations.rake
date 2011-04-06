@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'mechanize'
 require 'rubygems'
-require 'ccsv'
 require 'lib/freebase'
 require 'lib/wikipedia_parser'
 require 'lib/wikipedia_fillin'
@@ -583,6 +582,7 @@ namespace :data do
 
     desc "(USING THIS WILL REMOVE DOMAINS!) fix csv file from uni2.csv to uni.csv"
     task :fix_csv_file => :environment do
+      require 'ccsv'
       f = File.new("data/uni.csv", "w")
       Ccsv.foreach("data/uni2.csv") do |row|
         name      = row[0].split('-')[0].tr("\"", "")
@@ -604,6 +604,7 @@ namespace :data do
  state, V, domain] where V is TRUE if the university is open for signup or
  FALSE otherwise"
     task :import_universities => :environment do
+      require 'ccsv'
       Ccsv.foreach("data/uni.csv") do |row|
         a = University.new
         a.name = row[0].split('-')[0].tr("\"", "")
