@@ -32,6 +32,8 @@ pt-BR:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
       all_tab: Todas as perguntas
       unanswered_tab: Perguntas em aberto
+    embedded:
+      empty: Não há perguntas sobre este tópico
   activerecord:
     models:
       topic: Tópico
