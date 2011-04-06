@@ -2,7 +2,7 @@ AUTHORS
 autotest
 Capfile
 COPYING
-doc
+/doc/README_FOR_APP
 features
 public/stylesheets/compiled
 spec
