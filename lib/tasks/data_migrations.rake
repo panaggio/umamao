@@ -864,5 +864,15 @@ namespace :data do
       print "\n"
     end
 
+    desc "Fix student names"
+    task :fix_student_names => :environment do
+      Student.all(:name => /^[^A-Za-z]/).each do |s|
+        print "-"
+        s.name = s.name.match(/[A-Za-z].*\w/)[0]
+        s.save(:validate => false)
+      end
+      print "\n"
+    end
+
   end
 end
