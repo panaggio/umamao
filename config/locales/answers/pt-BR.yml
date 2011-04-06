@@ -27,7 +27,7 @@ pt-BR:
       facebook_self: Minha resposta
       twitter: Resposta no %{site}
       twitter_named: Resposta de %{name} no %{site}
-      twitter_self: Minha resposta no %{site}
+      twitter_self: Respondi no %{site}
     update:
       flash_notice: "Resposta atualizada."
     revert:
