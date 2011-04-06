@@ -2,16 +2,19 @@ require 'ostruct'
 
 require "#{Rails.root}/lib/tracking/mixpanel"
 
-options = YAML.load(ENV["SHAPADO_YML"])
+config_file = Rails.root + "config/shapado.yml"
+
+options = YAML.load_file(config_file)
 if !options[Rails.env]
-  raise "'#{Rails.env}' was not found in SHAPADO_YML"
+  raise "'#{Rails.env}' was not found in #{config_file}"
 end
 
 AppConfig = OpenStruct.new(options[Rails.env])
 
 # check config
 begin
-  known_options = YAML.load(ENV["SHAPADO_YML_SAMPLE"])[Rails.env]
+  sample_file = Rails.root + "config/shapado.yml.sample"
+  known_options = YAML.load_file(sample_file)[Rails.env]
   if known_options
     known_options.each do |k, v|
       if AppConfig.send(k).nil?
