@@ -15,7 +15,7 @@
     = f.label :title, "#{t('topics.edit.name')}*", :class => "label"
     = f.text_field :title, :class => "text_field"
   .group
-    = f.label :description, t('topics.edit.description'), :class => "label"
+    = f.label :description, t('question_lists.new.details'), :class => "label"
     = f.text_area :description, :class => "editor-input", :id => "topic-input", :rows => "auto", :cols => "auto"
     %label.label
       = t("global.preview")
@@ -25,21 +25,21 @@
       $().ready(function() { $("#topic-input").wmdMath({preview: "topic-preview"}); });
 
   %hr
-    .group
-      %span.sublabel
-        = "#{t('.main_topic')}:"
-      %span.main-topic
-        %span.topic
-          %span.topic-title
-            = @question_list.main_topic.slug
-      = f.hidden_field :main_topic, :value => @question_list.main_topic.slug
-    .group
-      %ul.topic-list
-        - @question_list.topics.each do |topic|
-          = topic_box(topic, @question_list, { :ajax_add => true })
-      = text_field "topics", "", :class => "inactive", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
-      %a.add-topic{:href => "#"}= t("scaffold.add")
-      %ul#topic-autocomplete-suggestions.autocomplete-list
+  .group
+    %span.sublabel
+      = "#{t('.main_topic')}:"
+    %span.main-topic
+      %span.topic
+        %span.topic-title
+          = @question_list.main_topic.title
+    = f.hidden_field :main_topic, :value => @question_list.main_topic.slug
+  .group
+    %ul#classify-ul.topic-list
+      - @question_list.topics.each do |topic|
+        = topic_box(topic, @question_list, { :ajax_add => true })
+    = text_field "topics", "", :class => "inactive", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
+    %a.add-topic{:href => "#"}= t("scaffold.add")
+    %ul#topic-autocomplete-suggestions.autocomplete-list
 
   .group.navform
     = f.submit t('.submit')

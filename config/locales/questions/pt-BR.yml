@@ -32,6 +32,7 @@ pt-BR:
       unset_answer: Desmarcar como aceita?
     create:
       flash_notice: "A pergunta foi criada. Clique em 'Editar' se quiser adicionar detalhes."
+      error: "Não foi possível criar a pergunta."
     edit:
       title: Editando pergunta
     flag:

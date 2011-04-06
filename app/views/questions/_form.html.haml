@@ -16,7 +16,7 @@
   - if topics
     %hr
     .group
-      = render :partial => "classify", :locals => {:question => @question, :ajax_add => false}
+      = render :partial => "shared/classify", :locals => {:classifiable => @question, :ajax_add => false}
 
 - if @question.new?
   .controls

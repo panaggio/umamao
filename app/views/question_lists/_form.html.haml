@@ -1,0 +1,17 @@
+- form_for new_question, :html => {:class => "form", :id => "new_question_form"} do |f|
+  .title
+    %a{:name => "form"}
+    = f.label :title, "#{t('.new_question')}*", :class => "label"
+    = f.text_field :title, :class => "text_field", :id => "question-title-input"
+  .body
+    = f.label :body, t(".details"), :class => "label"
+    = f.text_area :body, :class => "editor-input"
+  .preview
+    %label.label
+      = t("global.preview")
+    #question-preview.markdown
+  = f.hidden_field :question_list, :value => question_list.id
+
+  .group.navform
+    = f.submit t(".make_question"),  :class => "button"
+    = link_to t("scaffold.cancel"), "#", :class => "button cancel"

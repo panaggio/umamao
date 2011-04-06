@@ -1,9 +1,23 @@
 pt-BR:
   question_lists:
     new:
-      title: Criar lista de perguntas
-      main_topic: Tópico principal
-      submit: Criar lista
+      title: "Criar lista de perguntas"
+      main_topic: "Tópico principal"
+      submit: "Criar lista"
+      details: "Detalhes (opcional)"
     create:
       flash_notice: "Lista de perguntas criada com sucesso."
       topic_does_not_allow: "Tópico %{title} não permite listas de perguntas."
+    show:
+      empty: "Esta lista ainda não possui nenhuma pergunta."
+      confirm_destroy: "Tem certeza que deseja excluir esta lista de perguntas?"
+      allow_new_questions: "Adicionar nova pergunta"
+    form:
+      new_question: "Nova pergunta"
+      details: "Detalhes sobre a pergunta (opcional)"
+      make_question: "Adicionar pergunta"
+    question:
+      answers_count:
+        zero: "Adicionar resposta"
+        one: "%{count} resposta"
+        other: "%{count} respostas"

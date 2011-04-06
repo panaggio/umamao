@@ -7,7 +7,7 @@
   .summary
     - cache("question_list_on_index_#{question_list.id}_#{question_list.created_at}") do
       %h3= link_to name, question_list_path(question_list), :name => question_list.name
-      %ul.topic-list
+      %ul#classify-ul.topic-list
         - question_list.topics[0..5].each do |topic|
           %li
             .topic

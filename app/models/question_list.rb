@@ -5,9 +5,30 @@ class QuestionList < Topic
   key :topic_ids, Array, :index => true
   many :topics, :in => :topic_ids
 
-  key :question_ids, Array, :index => true
-  many :questions, :in => :question_ids
-
   key :user_id, String, :index => true
   belongs_to :user
+
+  # Classifies self under topic topic.
+  def classify!(topic)
+    if !topic_ids.include? topic.id
+      self.topic_ids_will_change!
+      self.topic_ids << topic.id
+      self.needs_to_update_search_index
+      save!
+    else
+      false
+    end
+  end
+
+  # Removes self from topic topic.
+  def unclassify!(topic)
+    if topic_ids.include? topic.id
+      self.topic_ids_will_change!
+      self.topic_ids.delete topic.id
+      self.needs_to_update_search_index
+      save!
+    else
+      false
+    end
+  end
 end

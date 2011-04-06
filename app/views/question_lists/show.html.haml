@@ -1,8 +1,5 @@
-= render :partial => 'shared/share_header', :locals => { :opts => { :content => @question_list, :class_name => QuestionList.to_s.underscore }, :content_url => question_list_url(@question_list) }
-- source = question_list_path(@question_list)
-
 - content_for :js do
-  = include_javascripts :content_edit, :show_question
+  = include_javascripts :content_edit, :show_question_list
   = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.min.js"
   = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.mathjax.js"
 
@@ -14,36 +11,38 @@
   %meta{:name => "description", :content => @question_list.description.gsub(/<\/?[^>]*>/, "")[0, 255] }
   %link{:rel => "canonical", :href => question_list_url(@question_list_url) }
 
--#= error_messages_for 'question_list'
+#question-list
 
-#question.commentable
-
-  %h1.navtitle.title.entry-title.question-title-col
+  %h1.navtitle.title.entry-title.question-list-title-col
     &= @question_list.title
 
-  %hr
-    = render :partial => "classify", :locals => {:question_list => @question_list, :ajax_add => true}
+  .body-col
+    .description.markdown
+      = markdown(@question_list.description)
 
-    .controls
-      .actions
-        - if logged_in?
-          - if current_user.can_modify?(@question_list)
-            = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => "are you sure?", :method => :delete
-            -# FIXME: EDIT QUESTION LIST
-            -#= link_to t('scaffold.edit'), edit_question_list_path(@question_list), :class => "button"
+    = render :partial => "shared/classify", :locals => {:classifiable => @question_list, :ajax_add => true}
 
-        #question_flag_div
+  .controls
+    .actions
+      - if logged_in?
+        - if current_user.can_modify?(@question_list)
+          = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => t(".confirm_destroy"), :method => :delete
+          = link_to t("scaffold.edit"), edit_topic_path(@question_list), :class => "button"
 
-  -#= render :partial => "shared/comments", :locals => {:commentable => @question, :source => source, :path_scope => [@question]}
+  %ul.items#questions
+    - if @questions.empty?
+      %li.empty
+        = t(".empty")
+    - else
+      - @questions.each do |question|
+        = render :partial => "question", :object => question
+  .clear
+  
+  - if @questions.total_pages == 0 || @page.to_i == @questions.total_pages
+    = render :partial => "form", :locals => { :question_list => @question_list, :new_question => @new_question }
+    #new_question_link
+      = link_to t('.allow_new_questions'), "#form"
 
-%ul.items#questions
-  - if @questions.empty?
-    %li.highlight
-      = t(".empty")
-  - @questions.each do |question|
-    = render :partial => "questions/question", :object => question
-
-#additional_info
-  = will_paginate @questions
-    
--#= render :partial => 'shared/share_body', :locals => { :opts => { :content => @question_list.id, :class_name => QuestionList.to_s.underscore } }
+  - unless @questions.empty?
+    #additional_info.pagination
+      = will_paginate @questions

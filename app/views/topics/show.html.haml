@@ -4,60 +4,61 @@
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
   = render :partial => "email_subscription", :locals => {:topic => @topic, :block => "block"}
-  - if @topic.allow_question_lists
-    .clear
-    = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug)
   = render_cell :users, :followers, :followed => @topic
   - if @students_course.present?
     %h3.title
       = t('.registered_students')
     = render :partial => "course_invitation", :locals => {:topic => @topic, :students => @students_course}
-
-.secondary-navigation
-  .navtitle
-    &= @topic.title
-%br
-
-.markdown
-  = markdown(@topic.description)
-
-%p
-  = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
-
-.secondary-navigation
-  - tabs_tag :namespace => :topic_show do |tab|
-    = tab.all t('.all_tab'), @topic
-    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
-%br
-
-- if @news_items.blank?
-  %ul.items#questions
-    - if @questions.blank?
-      %li.highlight
-        = t(".empty")
-    - @questions.each do |question|
-      = render :partial => "questions/question", :object => question
-- else
-  %ul.items#news_items
-    - @news_items.each do |news_item|
-      = render :partial => "welcome/news_item", :object => news_item
-
-- content_for :sidebar do
-  - if @topic.related_topics.any?
-    #related-topics.block.related
-      %h3.title
-        = t('.related_topics')
-      %ul.topic-list
-        = render :partial => "topics/related_topic_list"
-
-#additional_info
+  
+#topic
+  .secondary-navigation
+    .navtitle
+      &= @topic.title
+  %br
+  
+  .markdown
+    = markdown(@topic.description)
+  
+  .controls
+    .actions
+      = link_to t('scaffold.edit'), edit_topic_path(@topic)
+      - if @topic.allow_question_lists
+        = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug), :class => "featured"
+  
+  .secondary-navigation
+    - tabs_tag :namespace => :topic_show, :open_tabs => {:class => :tabs} do |tab|
+      = tab.all t('.all_tab'), @topic
+      = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
+  %br
+  
   - if @news_items.blank?
-    = will_paginate @questions
+    %ul.items#questions
+      - if @questions.blank?
+        %li.highlight
+          = t(".empty")
+      - @questions.each do |question|
+        = render :partial => "questions/question", :object => question
   - else
-    = will_paginate @news_items
-
-  #help_us
-    = t("questions.index.help_to_answer")
-    = link_to t("questions.index.unanswered_questions"), unanswered_topic_path(@topic)
-
-  .clear
+    %ul.items#news_items
+      - @news_items.each do |news_item|
+        = render :partial => "welcome/news_item", :object => news_item
+  
+  - content_for :sidebar do
+    - if @topic.related_topics.any?
+      #related-topics.block.related
+        %h3.title
+          = t('.related_topics')
+        %ul.topic-list
+          = render :partial => "topics/related_topic_list"
+  
+  #additional_info
+    - if @news_items.blank?
+      = will_paginate @questions
+    - else
+      = will_paginate @news_items
+  
+    #help_us
+      = t("questions.index.help_to_answer")
+      = link_to t("questions.index.unanswered_questions"), unanswered_topic_path(@topic)
+  
+    .clear

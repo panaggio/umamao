@@ -1,5 +1,5 @@
 - if @total_followers > 0
   .block.followers{"data-entry-type" => @type}
-    .title.count
+    %h2.title.count
       = t("#{@i18n_class}.link", :count => @total_followers, :link => @path)
     = render :state => :list
