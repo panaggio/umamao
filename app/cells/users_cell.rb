@@ -18,12 +18,7 @@ class UsersCell < Cell::Rails
     @followed = options[:followed]
     @users = @followed.followers
     @total_followers = @followed.followers.count
-    @type =
-      if @followed.is_a?(Topic)
-        "topic"
-      else
-        @followed.class.to_s.downcase
-      end
+    @type = @followed.collection.name.singularize
     @path =
       case @followed
       when User
