@@ -419,10 +419,16 @@ Time.zone.now ? 1 : 0)
     User.increment(user.id, :followers_count => 1)
 
     if user.notification_opts.activities
-      Notifier.delay.follow(self, user)
-      Notification.create!(:user => user,
-                           :event_type => "follow",
-                           :origin => self)
+      old_notification =
+        user.notifications.all(:event_type => "follow",
+                               :origin_id => self.id,
+                               :created_at.gte => Time.now - 1.week)
+      if old_notification.blank?
+        Notifier.delay.follow(self, user)
+        Notification.create!(:user => user,
+                             :event_type => "follow",
+                             :origin => self)
+      end
     end
 
     self.remove_suggestion(user)
