@@ -37,8 +37,7 @@ class Notifier < ActionMailer::Base
 
     subject = I18n.t("subject",
                      :scope => scope,
-                     :title => question.title,
-                     :name => question.user.name)
+                     :topic => @topic.title)
 
     mail(:to => user.email, :subject => subject)
   end

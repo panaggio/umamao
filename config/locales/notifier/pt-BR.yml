@@ -33,6 +33,7 @@ pt-BR:
       message4: "Assunto: %{subject}"
     new_question:
       author: "%{user} adicionou uma nova pergunta ao tópico %{topic}:"
+      question_link: "Veja a pergunta em:\n%{link}"
       disable_html: "Se não quiser mais receber por email as notificações deste tópico, visite a <a href='%{disable_link}'>página do tópico</a>."
       disable_text: "Se não quiser mais receber por email as notificações deste tópico, visite a página do tópico em:"
       link_label: "Para ver a resposta, visite o link:"

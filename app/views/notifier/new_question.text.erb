@@ -3,13 +3,15 @@
 
 <%= t('.author', :user => h(@question.user.name), :topic => h(@topic.name)) %>
 
-<% h(@question.title) %>
+<%= h(@question.title) %>
+ 
+<%= t('.question_link', :link => url_for(:host => @domain, :controller => "questions", :action => "show", :id => @question.slug)) %>
 
 ---
 <%= h(@question.body) %>
 ---
 
-<% t('.disable_text') %>
-<% @disable_link %>
+<%= t('.disable_text') %>
+<%= @disable_link %>
 
 <%= simple_format(t('notifier.global.signature')) %>
