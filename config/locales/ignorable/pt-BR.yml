@@ -4,7 +4,7 @@ pt-BR:
     unignore: Não ignorar
     text: Ignorar atualizações desse tópico
     link:
-      activate: ativa
+      activate: ativar
       deactivate: desativar
     flash:
       ignore: "Você não receberá mais atualizações de %{ignorable}"
