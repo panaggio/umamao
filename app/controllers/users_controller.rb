@@ -64,7 +64,8 @@ class UsersController < ApplicationController
       if @invitation
         @user.email = @invitation[:recipient_email]
         if (m = @user.email.match(/^[a-z](\d{6})@dac.unicamp.br$/)) &&
-           (student = Student.find_by_code(m[1]))
+           (student = Student.find_by_code(m[1], :university_id => University.
+                                           find_by_short_name("Unicamp").id))
           @user.name = student.name
         end
         @user.invitation_token = @invitation.invitation_token

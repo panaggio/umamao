@@ -78,7 +78,6 @@ class InvitationsController < ApplicationController
           :success => true,
           :message => t("invitations.sent")
         }
-       format.html
       end
     end
   end
@@ -92,7 +91,6 @@ class InvitationsController < ApplicationController
           :success => true,
           :message => t("invitations.sent")
         }
-       format.html
       end
     end
   end

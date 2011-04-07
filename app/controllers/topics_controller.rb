@@ -27,11 +27,8 @@ class TopicsController < ApplicationController
 
     set_tab :all, :topic_show
 
-    if current_user.affiliations.select{|a|
-      a.university.short_name == "Unicamp"}.size > 0 &&
-      @topic.is_a?(Course) && Affiliation.first(
-      :university_id => University.find_by_short_name("Unicamp").id,
-      :user_id => current_user.id)
+    if @topic.is_a?(Course) && current_user.affiliations.select{|a|
+      a.university.short_name == "Unicamp"}.size > 0
 
       id_offers = CourseOffer.all(:course_id => @topic.id).map(&:id)
       @students_course = Student.all(
