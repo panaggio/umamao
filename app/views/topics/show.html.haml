@@ -3,7 +3,7 @@
 
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
-  = render :partial => "ignore", :locals => {:topic => @topic, :block => "block"}
+  = render :partial => "ignore_link", :locals => {:topic => @topic, :block => "block"}
   = render :partial => "email_subscription", :locals => {:topic => @topic, :block => "block"}
   = render_cell :users, :followers, :followed => @topic
 
