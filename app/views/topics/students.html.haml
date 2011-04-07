@@ -14,8 +14,7 @@
               - if (email = student.academic_email) && (invitation = Invitation.find_by_recipient_email(email))
                 = "(#{t("invitations.new_invitation_student.pending")}"
                 - if invitation.sender_id == current_user.id
-                  = " - #{link_to(t("invitations.new_invitation_student.reinvite"), resend_invitations_path(:id => invitation.id), :class => "student-invitation reinvite")}"
-                = ")"
+                  = " - #{link_to(t("invitations.new_invitation_student.reinvite"), resend_invitations_path(:id => invitation.id), :class => "student-invitation reinvite")})"
               - else
                 = "(#{link_to(t("invitations.new_invitation_student.invite"), new_invitation_student_invitations_path(:id => offer.course.id, :student_id => student.id), :class => "student-invitation")})"
 
