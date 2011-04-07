@@ -4,6 +4,8 @@ Shapado::Application.routes.draw do
   match '/unanswered' => 'welcome#unanswered', :as => :unanswered
   get '/notifications' => 'welcome#notifications', :as => :notifications
 
+  resources :uploads, :only => [:new, :create, :index]
+
   resources :affiliations
 
   resources :question_lists, :only => [:new, :create, :show, :edit, :update] do
