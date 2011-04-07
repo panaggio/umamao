@@ -3,8 +3,10 @@
 = error_messages_for :user
 
 .tertiary-navigation
-  %span.menu-item.followed&= link_to t('.followed'), settings_follow_topics_path
-  %span.menu-item.ignored&= link_to t('.ignored'), settings_ignore_topics_path
+  %span.menu-item.followed{:class => @active == 'follow' ? 'active' : ''}
+    = link_to t('.followed'), settings_follow_topics_path
+  %span.menu-item.ignored{:class => @active == 'ignore' ? 'active' : ''}
+    = link_to t('.ignored'), settings_ignore_topics_path
 
 %input.text_field#follow-topics-autocomplete{:type => "text-field", :value => t("searches.form.follow_topics"), "data-autocomplete-url" => autocomplete_url}
 %ul.autocomplete-list#follow-topics-suggestions
@@ -12,6 +14,6 @@
 %hr
 %ul.items#followed-topics
   - @topics.each do |topic|
-    = render :partial => "topics/topic", :locals => {:topic => topic}
+    = render :partial => "topics/topic", :locals => {:topic => topic, :type => @active }
 
 = will_paginate @topics
