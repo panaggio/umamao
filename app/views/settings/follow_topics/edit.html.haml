@@ -16,4 +16,7 @@
   - @topics.each do |topic|
     = render :partial => "topics/topic", :locals => {:topic => topic, :type => @active }
 
-= will_paginate @topics
+-# HACK: attempting to paginate empty has_many queries that
+  work with an :in option doesn't work
+- if @topics.present?
+  = will_paginate @topics
