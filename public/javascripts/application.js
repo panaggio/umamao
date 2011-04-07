@@ -95,6 +95,10 @@ function initAutocomplete() {
     initTopicAutocompleteForFollowing();
   }
 
+  if ($("#ignore-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForIgnoring();
+  }
+
   var searchField = $("#search-field");
 
   // Keyboard shortcuts for search box
