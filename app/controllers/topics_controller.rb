@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
                                     :per_page => 30,
                                     :page => params[:page] || 1,
                                     :order => :created_at.desc,
-                                    :visible.ne => false)
+                                    :visible => true)
 
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 25,
