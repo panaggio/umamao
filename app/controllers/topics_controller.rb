@@ -34,22 +34,25 @@ class TopicsController < ApplicationController
       @students_course = Student.all(
         :registered_course_ids.in => id_offers).select{|s|
         Affiliation.first(:student_id => s.id).nil? &&
-          Invitation.count(:recipient_email => s.academic_email) == 0}[0..5]
+          Invitation.count(:recipient_email => s.academic_email) == 0}.first(6)
     end
 
-    @news_items = NewsItem.paginate(:recipient_id => @topic.id,
-                                    :recipient_type => "Topic",
-                                    :per_page => 30,
-                                    :page => params[:page] || 1,
-                                    :order => :created_at.desc,
-                                    :visible.ne => false)
+    @news_items = NewsItem.paginate(
+      :recipient_id => @topic.id,
+      :recipient_type => "Topic",
+      :per_page => 30,
+      :page => params[:page] || 1,
+      :order => :created_at.desc,
+      :visible.ne => false)
 
-    @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
-                                   :order => :activity_at.desc, :per_page => 25,
-                                   :page => params[:page] || 1) if @news_items.blank?
+    @questions = Question.paginate(
+      :topic_ids => @topic.id, :banned => false,
+      :order => :activity_at.desc, :per_page => 25,
+      :page => params[:page] || 1) if @news_items.blank?
 
     @related_topics_count =
-      @topic.related_topics_count.sort_by { |k,v| -v }.map { |k,v| [Topic.find_by_id(k), v] }
+      @topic.related_topics_count.sort_by { |k,v| -v }.
+      map { |k,v| [Topic.find_by_id(k), v] }
 
     respond_with @topics
   end
