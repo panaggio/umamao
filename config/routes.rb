@@ -20,6 +20,7 @@ Shapado::Application.routes.draw do
 
     collection do
       post :follow
+      post :ignore
     end
   end
 
