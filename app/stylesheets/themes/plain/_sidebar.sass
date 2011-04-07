@@ -1,6 +1,9 @@
 #sidebar
   +follow-button
   +suggestions
+  .email-subscribe-info, .ignore-info
+    &.hidden
+      display: none
   .follow-info.block
     +column(4)
     margin-top: 2px
@@ -21,7 +24,7 @@
   .navigation + .navigation
     margin-top: 18px
     border-top: 1px #ddd solid
-    padding-top : 18px
+    padding-top: 18px
 
   .suggestions
     a.follow_link

@@ -589,3 +589,35 @@ function initTopicAutocompleteForFollowing() {
   };
 
 }
+
+function initTopicAutocompleteForIgnoring() {
+  var topicBox =
+    new TopicAutocomplete("#ignore-topics-autocomplete",
+                          "#ignore-topics-suggestions");
+
+  var topicsUl = $("#ignored-topics");
+
+  // Sends to the server a request to follow topic named title.
+  topicBox.action = function (title) {
+    $.ajax({
+      url: "/topics/ignore.js?answer=t&title=" + encodeURIComponent(title),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          // HACK: avoid duplicating entries.
+          topicsUl.find(".title a").
+            filter(function () {
+                     return $(this).text() == title;
+                   }).parents("#followed-topics li").remove();
+          topicsUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
+        }
+      }
+    });
+    topicBox.clear();
+  };
+
+}

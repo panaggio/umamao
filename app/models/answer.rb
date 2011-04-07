@@ -45,6 +45,10 @@ class Answer < Comment
     self.question.title
   end
 
+  def topic_ids
+    self.question.topic_ids
+  end
+
   def topics
     self.question.topics
   end

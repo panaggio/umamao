@@ -55,6 +55,10 @@ class User
   key :feed_token,                String
   key :can_invite_without_confirmation, Boolean, :default => true
 
+  key :ignored_topic_ids,         Array
+  has_many :ignored_topics, :class_name => 'Topic', :in => :ignored_topic_ids
+  key :ignored_topics_count, :default => 0
+
   has_many :affiliations, :dependent => :destroy
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
@@ -172,6 +176,16 @@ class User
 
     u = User.find(user_ids, conditions.merge(:select => [:email, :login, :name, :language]))
     u ? u : []
+  end
+
+  def self.ignorers(topics)
+    igs = Set.new
+
+    topics.each do |topic|
+      igs += self.query(:ignored_topic_ids => topic.id)
+    end
+
+    igs
   end
 
   def confirm_from_invitation
@@ -446,6 +460,46 @@ Time.zone.now ? 1 : 0)
     self.mark_as_uninteresting(user)
     true
   end
+
+  def ignore_topic!(topic)
+    unless self.ignored_topic_ids.include?(topic.id)
+      self.ignored_topic_ids << topic.id
+      self.save!
+      self.increment(:ignored_topics_count => 1)
+      self.hide_ignored_news_items!
+      topic.remove_follower!(self)
+    end
+  end
+
+  def unignore_topic!(topic)
+    if self.ignored_topic_ids.delete(topic.id)
+      self.save!
+      self.increment(:ignored_topics_count => -1)
+      self.show_unignored_news_items!
+    end
+  end
+
+  def ignores?(topic)
+    self.ignored_topic_ids.include?(topic)
+  end
+
+  def hide_ignored_news_items!
+    self.news_items.each do |ni|
+      if ni.should_be_hidden?(self.ignored_topic_ids)
+        ni.hide!
+      end
+    end
+  end
+  handle_asynchronously :hide_ignored_news_items!
+
+  def show_unignored_news_items!
+    self.news_items.each do |ni|
+      unless ni.should_be_hidden?(self.ignored_topic_ids)
+        ni.show!
+      end
+    end
+  end
+  handle_asynchronously :show_unignored_news_items!
 
   def followers
     self.friend_list.followers

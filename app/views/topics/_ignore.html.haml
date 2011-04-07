@@ -1,0 +1,12 @@
+- block = local_assigns[:block]
+-# ignore/unignore topic link
+
+- if logged_in?
+  - follow = topic.follower_ids.include?(current_user.id)
+  - action_hash = { :unignore => { :text => t("ignorable.unignore"), :path => unignore_topic_path(topic), :cclass => "unignore_link" }, :ignore => { :text => t("ignorable.ignore"), :path => ignore_topic_path(topic), :cclass => "ignore_link" } }
+  .ignore-info{:class => [block, (follow ? 'hidden' : '')]}
+    - if current_user.ignored_topic_ids.include?(topic.id)
+      - action, undo_action = action_hash[:unignore], action_hash[:ignore]
+    - else
+      - action, undo_action = action_hash[:ignore], action_hash[:unignore]
+    = link_to action[:text], action[:path], :class => action[:cclass], 'data-class' => undo_action[:cclass], 'data-title' => undo_action[:text], 'data-undo' => undo_action[:path], "data-entry-type" => "topic"

@@ -1,5 +1,8 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow, :toggle_email_subscription]
+  before_filter :login_required, :only => [
+    :edit, :update, :follow, :unfollow, :ignore, :unignore,
+    :toggle_email_subscription
+  ]
   respond_to :html
 
   tabs :default => :topics
@@ -43,7 +46,7 @@ class TopicsController < ApplicationController
       :per_page => 30,
       :page => params[:page] || 1,
       :order => :created_at.desc,
-      :visible.ne => false)
+      :visible => true)
 
     @questions = Question.paginate(
       :topic_ids => @topic.id, :banned => false,
@@ -112,7 +115,8 @@ class TopicsController < ApplicationController
 
         if params[:answer]
           # Used when following from settings page
-          res[:html] = render_cell :topics, :followed, :topic => @topic
+          res[:html] = render_to_string :partial => 'topics/topic',
+            :locals => { :topic => @topic }
         elsif params[:suggestion]
           # We need to redraw the topics suggestions
           res[:suggestions] = render_cell :suggestions, :topics, :single_column => params[:single_column]
@@ -153,6 +157,65 @@ class TopicsController < ApplicationController
     end
   end
 
+  def ignore
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
+
+    current_user.ignore_topic!(@topic)
+
+    track_event(:ignored_topic)
+
+    notice = t("ignorable.flash.ignore", :ignorable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+
+      format.js do
+        res = {
+          :success => true,
+          :message => notice
+        }
+
+        if params[:answer]
+          # Used when following from settings page
+          res[:html] = render_to_string :partial => 'topics/topic',
+            :locals => { :topic => @topic, :type => 'ignore' }
+        end
+
+        render :json => res.to_json
+      end
+    end
+  end
+
+  def unignore
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    current_user.unignore_topic!(@topic)
+
+    track_event(:unignored_topic)
+
+    notice = t('ignorable.flash.unignore', :ignorable => @topic.title)
+
+    respond_to do |format|
+      format.html do
+        redirect_to topic_path(@topic)
+      end
+
+      format.js do
+        render :json => {
+          :success => true,
+          :message => notice
+        }.to_json
+      end
+    end
+  end
+
   def toggle_email_subscription
     if params[:id]
       @topic = Topic.find_by_slug_or_id(params[:id])
@@ -170,10 +233,12 @@ class TopicsController < ApplicationController
       @topic.email_subscriber_ids.delete(user.id)
       @topic.save!
       notice = t("topics.show.email_subscription.notice.unsubscribed", :topic => @topic.title)
+      track_event(:email_unsubscribed_topic)
     else
       @topic.email_subscriber_ids << user.id
       @topic.save!
       notice = t("topics.show.email_subscription.notice.subscribed", :topic => @topic.title)
+      track_event(:email_subscribed_topic)
     end
 
     respond_to do |format|

@@ -30,6 +30,9 @@ class NewsItem
             news_update.author, news_update.created_at)
     notified_users = Set.new [news_update.author]
 
+    # do not notify users that ignore any topic on that entry
+    notified_users += User.ignorers(news_update.entry.topics)
+
     origins.each do |origin|
       origin.followers.each do |follower|
         next if notified_users.include?(follower)
@@ -90,5 +93,14 @@ class NewsItem
   def show!
     self.visible = true
     self.save!
+  end
+
+  # if the news_item doesn't include a ignored topic and
+  # it's not a question that should be hidden
+  def should_be_hidden?(ignored_topic_ids = [])
+    entry = self.news_update.entry
+
+    !! (entry.is_a?(Question) and entry.answers_count > 0) or
+      ( (entry.topic_ids & ignored_topic_ids).any? )
   end
 end

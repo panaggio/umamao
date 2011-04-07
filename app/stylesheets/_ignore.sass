@@ -1,0 +1,19 @@
+// Button for ignoring things.
+// TODO: Merge ignore-button and follow-button
+
+$ignore=#EE3333
+
+=ignore-button
+  .ignore-info
+    a
+      +button
+      &.ignore_link
+        background-color: lighten($ignore, 15%)
+        +linear-gradient(color-stops(lighten($ignore, 15%), $ignore 50%, lighten($ignore, 10%)), top)
+        &:hover
+          background-color: $ignore
+          +linear-gradient(color-stops(lighten($ignore, 25%), lighten($ignore, 10%) 50%, lighten($ignore, 20%)), top)
+      &.unignore_link
+        background-color: #EEEEEE
+        &:hover
+          background-color: #BBBBBB

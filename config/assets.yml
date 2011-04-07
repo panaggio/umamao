@@ -18,6 +18,7 @@ javascripts:
     - public/javascripts/application.js
     - public/javascripts/modules/welcome.js
     - public/javascripts/modules/follow_link.js
+    - public/javascripts/modules/ignore_link.js
     - public/javascripts/modules/cookies.js
     - public/javascripts/modules/inline_edition.js
     - public/javascripts/modules/votes.js

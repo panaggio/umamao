@@ -10,6 +10,8 @@ Shapado::Application.routes.draw do
     member do
       post :follow
       post :unfollow
+      post :ignore
+      post :unignore
       get :unanswered
       get :followers
       post :toggle_email_subscription
@@ -18,6 +20,7 @@ Shapado::Application.routes.draw do
 
     collection do
       post :follow
+      post :ignore
     end
   end
 
@@ -79,6 +82,7 @@ Shapado::Application.routes.draw do
     match 'account' => 'account#edit', :via => :get
     match 'account' => 'account#update', :via => :put
     match 'follow_topics' => 'follow_topics#edit', :via => :get
+    match 'ignore_topics' => 'ignore_topics#edit', :via => :get
     resources :external_accounts, :only => [:index, :destroy]
   end
 
