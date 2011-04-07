@@ -9,6 +9,7 @@ class Inviter < ActionMailer::Base
     @recipient_email = invitation.recipient_email
     @message = invitation.message
     @invitation_token = invitation.invitation_token
+    @topics = invitation.topics
 
     mail(:to => @recipient_email, :subject => t('inviter.invitation.subject',
                                                 :inviter => @sender.name))

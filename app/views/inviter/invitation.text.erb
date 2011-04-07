@@ -1,6 +1,12 @@
 <%= t('.greeting') %>
 
-<%= t('.sender', :user => h(@sender.name)) %>
+<% if @topics.present? %>
+  <%= t('.sender_topic', :user => h(@sender.name), :topic => @topics[0].title) %>
+<% else %>
+  <%= t('.sender', :user => h(@sender.name)) %>
+<% end %>
+
+
 
 ---
 <%= h(@message) %>

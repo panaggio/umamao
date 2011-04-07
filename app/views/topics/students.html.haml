@@ -1,0 +1,20 @@
+= include_javascripts :student_invitation
+.list-registered-students
+  %h2.title
+    = t('topics.show.registered_students')
+  - @course_offers.each do |offer|
+    - if offer.students.present?
+      %h3.title
+        = "#{offer.course.code}#{offer.code}"
+      %ul
+        - offer.students.each do |student|
+          %li
+            - if !student.is_registered?
+              = student.name
+              - if (email = student.academic_email) && (invitation = Invitation.find_by_recipient_email(email))
+                = "(#{t("invitations.new_invitation_student.pending")}"
+                - if invitation.sender_id == current_user.id
+                  = " - #{link_to(t("invitations.new_invitation_student.reinvite"), resend_invitations_path(:id => invitation.id), :class => "student-invitation reinvite")})"
+              - else
+                = "(#{link_to(t("invitations.new_invitation_student.invite"), new_invitation_student_invitations_path(:id => offer.course.id, :student_id => student.id), :class => "student-invitation")})"
+

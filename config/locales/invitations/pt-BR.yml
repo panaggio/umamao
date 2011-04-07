@@ -56,3 +56,11 @@ pt-BR:
         pending: Nenhum convite pendente. Que tal convidar alguém?
         accepted: "Nenhum convite aceito."
     invite: 'Convidar outras pessoas'
+    sent: Convite enviado
+    new_invitation_student:
+      more: Ver mais
+      invite: convidar
+      reinvite: convidar novamente
+      invite_form: Convidar
+      pending: pendente
+      title: "Convite para %{name}"

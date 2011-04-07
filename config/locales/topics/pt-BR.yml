@@ -24,6 +24,7 @@ pt-BR:
         enable: ativar
         text: Receber novas perguntas por email
       related_topics: Tópicos relacionados
+      registered_students: Alunos matriculados
       unanswered_tab: Perguntas em aberto
       view: Ver tópico
     tooltip:

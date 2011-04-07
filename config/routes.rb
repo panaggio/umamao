@@ -25,6 +25,9 @@ Shapado::Application.routes.draw do
     collection do
       get :pending
       get :accepted
+      get :new_invitation_student
+      post :create_invitation_student
+      get :resend
     end
   end
 
@@ -206,7 +209,23 @@ Shapado::Application.routes.draw do
   match '/search/autocomplete' => 'searches#autocomplete'
   match '/about' => 'groups#show', :as => :about
 
-  [:universities, :courses, :course_offers,
+  resources :courses, :only => [:index, :show, :edit, :update],
+  :controller => 'topics' do
+    member do
+      post :follow
+      post :unfollow
+      get :unanswered
+      get :followers
+      get :students
+      get :student_invite
+    end
+
+    collection do
+      post :follow
+    end
+  end
+
+  [:universities, :course_offers,
    :academic_programs, :academic_program_classes].each do |submodel|
 
     resources submodel, :only => [:index, :show, :edit, :update],

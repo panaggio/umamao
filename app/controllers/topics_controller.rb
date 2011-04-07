@@ -27,19 +27,32 @@ class TopicsController < ApplicationController
 
     set_tab :all, :topic_show
 
-    @news_items = NewsItem.paginate(:recipient_id => @topic.id,
-                                    :recipient_type => "Topic",
-                                    :per_page => 30,
-                                    :page => params[:page] || 1,
-                                    :order => :created_at.desc,
-                                    :visible.ne => false)
+    if @topic.is_a?(Course) && current_user &&
+      current_user.affiliations.first(:university_id => @topic.university_id)
 
-    @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
-                                   :order => :activity_at.desc, :per_page => 25,
-                                   :page => params[:page] || 1) if @news_items.blank?
+      id_offers = CourseOffer.all(:course_id => @topic.id).map(&:id)
+      @students_course = Student.all(
+        :registered_course_ids.in => id_offers).select{|s|
+        Affiliation.first(:student_id => s.id).nil? &&
+          Invitation.count(:recipient_email => s.academic_email) == 0}.first(6)
+    end
+
+    @news_items = NewsItem.paginate(
+      :recipient_id => @topic.id,
+      :recipient_type => "Topic",
+      :per_page => 30,
+      :page => params[:page] || 1,
+      :order => :created_at.desc,
+      :visible.ne => false)
+
+    @questions = Question.paginate(
+      :topic_ids => @topic.id, :banned => false,
+      :order => :activity_at.desc, :per_page => 25,
+      :page => params[:page] || 1) if @news_items.blank?
 
     @related_topics_count =
-      @topic.related_topics_count.sort_by { |k,v| -v }.map { |k,v| [Topic.find_by_id(k), v] }
+      @topic.related_topics_count.sort_by { |k,v| -v }.
+      map { |k,v| [Topic.find_by_id(k), v] }
 
     respond_with @topics
   end
@@ -257,4 +270,8 @@ class TopicsController < ApplicationController
     render :content_type => 'text/javascript'
   end
 
+  def students
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @course_offers = CourseOffer.query(:course_id => @topic.id)
+  end
 end

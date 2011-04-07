@@ -18,6 +18,9 @@ class Invitation
   key :group_id, String
   belongs_to :group
 
+  key :topic_ids, Array
+  has_many :topics, :class_name => 'Topic', :in => :topic_ids
+
   token_confirmable_key :invitation_token
 
   after_create :send_invitation

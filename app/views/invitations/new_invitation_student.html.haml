@@ -1,0 +1,15 @@
+.modal
+  %h1= t(".title", :name => @student.name)
+  .invitation
+    - form_tag create_invitation_student_invitations_path do
+
+      = hidden_field_tag "student_id", @student.id
+      = hidden_field_tag "course_id", @course.id
+
+      #invitation-message
+        = label_tag "message", t("invitations.new.message")
+        = text_area_tag "message"
+
+      .controls
+        = link_to t("scaffold.cancel"), "#", :class => "close"
+        = submit_tag t(".invite_form"), :class => "invite-button"

@@ -63,6 +63,11 @@ class UsersController < ApplicationController
 
       if @invitation
         @user.email = @invitation[:recipient_email]
+        if (m = @user.email.match(/^[a-z](\d{6})@dac.unicamp.br$/)) &&
+           (student = Student.find_by_code(m[1], :university_id => University.
+                                           find_by_short_name("Unicamp").id))
+          @user.name = student.name
+        end
         @user.invitation_token = @invitation.invitation_token
       end
 
@@ -126,9 +131,25 @@ class UsersController < ApplicationController
 
     if invitation = Invitation.find_by_invitation_token(@user.invitation_token)
       tracking_properties[:invited_by] = invitation.sender.email
+
+      if m = invitation.recipient_email.match("^[a-z](\d{6})@dac.unicamp.br$")
+        unicamp = University.find_by_short_name('Unicamp')
+        affiliation = Affiliation.new(:user => @user,
+                                      :university => unicamp,
+                                      :email => invitation.recipient_email,
+                                      :confirmed_at => Time.now)
+        affiliation.save
+        @user.affiliation_token = affiliation.affiliation_token
+      end
     end
 
     if @user.save
+      if invitation && invitation.topics
+        invitation.topics.each do |topic|
+          topic.add_follower!(@user)
+        end
+      end
+
       if @group_invitation
         @group_invitation.push(:user_ids => @user.id)
         tracking_properties[:invited_by] = @group_invitation.slug
