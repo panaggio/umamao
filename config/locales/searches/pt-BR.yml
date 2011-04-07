@@ -15,6 +15,7 @@ pt-BR:
       tags_tip: Use [tópico] para especificar tópicos.
       search_all: Buscar por perguntas, tópicos e usuários
       follow_topics: Buscar tópicos
+      ignore_topics: Buscar tópicos
       select_topics: Selecionar tópicos
     question:
       answers:

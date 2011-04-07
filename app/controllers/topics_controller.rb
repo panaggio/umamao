@@ -1,5 +1,8 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :only => [:edit, :update, :follow, :unfollow, :toggle_email_subscription]
+  before_filter :login_required, :only => [
+    :edit, :update, :follow, :unfollow, :ignore, :unignore,
+    :toggle_email_subscription
+  ]
   respond_to :html
 
   tabs :default => :topics
@@ -150,7 +153,12 @@ class TopicsController < ApplicationController
   end
 
   def ignore
-    @topic = Topic.find_by_slug_or_id(params[:id])
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
 
     current_user.ignore_topic!(@topic)
 
@@ -164,10 +172,18 @@ class TopicsController < ApplicationController
       end
 
       format.js do
-        render :json => {
+        res = {
           :success => true,
           :message => notice
-        }.to_json
+        }
+
+        if params[:answer]
+          # Used when following from settings page
+          res[:html] = render_to_string :partial => 'topics/topic',
+            :locals => { :topic => @topic, :type => 'ignore' }
+        end
+
+        render :json => res.to_json
       end
     end
   end
