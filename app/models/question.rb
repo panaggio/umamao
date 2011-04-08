@@ -437,7 +437,19 @@ class Question
         topic.increment_questions_count
       end
 
-      save!
+      ret = save!
+
+      # Ignorers
+      ignorer_ids = topic.ignorer_ids
+      self.news_update.news_items.each do |ni|
+        if ni.recipient_type == 'User' &&
+          ignorer_ids.include?(ni.recipient_id)
+
+          ni.hide! if ni.should_be_hidden?([topic.id])
+        end
+      end
+
+      ret
     else
       false
     end
@@ -469,7 +481,19 @@ class Question
         end
       end
 
-      save!
+      ret = save!
+
+      # Ignorers
+      ignorer_ids = topic.ignorer_ids
+      self.news_update.news_items.each do |ni|
+        if ni.recipient_type == 'User' &&
+          ignorer_ids.include?(ni.recipient_id)
+
+          ni.show! unless ni.should_be_hidden?([topic.id])
+        end
+      end
+
+      ret
     else
       false
     end
