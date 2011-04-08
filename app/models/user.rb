@@ -483,8 +483,8 @@ Time.zone.now ? 1 : 0)
     self.ignored_topic_ids.include?(topic)
   end
 
-  def hide_ignored_news_items!
-    self.news_items.each do |ni|
+  def hide_ignored_news_items!(news_items = self.news_items)
+    news_items.each do |ni|
       if ni.should_be_hidden?(self.ignored_topic_ids)
         ni.hide!
       end
@@ -492,8 +492,8 @@ Time.zone.now ? 1 : 0)
   end
   handle_asynchronously :hide_ignored_news_items!
 
-  def show_unignored_news_items!
-    self.news_items.each do |ni|
+  def show_unignored_news_items!(news_items = self.news_items)
+    news_items.each do |ni|
       unless ni.should_be_hidden?(self.ignored_topic_ids)
         ni.show!
       end
