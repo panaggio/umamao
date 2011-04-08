@@ -86,6 +86,15 @@ class Topic
     }
   end
 
+  def ignorers
+    User.all(:ignored_topic_ids => self.id)
+  end
+
+  # FIXME: refactor
+  def ignorer_ids
+    self.ignorers.map &:id
+  end
+
   def name
     title
   end
