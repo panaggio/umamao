@@ -1,21 +1,21 @@
 pt-BR:
   question_lists:
     new:
-      title: "Criar lista de perguntas"
+      title: "Criar lista de exercícios"
       main_topic: "Tópico principal"
       submit: "Criar lista"
       details: "Detalhes (opcional)"
     create:
-      flash_notice: "Lista de perguntas criada com sucesso."
-      topic_does_not_allow: "Tópico %{title} não permite listas de perguntas."
+      flash_notice: "Lista de exercícios criada com sucesso."
+      topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
     show:
-      empty: "Esta lista ainda não possui nenhuma pergunta."
-      confirm_destroy: "Tem certeza que deseja excluir esta lista de perguntas?"
-      allow_new_questions: "Adicionar nova pergunta"
+      empty: "Esta lista ainda não possui nenhum exercício."
+      confirm_destroy: "Tem certeza que deseja excluir esta lista de exercícios?"
+      allow_new_questions: "Adicionar novo exercício"
     form:
-      new_question: "Nova pergunta"
-      details: "Detalhes sobre a pergunta (opcional)"
-      make_question: "Adicionar pergunta"
+      new_question: "Novo exercício"
+      details: "Detalhes sobre o exercício (opcional)"
+      make_question: "Adicionar exercício"
     question:
       answers_count:
         zero: "Adicionar resposta"
