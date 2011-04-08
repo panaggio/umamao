@@ -676,4 +676,5 @@ class QuestionsController < ApplicationController
       render :template => "welcome/confirm_age"
     end
   end
+
 end

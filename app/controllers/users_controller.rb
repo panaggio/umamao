@@ -445,6 +445,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @users = User.filter(params[:q],
+                     :per_page => 7)
+    respond_to do |format|
+      format.js do
+        render :json => @users.map{ |u|
+          {:id => u.id, :name => u.name, 
+            :email => u.email}
+        }.to_json
+      end
+    end
+
+  end
+
   protected
   def active_subtab(param)
     key = params.fetch(param, "newest")
@@ -472,4 +486,5 @@ class UsersController < ApplicationController
 
     @user.viewed_on!(current_group) if @user != current_user && !is_bot?
   end
+
 end

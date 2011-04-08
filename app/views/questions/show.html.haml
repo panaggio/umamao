@@ -94,6 +94,9 @@
     .follow-info.block.question
       = follow_button @question
 
+     .ask-answer
+        = link_to t(".ask_answer"), ask_for_answer_question_path(@question), :class => "follow_link"
+
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0
       .block

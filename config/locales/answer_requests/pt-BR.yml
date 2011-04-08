@@ -1,0 +1,5 @@
+pt-BR:
+  answer_requests:
+    invitation:
+      email: Nome
+      request_answer: Pedir resposta

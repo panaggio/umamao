@@ -1,0 +1,6 @@
+= include_javascripts :request_answer
+
+.request-answer
+  = form_for @answer_request do |f|
+    = f.hidden_field :invited_id
+    = f.text_field :message
