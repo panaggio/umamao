@@ -5,10 +5,12 @@
 class GroupInvitation
   include MongoMapper::Document
 
-  key :slug, String
+  key :slug, String, :unique => true
   key :message, String
   key :active, Boolean, :default => true
 
   key :user_ids, Array
   many :users, :in => :user_ids
+  key :topic_ids, Array
+  many :topics, :in => :topic_ids
 end

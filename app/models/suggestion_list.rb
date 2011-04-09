@@ -194,10 +194,18 @@ class SuggestionList
     end
   end
 
+  # Suggest topics related to the user's group invitation.
+  def suggest_from_group_invitation
+    if group_invitation = GroupInvitation.all(:user_ids => self.user.id).first
+      self.suggest(group_invitation.topics, "group_invitation")
+    end
+  end
+
   # Populate the user's suggestion list for the signup wizard.
   def find_first_suggestions
     if self.topic_suggestions.blank? &&
         self.user_suggestions.blank?
+      self.suggest_from_group_invitation
       self.suggest_university_topics
       self.suggest_from_outside
       self.suggest_from_dac
