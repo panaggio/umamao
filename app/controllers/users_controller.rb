@@ -48,7 +48,9 @@ class UsersController < ApplicationController
 
   def new
     if params[:group_invitation]
-      @group_invitation = GroupInvitation.first(:slug => params[:group_invitation])
+      case_insensitive_slug = Regexp.new("^#{params[:group_invitation]}$",
+                                         Regexp::IGNORECASE)
+      @group_invitation = GroupInvitation.first(:slug => case_insensitive_slug)
       unless @group_invitation && @group_invitation.active?
         redirect_to(root_path) && return
       end
