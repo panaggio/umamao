@@ -3,18 +3,18 @@ pt-BR:
     new:
       title: "Criar lista de exercícios"
       main_topic: "Tópico principal"
-      submit: "Criar lista"
-      details: "Detalhes (opcional)"
+      submit: "Adicionar exercícios"
+      description: "Descrição"
     create:
-      flash_notice: "Lista de exercícios criada com sucesso."
+      flash_notice: "Lista criada com sucesso. Adicione os exercícios."
       topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
     show:
       empty: "Esta lista ainda não possui nenhum exercício."
       confirm_destroy: "Tem certeza que deseja excluir esta lista de exercícios?"
       allow_new_questions: "Adicionar novo exercício"
     form:
-      new_question: "Novo exercício"
-      details: "Detalhes sobre o exercício (opcional)"
+      new_question: "Título"
+      details: "Enunciado"
       make_question: "Adicionar exercício"
     question:
       answers_count:

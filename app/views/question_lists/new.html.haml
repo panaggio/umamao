@@ -10,21 +10,23 @@
   .navtitle
     = t(".title")
 
-- form_for(@question_list, :html => {:class => "form"}, :as => :question_list) do |f|
+- form_for(@question_list, :html => {:class => "form", :id => "new_question_list"}, :as => :question_list) do |f|
   .group
     = f.label :title, "#{t('topics.edit.name')}*", :class => "label"
     = f.text_field :title, :class => "text_field"
-  .group
-    = f.label :description, t('question_lists.new.details'), :class => "label"
-    = f.text_area :description, :class => "editor-input", :id => "topic-input", :rows => "auto", :cols => "auto"
+  
+  .group.initially-hidden
+    = f.label :description, t('question_lists.new.description'), :class => "label"
+    = f.text_area :description, :class => "editor-input", :id => "description-input", :rows => "auto", :cols => "auto"
     %label.label
       = t("global.preview")
-    #topic-preview.markdown
+    #description-preview.markdown
 
-    %script{:type => "text/javascript", :charset => "utf-8"}
-      $().ready(function() { $("#topic-input").wmdMath({preview: "topic-preview"}); });
+    %hr
 
-  %hr
+  .controls
+    = link_to t("questions.new.add_details"), "#", :id => "show-description"
+
   .group
     %span.sublabel
       = "#{t('.main_topic')}:"

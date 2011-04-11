@@ -20,6 +20,8 @@ pt-BR:
     am: ''
     pm: ''
 
+  new_feature: "NOVO!"
+
   # distancia do tempo em palavras
   datetime:
     distance_in_words:
