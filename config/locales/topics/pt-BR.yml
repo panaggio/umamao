@@ -45,4 +45,4 @@ pt-BR:
       link:
         one: %{question_title} (1 resposta)
         other: %{question_title} (%{count} respostas)
-
+    more: Mais perguntas
