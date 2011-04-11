@@ -42,6 +42,8 @@ class Topic
   key :email_subscriber_ids,  Array
   has_many :email_subscribers, :class_name => 'User', :in => :email_subscriber_ids
 
+  key :allow_question_lists, Boolean, :default => false
+
 
   timestamps!
 
@@ -51,6 +53,7 @@ class Topic
 
   before_save :generate_slug
 
+  after_destroy :remove_from_questions
   after_destroy :remove_from_question_versions
   after_destroy :remove_from_suggestions
 
@@ -116,6 +119,10 @@ class Topic
       Hash[sorted_topics_count.map { |k,v| [k.to_s,v] }]
 
     self.related_topics
+  end
+
+  def questions
+    Question.query(:topic_ids => self.id)
   end
 
   # Add a follower to topic.
@@ -190,6 +197,13 @@ class Topic
     save
   end
 
+  def remove_from_questions
+    Question.find_each(:topic_ids => self.id) do |question|
+      question.topic_ids.delete(self.id)
+      question.save!
+    end
+  end
+
   # Iterates through each question removing this topic from every past
   # version. This is very slow and should be used with care, but as
   # topics aren't deleted that often, this is not too much of an
@@ -229,8 +243,8 @@ class Topic
   end
 
   def unanswered_questions_count
-    return Question.count(:topic_ids => self.id, :banned => false,
-                           :closed => false, :answered_with_id => nil)
+    Question.count(:topic_ids => self.id, :banned => false,
+                   :closed => false, :answered_with_id => nil)
   end
 
   # WARNING: The search index update isn't atomic: the models will be

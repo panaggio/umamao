@@ -12,7 +12,7 @@
   #question-body.markdown
     = markdown(@question.body)
   .body-col
-    = render :partial => "questions/classify", :locals => {:question => @question, :ajax_add => false}
+    = render :partial => "shared/classify", :locals => {:classifiable => @question, :ajax_add => false}
 
 %hr
 

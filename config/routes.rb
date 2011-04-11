@@ -6,6 +6,14 @@ Shapado::Application.routes.draw do
 
   resources :affiliations
 
+  resources :question_lists, :only => [:new, :create, :show, :edit, :update] do
+    member do 
+      # FIXME: classify and unclassify should be post
+      get :classify
+      get :unclassify
+    end
+  end
+
   resources :topics, :only => [:index, :show, :edit, :update] do
     member do
       post :follow
@@ -145,6 +153,7 @@ Shapado::Application.routes.draw do
       get :history
       get :revert
       get :diff
+      # FIXME: classify and unclassify should be post
       get :classify
       get :unclassify
       get :retag

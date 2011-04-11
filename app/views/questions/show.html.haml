@@ -40,7 +40,7 @@
       .post-text.entry-content
         = question_body
 
-    = render :partial => "classify", :locals => {:question => @question, :ajax_add => true}
+    = render :partial => "shared/classify", :locals => {:classifiable => @question, :ajax_add => true}
 
     .controls
       .actions
@@ -62,7 +62,7 @@
           - if (@question.wiki && current_user.can_edit_wiki_post_on?(@question.group)) || current_user.can_edit_others_posts_on?(@question.group) || current_user.can_modify?(@question)
             = link_to t('scaffold.edit'), edit_question_path(@question), :class => "button"
 
-        = link_to t('.add_follow_up_question'), new_question_path(:question => @follow_up_question), :target => '_blank', :id => 'add_follow_up_question'
+        = link_to t('.add_follow_up_question'), new_question_path(:question => @follow_up_question), :target => '_blank', :class => 'featured'
 
         #question_flag_div
 

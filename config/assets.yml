@@ -35,9 +35,17 @@ javascripts:
   signup_follow:
     - public/javascripts/modules/signup_follow.js
   new_question:
+    - public/javascripts/modules/topic_autocomplete.js
     - public/javascripts/modules/new_question.js
+  new_question_list:
+    - public/javascripts/modules/topic_autocomplete.js
+    - public/javascripts/modules/new_question_list.js
   show_question:
+    - public/javascripts/modules/topic_autocomplete.js
     - public/javascripts/modules/show_question.js
+  show_question_list:
+    - public/javascripts/modules/topic_autocomplete.js
+    - public/javascripts/modules/show_question_list.js
   external_accounts:
     - public/javascripts/modules/dac_external_account.js
   topics_email_subscription:

@@ -1,0 +1,27 @@
+pt-BR:
+  question_lists:
+    new:
+      title: "Criar lista de exercícios"
+      main_topic: "Tópico principal"
+      submit: "Adicionar exercícios"
+      description: "Descrição"
+    create:
+      success: "Lista criada com sucesso. Adicione os exercícios."
+      error:
+        existing_list: "Erro ao tentar criar a lista. Lista já existente."
+        default: "Erro ao tentar criar a lista."
+      topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
+    show:
+      empty: "Esta lista ainda não possui nenhum exercício."
+      confirm_destroy: "Tem certeza que deseja excluir esta lista de exercícios?"
+      allow_new_questions: "Adicionar novo exercício"
+    form:
+      new_question: "Título do exercício"
+      example: "(ex.: %{list_title} - Exercício 1)"
+      details: "Enunciado"
+      make_question: "Adicionar exercício"
+    question:
+      answers_count:
+        zero: "Adicionar resposta"
+        one: "%{count} resposta"
+        other: "%{count} respostas"

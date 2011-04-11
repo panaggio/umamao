@@ -209,6 +209,12 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.topics = Topic.from_titles!(params[:question][:topics])
 
+    if params[:question][:question_list].present?
+      @question_list = QuestionList.find_by_id(params[:question][:question_list])
+      @question.topics = @question_list.topics
+      @question.topics << @question_list
+    end
+
     if !logged_in?
       draft = Draft.create!(:question => @question)
       session[:draft] = draft.id
@@ -227,9 +233,17 @@ class QuestionsController < ApplicationController
           flash[:notice] = t(:flash_notice, :scope => "questions.create")
           redirect_to(question_path(@question))
         end
+        format.js do
+          render :json => {
+            :success => true,
+            :html => render_to_string(:partial => "question_lists/question",
+                                      :object => @question)
+          }.to_json
+        end
         format.json { render :json => @question.to_json(:except => %w[_keywords watchers]), :status => :created}
       else
         format.html { render :action => "new" }
+        format.js { render :json => { :success => false, :message => t('questions.create.error') }.to_json }
         format.json { render :json => @question.errors, :status => :unprocessable_entity }
       end
     end
@@ -462,7 +476,7 @@ class QuestionsController < ApplicationController
         res = { :success => status }
         res[:box] = render_to_string(
           :partial => 'topics/topic_box', :locals => {
-            :topic => @topic, :question => @question,
+            :topic => @topic, :classifiable => @question,
             :options => { :ajax_add => true, :logged_in => true }
         }) if status
         render :json => res.to_json

@@ -27,6 +27,7 @@ pt-BR:
       registered_students: Alunos matriculados
       unanswered_tab: Perguntas em aberto
       view: Ver tópico
+      new_question_list: Criar lista de exercícios
     tooltip:
       describe: "Ajude a descrever o tópico %{title}"
     unanswered:

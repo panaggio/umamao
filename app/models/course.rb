@@ -16,5 +16,9 @@ class Course < Topic
 
   timestamps!
 
+  def allow_question_lists
+    true
+  end
+
   validates_uniqueness_of :code, :scope => :university_id
 end

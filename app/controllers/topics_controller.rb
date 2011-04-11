@@ -26,6 +26,12 @@ class TopicsController < ApplicationController
     rescue BSON::InvalidObjectId
       raise Goalie::NotFound
     end
+
+    if @topic.is_a?(QuestionList)
+      redirect_to question_list_path(@topic)
+      return
+    end
+
     set_page_title(@topic.title)
 
     set_tab :all, :topic_show
@@ -276,6 +282,7 @@ class TopicsController < ApplicationController
     respond_with @topics
   end
 
+  # DEPRECATED!
   # Searches matching topics and render them in JSON form for input
   # autocomplete.
   def autocomplete
@@ -301,8 +308,8 @@ class TopicsController < ApplicationController
                :html => (render_to_string :partial => "autocomplete.html", :locals => {:topic => t, :question => false})
              }
              if !params[:follow]
-               res[:box] = render_to_string(:partial => "box.html",
-                                            :locals => {:topic => t, :question => false})
+               render_to_string(:partial => "topic_box",
+                                :locals => {:topic => t, :classifiable => false})
              end
              res
            end.to_json)

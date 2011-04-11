@@ -5,7 +5,6 @@ require File.expand_path('../boot', __FILE__)
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
-require "lib/exceptions"
 # require "rails/test_unit/railtie"
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -22,7 +21,8 @@ module Shapado
     config.autoload_paths += %W( #{Rails.root}/app/middlewares
                                  #{Rails.root}/app/models/widgets
                                  #{Rails.root}/lib #{Rails.root}/lib/core_ext
-                                 #{Rails.root}/lib/tracking )
+                                 #{Rails.root}/lib/tracking
+                                 #{Rails.root}/lib/exceptions )
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named

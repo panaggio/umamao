@@ -10,8 +10,11 @@
 .markdown
   = markdown(@topic.description)
 
-%p
-  = link_to t('scaffold.edit'), edit_topic_path(@topic), :class => "edit-link"
+.controls
+  .actions
+    = link_to t('scaffold.edit'), edit_topic_path(@topic)
+    - if @topic.allow_question_lists
+      = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug)
 
 .secondary-navigation
   - tabs_tag :namespace => :topic_show do |tab|
