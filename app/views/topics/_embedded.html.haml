@@ -7,10 +7,11 @@
   - if questions.blank?
     %li.highlight
       = t(".empty")
-  - questions.each do |question|
+  - else
+    - questions.each do |question|
+      %li
+        = link_to t("embedded.question.link", :count => question.answers_count, :question_title => question.title), question_url(question), :class => "umamao-question-title", :target => "_blank"
     %li
-      = link_to t("embedded.question.link", :count => question.answers_count, :question_title => question.title), question_url(question), :class => "umamao-question-title", :target => "_blank"
-  %li
-    = link_to t("embedded.more"), topic_url(topic), :class => "umamao-question-title", :target => "_blank"
+      = link_to t("embedded.more"), topic_url(topic), :class => "umamao-question-title", :target => "_blank"
 
 .clear
