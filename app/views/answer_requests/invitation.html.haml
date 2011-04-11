@@ -1,8 +1,7 @@
-= include_javascripts :request_answer
-
 #select-users
   .controls{:class => @fetching_contacts ? "waiting" : ""}
+    = hidden_field_tag "question_id", @question_id
     = hidden_field_tag "user_id"
     = text_field_tag "", t(".email"), :id => "search-users", :class => "inactive", "data-autocomplete-url" => search_users_path
     %ul#search-users-results.autocomplete-list
-    = link_to t(".request_answer"), new_answer_request_path, :class => "request-answer"
+    = link_to t(".request_answer"), new_answer_request_path, :class => "request-answer-button"

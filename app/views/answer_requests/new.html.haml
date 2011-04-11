@@ -1,6 +1,10 @@
-= include_javascripts :request_answer
-
-.request-answer
-  = form_for @answer_request do |f|
-    = f.hidden_field :invited_id
-    = f.text_field :message
+.modal
+  .invitation
+    = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
+      = f.hidden_field :question_id
+      = f.hidden_field :invited_id
+      #invitation-message
+        = f.text_area :message
+      .controls
+        = link_to t("scaffold.cancel"), "#", :class => "close"
+        = f.submit t(".invite_form"), :class => "invite-button"

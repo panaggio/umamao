@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         pagination = render_to_string(:partial => "shared/pagination", :object => @users,
                                       :format => "html")
         render :json => {:html => html, :pagination => pagination }
-      }
+     }
     end
   end
 

@@ -1,3 +1,5 @@
+= include_javascripts :request_answer
+
 = render :partial => 'shared/share_header', :locals => { :opts => { :content => @question, :class_name => Question.to_s.underscore }, :content_url => question_url(@question) }
 
 - @current_class = 'question hentry entry post'
@@ -94,8 +96,9 @@
     .follow-info.block.question
       = follow_button @question
 
-     .ask-answer
-        = link_to t(".ask_answer"), ask_for_answer_question_path(@question), :class => "follow_link"
+    .request-answer
+      = link_to t(".request_answer"), invitation_answer_requests_path(:question_id => @question.id), :class => "request_answer_link"
+    = render_cell :users, :list, :users => @question.requested_users
 
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0

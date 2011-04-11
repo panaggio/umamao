@@ -3,3 +3,5 @@ pt-BR:
     invitation:
       email: Nome
       request_answer: Pedir resposta
+    new:
+      invite_form: Convidar
