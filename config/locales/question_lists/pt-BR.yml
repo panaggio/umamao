@@ -16,7 +16,8 @@ pt-BR:
       confirm_destroy: "Tem certeza que deseja excluir esta lista de exercícios?"
       allow_new_questions: "Adicionar novo exercício"
     form:
-      new_question: "Título"
+      new_question: "Título do exercício"
+      example: "(ex.: %{list_title} - Exercício 1)"
       details: "Enunciado"
       make_question: "Adicionar exercício"
     question:

@@ -2,6 +2,8 @@
   .title
     %a{:name => "form"}
     = f.label :title, "#{t('.new_question')}*", :class => "label"
+    .example
+      = t(".example", :list_title => question_list.title)
     = f.text_field :title, :class => "text_field", :id => "question-title-input"
   .body
     = f.label :body, t(".details"), :class => "label"
