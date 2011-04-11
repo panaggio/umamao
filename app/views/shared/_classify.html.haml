@@ -1,0 +1,16 @@
+-# Autocomplete box used for adding topics to classifiable entities,
+-# such as questions and question lists.
+
+%ul#classify-ul.topic-list
+  - classifiable.topics.each do |topic|
+    = topic_box(topic, classifiable, { :ajax_add => true })
+  - if logged_in? && ajax_add && current_user.can_modify?(classifiable)
+    %li.retag
+      %a.reclassify{:href => "#"}
+        %span.empty= t("classifiable.tags.tag")
+        %span.not-empty= t("classifiable.tags.retag")
+= text_field "topics", "", :class => "inactive", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
+%a.add-topic{:href => "#"}= t("scaffold.add")
+- if ajax_add
+  %a.cancel-reclassify{:href => "#"}= t("scaffold.done")
+%ul#topic-autocomplete-suggestions.autocomplete-list

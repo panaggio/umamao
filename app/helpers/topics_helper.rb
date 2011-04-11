@@ -1,13 +1,16 @@
+# -*- coding: utf-8 -*-
 module TopicsHelper
 
   # Small topic container used throughout the site.
-  def topic_box(topic, question = nil, options = {})
+  def topic_box(topic, classifiable = nil, options = {})
+    url = url_for(classifiable)
+    class_name = classifiable.class.to_s.underscore
     "<li><div class='topic'><span class='topic-title'>#{
       if options[:logged_in] or (self.respond_to?(:logged_in?) and logged_in?)
-        if question && options[:ajax_add]
-          "<a class='remove' href='#{question_url(question)}/unclassify?topic=#{h(topic.title)}'>✕</a>"
+        if classifiable && options[:ajax_add]
+          "<a class='remove' href='#{url}/unclassify?topic=#{h(topic.title)}'>✕</a>"
         else
-          "<input type='hidden' name='question[topics][]' value='#{topic.title}'/><span class='remove'>✕</span>"
+          "<input type='hidden' name='#{class_name}[topics][]' value='#{topic.title}'/><span class='remove'>✕</span>"
         end
       end
     }#{link_to_topic(topic)}</span></div></li>"

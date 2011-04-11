@@ -1,0 +1,48 @@
+- content_for :js do
+  = include_javascripts :content_edit, :show_question_list
+  = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.min.js"
+  = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.mathjax.js"
+
+- content_for :css do
+  = stylesheet_link_tag "#{AppConfig.wmd_location}/wmd.css"
+
+- content_for :head do
+  %meta{:name => "keywords", :content => clean_seo_keywords(@question_list.topics.map(&:title).dup, @question_list.title)}
+  %meta{:name => "description", :content => @question_list.description.gsub(/<\/?[^>]*>/, "")[0, 255] }
+  %link{:rel => "canonical", :href => question_list_url(@question_list_url) }
+
+#question-list
+
+  %h1.navtitle.title.entry-title.question-list-title-col
+    &= @question_list.title
+
+  .body-col
+    .description.markdown
+      = markdown(@question_list.description)
+
+    = render :partial => "shared/classify", :locals => {:classifiable => @question_list, :ajax_add => true}
+
+  .controls
+    .actions
+      - if logged_in?
+        - if current_user.can_modify?(@question_list)
+          = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => t(".confirm_destroy"), :method => :delete
+          = link_to t("scaffold.edit"), edit_topic_path(@question_list), :class => "button"
+
+  %ul.items#questions
+    - if @questions.empty?
+      %li.empty
+        = t(".empty")
+    - else
+      - @questions.each do |question|
+        = render :partial => "question", :object => question
+  .clear
+  
+  - if @questions.total_pages == 0 || @page.to_i == @questions.total_pages
+    = render :partial => "form", :locals => { :question_list => @question_list, :new_question => @new_question }
+    #new_question_link
+      = link_to t('.allow_new_questions'), "#form"
+
+  - unless @questions.empty?
+    #additional_info.pagination
+      = will_paginate @questions

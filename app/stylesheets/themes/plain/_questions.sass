@@ -1,4 +1,21 @@
-#question
+#question, #question-list, #topic
+  .body-col, .controls
+    .actions
+      font-size: 13px
+      line-height: 26px
+      a
+        margin-right: 2px
+        color: $controls-color
+      .new_feature
+        display: inline
+        vertical-align: super
+        font-size: 60%
+        color: red
+        font-weight: bold
+      .featured
+        float: right
+
+#question, #question-list
   position: relative
   margin-bottom: 3em
   +pie-clearfix
@@ -30,14 +47,6 @@
         .time_ago
           display: block
           font-weight: bold
-    .actions
-      font-size: 13px
-      line-height: 26px
-      a
-        margin-right: 2px
-        color: $controls-color
-        &#add_follow_up_question
-          float: right
     .ccontrol
       font-size: 13px
       line-height: 26px

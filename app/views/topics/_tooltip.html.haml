@@ -5,4 +5,4 @@
   - if topic.description.present?
     .description= topic.description
   - else
-    = link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic), :class => "edit-link"
+    = link_to t('topics.tooltip.describe', :title => topic.title), edit_topic_path(topic)

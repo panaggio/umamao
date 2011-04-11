@@ -1,35 +1,6 @@
-function initTopicAutocomplete() {
-  var topicBox = new TopicAutocomplete("#topic-autocomplete-input",
-                                       "#topic-autocomplete-suggestions");
-  var topicsUl = $("ul.topic-list");
-
-  $(".add-topic").live("click", function() {
-    if (topicBox.isActive)
-      topicBox.returnDefault();
-    return false;
-  });
-
-  $(".topic .remove").live("click", function () {
-    $(this).closest("li").remove();
-    return false;
-  });
-
-  // Classifies the current question under topic named title.
-  topicBox.action = function (title) {
-    var topicLi = '<li><div class="topic"><span class="topic-title">' +
-      title + '</span> <a class="remove" href="#">✕</a></div>' +
-      '<input type="hidden" name="question[topics][]" value="' +
-      title + '" /></li>';
-    topicsUl.append($(topicLi));
-    topicBox.clear();
-  };
-
-}
-
-
 $(document).ready(function() {
 
-  initTopicAutocomplete();
+  initTopicAutocompleteForForms('question');
 
   // For some reason, WMD throws an exception if its target is hidden.
   // Thus, we'll only initialize it the first time we display the form.

@@ -1,0 +1,20 @@
+- name = h(question_list.name)
+- owner = question_list.user
+- last_target = question_list
+
+%li.entry.item
+  -# QuestionList Summary
+  .summary
+    - cache("question_list_on_index_#{question_list.id}_#{question_list.created_at}") do
+      %h3= link_to name, question_list_path(question_list), :name => question_list.name
+      %ul#classify-ul.topic-list
+        - question_list.topics[0..5].each do |topic|
+          %li
+            .topic
+              = link_to_topic(topic)
+
+    -# QuestionList Stats
+    .info
+      .metadata
+        = t("time.ago", :time => time_ago_in_words(question_list.updated_at))
+  .clear
