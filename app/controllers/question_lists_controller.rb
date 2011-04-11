@@ -20,13 +20,20 @@ class QuestionListsController < TopicsController
     @question_list.topics << @question_list.main_topic
 
     if @question_list.save
-      flash[:notice] = t(:flash_notice, :scope => "question_lists.create")
+      flash[:notice] = t("question_lists.create.success")
+      
+      # The "#form" suffix below is used to open the "new question
+      # form", which is supposed to be the main use case right after you
+      # create a new question list.
+      redirect_to("#{question_list_path(@question_list)}#form")
+    else
+      if QuestionList.find_by_title(params[:question_list][:title])
+        flash[:error] = t('question_lists.create.error.existing_list')
+      else
+        flash[:error] = t('question_lists.create.error.default')
+      end
+      render :action => "new"
     end
-
-    # The "#form" suffix below is used to open the "new question
-    # form", which is supposed to be the main use case right after you
-    # create a new question list.
-    redirect_to("#{question_list_path(@question_list)}#form")
   end
 
   # GET /question_lists/1
