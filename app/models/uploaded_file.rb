@@ -9,7 +9,16 @@ class UploadedFile
 
   belongs_to :user
 
+  attr_reader :file
+
+  validate :check_file_presence, :if => lambda { |uf| uf.new? }
+  validate :check_file_size, :if => lambda { |uf| uf.file.present? }
+
   after_create :store_file!
+
+  before_destroy :remove_file_from_storage!
+
+  MAXSIZE = 20 * 1024 * 1024
 
   def initialize(args)
     @file = args.delete :file
@@ -17,26 +26,49 @@ class UploadedFile
     super
   end
 
+  # Return the file's extension
   def extension
     self.original_filename.match(/\.\w+$/)[0]
   end
 
-  def filename
-    self.id.to_s + self.extension
-  end
-
+  # The url to the file in storage
   def url
-    uploader = FileUploader.new
+    uploader = FileUploader.new(self)
     # This actually doesn't retrieve the file on the server, but sets
     # the uploader's state so we can get the url.
-    uploader.retrieve_from_store!(self.filename)
+    uploader.retrieve_from_store!(self.original_filename)
     uploader.url
+  end
+
+  # Remove the corresponding file from storage
+  def remove_file_from_storage!
+    uploader = FileUploader.new(self)
+    uploader.retrieve_from_store!(self.original_filename)
+    uploader.remove!
   end
 
   def store_file!
     # TODO: destroy self if upload doesn't work
     uploader = FileUploader.new(self)
     uploader.store!(@file)
+  end
+
+  # Check that a file was given upon creation
+  def check_file_presence
+    if @file.blank?
+      self.errors.add(:file, I18n.t("uploaded_files.errors.blank"))
+      return false
+    end
+    true
+  end
+
+  # Check that the given file is not too large
+  def check_file_size
+    if @file.size > MAXSIZE
+      self.errors.add(:file, I18n.t("uploaded_files.errors.size"))
+      return false
+    end
+    true
   end
 
 end
