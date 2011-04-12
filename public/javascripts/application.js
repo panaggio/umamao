@@ -99,6 +99,10 @@ function initAutocomplete() {
     initTopicAutocompleteForIgnoring();
   }
 
+  if ($("#user-suggested-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForUserSuggesting();
+  }
+
   var searchField = $("#search-field");
 
   // Keyboard shortcuts for search box

@@ -621,3 +621,32 @@ function initTopicAutocompleteForIgnoring() {
   };
 
 }
+
+function initTopicAutocompleteForUserSuggesting() {
+  var topicBox =
+    new TopicAutocomplete("#user-suggested-topics-autocomplete",
+                          "#user-suggested-topics-suggestions");
+
+  var topicsUl = $("#user-suggested");
+  var user_id = $("#user_id").attr("value");
+
+  // Sends to the server a request to suggest a topic named title
+  // to a user named user.
+  topicBox.action = function (title) {
+    $.ajax({
+      url: "/topics/user_suggest.js?user=" + user_id + "&answer=t&title=" + encodeURIComponent(title),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          topicsUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
+        }
+      }
+    });
+    topicBox.clear();
+  };
+
+}
