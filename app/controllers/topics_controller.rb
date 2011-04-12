@@ -333,11 +333,14 @@ class TopicsController < ApplicationController
       raise Goalie::NotFound
     end
 
+    title = params[:title]
+
     questions = Question.paginate(:topic_ids => topic.id, :banned => false,
                                    :order => :activity_at.desc, :per_page => 5,
                                    :page =>  1)
 
-    @info = render_to_string :partial => "embedded.html", :locals => {:topic => topic, :questions => questions}
+    @info = render_to_string :partial => "embedded.html",
+      :locals => {:topic => topic,:questions => questions, :title => title}
     @info.gsub!("\n", "").gsub!("\"", "\\\"")
     render :content_type => 'text/javascript'
   end

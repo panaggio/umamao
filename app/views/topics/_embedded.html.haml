@@ -1,7 +1,10 @@
-.secondary-navigation
-  .navtitle
-    = link_to topic.title, topic_url(topic), :class => "umamao-topic-title", :target => "_blank"
-
+- if !title || title != ""
+  .secondary-navigation
+    .navtitle
+      - if title
+        &= link_to title, topic_url(topic), :class => "umamao-topic-title", :target => "_blank"
+      - else
+        &= link_to topic.title, topic_url(topic), :class => "umamao-topic-title", :target => "_blank"
 
 %ul.items#questions
   - if questions.blank?
