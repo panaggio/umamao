@@ -1,4 +1,13 @@
 pt-BR:
   user_suggestions:
+    suggested:
+      user: Tópicos sugeridos
+      suggest: Sugira um tópico
     topic: Sugira esse tópico
     user: Sugerir tópicos
+    user_suggest:
+      notice:
+        ok:
+          "Tópico %{topic} sugerido ao usuário %{user}"
+        already_follow:
+          "%{user} já segue o tópico %{topic}"
