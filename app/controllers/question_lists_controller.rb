@@ -105,6 +105,7 @@ class QuestionListsController < TopicsController
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
     @file = QuestionListFile.new(:file => params[:file],
                                  :user => current_user,
+                                 :group => current_group,
                                  :question_list => @question_list)
 
     if !@file.save
@@ -119,7 +120,7 @@ class QuestionListsController < TopicsController
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
     @file = @question_list.question_list_files.find(params[:file])
 
-    if @file.present?
+    if @file.present? && @file.can_be_destroyed_by?(current_user)
       @file.destroy
     else
       flash[:error] = t("question_lists.destroy_file.error")

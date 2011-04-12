@@ -5,9 +5,11 @@ class UploadedFile
 
   timestamps!
 
-  key :original_filename, String
+  key :original_filename, String, :required => true
 
-  belongs_to :user
+  belongs_to :user, :required => true
+
+  belongs_to :group, :required => true
 
   attr_reader :file
 
@@ -38,6 +40,10 @@ class UploadedFile
     # the uploader's state so we can get the url.
     uploader.retrieve_from_store!(self.original_filename)
     uploader.url
+  end
+
+  def can_be_destroyed_by?(user)
+    self.user == user || user.owner_of?(self.group)
   end
 
   # Remove the corresponding file from storage
