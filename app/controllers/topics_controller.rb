@@ -235,6 +235,48 @@ class TopicsController < ApplicationController
     end
   end
 
+  def user_suggest
+    if params[:id]
+      @topic = Topic.find_by_slug_or_id(params[:id])
+    elsif params[:title]
+      @topic = Topic.find_by_title(params[:title]) ||
+        Topic.new(:title => params[:title])
+    end
+
+    receiver = User.find_by_id(params[:user])
+
+    success = receiver.add_user_suggestion(current_user, @topic)
+    notice = t(
+      if success
+        'user_suggestions.user_suggest.notice.ok'
+      else
+        'user_suggestions.user_suggest.notice.already_follow'
+      end,
+    :user => receiver.name, :topic => @topic.title)
+
+    track_event(:user_suggested_topic)
+
+    respond_to do |format|
+      format.js do
+        res = {
+          :success => success,
+          :message => notice
+        }
+
+        if success and params[:answer]
+          # Used when suggesting a topic from user's topic page;
+          # requires a rendered topic to be shown
+
+          res[:html] = render_to_string :partial => 'topics/topic',
+            :locals => { :topic => @topic }
+        end
+
+        render :json => res.to_json
+      end
+    end
+
+  end
+
   def toggle_email_subscription
     if params[:id]
       @topic = Topic.find_by_slug_or_id(params[:id])

@@ -41,6 +41,7 @@ Shapado::Application.routes.draw do
     collection do
       post :follow
       post :ignore
+      post :user_suggest
     end
   end
 
