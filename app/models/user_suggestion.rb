@@ -7,6 +7,23 @@ class UserSuggestion < Suggestion
 
   validate :user_dont_follow_entry?
 
+  # FIXME: by the time notifications send e-mail, send invitation will
+  # not be necessary anymor
+  after_create :send_notification, :send_invitation
+
+  def send_invitation
+  end
+
+  def send_notification
+    Notification.new(
+      :user => self.user,
+      :event_type => 'new_user_suggestion',
+      :origin_id => self.origin_id,
+      :reason => self,
+      :topic_id => self.entry_id
+    ).save!
+  end
+
   def user_dont_follow_entry?
     if self.user.following?(self.entry)
       self.errors.add(:user_id,
