@@ -1,7 +1,7 @@
 class Course < Topic
   include MongoMapper::Document
 
-  key :code, String, :length => 15, :index => true, :required => true
+  key :code, String, :length => 15, :index => true
   key :name, String, :length => 500, :index => true, :required => true
   key :summary, String
   key :undergrad, Boolean, :default => true
@@ -20,5 +20,5 @@ class Course < Topic
     true
   end
 
-  validates_uniqueness_of :code, :scope => :university_id
+  validates_uniqueness_of :code, :scope => :university_id, :allow_blank => true
 end
