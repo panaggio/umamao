@@ -30,7 +30,7 @@ pt-BR:
       full_list_of_questions: "lista completa de perguntas"
       browse_by_topics: "navegue por tópicos"
       looking_for: "Procurando %{link}?"
-      exercises: resoluções de exercícios
+      exercises: listas de exercícios
     sidebar:
       admin: Administrar
       moderate: Moderar
