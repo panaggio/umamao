@@ -1,0 +1,21 @@
+- if @style
+  = include_stylesheets :embedded
+
+- if !@title || @title != ""
+  .secondary-navigation
+    .navtitle
+      - title = @title || @topic.title
+      &= link_to title, topic_url(@topic), :class => "umamao-topic-title", :target => "_blank"
+
+%ul.items#questions
+  - if @questions.blank?
+    %li.highlight
+      = t(".empty")
+  - else
+    - @questions.each do |question|
+      %li
+        = link_to question.title, question_url(question), :class => "umamao-question-title", :target => "_blank"
+    %li
+      = link_to t("embedded.more"), topic_url(@topic), :class => "umamao-question-title", :target => "_blank"
+
+.clear

@@ -23,7 +23,7 @@ Shapado::Application.routes.draw do
       get :unanswered
       get :followers
       post :toggle_email_subscription
-      get :javascript_embedded
+      get :embedded
     end
 
     collection do
@@ -31,6 +31,8 @@ Shapado::Application.routes.draw do
       post :ignore
     end
   end
+
+  match "/topics/:id/javascript_embedded" => "topics#embedded"
 
   resources :invitations, :only => [:new, :create] do
     collection do

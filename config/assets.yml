@@ -66,3 +66,5 @@ stylesheets:
     - public/stylesheets/autocomplete_landing.css
     - public/stylesheets/compiled/landing.css
     - public/stylesheets/tip-twitter.css
+  embedded:
+    - public/stylesheets/embedded.css

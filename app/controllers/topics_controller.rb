@@ -326,23 +326,30 @@ class TopicsController < ApplicationController
     end
   end
 
-  def javascript_embedded
+  def embedded
     begin
-      topic = Topic.find_by_slug_or_id(params[:id])
+      @topic = Topic.find_by_slug_or_id(params[:id])
     rescue BSON::InvalidObjectId
       raise Goalie::NotFound
     end
 
-    title = params[:title]
+    @title = params[:title]
 
-    questions = Question.paginate(:topic_ids => topic.id, :banned => false,
-                                   :order => :activity_at.desc, :per_page => 5,
+    @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
+                                   :order => :created_at.desc, :per_page => 5,
                                    :page =>  1)
 
-    @info = render_to_string :partial => "embedded.html",
-      :locals => {:topic => topic,:questions => questions, :title => title}
-    @info.gsub!("\n", "").gsub!("\"", "\\\"")
-    render :content_type => 'text/javascript'
+    respond_to do |format|
+      format.js do
+        info = render_to_string :layout => false
+        info.gsub!("\n", "").gsub!("\"", "\\\"")
+        render :partial => "javascript_embedded.js", :content_type => 'text/javascript', :locals => {:info => info}
+      end
+      format.html do
+        @style = true
+        render :layout => false
+      end
+    end
   end
 
   def students
