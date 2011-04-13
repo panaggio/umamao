@@ -1,0 +1,20 @@
+ul{
+  color: #199BDC;
+  font-size: 12px;
+}
+li{
+  margin-bottom: 7px;
+  list-style: none;
+}
+
+a{
+  font-family: arial,helvetica,sans-serif;
+  color: #199BDC;
+}
+
+.umamao-topic-title{
+  font-size: 15px;
+}
+
+.umamao-question-title{
+}
