@@ -1,6 +1,6 @@
 // Follow/unfollow buttons
 $(document).ready(function() {
-  // Only selects '.follow_link's that may not heve been selected
+  // Only selects '.follow_link's that may not have been selected
   Utils.clickObject(".follow_link:not(#topic-suggestions a)", function () {
     var link = $(this);
 

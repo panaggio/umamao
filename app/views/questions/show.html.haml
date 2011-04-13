@@ -92,10 +92,7 @@
   - if logged_in? && current_user != @question.user
     -# Can watch the question
     .follow-info.block.question
-      - if @question.watch_for?(current_user)
-        = link_to t("followable.unfollow"), unwatch_question_path(@question), :class => "unfollow_link", "data-class" => "follow_link", "data-title" => t("followable.follow"), "data-undo" => watch_question_path(@question), "data-entry-type" => "question"
-      - else
-        = link_to t("followable.follow"), watch_question_path(@question), :class => "follow_link", "data-class" => "unfollow_link", "data-title" => t("followable.unfollow"), "data-undo" => unwatch_question_path(@question), "data-entry-type" => "question"
+      = follow_button @question
 
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0
