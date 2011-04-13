@@ -12,6 +12,8 @@
     = yield :js
 
   %body.bp
+    ~ AppConfig.beginning_of_body_tag if Rails.env.production?
+
     #container
       #header
         = link_to image_tag("default_logo.png", :class => "group_logo", :width => 150, :height => 75), domain_url(:custom => current_group.domain)
