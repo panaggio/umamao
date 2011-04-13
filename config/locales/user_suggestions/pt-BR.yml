@@ -1,5 +1,7 @@
 pt-BR:
   user_suggestions:
+    notification:
+      "%{user} sugeriu que você seguisse o tópico %{topic}"
     suggested:
       user: Tópicos sugeridos
       suggest: Sugira um tópico
