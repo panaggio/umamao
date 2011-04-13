@@ -2,13 +2,25 @@
   .navtitle
     &= @topic.title
 
-%h2= t("followable.followers", :count => @followers.total_entries)
+#profile-display
+  %input#topic_id{:type => 'hidden', :value => @topic.id}
 
-%ul#users.items
-  - @followers.each do |user|
-    = render :partial => "users/user", :locals => {:user => user}
+  %h2= t("followable.followers", :count => @followers.total_entries)
 
-= will_paginate @followers
+  -# User suggestion
+  %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
+    %ul.autocomplete-list#topic-suggested-users-suggestions
+
+  %ul#user-suggested.items
+    - @users_suggested.each do |user|
+      = render :partial => "users/user", :locals => {:user => user}
+
+  %ul#users.items
+    - @followers.each do |user|
+      = render :partial => "users/user", :locals => {:user => user}
+
+  #additional_info
+    = will_paginate @followers
 
 - content_for :sidebar do
   = link_to t("topics.show.view"), topic_path(@topic)

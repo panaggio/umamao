@@ -382,6 +382,12 @@ class TopicsController < ApplicationController
 
     @followers =
       @topic.followers.paginate :per_page => 15, :page => params[:page]
+
+    @users_suggested = UserSuggestion.query(
+      :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
+      :origin_id => current_user.id
+    ).all.map(&:user)
+
     respond_to do |format|
       format.html
     end
