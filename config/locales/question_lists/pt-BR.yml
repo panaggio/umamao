@@ -12,9 +12,17 @@ pt-BR:
         default: "Erro ao tentar criar a lista."
       topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
     show:
-      empty: "Esta lista ainda não possui nenhum exercício."
-      confirm_destroy: "Tem certeza que deseja excluir esta lista de exercícios?"
+      empty:
+        basic: "Esta lista ainda não possui nenhum exercício."
+        transcribe: |
+          Esta lista ainda não possui nenhum exercício.
+          Você pode ajudar transcrevendo os arquivos acima.
+      confirm_destroy: |
+        Tem certeza que deseja excluir esta lista de exercícios?
       allow_new_questions: "Adicionar novo exercício"
+      files:
+        title: "Arquivos"
+        empty: "Esta lista não possui arquivos."
     form:
       new_question: "Título do exercício"
       example: "(ex.: %{list_title} - Exercício 1)"
@@ -25,3 +33,7 @@ pt-BR:
         zero: "Adicionar resposta"
         one: "%{count} resposta"
         other: "%{count} respostas"
+    create_file:
+      error: "Não foi possível enviar o arquivo"
+    destroy_file:
+      error: "Não foi possível apagar o arquivo"

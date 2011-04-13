@@ -146,6 +146,8 @@ GEM
     capybara-envjs (0.4.0)
       capybara (~> 0.4.0)
       envjs (>= 0.3.7)
+    carrierwave (0.5.3)
+      activesupport (~> 3.0)
     ccsv (0.1)
     celerity (0.8.9)
     childprocess (0.1.8)
@@ -185,6 +187,7 @@ GEM
       johnson (>= 2.0.0.pre3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    excon (0.6.1)
     faker (0.9.5)
       i18n (~> 0.4)
     fancy-buttons (0.5.5)
@@ -198,6 +201,16 @@ GEM
       faraday (~> 0.5.4)
     ffi (1.0.7)
       rake (>= 0.8.7)
+    fog (0.7.2)
+      builder
+      excon (>= 0.6.1)
+      formatador (>= 0.1.3)
+      json
+      mime-types
+      net-ssh (>= 2.1.3)
+      nokogiri (>= 1.4.4)
+      ruby-hmac
+    formatador (0.1.3)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
     grit (2.4.1)
@@ -241,6 +254,7 @@ GEM
     multi_xml (0.2.2)
     multipart-post (1.1.0)
     net-ldap (0.1.1)
+    net-ssh (2.1.4)
     nokogiri (1.4.4)
     oauth (0.4.4)
     oauth2 (0.1.1)
@@ -299,6 +313,7 @@ GEM
       ruby-debug-base (~> 0.10.4.0)
     ruby-debug-base (0.10.4)
       linecache (>= 0.3)
+    ruby-hmac (0.4.0)
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
@@ -354,6 +369,7 @@ DEPENDENCIES
   bson_ext
   capybara
   capybara-envjs
+  carrierwave
   ccsv (~> 0.1)
   cells!
   cloudsponge
@@ -372,6 +388,7 @@ DEPENDENCIES
   factory_girl_rails!
   faker
   fancy-buttons (~> 0.5.1)
+  fog
   grit
   haml (~> 3.0.13)
   hoptoad_notifier

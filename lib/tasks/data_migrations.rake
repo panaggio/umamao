@@ -7,6 +7,165 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Import CACo's exams as lists of questions"
+    task :import_caco_exams => :environment do
+      unicamp = University.find_by_short_name("Unicamp")
+
+      # Map each file's name to the information extracted from it
+      file_map = {}
+
+      file_count = 0
+      uploaded_count = 0
+
+      # Iterate on each course group (e.g. MA, MC, etc)
+      Dir[Rails.root.join("banco-de-provas", "{?,??}")].each do |code|
+
+        # Iterate on each course
+        Dir[code + "/*"].each do |course_code|
+          course = Course.first(:code => File.basename(course_code).upcase,
+                                :university_id => unicamp.id)
+          if !course
+            puts "Creating course #{File.basename(course_code).upcase}"
+            # We put any name if the course doesn't exist
+            code_upcase = File.basename(course_code).upcase
+            course =
+              Course.create!(:code => code_upcase, :name => code_upcase,
+                             :title => "#{code_upcase} (Unicamp)",
+                             :university_id => unicamp.id)
+          end
+
+          if course.present?
+            # In a course's directory we can find professor subdir's or
+            # standalone exams.
+            Dir[course_code + "/*"].each do |entry|
+
+              # Professor subdir
+              if File.directory? entry
+                Dir[entry + "/*"].each do |professor_entry|
+                  re = /^.{4,5}-(.*)-(\d{4}s\d[^-]*)(-.+)?\.pdf$/
+                  re_alt = /^.{4,5}-(.*)-[^-]+\.pdf$/
+                  match = File.basename(professor_entry).match re
+                  info = {}
+                  if match
+                    file_count += 1
+                    info[:kind] =
+                      case match[1]
+                      when /p(\d+)/
+                        "Prova #{$1}"
+                      when /t(\d+)/
+                        "Teste #{$1}"
+                      when "ex"
+                        "Exame"
+                      when "2c"
+                        "Segunda chamada"
+                      else
+                        "Prova #{match[1]}"
+                      end
+                    info[:period] = match[2]
+                    info[:other] = match[3]
+                  elsif File.basename(professor_entry).match re_alt
+                    file_count += 1
+                    info[:kind] = $1.tr("-", " ")
+                  else
+                    info[:kind] = :bogus
+                    puts "Bogus #{professor_entry}"
+                  end
+                  info[:course] = course
+                  file_map[professor_entry] = info
+                end
+
+              # Standalone exam.
+              elsif entry =~ /\.pdf$/
+                re = /^.{4,5}-(.*)-(\d{4}s\d[^-]*)(-.*)?\.pdf$/
+                re_alt = /^.{4,5}-(.*)\.pdf$/
+                match = File.basename(entry).match re
+                info = {}
+                if match
+                  file_count += 1
+                  info[:kind] =
+                    case match[1]
+                    when /p(\d+)/
+                      "Prova #{$1}"
+                    when /t(\d+)/
+                      "Teste #{$1}"
+                    when "ex"
+                      "Exame"
+                    when "2c"
+                      "Segunda chamada"
+                    else
+                      match[1]
+                    end
+                  info[:period] = match[2]
+                  info[:other] = match[3]
+                elsif File.basename(entry).match re_alt
+                  file_count += 1
+                  info[:kind] = $1.tr("-", " ")
+                else
+                  info[:kind] = :bogus
+                  puts "Bogus #{entry}"
+                end
+                info[:course] = course
+                file_map[entry] = info
+              else
+                puts "  Unknown #{File.basename entry}"
+              end
+            end
+          else
+            puts "Missing #{course_code}"
+          end
+        end
+      end
+
+      inverse_map = {}
+
+      file_map.each do |file, info|
+        if info[:kind] == :bogus
+          question_list_name = "Bogus"
+        else
+          question_list_name = ""
+          question_list_name += info[:course].title if info[:course]
+          question_list_name += " - #{info[:kind]}" if info[:kind]
+          question_list_name += " - #{info[:period]}" if info[:period]
+        end
+
+        inverse_map[question_list_name] ||= {
+          :files => [],
+          :course => info[:course]
+        }
+        inverse_map[question_list_name][:files] << file
+      end
+
+      base = Topic.find_by_title("Banco de provas")
+      if !base
+        base = Topic.create!(:title => "Banco de provas")
+      end
+
+      exercises_id = BSON::ObjectId("4cbefdbb79de4f58ea00012c")
+
+      inverse_map.each do |name, info|
+        list = QuestionList.find_by_title(name)
+        if list
+          puts "Found list #{name}"
+        else
+          puts "Creating list #{name}"
+          topic_ids = [info[:course].id, base.id, exercises_id]
+          list =
+            QuestionList.create!(:title => String.new(name),
+                                 :description => "",
+                                 :main_topic_id => info[:course].id,
+                                 :topic_ids => topic_ids)
+        end
+
+        if info[:files] != :bogus
+          info[:files].each do |file_name|
+            QuestionListFile.create!(:file => File.open(file_name),
+                                     :question_list => list)
+            puts "  Uploaded file #{File.basename file_name}"
+          end
+        end
+      end
+    end
+
     desc "Initialize news_item's visibility flag"
     task :initialize_news_items_visibility_flag => :environment do
       NewsItem.find_each do |ni|
@@ -26,7 +185,6 @@ namespace :data do
         user.save!
       end
     end
-
     desc "Randomly reset passwords for users that don't have one"
     task :fill_in_missing_passwords => :environment do
       total = 0

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class QuestionListsController < TopicsController
   before_filter :login_required, :except => [:show]
+  before_filter :admin_required, :only => [:create_files, :destroy_files]
   before_filter :main_topic_allow_question_lists, :only => [:new, :create]
 
   # GET /question_lists/new
@@ -21,7 +22,7 @@ class QuestionListsController < TopicsController
 
     if @question_list.save
       flash[:notice] = t("question_lists.create.success")
-      
+
       # The "#form" suffix below is used to open the "new question
       # form", which is supposed to be the main use case right after you
       # create a new question list.
@@ -99,6 +100,34 @@ class QuestionListsController < TopicsController
         render :json => { :success => status }.to_json
       end
     end
+  end
+
+  def create_file
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+    @file = QuestionListFile.new(:file => params[:file],
+                                 :user => current_user,
+                                 :group => current_group,
+                                 :question_list => @question_list)
+
+    if !@file.save
+      flash[:error] = "#{t("question_lists.create_file.error")}: "
+      flash[:error] += @file.errors[:file].join ' '
+    end
+
+    redirect_to question_list_path(@question_list)
+  end
+
+  def destroy_file
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+    @file = @question_list.question_list_files.find(params[:file])
+
+    if @file.present? && @file.can_be_destroyed_by?(current_user)
+      @file.destroy
+    else
+      flash[:error] = t("question_lists.destroy_file.error")
+    end
+
+    redirect_to question_list_path(@question_list)
   end
 
   protected

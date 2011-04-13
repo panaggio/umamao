@@ -8,6 +8,8 @@ class QuestionList < Topic
   key :user_id, String, :index => true
   belongs_to :user
 
+  has_many :question_list_files, :dependent => :destroy
+
   # Classifies self under topic topic.
   def classify!(topic)
     if !topic_ids.include? topic.id

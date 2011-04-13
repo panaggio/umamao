@@ -1,0 +1,5 @@
+pt-BR:
+  uploaded_files:
+    errors:
+      blank: Arquivo faltando
+      size: Arquivo grande demais

@@ -20,6 +20,7 @@ gem 'mongo'
 gem "mongo_mapper", :git => "git://github.com/umamao/mongomapper.git"
 gem 'mongomapper_ext', :git => 'git://github.com/umamao/mongomapper_ext.git'
 gem 'devise', :git => 'git://github.com/umamao/devise.git'
+gem 'carrierwave' # file upload manager
 gem 'cells', :git => 'git://github.com/apotonick/cells.git'
 gem 'cloudsponge'
 gem 'curb'
@@ -28,6 +29,7 @@ gem 'delayed_job'
 gem 'delayed_job_mongo_mapper'
 gem 'differ', '~>0.1.1'
 gem 'dynamic_form'
+gem 'fog' # connect to storage services such as cloudfiles
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
 gem 'jquery-rails'
 gem 'haml', '~> 3.0.13'

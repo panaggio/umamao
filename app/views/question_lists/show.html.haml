@@ -8,7 +8,8 @@
 
 - content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question_list.topics.map(&:title).dup, @question_list.title)}
-  %meta{:name => "description", :content => @question_list.description.gsub(/<\/?[^>]*>/, "")[0, 255] }
+  - if @question_list.description.present?
+    %meta{:name => "description", :content => @question_list.description.gsub(/<\/?[^>]*>/, "")[0, 255] }
   %link{:rel => "canonical", :href => question_list_url(@question_list_url) }
 
 #question-list
@@ -28,16 +29,36 @@
         - if current_user.can_modify?(@question_list)
           = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => t(".confirm_destroy"), :method => :delete
           = link_to t("scaffold.edit"), edit_topic_path(@question_list), :class => "button"
+  .files
+    %h2= t(".files.title")
+    - if @question_list.question_list_files.present?
+      %ul
+        - @question_list.question_list_files.each do |question_list_file|
+          %li
+            = link_to question_list_file.original_filename, question_list_file.url
+            - if logged_in? && question_list_file.can_be_destroyed_by?(current_user)
+              = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post
+    - else
+      .empty= t(".files.empty")
+    - if logged_in? && current_user.admin?
+      -# Adding files is restricted right now.
+      .add-file
+        - form_tag create_file_question_list_path, :multipart => true do
+          = file_field_tag :file
+          = submit_tag
 
   %ul.items#questions
     - if @questions.empty?
       %li.empty
-        = t(".empty")
+        - if @question_list.question_list_files.present?
+          = t(".empty.transcribe")
+        - else
+          = t(".empty.basic")
     - else
       - @questions.each do |question|
         = render :partial => "question", :object => question
   .clear
-  
+
   - if @questions.total_pages == 0 || @page.to_i == @questions.total_pages
     = render :partial => "form", :locals => { :question_list => @question_list, :new_question => @new_question }
     #new_question_link
