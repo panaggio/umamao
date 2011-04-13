@@ -4,6 +4,8 @@
     = notification_message notification
   .metadata
     - if notification.event_type == "follow"
-      = follow_button notification.origin, :only_if_unfollowed => true
+      = follow_button notification.origin
+    - elsif notification.event_type == 'new_user_suggestion'
+      = follow_button notification.topic
     .date
       = t("time.ago", :time => time_ago_in_words(notification.created_at))
