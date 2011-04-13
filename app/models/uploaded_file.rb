@@ -20,11 +20,16 @@ class UploadedFile
 
   before_destroy :remove_file_from_storage!
 
-  MAXSIZE = 20 * 1024 * 1024
+  MAXSIZE = 20 * 1024 * 1024 # 20MB
 
   def initialize(args)
     @file = args.delete :file
-    self.original_filename = File.basename @file.original_filename
+    self.original_filename =
+      if @file.respond_to? :original_filename
+        File.basename @file.original_filename
+      else
+        File.basename @file.path
+      end
     super
   end
 
@@ -70,7 +75,14 @@ class UploadedFile
 
   # Check that the given file is not too large
   def check_file_size
-    if @file.size > MAXSIZE
+    size =
+      # File instances in 1.8.7 do not respond to :size
+      if @file.respond_to? :size
+        @file.size
+      else
+        File.size(@file.path)
+      end
+    if size > MAXSIZE
       self.errors.add(:file, I18n.t("uploaded_files.errors.size"))
       return false
     end
