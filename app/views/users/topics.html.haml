@@ -15,7 +15,6 @@
   %ul.autocomplete-list#user-suggested-topics-suggestions
 
   %ul#user-suggested.items
-    -# @topics[0..1].each do |topic|
     - @suggested_topics.each do |topic|
       = render :partial => "topics/topic", :locals => {:topic => topic}
 
