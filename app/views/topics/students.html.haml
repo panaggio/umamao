@@ -5,7 +5,8 @@
   - @course_offers.each do |offer|
     - if offer.students.present?
       %h3.title
-        = "#{offer.course.code}#{offer.code}"
+        - course_code = offer.course.code || "#{offer.course.name} - "
+        = "#{course_code}#{offer.code}"
       %ul
         - offer.students.each do |student|
           %li
