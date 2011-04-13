@@ -125,7 +125,10 @@ namespace :data do
           question_list_name = ""
           question_list_name += info[:course].title if info[:course]
           question_list_name += " - #{info[:kind]}" if info[:kind]
-          question_list_name += " - #{info[:period]}" if info[:period]
+          if info[:period].present?
+            info[:period].match(/(\d{4})s(.)(.*)/)
+            question_list_name += " - #{$2}s#{$1}#{$3}"
+          end
         end
 
         inverse_map[question_list_name] ||= {
