@@ -7,14 +7,13 @@ class UserSuggestion < Suggestion
 
   validate :user_dont_follow_entry?
 
-  # FIXME: by the time notifications send e-mail, send invitation will
-  # not be necessary anymor
-  after_create :send_notification, :send_invitation
-
-  def send_invitation
-  end
+  after_save :send_notification
 
   def send_notification
+    # FIXME: by the time notifications send e-mail, send invitation will
+    # not be necessary anymore
+    Notifier.new_user_suggestion(self.user, self.origin, self.entry).deliver
+
     Notification.new(
       :user => self.user,
       :event_type => 'new_user_suggestion',
@@ -23,6 +22,7 @@ class UserSuggestion < Suggestion
       :topic_id => self.entry_id
     ).save!
   end
+  handle_asynchronously :send_notification
 
   def user_dont_follow_entry?
     if self.user.following?(self.entry)
