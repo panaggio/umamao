@@ -15,4 +15,9 @@ class FileUploader < CarrierWave::Uploader::Base
     self.model.original_filename
   end
 
+  # Override default cache dir so we can upload to Heroku
+  def cache_dir
+    "#{Rails.root}/tmp/uploads"
+  end
+
 end
