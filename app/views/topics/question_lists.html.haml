@@ -1,0 +1,14 @@
+- content_for :subtabs do
+  .secondary-navigation
+    .navtitle= @topic.title
+    %h3= t(".title")
+
+= render :partial => "sidebar", :locals => {:topic => @topic, :students => nil}
+- content_for :sidebar do
+  = link_to t(".main"), topic_path(@topic)
+
+%ul.items#topics
+  - @question_lists.each do |question_list|
+    = render :partial => "topics/topic", :locals => {:topic => question_list}
+
+= will_paginate @question_lists

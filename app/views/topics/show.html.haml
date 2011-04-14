@@ -1,24 +1,17 @@
 - content_for :js do
   = include_javascripts :topics_email_subscription
 
-- content_for :sidebar do
-  = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
-  = render :partial => "email_subscription", :locals => {:topic => @topic, :block => "block"}
-  = render_cell :users, :followers, :followed => @topic
-  - if @students_course.present?
-    %h3.title
-      = t('.registered_students')
-    = render :partial => "course_invitation", :locals => {:topic => @topic, :students => @students_course}
-  
+= render :partial => "sidebar", :locals => {:topic => @topic, :students => @students_course}
+
 #topic
   .secondary-navigation
     .navtitle
       &= @topic.title
   %br
-  
+
   .markdown
     = markdown(@topic.description)
-  
+
   .controls
     .actions
       = link_to t('scaffold.edit'), edit_topic_path(@topic)
@@ -33,7 +26,7 @@
       = tab.all t('.all_tab'), @topic
       = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
   %br
-  
+
   - if @news_items.blank?
     %ul.items#questions
       - if @questions.blank?
@@ -45,23 +38,28 @@
     %ul.items#news_items
       - @news_items.each do |news_item|
         = render :partial => "welcome/news_item", :object => news_item
-  
+
   - content_for :sidebar do
-    - if @topic.related_topics.any?
-      #related-topics.block.related
-        %h3.title
-          = t('.related_topics')
+    - if @topic.allow_question_lists && @question_lists.present?
+      #question-lists.block
+        %h3.title= t(".question_lists")
         %ul.topic-list
-          = render :partial => "topics/related_topic_list"
-  
+          - @question_lists.each do |question_list|
+            %li.topic
+              -# As question list following will be a little bit different, we'll turn this off for now.
+              %span.topic-title= link_to_topic question_list, :render_follow_button => false
+        - if @question_lists.size < @question_lists.total_entries
+          = link_to t(".more"), question_lists_topic_path(@topic)
+
+
   #additional_info
     - if @news_items.blank?
       = will_paginate @questions
     - else
       = will_paginate @news_items
-  
+
     #help_us
       = t("questions.index.help_to_answer")
       = link_to t("questions.index.unanswered_questions"), unanswered_topic_path(@topic)
-  
+
     .clear

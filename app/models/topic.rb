@@ -121,8 +121,22 @@ class Topic
     self.related_topics
   end
 
+  # Return a Hash [Topic, Integer] giving the co-occurrence of
+  # questions between self and the others.
+  def related_topics_with_count
+    self.related_topics_count.sort_by { |k,v| -v }.
+      map { |k,v| [Topic.find_by_id(k), v] }
+  end
+
   def questions
     Question.query(:topic_ids => self.id)
+  end
+
+  # We make this association by hand because declaring it as usual was
+  # screwing up our development server (probably a dependency resolver
+  # bug).
+  def question_lists
+    QuestionList.query(:main_topic_id => self.id)
   end
 
   # Add a follower to topic.

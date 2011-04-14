@@ -26,6 +26,7 @@ Shapado::Application.routes.draw do
       get :followers
       post :toggle_email_subscription
       get :embedded
+      get :question_lists
     end
 
     collection do

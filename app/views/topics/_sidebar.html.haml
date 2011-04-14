@@ -1,0 +1,14 @@
+- content_for :sidebar do
+  = render :partial => "follow", :locals => {:topic => topic, :block => "block"}
+  = render :partial => "email_subscription", :locals => {:topic => topic, :block => "block"}
+  = render_cell :users, :followers, :followed => topic
+  - if students.present?
+    %h3.title
+      = t('.registered_students')
+    = render :partial => "course_invitation", :locals => {:topic => topic, :students => students}
+  - if @topic.related_topics.any?
+    #related-topics.block.related
+      %h3.title
+        = t('.related_topics')
+      %ul.topic-list
+        = render :partial => "related_topic_list", :locals => {:topic => topic}

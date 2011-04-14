@@ -46,6 +46,10 @@ class TopicsController < ApplicationController
           Invitation.count(:recipient_email => s.academic_email) == 0}.first(6)
     end
 
+    @question_lists =
+      @topic.question_lists.paginate(:per_page => 2,
+                                     :order => :created_at.desc)
+
     @news_items = NewsItem.paginate(
       :recipient_id => @topic.id,
       :recipient_type => "Topic",
@@ -58,10 +62,6 @@ class TopicsController < ApplicationController
       :topic_ids => @topic.id, :banned => false,
       :order => :activity_at.desc, :per_page => 25,
       :page => params[:page] || 1) if @news_items.blank?
-
-    @related_topics_count =
-      @topic.related_topics_count.sort_by { |k,v| -v }.
-      map { |k,v| [Topic.find_by_id(k), v] }
 
     respond_with @topics
   end
@@ -356,4 +356,13 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_slug_or_id(params[:id])
     @course_offers = CourseOffer.query(:course_id => @topic.id)
   end
+
+  def question_lists
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @question_lists =
+      @topic.question_lists.paginate(:per_page => 20,
+                                     :page => params[:page],
+                                     :order => :created_at.desc)
+  end
+
 end

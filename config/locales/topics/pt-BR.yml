@@ -23,11 +23,17 @@ pt-BR:
         disable: desativar
         enable: ativar
         text: Receber novas perguntas por email
-      related_topics: Tópicos relacionados
-      registered_students: Alunos matriculados
+      more: Mais
+      question_lists: Listas de exercícios
       unanswered_tab: Perguntas em aberto
       view: Ver tópico
       new_question_list: Criar lista de exercícios
+    question_lists:
+      title: Listas de exercícios
+      main: Principal
+    sidebar:
+      related_topics: Tópicos relacionados
+      registered_students: Alunos matriculados
     tooltip:
       describe: "Ajude a descrever o tópico %{title}"
     unanswered:
