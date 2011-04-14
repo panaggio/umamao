@@ -1,10 +1,15 @@
 .modal
+  #select-users
+    = text_field_tag "", t(".input"), :id => "search-users", :class => "inactive", "data-autocomplete-url" => autocomplete_url
+    %ul#search-users-results.autocomplete-list
+  %br
   .invitation
     = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
       = f.hidden_field :question_id
-      = f.hidden_field :invited_id
+      = f.hidden_field :invited_id, :class => "invited_id"
       #invitation-message
+        = f.label :message, t(".message")
         = f.text_area :message
       .controls
         = link_to t("scaffold.cancel"), "#", :class => "close"
-        = f.submit t(".invite_form"), :class => "invite-button"
+        = f.submit t(".invite_form"), :class => "invite-button", :disabled => "disabled"

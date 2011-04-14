@@ -96,10 +96,6 @@
     .follow-info.block.question
       = follow_button @question
 
-    .request-answer
-      = link_to t(".request_answer"), invitation_answer_requests_path(:question_id => @question.id), :class => "request_answer_link"
-    = render_cell :users, :list, :users => @question.requested_users
-
   - if logged_in? && (current_user.mod_of?(current_group) || current_user.can_view_offensive_counts_on?(current_group))
     - unless @question.flags.count == 0
       .block
@@ -130,6 +126,10 @@
             %li= link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
 
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question.id, :class_name => Question.to_s.underscore } }
+
+  .request-answer
+    = link_to t(".request_answer"), new_answer_request_path(:question_id => @question.id), :class => "request-answer-button"
+  = render_cell :users, :list, :users => @question.requested_users
 
   .question-stats
     %h3= t("questions.show.stats")

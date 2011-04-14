@@ -17,3 +17,13 @@ pt-BR:
 
         Abraço,
         Equipe Umamão
+    request_answer:
+      subject: "%{user} pediu para você responder a uma pergunta no Umamão"
+      greeting: Olá %{invited},
+      sender: "%{user} acha que você sabe a resposta para a pergunta abaixo e gostaria da sua ajuda:"
+      answer: Clique aqui para responder
+      text_link_label: "Para respoder a questão, clique neste link:"
+      goodbye: |
+
+        Abraço,
+        Equipe Umamão

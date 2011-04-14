@@ -1,7 +1,7 @@
 pt-BR:
   answer_requests:
-    invitation:
-      email: Nome
-      request_answer: Pedir resposta
     new:
       invite_form: Convidar
+      input: Digite o nome
+      message: Mensagem (opcional)
+      request_answer: Pedir resposta

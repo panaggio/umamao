@@ -5,51 +5,14 @@ function initUserAutocomplete(){
   // manage it in Javascript.
   var controls = $("#select-users");
 
-  var userAutocomplete = new UserAutocompleteBox("#search-users",
+  var userAutocomplete = new UserAutocomplete("#search-users",
                                                 "#search-users-results");
 
-
-  var autocompleteTemplate = $.template(null,
-    '<li class="autocomplete-entry">${name} ' +
-    '<span class="desc">${email}</span></li>');
-
-  var UserItem = function (user) {
-    this.data = user;
-    this.html = $.tmpl(autocompleteTemplate, user);
+  // Classifies the current question under topic named title.
+  userAutocomplete.action = function (title) {
+    $("#search-users").val(this.data.title);
+    $(".invited_id").val(this.data.id);
   };
-
-  UserItem.prototype = {
-    click: function () {
-      userAutocomplete.clear();
-      $("#search-users").val(this.data.name);
-      $(".invited_id").val(this.data.id);
-    }
-  };
-
-  Utils.extend(UserItem, Item);
-
-  userAutocomplete.processData = function (data) {
-    var items = [];
-
-    data.forEach(function (result) {
-      items.push(new UserItem(result));
-    });
-
-    return items;
-  };
-  
-  // We should enable/disable the "add" button as well.
-  // TODO: maybe we should incorporate buttons in the AutocompleteBox as well.
-  userAutocomplete.enable = function () {
-    controls.find("input").removeAttr("disabled");
-    AutocompleteBox.prototype.enable.call(this);
-  };
-
-  userAutocomplete.disable = function () {
-    controls.find("input").attr("disabled", "true");
-    AutocompleteBox.prototype.disable.call(this);
-  };
-
 
 }
 
@@ -73,7 +36,7 @@ Utils.clickObject(".request-answer-button", function () {
     success: function(data) {
       if(data.success){
         Utils.modal({html : data.html});
-        initAutocompleteUser();
+        initUserAutocomplete();
       }
       else
         showMessage(data.message, "error");
