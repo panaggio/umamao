@@ -73,10 +73,16 @@ class QuestionListsController < TopicsController
       format.js do
         res = { :success => status }
         res[:box] = render_to_string(
-          :partial => 'topics/topic_box', :locals => {
-            :topic => @topic, :classifiable => @question_list,
-            :options => { :ajax_add => true, :logged_in => true }
-        }) if status
+          :partial => 'topics/topic_box',
+          :locals => {
+            :topic => @topic,
+            :options => {
+              :ajax_add => true,
+              :logged_in => true,
+              :classifiable => @question_list
+            }
+          }
+        ) if status
         render :json => res.to_json
       end
     end

@@ -10,6 +10,18 @@ class QuestionList < Topic
 
   has_many :question_list_files, :dependent => :destroy
 
+  def initialize(options = {})
+    if options[:topics].present?
+      options[:topic_ids] = options[:topics].map(&:id)
+      options.delete :topics
+    elsif options[:topic_ids].blank?
+      # Use "solved exercices" topic by default
+      options[:topic_ids] = [BSON::ObjectId('4cbefdbb79de4f58ea00012c')]
+    end
+
+    super
+  end
+
   # Classifies self under topic topic.
   def classify!(topic)
     if !topic_ids.include? topic.id

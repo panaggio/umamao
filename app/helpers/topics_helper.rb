@@ -2,7 +2,11 @@
 module TopicsHelper
 
   # Small topic container used throughout the site.
-  def topic_box(topic, classifiable = nil, options = {})
+  # options:
+  #  - classifiable: the object that this topic classifies
+  #  - ajax_add: whether this topic is being added on a form or not
+  def topic_box(topic, options = {})
+    classifiable = options[:classifiable]
     url = url_for(classifiable)
     class_name = classifiable.class.to_s.underscore
     "<li><div class='topic'><span class='topic-title'>#{

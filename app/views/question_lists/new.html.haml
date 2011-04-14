@@ -14,7 +14,7 @@
   .group
     = f.label :title, "#{t('topics.edit.name')}*", :class => "label"
     = f.text_field :title, :class => "text_field"
-  
+
   .group.initially-hidden
     = f.label :description, t('question_lists.new.description'), :class => "label"
     = f.text_area :description, :class => "editor-input", :id => "description-input", :rows => "auto", :cols => "auto"
@@ -38,7 +38,7 @@
   .group
     %ul#classify-ul.topic-list
       - @question_list.topics.each do |topic|
-        = topic_box(topic, @question_list, { :ajax_add => true })
+        = topic_box topic, :classifiable => @question_list
     = text_field "topics", "", :class => "inactive", :id => "topic-autocomplete-input", :value => t("searches.form.select_topics"), "data-autocomplete-url" => autocomplete_url
     %a.add-topic{:href => "#"}= t("scaffold.add")
     %ul#topic-autocomplete-suggestions.autocomplete-list

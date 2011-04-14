@@ -309,7 +309,7 @@ class TopicsController < ApplicationController
              }
              if !params[:follow]
                render_to_string(:partial => "topic_box",
-                                :locals => {:topic => t, :classifiable => false})
+                                :locals => {:topic => t})
              end
              res
            end.to_json)
