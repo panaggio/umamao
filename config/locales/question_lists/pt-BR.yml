@@ -22,7 +22,9 @@ pt-BR:
       allow_new_questions: "Adicionar novo exercício"
       files:
         title: "Arquivos"
-        empty: "Esta lista não possui arquivos."
+        add:
+          title: "Adicionar arquivo"
+          submit: "Enviar"
     form:
       new_question: "Título do exercício"
       example: "(ex.: %{list_title} - Exercício 1)"

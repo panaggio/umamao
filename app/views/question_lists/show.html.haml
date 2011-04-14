@@ -30,22 +30,21 @@
           = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => t(".confirm_destroy"), :method => :delete
           = link_to t("scaffold.edit"), edit_topic_path(@question_list), :class => "button"
   .files
-    %h2= t(".files.title")
     - if @question_list.question_list_files.present?
+      %h2= t(".files.title")
       %ul
         - @question_list.question_list_files.each do |question_list_file|
           %li
             = link_to question_list_file.original_filename, question_list_file.url
             - if logged_in? && question_list_file.can_be_destroyed_by?(current_user)
-              = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post
-    - else
-      .empty= t(".files.empty")
+              = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post, :class => "remove"
     - if logged_in? && current_user.admin?
       -# Adding files is restricted right now.
       .add-file
         - form_tag create_file_question_list_path, :multipart => true do
+          = label_tag :file, t(".files.add.title")
           = file_field_tag :file
-          = submit_tag
+          = submit_tag t(".files.add.submit")
 
   %ul.items#questions
     - if @questions.empty?
