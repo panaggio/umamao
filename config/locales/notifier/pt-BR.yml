@@ -18,6 +18,8 @@ pt-BR:
       message2: "Para responder, responda aqui:"
       message3: "Ou se você souber de alguém que sabe responder, passe este link:"
       message4: ""
+    new_user_suggestion:
+      message: "%{origin} sugeriu que você seguisse o tópico %{entry}"
     new_answer:
       author: "%{user} respondeu:"
       question: 'à pergunta "%{question}"'

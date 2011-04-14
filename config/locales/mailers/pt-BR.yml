@@ -9,6 +9,8 @@ pt-BR:
         subject_other: "%{name} respondeu à pergunta \"%{title}\""
       new_comment:
         subject: "%{name} comentou no %{group}"
+      new_user_suggestion:
+        "%{origin} sugeriu que você seguisse o tópico %{entry}"
       give_advice:
         subject: "Precisamos da sua ajuda em: %{question_title}"
         friend_subject: "Precisamos da sua ajuda em: %{question_title}"
