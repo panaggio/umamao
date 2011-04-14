@@ -49,7 +49,7 @@
               -# As question list following will be a little bit different, we'll turn this off for now.
               %span.topic-title= link_to_topic question_list, :render_follow_button => false
         - if @question_lists.size < @question_lists.total_entries
-          = link_to t(".more"), question_lists_topic_path(@topic)
+          = link_to t(".more"), question_lists_topic_path(@topic), :class => "more"
 
 
   #additional_info
