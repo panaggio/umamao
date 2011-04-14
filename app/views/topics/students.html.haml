@@ -20,9 +20,10 @@
                 = "(#{link_to(t("invitations.new_invitation_student.invite"), new_invitation_student_invitations_path(:id => offer.course.id, :student_id => student.id), :class => "student-invitation")})"
 
 - content_for :sidebar do
-  #user-suggestions.block.suggestions.student-suggestion
-    %h3.title
-      = "Alunos já cadastrados"
-    %ul
-      - @users.each do |user|
-        = render :partial => "users/suggestion", :locals =>  {:user => user, :simple_accept => true}
+  - if @users.present?
+    #user-suggestions.block.suggestions.student-suggestion
+      %h3.title
+        = "Alunos já cadastrados"
+      %ul
+        - @users.each do |user|
+          = render :partial => "users/suggestion", :locals =>  {:user => user, :simple_accept => true}
