@@ -47,7 +47,7 @@ class TopicsController < ApplicationController
     end
 
     @question_lists =
-      @topic.question_lists.paginate(:per_page => 2,
+      @topic.question_lists.paginate(:per_page => 6,
                                      :order => :created_at.desc)
 
     @news_items = NewsItem.paginate(
