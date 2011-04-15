@@ -1,35 +1,14 @@
-- content_for :sidebar do
-  = render :partial => "follow", :locals => {:topic => @topic, :block => "block"}
-  = render_cell :users, :followers, :followed => @topic
+#topic
+  = render :partial => "common", :locals => {:topic => @topic, :students => @students_course}
 
-.secondary-navigation
-  .navtitle
-    &= @topic.title
-%br
+  %ul.items#questions
+    - if @questions.blank?
+      %li.highlight
+        = t(".empty")
+    - @questions.each do |question|
+      = render :partial => "questions/question", :object => question
 
-.markdown
-  = markdown(@topic.description)
+  #additional_info
+    = will_paginate @questions
 
-.controls
-  .actions
-    = link_to t('scaffold.edit'), edit_topic_path(@topic)
-    - if @topic.allow_question_lists
-      = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug)
-
-.secondary-navigation
-  - tabs_tag :namespace => :topic_show do |tab|
-    = tab.all t('.all_tab'), @topic
-    = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
-%br
-
-%ul.items#questions
-  - if @questions.blank?
-    %li.highlight
-      = t(".empty")
-  - @questions.each do |question|
-    = render :partial => "questions/question", :object => question
-
-#additional_info
-  = will_paginate @questions
-
-  .clear
+    .clear

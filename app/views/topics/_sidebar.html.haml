@@ -1,14 +1,33 @@
+- students = local_assigns[:students]
+- link_to_main = local_assigns[:link_to_main]
+
 - content_for :sidebar do
   = render :partial => "follow", :locals => {:topic => topic, :block => "block"}
   = render :partial => "email_subscription", :locals => {:topic => topic, :block => "block"}
   = render_cell :users, :followers, :followed => topic
+
   - if students.present?
     %h3.title
       = t('.registered_students')
     = render :partial => "course_invitation", :locals => {:topic => topic, :students => students}
-  - if @topic.related_topics.any?
+  - if topic.related_topics.any?
     #related-topics.block.related
       %h3.title
         = t('.related_topics')
       %ul.topic-list
         = render :partial => "related_topic_list", :locals => {:topic => topic}
+
+  - unless local_assigns[:hide_question_lists]
+    - if topic.allow_question_lists && @question_lists.present?
+      #question-lists.block
+        %h3.title= t(".question_lists")
+        %ul.topic-list
+          - @question_lists.each do |question_list|
+            %li.topic
+              -# As question list following will be a little bit different, we'll turn this off for now.
+              %span.topic-title= link_to_topic question_list, :render_follow_button => false
+        - if @question_lists.size < @question_lists.total_entries
+          = link_to t(".more"), question_lists_topic_path(topic), :class => "more"
+
+  - if link_to_main
+    = link_to t(".main"), topic_path(topic)

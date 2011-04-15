@@ -3,9 +3,7 @@
     .navtitle= @topic.title
     %h3= t(".title")
 
-= render :partial => "sidebar", :locals => {:topic => @topic, :students => nil}
-- content_for :sidebar do
-  = link_to t(".main"), topic_path(@topic)
+= render :partial => "sidebar", :locals => {:topic => @topic, :hide_question_lists => true, :link_to_main => true}
 
 %ul.items#topics
   - @question_lists.each do |question_list|
