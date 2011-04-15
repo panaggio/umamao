@@ -32,5 +32,17 @@ Utils.clickObject(".invite-button", function () {
   };
 });
 
+Utils.clickObject(".student-suggestion a.follow_link, .student-suggestion a.unfollow_link", function () {
+  return {
+    type: "POST",
+    success: function (data) {
+      if(data.success){
+        $('#'+data.div_id).replaceWith(data.new_link);
+      }
+    }
+
+  };
+});
+
 // Workaroud to get .follow_link's to work properly
 $('a[data-confirm], a[data-method], a[data-remote]').die("click.rails");

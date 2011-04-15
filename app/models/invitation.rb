@@ -19,7 +19,7 @@ class Invitation
   belongs_to :group
 
   key :topic_ids, Array
-  has_many :topics, :class_name => 'Topic', :in => :topic_ids
+  has_many :topics, :in => :topic_ids
 
   token_confirmable_key :invitation_token
 

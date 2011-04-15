@@ -1,6 +1,38 @@
 class SuggestionsController < ApplicationController
   before_filter :login_required
 
+  def follow_user
+    @followed_user = User.find_by_id(params[:user])
+    if @followed_user
+      success = current_user.follow(@followed_user)
+    end
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => !!success,
+          :div_id => "follow#{@followed_user.id}",
+          :new_link => render_to_string(:partial => "followed",
+                                        :layout => false)}
+      end
+    end
+  end
+
+  def unfollow_user
+    @unfollowed_user = User.find_by_id(params[:user])
+    if @unfollowed_user
+      success = current_user.unfollow(@unfollowed_user)
+    end
+    respond_to do |format|
+      format.js do
+        render :json => {
+          :success => !!success,
+          :div_id => "follow#{@unfollowed_user.id}",
+          :new_link => render_to_string(:partial => "unfollowed",
+                                        :layout => false)}
+      end
+    end
+  end
+
   # Refuse suggestions.
   def refuse
     type = nil

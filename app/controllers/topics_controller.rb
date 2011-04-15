@@ -355,6 +355,8 @@ class TopicsController < ApplicationController
   def students
     @topic = Topic.find_by_slug_or_id(params[:id])
     @course_offers = CourseOffer.query(:course_id => @topic.id)
+
+    @users = Student.all(:registered_course_ids.in => @course_offers.map(&:id)).map(&:user).select{|u| u}
   end
 
   def question_lists
