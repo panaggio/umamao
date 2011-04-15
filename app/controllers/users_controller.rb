@@ -373,7 +373,7 @@ class UsersController < ApplicationController
     current_user.new_user = false
     current_user.save
     respond_to do |format|
-      format.js  { head :ok }
+      format.js  { render :json => { :success => true }.to_json }
     end
   end
 

@@ -8,11 +8,14 @@ $(document).ready(function() {
     var link = $(this);
     $.ajax({
       url: $(this).attr("href"),
-      dataType: "js",
+      dataType: "json",
       type: "GET",
       success: function(data) {
-        $('#getting_started_div').html('')
-      }});
+        $('#getting_started_div').slideUp("slow", function () {
+          $(this).remove();
+        });
+      }
     });
+  });
 
 });
