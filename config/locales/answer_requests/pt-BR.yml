@@ -5,3 +5,4 @@ pt-BR:
       input: Digite o nome
       message: Mensagem (opcional)
       request_answer: Pedir resposta
+      title: Convidar usuário para responder

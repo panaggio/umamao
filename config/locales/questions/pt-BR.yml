@@ -151,7 +151,8 @@ pt-BR:
       viewed: visitada
       watch_tooltip: Seguir esta pergunta
       stats: Estatísticas da pergunta
-      request_answer: Pedir resposta
+      requested_users: Pedidos de resposta
+      request_answer: Pedir para alguém responder
     solve:
       flash_notice: Resposta aceita.
     tags:
