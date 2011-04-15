@@ -16,6 +16,9 @@
       = label_tag 'user[remember_me]', t("sessions.new.remember_me")
       = check_box_tag 'user[remember_me]', '1', false, :tabindex => @signin_index + 2
 
+    #recover_password
+      = link_to t("devise.passwords.link"), new_password_path("user")
+
 - content_for :js do
   = include_javascripts :landing
 
