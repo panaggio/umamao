@@ -1,0 +1,15 @@
+- if user.id != current_user.id
+  .user.info
+    = link_to avatar_for(user, :size => 32).html_safe, user
+    %ul
+      %li.user-name
+        = link_to user.name, user, :title => user.name
+      - if user.bio.present?
+        %li.user-description
+          = link_to user.bio, user, :title => user.bio
+  .controls
+    .follow-info{:id => "follow#{user.id}"}
+      - if current_user.following?(user)
+        = link_to "#{t("followable.unfollow")}", unfollow_user_suggestion_path(:user => user), :class => "unfollow_link", :method => :post
+      - else
+        = link_to "#{t("followable.follow")}", follow_user_suggestion_path(:user => user), :class => "follow_link", :method => :post

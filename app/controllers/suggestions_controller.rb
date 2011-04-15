@@ -1,7 +1,7 @@
 class SuggestionsController < ApplicationController
   before_filter :login_required
 
-  def accept_user
+  def follow_user
     @followed_user = User.find_by_id(params[:user])
     if @followed_user
       success = current_user.follow(@followed_user)

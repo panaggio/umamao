@@ -1,0 +1,2 @@
+.follow-info{:id => "follow#{@followed_user.id}"}
+  = link_to "#{t("followable.unfollow")}", unfollow_user_suggestion_path(:user => @followed_user), :class => "unfollow_link", :method => :post
