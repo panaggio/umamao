@@ -5,6 +5,8 @@ module FollowableHelper
   def follow_button(followable, options = {})
     options = {:only_if_unfollowed => false}.merge(options)
 
+    return "" if !logged_in? || current_user == followable
+
     if followable.is_a?(User)
       follow_path = follow_user_path(followable)
       unfollow_path = unfollow_user_path(followable)
@@ -27,10 +29,7 @@ module FollowableHelper
       entry_type = ""
     end
 
-    if !logged_in? || current_user == followable ||
-        options[:only_if_unfollowed] && following
-      return ""
-    end
+    return "" if options[:only_if_unfollowed] && following
 
     attributes = {
       :follow => {
