@@ -168,11 +168,29 @@ class Answer < Comment
   end
 
   def new_answer_notification
-    # only if the answer wasn't created by question author and
-    # question author asked to receive email notification about
-    # answers
+    # Notify those who follow the question about the new answer,
+    # except the creator of the answer and those who asked not to
+    # receive email notifications about answers.
+    #
+    # Additionally notify who follows the question lists of the
+    # question, should it belong to any.
+
+    watcher_ids_set = Set.new
+
     self.question.watchers.each do |watcher|
-      user = User.find_by_id(watcher)
+      # `watcher` is already the id.
+      watcher_ids_set << watcher
+    end
+
+    self.question.topics.each do |topic|
+      next unless topic.is_a?(QuestionList)
+      topic.followers.each do |follower|
+        watcher_ids_set << follower.id
+      end
+    end
+
+    watcher_ids_set.each do |watcher_id|
+      user = User.find_by_id(watcher_id)
       if user != self.user &&
           user.notification_opts.new_answer
         Notifier.delay.new_answer(user, self.group, self, true)
