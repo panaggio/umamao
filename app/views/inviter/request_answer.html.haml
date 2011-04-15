@@ -1,0 +1,15 @@
+%p= t('.greeting', :invited => @invited.name)
+
+%p
+  = t('.sender', :user => h(@sender.name))
+  %br
+  = link_to @question.title, @question
+  = @question.body
+  %br
+  = link_to t(".answer"), @question
+
+\---
+%p= markdown(@message, :group => @group)
+\---
+
+= simple_format(t('.goodbye'))
