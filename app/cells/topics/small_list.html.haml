@@ -6,8 +6,9 @@
     %h2.title
       %span
         = t("followable.topics.link", :count => @topics.count, :link => @path)
-      %span
-        = link_to t("user_suggestions.user"), @path, :class => :'suggestion-link'
+      - unless params[:id] == current_user.id
+        %span
+          = link_to t("user_suggestions.user"), @path, :class => :'suggestion-link'
     %ul.topic-list
       - @topics.each do |topic|
         %li
