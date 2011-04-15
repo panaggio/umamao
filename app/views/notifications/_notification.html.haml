@@ -4,6 +4,6 @@
     = notification_message notification
   .metadata
     - if notification.event_type == "follow"
-      = follow_button notification.origin
+      = follow_button notification.origin, :only_if_unfollowed => true
     .date
       = t("time.ago", :time => time_ago_in_words(notification.created_at))

@@ -18,11 +18,7 @@
 
 - content_for :sidebar do
   .follow-info.block
-    - if current_user != @user
-      - if logged_in? && current_user.following?(@user)
-        = link_to t("followable.unfollow"), unfollow_user_path(@user), :class => "unfollow_link", 'data-class' => "follow_link", 'data-title' => t("followable.follow"), 'data-undo' => follow_user_path(@user), "data-entry-type" => "user"
-      - else
-        = link_to t("followable.follow"), follow_user_path(@user), :class => "follow_link", 'data-class' => "unfollow_link", 'data-title' => t("followable.unfollow"), 'data-undo' => unfollow_user_path(@user), "data-entry-type" => "user"
+    = follow_button @user
 
   .user-info.block
     = avatar_for(@user, :size => 128)
