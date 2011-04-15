@@ -127,9 +127,10 @@
 
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question.id, :class_name => Question.to_s.underscore } }
 
-  .request-answer
-    = link_to t(".request_answer"), new_answer_request_path(:question_id => @question.id), :class => "request-answer-button"
-  = render_cell :users, :list, :users => @question.requested_users
+  .block
+    .requested_users
+      = render :partial => "requested_users", :locals => {:question => @question}
+
 
   .question-stats
     %h3= t("questions.show.stats")
