@@ -30,11 +30,15 @@ class AnswerRequestsController < ApplicationController
     @answer_request.safe_update(["question_id", "invited_id", "message"],
                                 params[:answer_request])
     @answer_request.save
+
     respond_to do |format|
       format.js do
         render :json => {
           :success => true,
-          :message => "Usuário convidado"
+          :message => "Usuário convidado",
+          :html => render_to_string(:partial => "questions/requested_users",
+                                    :locals => {:question => 
+                                      @answer_request.question})
         }
       end
     end
