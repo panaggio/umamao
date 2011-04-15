@@ -1,31 +1,5 @@
-- content_for :js do
-  = include_javascripts :topics_email_subscription
-
-= render :partial => "sidebar", :locals => {:topic => @topic, :students => @students_course}
-
 #topic
-  .secondary-navigation
-    .navtitle
-      &= @topic.title
-  %br
-
-  .markdown
-    = markdown(@topic.description)
-
-  .controls
-    .actions
-      = link_to t('scaffold.edit'), edit_topic_path(@topic)
-      - if @topic.allow_question_lists
-        .featured
-          = link_to t('.new_question_list'), new_question_list_path(:main_topic => @topic.slug, :class => "featured")
-          .new_feature
-            = t('new_feature')
-
-  .secondary-navigation
-    - tabs_tag :namespace => :topic_show, :open_tabs => {:class => :tabs} do |tab|
-      = tab.all t('.all_tab'), @topic
-      = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
-  %br
+  = render :partial => "common", :locals => {:topic => @topic, :students => @students_course}
 
   - if @news_items.blank?
     %ul.items#questions
@@ -38,19 +12,6 @@
     %ul.items#news_items
       - @news_items.each do |news_item|
         = render :partial => "welcome/news_item", :object => news_item
-
-  - content_for :sidebar do
-    - if @topic.allow_question_lists && @question_lists.present?
-      #question-lists.block
-        %h3.title= t(".question_lists")
-        %ul.topic-list
-          - @question_lists.each do |question_list|
-            %li.topic
-              -# As question list following will be a little bit different, we'll turn this off for now.
-              %span.topic-title= link_to_topic question_list, :render_follow_button => false
-        - if @question_lists.size < @question_lists.total_entries
-          = link_to t(".more"), question_lists_topic_path(@topic), :class => "more"
-
 
   #additional_info
     - if @news_items.blank?

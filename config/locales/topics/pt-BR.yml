@@ -13,9 +13,12 @@ pt-BR:
       title: Editar tópico
       name: Nome
       description: Descrição
+    common:
+      all_tab: Todas as perguntas
+      unanswered_tab: Perguntas em aberto
+      new_question_list: Criar lista de exercícios
     show:
       empty: Tópico vazio. Ajude a populá-lo <a href="/questions/new">criando uma nova pergunta</a>.
-      all_tab: Todas as perguntas
       email_subscription:
         notice:
           subscribed: Você reberá por email as novas perguntas do tópico %{topic}.
@@ -23,18 +26,16 @@ pt-BR:
         disable: desativar
         enable: ativar
         text: Receber novas perguntas por email
-      more: Mais ...
-      question_lists: Listas de exercícios
-      unanswered_tab: Perguntas em aberto
       view: Ver tópico
-      new_question_list: Criar lista de exercícios
       registered_students: Alunos matriculados
     question_lists:
       title: Listas de exercícios
-      main: Principal
     sidebar:
       related_topics: Tópicos relacionados
       registered_students: Alunos matriculados
+      question_lists: Listas de exercícios
+      main: Principal
+      more: Mais ...
     tooltip:
       describe: "Ajude a descrever o tópico %{title}"
     unanswered:

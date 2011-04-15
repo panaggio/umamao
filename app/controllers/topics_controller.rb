@@ -279,6 +279,10 @@ class TopicsController < ApplicationController
                                    :order => :activity_at.desc, :per_page => 25,
                                    :page => params[:page] || 1}.merge(conditions))
 
+    @question_lists =
+      @topic.question_lists.paginate(:per_page => 6,
+                                     :order => :created_at.desc)
+
     respond_with @topics
   end
 
