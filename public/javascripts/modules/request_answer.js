@@ -22,6 +22,7 @@ Utils.clickObject(".invite-button", function () {
     success: function(data) {
       Utils.showMessage(data.message, "notice");
       $.colorbox.close();
+      $(".requested_users").html(data.html);
     }
   };
 

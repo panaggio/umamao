@@ -13,6 +13,17 @@ class AnswerRequestsController < ApplicationController
 
   end
 
+  def user_autocomplete
+    @question = Question.find_by_slug_or_id(params[:question_id])
+
+    respond_to do |format|
+      format.js do
+        render :partial => "users/autocomplete.js", :type => "text/javascript",
+          :locals => {:exclude_user_ids => (@question.requested_users + [current_user]).map(&:id)}
+      end
+    end
+  end
+
   def create
     @answer_request = AnswerRequest.new
     @answer_request.sender_ids << current_user.id

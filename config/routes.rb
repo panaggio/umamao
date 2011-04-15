@@ -9,7 +9,7 @@ Shapado::Application.routes.draw do
 
   resources :answer_requests, :only => [:new, :create] do
     collection do
-      get :invitation
+      get :user_autocomplete
     end
   end
 
