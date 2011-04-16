@@ -3,6 +3,7 @@ class TopicsCell < Cell::Rails
   include AuthenticatedSystem
   helper ApplicationHelper
   helper TopicsHelper
+  helper FollowableHelper
   helper_method :current_user
 
   before_filter :define_domain
