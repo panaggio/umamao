@@ -6,5 +6,38 @@
     .inactive
       color: #999999
 
+  li
+    padding-top: 17px
+
+    .title, .info
+      padding-left: 20px
+      padding-right: 20px
+
+  .controls
+    +follow-button
+    float: right
+    clear: both
+
+    .refuse
+      padding: 0
+
   #user-suggested
     background-color: #F9F9F9
+
+    .suggestion-info
+      font-size: 0.8em
+      color: #999999
+
+    li
+      padding-top: 0
+      .title
+        clear: both
+      .refuse
+        opacity: 0
+        a
+          text-decoration: none
+          color: $link_color
+
+      &:hover
+        .refuse
+          opacity: 1
