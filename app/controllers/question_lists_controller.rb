@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class QuestionListsController < TopicsController
   before_filter :login_required, :except => [:show]
-  before_filter :admin_required, :only => [:create_files, :destroy_files]
   before_filter :main_topic_allow_question_lists, :only => [:new, :create]
 
   # GET /question_lists/new
@@ -22,11 +21,7 @@ class QuestionListsController < TopicsController
 
     if @question_list.save
       flash[:notice] = t("question_lists.create.success")
-
-      # The "#form" suffix below is used to open the "new question
-      # form", which is supposed to be the main use case right after you
-      # create a new question list.
-      redirect_to("#{question_list_path(@question_list)}#form")
+      redirect_to question_list_path(@question_list)
     else
       if QuestionList.find_by_title(params[:question_list][:title])
         flash[:error] = t('question_lists.create.error.existing_list')

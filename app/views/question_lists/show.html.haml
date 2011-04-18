@@ -29,8 +29,8 @@
         - if current_user.can_modify?(@question_list)
           = link_to t("scaffold.destroy"), question_list_path(@question_list.id), :confirm => t(".confirm_destroy"), :method => :delete
           = link_to t("scaffold.edit"), edit_topic_path(@question_list), :class => "button"
-  .files
-    - if @question_list.question_list_files.present?
+  - if @question_list.question_list_files.present?
+    .files
       %h2= t(".files.title")
       %ul
         - @question_list.question_list_files.each do |question_list_file|
@@ -38,13 +38,6 @@
             = link_to question_list_file.original_filename, question_list_file.url
             - if logged_in? && question_list_file.can_be_destroyed_by?(current_user)
               = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post, :class => "remove"
-    - if logged_in? && current_user.admin?
-      -# Adding files is restricted right now.
-      .add-file
-        - form_tag create_file_question_list_path, :multipart => true do
-          = label_tag :file, t(".files.add.title")
-          = file_field_tag :file
-          = submit_tag t(".files.add.submit")
 
   %ul.items#questions
     - if @questions.empty?
@@ -58,10 +51,18 @@
         = render :partial => "question", :object => question
   .clear
 
-  - if @questions.total_pages == 0 || @page.to_i == @questions.total_pages
+  - if logged_in? && (@questions.total_pages == 0 || @page.to_i == @questions.total_pages)
     = render :partial => "form", :locals => { :question_list => @question_list, :new_question => @new_question }
-    #new_question_link
-      = link_to t('.allow_new_questions'), "#form"
+    #add_file_form
+      - form_tag create_file_question_list_path, :multipart => true do
+        = label_tag :file, t(".files.add.title")
+        = file_field_tag :file
+        = submit_tag t(".files.add.submit")
+        = link_to t("scaffold.cancel"), "#", :class => "cancel"
+    #add_content
+      = link_to t(".add_questions"), "#add_questions", :class => "add_questions"
+      = t("global.or")
+      = link_to t(".add_files"), "#add_files", :class => "add_files"
 
   - unless @questions.empty?
     #additional_info.pagination

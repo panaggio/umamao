@@ -17,11 +17,11 @@
         padding-bottom: 10px
         color: #aaa
   #questions
-    border-top: dotted #ddd 1px
+    border-top: $dotted-border
     .empty
-      border-bottom: dotted #ddd 1px
+      border-bottom: $dotted-border
       padding: 10px
-  #new_question_link
+  #add_content
     padding-top: 12px
   .make_question
     padding: 1px
@@ -34,9 +34,11 @@
     width: 100%
     text-align: right
   .files
+    border-top: $dotted-border
+    padding: 10px
     h2
+      font-size: 15px
       margin-bottom: 5px
-    margin-bottom: 10px
     ul
       padding-left: 10px
       list-style: none
@@ -55,3 +57,22 @@
   .controls
     margin-bottom: 10px
     text-align: center
+
+#new_question_form, #add_file_form
+  display: none
+
+#add_file_form
+  padding-top: 12px
+  label
+    font-size: 15px
+    display: block
+    margin-bottom: 10px
+  input[type=file]
+    display: block
+    margin: 0 0 10px 5px
+  input[type=submit]
+    padding: 4px 6px
+    margin: 0 5px
+
+
+
