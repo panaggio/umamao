@@ -10,7 +10,7 @@
       = f.hidden_field :invited_id, :class => "invited_id"
       #invitation-message.request-answer
         = f.label :message, t(".message")
-        = f.text_area :message
+        = f.text_area :message, :class => "message"
       .controls
         = link_to t("scaffold.cancel"), "#", :class => "close"
         = f.submit t(".invite_form"), :class => "invite-button", :disabled => "disabled"
