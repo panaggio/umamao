@@ -89,6 +89,8 @@ class Question
   # This ought to be has_one, but it wasn't working
   has_many :news_updates, :as => "entry", :dependent => :destroy
 
+  has_many :notifications, :as => "reason", :dependent => :destroy
+
   validates_presence_of :user_id
   validates_uniqueness_of :slug, :scope => :group_id, :allow_blank => true
 
