@@ -8,8 +8,7 @@
           - if suggestion == 'self'
             = link_to '✕', refuse_suggestion_path(:topic => topic.id), :method => :post
           -else
-            -# TODO: delete suggestion
-            = link_to '✕', refuse_suggestion_path(:topic => topic.id), :method => :post
+            = link_to '✕', delete_suggestion_path(:topic => topic.id), :method => :post
 
     .title
       = link_to h(topic.title), topic_path(topic)

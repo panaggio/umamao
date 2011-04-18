@@ -135,6 +135,9 @@ Shapado::Application.routes.draw do
   post "/suggestions/refuse" => "suggestions#refuse",
     :as => :refuse_suggestion
 
+  post "/suggestions/delete" => "suggestions#delete",
+    :as => :delete_suggestion
+
   post "/suggestions/follow_user" => "suggestions#follow_user",
     :as => :follow_user_suggestion
 
