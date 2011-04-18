@@ -120,6 +120,7 @@ class Question
   before_save :update_autocomplete_keywords
   before_create :add_question_author_to_watchers
   after_create :create_news_update, :new_question_notification
+  after_create :update_topics_questions_count
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -538,6 +539,10 @@ class Question
       map(&:invited)
   end
 
+  def update_topics_questions_count
+    self.topics.each(&:increment_questions_count)
+  end
+
   protected
   def update_answer_count
     self.answers_count = self.answers.where(:banned => false).count
@@ -572,5 +577,6 @@ class Question
   def needs_to_update_search_index?
     self.title_changed? || super
   end
+
 end
 
