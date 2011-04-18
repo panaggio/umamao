@@ -3,9 +3,9 @@
 <%= t('.sender', :user => h(@sender.name), :question => "\"#{@question.title}\"") %>
 
 <% if @message.present? %>
-\---
+---
 <%= @message %>
-\---
+---
 
 <% end %>
 <%= t(".text_link_label") %>
