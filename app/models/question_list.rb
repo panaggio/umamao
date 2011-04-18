@@ -22,6 +22,10 @@ class QuestionList < Topic
     super
   end
 
+  def default_question_order
+    :created_at
+  end
+
   # Classifies self under topic topic.
   def classify!(topic)
     if !topic_ids.include? topic.id

@@ -132,6 +132,11 @@ class Topic
     Question.query(:topic_ids => self.id)
   end
 
+  # The order in which the questions should be listed.
+  def default_question_order
+    :created_at.desc
+  end
+
   # We make this association by hand because declaring it as usual was
   # screwing up our development server (probably a dependency resolver
   # bug).
