@@ -268,7 +268,7 @@ class TopicsController < ApplicationController
           # requires a rendered topic to be shown
 
           res[:html] = render_to_string :partial => 'topics/topic',
-            :locals => { :topic => @topic }
+            :locals => { :topic => @topic, :suggestion => 'friend' }
         end
 
         render :json => res.to_json
