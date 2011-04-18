@@ -19,7 +19,8 @@ pt-BR:
           Você pode ajudar transcrevendo os arquivos acima.
       confirm_destroy: |
         Tem certeza que deseja excluir esta lista de exercícios?
-      allow_new_questions: "Adicionar novo exercício"
+      add_questions: "Adicionar novo exercício"
+      add_files: "adicionar arquivo"
       files:
         title: "Arquivos"
         add:
