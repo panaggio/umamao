@@ -26,13 +26,14 @@ UserAutocomplete.prototype = {
                    function () {
                      me.clear();
                      if(this.data.id == undefined){
-                      $(".invited_id").val("");
-                      $("#search-users").val("");
-                      $(".invite-button").attr("disabled", "disabled");
+                       $(".invited_id").val("");
+                       $("#search-users").val("");
+                       $(".invite-button").attr("disabled", "disabled");
                      }else{
-                      $(".invited_id").val(this.data.id);
-                      $("#search-users").val(this.data.title);
-                      $(".invite-button").removeAttr("disabled");
+                       $(".invited_id").val(this.data.id);
+                       $("#search-users").val(this.data.title);
+                       $(".invite-button").removeAttr("disabled");
+                       $(".invitation .message").focus();
                      }
                    };
     return item;
