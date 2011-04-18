@@ -13,7 +13,7 @@
       .origin
         - if question.topics.any?
           - topic = question.topics.first
-          .description= t(".#{entry_type}.topic.#{action}", :origin => link_to(topic.name, url_for(topic)))
+          .description= t(".#{entry_type}.topic.#{action}", :origin => link_to_topic(topic))
         - else
           .description= t(".#{entry_type}.user.#{action}", :origin => link_to(author.name, url_for(author)))
       - if entry_type == "answer"
@@ -30,4 +30,3 @@
             -# Can watch the question
             \|
             = follow_button question
-    .clear
