@@ -94,8 +94,12 @@ module ApplicationHelper
       end
     end
 
-    txt = render_page_links(txt, options) if options[:render_page_links]
-    processed_markdown = RDiscount.new(txt, :strict).to_html
+    if options[:render_links]
+      txt = render_page_links(txt, options)
+      processed_markdown = RDiscount.new(txt, :strict, :autolink).to_html
+    else
+      processed_markdown = RDiscount.new(txt, :strict).to_html
+    end
 
     if options[:process_latex]
       processed_markdown = Nokogiri::HTML(processed_markdown)
