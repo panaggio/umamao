@@ -4,7 +4,6 @@
   #select-users
     = text_field_tag "", t(".input"), :id => "search-users", :class => "inactive", "data-autocomplete-url" => autocomplete_url
     %ul#search-users-results.autocomplete-list
-  %br
   .invitation
     = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
       = f.hidden_field :question_id

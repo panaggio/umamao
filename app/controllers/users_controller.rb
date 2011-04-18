@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         pagination = render_to_string(:partial => "shared/pagination", :object => @users,
                                       :format => "html")
         render :json => {:html => html, :pagination => pagination }
-     }
+      }
     end
   end
 
@@ -443,20 +443,6 @@ class UsersController < ApplicationController
         }
       end
     end
-  end
-
-  def search
-    @users = User.filter(params[:q],
-                     :per_page => 7)
-    respond_to do |format|
-      format.js do
-        render :json => @users.map{ |u|
-          {:id => u.id, :name => u.name, 
-            :email => u.email}
-        }.to_json
-      end
-    end
-
   end
 
   protected
