@@ -1,0 +1,6 @@
+- if question.requested_users.present?
+  %h3= t("questions.show.requested_users")
+  = render_cell :users, :list, :users => question.requested_users
+  = link_to t("questions.show.request_answer"), new_answer_request_path(:question_id => question.id), :class => "request-answer-button smaller"
+- else
+  = link_to t("questions.show.request_answer"), new_answer_request_path(:question_id => question.id), :class => "request-answer-button"
