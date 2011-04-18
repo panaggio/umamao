@@ -250,7 +250,10 @@ window.Utils = {
     $("#sidebar .topic-list .topic, #topic-suggestions .topic-list .topic").poshytip(
         $.extend(Utils.poshytip_sidebar_options, Utils.poshytip_default_options)
     );
-    $(".entry.item .summary .origin .description a:not(.nickname), #questions .topic-list .topic, #question .topic-list .topic, .question .topic-list .topic").poshytip(
+    $(".entry.item .summary .origin .description a:not(.nickname), "
+      + "#questions .topic-list .topic, #question .topic-list .topic, "
+      + ".question .topic-list .topic, "
+      + "#question-list #classify-ul .topic").poshytip(
         $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
     );
   }
