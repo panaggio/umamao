@@ -14,4 +14,14 @@ class Inviter < ActionMailer::Base
     mail(:to => @recipient_email, :subject => t('inviter.invitation.subject',
                                                 :inviter => @sender.name))
   end
+
+  def request_answer(answer_request, sender)
+    @sender = sender
+    @invited = answer_request.invited
+    @recipient_email = answer_request.invited.email
+    @message = answer_request.message
+    @question = answer_request.question
+    mail(:to => @recipient_email, :subject => t('inviter.request_answer.subject',
+                                                :user => @sender.name))
+  end
 end

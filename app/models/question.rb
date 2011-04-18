@@ -533,6 +533,11 @@ class Question
   end
   handle_asynchronously :new_question_notification
 
+  def requested_users
+    AnswerRequest.query(:question_id => self.id).
+      map(&:invited)
+  end
+
   protected
   def update_answer_count
     self.answers_count = self.answers.where(:banned => false).count

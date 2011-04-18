@@ -1,3 +1,5 @@
+= include_javascripts :request_answer
+
 = render :partial => 'shared/share_header', :locals => { :opts => { :content => @question, :class_name => Question.to_s.underscore }, :content_url => question_url(@question) }
 
 - @current_class = 'question hentry entry post'
@@ -124,6 +126,12 @@
             %li= link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
 
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question.id, :class_name => Question.to_s.underscore } }
+
+  - if current_user && current_user.admin?
+    .block
+      .requested_users
+        = render :partial => "requested_users", :locals => {:question => @question}
+
 
   .question-stats
     %h3= t("questions.show.stats")

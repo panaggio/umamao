@@ -1,0 +1,14 @@
+<%= t('.greeting', :invited => @invited.first_name) %>
+
+<%= t('.sender', :user => h(@sender.name), :question => "\"#{@question.title}\"") %>
+
+<% if @message.present? %>
+---
+<%= @message %>
+---
+
+<% end %>
+<%= t(".text_link_label") %>
+<%= questions_url(@question) %>
+
+<%=  simple_format(t('.goodbye')) %>

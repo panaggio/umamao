@@ -472,4 +472,5 @@ class UsersController < ApplicationController
 
     @user.viewed_on!(current_group) if @user != current_user && !is_bot?
   end
+
 end

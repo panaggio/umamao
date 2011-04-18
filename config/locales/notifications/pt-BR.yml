@@ -4,3 +4,4 @@ pt-BR:
     new_comment: "%{user} comentou na pergunta \"%{question}\""
     new_question: "%{user} perguntou \"%{question}\" no tópico %{topic}."
     follow: "%{user} está seguindo você no Umamão"
+    new_answer_request: "%{user} pediu para você responder à pergunta \"%{question}\""

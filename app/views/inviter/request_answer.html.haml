@@ -1,0 +1,12 @@
+%p= t('.greeting', :invited => @invited.first_name)
+
+%p= t('.sender', :user => h(@sender.name), :question => "\"#{link_to(@question.title, questions_url(@question))}\"")
+
+- if @message.present?
+  \---
+  = markdown(@message, :group => @group)
+  \---
+
+= link_to t(".answer"), questions_url(@question)
+
+= simple_format(t('.goodbye'))

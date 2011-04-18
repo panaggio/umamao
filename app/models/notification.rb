@@ -36,6 +36,8 @@ class Notification
       self.reason.find_question
     when "new_question"
       self.reason
+    when "new_answer_request"
+      self.reason.question
     end
   end
 end

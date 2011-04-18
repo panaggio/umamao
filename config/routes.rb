@@ -4,6 +4,15 @@ Shapado::Application.routes.draw do
   match '/unanswered' => 'welcome#unanswered', :as => :unanswered
   get '/notifications' => 'welcome#notifications', :as => :notifications
 
+  match '/users/autocomplete_name' => 'users#autocomplete_name',
+    :as => :autocomplete_name_users
+
+  resources :answer_requests, :only => [:new, :create] do
+    collection do
+      get :user_autocomplete
+    end
+  end
+
   resources :affiliations
 
   resources :question_lists, :only => [:new, :create, :show, :edit, :update] do
@@ -109,6 +118,10 @@ Shapado::Application.routes.draw do
       get  :topics
       get  :questions
       get  :answers
+    end
+
+    collection do
+      get  :search
     end
   end
 
