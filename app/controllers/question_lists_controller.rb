@@ -5,8 +5,13 @@ class QuestionListsController < TopicsController
 
   # GET /question_lists/new
   def new
-    @question_list = QuestionList.new
-    @question_list.main_topic = @main_topic
+    @question_list = QuestionList.new :main_topic => @main_topic
+
+    now = Time.now
+    @sample_title = t("question_lists.new.sample_title",
+                      :title => @question_list.main_topic.title,
+                      :semester => now.month < 7 ? 1 : 2,
+                      :year => now.year)
   end
 
   # POST /question_lists
