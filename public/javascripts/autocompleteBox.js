@@ -491,6 +491,11 @@ function TopicAutocompleteForUserSuggestion(inputField, itemBoxContainer) {
   AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
+// User autocomplete for several boxes in the website.
+function UserAutocomplete(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
+}
+
 TopicAutocomplete.prototype = {
 
   activateWithTab: true,
@@ -569,6 +574,84 @@ TopicAutocomplete.prototype = {
 
 };
 
+UserAutocomplete.prototype = {
+
+  activateWithTab: true,
+
+  addOnNoExactMatch: false,
+
+  actionData: function (data) {
+    return data.id;
+  },
+
+  // Builds an item for this box.
+  makeItem: function (data) {
+    var item = new Item(data);
+    var me = this;
+    var action_param = this.actionData(data);
+    item.click = this.itemClicked ||
+                   function () {
+                     me.action(action_param);
+                     me.clear();
+                   };
+    return item;
+  },
+
+  makeRequest: function (query) {
+    var addOnNoExactMatch = this.addOnNoExactMatch;
+    var callback = this.requestCallback();
+    var input = this.input;
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:User"},
+      success: function (data) {
+        var docs = data.response.docs;
+        var hasExactMatch = false;
+        docs.forEach(function (doc) {
+          if (doc.title == query) hasExactMatch = true;
+        });
+        if (addOnNoExactMatch && !hasExactMatch) {
+          docs.push({
+            title: input.val(),
+            entry_type: "User",
+            question_count: "0"
+          });
+        }
+        callback(docs);
+      }
+    });
+    return request;
+  },
+
+  // Populates the suggestion box when data is received.
+  processData: function (data) {
+    var items = [];
+    var me = this;
+    data.forEach(function (it) {
+      items.push(me.makeItem(solrConversion(it)));
+    });
+    return items;
+  },
+
+  returnDefault: function () {
+    var input = this.input.val();
+    if (input.trim() != "") {
+      this.clear();
+      this.action(input);
+    }
+  },
+
+  // HACK
+  itemClicked: null,
+
+  // Action to be run on topic title or input box value.
+  action: null
+
+};
+
 TopicAutocompleteForUserSuggestion.prototype = {
   addOnNoExactMatch: false,
 
@@ -581,6 +664,7 @@ TopicAutocompleteForUserSuggestion.prototype = {
 
 Utils.extend(TopicAutocomplete, AutocompleteBox);
 Utils.extend(TopicAutocompleteForUserSuggestion, TopicAutocomplete);
+Utils.extend(UserAutocomplete, AutocompleteBox);
 
 function initTopicAutocompleteForFollowing() {
   var topicBox =
@@ -675,4 +759,32 @@ function initTopicAutocompleteForUserSuggesting() {
     topicBox.clear();
   };
 
+}
+
+function initUserAutocompleteForUserSuggesting() {
+  var userBox =
+    new UserAutocomplete("#topic-suggested-users-autocomplete",
+                         "#topic-suggested-users-suggestions");
+
+  var usersUl = $("#user-suggested");
+  var topic_id = $("#topic_id").attr("value");
+
+  // Sends to the server a request to suggest a topic named title
+  // to a user named user.
+  userBox.action = function (user_id) {
+    $.ajax({
+      url: "/topics/user_suggest.js?id=" + topic_id + "&answer=t&user=" + encodeURIComponent(user_id),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          usersUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
+        }
+      }
+    });
+    userBox.clear();
+  };
 }
