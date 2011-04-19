@@ -340,7 +340,8 @@ class TopicsController < ApplicationController
     @title = params[:title]
 
     @questions = Question.paginate(:topic_ids => @topic.id, :banned => false,
-                                   :order => :created_at.desc, :per_page => 5,
+                                   :order => @topic.default_question_order,
+                                   :per_page => 5,
                                    :page =>  1)
 
     respond_to do |format|
