@@ -261,8 +261,15 @@ class TopicsController < ApplicationController
           # Used when suggesting a topic from user's topic page;
           # requires a rendered topic to be shown
 
-          res[:html] = render_to_string :partial => 'topics/topic',
-            :locals => { :topic => @topic, :suggestion => 'friend' }
+          res[:html] =
+            case params[:answer]
+            when 'topic'
+              render_to_string :partial => 'topics/topic',
+                :locals => { :topic => @topic, :suggestion => 'friend' }
+            when 'user'
+              render_to_string :partial => 'users/user',
+                :locals => { :user => receiver }
+            end
         end
 
         render :json => res.to_json

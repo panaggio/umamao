@@ -744,7 +744,7 @@ function initTopicAutocompleteForUserSuggesting() {
   // to a user named user.
   topicBox.action = function (topic_id) {
     $.ajax({
-      url: "/topics/user_suggest.js?user=" + user_id + "&answer=t&id=" + encodeURIComponent(topic_id),
+      url: "/topics/user_suggest.js?user=" + user_id + "&answer=topic&id=" + encodeURIComponent(topic_id),
       dataType: "json",
       type: "POST",
       success: function (data) {
@@ -773,7 +773,7 @@ function initUserAutocompleteForUserSuggesting() {
   // to a user named user.
   userBox.action = function (user_id) {
     $.ajax({
-      url: "/topics/user_suggest.js?id=" + topic_id + "&answer=t&user=" + encodeURIComponent(user_id),
+      url: "/topics/user_suggest.js?id=" + topic_id + "&answer=user&user=" + encodeURIComponent(user_id),
       dataType: "json",
       type: "POST",
       success: function (data) {
