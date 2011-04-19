@@ -13,7 +13,6 @@
   -# User suggestion
   - if @user != current_user
     %input.text_field#user-suggested-topics-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
-    %input{ :type => :submit, :value => t("user_suggestions.suggested.button") }
     %ul.autocomplete-list#user-suggested-topics-suggestions
 
   %ul#user-suggested.items
