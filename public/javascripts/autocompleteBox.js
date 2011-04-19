@@ -658,9 +658,9 @@ function initTopicAutocompleteForUserSuggesting() {
 
   // Sends to the server a request to suggest a topic named title
   // to a user named user.
-  topicBox.action = function (title) {
+  topicBox.action = function (topic_id) {
     $.ajax({
-      url: "/topics/user_suggest.js?user=" + user_id + "&answer=t&title=" + encodeURIComponent(title),
+      url: "/topics/user_suggest.js?user=" + user_id + "&answer=t&id=" + encodeURIComponent(topic_id),
       dataType: "json",
       type: "POST",
       success: function (data) {

@@ -236,13 +236,7 @@ class TopicsController < ApplicationController
   end
 
   def user_suggest
-    if params[:id]
-      @topic = Topic.find_by_slug_or_id(params[:id])
-    elsif params[:title]
-      @topic = Topic.find_by_title(params[:title]) ||
-        Topic.new(:title => params[:title])
-    end
-
+    @topic = Topic.find_by_id(params[:id])
     receiver = User.find_by_id(params[:user])
 
     success = receiver.add_user_suggestion(current_user, @topic)
