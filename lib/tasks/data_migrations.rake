@@ -7,6 +7,15 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Recalculate questions count in search index."
+    task :recalculate_questions_count_index => :environment do
+      # Ignore topics that don't have questions. This is not correct,
+      # but ought to work now.
+      Topic.find_each(:questions_count.gt => 0) do |topic|
+        topic.update_search_index true
+      end
+    end
+
     desc "Import CACo's exams as lists of questions"
     task :import_caco_exams => :environment do
       unicamp = University.find_by_short_name("Unicamp")
