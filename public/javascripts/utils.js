@@ -162,6 +162,11 @@ window.Utils = {
     $.colorbox.resize({width: placedModal.outerWidth()});
   },
 
+  resizeModal : function(){
+    var placedModal = $("#colorbox .modal");
+    $.colorbox.resize({width: placedModal.outerWidth()});
+  },
+
   // Toggle a button state between "follow" and "unfollow"
   toggleFollowLink: function (link) {
     var href = link.attr("href");

@@ -25,11 +25,14 @@ class AnswerRequestsController < ApplicationController
   end
 
   def create
-    @answer_request = AnswerRequest.new
-    @answer_request.sender_ids << current_user.id
-    @answer_request.safe_update(["question_id", "invited_id", "message"],
-                                params[:answer_request])
-    @answer_request.save
+    params[:invited_ids].split(";").each do |invited_id|
+      @answer_request = AnswerRequest.new
+      @answer_request.sender_ids << current_user.id
+      @answer_request.invited_id = invited_id
+      @answer_request.safe_update(["question_id", "message"],
+                                  params[:answer_request])
+      @answer_request.save
+    end
 
     respond_to do |format|
       format.js do

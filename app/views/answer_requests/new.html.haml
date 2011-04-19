@@ -4,10 +4,11 @@
   #select-users
     = text_field_tag "", t(".input"), :id => "search-users", :class => "inactive", "data-autocomplete-url" => autocomplete_url
     %ul#search-users-results.autocomplete-list
+  .invited_users
   .invitation
     = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
       = f.hidden_field :question_id
-      = f.hidden_field :invited_id, :class => "invited_id"
+      = hidden_field_tag :invited_ids,  "", :class => "invited_ids"
       #invitation-message.request-answer
         = f.label :message, t(".message")
         = f.text_area :message, :class => "message"
