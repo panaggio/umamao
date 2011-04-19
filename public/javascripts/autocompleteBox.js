@@ -486,9 +486,16 @@ function TopicAutocomplete(inputField, itemBoxContainer) {
   AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
+// Topic autocomplete for user suggestions
+function TopicAutocompleteForUserSuggestion(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
+}
+
 TopicAutocomplete.prototype = {
 
   activateWithTab: true,
+
+  addOnNoExactMatch: true,
 
   // Builds an item for this box.
   makeItem: function (data) {
@@ -503,6 +510,7 @@ TopicAutocomplete.prototype = {
   },
 
   makeRequest: function (query) {
+    var addOnNoExactMatch = this.addOnNoExactMatch;
     var callback = this.requestCallback();
     var input = this.input;
     var request = $.ajax({
@@ -517,7 +525,7 @@ TopicAutocomplete.prototype = {
         docs.forEach(function (doc) {
           if (doc.title == query) hasExactMatch = true;
         });
-        if (!hasExactMatch) {
+        if (addOnNoExactMatch && !hasExactMatch) {
           docs.push({
             title: input.val(),
             entry_type: "Topic",
@@ -556,7 +564,12 @@ TopicAutocomplete.prototype = {
 
 };
 
+TopicAutocompleteForUserSuggestion.prototype = {
+  addOnNoExactMatch: false
+}
+
 Utils.extend(TopicAutocomplete, AutocompleteBox);
+Utils.extend(TopicAutocompleteForUserSuggestion, TopicAutocomplete);
 
 function initTopicAutocompleteForFollowing() {
   var topicBox =
@@ -624,8 +637,10 @@ function initTopicAutocompleteForIgnoring() {
 
 function initTopicAutocompleteForUserSuggesting() {
   var topicBox =
-    new TopicAutocomplete("#user-suggested-topics-autocomplete",
-                          "#user-suggested-topics-suggestions");
+    new TopicAutocompleteForUserSuggestion(
+        "#user-suggested-topics-autocomplete",
+        "#user-suggested-topics-suggestions"
+    );
 
   var topicsUl = $("#user-suggested");
   var user_id = $("#user_id").attr("value");
