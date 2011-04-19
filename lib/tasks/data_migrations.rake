@@ -7,6 +7,17 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Remove notifications without questions"
+    task :remove_notifications_without_questions => :environment do
+      # Right now, notifications without questions should be destroyed.
+      Notification.find_each do |n|
+        if n.question.blank?
+          puts "#{n.id} -> #{n.user.email}"
+          n.destroy
+        end
+      end
+    end
+
     desc "Recalculate questions count in search index."
     task :recalculate_questions_count_index => :environment do
       # Ignore topics that don't have questions. This is not correct,
