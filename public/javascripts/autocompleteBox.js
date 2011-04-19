@@ -497,13 +497,18 @@ TopicAutocomplete.prototype = {
 
   addOnNoExactMatch: true,
 
+  actionData: function (data) {
+    return data.title;
+  },
+
   // Builds an item for this box.
   makeItem: function (data) {
     var item = new Item(data);
     var me = this;
+    var action_param = this.actionData(data);
     item.click = this.itemClicked ||
                    function () {
-                     me.action(this.data.title);
+                     me.action(action_param);
                      me.clear();
                    };
     return item;
@@ -565,7 +570,11 @@ TopicAutocomplete.prototype = {
 };
 
 TopicAutocompleteForUserSuggestion.prototype = {
-  addOnNoExactMatch: false
+  addOnNoExactMatch: false,
+
+  actionData: function (data) {
+    return data.id;
+  }
 }
 
 Utils.extend(TopicAutocomplete, AutocompleteBox);
