@@ -1,0 +1,42 @@
+#select-users
+  margin-bottom: 15px
+
+ul#search-users-results.autocomplete-list
+  width: 400px
+
+.invited_users
+  display: inline
+  .user
+    +border-radius
+    display: inline-block
+    padding: 4px
+    background: #f7f7f7
+    overflow: hidden
+    margin: 0 5px 5px 0
+    font-weight: normal
+    font-size: 12px
+    line-height: 15px
+    height: 15px
+    font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
+    .user-name
+      white-space: nowrap
+      display: block
+      float: left
+      +ellipsis
+    .remove
+      cursor: pointer
+      display: block
+      float: right
+      margin-left: 5px
+    color: #444444
+    font-weight: normal
+    &:hover
+      background: #eeeeee
+    a
+      color: #444444
+      font-weight: normal
+      &:link, &:active, &:visited
+        cursor: pointer
+        text-align: center
+      &:hover
+        text-decoration: none
