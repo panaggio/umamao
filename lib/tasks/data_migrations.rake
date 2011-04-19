@@ -7,6 +7,29 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Recreate follow notifications."
+    task :recreate_follow_notifications => :environment do
+      User.find_each do |user|
+        user.followers.each do |follower|
+          options = {
+            :event_type => "follow",
+            :user_id => user.id,
+            :origin_id => follower.id,
+          }
+
+          if Notification.first(options).blank?
+            options[:created_at] =
+              if user.created_at < follower.created_at
+                follower.created_at
+              else
+                user.created_at
+              end
+            Notification.create!(options)
+          end
+        end
+      end
+    end
+
     desc "Remove notifications without questions"
     task :remove_notifications_without_questions => :environment do
       # Right now, notifications without questions should be destroyed.
