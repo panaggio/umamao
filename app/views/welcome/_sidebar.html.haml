@@ -16,6 +16,7 @@
   - if logged_in?
     = render_cell :suggestions, :users, :single_column => true
     = render_cell :suggestions, :topics, :single_column => true
+    = render :partial => 'user_suggestions', :locals => { :user_suggested_topics => @user_suggested_topics }
 
   - current_group.widgets.each do |widget|
     .widget.block{:id => widget.name}
