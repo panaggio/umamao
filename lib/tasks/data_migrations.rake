@@ -255,7 +255,9 @@ namespace :data do
       Topic.find_each do |topic|
         old_questions_count = topic.questions_count
         topic.questions_count = topic_questions_count[topic.id]
-        topic.save if topic.questions_count != old_questions_count
+        if topic.questions_count != old_questions_count && topic.save
+          topic.update_search_index true
+        end
       end
     end
 
