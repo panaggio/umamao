@@ -574,7 +574,9 @@ TopicAutocompleteForUserSuggestion.prototype = {
 
   actionData: function (data) {
     return data.id;
-  }
+  },
+
+  returnDefault: null
 }
 
 Utils.extend(TopicAutocomplete, AutocompleteBox);
