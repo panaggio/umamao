@@ -386,8 +386,12 @@ class TopicsController < ApplicationController
 
     @users_suggested = UserSuggestion.query(
       :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
-      :origin_id => current_user.id
+      :$or => [{:origin_id => current_user.id}, {:user_id => current_user.id }]
     ).all.map(&:user)
+
+    if @users_suggested.delete(current_user)
+      @users_suggested.unshift(current_user)
+    end
 
     respond_to do |format|
       format.html
