@@ -17,6 +17,7 @@ class Inviter < ActionMailer::Base
 
   def request_answer(answer_request, sender)
     @sender = sender
+    @group = sender.groups[0] if sender && sender.groups.present?
     @invited = answer_request.invited
     @recipient_email = answer_request.invited.email
     @message = answer_request.message
