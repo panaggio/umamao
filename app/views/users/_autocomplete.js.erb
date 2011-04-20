@@ -55,7 +55,7 @@ UserAutocomplete.prototype = {
       dataType: "jsonp",
       jsonp: "json.wrf",
       data: {q: "title:" + Utils.solrEscape(query) +
-             " AND entry\\_type:User", rows: 9},
+             " AND entry\\_type:User", rows: 7},
       success: function (data) {
         var docs = data.response.docs;
         var hasExactMatch = false;
