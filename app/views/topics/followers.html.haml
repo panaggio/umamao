@@ -13,7 +13,7 @@
 
   %ul#user-suggested.items
     - @users_suggested.each do |user|
-      = render :partial => "users/user", :locals => {:user => user}
+      = render :partial => "users/user", :locals => { :user => user, :suggestion => 'friend' }
 
   %ul#users.items
     - @followers.each do |user|

@@ -1,6 +1,15 @@
+- suggestion ||= false
 %li.item
   / User Summary
   .summary
+    - if suggestion
+      .controls
+        .refuse
+          - if suggestion == 'self'
+            = link_to '✕', refuse_suggestion_path(:topic => @topic.id), :method => :post
+          -else
+            = link_to '✕', delete_suggestion_path(:topic => @topic.id), :method => :post
+
     .avatar
       = link_to avatar_for(user, :size => 96).html_safe, user_path(user)
 
@@ -9,6 +18,9 @@
     .info
       .bio
         = auto_link(truncate_words(h(user.bio), 200, link_to('…', user_path(user))))
+      - if suggestion
+        .suggestion-info
+          = t("user_suggestions.user_suggest.suggestion_box.friend")
       .metadata
         = t(:created_at, :scope => "activerecord.attributes.user")
         = t("time.ago", :time => time_ago_in_words(user.created_at))

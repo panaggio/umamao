@@ -268,7 +268,7 @@ class TopicsController < ApplicationController
                 :locals => { :topic => @topic, :suggestion => 'friend' }
             when 'user'
               render_to_string :partial => 'users/user',
-                :locals => { :user => receiver }
+                :locals => { :user => receiver, :suggestion => 'friend' }
             end
         end
 
