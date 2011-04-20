@@ -5,7 +5,7 @@
 #profile-display
   %input#topic_id{:type => 'hidden', :value => @topic.id}
 
-  %h2= t("followable.followers", :count => @followers.total_entries)
+  %h2= t("followable.followers", :count => @followers.empty? ? 0 : @followers.total_entries)
 
   -# User suggestion
   %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
@@ -19,8 +19,9 @@
     - @followers.each do |user|
       = render :partial => "users/user", :locals => {:user => user}
 
-  #additional_info
-    = will_paginate @followers
+  - unless @followers.empty?
+    #additional_info
+      = will_paginate @followers
 
 - content_for :sidebar do
   = link_to t("topics.show.view"), topic_path(@topic)
