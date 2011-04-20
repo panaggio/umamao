@@ -40,6 +40,9 @@ class QuestionListsController < TopicsController
   # GET /question_lists/1
   def show
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
     @page = params[:page] || 1
     options = {
       :per_page => 20, :page => @page,
@@ -53,6 +56,8 @@ class QuestionListsController < TopicsController
   # Classifies the question_list under a certain topic.
   def classify
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
 
     @topic = Topic.find_by_title(params[:topic])
 
@@ -93,6 +98,8 @@ class QuestionListsController < TopicsController
   def unclassify
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
 
+    raise Goalie::NotFound unless @question_list
+
     @topic = Topic.find_by_title(params[:topic])
     @question_list.updated_by = current_user
     status = @question_list.unclassify! @topic
@@ -110,6 +117,9 @@ class QuestionListsController < TopicsController
 
   def create_file
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
     @file = QuestionListFile.new(:file => params[:file],
                                  :user => current_user,
                                  :group => current_group,
@@ -125,6 +135,9 @@ class QuestionListsController < TopicsController
 
   def destroy_file
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
     @file = @question_list.question_list_files.find(params[:file])
 
     if @file.present? && @file.can_be_destroyed_by?(current_user)

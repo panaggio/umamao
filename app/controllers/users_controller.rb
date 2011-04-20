@@ -308,6 +308,9 @@ class UsersController < ApplicationController
 
   def follow
     @user = User.find_by_login_or_id(params[:id])
+
+    raise Goalie::NotFound unless @user
+
     current_user.follow(@user)
     current_user.populate_news_feed!(@user)
     current_user.save!
@@ -343,6 +346,9 @@ class UsersController < ApplicationController
 
   def unfollow
     @user = User.find_by_login_or_id(params[:id])
+
+    raise Goalie::NotFound unless @user
+
     current_user.unfollow(@user)
     current_user.save!
 
@@ -379,6 +385,9 @@ class UsersController < ApplicationController
 
   def followers
     @user = User.find_by_id(params[:id])
+
+    raise Goalie::NotFound unless @user
+
     @users = @user.followers.paginate :per_page => 15, :page => params[:page]
     respond_to do |format|
       format.html { render "users" }
@@ -387,6 +396,9 @@ class UsersController < ApplicationController
 
   def following
     @user = User.find_by_id(params[:id])
+
+    raise Goalie::NotFound unless @user
+
     @users = @user.following.paginate :per_page => 15, :page => params[:page]
     respond_to do |format|
       format.html { render "users" }
@@ -395,6 +407,9 @@ class UsersController < ApplicationController
 
   def topics
     @user = User.find_by_id(params[:id])
+
+    raise Goalie::NotFound unless @user
+
     @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
                                                               :page => params[:page])
     respond_to do |format|
@@ -464,6 +479,7 @@ class UsersController < ApplicationController
 
   def common_show
     @user = User.find_by_login_or_id(params[:id])
+
     raise Goalie::NotFound unless @user
 
     set_page_title(t("users.show.title", :user => @user.name))
