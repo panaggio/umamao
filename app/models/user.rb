@@ -55,6 +55,8 @@ class User
   key :feed_token,                String
   key :can_invite_without_confirmation, Boolean, :default => true
 
+  has_one :avatar, :dependent => :destroy
+
   key :ignored_topic_ids,         Array
   has_many :ignored_topics, :class_name => 'Topic', :in => :ignored_topic_ids
   key :ignored_topics_count, :default => 0
@@ -210,6 +212,11 @@ class User
   def first_name
     return nil unless self.name
     self.name.split(/\s+/).first
+  end
+
+  # Return the avatar url, if it exists
+  def avatar_url
+    self.avatar.url if self.avatar
   end
 
   def accept_invitation

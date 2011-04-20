@@ -33,10 +33,18 @@
   .group.navform
     = submit_tag t('users.edit.submit')
 
--content_for :sidebar do
+- content_for :sidebar do
   .block
     .inner{:style => "padding-top: 10px"}
       %ul.navigation
         %li{:style => "text-align: center"}
           = avatar_for(@user, :size => 128)
 
+  .block
+    - if current_user.avatar_url
+      = image_tag current_user.avatar_url
+    - form_tag avatars_path, :multipart => true do
+      = file_field_tag :file
+      = submit_tag
+    - form_tag delete_avatars_path do
+      = submit_tag

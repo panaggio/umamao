@@ -22,6 +22,8 @@ class UploadedFile
 
   MAXSIZE = 20 * 1024 * 1024 # 20MB
 
+  UPLOADER = FileUploader
+
   def initialize(args)
     @file = args.delete :file
     self.original_filename =
@@ -40,7 +42,7 @@ class UploadedFile
 
   # The url to the file in storage
   def url
-    uploader = FileUploader.new(self)
+    uploader = UPLOADER.new(self)
     # This actually doesn't retrieve the file on the server, but sets
     # the uploader's state so we can get the url.
     uploader.retrieve_from_store!(self.original_filename)
@@ -53,14 +55,14 @@ class UploadedFile
 
   # Remove the corresponding file from storage
   def remove_file_from_storage!
-    uploader = FileUploader.new(self)
+    uploader = UPLOADER.new(self)
     uploader.retrieve_from_store!(self.original_filename)
     uploader.remove!
   end
 
   def store_file!
     # TODO: destroy self if upload doesn't work
-    uploader = FileUploader.new(self)
+    uploader = UPLOADER.new(self)
     uploader.store!(@file)
   end
 
