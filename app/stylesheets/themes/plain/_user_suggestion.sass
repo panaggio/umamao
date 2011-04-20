@@ -6,13 +6,23 @@
     .inactive
       color: #999999
 
-  #user-suggested, #topics
+  #users
+    .metadata
+      clear: both
+
+  #user-suggested, #topics, #users
     li
       padding-top: 17px
 
-      .title, .info
+      .title, .info, .avatar
         padding-left: 20px
         padding-right: 20px
+
+      .bio
+        margin-left: -20px
+
+      .avatar
+        clear: both
 
     .controls
       +follow-button
@@ -28,6 +38,14 @@
     .suggestion-info
       font-size: 0.8em
       color: #999999
+      float: left
+      clear: left
+
+    .metadata
+      float: right
+
+    .suggestion-info, .metadata
+      padding-top: 4px
 
     li
       padding-top: 0
