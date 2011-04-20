@@ -4,6 +4,7 @@
 
 #profile-display
   %input#topic_id{:type => 'hidden', :value => @topic.id}
+  %input.user_id{:type => 'hidden', :value => current_user.id}
 
   %h2= t("followable.followers", :count => @followers.empty? ? 0 : @followers.total_entries)
 

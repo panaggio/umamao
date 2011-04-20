@@ -16,6 +16,7 @@
       %p
         = link_to h(user.name), user_path(user)
     .info
+      %input.user_id{ :type => :hidden, :id => user.id }
       .bio
         = auto_link(truncate_words(h(user.bio), 200, link_to('…', user_path(user))))
       - if suggestion

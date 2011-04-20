@@ -580,6 +580,8 @@ UserAutocomplete.prototype = {
 
   addOnNoExactMatch: false,
 
+  filterDocs: null,
+
   actionData: function (data) {
     return data.id;
   },
@@ -601,6 +603,7 @@ UserAutocomplete.prototype = {
     var addOnNoExactMatch = this.addOnNoExactMatch;
     var callback = this.requestCallback();
     var input = this.input;
+    var filterDocs = this.filterDocs;
     var request = $.ajax({
       url: this.url,
       dataType: "jsonp",
@@ -620,6 +623,8 @@ UserAutocomplete.prototype = {
             question_count: "0"
           });
         }
+        if (filterDocs)
+          docs = filterDocs(docs);
         callback(docs);
       }
     });
@@ -634,14 +639,6 @@ UserAutocomplete.prototype = {
       items.push(me.makeItem(solrConversion(it)));
     });
     return items;
-  },
-
-  returnDefault: function () {
-    var input = this.input.val();
-    if (input.trim() != "") {
-      this.clear();
-      this.action(input);
-    }
   },
 
   // HACK
@@ -765,6 +762,33 @@ function initUserAutocompleteForUserSuggesting() {
   var userBox =
     new UserAutocomplete("#topic-suggested-users-autocomplete",
                          "#topic-suggested-users-suggestions");
+
+  var usersAlreadyFollowing = $.map( $(".user_id"), function(e, i){
+    return $(e).attr("id");
+  });
+
+  userBox.filterDocs = function(docs) {
+    var filteredDocs = [];
+
+    console.log(docs.length);
+    var docsSize = docs.length;
+    for (var i=0; i<docsSize; i++) {
+      shouldAdd = true;
+
+      var listSize = usersAlreadyFollowing.length;
+      for (var j=0; j<listSize; j++) {
+        if (docs[i].id == usersAlreadyFollowing[j]) {
+          shouldAdd = false;
+          break;
+        }
+      }
+
+      if (shouldAdd)
+        filteredDocs.push(docs[i]);
+    }
+
+    return filteredDocs;
+  };
 
   var usersUl = $("#user-suggested");
   var topic_id = $("#topic_id").attr("value");
