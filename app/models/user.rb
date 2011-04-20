@@ -546,7 +546,7 @@ Time.zone.now ? 1 : 0)
       :entry_type => thing.collection.name.singularize.camelize,
       :reason => 'UserSuggested'
     )
-    us.save
+    us.save!
   end
 
   def ignore_topic!(topic)

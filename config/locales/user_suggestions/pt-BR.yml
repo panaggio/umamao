@@ -16,6 +16,10 @@ pt-BR:
           "Tópico %{topic} sugerido ao usuário %{user}"
         already_follow:
           "%{user} já segue o tópico %{topic}"
+        suggestion_exists:
+          "Você já sugeriu o tópico %{topic} para %{user}"
+        user_is_origin:
+          "Você não pode sugerir um tópico a você"
       suggestion_box:
         friend: "Sugerido por você. Aguardando confirmação."
         self_html:
