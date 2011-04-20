@@ -384,13 +384,20 @@ class TopicsController < ApplicationController
     @followers =
       @topic.followers.paginate :per_page => 15, :page => params[:page]
 
-    @users_suggested = UserSuggestion.query(
+    user_suggestions = UserSuggestion.query(
       :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
       :$or => [{:origin_id => current_user.id}, {:user_id => current_user.id }]
-    ).all.map(&:user)
+    ).all
+
+    @users_suggested = user_suggestions.map(&:user).uniq
 
     if @users_suggested.delete(current_user)
       @users_suggested.unshift(current_user)
+    end
+
+    @users_suggested.map! do |user|
+      [ user,
+        user_suggestions.select{ |s| s.user_id == user.id }.map(&:origin)]
     end
 
     respond_to do |format|

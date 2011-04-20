@@ -20,7 +20,10 @@
         = auto_link(truncate_words(h(user.bio), 200, link_to('…', user_path(user))))
       - if suggestion
         .suggestion-info
-          = t("user_suggestions.user_suggest.suggestion_box.friend")
+          -if suggestion == 'self'
+            &= t("user_suggestions.user_suggest.suggestion_box.self_html", :origin => link_to(h(origins.first.first_name), user_path(origins.first.id)), :count => origins.count-1)
+          -else
+            &= t("user_suggestions.user_suggest.suggestion_box.friend")
       .metadata
         = t(:created_at, :scope => "activerecord.attributes.user")
         = t("time.ago", :time => time_ago_in_words(user.created_at))

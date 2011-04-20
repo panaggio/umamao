@@ -12,8 +12,8 @@
     %ul.autocomplete-list#topic-suggested-users-suggestions
 
   %ul#user-suggested.items
-    - @users_suggested.each do |user|
-      = render :partial => "users/user", :locals => { :user => user, :suggestion => 'friend' }
+    - @users_suggested.each do |user, origins|
+      = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
 
   %ul#users.items
     - @followers.each do |user|
