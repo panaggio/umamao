@@ -47,8 +47,8 @@ class TopicsController < ApplicationController
     end
 
     @question_lists =
-      @topic.question_lists.paginate(:per_page => 6,
-                                     :order => :created_at.desc)
+      @topic.indirect_question_lists.paginate(:per_page => 6,
+                                              :order => :created_at.desc)
 
     @news_items = NewsItem.paginate(
       :recipient_id => @topic.id,
@@ -280,8 +280,8 @@ class TopicsController < ApplicationController
                                    :page => params[:page] || 1}.merge(conditions))
 
     @question_lists =
-      @topic.question_lists.paginate(:per_page => 6,
-                                     :order => :created_at.desc)
+      @topic.indirect_question_lists.paginate(:per_page => 6,
+                                              :order => :created_at.desc)
 
     respond_with @topics
   end
@@ -367,9 +367,9 @@ class TopicsController < ApplicationController
   def question_lists
     @topic = Topic.find_by_slug_or_id(params[:id])
     @question_lists =
-      @topic.question_lists.paginate(:per_page => 20,
-                                     :page => params[:page],
-                                     :order => :created_at.desc)
+      @topic.indirect_question_lists.paginate(:per_page => 20,
+                                              :page => params[:page],
+                                              :order => :created_at.desc)
   end
 
 end

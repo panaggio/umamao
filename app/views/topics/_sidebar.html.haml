@@ -18,7 +18,7 @@
         = render :partial => "related_topic_list", :locals => {:topic => topic}
 
   - unless local_assigns[:hide_question_lists]
-    - if topic.allow_question_lists && @question_lists.present?
+    - if @question_lists.present?
       #question-lists.block
         %h3.title= t(".question_lists")
         %ul.topic-list

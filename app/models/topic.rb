@@ -144,6 +144,11 @@ class Topic
     QuestionList.query(:main_topic_id => self.id)
   end
 
+  # Return the question lists that are classified under this topic.
+  def indirect_question_lists
+    QuestionList.query(:topic_ids => self.id)
+  end
+
   # Add a follower to topic.
   def add_follower!(user)
     if !self.followers.include?(user)
