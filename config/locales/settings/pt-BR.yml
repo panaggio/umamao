@@ -12,10 +12,6 @@ pt-BR:
       edit:
         title: Informações do Perfil
         change_picture: Trocar avatar
-        avatar_config:
-          title: Avatar
-          upload: Escolha uma foto
-          external: ou use um avatar externo
     notifications:
       edit:
         title: Notificações
@@ -26,3 +22,15 @@ pt-BR:
       edit:
         followed: Tópicos seguidos
         ignored: Tópicos ignorados
+    avatars:
+      edit:
+        avatar_config:
+          title: Avatar
+          upload: Escolha uma foto
+          external: ou use um avatar externo
+      create:
+        error: "Não foi possível atualizar seu avatar."
+      update:
+        error: "Não foi possível atualizar seu avatar."
+      destroy:
+        error: "Houve um erro ao tentar remover sua foto."

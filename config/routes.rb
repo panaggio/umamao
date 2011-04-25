@@ -96,6 +96,7 @@ Shapado::Application.routes.draw do
   namespace :settings do
     match 'profile' => 'profile#edit', :via => :get
     match 'profile' => 'profile#update', :via => :put
+    match 'avatar' => 'avatars#edit', :via => :get
     match 'avatar' => 'avatars#update', :via => :put
     match 'resume' => 'resume#edit'
     match 'notifications' => 'notifications#edit', :via => :get

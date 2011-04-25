@@ -33,32 +33,12 @@
   .group.navform
     = submit_tag t('users.edit.submit')
 
-
-- form_for @user, :url => settings_avatar_path, :html => {:multipart => true} do |f|
-  .group
-    = label_tag :avatar_config, t(".avatar_config.title"), :class => "label"
-    .option.upload
-      %h3= t(".avatar_config.upload")
-      = file_field_tag "avatar"
-    .external
-      %h3= t(".avatar_config.external")
-      .option
-        = f.radio_button "avatar_config", "facebook", :disabled => @user.facebook_account.blank?
-        Facebook
-      .option
-        = f.radio_button "avatar_config", "twitter", :disabled => @user.twitter_account.blank?
-        Twitter
-      .option
-        = f.radio_button "avatar_config", "gravatar"
-        Gravatar
-    = submit_tag
-
 - content_for :sidebar do
   .block
     .inner{:style => "padding-top: 10px"}
       %ul.navigation
         %li{:style => "text-align: center"}
           = avatar_for(@user, :size => 128)
-    = link_to t(".change_picture"), "#avatar"
+    = link_to t(".change_picture"), settings_avatar_path
 
 
