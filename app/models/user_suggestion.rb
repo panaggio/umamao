@@ -12,7 +12,7 @@ class UserSuggestion < Suggestion
   validate :user_is_origin?
   validate :user_follow_entry?
 
-  after_save :send_notification
+  after_create :send_notification
 
   def accepted?
     !!self.accepted_at
