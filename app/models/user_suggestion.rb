@@ -27,6 +27,10 @@ class UserSuggestion < Suggestion
     self.save!
   end
 
+  def delete!
+    self.destroy
+  end
+
   def reject!
     self.rejected_at = Time.zone.now
     self.save!

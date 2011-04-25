@@ -82,4 +82,14 @@ class SuggestionsController < ApplicationController
     end
   end
 
+  # Delete suggestions
+  def delete
+    @user_suggestion = UserSuggestion.first(
+      :entry_id => BSON::ObjectId(params[:topic]), :entry_type => 'Topic',
+      :origin_id => BSON::ObjectId(params[:origin]), :user_id => current_user.id)
+
+    track_event(:deleted_user_suggestion)
+
+    @user_suggestion.delete!
+  end
 end
