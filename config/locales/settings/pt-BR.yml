@@ -24,10 +24,10 @@ pt-BR:
         ignored: Tópicos ignorados
     avatars:
       edit:
-        avatar_config:
-          title: Avatar
-          upload: Escolha uma foto
-          external: ou use um avatar externo
+        title: Trocar avatar
+        upload: Escolha uma foto
+        external: ou use um avatar externo
+        submit: Enviar
       create:
         error: "Não foi possível atualizar seu avatar."
       update:

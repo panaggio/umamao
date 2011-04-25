@@ -1,5 +1,6 @@
 class Settings::AvatarsController < ApplicationController
   before_filter :login_required
+  before_filter :admin_required
 
   def edit
     @user = current_user

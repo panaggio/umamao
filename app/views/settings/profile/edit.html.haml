@@ -34,11 +34,9 @@
     = submit_tag t('users.edit.submit')
 
 - content_for :sidebar do
-  .block
-    .inner{:style => "padding-top: 10px"}
-      %ul.navigation
-        %li{:style => "text-align: center"}
-          = avatar_for(@user, :size => 128)
-    = link_to t(".change_picture"), settings_avatar_path
+  .avatar
+    = avatar_for(@user, :size => 128)
+    - if current_user.admin?
+      .edit= link_to t(".change_picture"), settings_avatar_path
 
 

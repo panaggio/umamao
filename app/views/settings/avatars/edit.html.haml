@@ -1,22 +1,27 @@
 .secondary-navigation
-  .navtitle= t(".avatar_config.title")
+  .navtitle= t(".title")
 
-= avatar_for @user, :size => 100
+#avatar-config
+  .avatar= avatar_for @user, :size => 150
 
-- form_for @user, :url => settings_avatar_path, :html => {:multipart => true} do |f|
-  .group
+  - form_for @user, :url => settings_avatar_path, :html => {:multipart => true} do |f|
     .option.upload
-      %h3= t(".avatar_config.upload")
+      %h3= t(".upload")
       = file_field_tag "avatar"
     .external
-      %h3= t(".avatar_config.external")
-      .option
-        = f.radio_button "avatar_config", "facebook", :disabled => @user.facebook_account.blank?
-        Facebook
-      .option
-        = f.radio_button "avatar_config", "twitter", :disabled => @user.twitter_account.blank?
-        Twitter
+      %h3= t(".external")
+      - if @user.facebook_account.present?
+        .option
+          = f.radio_button "avatar_config", "facebook", :disabled => @user.facebook_account.blank?
+          = image_tag "facebook.gif", :alt => "Facebook"
+          Facebook
+      - if @user.twitter_account.present?
+        .option
+          = f.radio_button "avatar_config", "twitter", :disabled => @user.twitter_account.blank?
+          = image_tag "twitter.gif", :alt => "Twitter"
+          Twitter
       .option
         = f.radio_button "avatar_config", "gravatar"
         Gravatar
-    = submit_tag
+    = submit_tag t(".submit")
+    = link_to t("scaffold.cancel"), settings_profile_path
