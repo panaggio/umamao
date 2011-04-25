@@ -21,11 +21,9 @@ class TopicsController < ApplicationController
   end
 
   def show
-    begin
-      @topic = Topic.find_by_slug_or_id(params[:id])
-    rescue BSON::InvalidObjectId
-      raise Goalie::NotFound
-    end
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
 
     if @topic.is_a?(QuestionList)
       redirect_to question_list_path(@topic)
@@ -68,11 +66,17 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     respond_with @topic
   end
 
   def update
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     @topic.safe_update(%w[title description], params[:topic])
     @topic.updated_by = current_user
     @topic.save
@@ -92,6 +96,8 @@ class TopicsController < ApplicationController
       @topic = Topic.find_by_title(params[:title]) ||
         Topic.new(:title => params[:title])
     end
+
+    raise Goalie::NotFound unless @topic
 
     user = current_user
     followers_count = @topic.followers_count + 1
@@ -135,6 +141,9 @@ class TopicsController < ApplicationController
 
   def unfollow
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     followers_count = @topic.followers_count - 1
     @topic.remove_follower!(current_user)
 
@@ -171,6 +180,8 @@ class TopicsController < ApplicationController
         Topic.new(:title => params[:title])
     end
 
+    raise Goalie::NotFound unless @topic
+
     current_user.ignore_topic!(@topic)
 
     track_event(:ignored_topic)
@@ -201,6 +212,8 @@ class TopicsController < ApplicationController
 
   def unignore
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
 
     current_user.unignore_topic!(@topic)
 
@@ -263,11 +276,10 @@ class TopicsController < ApplicationController
   end
 
   def unanswered
-    begin
-      @topic = Topic.find_by_slug_or_id(params[:id])
-    rescue BSON::InvalidObjectId
-      raise Goalie::NotFound
-    end
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     set_page_title(@topic.title)
 
     set_tab :unanswered, :topic_show
@@ -323,6 +335,9 @@ class TopicsController < ApplicationController
 
   def followers
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     @followers =
       @topic.followers.paginate :per_page => 15, :page => params[:page]
     respond_to do |format|
@@ -331,11 +346,9 @@ class TopicsController < ApplicationController
   end
 
   def embedded
-    begin
-      @topic = Topic.find_by_slug_or_id(params[:id])
-    rescue BSON::InvalidObjectId
-      raise Goalie::NotFound
-    end
+    @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
 
     @title = params[:title]
 
@@ -359,6 +372,9 @@ class TopicsController < ApplicationController
 
   def students
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     @course_offers = CourseOffer.query(:course_id => @topic.id)
 
     @users = Student.all(:registered_course_ids.in => @course_offers.map(&:id)).map(&:user).select{|u| u}
@@ -366,6 +382,9 @@ class TopicsController < ApplicationController
 
   def question_lists
     @topic = Topic.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @topic
+
     @question_lists =
       @topic.indirect_question_lists.paginate(:per_page => 20,
                                               :page => params[:page],

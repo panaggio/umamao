@@ -63,6 +63,9 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = current_scope.find(params[:id])
+
+    raise Goalie::NotFound unless @comment
+
     respond_to do |format|
       format.html
       format.js do
@@ -78,6 +81,9 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       @comment = Comment.find(params[:id])
+
+      raise Goalie::NotFound unless @comment
+
       @comment.body = params[:body]
       if @comment.valid? && @comment.save
         if question_id = @comment.question_id
@@ -117,6 +123,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = scope.comments.find(params[:id])
+
+    raise Goalie::NotFound unless @comment
+
     @comment.destroy
 
     respond_to do |format|
@@ -128,6 +137,9 @@ class CommentsController < ApplicationController
   protected
   def check_permissions
     @comment = current_scope.find(params[:id])
+
+    raise Goalie::NotFound unless @comment
+
     valid = false
     if params[:action] == "destroy"
       valid = @comment.can_be_deleted_by?(current_user)

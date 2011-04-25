@@ -7,6 +7,9 @@ class AnswersController < ApplicationController
 
   def history
     @answer = Answer.find(params[:id])
+
+    raise Goalie::NotFound unless @answer
+
     @question = @answer.question
 
     respond_to do |format|
@@ -17,6 +20,9 @@ class AnswersController < ApplicationController
 
   def diff
     @answer = Answer.find(params[:id])
+
+    raise Goalie::NotFound unless @answer
+
     @question = @answer.question
     @prev = params[:prev]
     @curr = params[:curr]
@@ -47,7 +53,9 @@ class AnswersController < ApplicationController
     @open_sharing_widget = flash[:connected_to]
 
     @answer = Answer.find(params[:id])
-    raise Goalie::NotFound if @answer.nil?
+
+    raise Goalie::NotFound unless @answer
+
     @question = @answer.question
     set_page_title(@question.title)
     respond_to do |format|
@@ -61,6 +69,7 @@ class AnswersController < ApplicationController
 
     @answer.safe_update(%w[body wiki], params[:answer])
     @question = Question.find_by_slug_or_id(params[:question_id])
+
     @answer.question = @question
     @answer.group_id = @question.group_id
 
@@ -171,6 +180,9 @@ class AnswersController < ApplicationController
 
   def flag
     @answer = Answer.find(params[:id])
+
+    raise Goalie::NotFound unless @answer
+
     @flag = Flag.new
     @flag.flaggeable_type = @answer.class.name
     @flag.flaggeable_id = @answer.id
@@ -202,6 +214,9 @@ class AnswersController < ApplicationController
 
   def check_update_permissions
     @answer = Answer.find(params[:id])
+
+    raise Goalie::NotFound unless @answer
+
     allow_update = true
   end
 end
