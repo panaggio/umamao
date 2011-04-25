@@ -36,9 +36,8 @@
       - else
         - sort = "newest"
       %ul.items{:id => @tab}
-        - cache("users_show.#{@tab}.#{sort}.#{@user.id}.#{@items.current_page}.#{@items.total_entries}") do
-          - @items.each do |item|
-            = render :partial => partial, :object => item
+        - @items.each do |item|
+          = render :partial => partial, :object => item
       .additional_info
         = will_paginate @items, :param_name => "page"
         .clear
