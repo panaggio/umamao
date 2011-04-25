@@ -31,6 +31,9 @@ class User
   key :description,               String
   key :new_user,                  Boolean, :default => true
 
+  key :avatar_config, String,
+    :in => ["gravatar", "twitter", "facebook", "uploaded"]
+
   key :identity_url,              String
   key :role,                      String, :default => "user"
   key :last_logged_at,            Time
@@ -214,9 +217,33 @@ class User
     self.name.split(/\s+/).first
   end
 
-  # Return the avatar url, if it exists
-  def avatar_url
-    self.avatar.url if self.avatar
+  # Return the avatar url based on the user's avatar configurations.
+  def avatar_url(from = self.avatar_config)
+    case from
+    when "auto"
+      ["uploaded", "facebook", "twitter", "gravatar"].each do |location|
+        url = avatar_url location
+        return url if url
+      end
+      nil
+    when "gravatar"
+      Helper.instance.gravatar_url self.email
+    when "twitter", "facebook"
+      if account = self.external_accounts.first(:provider => from)
+        account.user_info['image']
+      end
+    when "uploaded"
+      self.avatar.url if self.avatar
+    end
+  end
+
+  def update_avatar!(file, group)
+    self.avatar.destroy if self.avatar.present?
+    Avatar.create!(:file => file,
+                   :user => self,
+                   :group => group)
+    self.avatar_config = "uploaded"
+    self.save!
   end
 
   def accept_invitation

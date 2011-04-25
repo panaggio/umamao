@@ -11,6 +11,11 @@ pt-BR:
     profile:
       edit:
         title: Informações do Perfil
+        change_picture: Trocar avatar
+        avatar_config:
+          title: Avatar
+          upload: Escolha uma foto
+          external: ou use um avatar externo
     notifications:
       edit:
         title: Notificações

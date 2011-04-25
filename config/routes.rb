@@ -108,11 +108,7 @@ Shapado::Application.routes.draw do
     resources :external_accounts, :only => [:index, :destroy]
   end
 
-  resources :avatars, :only => [:create] do
-    collection do
-      post :delete
-    end
-  end
+  post "/avatars/update" => "avatars#update", :as => "update_avatar"
 
   resources :users, :except => [:edit, :update] do
     member do
