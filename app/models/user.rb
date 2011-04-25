@@ -237,12 +237,19 @@ class User
     end
   end
 
-  def update_avatar!(file, group)
-    self.avatar.destroy if self.avatar.present?
-    Avatar.create!(:file => file,
-                   :user => self,
-                   :group => group)
-    self.avatar_config = "uploaded"
+  # Update the user's avatar. If given a file, create an Avatar model;
+  # otherwise, simply update the avatar_config field.
+  def update_avatar!(file_or_config)
+    old_avatar = self.avatar
+
+    if file_or_config.is_a? String
+      self.avatar_config = file_or_config
+    else
+      Avatar.create!(:file => file_or_config, :user => self)
+      self.avatar_config = "uploaded"
+    end
+
+    old_avatar.destroy if old_avatar.present?
     self.save!
   end
 

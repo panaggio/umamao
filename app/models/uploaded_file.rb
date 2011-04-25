@@ -9,7 +9,7 @@ class UploadedFile
 
   belongs_to :user, :required => true
 
-  belongs_to :group, :required => true
+  belongs_to :group
 
   attr_reader :file
 
@@ -50,7 +50,7 @@ class UploadedFile
   end
 
   def can_be_destroyed_by?(user)
-    self.user == user || user.owner_of?(self.group)
+    self.user == user || self.group.present? && user.owner_of?(self.group)
   end
 
   # Remove the corresponding file from storage

@@ -96,6 +96,7 @@ Shapado::Application.routes.draw do
   namespace :settings do
     match 'profile' => 'profile#edit', :via => :get
     match 'profile' => 'profile#update', :via => :put
+    match 'avatar' => 'avatars#update', :via => :put
     match 'resume' => 'resume#edit'
     match 'notifications' => 'notifications#edit', :via => :get
     match 'notifications' => 'notifications#update', :via => :put
@@ -107,8 +108,6 @@ Shapado::Application.routes.draw do
     match 'ignore_topics' => 'ignore_topics#edit', :via => :get
     resources :external_accounts, :only => [:index, :destroy]
   end
-
-  post "/avatars/update" => "avatars#update", :as => "update_avatar"
 
   resources :users, :except => [:edit, :update] do
     member do

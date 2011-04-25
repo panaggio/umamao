@@ -34,7 +34,7 @@
     = submit_tag t('users.edit.submit')
 
 
-- form_tag update_avatar_path, :multipart => true do
+- form_for @user, :url => settings_avatar_path, :html => {:multipart => true} do |f|
   .group
     = label_tag :avatar_config, t(".avatar_config.title"), :class => "label"
     .option.upload
@@ -43,13 +43,13 @@
     .external
       %h3= t(".avatar_config.external")
       .option
-        = radio_button_tag "avatar_config", "facebook", :disabled => @user.facebook_account.blank?
+        = f.radio_button "avatar_config", "facebook", :disabled => @user.facebook_account.blank?
         Facebook
       .option
-        = radio_button_tag "avatar_config", "twitter", :disabled => @user.twitter_account.blank?
+        = f.radio_button "avatar_config", "twitter", :disabled => @user.twitter_account.blank?
         Twitter
       .option
-        = radio_button_tag "avatar_config", "gravatar"
+        = f.radio_button "avatar_config", "gravatar"
         Gravatar
     = submit_tag
 

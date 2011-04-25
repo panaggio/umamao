@@ -1,6 +1,8 @@
 pt-BR:
   avatars:
     create:
-      error: "Não foi possível criar a sua foto."
+      error: "Não foi possível atualizar seu avatar."
+    update:
+      error: "Não foi possível atualizar seu avatar."
     destroy:
       error: "Houve um erro ao tentar remover sua foto."
