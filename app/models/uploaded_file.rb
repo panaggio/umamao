@@ -20,8 +20,12 @@ class UploadedFile
 
   before_destroy :remove_file_from_storage!
 
-  MAXSIZE = 20 * 1024 * 1024 # 20MB
+  # Maximum allowed filesize
+  def self.maxsize
+    20 * 1024 * 1024 # 20MB
+  end
 
+  # Carrierwave uploader used to communicate with storage
   def self.uploader
     FileUploader
   end
@@ -94,7 +98,7 @@ class UploadedFile
       else
         File.size(@file.path)
       end
-    if size > MAXSIZE
+    if size > self.class.maxsize
       self.errors.add(:file, I18n.t("uploaded_files.errors.size"))
       return false
     end

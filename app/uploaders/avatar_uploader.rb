@@ -2,7 +2,9 @@ class AvatarUploader < FileUploader
 
   include CarrierWave::RMagick
 
-  process :resize_to_fit => [200, 200]
+  version :large do
+    process :resize_to_fit => [200, 200]
+  end
 
   version :thumb do
     process :resize_to_fill => [50, 50]

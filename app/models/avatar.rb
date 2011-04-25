@@ -1,5 +1,9 @@
 class Avatar < UploadedFile
 
+  def self.maxsize
+    4 * 1024 * 1024
+  end
+
   def self.uploader
     AvatarUploader
   end
@@ -14,7 +18,7 @@ class Avatar < UploadedFile
     when :thumb
       self.mount.thumb.url
     else
-      self.mount.url
+      self.mount.large.url
     end
   end
 
