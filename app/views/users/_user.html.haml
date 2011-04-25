@@ -4,11 +4,12 @@
   .summary
     - if suggestion
       .controls
-        .refuse
-          - if suggestion == 'self'
+        - if suggestion == 'self'
+          .refuse-suggestion
             = link_to '✕', refuse_suggestion_path(:topic => @topic.id), :method => :post
-          -else
-            = link_to '✕', delete_suggestion_path(:topic => @topic.id), :method => :post
+        -else
+          .delete-suggestion
+            = link_to '✕', delete_suggestion_path(:topic => @topic.id, :user => user.id), :method => :post
 
     .avatar
       = link_to avatar_for(user, :size => 96).html_safe, user_path(user)
