@@ -218,24 +218,41 @@ class User
   end
 
   # Return the avatar url based on the user's avatar configurations.
-  def avatar_url(from = nil, size = nil)
+  #   parameters:
+  #   - from: which avatar to try (uploaded, facebook, twitter, gravatar)
+  #   - size: the size of the avatar in pixels
+  #   - force: if set to true will force to use the found avatar even if it
+  #     is the default one.
+  #
+  def avatar_url(from = nil, size = nil, force = true)
     from ||= self.avatar_config
     case from
     when nil
       ["uploaded", "facebook", "twitter", "gravatar"].each do |location|
-        url = avatar_url location, size
+        url = avatar_url location, size, false
         return url if url
       end
       nil
     when "gravatar"
       Helper.instance.gravatar_url self.email, :size => size
-    when "twitter", "facebook"
-      if account = self.external_accounts.first(:provider => from)
+    when "twitter"
+      if account = self.twitter_account
         url = account.user_info['image']
         if url =~ /default_profile_images/
-          nil
+          if force
+            size && size > 50 ? url.gsub("_normal.", "_bigger.") : url
+          end
         elsif size && size > 50
-          url.gsub("type=square", "type=large").gsub("_normal.", ".")
+          url.gsub("_normal.", ".")
+        else
+          url
+        end
+      end
+    when "facebook"
+      if account = self.facebook_account
+        url = account.user_info['image']
+        if size && size > 50
+          url.gsub("type=square", "type=large")
         else
           url
         end
