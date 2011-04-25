@@ -43,10 +43,18 @@ class SuggestionsController < ApplicationController
       @suggestion = Suggestion.first(:entry_id => BSON::ObjectId(params[:topic]),
                                      :entry_type => "Topic",
                                      :user_id => current_user.id)
+
+      @user_suggestions = UserSuggestion.all(
+        :entry_id => BSON::ObjectId(params[:topic]), :entry_type => 'Topic',
+        :user_id => current_user.id)
     elsif params[:user].present?
       @suggestion = Suggestion.first(:entry_id => params[:user],
                                      :entry_type => "User",
                                      :user_id => current_user.id)
+
+      @user_suggestions = UserSuggestion.all(
+        :entry_id => BSON::ObjectId(params[:user]), :entry_type => 'User',
+        :user_id => current_user.id)
     end
 
     if @suggestion
@@ -56,9 +64,17 @@ class SuggestionsController < ApplicationController
       track_event(:refused_suggestion)
     end
 
+    unless @user_suggestions.empty?
+      @user_suggestions.map!(&:reject!)
+      track_event(:refused_user_suggestion)
+    end
+    @user_suggestion_went_well =
+      @user_suggestions.empty? || @user_suggestions.uniq == [true]
+
     respond_to do |format|
       format.js do
-        request_answer = {:success => !!@suggestion}
+        request_answer = {
+          :success => !!@suggestion && @user_suggestion_went_well}
         if type
           request_answer[:suggestions] = render_cell :suggestions, type, :single_column => params[:single_column]
         end
