@@ -3,6 +3,9 @@ class UserSuggestion < Suggestion
   key :origin_id, :required => true, :index => true
   belongs_to :origin, :class_name => 'User'
 
+  key :accepted_at, Date
+  key :rejected_at, Date
+
   validates_uniqueness_of :user_id, :scope => [ :origin_id, :entry_id ],
     :message => lambda { 'already have been suggested that topic by origin' }
 
@@ -10,6 +13,24 @@ class UserSuggestion < Suggestion
   validate :user_follow_entry?
 
   after_save :send_notification
+
+  def accepted?
+    !!self.accepted_at
+  end
+
+  def rejected?
+    !!self.rejected_at
+  end
+
+  def accept!
+    self.accepted_at = Time.zone.now
+    self.save!
+  end
+
+  def reject!
+    self.rejected_at = Time.zone.now
+    self.save!
+  end
 
   def send_notification
     # FIXME: by the time notifications send e-mail, send invitation will
