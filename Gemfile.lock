@@ -299,6 +299,7 @@ GEM
     responders (0.6.2)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rspec (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
@@ -412,6 +413,7 @@ DEPENDENCIES
   rails (= 3.0.5)
   rdiscount (~> 1.6.3.1)
   responders
+  rmagick
   rspec
   rspec-rails (~> 2.0.0)
   ruby-debug
