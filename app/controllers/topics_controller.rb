@@ -100,6 +100,16 @@ class TopicsController < ApplicationController
     raise Goalie::NotFound unless @topic
 
     user = current_user
+
+    # accept user suggestions on that topic
+    user_suggestions = UserSuggestion.all(
+      :entry_id => @topic.id, :entry_type => 'Topic', :user_id => user.id)
+
+    unless user_suggestions.empty?
+      user_suggestions.each(&:accept!)
+      track_event(:accepted_user_suggestion)
+    end
+
     followers_count = @topic.followers_count + 1
     @topic.add_follower!(user)
     user.remove_suggestion(@topic)
