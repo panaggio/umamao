@@ -99,7 +99,7 @@ class SuggestionList
     elsif entry_type == "User"
       self.user_suggestion_ids.delete(suggestion.id)
     end
-    suggestion.destroy
+    suggestion.reject!
   end
 
   # Mark something as uninteresting. Uninteresting users and topics
@@ -232,7 +232,7 @@ class SuggestionList
           topic_suggestion.entry.present?
         kept_suggestions << topic_suggestion
       else
-        topic_suggestion.destroy
+        topic_suggestion.reject!
       end
     end
 
