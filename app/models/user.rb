@@ -218,22 +218,32 @@ class User
   end
 
   # Return the avatar url based on the user's avatar configurations.
-  def avatar_url(from = self.avatar_config)
+  def avatar_url(from = nil, size = nil)
+    from ||= self.avatar_config
     case from
-    when "auto"
+    when nil
       ["uploaded", "facebook", "twitter", "gravatar"].each do |location|
-        url = avatar_url location
+        url = avatar_url location, size
         return url if url
       end
       nil
     when "gravatar"
-      Helper.instance.gravatar_url self.email
+      Helper.instance.gravatar_url self.email, :size => size
     when "twitter", "facebook"
       if account = self.external_accounts.first(:provider => from)
-        account.user_info['image']
+        url = account.user_info['image']
+        if url =~ /default_profile_images/
+          nil
+        elsif size && size > 50
+          url.gsub("type=square", "type=large").gsub("_normal.", ".")
+        else
+          url
+        end
       end
     when "uploaded"
-      self.avatar.url if self.avatar
+      if self.avatar
+        size && size > 50 ? self.avatar.url : self.avatar.url(:thumb)
+      end
     end
   end
 

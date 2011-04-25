@@ -12,7 +12,7 @@ class FileUploader < CarrierWave::Uploader::Base
 
   # Use the file's database id as its name on the storage server.
   def filename
-    self.model.original_filename
+    self.model.filename
   end
 
   # Override default cache dir so we can upload to Heroku

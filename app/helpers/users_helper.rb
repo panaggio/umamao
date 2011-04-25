@@ -6,7 +6,7 @@ module UsersHelper
     options.reverse_merge!(:title => user.name, :alt => user.name)
     options = GravatarHelper::DEFAULT_OPTIONS.merge(options)
 
-    src = user.avatar_url
+    src = user.avatar_url options[:from], options[:size]
 
     [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
     # Don't set height in case size > 50
