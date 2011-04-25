@@ -19,6 +19,3 @@ Utils.clickObject(".suggestions a.follow_link, .suggestions .refuse-suggestion a
   };
 
 });
-
-// Workaroud to get .follow_link's to work properly
-$('a[data-confirm], a[data-method], a[data-remote]').die("click.rails");

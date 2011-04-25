@@ -1,5 +1,8 @@
 // Utility functions.
 
+// Workaroud to get .follow_link's to work properly
+$('a[data-confirm], a[data-method], a[data-remote]').die("click.rails");
+
 window.Utils = {
 
   // Escapes every character in a string that has a special meaning in a
