@@ -36,7 +36,6 @@
 - content_for :sidebar do
   .avatar
     = avatar_for(@user, :size => 128)
-    - if current_user.admin?
-      .edit= link_to t(".change_picture"), settings_avatar_path
+    .edit= link_to t(".change_picture"), settings_avatar_path
 
 
