@@ -413,15 +413,17 @@ class UsersController < ApplicationController
     @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
                                                               :page => params[:page])
 
-    user_suggestions = UserSuggestion.all({
-      :entry_type => 'Topic', :rejected_at => nil, :accepted_at => nil,
-      :$or => [{ :user_id => current_user.id },
-               { :origin_id => current_user.id, :user_id => params[:id] }]
-    })
+    if current_user
+      user_suggestions = UserSuggestion.all({
+        :entry_type => 'Topic', :rejected_at => nil, :accepted_at => nil,
+        :$or => [{ :user_id => current_user.id },
+                 { :origin_id => current_user.id, :user_id => params[:id] }]
+      })
 
-    @suggested_topics = user_suggestions.map(&:entry).uniq.map do |entry|
-      [ entry,
-        user_suggestions.select{ |s| s.entry_id == entry.id }.map(&:origin) ]
+      @suggested_topics = user_suggestions.map(&:entry).uniq.map do |entry|
+        [ entry,
+          user_suggestions.select{ |s| s.entry_id == entry.id }.map(&:origin) ]
+      end
     end
 
     respond_to do |format|

@@ -4,17 +4,19 @@
 
 #profile-display
   %input#topic_id{:type => 'hidden', :value => @topic.id}
-  %input.user_id{:type => 'hidden', :value => current_user.id}
 
   %h2= t("followable.followers", :count => @followers.empty? ? 0 : @followers.total_entries)
 
-  -# User suggestion
-  %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
-    %ul.autocomplete-list#topic-suggested-users-suggestions
+  - if current_user
+    %input.user_id{:type => 'hidden', :value => current_user.id}
+    -# User suggestion
+    - if current_user
+      %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
+        %ul.autocomplete-list#topic-suggested-users-suggestions
 
-  %ul#user-suggested.items
-    - @users_suggested.each do |user, origins|
-      = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
+    %ul#user-suggested.items
+      - @users_suggested.each do |user, origins|
+        = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
 
   %ul#users.items
     - @followers.each do |user|
