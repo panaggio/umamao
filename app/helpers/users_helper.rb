@@ -6,24 +6,7 @@ module UsersHelper
     options.reverse_merge!(:title => user.name, :alt => user.name)
     options = GravatarHelper::DEFAULT_OPTIONS.merge(options)
 
-    accounts = user.external_accounts.all
-    image_url = nil
-
-    ['facebook', 'twitter'].each do |provider|
-      if account = accounts.find{ |a| a.provider == provider }
-        image_url = account.user_info['image']
-        break
-      end
-    end
-
-    if options[:size] > 50 && image_url.present?
-      image_url = image_url.gsub('type=square', 'type=large').
-        gsub('_normal.', '.')
-    end
-
-    image_url = nil if image_url =~ /default_profile_images/
-
-    src = image_url || gravatar_url(user.email, options)
+    src = user.avatar_url options[:from], options[:size]
 
     [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
     # Don't set height in case size > 50

@@ -1,0 +1,15 @@
+.secondary-navigation
+  .navtitle= t(".title")
+
+#avatar-config
+  .avatar
+    = avatar_for @user, :size => 150
+    - if @user.avatar.present?
+      = link_to t(".destroy"), settings_destroy_avatar_path, :method => :delete
+
+  - form_tag settings_avatar_path, :multipart => true, :method => :post do |f|
+    .option.upload
+      %h3= t(".upload", :limit => "#{Avatar.maxsize / (1024 * 1024)}MB")
+      = file_field_tag "avatar"
+    = submit_tag t(".submit")
+    = link_to t("scaffold.cancel"), settings_profile_path

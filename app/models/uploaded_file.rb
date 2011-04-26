@@ -20,7 +20,15 @@ class UploadedFile
 
   before_destroy :remove_file_from_storage!
 
-  MAXSIZE = 20 * 1024 * 1024 # 20MB
+  # Maximum allowed filesize
+  def self.maxsize
+    20 * 1024 * 1024 # 20MB
+  end
+
+  # Carrierwave uploader used to communicate with storage
+  def self.uploader
+    FileUploader
+  end
 
   def initialize(args)
     @file = args.delete :file
@@ -35,16 +43,17 @@ class UploadedFile
 
   # Return the file's extension
   def extension
-    self.original_filename.match(/\.\w+$/)[0]
+    self.original_filename.match(/\.(\w+)$/)[1].downcase
+  end
+
+  # Return the filename as in the storage container.
+  def filename
+    self.original_filename
   end
 
   # The url to the file in storage
   def url
-    uploader = FileUploader.new(self)
-    # This actually doesn't retrieve the file on the server, but sets
-    # the uploader's state so we can get the url.
-    uploader.retrieve_from_store!(self.original_filename)
-    uploader.url
+    self.mount.url
   end
 
   def can_be_destroyed_by?(user)
@@ -53,15 +62,22 @@ class UploadedFile
 
   # Remove the corresponding file from storage
   def remove_file_from_storage!
-    uploader = FileUploader.new(self)
-    uploader.retrieve_from_store!(self.original_filename)
-    uploader.remove!
+    self.mount.remove!
   end
 
   def store_file!
     # TODO: destroy self if upload doesn't work
-    uploader = FileUploader.new(self)
+    uploader = self.class.uploader.new(self)
     uploader.store!(@file)
+  end
+
+  # Return an uploader to interact with the file remotely
+  def mount
+    uploader = self.class.uploader.new(self)
+    # This actually doesn't retrieve the file on the server, but sets
+    # the uploader's state so we can get the url.
+    uploader.retrieve_from_store!(self.filename)
+    uploader
   end
 
   # Check that a file was given upon creation
@@ -82,7 +98,7 @@ class UploadedFile
       else
         File.size(@file.path)
       end
-    if size > MAXSIZE
+    if size > self.class.maxsize
       self.errors.add(:file, I18n.t("uploaded_files.errors.size"))
       return false
     end

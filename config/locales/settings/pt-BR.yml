@@ -11,6 +11,7 @@ pt-BR:
     profile:
       edit:
         title: Informações do Perfil
+        change_picture: Trocar avatar
     notifications:
       edit:
         title: Notificações
@@ -21,3 +22,17 @@ pt-BR:
       edit:
         followed: Tópicos seguidos
         ignored: Tópicos ignorados
+    avatars:
+      edit:
+        title: Trocar avatar
+        upload: Escolha uma foto (limite %{limit})
+        submit: Enviar
+        destroy: Remover
+      create:
+        success: "Avatar atualizado com sucesso."
+        error: "Não foi possível atualizar seu avatar."
+      update:
+        error: "Não foi possível atualizar seu avatar."
+      destroy:
+        success: "Avatar removido com sucesso."
+        error: "Houve um erro ao tentar remover seu avatar."

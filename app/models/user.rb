@@ -55,6 +55,8 @@ class User
   key :feed_token,                String
   key :can_invite_without_confirmation, Boolean, :default => true
 
+  has_one :avatar, :dependent => :destroy
+
   key :ignored_topic_ids,         Array
   has_many :ignored_topics, :class_name => 'Topic', :in => :ignored_topic_ids
   key :ignored_topics_count, :default => 0
@@ -210,6 +212,82 @@ class User
   def first_name
     return nil unless self.name
     self.name.split(/\s+/).first
+  end
+
+  # Return the avatar url based on the user's avatar configurations.
+  #   parameters:
+  #   - from: which avatar to try (uploaded, facebook, twitter, gravatar)
+  #   - size: the size of the avatar in pixels
+  #   - force: if set to true will force to use the found avatar even if it
+  #     is the default one.
+  #
+  def avatar_url(from = nil, size = nil, force = true)
+    case from
+    when nil
+      ["uploaded", "facebook", "twitter", "gravatar"].each do |location|
+        url = avatar_url location, size, false
+        return url if url
+      end
+      nil
+    when "gravatar"
+      Helper.instance.gravatar_url self.email, :size => size
+    when "twitter"
+      if account = self.twitter_account
+        url = account.user_info['image']
+        if url =~ /default_profile_images/
+          if force
+            size && size > 50 ? url.gsub("_normal.", "_bigger.") : url
+          end
+        elsif size && size > 50
+          url.gsub("_normal.", ".")
+        else
+          url
+        end
+      end
+    when "facebook"
+      if account = self.facebook_account
+        url = account.user_info['image']
+        if size && size > 50
+          url.gsub("type=square", "type=large")
+        else
+          url
+        end
+      end
+    when "uploaded"
+      if self.avatar
+        size && size > 50 ? self.avatar.url : self.avatar.url(:thumb)
+      end
+    end
+  end
+
+  # Update the user's avatar. If given a file, create an Avatar model;
+  # otherwise, simply update the avatar_config field.
+  def update_avatar(file)
+    old_avatar = self.avatar
+    new_avatar = Avatar.new(:file => file, :user => self)
+    if new_avatar.save
+      self.avatar = new_avatar
+      old_avatar.destroy if old_avatar.present?
+      self.needs_to_update_search_index
+      self.save!
+      true
+    else
+      false
+    end
+  end
+
+  # Remove the current uploaded avatar, if it exists. Return true if
+  # the avatar was destroyed, false otherwise.
+  def remove_avatar
+    if self.avatar.present?
+      self.avatar.destroy
+      self.avatar_config = nil
+      self.needs_to_update_search_index
+      self.save!
+      true
+    else
+      false
+    end
   end
 
   def accept_invitation
@@ -764,7 +842,7 @@ Time.zone.now ? 1 : 0)
   # Updates caused by changes in external accounts are handled by the
   # external accounts class.
   def needs_to_update_search_index?
-    self.name_changed?
+    self.name_changed? || super
   end
 
   # Return all unread notifications
