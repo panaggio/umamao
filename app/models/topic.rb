@@ -17,8 +17,6 @@ class Topic
   key :updated_by_id, String
   belongs_to :updated_by, :class_name => "User"
 
-  key :follower_ids, Array, :index => true
-  has_many :followers, :class_name => 'User', :in => :follower_ids
   key :followers_count, :default => 0, :index => true
 
   slug_key :title, :unique => true, :min_length => 3
@@ -155,9 +153,17 @@ class Topic
 
   # Add a follower to topic.
   def add_follower!(user)
-    if !self.followers.include?(user)
-      self.followers << user
-      self.save!
+    if user_topic_info = UserInfo.first(:topic_id => self.id, 
+                                        :user_id => user.id)
+      unless user_topic_info.following
+        user_topic_info.following = true
+        user_topic_info.save!
+        self.increment(:followers_count => 1)
+        user.unignore_topic!(self)
+      end
+    else
+      UserInfo.create(:topic_id => self.id, :user_id => user.id, 
+                      :following => true)
       self.increment(:followers_count => 1)
       user.unignore_topic!(self)
     end
@@ -165,13 +171,16 @@ class Topic
 
   # Remove a follower from topic.
   def remove_follower!(user)
-    if self.followers.include?(user)
-      self.follower_ids.delete(user.id)
+    if user_topic_info = UserInfo.first(:topic_id => self.id, 
+                                        :user_id => user.id) &&
+                                        user_topic_info.following
+      user_topic_info.following = false
+      user_topic_info.save!
       if self.email_subscribers.include?(user)
         self.email_subscriber_ids.delete(user.id)
       end
-      self.save!
       self.increment(:followers_count => -1)
+      self.save!
     end
   end
 
@@ -312,4 +321,14 @@ class Topic
     end
   end
   handle_asynchronously :update_questions_search_entries
+
+  def follower_ids
+    UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
+                                           :following => true).map(&:user_id)
+  end
+
+  def followers
+    UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
+                                           :following => true).map(&:user)
+  end
 end

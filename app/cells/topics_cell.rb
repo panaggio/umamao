@@ -20,7 +20,10 @@ class TopicsCell < Cell::Rails
 
   def small_list
     @user = options[:user]
-    @topics = Topic.query(:follower_ids => @user.id, :limit => 7)
+    @topics = UserTopicInfo.all(:user_id => @user.id, :following => true,
+                                  :order => :answers_count.desc,
+                                  :limit => 7).map(&:topic)
+
     @path = topics_user_path @user
     render
   end

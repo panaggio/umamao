@@ -1124,5 +1124,57 @@ namespace :data do
       print "\n"
     end
 
+    def create_user_topic_info(user_id, topic_id, following, 
+                               topics_answered_questions, 
+                               topics_asked_questions)
+      return if UserTopicInfo.count(:user_id => user_id,
+                                    :topic_id => topic_id) > 0
+      uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id, 
+                              :following => following)
+      uti.answers_count = topics_answered_questions.
+        select{|t| t.include?(topic_id)}.count
+      uti.questions_count = topics_asked_questions.
+        select{|t| t.include?(topic_id)}.count
+      uti.save!
+    end
+
+    desc "Migrate topic's follower information to UserTopicInfo model"
+    task :user_topic_info_migration => :environment do
+      Topic.query(:followers_count => {'$gt' => 0}).each do |topic|
+        next unless topic['follower_ids']
+        topic['follower_ids'].each do |user_id|
+          puts "user_id #{user_id}"
+          topics_answered_questions = Answer.all(:user_id => user_id).
+            map{|a| a.question.topic_ids}
+          topics_asked_questions = Question.all(:user_id => user_id).
+            map{|q| q.topic_ids}
+
+          create_user_topic_info(user_id, topic.id, true,
+                                 topics_answered_questions,
+                                 topics_asked_questions)
+        end
+        topic['old_follower_ids'] = topic['follower_ids']
+        topic['follower_ids'] = nil
+        topic.save(:validate => false)
+      end
+
+      User.query.each do |user|
+        topics_answered_questions = Answer.all(:user_id => user.id).
+          map{|a| a.question.topic_ids}
+        topics_asked_questions = Question.all(:user_id => user.id).
+          map{|q| q.topic_ids}
+
+        (topics_answered_questions | topics_asked_questions).each do |topic_id|
+          unless Topic.find_by_id(topic_id)
+            puts "topic id com problema #{topic_id}"
+            next
+          end
+          create_user_topic_info(user.id, topic_id, false,
+                                 topics_answered_questions,
+                                 topics_asked_questions)
+        end
+
+      end
+    end
   end
 end
