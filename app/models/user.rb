@@ -281,7 +281,6 @@ class User
   def remove_avatar
     if self.avatar.present?
       self.avatar.destroy
-      self.avatar_config = nil
       self.needs_to_update_search_index
       self.save!
       true
