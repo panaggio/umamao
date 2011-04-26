@@ -272,11 +272,12 @@ class User
     if file_or_config.is_a? String
       self.avatar_config = file_or_config
     else
-      Avatar.create!(:file => file_or_config, :user => self)
+      self.avatar = Avatar.create!(:file => file_or_config, :user => self)
       self.avatar_config = "uploaded"
     end
 
     old_avatar.destroy if old_avatar.present?
+    self.needs_to_update_search_index
     self.save!
   end
 
@@ -832,7 +833,7 @@ Time.zone.now ? 1 : 0)
   # Updates caused by changes in external accounts are handled by the
   # external accounts class.
   def needs_to_update_search_index?
-    self.name_changed?
+    self.name_changed? || super
   end
 
   # Return all unread notifications

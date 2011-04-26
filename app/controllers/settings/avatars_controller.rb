@@ -10,6 +10,12 @@ class Settings::AvatarsController < ApplicationController
     current_user.update_avatar!(params[:avatar] ||
                                 params[:user][:avatar_config])
 
+    if params[:avatar].present?
+      track_event(:uploaded_avatar)
+    elsif params[:user][:avatar_config].present?
+      track_event(:changed_avatar, :to => params[:user][:avatar_config])
+    end
+
     redirect_to settings_avatar_path
   end
 
