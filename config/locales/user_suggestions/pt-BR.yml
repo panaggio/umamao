@@ -1,5 +1,8 @@
 pt-BR:
   user_suggestions:
+    delete:
+      notice:
+        "Sugestão deletada"
     notification:
       "%{user} sugeriu que você seguisse o tópico %{topic}"
     suggested:
