@@ -6,16 +6,18 @@ class Settings::AvatarsController < ApplicationController
     @user = current_user
   end
 
-  def update
-    current_user.update_avatar!(params[:avatar] ||
-                                params[:user][:avatar_config])
+  def create
+    current_user.update_avatar!(params[:avatar])
 
-    if params[:avatar].present?
-      track_event(:uploaded_avatar)
-    elsif params[:user][:avatar_config].present?
-      track_event(:changed_avatar, :to => params[:user][:avatar_config])
+    track_event(:uploaded_avatar)
+
+    redirect_to settings_avatar_path
+  end
+
+  def destroy
+    if current_user.remove_avatar!
+      track_event(:removed_avatar)
     end
-
     redirect_to settings_avatar_path
   end
 

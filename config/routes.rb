@@ -97,7 +97,9 @@ Shapado::Application.routes.draw do
     match 'profile' => 'profile#edit', :via => :get
     match 'profile' => 'profile#update', :via => :put
     match 'avatar' => 'avatars#edit', :via => :get
-    match 'avatar' => 'avatars#update', :via => :put
+    match 'avatar' => 'avatars#create', :via => :post
+    match 'avatar/destroy' => 'avatars#destroy', :via => :delete,
+      :as => :destroy_avatar
     match 'resume' => 'resume#edit'
     match 'notifications' => 'notifications#edit', :via => :get
     match 'notifications' => 'notifications#update', :via => :put

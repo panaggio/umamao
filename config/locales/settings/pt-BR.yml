@@ -26,8 +26,8 @@ pt-BR:
       edit:
         title: Trocar avatar
         upload: Escolha uma foto
-        external: ou use um avatar externo
         submit: Enviar
+        destroy: Remover
       create:
         error: "Não foi possível atualizar seu avatar."
       update:

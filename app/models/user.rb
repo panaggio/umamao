@@ -31,9 +31,6 @@ class User
   key :description,               String
   key :new_user,                  Boolean, :default => true
 
-  key :avatar_config, String,
-    :in => ["gravatar", "twitter", "facebook", "uploaded"]
-
   key :identity_url,              String
   key :role,                      String, :default => "user"
   key :last_logged_at,            Time
@@ -225,7 +222,6 @@ class User
   #     is the default one.
   #
   def avatar_url(from = nil, size = nil, force = true)
-    from ||= self.avatar_config
     case from
     when nil
       ["uploaded", "facebook", "twitter", "gravatar"].each do |location|
@@ -266,19 +262,27 @@ class User
 
   # Update the user's avatar. If given a file, create an Avatar model;
   # otherwise, simply update the avatar_config field.
-  def update_avatar!(file_or_config)
+  def update_avatar!(file)
     old_avatar = self.avatar
-
-    if file_or_config.is_a? String
-      self.avatar_config = file_or_config
-    else
-      self.avatar = Avatar.create!(:file => file_or_config, :user => self)
-      self.avatar_config = "uploaded"
-    end
-
+    self.avatar = Avatar.create!(:file => file, :user => self)
     old_avatar.destroy if old_avatar.present?
     self.needs_to_update_search_index
     self.save!
+  end
+
+  # Remove the current uploaded avatar, if it exists. Return true if
+  # the avatar was destroyed, false otherwise.
+  def remove_avatar!
+    if self.avatar.present?
+      self.avatar.destroy
+      self.avatar_config = nil
+      self.needs_to_update_search_index
+      success = true
+    else
+      success = false
+    end
+    self.save!
+    success
   end
 
   def accept_invitation
