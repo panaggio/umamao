@@ -29,7 +29,7 @@
       float: right
       clear: both
 
-      .refuse
+      .refuse-suggestion, .delete-suggestion
         padding: 0
 
   #user-suggested
@@ -51,12 +51,12 @@
       padding-top: 0
       .title
         clear: both
-      .refuse
+      .refuse-suggestion, .delete-suggestion
         opacity: 0
         a
           text-decoration: none
           color: $link_color
 
       &:hover
-        .refuse
+        .refuse-suggestion, .delete-suggestion
           opacity: 1
