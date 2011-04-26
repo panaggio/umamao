@@ -406,6 +406,7 @@ class TopicsController < ApplicationController
 
     user_suggestions = UserSuggestion.query(
       :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
+      :rejected_at => nil, :accepted_at => nil,
       :$or => [{:origin_id => current_user.id}, {:user_id => current_user.id }]
     ).all
 

@@ -413,12 +413,11 @@ class UsersController < ApplicationController
     @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
                                                               :page => params[:page])
 
-    user_suggestions = UserSuggestion.query({ :entry_type => 'Topic' }.merge(
-      if @user == current_user
-        { :user_id => current_user.id }
-      else
-        { :origin_id => current_user.id, :user_id => params[:id] }
-      end))
+    user_suggestions = UserSuggestion.all({
+      :entry_type => 'Topic', :rejected_at => nil, :accepted_at => nil,
+      :$or => [{ :user_id => current_user.id },
+               { :origin_id => current_user.id, :user_id => params[:id] }]
+    })
 
     @suggested_topics = user_suggestions.map(&:entry).uniq.map do |entry|
       [ entry,
