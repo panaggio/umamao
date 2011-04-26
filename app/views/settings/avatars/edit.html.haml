@@ -9,7 +9,7 @@
 
   - form_tag settings_avatar_path, :multipart => true, :method => :post do |f|
     .option.upload
-      %h3= t(".upload")
+      %h3= t(".upload", :limit => "#{Avatar.maxsize / (1024 * 1024)}MB")
       = file_field_tag "avatar"
     = submit_tag t(".submit")
     = link_to t("scaffold.cancel"), settings_profile_path

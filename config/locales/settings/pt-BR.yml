@@ -25,12 +25,14 @@ pt-BR:
     avatars:
       edit:
         title: Trocar avatar
-        upload: Escolha uma foto
+        upload: Escolha uma foto (limite %{limit})
         submit: Enviar
         destroy: Remover
       create:
+        success: "Avatar atualizado com sucesso."
         error: "Não foi possível atualizar seu avatar."
       update:
         error: "Não foi possível atualizar seu avatar."
       destroy:
-        error: "Houve um erro ao tentar remover sua foto."
+        success: "Avatar removido com sucesso."
+        error: "Houve um erro ao tentar remover seu avatar."

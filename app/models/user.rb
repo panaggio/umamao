@@ -262,27 +262,32 @@ class User
 
   # Update the user's avatar. If given a file, create an Avatar model;
   # otherwise, simply update the avatar_config field.
-  def update_avatar!(file)
+  def update_avatar(file)
     old_avatar = self.avatar
-    self.avatar = Avatar.create!(:file => file, :user => self)
-    old_avatar.destroy if old_avatar.present?
-    self.needs_to_update_search_index
-    self.save!
+    new_avatar = Avatar.new(:file => file, :user => self)
+    if new_avatar.save
+      self.avatar = new_avatar
+      old_avatar.destroy if old_avatar.present?
+      self.needs_to_update_search_index
+      self.save!
+      true
+    else
+      false
+    end
   end
 
   # Remove the current uploaded avatar, if it exists. Return true if
   # the avatar was destroyed, false otherwise.
-  def remove_avatar!
+  def remove_avatar
     if self.avatar.present?
       self.avatar.destroy
       self.avatar_config = nil
       self.needs_to_update_search_index
-      success = true
+      self.save!
+      true
     else
-      success = false
+      false
     end
-    self.save!
-    success
   end
 
   def accept_invitation
