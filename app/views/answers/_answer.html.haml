@@ -3,15 +3,15 @@
 - owner = answer.user
 
 %li.item
-  / Question Stats
+  / Answer Stats
   .stats
     .box.votes
       .counter{:class => class_for_number(answer.votes_average) }
         = format_number(answer.votes_average)
       .text
         = t(:votes, :scope => "activerecord.attributes.question")
-  / Question Summary
+  / Answer Summary
   .summary
     %h3
-      = link_to title, question_path(question), :title => truncate(h(answer.body), :length => 200)
+      = link_to title, question_answer_path(question, answer), :title => truncate(h(answer.body), :length => 200)
   .clear
