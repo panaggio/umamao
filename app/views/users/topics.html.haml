@@ -11,7 +11,7 @@
   %h3= t("followable.topics", :count => @topics.total_entries)
 
   -# User suggestion
-  - if current_user && @user != current_user
+  - if current_user && @user != current_user && current_user.mod_of?(current_group)
     %input.text_field#user-suggested-topics-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
     %ul.autocomplete-list#user-suggested-topics-suggestions
 

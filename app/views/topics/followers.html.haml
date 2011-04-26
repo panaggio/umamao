@@ -7,7 +7,7 @@
 
   %h2= t("followable.followers", :count => @followers.empty? ? 0 : @followers.total_entries)
 
-  - if current_user
+  - if current_user && current_user.mod_of?(current_group)
     %input.user_id{:type => 'hidden', :value => current_user.id}
     -# User suggestion
     - if current_user
