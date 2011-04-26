@@ -124,8 +124,9 @@ class Topic
   # Return a Hash [Topic, Integer] giving the co-occurrence of
   # questions between self and the others.
   def related_topics_with_count
-    self.related_topics_count.sort_by { |k,v| -v }.
-      map { |k,v| [Topic.find_by_id(k), v] }
+    unordered_topics = Topic.query(:id.in => related_topics_count.keys)
+    unordered_topics.sort_by { |t| -(self.related_topics_count[t.id.to_s]) }.
+      map { |t| [t, self.related_topics_count[t.id.to_s]] }
   end
 
   def questions

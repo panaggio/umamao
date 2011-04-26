@@ -2,7 +2,9 @@
 - link_to_main = local_assigns[:link_to_main]
 
 - content_for :sidebar do
-  = render :partial => "follow", :locals => {:topic => topic, :block => "block"}
+  - if logged_in?
+    .follow-info.block
+      = follow_button topic
   = render :partial => "email_subscription", :locals => {:topic => topic, :block => "block"}
   = render_cell :users, :followers, :followed => topic
 
