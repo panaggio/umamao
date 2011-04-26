@@ -73,7 +73,9 @@ class SuggestionsController < ApplicationController
     respond_to do |format|
       format.js do
         request_answer = {
-          :success => !!@suggestion && @user_suggestion_went_well}
+          :success => !!@suggestion && @user_suggestion_went_well,
+          :message => t('user_suggestions.refuse.notice')
+        }
         if type
           request_answer[:suggestions] = render_cell :suggestions, type, :single_column => params[:single_column]
         end

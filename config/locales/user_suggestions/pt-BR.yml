@@ -3,6 +3,9 @@ pt-BR:
     delete:
       notice:
         "Sugestão deletada"
+    refuse:
+      notice:
+        "Sugestão recusada"
     notification:
       "%{user} sugeriu que você seguisse o tópico %{topic}"
     suggested:
