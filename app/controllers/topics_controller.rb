@@ -173,12 +173,12 @@ class TopicsController < ApplicationController
   end
 
   def ignore
-    if params[:id]
-      @topic = Topic.find_by_slug_or_id(params[:id])
-    elsif params[:title]
-      @topic = Topic.find_by_title(params[:title]) ||
-        Topic.new(:title => params[:title])
-    end
+    @topic =
+      if params[:id]
+        Topic.find_by_slug_or_id(params[:id])
+      elsif params[:title]
+        Topic.find_by_title(params[:title])
+      end
 
     raise Goalie::NotFound unless @topic
 
