@@ -2,7 +2,6 @@
 class WelcomeController < ApplicationController
   before_filter :login_required, :only => [:home, :unanswered, :notifications]
   before_filter :calculate_counts, :only => [:home, :unanswered, :notifications]
-  before_filter :fillin_user_suggestions, :only => [:home, :unanswered, :notifications]
 
   helper :questions
   layout 'application'
@@ -30,8 +29,6 @@ class WelcomeController < ApplicationController
   end
 
   def home
-    # FIXME: before_filter isn't working
-    fillin_user_suggestions
     @news_items = filter_news_items(:visible => true)
 
     @questions = Question.latest.limit(10) || [] if @news_items.empty?
@@ -125,15 +122,6 @@ class WelcomeController < ApplicationController
     )
 
     @notifications_unread_count = current_user.unread_notifications.count
-  end
-
-  def fillin_user_suggestions
-    user_suggestions = UserSuggestion.query(:user_id => current_user.id)
-    @user_suggested_topics = user_suggestions.map(&:entry).uniq.first(7)
-    @user_suggested_topics.map! do |entry|
-      [ entry,
-        user_suggestions.select{ |s| s.entry_id == entry.id }.map(&:origin) ]
-    end
   end
 end
 
