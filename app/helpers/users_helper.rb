@@ -11,7 +11,17 @@ module UsersHelper
     [:class, :alt, :size, :title].each { |opt| options[opt] = CGI.escapeHTML(options[opt].to_s) }
     # Don't set height in case size > 50
     # (Twitter/Facebook don't return square images after this size)
-    "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" #{options[:size].to_i > 50 ? '' : "height=" + "\"#{options[:size]}\""} src=\"#{src}\" />"
+    img = "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" #{options[:size].to_i > 50 ? '' : "height=" + "\"#{options[:size]}\""} src=\"#{src}\" />"
+
+    if options[:editable]
+      "<div class='picture'>#{img}#{
+        link_to(
+          t("settings.profile.edit.change_picture"),
+          settings_avatar_path, :class => :edit_picture)
+      }</div>"
+    else
+      img
+    end
   end
 
   #
