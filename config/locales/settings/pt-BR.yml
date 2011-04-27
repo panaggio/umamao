@@ -11,7 +11,7 @@ pt-BR:
     profile:
       edit:
         title: Informações do Perfil
-        change_picture: Trocar avatar
+        change_picture: Trocar foto
     notifications:
       edit:
         title: Notificações
@@ -25,7 +25,7 @@ pt-BR:
     avatars:
       edit:
         title: Trocar avatar
-        upload: Escolha uma foto (limite %{limit})
+        upload: Escolha uma foto (limite de %{limit})
         submit: Enviar
         destroy: Remover
       create:
