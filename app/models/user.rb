@@ -607,7 +607,9 @@ Time.zone.now ? 1 : 0)
     if followable.is_a? User
       friend_list(:select => [:following_ids]).following_ids.include?(followable.id)
     elsif followable.is_a? Topic
-      followable.follower_ids.include? self.id
+      UserTopicInfo.count(:user_id => self.id, 
+                                 :topic_id => followable.id,
+                                 :following => true) > 0
     else
       raise "User can't follow a #{followable.class}"
     end

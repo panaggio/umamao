@@ -8,7 +8,7 @@
 #profile-display
   %input#user_id{:type => 'hidden', :value => @user.id}
 
-  %h3= t("followable.topics", :count => @topics.total_entries)
+  %h3= t("followable.topics", :count => @user_topics.total_entries)
 
   -# User suggestion
   - if logged_in?
@@ -23,8 +23,8 @@
 
   -# User followed topics
   %ul#topics.items
-    - @topics.each do |topic|
-      = render :partial => "topics/topic", :locals => {:topic => topic}
+    - @user_topics.each do |user_topic|
+      = render :partial => "topics/topic", :locals => {:topic => user_topic.topic}
 
   #additional_info
-    = will_paginate @topics
+    = will_paginate @user_topics

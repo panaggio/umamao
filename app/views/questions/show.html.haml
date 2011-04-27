@@ -142,6 +142,6 @@
       = t('.question_views',
           :count => @question.views_count)
       = t('.topic_followers',
-          :count => @question.topics.map{|t| t.follower_ids.size }.inject(0) {|sum, count| sum + count})
+          :count => @question.topics.map(&:followers_count).inject(0) {|sum, count| sum + count})
     = render_cell :users, :followers, :followed => @question
 

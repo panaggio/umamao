@@ -1141,14 +1141,16 @@ namespace :data do
     desc "Migrate topic's follower information to UserTopicInfo model"
     task :user_topic_info_migration => :environment do
       Topic.query(:followers_count => {'$gt' => 0}).each do |topic|
-        next unless topic['follower_ids']
+        next if !topic['follower_ids'] ||
         topic['follower_ids'].each do |user_id|
-          puts "user_id #{user_id}"
+          next if UserTopicInfo.count(:user_id => user_id,
+                              :topic_id => topic.id) > 0
           topics_answered_questions = Answer.all(:user_id => user_id).
-            map{|a| a.question.topic_ids}
+            select{|a| a.question}.map{|a| a.question.topic_ids}
           topics_asked_questions = Question.all(:user_id => user_id).
             map{|q| q.topic_ids}
 
+          print "-"
           create_user_topic_info(user_id, topic.id, true,
                                  topics_answered_questions,
                                  topics_asked_questions)
@@ -1160,13 +1162,13 @@ namespace :data do
 
       User.query.each do |user|
         topics_answered_questions = Answer.all(:user_id => user.id).
-          map{|a| a.question.topic_ids}
+          select{|a| a.question}.map{|a| a.question.topic_ids}
         topics_asked_questions = Question.all(:user_id => user.id).
           map{|q| q.topic_ids}
 
         (topics_answered_questions | topics_asked_questions).each do |topic_id|
           unless Topic.find_by_id(topic_id)
-            puts "topic id com problema #{topic_id}"
+            puts "Problem with \"#{topic_id}\""
             next
           end
           create_user_topic_info(user.id, topic_id, false,
