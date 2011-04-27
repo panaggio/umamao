@@ -35,13 +35,8 @@ class TopicsController < ApplicationController
     set_tab :all, :topic_show
 
     if @topic.is_a?(Course) && current_user &&
-      current_user.affiliations.first(:university_id => @topic.university_id)
-
-      id_offers = CourseOffer.all(:course_id => @topic.id).map(&:id)
-      @students_course = Student.all(
-        :registered_course_ids.in => id_offers).select{|s|
-        Affiliation.first(:student_id => s.id).nil? &&
-          Invitation.count(:recipient_email => s.academic_email) == 0}.first(6)
+        current_user.affiliated_with?(@topic.university)
+      @students_course = @topic.unregistered_students.first 6
     end
 
     @question_lists =

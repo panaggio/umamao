@@ -21,4 +21,16 @@ class Course < Topic
   end
 
   validates_uniqueness_of :code, :scope => :university_id, :allow_blank => true
+
+  # Return all students which are currently enrolled in this course
+  # but don't correspond to an existing user and haven't been invited yet.
+  def unregistered_students
+    id_offers =
+      CourseOffer.all(:course_id => self.id, :select => [:id]).map(&:id)
+    Student.all(
+      :registered_course_ids.in => id_offers).select{|s|
+      Affiliation.first(:student_id => s.id).nil? &&
+        Invitation.count(:recipient_email => s.academic_email) == 0}
+  end
+
 end

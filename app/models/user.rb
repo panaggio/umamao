@@ -209,6 +209,12 @@ class User
     self.affiliations.any?(&:confirmed?)
   end
 
+  # Return true iff the user is affiliated with the university through
+  # an affiliation object.
+  def affiliated_with?(university)
+    self.affiliations.first(:university_id => university.id).present?
+  end
+
   def first_name
     return nil unless self.name
     self.name.split(/\s+/).first
