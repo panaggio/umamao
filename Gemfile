@@ -4,7 +4,7 @@ source 'http://gemcutter.org'
 
 group :development do
   gem 'ccsv', '~> 0.1'
-  gem 'compass', '~> 0.10.2'
+  gem 'compass', '~> 0.11.1'
   gem 'compass-colors', '~> 0.3.1'
   gem 'fancy-buttons', '~>0.5.1'
   gem 'RedCloth', '~> 4.1.1'
@@ -32,7 +32,7 @@ gem 'dynamic_form'
 gem 'fog' # connect to storage services such as cloudfiles
 gem 'jnunemaker-validatable', :require => 'validatable', :git => "git://github.com/umamao/validatable.git"
 gem 'jquery-rails'
-gem 'haml', '~> 3.0.13'
+gem 'haml', '~> 3.1.1'
 gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
 gem 'mechanize', :require => false
