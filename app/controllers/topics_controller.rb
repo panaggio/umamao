@@ -165,16 +165,14 @@ class TopicsController < ApplicationController
       end
       format.js do
         render(:json => {
-                 :success => true,
-                 :message => notice,
-                 :user_id => current_user.id,
-                 :followers_count => "#{
-                   I18n.t("followable.followers.link",
-                          :count => followers_count,
-                          :link => followers_topic_path(@topic.id))
-                 } "
+          :success => true,
+          :message => notice,
+          :user_id => current_user.id,
+          :followers_count => "#{
+            I18n.t("followable.followers.link", :count => followers_count,
+                   :link => followers_topic_path(@topic.id))} "
 
-               }.to_json)
+        }.to_json)
       end
     end
   end
