@@ -36,7 +36,7 @@ class TopicsController < ApplicationController
 
     if @topic.is_a?(Course) && current_user &&
         current_user.affiliated_with?(@topic.university)
-      @students_course = @topic.unregistered_students.first 6
+      @students_course = @topic.unregistered_students.query(:limit => 6)
     end
 
     @question_lists =

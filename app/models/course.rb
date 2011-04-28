@@ -27,10 +27,9 @@ class Course < Topic
   def unregistered_students
     id_offers =
       CourseOffer.all(:course_id => self.id, :select => [:id]).map(&:id)
-    Student.all(
-      :registered_course_ids.in => id_offers).select{|s|
-      Affiliation.first(:student_id => s.id).nil? &&
-        Invitation.count(:recipient_email => s.academic_email) == 0}
+    Student.query(:registered_course_ids.in => id_offers,
+                  :user_id => nil,
+                  :has_been_invited.ne => true)
   end
 
 end
