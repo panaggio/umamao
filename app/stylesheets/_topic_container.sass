@@ -2,10 +2,12 @@
 // topics followed by a user, etc).
 
 @import "compass/utilities/text/ellipsis"
+@import "compass/css3/box-shadow"
 
 =topic-container
   .topic
     +border-radius
+    +box-shadow(1px 1px 3px #999999)
     border: 0.5px solid lighten($link-color, 10%)
     padding: 4px
     background: lighten($link-color, 50%)
