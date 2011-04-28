@@ -43,6 +43,8 @@ class QuestionListsController < TopicsController
 
     raise Goalie::NotFound unless @question_list
 
+    set_page_title(@question_list.title)
+
     @page = params[:page] || 1
     options = {
       :per_page => 20, :page => @page,

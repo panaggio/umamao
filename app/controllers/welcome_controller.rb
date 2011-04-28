@@ -42,6 +42,8 @@ class WelcomeController < ApplicationController
     @news_items = filter_news_items :news_update_entry_type => "Question",
       :open_question => true
 
+    set_page_title(t("welcome.unanswered.title"))
+
     set_tab :unanswered, :welcome_home
     render 'unanswered'
   end
@@ -51,6 +53,8 @@ class WelcomeController < ApplicationController
     @notifications = @user.notifications.paginate(:per_page => 20,
                                                   :page => params[:page],
                                                   :order => :created_at.desc)
+    set_page_title(t("welcome.notifications.title"))
+
     set_tab :notifications, :welcome_home
     render
 

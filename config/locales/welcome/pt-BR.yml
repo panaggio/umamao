@@ -36,6 +36,8 @@ pt-BR:
       moderate: Moderar
     about:
       title: Quem são vocês?
+    notifications:
+      title: Notificações
     news_item:
       question:
         user:
@@ -47,3 +49,5 @@ pt-BR:
           created: "%{origin} adicionou uma resposta."
         topic:
           created: "Resposta adicionada ao tópico %{origin}."
+    unanswered:
+      title: Responda
