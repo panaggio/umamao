@@ -5,6 +5,9 @@ class Topic
   include Support::Versionable
   include Support::Search::Searchable
 
+  # It seems that MM doesn't do this automatically
+  ensure_index :_type
+
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
   key :description, String
