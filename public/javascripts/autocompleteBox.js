@@ -424,8 +424,11 @@ function solrConversion(data) {
     data.url = "/questions/" + data.id;
     data.html = makeLi(data.title + makeDesc(data.topic));
     break;
+  case "NotFound":
+    data.url = "";
+    data.html = makeLi(data.title);
+    break;
   }
-
   return data;
 }
 
@@ -576,6 +579,8 @@ TopicAutocomplete.prototype = {
 
 UserAutocomplete.prototype = {
 
+  maxRows : 0,
+
   activateWithTab: true,
 
   addOnNoExactMatch: false,
@@ -604,12 +609,18 @@ UserAutocomplete.prototype = {
     var callback = this.requestCallback();
     var input = this.input;
     var filterDocs = this.filterDocs;
+    if(this.maxRows > 0){
+      data = {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:User", rows : this.maxRows};
+    }else{
+      data = {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:User"};
+    }
     var request = $.ajax({
       url: this.url,
       dataType: "jsonp",
       jsonp: "json.wrf",
-      data: {q: "title:" + Utils.solrEscape(query) +
-             " AND entry\\_type:User"},
+      data: data,
       success: function (data) {
         var docs = data.response.docs;
         var hasExactMatch = false;
