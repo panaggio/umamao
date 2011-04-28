@@ -20,7 +20,7 @@ class TopicsCell < Cell::Rails
 
   def small_list
     @user = options[:user]
-    @topics = Topic.query(:follower_ids => @user.id, :limit => 14)
+    @topics = Topic.query(:follower_ids => @user.id, :limit => 7)
     @path = topics_user_path @user
     render
   end
