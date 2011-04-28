@@ -10,7 +10,8 @@ pt-BR:
       "%{user} sugeriu que você seguisse o tópico %{topic}"
     suggested:
       user: Tópicos sugeridos
-      suggest: Sugira um tópico
+      suggest: Sugirir um tópico
+      suggest_to: Sugerir este tópico para alguém
     suggested_by:
       one: "Sugerido por %{user}"
       other: "Sugerido por %{user} e %{others}"
