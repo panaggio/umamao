@@ -82,6 +82,7 @@ class Invitation
       student.save!
     end
   end
+  handle_asynchronously :mark_student_as_invited
 
   private
   def recipient_is_not_user

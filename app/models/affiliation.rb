@@ -61,7 +61,7 @@ class Affiliation
 
   # Associate this affiliation's Student with the corresponding User.
   def set_user_in_student
-    if self.student.present? && self.student.user_id.blank?
+    if self.student.present? && self.student.user.blank?
       self.student.user = self.user
       self.student.save!
     end
