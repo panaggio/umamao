@@ -19,7 +19,7 @@ $(document).ready(function() {
             element.fadeIn("slow");
           }
           if (data.followers_count) {
-            followers.find(".count").html(data.followers_count);
+            followers.find(".count span:first").html(data.followers_count);
           }
         }
         Utils.toggleFollowLink(link);
@@ -55,7 +55,7 @@ $(document).ready(function() {
             element.fadeOut("slow", function () { element.remove(); });
           }
           if (data.followers_count) {
-            followers.find(".count").html(data.followers_count);
+            followers.find(".count span:first").html(data.followers_count);
           }
         }
         Utils.toggleFollowLink(link);

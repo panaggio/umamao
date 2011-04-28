@@ -259,7 +259,7 @@ class TopicsController < ApplicationController
         end, :user => receiver.name, :topic => @topic.title)
     else
       success = true
-      notice = t('user_suggestions.user_suggest.notice.already_follow',
+      notice = t('user_suggestions.user_suggest.notice.ok',
                  :user => receiver.name, :topic => @topic.title)
     end
 

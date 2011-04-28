@@ -410,15 +410,19 @@ class UsersController < ApplicationController
 
     raise Goalie::NotFound unless @user
 
-    @topics = Topic.query(:follower_ids => @user.id).paginate(:per_page => 15,
-                                                              :page => params[:page])
+    @topics = Topic.query(:follower_ids => @user.id).paginate(
+      :per_page => 15, :page => params[:page])
 
     if current_user
       user_suggestions = UserSuggestion.all({
         :entry_type => 'Topic', :rejected_at => nil, :accepted_at => nil,
-        :$or => [{ :user_id => current_user.id },
-                 { :origin_id => current_user.id, :user_id => params[:id] }]
-      })
+      }.merge(
+        if current_user == @user
+          { :user_id => current_user.id }
+        else
+          { :origin_id => current_user.id, :user_id => params[:id] }
+        end
+      ))
 
       @suggested_topics = user_suggestions.map(&:entry).uniq.map do |entry|
         [ entry,
