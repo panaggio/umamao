@@ -5,6 +5,9 @@ class Topic
   include Support::Versionable
   include Support::Search::Searchable
 
+  # It seems that MM doesn't do this automatically
+  ensure_index :_type
+
   key :title, String, :required => true, :index => true, :unique => true
   filterable_keys :title
   key :description, String
@@ -124,8 +127,9 @@ class Topic
   # Return a Hash [Topic, Integer] giving the co-occurrence of
   # questions between self and the others.
   def related_topics_with_count
-    self.related_topics_count.sort_by { |k,v| -v }.
-      map { |k,v| [Topic.find_by_id(k), v] }
+    unordered_topics = Topic.query(:id.in => related_topics_count.keys)
+    unordered_topics.sort_by { |t| -(self.related_topics_count[t.id.to_s]) }.
+      map { |t| [t, self.related_topics_count[t.id.to_s]] }
   end
 
   def questions

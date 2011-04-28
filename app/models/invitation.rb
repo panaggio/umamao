@@ -24,6 +24,7 @@ class Invitation
   token_confirmable_key :invitation_token
 
   after_create :send_invitation
+  after_create :mark_student_as_invited
 
   validate_on_create :recipient_is_not_user
 
@@ -72,6 +73,16 @@ class Invitation
 
     [invited_count, faulty_emails]
   end
+
+  # Try to find a student with this affiliation's email address and
+  # mark it as having been invited.
+  def mark_student_as_invited
+    if student = Student.find_by_email(self.recipient_email)
+      student.has_been_invited = true
+      student.save!
+    end
+  end
+  handle_asynchronously :mark_student_as_invited
 
   private
   def recipient_is_not_user

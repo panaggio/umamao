@@ -29,19 +29,7 @@ class Affiliation
 
   before_validation :strip_email
   after_create :send_confirmation
-
-  # This method is for debugging porpouses only.
-  # creates an random affiliation and retrieves a url
-  # I've used glue instead of gu (get url) just to
-  # get a more stickie name =]
-  def self.glue
-    a = Affiliation.new
-    a.university_id = University.where(:short_name => "USP").first.id
-    a.email = (0...12).map{ ('a'..'z').to_a[rand(26)] }.join+"@usp.br"
-    a.save
-    "localhost.lan:3000/users/new?affiliation_token="+
-      a.affiliation_token
-  end
+  after_save :set_user_in_student
 
   def send_confirmation
     return if self.confirmed_at.present? # We don't need to confirm this.
@@ -70,4 +58,13 @@ class Affiliation
   def strip_email
     self.email = self.email.strip if self.email
   end
+
+  # Associate this affiliation's Student with the corresponding User.
+  def set_user_in_student
+    if self.student.present? && self.student.user.blank?
+      self.student.user = self.user
+      self.student.save!
+    end
+  end
+
 end

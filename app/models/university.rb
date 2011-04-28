@@ -12,6 +12,7 @@ class University < Topic
   key :open_for_signup, Boolean, :default => true
   key :validation_type, String, :default => 'email'
   key :domains, Array
+  key :email_code_regexp, String
 
   has_many :affiliations, :dependent => :destroy
 
@@ -44,6 +45,26 @@ class University < Topic
       return u.id if email.strip =~ u.email_regexp
     }
     return nil
+  end
+
+  def self.find_by_email_domain(email)
+    University.all.each { |u|
+      return u if email.strip =~ u.email_regexp
+    }
+    return nil
+  end
+
+  # Return a student code based on his academic email, if possible
+  def student_code_from_email(email)
+    if self.email_code_regexp.present?
+      email.match(Regexp.new self.email_code_regexp)[1]
+    end
+  end
+
+  # Find a student of this university based on the email address.
+  def find_student_by_email(email)
+    Student.first(:code => self.student_code_from_email(email),
+                  :university_id => self.id)
   end
 
 end

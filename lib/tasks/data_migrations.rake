@@ -7,6 +7,31 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Denormalize Invitation/Student relation."
+    task :associate_students_to_invitations => :environment do
+      Student.find_each do |student|
+        if student.check_whether_has_been_invited
+          student.has_been_invited = true
+          student.save!
+        end
+      end
+    end
+
+    desc "Denormalize User/Student association."
+    task :associate_students_to_users => :environment do
+      Affiliation.find_each(:student_id.ne => nil) do |affiliation|
+        affiliation.student.user = affiliation.user
+        affiliation.student.save!
+      end
+    end
+
+    desc "Set Unicamp email_code_regexp field"
+    task :unicamp_email_code_regexp => :environment do
+      unicamp = University.find_by_title "Unicamp"
+      unicamp.email_code_regexp = '^[^@]*(\d{6})[^@]*@'
+      unicamp.save!
+    end
+
     desc "Recreate follow notifications."
     task :recreate_follow_notifications => :environment do
       User.find_each do |user|

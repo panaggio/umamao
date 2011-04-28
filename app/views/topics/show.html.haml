@@ -11,7 +11,10 @@
   - else
     %ul.items#news_items
       - @news_items.each do |news_item|
-        = render :partial => "welcome/news_item", :object => news_item
+        - entry = news_item.news_update.entry
+        - question = entry.class.to_s.downcase == "question" ? entry : entry.question
+        - cache("topic_news_items.#{entry.id}.#{entry.updated_at}.#{question.updated_at}") do
+          = render :partial => "welcome/news_item", :object => news_item
 
   #additional_info
     - if @news_items.blank?
@@ -22,5 +25,3 @@
     #help_us
       = t("questions.index.help_to_answer")
       = link_to t("questions.index.unanswered_questions"), unanswered_topic_path(@topic)
-
-    .clear
