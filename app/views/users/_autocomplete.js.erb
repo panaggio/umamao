@@ -1,4 +1,10 @@
 var exclude_list = eval("<%= exclude_user_ids.to_json %>".replace(/&quot;/g,"\""));
+
+Array.prototype.remove = function(e){
+  i = this.indexOf(e);
+  if(i > 1)
+    this.splice(i, 1);
+}
 function clearData(data){
   new_data = new Array();
   data.forEach(function (it){
@@ -9,63 +15,16 @@ function clearData(data){
   return new_data;
 }
 
+/*
 // User autocomplete for several boxes in the website.
 function UserAutocomplete(inputField, itemBoxContainer) {
   AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
+
 UserAutocomplete.prototype = {
 
   activateWithTab: true,
-
-  // Builds an item for this box.
-  makeItem: function (data) {
-    var item = new Item(data);
-    var me = this;
-    item.click = this.itemClicked ||
-                   function () {
-                     me.clear();
-                     if(this.data.id == undefined){
-                       $(".invited_id").val("");
-                       $("#search-users").val("");
-                       $(".invite-button").attr("disabled", "disabled");
-                     }else{
-                       $(".invited_id").val(this.data.id);
-                       $("#search-users").val(this.data.title);
-                       $(".invite-button").removeAttr("disabled");
-                       $(".invitation .message").focus();
-                     }
-                   };
-    return item;
-  },
-
-  makeRequest: function (query) {
-    var callback = this.requestCallback();
-    var input = this.input;
-    var request = $.ajax({
-      url: this.url,
-      dataType: "jsonp",
-      jsonp: "json.wrf",
-      data: {q: "title:" + Utils.solrEscape(query) +
-             " AND entry\\_type:User"},
-      success: function (data) {
-        var docs = data.response.docs;
-        var hasExactMatch = false;
-        docs.forEach(function (doc) {
-          if (doc.title == query) hasExactMatch = true;
-        });
-        if (!hasExactMatch) {
-          docs.push({
-            title: input.val(),
-            entry_type: "User",
-            question_count: "0"
-          });
-        }
-        callback(docs);
-      }
-    });
-    return request;
-  },
 
   // Populates the suggestion box when data is received.
   processData: function (data) {
@@ -108,3 +67,5 @@ UserAutocomplete.prototype = {
 };
 
 Utils.extend(UserAutocomplete, AutocompleteBox);
+*/
+// Button to remove add the invited user
