@@ -14,11 +14,11 @@ module UsersHelper
     img = "<img class=\"#{options[:class]}\" title=\"#{options[:title]}\" alt=\"#{options[:alt]}\" width=\"#{options[:size]}\" #{options[:size].to_i > 50 ? '' : "height=" + "\"#{options[:size]}\""} src=\"#{src}\" />"
 
     if options[:editable]
-      "<div class='picture'>#{img}#{
+      "<div class='picture'>#{
         link_to(
           t("settings.profile.edit.change_picture"),
           settings_avatar_path, :class => :edit_picture)
-      }</div>"
+      }#{img}</div>"
     else
       img
     end
