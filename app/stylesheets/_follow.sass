@@ -6,10 +6,10 @@
       +button
       &.follow_link
         background-color: lighten($affirmative, 15%)
-        +linear-gradient(color-stops(lighten($affirmative, 15%), $affirmative 50%, lighten($affirmative, 10%)), top)
+        +background(linear-gradient(top, color-stops(lighten($affirmative, 15%), $affirmative 50%, lighten($affirmative, 10%))))
         &:hover
           background-color: $affirmative
-          +linear-gradient(color-stops(lighten($affirmative, 25%), lighten($affirmative, 10%) 50%, lighten($affirmative, 20%)), top)
+          +background(linear-gradient(top, color-stops(lighten($affirmative, 25%), lighten($affirmative, 10%) 50%, lighten($affirmative, 20%))))
       &.unfollow_link
         background-color: #eeeeee
         &:hover

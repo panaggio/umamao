@@ -6,7 +6,7 @@ group :development do
   gem 'ccsv', '~> 0.1'
   gem 'compass', '~> 0.11.1'
   gem 'compass-colors', '~> 0.3.1'
-  gem 'fancy-buttons', '~>0.5.1'
+  gem 'fancy-buttons', '~>1.1.1'
   gem 'RedCloth', '~> 4.1.1'
   gem 'ruby-debug'
   gem 'ruby-prof'
