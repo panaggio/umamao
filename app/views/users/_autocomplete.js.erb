@@ -15,65 +15,16 @@ function clearData(data){
   return new_data;
 }
 
+/*
 // User autocomplete for several boxes in the website.
 function UserAutocomplete(inputField, itemBoxContainer) {
   AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
-function makeBox(name, id){
-  return '<div class="user" id="invited'+id+'"> <a class="remove" href="#" data="'+id+'">x</a> <div class="user-name"><a href="/users/'+id+'">' + name +'</a> </div></div>';
-}
 
 UserAutocomplete.prototype = {
 
   activateWithTab: true,
-
-  // Builds an item for this box.
-  makeItem: function (data) {
-    var item = new Item(data);
-    var me = this;
-    item.click = this.itemClicked ||
-                   function () {
-                     if(this.data.id != undefined){
-                       $(".invited_ids").val($(".invited_ids").val() + this.data.id + ";");
-                       exclude_list[exclude_list.length] = this.data.id;
-                       $(".invite-button").removeAttr("disabled");
-                       $('.invited_users').html($('.invited_users').html() + makeBox(this.data.title, this.data.id));
-                       Utils.resizeModal();
-                     }
-                     me.clear();
-                     $("#search-users").val("");
-                   };
-    return item;
-  },
-
-  makeRequest: function (query) {
-    var callback = this.requestCallback();
-    var input = this.input;
-    var request = $.ajax({
-      url: this.url,
-      dataType: "jsonp",
-      jsonp: "json.wrf",
-      data: {q: "title:" + Utils.solrEscape(query) +
-             " AND entry\\_type:User", rows: 7},
-      success: function (data) {
-        var docs = data.response.docs;
-        var hasExactMatch = false;
-        docs.forEach(function (doc) {
-          if (doc.title == query) hasExactMatch = true;
-        });
-        if (!hasExactMatch) {
-          docs.push({
-            title: input.val(),
-            entry_type: "User",
-            question_count: "0"
-          });
-        }
-        callback(docs);
-      }
-    });
-    return request;
-  },
 
   // Populates the suggestion box when data is received.
   processData: function (data) {
@@ -116,12 +67,5 @@ UserAutocomplete.prototype = {
 };
 
 Utils.extend(UserAutocomplete, AutocompleteBox);
-
+*/
 // Button to remove add the invited user
-$(".invited_users .remove").live("click", function () {
-  id = $(this).attr("data");
-  $(".invited_ids").val( $(".invited_ids").val().replace(id+";", ""));
-  $("#invited"+id).replaceWith("");
-  exclude_list.remove(id);
-  return false;
-});

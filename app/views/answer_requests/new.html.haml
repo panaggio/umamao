@@ -1,6 +1,8 @@
-= javascript_include_tag  user_autocomplete_answer_requests_url(:question_id => @answer_request.question_id)
 .modal
   %h1= t(".title")
+  #excluded-users
+    - for user_id in @exclude_user_ids
+      = hidden_field_tag "", user_id, :id => "excluded_user#{user_id}"
   #select-users
     = text_field_tag "", t(".input"), :id => "search-users", :class => "inactive", "data-autocomplete-url" => autocomplete_url
     %ul#search-users-results.autocomplete-list
@@ -8,7 +10,7 @@
   .invitation
     = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
       = f.hidden_field :question_id
-      = hidden_field_tag :invited_ids,  "", :class => "invited_ids"
+      .invitation-ids
       #invitation-message.request-answer
         = f.label :message, t(".message")
         = f.text_area :message, :class => "message"

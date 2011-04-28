@@ -8,9 +8,6 @@ Shapado::Application.routes.draw do
     :as => :autocomplete_name_users
 
   resources :answer_requests, :only => [:new, :create] do
-    collection do
-      get :user_autocomplete
-    end
   end
 
   resources :affiliations
