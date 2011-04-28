@@ -1,4 +1,7 @@
 - topics.each do |topic|
+  - users = nil
+  - unless topic.is_a? Topic
+    - topic, users = topic
   %li
     .topic.info
       %span.topic-title
@@ -8,3 +11,8 @@
         = link_to "#{t("followable.follow")}", follow_topic_path(topic, :single_column => single_column), :class => "follow_link", :method => :post
       .refuse-suggestion
         = link_to "✕", refuse_suggestion_path(:topic => topic.id, :single_column => single_column), :method => :post
+    - if users
+      .suggested-by
+        = t("user_suggestions.suggested_by", :user => users.first.first_name, :count => users.count, :others => "outros")
+    - else
+      .no-suggestion

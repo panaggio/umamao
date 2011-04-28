@@ -33,3 +33,5 @@ pt-BR:
     suggestions:
       users: "Sugestões de usuários"
       topics: "Sugestões de tópicos"
+    user_suggestions:
+      topics: Sugestões de tópicos por usuários

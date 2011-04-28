@@ -99,6 +99,14 @@ function initAutocomplete() {
     initTopicAutocompleteForIgnoring();
   }
 
+  if ($("#user-suggested-topics-autocomplete").length > 0) {
+    initTopicAutocompleteForUserSuggesting();
+  }
+
+  if ($("#topic-suggested-users-autocomplete").length > 0) {
+    initUserAutocompleteForUserSuggesting();
+  }
+
   var searchField = $("#search-field");
 
   // Keyboard shortcuts for search box

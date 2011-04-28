@@ -2,6 +2,7 @@
 class WelcomeController < ApplicationController
   before_filter :login_required, :only => [:home, :unanswered, :notifications]
   before_filter :calculate_counts, :only => [:home, :unanswered, :notifications]
+
   helper :questions
   layout 'application'
 

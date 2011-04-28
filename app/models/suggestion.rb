@@ -13,4 +13,8 @@ class Suggestion
   key :reason, String
 
   timestamps!
+
+  def reject!
+    self.destroy
+  end
 end

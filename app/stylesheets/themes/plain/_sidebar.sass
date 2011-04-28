@@ -61,6 +61,13 @@
       margin-bottom: 5px
       margin-bottom: 10px
 
-.followers
-  .count
-    margin-top: 1em
+  .followers
+    .count
+      margin-top: 1em
+  .followers, .followed-topics, .profile
+    .title
+      > span:after
+        content: '·'
+        font-weight: bold
+      > span:last-child:after
+        content: ''

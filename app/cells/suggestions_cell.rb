@@ -18,9 +18,17 @@ class SuggestionsCell < Cell::Rails
 
   def topics
     if options.present? and options[:single_column]
-      topic_suggestions = current_user.topic_suggestions[0 .. 6]
-      @suggested_topics =
-        Topic.query(:id.in => topic_suggestions.map(&:entry_id))
+      user_suggestions = UserSuggestion.query(
+        :accepted_at => nil, :rejected_at => nil, :user_id => current_user.id)
+      @suggested_topics = user_suggestions.map(&:entry).uniq.first(7)
+      @suggested_topics.map! do |entry|
+        [ entry,
+          user_suggestions.select{ |s| s.entry_id == entry.id }.map(&:origin) ]
+      end
+
+      topic_suggestions = current_user.topic_suggestions[0 .. 7 - @suggested_topics.size]
+      @suggested_topics +=
+        Topic.all(:id.in => topic_suggestions.map(&:entry_id))
     else
       # Calculate the bounds to each column
       left_last = [6, (current_user.topic_suggestions.length/2.0).ceil - 1].min

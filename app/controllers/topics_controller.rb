@@ -100,6 +100,16 @@ class TopicsController < ApplicationController
     raise Goalie::NotFound unless @topic
 
     user = current_user
+
+    # accept user suggestions on that topic
+    user_suggestions = UserSuggestion.all(
+      :entry_id => @topic.id, :entry_type => 'Topic', :user_id => user.id)
+
+    unless user_suggestions.empty?
+      user_suggestions.each(&:accept!)
+      track_event(:accepted_user_suggestion)
+    end
+
     followers_count = @topic.followers_count + 1
     @topic.add_follower!(user)
     user.remove_suggestion(@topic)
@@ -235,6 +245,59 @@ class TopicsController < ApplicationController
     end
   end
 
+  def user_suggest
+    @topic = Topic.find_by_id(params[:id])
+    receiver = User.find_by_id(params[:user])
+
+    begin
+      receiver.add_user_suggestion(current_user, @topic)
+    rescue MongoMapper::DocumentNotValid => e
+      success = false
+      notice = t(
+        case e.message
+        when 'Validation failed: User already have been suggested that topic by origin'
+          'user_suggestions.user_suggest.notice.suggestion_exists'
+        when 'Validation failed: User already follows entry'
+          'user_suggestions.user_suggest.notice.already_follow'
+        when 'Validation failed: User and origin are the same'
+          'user_suggestions.user_suggest.notice.user_is_origin'
+        end, :user => receiver.name, :topic => @topic.title)
+    else
+      success = true
+      notice = t('user_suggestions.user_suggest.notice.already_follow',
+                 :user => receiver.name, :topic => @topic.title)
+    end
+
+    track_event(:user_suggested_topic)
+
+    respond_to do |format|
+      format.js do
+        res = {
+          :success => success,
+          :message => notice
+        }
+
+        if success and params[:answer]
+          # Used when suggesting a topic from user's topic page;
+          # requires a rendered topic to be shown
+
+          res[:html] =
+            case params[:answer]
+            when 'topic'
+              render_to_string :partial => 'topics/topic',
+                :locals => { :topic => @topic, :suggestion => 'friend' }
+            when 'user'
+              render_to_string :partial => 'users/user',
+                :locals => { :user => receiver, :suggestion => 'friend' }
+            end
+        end
+
+        render :json => res.to_json
+      end
+    end
+
+  end
+
   def toggle_email_subscription
     if params[:id]
       @topic = Topic.find_by_slug_or_id(params[:id])
@@ -340,6 +403,26 @@ class TopicsController < ApplicationController
 
     @followers =
       @topic.followers.paginate :per_page => 15, :page => params[:page]
+
+    if current_user
+      user_suggestions = UserSuggestion.query(
+        :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
+       :rejected_at => nil, :accepted_at => nil,
+        :$or => [{:origin_id => current_user.id}, {:user_id => current_user.id }]
+      ).all
+
+      @users_suggested = user_suggestions.map(&:user).uniq
+
+      if @users_suggested.delete(current_user)
+        @users_suggested.unshift(current_user)
+      end
+
+      @users_suggested.map! do |user|
+        [ user,
+          user_suggestions.select{ |s| s.user_id == user.id }.map(&:origin)]
+      end
+    end
+
     respond_to do |format|
       format.html
     end

@@ -486,23 +486,41 @@ function TopicAutocomplete(inputField, itemBoxContainer) {
   AutocompleteBox.call(this, inputField, itemBoxContainer);
 }
 
+// Topic autocomplete for user suggestions
+function TopicAutocompleteForUserSuggestion(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
+}
+
+// User autocomplete for several boxes in the website.
+function UserAutocomplete(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
+}
+
 TopicAutocomplete.prototype = {
 
   activateWithTab: true,
+
+  addOnNoExactMatch: true,
+
+  actionData: function (data) {
+    return data.title;
+  },
 
   // Builds an item for this box.
   makeItem: function (data) {
     var item = new Item(data);
     var me = this;
+    var action_param = this.actionData(data);
     item.click = this.itemClicked ||
                    function () {
-                     me.action(this.data.title);
+                     me.action(action_param);
                      me.clear();
                    };
     return item;
   },
 
   makeRequest: function (query) {
+    var addOnNoExactMatch = this.addOnNoExactMatch;
     var callback = this.requestCallback();
     var input = this.input;
     var request = $.ajax({
@@ -517,7 +535,7 @@ TopicAutocomplete.prototype = {
         docs.forEach(function (doc) {
           if (doc.title == query) hasExactMatch = true;
         });
-        if (!hasExactMatch) {
+        if (addOnNoExactMatch && !hasExactMatch) {
           docs.push({
             title: input.val(),
             entry_type: "Topic",
@@ -556,7 +574,94 @@ TopicAutocomplete.prototype = {
 
 };
 
+UserAutocomplete.prototype = {
+
+  activateWithTab: true,
+
+  addOnNoExactMatch: false,
+
+  filterDocs: null,
+
+  actionData: function (data) {
+    return data.id;
+  },
+
+  // Builds an item for this box.
+  makeItem: function (data) {
+    var item = new Item(data);
+    var me = this;
+    var action_param = this.actionData(data);
+    item.click = this.itemClicked ||
+                   function () {
+                     me.action(action_param);
+                     me.clear();
+                   };
+    return item;
+  },
+
+  makeRequest: function (query) {
+    var addOnNoExactMatch = this.addOnNoExactMatch;
+    var callback = this.requestCallback();
+    var input = this.input;
+    var filterDocs = this.filterDocs;
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:User"},
+      success: function (data) {
+        var docs = data.response.docs;
+        var hasExactMatch = false;
+        docs.forEach(function (doc) {
+          if (doc.title == query) hasExactMatch = true;
+        });
+        if (addOnNoExactMatch && !hasExactMatch) {
+          docs.push({
+            title: input.val(),
+            entry_type: "User",
+            question_count: "0"
+          });
+        }
+        if (filterDocs)
+          docs = filterDocs(docs);
+        callback(docs);
+      }
+    });
+    return request;
+  },
+
+  // Populates the suggestion box when data is received.
+  processData: function (data) {
+    var items = [];
+    var me = this;
+    data.forEach(function (it) {
+      items.push(me.makeItem(solrConversion(it)));
+    });
+    return items;
+  },
+
+  // HACK
+  itemClicked: null,
+
+  // Action to be run on topic title or input box value.
+  action: null
+
+};
+
+TopicAutocompleteForUserSuggestion.prototype = {
+  addOnNoExactMatch: false,
+
+  actionData: function (data) {
+    return data.id;
+  },
+
+  returnDefault: null
+}
+
 Utils.extend(TopicAutocomplete, AutocompleteBox);
+Utils.extend(TopicAutocompleteForUserSuggestion, TopicAutocomplete);
+Utils.extend(UserAutocomplete, AutocompleteBox);
 
 function initTopicAutocompleteForFollowing() {
   var topicBox =
@@ -620,4 +725,90 @@ function initTopicAutocompleteForIgnoring() {
     topicBox.clear();
   };
 
+}
+
+function initTopicAutocompleteForUserSuggesting() {
+  var topicBox =
+    new TopicAutocompleteForUserSuggestion(
+        "#user-suggested-topics-autocomplete",
+        "#user-suggested-topics-suggestions"
+    );
+
+  var topicsUl = $("#user-suggested");
+  var user_id = $("#user_id").attr("value");
+
+  // Sends to the server a request to suggest a topic named title
+  // to a user named user.
+  topicBox.action = function (topic_id) {
+    $.ajax({
+      url: "/topics/user_suggest.js?user=" + user_id + "&answer=topic&id=" + encodeURIComponent(topic_id),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          topicsUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
+        }
+      }
+    });
+    topicBox.clear();
+  };
+
+}
+
+function initUserAutocompleteForUserSuggesting() {
+  var userBox =
+    new UserAutocomplete("#topic-suggested-users-autocomplete",
+                         "#topic-suggested-users-suggestions");
+
+  var usersAlreadyFollowing = $.map( $(".user_id"), function(e, i){
+    return $(e).attr("id");
+  });
+
+  userBox.filterDocs = function(docs) {
+    var filteredDocs = [];
+
+    console.log(docs.length);
+    var docsSize = docs.length;
+    for (var i=0; i<docsSize; i++) {
+      shouldAdd = true;
+
+      var listSize = usersAlreadyFollowing.length;
+      for (var j=0; j<listSize; j++) {
+        if (docs[i].id == usersAlreadyFollowing[j]) {
+          shouldAdd = false;
+          break;
+        }
+      }
+
+      if (shouldAdd)
+        filteredDocs.push(docs[i]);
+    }
+
+    return filteredDocs;
+  };
+
+  var usersUl = $("#user-suggested");
+  var topic_id = $("#topic_id").attr("value");
+
+  // Sends to the server a request to suggest a topic named title
+  // to a user named user.
+  userBox.action = function (user_id) {
+    $.ajax({
+      url: "/topics/user_suggest.js?id=" + topic_id + "&answer=user&user=" + encodeURIComponent(user_id),
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        if (data.success) {
+          usersUl.prepend(data.html);
+          showMessage(data.message, "notice");
+        } else {
+          showMessage(data.message, "error");
+        }
+      }
+    });
+    userBox.clear();
+  };
 }

@@ -10,8 +10,11 @@
   .notification
     .message
       padding-top: 5px
+      .controls
+        float: right
+        +follow-button
     +clearfix
-    padding: 17px 12px
+    padding: 17px 12px 5px 12px
     border-bottom: 1px #ccc dotted
     font-size: 11px
 
@@ -22,6 +25,8 @@
       border-bottom-style: none
 
   .metadata
+    padding-top: 13px
+
     & > *
       padding-right: 5px
       border-right: 1px solid #aaa

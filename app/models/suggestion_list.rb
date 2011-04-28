@@ -88,9 +88,10 @@ class SuggestionList
     else
       entry_id = suggestion_or_entry.id
       entry_type = suggestion_or_entry.class <= Topic ? "Topic" : "User"
-      suggestion = Suggestion.first(:entry_id => entry_id,
-                                    :entry_type => entry_type,
-                                    :user_id => self.user.id)
+      suggestion = Suggestion.first(
+        :entry_id => entry_id, :entry_type => entry_type,
+        :rejected_at => nil, :accepted_at => nil,
+        :origin_id => nil, :user_id => self.user.id)
     end
     return if !suggestion
 
@@ -99,7 +100,7 @@ class SuggestionList
     elsif entry_type == "User"
       self.user_suggestion_ids.delete(suggestion.id)
     end
-    suggestion.destroy
+    suggestion.reject!
   end
 
   # Mark something as uninteresting. Uninteresting users and topics
@@ -232,7 +233,7 @@ class SuggestionList
           topic_suggestion.entry.present?
         kept_suggestions << topic_suggestion
       else
-        topic_suggestion.destroy
+        topic_suggestion.reject!
       end
     end
 

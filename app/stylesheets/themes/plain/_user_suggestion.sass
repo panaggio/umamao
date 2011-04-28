@@ -1,0 +1,62 @@
+#profile-display
+  input[type=text-field]
+    border: 1px solid #BBB
+    padding: 5px
+    width: 98%
+    .inactive
+      color: #999999
+
+  #users
+    .metadata
+      clear: both
+
+  #user-suggested, #topics, #users
+    li
+      padding-top: 17px
+
+      .title, .info, .avatar
+        padding-left: 20px
+        padding-right: 20px
+
+      .bio
+        margin-left: -20px
+
+      .avatar
+        clear: both
+
+    .controls
+      +follow-button
+      float: right
+      clear: both
+
+      .refuse-suggestion, .delete-suggestion
+        padding: 0
+
+  #user-suggested
+    background-color: #F9F9F9
+
+    .suggestion-info
+      font-size: 0.8em
+      color: #999999
+      float: left
+      clear: left
+
+    .metadata
+      float: right
+
+    .suggestion-info, .metadata
+      padding-top: 4px
+
+    li
+      padding-top: 0
+      .title
+        clear: both
+      .refuse-suggestion, .delete-suggestion
+        opacity: 0
+        a
+          text-decoration: none
+          color: $link_color
+
+      &:hover
+        .refuse-suggestion, .delete-suggestion
+          opacity: 1

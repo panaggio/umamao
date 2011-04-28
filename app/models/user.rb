@@ -538,6 +538,17 @@ Time.zone.now ? 1 : 0)
     true
   end
 
+  def add_user_suggestion(origin, thing)
+    us = UserSuggestion.new(
+      :origin_id => origin.id,
+      :user_id => self.id,
+      :entry_id => thing.id,
+      :entry_type => thing.collection.name.singularize.camelize,
+      :reason => 'UserSuggested'
+    )
+    us.save!
+  end
+
   def ignore_topic!(topic)
     unless self.ignored_topic_ids.include?(topic.id)
       self.ignored_topic_ids << topic.id
@@ -586,8 +597,14 @@ Time.zone.now ? 1 : 0)
     self.friend_list.following
   end
 
-  def following?(user)
-    friend_list(:select => [:following_ids]).following_ids.include?(user.id)
+  def following?(followable)
+    if followable.is_a? User
+      friend_list(:select => [:following_ids]).following_ids.include?(followable.id)
+    elsif followable.is_a? Topic
+      followable.follower_ids.include? self.id
+    else
+      raise "User can't follow a #{followable.class}"
+    end
   end
 
   def viewed_on!(group)

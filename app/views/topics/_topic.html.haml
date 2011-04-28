@@ -1,12 +1,31 @@
 - type ||= 'follow'
+- suggestion ||= false
 %li.item
   .summary
+    - if suggestion
+      .controls
+        - if suggestion == 'self'
+          .refuse-suggestion
+            = link_to '✕', refuse_suggestion_path(:topic => topic.id), :method => :post
+        -else
+          .delete-suggestion
+            = link_to '✕', delete_suggestion_path(:topic => topic.id, :user => current_user.id), :method => :post
+
     .title
       = link_to h(topic.title), topic_path(topic)
-    .info
-      .metadata
-        = render :partial => "topics/#{type}", :locals => {:topic => topic}
+      -if suggestion != 'friend'
+        .controls
+          .button= render :partial => "topics/#{type}", :locals => {:topic => topic}
 
+    .info
+      -if suggestion
+        %span.suggestion-info
+          -if suggestion == 'self'
+            &= t("user_suggestions.user_suggest.suggestion_box.self_html", :origin => link_to(h(origins.first.first_name), user_path(origins.first.id)), :count => origins.count-1)
+          -else
+            &= t("user_suggestions.user_suggest.suggestion_box.friend")
+
+      .metadata
         - count = topic.questions_count
         = format_number(count)
         = t(:question_count, :scope => "activerecord.models", :count => count)

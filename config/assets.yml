@@ -3,7 +3,7 @@ embed_assets: datauri
 javascripts:
   base:
     - public/javascripts/i18n/pt-BR.js
-    - public/javascripts/jquery.min.js
+    - public/javascripts/jquery.js
     - public/javascripts/jquery.tmpl.js
     - public/javascripts/rails.js
     - public/javascripts/jquery.tools.min.js
@@ -24,6 +24,7 @@ javascripts:
     - public/javascripts/modules/votes.js
     - public/javascripts/modules/import_contacts.js
     - public/javascripts/modules/topic_tooltip.js
+    - public/javascripts/modules/user_suggestions.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:

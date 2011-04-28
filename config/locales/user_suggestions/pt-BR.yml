@@ -1,0 +1,34 @@
+pt-BR:
+  user_suggestions:
+    delete:
+      notice:
+        "Sugestão deletada"
+    refuse:
+      notice:
+        "Sugestão recusada"
+    notification:
+      "%{user} sugeriu que você seguisse o tópico %{topic}"
+    suggested:
+      user: Tópicos sugeridos
+      suggest: Sugira um tópico
+    suggested_by:
+      one: "Sugerido por %{user}"
+      other: "Sugerido por %{user} e %{others}"
+    topic: Sugira esse tópico
+    user: Sugerir tópicos
+    user_suggest:
+      notice:
+        ok:
+          "Tópico %{topic} sugerido ao usuário %{user}"
+        already_follow:
+          "%{user} já segue o tópico %{topic}"
+        suggestion_exists:
+          "Você já sugeriu o tópico %{topic} para %{user}"
+        user_is_origin:
+          "Você não pode sugerir um tópico a você"
+      suggestion_box:
+        friend: "Sugerido por você. Aguardando confirmação."
+        self_html:
+          zero: "Sugerido por %{origin}"
+          one: "Sugerido por %{origin} e mais uma pessoa"
+          other: "Sugerido por %{origin} e mais %{count} pessoas"
