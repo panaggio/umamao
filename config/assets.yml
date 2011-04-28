@@ -37,6 +37,7 @@ javascripts:
     - public/javascripts/modules/signup_follow.js
   new_question:
     - public/javascripts/modules/topic_autocomplete.js
+    - public/javascripts/modules/question_autocomplete.js
     - public/javascripts/modules/new_question.js
   new_question_list:
     - public/javascripts/modules/topic_autocomplete.js
