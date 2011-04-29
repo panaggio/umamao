@@ -6,8 +6,11 @@ pt-BR:
     refuse:
       notice:
         "Sugestão recusada"
-    notification:
-      "%{user} sugeriu que você seguisse o tópico %{topic}"
+    notifications:
+      new_user_suggestion:
+        "%{user} sugeriu que você seguisse o tópico %{topic}"
+      accepted_user_suggestion:
+        "%{user} aceitou sua sugestão e seguiu o tópico %{topic}"
     suggested:
       user: Tópicos sugeridos
       suggest: Sugirir um tópico
