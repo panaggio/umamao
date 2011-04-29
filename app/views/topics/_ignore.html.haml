@@ -10,7 +10,7 @@
                                  :path => ignore_topic_path(topic, :format => :js),
                                  :cclass => "ignore_link" } }
   .ignore-info{:class => [block, (follow ? 'hidden' : '')]}
-    - if current_user.ignored_topic_ids.include?(topic.id)
+    - if current_user.ignores?(topic)
       - action, undo_action = action_hash[:unignore], action_hash[:ignore]
     - else
       - action, undo_action = action_hash[:ignore], action_hash[:unignore]

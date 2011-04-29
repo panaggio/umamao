@@ -91,12 +91,14 @@ class Topic
   end
 
   def ignorers
-    User.all(:ignored_topic_ids => self.id)
+    UserTopicInfo.fields([:user_id]).
+      query(:topic_id => self.id, :ignoring => true).map(&:user)
   end
 
   # FIXME: refactor
   def ignorer_ids
-    self.ignorers.map &:id
+    UserTopicInfo.fields([:user_id]).
+      query(:topic_id => self.id, :ignoring => true).map(&:user_id)
   end
 
   def name

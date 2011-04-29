@@ -36,8 +36,10 @@ class Answer < Comment
   validate :disallow_spam
   validate :check_unique_answer, :if => lambda { |a| (!a.group.forum && !a.disable_limits?) }
 
-  after_create :create_news_update, :new_answer_notification
+  after_create :create_news_update, :new_answer_notification,
+    :increment_user_topic_answers_count
   before_destroy :unhide_news_update
+  after_destroy :decrement_user_topic_answers_count
 
   ensure_index([[:user_id, 1], [:question_id, 1]])
 
@@ -207,6 +209,14 @@ class Answer < Comment
   # We need this because has_one doesn't work.
   def news_update
     news_updates.first
+  end
+
+  def increment_user_topic_answers_count
+    UserTopicInfo.answer_added!(self)
+  end
+
+  def decrement_user_topic_answers_count
+    UserTopicInfo.answer_removed!(self)
   end
 
 end

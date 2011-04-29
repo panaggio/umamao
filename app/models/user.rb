@@ -57,8 +57,6 @@ class User
 
   has_one :avatar, :dependent => :destroy
 
-  key :ignored_topic_ids,         Array
-  has_many :ignored_topics, :class_name => 'Topic', :in => :ignored_topic_ids
   key :ignored_topics_count, :default => 0
 
   has_many :affiliations, :dependent => :destroy
@@ -184,7 +182,9 @@ class User
     igs = Set.new
 
     topics.each do |topic|
-      igs += self.query(:ignored_topic_ids => topic.id)
+      igs += UserTopicInfo.fields([:user_id]).query(:topic_id => topic.id,
+                                                   :ignoring => true).
+                                                   map(&:user)
     end
 
     igs
@@ -556,30 +556,44 @@ Time.zone.now ? 1 : 0)
   end
 
   def ignore_topic!(topic)
-    unless self.ignored_topic_ids.include?(topic.id)
-      self.ignored_topic_ids << topic.id
-      self.save!
-      self.increment(:ignored_topics_count => 1)
-      self.hide_ignored_news_items!
-      topic.remove_follower!(self)
+    user_topic = UserTopicInfo.first(:user_id => self.id, :topic_id => topic.id)
+    if user_topic && user_topic.ignoring
+      return
     end
+
+    if user_topic
+      user_topic.ignoring = true
+      user_topic.save
+      topic.remove_follower!(self)
+    else
+      UserTopicInfo.create(:user_id => self.id, :topic_id => topic.id,
+                           :ignoring => true)
+    end
+    self.increment(:ignored_topics_count => 1)
+    self.hide_ignored_news_items!
   end
 
   def unignore_topic!(topic)
-    if self.ignored_topic_ids.delete(topic.id)
-      self.save!
+    if (user_topic = UserTopicInfo.first(:user_id => self.id, 
+                                         :topic_id => topic.id)) &&
+                                         user_topic.ignoring
+      user_topic.ignoring = false
+      user_topic.save
       self.increment(:ignored_topics_count => -1)
       self.show_unignored_news_items!
     end
   end
 
   def ignores?(topic)
-    self.ignored_topic_ids.include?(topic)
+    UserTopicInfo.first(:topic_id => topic.id, :user_id => self.id, 
+                        :ignoring => true).present?
   end
 
   def hide_ignored_news_items!(news_items = self.news_items)
+    ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
+      query(:user_id => self.id, :ignoring => true).map(&:topic_id)
     news_items.each do |ni|
-      if ni.should_be_hidden?(self.ignored_topic_ids)
+      if ni.should_be_hidden?(ignored_topic_ids)
         ni.hide!
       end
     end
@@ -587,8 +601,10 @@ Time.zone.now ? 1 : 0)
   handle_asynchronously :hide_ignored_news_items!
 
   def show_unignored_news_items!(news_items = self.news_items)
+    ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
+      query(:user_id => self.id, :ignoring => true).map(&:topic_id)
     news_items.each do |ni|
-      unless ni.should_be_hidden?(self.ignored_topic_ids)
+      unless ni.should_be_hidden?(ignored_topic_ids)
         ni.show!
       end
     end

@@ -7,9 +7,9 @@ class Settings::FollowTopicsController < ApplicationController
 
   def edit
     @active = 'follow'
-    @topics = UserTopicInfo.query(:user_id => current_user.id,
+    @user_topics = UserTopicInfo.query(:user_id => current_user.id,
                                   :following => true).
-      paginate(:per_page => 100, :page => params[:page] || 1).map(&:topic)
+      paginate(:per_page => 100, :page => params[:page] || 1)
   end
 
 end

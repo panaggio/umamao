@@ -13,10 +13,11 @@
 
 %hr
 %ul.items{:id => "#{@active}#{@active == 'follow' ? 'ed' : 'd'}-topics"}
-  - @topics.each do |topic|
+  - @user_topics.each do |user_topic|
+    - topic = user_topic.topic
     = render :partial => "topics/topic", :locals => {:topic => topic, :type => @active }
 
 -# HACK: attempting to paginate empty has_many queries that
   work with an :in option doesn't work
-- if @topics.present?
-  = will_paginate @topics
+- if @user_topics.present?
+  = will_paginate @user_topics

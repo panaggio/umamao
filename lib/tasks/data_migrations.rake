@@ -1124,13 +1124,13 @@ namespace :data do
       print "\n"
     end
 
-    def create_user_topic_info(user_id, topic_id, following, 
-                               topics_answered_questions, 
-                               topics_asked_questions)
+    def create_user_topic_info(user_id, topic_id, topics_answered_questions,
+                               topics_asked_questions, following=false,
+                               ignoring=false)
       return if UserTopicInfo.count(:user_id => user_id,
                                     :topic_id => topic_id) > 0
-      uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id, 
-                              :following => following)
+      uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id,
+                              :following => following, :ignoring => ignoring)
       uti.answers_count = topics_answered_questions.
         select{|t| t.include?(topic_id)}.count
       uti.questions_count = topics_asked_questions.
@@ -1151,9 +1151,8 @@ namespace :data do
             map{|q| q.topic_ids}
 
           print "-"
-          create_user_topic_info(user_id, topic.id, true,
-                                 topics_answered_questions,
-                                 topics_asked_questions)
+          create_user_topic_info(user_id, topic.id, topics_answered_questions,
+                                 topics_asked_questions, :following => true)
         end
         topic['old_follower_ids'] = topic['follower_ids']
         topic['follower_ids'] = nil
@@ -1166,13 +1165,18 @@ namespace :data do
         topics_asked_questions = Question.all(:user_id => user.id).
           map{|q| q.topic_ids}
 
+        puts user['ignored_topic_ids']
+        user['ignored_topic_ids'].each do |topic_id|
+          create_user_topic_info(user.id, topic_id, topics_answered_questions,
+                                 topics_asked_questions, :ignoring => true)
+        end
+
         (topics_answered_questions | topics_asked_questions).each do |topic_id|
           unless Topic.find_by_id(topic_id)
             puts "Problem with \"#{topic_id}\""
             next
           end
-          create_user_topic_info(user.id, topic_id, false,
-                                 topics_answered_questions,
+          create_user_topic_info(user.id, topic_id, topics_answered_questions,
                                  topics_asked_questions)
         end
 
