@@ -24,3 +24,5 @@ pt-BR:
         subject: "Confirme seu cadastro no Umamão"
       closed_for_signup:
         subject: "Seu cadastro no Umamão"
+      user_accepted_suggestion:
+        "%{user} aceitou sua sugestão e seguiu o tópico %{entry}"

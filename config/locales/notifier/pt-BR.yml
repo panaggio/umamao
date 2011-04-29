@@ -20,6 +20,8 @@ pt-BR:
       message4: ""
     new_user_suggestion:
       message: "%{origin} sugeriu que você seguisse o tópico %{entry}"
+    user_accepted_suggestion:
+      message: "%{user} aceitou sua sugestão e seguiu o tópico %{entry}."
     new_answer:
       author: "%{user} respondeu:"
       question: 'à pergunta "%{question}"'

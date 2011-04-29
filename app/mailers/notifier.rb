@@ -100,6 +100,16 @@ class Notifier < ActionMailer::Base
     mail(:to => recipients, :subject => subject)
   end
 
+  def user_accepted_suggestion(origin, user, entry)
+    @user, @origin, @entry, @domain = user, origin, entry, AppConfig.domain
+
+    subject = I18n.t(
+      'mailers.notifications.user_accepted_suggestion',
+      :user => user.name, :entry => entry.title)
+
+    mail(:to => origin.email, :subject => subject)
+  end
+
   def new_user_suggestion(user, origin, entry)
     @user, @origin, @entry, @domain = user, origin, entry, AppConfig.domain
 
