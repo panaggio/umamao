@@ -23,6 +23,8 @@ class UserSuggestion < Suggestion
   end
 
   def accept!
+    self.send_accept_notification_to_origin
+
     self.accepted_at = Time.zone.now
     self.save!
   end
@@ -50,6 +52,21 @@ class UserSuggestion < Suggestion
     ).save!
   end
   handle_asynchronously :send_notification
+
+  def send_accept_notification_to_origin
+    # FIXME: by the time notifications send e-mail, send invitation will
+    # not be necessary anymore
+    Notifier.user_accepted_suggestion(self.origin, self.user, self.entry).deliver
+
+    Notification.new(
+      :user => self.origin,
+      :event_type => 'accepted_user_suggestion',
+      :origin_id => self.user_id,
+      :reason => self,
+      :topic_id => self.entry_id
+    ).save!
+  end
+  handle_asynchronously :send_accept_notification_to_origin
 
   def user_is_origin?
     if self.user == self.origin
