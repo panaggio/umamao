@@ -65,6 +65,14 @@ class NewsItem
                :recipient => recipient,
                :origin => origin)
 
+    if recipient.is_a? User
+      if news_update.entry.is_a? Question
+        news_update.entry.topic_ids.each do |topic_id|
+          return if recipient.ignored_topic_ids.include?(topic_id)
+        end
+      end
+    end
+
     if recipient.is_a? Topic
       news_item.recipient_type = "Topic"
     end
