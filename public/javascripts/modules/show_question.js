@@ -43,21 +43,6 @@ $(document).ready(function() {
     charsleft.html(cl);
   });
 
-  // Send shared question to Facebook.
-  Utils.clickObject(".share-question-widget input[type=submit]", function () {
-    return {
-      success: function (data) {
-        $.colorbox.close();
-      },
-
-      error: function (data) {
-        if (data.status == "needs_permission") {
-          Utils.modal({html: data.html});
-        }
-      }
-    };
-  });
-
   // Open modal box to share question.
   Utils.clickObject(".share .facebook, .share .twitter", function () {
     return {
@@ -73,14 +58,12 @@ $(document).ready(function() {
     };
   });
 
-  Utils.clickObject(".comment .comment-votes form.vote-up-comment-form input[name=vote_up]", function () {
-    var btn = $(this);
-    var form = $(this).closest("form");
+  Utils.clickObject(".comment .comment-votes form.vote-up-comment-form", function () {
+    var form = $(this);
+    var btn = $(this).find("input[name=vote_up]");
     btn.hide();
 
     return {
-      data: form.serialize()+"&"+btn.attr("name")+"=1",
-
       success: function (data) {
         if(data.vote_state == "deleted") {
           btn.attr("src", "/images/dialog-ok.png" );
@@ -94,10 +77,10 @@ $(document).ready(function() {
     };
   });
 
-  Utils.clickObject("form.mainAnswerForm .button", function () {
-    var form = $(this).parents("form");
+  Utils.clickObject("form.mainAnswerForm", function () {
+    var form = $(this);
     var answers = $("#answers .hentry");
-    var button = $(this);
+    var button = $(this).find(".button");
 
     return {
       success: function (data) {
@@ -121,10 +104,10 @@ $(document).ready(function() {
   });
 
   // Send new comment.
-  Utils.clickObject("form.commentForm .button", function () {
-    var form = $(this).parents("form");
+  Utils.clickObject("form.commentForm", function () {
+    var form = $(this);
     var comments = $(this).closest(".commentable").find(".comments");
-    var button = $(this);
+    var button = $(this).find(".button");
 
     return {
       success: function (data) {

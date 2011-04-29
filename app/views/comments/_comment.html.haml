@@ -28,7 +28,9 @@
     .comment-votes
 
       - if logged_in? && current_user.can_vote_up_on?(current_group) && current_user != comment.user
-        - form_tag votes_path, :class => "vote-up-comment-form" do
+        - form_tag votes_path(:format => :js),
+          :class => "vote-up-comment-form",
+          :remote => true, "data-type" => "json" do
           .fields
             = hidden_field_tag "voteable_type", comment.class.name, :id => "voteable_type_#{comment.id}"
             = hidden_field_tag "voteable_id", comment.id, :id =>  "voteable_id_#{comment.id}"

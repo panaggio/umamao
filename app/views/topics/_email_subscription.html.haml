@@ -9,8 +9,8 @@
       - action_text = t("topics.show.email_subscription.disable")
       - undo_action_text = t("topics.show.email_subscription.enable")
       - status_switch = "on"
-    - else 
+    - else
       - action_text = t("topics.show.email_subscription.enable")
       - undo_action_text = t("topics.show.email_subscription.disable")
       - status_switch = "off"
-    = "(#{link_to action_text, toggle_email_subscription_topic_path(topic), :id => 'toggle_email_subscription_link', 'data-text' => undo_action_text, 'status-switch' => status_switch})"
+    = "(#{link_to action_text, toggle_email_subscription_topic_path(topic, :format => :js), :id => 'toggle_email_subscription_link', 'data-text' => undo_action_text, 'status-switch' => status_switch, :remote => true, "data-type" => "json", :method => :post})"

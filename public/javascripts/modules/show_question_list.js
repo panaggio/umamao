@@ -4,7 +4,7 @@ $(document).ready(function () {
   initTopicAutocompleteForReclassifying();
 
   // Question submit
-  Utils.clickObject("#question-list #question_submit", function () {
+  Utils.clickObject("#question-list #new_question_form", function () {
     return {
       success: function (data) {
         var question = $(data.html);

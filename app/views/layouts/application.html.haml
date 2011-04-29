@@ -50,11 +50,14 @@
                 =t(".now")
 
 
-    -unless current_user.blank? || current_user.confirmed?
+    - unless current_user.blank? || current_user.confirmed?
       %span.persistent_message
-        =I18n.t("users.annoying.unconfirmed_non_academic_email")
-        %a#resend_confirmation_email{:href => '#'}
-          =t("users.annoying.resend_confirmation_email")
+        = I18n.t("users.annoying.unconfirmed_non_academic_email")
+        = link_to t("users.annoying.resend_confirmation_email"),
+          resend_confirmation_email_path(:format => :js),
+          :id => "resend_confirmation_email",
+          :remote => true,
+          "data-type" => "json"
         = image_tag("ajax-loader.gif", :id => "ajax-loader", :class => "hide")
 
     #container{:class => @current_class}
@@ -64,7 +67,7 @@
 
             - if content_for?(:subtabs)
               .secondary-navigation{:class => @active_subtab.to_s}
-                =yield :subtabs
+                = yield :subtabs
 
             .content
               .inner

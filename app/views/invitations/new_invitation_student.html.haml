@@ -1,7 +1,10 @@
 .modal
   %h1= t(".title", :name => @student.name)
   .invitation
-    - form_tag create_invitation_student_invitations_path do
+    - form_tag create_invitation_student_invitations_path(:format => :js),
+      :id => "new_student_invitation",
+      :remote => true,
+      :data-type => "json" do
 
       = hidden_field_tag "student_id", @student.id
       = hidden_field_tag "course_id", @course.id

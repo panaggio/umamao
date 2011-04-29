@@ -8,7 +8,8 @@
     %ul#search-users-results.autocomplete-list
   .invited_users
   .invitation
-    = form_for @answer_request, :url => answer_requests_path, :method => "POST" do |f|
+    = form_for @answer_request, :url => answer_requests_path(:format => :js),
+      :html => {:remote => true, "data-type" => "json"} do |f|
       = f.hidden_field :question_id
       .invitation-ids
       #invitation-message.request-answer

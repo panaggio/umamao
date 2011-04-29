@@ -6,10 +6,16 @@
       .controls
         - if suggestion == 'self'
           .refuse-suggestion
-            = link_to '✕', refuse_suggestion_path(:topic => @topic.id), :method => :post
-        -else
+            = link_to '✕',
+              refuse_suggestion_path(:topic => @topic.id, :format => :js),
+              :method => :post, :remote => true, "data-type" => "json"
+        - else
           .delete-suggestion
-            = link_to '✕', delete_suggestion_path(:topic => @topic.id, :user => user.id), :method => :post
+            = link_to '✕',
+              delete_suggestion_path(:topic => @topic.id,
+                                     :user => user.id,
+                                     :format => :js),
+              :method => :post, :remote => true, 'data-type" => "json"
 
     .avatar
       = link_to avatar_for(user, :size => 96).html_safe, user_path(user)
@@ -22,9 +28,9 @@
         = auto_link(truncate_words(h(user.bio), 200, link_to('…', user_path(user))))
       - if suggestion
         .suggestion-info
-          -if suggestion == 'self'
+          - if suggestion == 'self'
             &= t("user_suggestions.user_suggest.suggestion_box.self_html", :origin => link_to(h(origins.first.first_name), user_path(origins.first.id)), :count => origins.count-1)
-          -else
+          - else
             &= t("user_suggestions.user_suggest.suggestion_box.friend")
       .metadata
         = t(:created_at, :scope => "activerecord.attributes.user")

@@ -12,9 +12,7 @@ $(document).ready(function() {
         if (data.status == "unauthenticate") {
           window.location = "/users/login";
         }
-      },
-
-      type: "POST"
+      }
     };
   });
 });

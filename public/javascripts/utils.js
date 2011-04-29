@@ -1,8 +1,5 @@
 // Utility functions.
 
-// Workaroud to get .follow_link's to work properly
-$('a[data-confirm], a[data-method], a[data-remote]').die("click.rails");
-
 window.Utils = {
 
   // Escapes every character in a string that has a special meaning in a
@@ -54,6 +51,8 @@ window.Utils = {
     eraseCookie("flash_warn");
   },
 
+  // WARNING: This is deprecated and will DIE.
+  //
   // Associates with objects of a given selector AJAX behavior when clicked.
   // prepare is a callback of no arguments that returns parameters to be used in
   // a jQuery.ajax() call. All fields returned by prepare behave exactly as the options
@@ -68,69 +67,34 @@ window.Utils = {
   // of data.message is displayed in an animated box (see Utils.showMessage) if
   // it is present.
   clickObject: function (selector, prepare) {
-    $(selector).live("click", function (event) {
+    $(selector).live("ajax:beforeSend", function (event, xhr, settings) {
+      $(this).attr("disabled", "true");
+      return true;
+    });
+
+    $(selector).live("ajax:success", function (event, data, status, xhr) {
       var element = this;
-      var settings = prepare.call(element);
+      var settings = prepare.call(this);
 
-      // Basic behavior.
-      var ajaxParams = {
-        dataType: "json",
-
-        complete: function () {
-          $(element).removeAttr("disabled");
-          if (settings.complete) settings.complete.call(element);
-        },
-
-        error: Utils.manageAjaxError,
-
-        success: function (data) {
-          if (data.success) {
-            if (settings.success) settings.success.call(element, data);
-            if (data.message) Utils.showMessage(data.message, "notice");
-          } else {
-            if (data.message) Utils.showMessage(data.message, "error");
-            if (settings.error) settings.error.call(element, data);
-          }
-        }
-      };
-
-      // Try to guess what to do based on the type and attributes
-      // of the element.
-      if ($(element).is("a")) {
-        ajaxParams.url = settings.url || $(element).attr("href");
-        var type = settings.type || $(element).attr("data-method") ||
-          "GET";
-        var isDelete = type.match(/DELETE/i) ? true : false;
-
-        if (typeof settings.data === "string" ||
-            settings.data instanceof String) {
-          ajaxParams.data = settings.data + "&format=js";
-          if (isDelete) {
-            ajaxParams.data += "&method=delete";
-          }
-        } else if (typeof settings.data === "object") {
-          var extraParams = {format: "js"};
-          if (isDelete) {
-            extraParams.method = "delete";
-          }
-          ajaxParams.data = $.extend({}, settings.data, extraParams);
-        } else {
-          ajaxParams.data = isDelete ? "format=js&method=delete" :
-            "format=js";
-        }
-        ajaxParams.type = isDelete ? "POST" : type;
+      if (data.success) {
+        if (settings.success) settings.success.call(element, data);
+        if (data.message) Utils.showMessage(data.message, "notice");
       } else {
-        // Assume element belongs to a form.
-        var form = $(element).closest("form");
-        ajaxParams.url = settings.url || (form.attr("action") + ".js");
-        ajaxParams.data = settings.data || form.serialize();
-        ajaxParams.type = settings.type || form.attr("method");
+        if (data.message) Utils.showMessage(data.message, "error");
+        if (settings.error) settings.error.call(element, data);
       }
-      $.ajax(ajaxParams);
+    });
 
-      $(element).attr("disabled", "true");
+    $(selector).live("ajax:error", function (event, xhr, status, error) {
+      Utils.manageAjaxError();
+    });
 
-      return false;
+    $(selector).live("ajax:complete",
+                     function (event, xhr, status) {
+      var element = this;
+      var settings = prepare.call(this);
+      $(element).removeAttr("disabled");
+      if (settings.complete) settings.complete.call(element);
     });
   },
 

@@ -10,8 +10,11 @@
       .explanation
         = t(".share_new_answer")
       .links
-        = link_to image_tag("facebook.gif"), new_share_answer_path(:content => answer.id, :where => "facebook", :class_name => "answer"), :class => "facebook"
-        = link_to image_tag("twitter.gif"), new_share_answer_path(:content => answer.id, :where => "twitter", :class_name => "answer"), :class => "twitter"
+        - ["facebook", "twitter"].each do |site|
+          = link_to image_tag("#{site}.gif"),
+            new_share_answer_path(:content => answer.id, :where => site,
+                                  :class_name => "answer", :format => :js),
+            :class => site, :remote => true, "data-type" => "json"
 
   .vote-col
     = vote_box(answer, question_path(question), question.closed)

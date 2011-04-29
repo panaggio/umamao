@@ -280,7 +280,7 @@ class TopicsController < ApplicationController
             case params[:answer]
             when 'topic'
               render_to_string :partial => 'topics/topic',
-                :locals => { :topic => @topic, :suggestion => 'friend' }
+                :locals => { :topic => @topic, :suggestion => 'friend', :receiver => receiver }
             when 'user'
               render_to_string :partial => 'users/user',
                 :locals => { :user => receiver, :suggestion => 'friend' }
