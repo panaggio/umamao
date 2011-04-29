@@ -8,7 +8,7 @@ class Settings::IgnoreTopicsController < ApplicationController
   def edit
     @active = 'ignore'
     @user_topics = UserTopicInfo.query(:user_id => current_user.id, 
-                                       :ignoring => true).
+                                       :ignored_at.ne => nil).
       paginate(:per_page => 100, :page => params[:page] || 1)
 
     render 'settings/follow_topics/edit'

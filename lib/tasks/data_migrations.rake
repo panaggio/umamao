@@ -1129,8 +1129,15 @@ namespace :data do
                                ignoring=false)
       return if UserTopicInfo.count(:user_id => user_id,
                                     :topic_id => topic_id) > 0
-      uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id,
-                              :following => following, :ignoring => ignoring)
+      uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id)
+
+      if following
+        uti.follow!
+      end
+      if ignoring
+        uti.ignore!
+      end
+
       uti.answers_count = topics_answered_questions.
         select{|t| t.include?(topic_id)}.count
       uti.questions_count = topics_asked_questions.

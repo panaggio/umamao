@@ -92,13 +92,13 @@ class Topic
 
   def ignorers
     UserTopicInfo.fields([:user_id]).
-      query(:topic_id => self.id, :ignoring => true).map(&:user)
+      query(:topic_id => self.id, :ignored_at.ne => nil).map(&:user)
   end
 
   # FIXME: refactor
   def ignorer_ids
     UserTopicInfo.fields([:user_id]).
-      query(:topic_id => self.id, :ignoring => true).map(&:user_id)
+      query(:topic_id => self.id, :ignored_at.ne => nil).map(&:user_id)
   end
 
   def name
@@ -155,17 +155,17 @@ class Topic
 
   # Add a follower to topic.
   def add_follower!(user)
-    if user_topic_info = UserTopicInfo.first(:topic_id => self.id, 
+    if user_topic_info = UserTopicInfo.first(:topic_id => self.id,
                                         :user_id => user.id)
-      unless user_topic_info.following
-        user_topic_info.following = true
+      unless user_topic_info.followed?
+        user_topic_info.follow!
         user_topic_info.save!
         self.increment(:followers_count => 1)
         user.unignore_topic!(self)
       end
     else
-      UserTopicInfo.create(:topic_id => self.id, :user_id => user.id, 
-                      :following => true)
+      UserTopicInfo.create(:topic_id => self.id, :user_id => user.id,
+                      :followed_at => Time.now)
       self.increment(:followers_count => 1)
       user.unignore_topic!(self)
     end
@@ -173,10 +173,10 @@ class Topic
 
   # Remove a follower from topic.
   def remove_follower!(user)
-    if (user_topic_info = UserTopicInfo.first(:topic_id => self.id, 
-                                        :user_id => user.id)) &&
-                                        user_topic_info.following
-      user_topic_info.following = false
+    if user_topic_info = UserTopicInfo.first(:topic_id => self.id,
+                                        :user_id => user.id,
+                                        :followed_at.ne => nil)
+      user_topic_info.followed_at = nil
       user_topic_info.save!
       if self.email_subscribers.include?(user)
         self.email_subscriber_ids.delete(user.id)
@@ -206,8 +206,8 @@ class Topic
       end
     end
 
-    self.followers_count = UserTopicInfo.count(:topic_id => self.id, 
-                                               :following => true)
+    self.followers_count = UserTopicInfo.count(:topic_id => self.id,
+                                               :followed_at.ne => nil)
 
     Question.query(:topic_ids => other.id).each do |q|
       q.classify! self
@@ -338,16 +338,16 @@ class Topic
 
   def follower_ids
     UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
-                                           :following => true).map(&:user_id)
+                                           :followed_at.ne => nil).map(&:user_id)
   end
 
   def followers
     UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
-                                           :following => true).map(&:user)
+                                           :followed_at.ne => nil).map(&:user)
   end
 
   def is_followed_by?(user)
-    UserTopicInfo.count(:user_id => user.id, :topic_id => self.id,
-                        :following => true) > 0
+    UserTopicInfo.first(:user_id => user.id, :topic_id => self.id,
+                        :followed_at.ne => nil).present?
   end
 end

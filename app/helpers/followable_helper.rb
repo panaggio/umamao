@@ -14,9 +14,9 @@ module FollowableHelper
     elsif followable.is_a?(Topic)
       follow_path = follow_topic_path(followable, :format => :js)
       unfollow_path = unfollow_topic_path(followable, :format => :js)
-      following = UserTopicInfo.count(:user_id => current_user.id, 
-                                      :topic_id => followable.id, 
-                                      :following => true) > 0
+      following = UserTopicInfo.first(:user_id => current_user.id,
+                                      :topic_id => followable.id,
+                                      :followed_at.ne => nil).present?
       entry_type = "topic"
     elsif followable.is_a?(Question)
       follow_path = watch_question_path(followable, :format => :js)

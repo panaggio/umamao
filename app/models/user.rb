@@ -183,7 +183,7 @@ class User
 
     topics.each do |topic|
       igs += UserTopicInfo.fields([:user_id]).query(:topic_id => topic.id,
-                                                   :ignoring => true).
+                                                   :ignored_at.ne => nil).
                                                    map(&:user)
     end
 
@@ -557,27 +557,27 @@ Time.zone.now ? 1 : 0)
 
   def ignore_topic!(topic)
     user_topic = UserTopicInfo.first(:user_id => self.id, :topic_id => topic.id)
-    if user_topic && user_topic.ignoring
+    if user_topic && user_topic.ignored?
       return
     end
 
     if user_topic
-      user_topic.ignoring = true
+      user_topic.ignore!
       user_topic.save
       topic.remove_follower!(self)
     else
       UserTopicInfo.create(:user_id => self.id, :topic_id => topic.id,
-                           :ignoring => true)
+                           :ignored_at => Time.now)
     end
     self.increment(:ignored_topics_count => 1)
     self.hide_ignored_news_items!
   end
 
   def unignore_topic!(topic)
-    if (user_topic = UserTopicInfo.first(:user_id => self.id, 
-                                         :topic_id => topic.id)) &&
-                                         user_topic.ignoring
-      user_topic.ignoring = false
+    if user_topic = UserTopicInfo.first(:user_id => self.id,
+                                         :topic_id => topic.id,
+                                         :ignored_at.ne => nil)
+      user_topic.unignore!
       user_topic.save
       self.increment(:ignored_topics_count => -1)
       self.show_unignored_news_items!
@@ -585,13 +585,13 @@ Time.zone.now ? 1 : 0)
   end
 
   def ignores?(topic)
-    UserTopicInfo.first(:topic_id => topic.id, :user_id => self.id, 
-                        :ignoring => true).present?
+    UserTopicInfo.first(:topic_id => topic.id, :user_id => self.id,
+                        :ignored_at.ne  => nil).present?
   end
 
   def hide_ignored_news_items!(news_items = self.news_items)
     ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
-      query(:user_id => self.id, :ignoring => true).map(&:topic_id)
+      query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
     news_items.each do |ni|
       if ni.should_be_hidden?(ignored_topic_ids)
         ni.hide!
@@ -602,7 +602,7 @@ Time.zone.now ? 1 : 0)
 
   def show_unignored_news_items!(news_items = self.news_items)
     ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
-      query(:user_id => self.id, :ignoring => true).map(&:topic_id)
+      query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
     news_items.each do |ni|
       unless ni.should_be_hidden?(ignored_topic_ids)
         ni.show!
@@ -625,7 +625,7 @@ Time.zone.now ? 1 : 0)
     elsif followable.is_a? Topic
       UserTopicInfo.count(:user_id => self.id, 
                                  :topic_id => followable.id,
-                                 :following => true) > 0
+                                 :followed_at.ne => nil) > 0
     else
       raise "User can't follow a #{followable.class}"
     end

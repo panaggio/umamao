@@ -238,7 +238,7 @@ class SuggestionList
     end
 
     count = Hash.new(0) # Scores for suggestions
-    UserTopicInfo.query(:user_id => user.id, :following => true) do |user_topic|
+    UserTopicInfo.query(:user_id => user.id, :followed_at.net => nil) do |user_topic|
       topic = user_topic.topic
       topic.related_topics.each do |related_topic|
         next if self.user.follows?(related_topic) ||
