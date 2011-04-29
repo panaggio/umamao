@@ -19,7 +19,7 @@ pt-BR:
       message3: "Ou se você souber de alguém que sabe responder, passe este link:"
       message4: ""
     new_user_suggestion:
-      message: "%{origin} sugeriu que você seguisse o tópico %{entry}"
+      message: "%{origin} sugeriu que você seguisse o tópico %{entry}."
     user_accepted_suggestion:
       message: "%{user} aceitou sua sugestão e seguiu o tópico %{entry}."
     new_answer:
