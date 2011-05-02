@@ -184,10 +184,8 @@ class QuestionListsController < TopicsController
 
   protected
   def calculate_unanswered_count
-    QuestionList.find_by_slug_or_id(params[:id]).
-      questions.select do |q|
-        q.answers.count > 0
-      end.size
+    QuestionList.find_by_slug_or_id(params[:id]).questions.count(
+      :is_open => true)
   end
 
   def main_topic_allow_question_lists
