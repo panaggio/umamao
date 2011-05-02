@@ -13,6 +13,7 @@ pt-BR:
         default: "Erro ao tentar criar a lista."
       topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
     show:
+      all: Todas as perguntas
       empty:
         basic: "Esta lista ainda não possui nenhum exercício."
         transcribe: |
@@ -27,6 +28,7 @@ pt-BR:
         add:
           title: "Adicionar arquivo"
           submit: "Enviar"
+      unanswered: Perguntas em aberto
     form:
       new_question: "Título do exercício"
       example: "(ex.: %{list_title} - Exercício 1)"
