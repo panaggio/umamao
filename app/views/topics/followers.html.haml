@@ -11,7 +11,7 @@
     %input.user_id{:type => 'hidden', :value => current_user.id}
     -# User suggestion
     - if current_user
-      %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest"), "data-autocomplete-url" => autocomplete_url }
+      %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest_to"), "data-autocomplete-url" => autocomplete_url }
         %ul.autocomplete-list#topic-suggested-users-suggestions
 
     %ul#user-suggested.items
