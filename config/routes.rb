@@ -17,6 +17,7 @@ Shapado::Application.routes.draw do
       # FIXME: classify and unclassify should be post
       get :classify
       get :unclassify
+      get :unanswered
       post :create_file
       post :destroy_file
     end
