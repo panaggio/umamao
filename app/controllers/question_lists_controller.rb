@@ -45,6 +45,7 @@ class QuestionListsController < TopicsController
     @new_question = Question.new
   end
 
+  # GET /question_lists/1/unanswered
   def unanswered
     show_init('is_open' => true)
     set_tab :unanswered, :question_list_show
