@@ -36,3 +36,4 @@ pt-BR:
           zero: "Sugerido por %{origin}"
           one: "Sugerido por %{origin} e mais uma pessoa"
           other: "Sugerido por %{origin} e mais %{count} pessoas"
+    user_follows_nothing: "%{user} não segue nenhum tópico ainda."
