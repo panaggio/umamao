@@ -14,9 +14,10 @@
       %input.text_field#topic-suggested-users-autocomplete{ :type => "text-field", :value => t("user_suggestions.suggested.suggest_to"), "data-autocomplete-url" => autocomplete_url }
         %ul.autocomplete-list#topic-suggested-users-suggestions
 
-    %ul#user-suggested.items
-      - @users_suggested.each do |user, origins|
-        = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
+    - if [nil, '1'].include? params['page']
+      %ul#user-suggested.items
+        - @users_suggested.each do |user, origins|
+          = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
 
   %ul#users.items
     - @followers.each do |user|
