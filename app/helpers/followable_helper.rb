@@ -8,18 +8,18 @@ module FollowableHelper
     return "" if !logged_in? || current_user == followable
 
     if followable.is_a?(User)
-      follow_path = follow_user_path(followable)
-      unfollow_path = unfollow_user_path(followable)
+      follow_path = follow_user_path(followable, :format => :js)
+      unfollow_path = unfollow_user_path(followable, :format => :js)
       following = current_user.following?(followable)
       entry_type = "user"
     elsif followable.is_a?(Topic)
-      follow_path = follow_topic_path(followable)
-      unfollow_path = unfollow_topic_path(followable)
+      follow_path = follow_topic_path(followable, :format => :js)
+      unfollow_path = unfollow_topic_path(followable, :format => :js)
       following = followable.follower_ids.include?(current_user.id)
       entry_type = "topic"
     elsif followable.is_a?(Question)
-      follow_path = watch_question_path(followable)
-      unfollow_path = unwatch_question_path(followable)
+      follow_path = watch_question_path(followable, :format => :js)
+      unfollow_path = unwatch_question_path(followable, :format => :js)
       following = followable.watch_for?(current_user)
       entry_type = "question"
     else
@@ -49,6 +49,9 @@ module FollowableHelper
     button = link_to(attributes[act][:title],
                      attributes[act][:path],
                      :class => attributes[act][:class],
+                     :remote => true,
+                     :method => :post,
+                     "data-type" => "json",
                      "data-entry-type" => entry_type,
                      "data-title" => attributes[undo][:title],
                      "data-undo" => attributes[undo][:path],

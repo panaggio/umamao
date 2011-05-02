@@ -10,7 +10,4 @@
   - if logged_in?
     .controls
       .follow-info{:id => "follow#{user.id}"}
-        - if current_user.following?(user)
-          = link_to "#{t("followable.unfollow")}", unfollow_user_suggestion_path(:user => user), :class => "unfollow_link", :method => :post
-        - else
-          = link_to "#{t("followable.follow")}", follow_user_suggestion_path(:user => user), :class => "follow_link", :method => :post
+        = follow_button user

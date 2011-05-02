@@ -1,28 +1,36 @@
 - type ||= 'follow'
 - suggestion ||= false
+- receiver = @user || local_assigns[:receiver]
 %li.item
   .summary
     - if suggestion
       .controls
         - if suggestion == 'self'
           .refuse-suggestion
-            = link_to '✕', refuse_suggestion_path(:topic => topic.id), :method => :post
-        -else
+            = link_to '✕',
+              refuse_suggestion_path(:topic => topic.id,
+                                     :format => :js),
+              :method => :post, :remote => true, "data-type" => "json"
+        - else
           .delete-suggestion
-            = link_to '✕', delete_suggestion_path(:topic => topic.id, :user => current_user.id), :method => :post
+            = link_to '✕',
+              delete_suggestion_path(:topic => topic.id,
+                                     :user => receiver.id,
+                                     :format => :js),
+              :method => :post, :remote => true, "data-type" => "json"
 
     .title
       = link_to h(topic.title), topic_path(topic)
-      -if suggestion != 'friend'
+      - if suggestion != 'friend'
         .controls
           .button= render :partial => "topics/#{type}", :locals => {:topic => topic}
 
     .info
-      -if suggestion
+      - if suggestion
         %span.suggestion-info
-          -if suggestion == 'self'
+          - if suggestion == 'self'
             &= t("user_suggestions.user_suggest.suggestion_box.self_html", :origin => link_to(h(origins.first.first_name), user_path(origins.first.id)), :count => origins.count-1)
-          -else
+          - else
             &= t("user_suggestions.user_suggest.suggestion_box.friend")
 
       .metadata

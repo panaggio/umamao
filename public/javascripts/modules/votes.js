@@ -1,11 +1,9 @@
 $(document).ready(function() {
-  Utils.clickObject("form.vote_form button", function () {
-    var btn_name = $(this).attr("name");
-    var form = $(this).parents("form");
+  Utils.clickObject("form.vote_form", function () {
+    var btn_name = $(this).find("button").attr("name");
+    var form = $(this);
 
     return {
-      data: form.serialize() + "&" + btn_name + "=1",
-
       success: function (data) {
         form.find(".votes_average").text(data.average);
         if (data.vote_state == "deleted") {

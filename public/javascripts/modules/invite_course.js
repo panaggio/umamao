@@ -43,6 +43,3 @@ Utils.clickObject(".student-suggestion a.follow_link, .student-suggestion a.unfo
 
   };
 });
-
-// Workaroud to get .follow_link's to work properly
-$('a[data-confirm], a[data-method], a[data-remote]').die("click.rails");

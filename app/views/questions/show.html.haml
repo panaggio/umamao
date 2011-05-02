@@ -80,7 +80,11 @@
 - unless @question.closed
   - if logged_in? && !@answers.map(&:user_id).include?(current_user.id) && current_user.can_post_more_answers_on?(@question)
     #new-answer-wrapper
-      = form_for @answer, :url => question_answers_path(@question.id), :html => {:class => "form mainAnswerForm bp"} do |f|
+      = form_for @answer,
+        :url => question_answers_path(@question.id, :format => :js),
+        :html => {:class => "form mainAnswerForm bp",
+                  :remote => true,
+                  "data-type" => "json"} do |f|
         = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
         .group.navform
           = submit_tag t("answers.form.submit"), :class => "button"

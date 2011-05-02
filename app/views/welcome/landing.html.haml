@@ -59,7 +59,9 @@
 #signup
   %h3  #{ t('layouts.application.signup') }
 
-  = form_for @affiliation do |f|
+  = form_for @affiliation, :remote => true,
+    :url => affiliations_path(:format => :js),
+    :html => { "data-type" => "json" } do |f|
     #landing_signup
       .field
         .label{:style => "position: relative; top: 12px"}

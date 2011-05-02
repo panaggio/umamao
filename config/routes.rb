@@ -72,7 +72,8 @@ Shapado::Application.routes.draw do
   match '/change_language_filter' => 'welcome#change_language_filter', :as => :change_language_filter
   match '/register' => 'users#create', :as => :register
   match '/signup' => 'users#new', :as => :signup
-  match '/resend_confirmation_email' => 'users#resend_confirmation_email'
+  match '/resend_confirmation_email' => 'users#resend_confirmation_email',
+    :as => :resend_confirmation_email
   match '/signup/find' => 'signup_wizard#find'
   match '/signup/:current_step' => 'signup_wizard#wizard', :as => :wizard
   match '/moderate' => 'admin/moderate#index', :as => :moderate

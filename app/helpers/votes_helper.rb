@@ -4,7 +4,7 @@ module VotesHelper
     if !closed && (logged_in? && voteable.user != current_user) || !logged_in?
       vote = current_user.vote_on(voteable) if logged_in?
       %@
-      <form action='#{votes_path}' method='post' class='vote_form' >
+      <form action='#{votes_path(:format => :js)}' method='post' class='vote_form' data-remote='true' data-type='json'>
         <div>
           #{token_tag}
         </div>

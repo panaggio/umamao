@@ -27,7 +27,6 @@ function initUserAutocomplete() {
   userBox.filterDocs = function(docs) {
     var filteredDocs = [];
 
-    console.log(docs.length);
     var docsSize = docs.length;
     for (var i=0; i<docsSize; i++) {
       id = docs[i].id;
@@ -36,7 +35,7 @@ function initUserAutocomplete() {
         filteredDocs.push(docs[i]);
     }
     if(filteredDocs.length == 0){
-      filteredDocs.push({title: "Usuário não encontrado", 
+      filteredDocs.push({title: "Usuário não encontrado",
           entry_type : "NotFound"});
     }
     return filteredDocs;
@@ -63,7 +62,7 @@ function initUserAutocomplete() {
 }
 
 // Button to add the typed email to the list.
-Utils.clickObject(".invite-button", function () {
+Utils.clickObject("#new_answer_request", function () {
   return {
     success: function(data) {
       Utils.showMessage(data.message, "notice");
@@ -74,19 +73,12 @@ Utils.clickObject(".invite-button", function () {
 
 });
 
-// Button to add the typed email to the list.
+// Open the request to answer modal box
 Utils.clickObject(".request-answer-button", function () {
   return {
-    url: $(this).attr("href"),
-    dataType: "json",
-    type: "GET",
     success: function(data) {
-      if(data.success){
-        Utils.modal({html : data.html});
-        initUserAutocomplete();
-      }
-      else
-        showMessage(data.message, "error");
+      Utils.modal({html : data.html});
+      initUserAutocomplete();
     }
   };
 

@@ -1,4 +1,8 @@
-- form_for new_question, :html => {:class => "form", :id => "new_question_form"} do |f|
+- form_for new_question, :url => questions_url(:format => :js),
+  :html => {:class => "form",
+            :id => "new_question_form",
+            :remote => true,
+            "data-type" => "json"} do |f|
   .title
     %a{:name => "form"}
     = f.label :title, "#{t('.new_question')}*", :class => "label"

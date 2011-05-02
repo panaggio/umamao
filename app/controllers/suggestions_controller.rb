@@ -90,9 +90,6 @@ class SuggestionsController < ApplicationController
       :entry_id => BSON::ObjectId(params[:topic]), :entry_type => 'Topic',
       :origin_id => current_user.id, :user_id => params[:user])
 
-    p(:entry_id => BSON::ObjectId(params[:topic]), :entry_type => 'Topic',
-      :origin_id => current_user.id, :user_id => params[:user])
-
     @user_suggestion.delete!
 
     track_event(:deleted_user_suggestion)

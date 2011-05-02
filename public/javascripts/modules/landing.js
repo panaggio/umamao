@@ -5,9 +5,6 @@ function signUpAjaxRequest() {
     $("input#affiliation_email").attr("readonly", "readonly");
 
     return {
-      url: "/affiliations?format=js",
-      data: form.serialize(),
-
       success: function (data) {
         if (data.url) {
           window.location.href = data.url;
