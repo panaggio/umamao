@@ -1,14 +1,18 @@
 = f.error_messages
 .group
   = f.label :title, "#{t(:title, :scope => "activerecord.attributes.question")}*", :class => "label"
-  = f.text_field :title, :class => "text_field"
+  = f.text_field :title, :class => "text_field", "data-autocomplete-url" => autocomplete_url
+  - if @question.new?
+    %ul#question-search-results.autocomplete-list
   .description
     = current_group.question_prompt
 
-#question-details{:style => @question.new? ? "display: none;" : ""}
+#question-details
   .group
     = f.label :body, t("questions.form.details"), :class => "label"
-    = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
+    - details_class = "editor-input"
+    - details_class += " shorter-details" if @question.new?
+    = f.text_area :body, :class => details_class, :id => "question-input", :rows => "auto", :cols => "auto"
     %label.label
       = t("global.preview")
     #question-preview.markdown
@@ -17,10 +21,6 @@
     %hr
     .group
       = render :partial => "shared/classify", :locals => {:classifiable => @question, :ajax_add => false}
-
-- if @question.new?
-  .controls
-    = link_to t("questions.new.add_details"), "#", :id => "show-details"
 
 - if current_group.language.nil? && AppConfig.enable_i18n
   .group

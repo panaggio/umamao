@@ -674,6 +674,136 @@ Utils.extend(TopicAutocomplete, AutocompleteBox);
 Utils.extend(TopicAutocompleteForUserSuggestion, TopicAutocomplete);
 Utils.extend(UserAutocomplete, AutocompleteBox);
 
+// Question autocomplete for several boxes in the website.
+function QuestionAutocomplete(inputField, itemBoxContainer) {
+  AutocompleteBox.call(this, inputField, itemBoxContainer);
+}
+
+QuestionAutocomplete.prototype = {
+
+  activateWithTab: false,
+
+  initInputField: function() {
+    var box = this;
+    var itemBox = this.itemBox;
+    this.input.attr("autocomplete", "off").
+      focus(function () {
+        if (!box.isActive) {
+          box.isActive = true;
+        } else if ($(this).val() != "" && itemBox) {
+          if (itemBox.itemsContainer[0].childNodes.length != 0) {
+            itemBox.show();
+          }
+        }
+        if (!box.interval && box.url) {
+          box.interval = setInterval(function () {
+                                       box.fetchData(box.input.val());
+                                     }, box.delay);
+        }
+    }).blur(function () {
+      if ($(this).val() == "") {
+        $(this).val(box.startText);
+        box.isActive = false;
+      }
+      if (!box.selectionClicked && itemBox) {
+        itemBox.hide();
+      }
+      if (box.interval) {
+        clearInterval(box.interval);
+        box.interval = null;
+      }
+    }).keydown(function (e) {
+      switch (e.keyCode) {
+      case 38: // up
+        e.preventDefault();
+        itemBox && itemBox.moveUp();
+        break;
+      case 40: // down
+        e.preventDefault();
+        itemBox && itemBox.moveDown();
+        break;
+      case 13: // return
+        if (itemBox && itemBox.isSelected()) {
+          itemBox.click();
+        } else if (box.returnDefault) {
+          box.returnDefault();
+        }
+        e.preventDefault();
+        break;
+      case 9: // tab
+        if (box.activateWithTab && itemBox && itemBox.isSelected()) {
+          e.preventDefault();
+          itemBox.click();
+        }
+        break;
+      // ignore [escape] [shift] [capslock]
+      case 27:
+        box.abortRequest();
+        itemBox && itemBox.hide();
+        break;
+      }
+    });
+  },
+
+  // Builds an item for this box.
+  makeItem: function (data) {
+    var item = new Item(data);
+    var me = this;
+    item.click = this.itemClicked ||
+                   function () {
+                     window.location = this.data.url;
+                   };
+    return item;
+  },
+
+  makeRequest: function (query) {
+    var callback = this.requestCallback();
+    var input = this.input;
+    var request = $.ajax({
+      url: this.url,
+      dataType: "jsonp",
+      jsonp: "json.wrf",
+      data: {q: "title:" + Utils.solrEscape(query) +
+             " AND entry\\_type:Question"},
+      success: function (data) {
+        var docs = data.response.docs;
+        var hasExactMatch = false;
+        docs.forEach(function (doc) {
+          if (doc.title == query) hasExactMatch = true;
+        });
+        callback(docs);
+      }
+    });
+    return request;
+  },
+
+  // Populates the suggestion box when data is received.
+  processData: function (data) {
+    var items = [];
+    var me = this;
+    data.forEach(function (it) {
+      items.push(me.makeItem(solrConversion(it)));
+    });
+    return items;
+  },
+
+  returnDefault: function () {
+    var input = this.input.val();
+    if (input.trim() != "") {
+      this.action(input);
+    }
+  },
+
+  // HACK
+  itemClicked: null,
+
+  // Action to be run on question title or input box value.
+  action: null
+
+};
+
+Utils.extend(QuestionAutocomplete, AutocompleteBox);
+
 function initTopicAutocompleteForFollowing() {
   var topicBox =
     new TopicAutocomplete("#follow-topics-autocomplete",
