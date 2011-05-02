@@ -19,7 +19,14 @@ $(document).ready(function() {
             element.fadeIn("slow");
           }
           if (data.followers_count) {
-            followers.find(".count span:first").html(data.followers_count);
+            var oldCount = followers.find(".count");
+            if (oldCount.size() == 0) {
+              followers.find(".title").
+                prepend("<span class=\"count\">" + data.followers_count +
+                        "</span>");
+            } else {
+              followers.find(".count").html(data.followers_count);
+            }
           }
         }
         Utils.toggleFollowLink(link);
@@ -55,7 +62,14 @@ $(document).ready(function() {
             element.fadeOut("slow", function () { element.remove(); });
           }
           if (data.followers_count) {
-            followers.find(".count span:first").html(data.followers_count);
+            var countContainer = followers.find(".count");
+            var newCount = $(data.followers_count);
+            if (newCount.attr("data-count") == "0") {
+              // Topic has no followers now
+              countContainer.remove();
+            } else {
+              countContainer.html(newCount);
+            }
           }
         }
         Utils.toggleFollowLink(link);
@@ -73,9 +87,7 @@ $(document).ready(function() {
         if (data.status == "unauthenticate") {
           window.location = "/users/login";
         }
-      },
-
-      type: "POST"
+      }
     };
   });
 

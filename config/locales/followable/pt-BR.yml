@@ -12,8 +12,8 @@ pt-BR:
       one: "1 seguidor(a)"
       other: "%{count} seguidores"
       link:
-        one: "<a href=\"%{link}\">1 seguidor(a)</a>"
-        other: "<a href=\"%{link}\">%{count} seguidores</a>"
+        one: "<a href=\"%{link}\" data-count=\"%{count}\">1 seguidor(a)</a>"
+        other: "<a href=\"%{link}\" data-count=\"%{count}\">%{count} seguidores</a>"
       question:
         one: "1 pessoa segue esta pergunta."
         other: "%{count} pessoas seguem esta pergunta."

@@ -1,9 +1,9 @@
-- if @total_followers > 0
-  .block.followers{"data-entry-type" => @type}
-    %h2.title.count
-      %span
+.block.followers{"data-entry-type" => @type}
+  %h2.title
+    - if @total_followers > 0
+      %span.count
         = t("#{@i18n_class}.link", :count => @total_followers, :link => @path)
-      - if @type == 'topic'
-        %span
-          &= link_to t("user_suggestions.#{@type}"), @path, :class => :'suggestion-link'
-    = render :state => :list
+    - if @type == 'topic'
+      %span
+        &= link_to t("user_suggestions.#{@type}"), @path, :class => :'suggestion-link'
+  = render :state => :list
