@@ -15,7 +15,7 @@
               delete_suggestion_path(:topic => @topic.id,
                                      :user => user.id,
                                      :format => :js),
-              :method => :post, :remote => true, 'data-type" => "json"
+              :method => :post, :remote => true, "data-type" => "json"
 
     .avatar
       = link_to avatar_for(user, :size => 96).html_safe, user_path(user)
