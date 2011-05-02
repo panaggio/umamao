@@ -23,3 +23,8 @@
 
     = f.submit t("questions.new.ask")
     = link_to t('scaffold.cancel'), questions_path, :class => "button cancel"
+
+- form_for ContentImage.new, :multipart => true, :remote => true,
+  :html => { "data-type" => "json" } do |f|
+  = file_field_tag "image"
+  = f.submit

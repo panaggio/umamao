@@ -30,14 +30,16 @@ class UploadedFile
     FileUploader
   end
 
-  def initialize(args)
+  def initialize(*args)
     @file = args.delete :file
-    self.original_filename =
-      if @file.respond_to? :original_filename
-        File.basename @file.original_filename
-      else
-        File.basename @file.path
-      end
+    if @file.present?
+      self.original_filename =
+        if @file.respond_to? :original_filename
+          File.basename @file.original_filename
+        else
+          File.basename @file.path
+        end
+    end
     super
   end
 

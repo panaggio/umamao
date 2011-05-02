@@ -10,4 +10,8 @@ $(document).ready(function() {
   });
 
   $("#question-input").wmdMath({preview: "question-preview"});
+
+  $("#new_content_image").live("ajax:success", function (data) {
+    $("#new_question").after(data.html);
+  });
 });

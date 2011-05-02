@@ -1,0 +1,6 @@
+.image
+  = content_image.filename
+  = link_to "(url)", content_image.url
+  = link_to t("scaffold.destroy"), destroy_content_image_path(content_image),
+    :method => :delete
+  = hidden_field_tag "image_ids[]", content_image.id
