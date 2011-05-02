@@ -13,7 +13,7 @@ group :development do
   gem 'grit'
 end
 
-gem 'rails', '3.0.7'
+gem 'rails', :git => 'git://github.com/umamao/rails.git', :branch => '3-0-7'
 
 gem 'bson_ext', :require => 'bson'
 gem 'mongo'
