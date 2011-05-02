@@ -80,22 +80,10 @@ GIT
       oa-openid (= 0.2.0.beta1)
 
 GIT
-  remote: git://github.com/umamao/validatable.git
-  revision: 6b7d023f79ff7d2a8151a69a315bc4b196fceba5
+  remote: git://github.com/umamao/rails.git
+  revision: d8186734f48b39be7ed68790aa0e5aa0ef6a98ea
+  branch: 3-0-7
   specs:
-    jnunemaker-validatable (1.8.4)
-      activesupport (>= 2.3.4)
-
-GEM
-  remote: http://gemcutter.org/
-  specs:
-    POpen4 (0.1.4)
-      Platform (>= 0.4.0)
-      open4
-    Platform (0.4.0)
-    RedCloth (4.1.9)
-    ZenTest (4.5.0)
-    abstract (1.0.0)
     actionmailer (3.0.7)
       actionpack (= 3.0.7)
       mail (~> 2.2.15)
@@ -122,6 +110,37 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    rails (3.0.7)
+      actionmailer (= 3.0.7)
+      actionpack (= 3.0.7)
+      activerecord (= 3.0.7)
+      activeresource (= 3.0.7)
+      activesupport (= 3.0.7)
+      bundler (~> 1.0)
+      railties (= 3.0.7)
+    railties (3.0.7)
+      actionpack (= 3.0.7)
+      activesupport (= 3.0.7)
+      rake (>= 0.8.7)
+      thor (~> 0.14.4)
+
+GIT
+  remote: git://github.com/umamao/validatable.git
+  revision: 6b7d023f79ff7d2a8151a69a315bc4b196fceba5
+  specs:
+    jnunemaker-validatable (1.8.4)
+      activesupport (>= 2.3.4)
+
+GEM
+  remote: http://gemcutter.org/
+  specs:
+    POpen4 (0.1.4)
+      Platform (>= 0.4.0)
+      open4
+    Platform (0.4.0)
+    RedCloth (4.1.9)
+    ZenTest (4.5.0)
+    abstract (1.0.0)
     addressable (2.2.4)
     arel (2.0.9)
     autotest-rails (4.1.0)
@@ -284,19 +303,6 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-test (0.5.7)
       rack (>= 1.0)
-    rails (3.0.7)
-      actionmailer (= 3.0.7)
-      actionpack (= 3.0.7)
-      activerecord (= 3.0.7)
-      activeresource (= 3.0.7)
-      activesupport (= 3.0.7)
-      bundler (~> 1.0)
-      railties (= 3.0.7)
-    railties (3.0.7)
-      actionpack (= 3.0.7)
-      activesupport (= 3.0.7)
-      rake (>= 0.8.7)
-      thor (~> 0.14.4)
     rake (0.8.7)
     rdiscount (1.6.3.2)
     responders (0.6.2)
@@ -414,7 +420,7 @@ DEPENDENCIES
   omniauth!
   postmark (~> 0.9.0)
   postmark-rails (~> 0.4.0)
-  rails (= 3.0.7)
+  rails!
   rdiscount (~> 1.6.3.1)
   responders
   rmagick
