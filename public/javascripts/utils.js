@@ -182,7 +182,7 @@ window.Utils = {
   },
 
   poshytip_find: function(button) {
-    var anchor = button.find("a:last");
+    var anchor = button.find("a:first");
     if (anchor.length)
       return $(anchor);
     return button;
