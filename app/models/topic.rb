@@ -191,24 +191,6 @@ class Topic
   def merge_with!(other)
     return false if id == other.id
 
-    UserTopicInfo.query(:topic_id => other.id).each do |user_topic_other|
-      if user_topic = UserTopicInfo.first(:topic_id => self.id, 
-                                          :user_id => user_topic_other.user.id)
-         user_topic.following ||= user_topic_other.following
-         user_topic.answers_count += user_topic_other.answers_count
-         user_topic.questions_count += user_topic_other.questions_count
-         if user_topic.save!
-           user_topic_other.destroy
-         end
-      else
-        user_topic_other.topic = user_topic.topic
-        user_topic.save!
-      end
-    end
-
-    self.followers_count = UserTopicInfo.count(:topic_id => self.id,
-                                               :followed_at.ne => nil)
-
     Question.query(:topic_ids => other.id).each do |q|
       q.classify! self
     end
@@ -228,6 +210,40 @@ class Topic
       end
       q.save! if changed
     end
+
+    UserTopicInfo.query(:topic_id => other.id).each do |user_topic_other|
+      if user_topic = UserTopicInfo.first(:topic_id => self.id, 
+                                          :user_id => user_topic_other.user.id)
+        followed_at = []
+        followed_at << user_topic.followed_at if user_topic.followed?
+        followed_at << user_topic_other.followed_at if user_topic_other.
+          followed?
+        user_topic.followed_at = followed_at.min if followed_at.present?
+
+        ignored_at = []
+        ignored_at << user_topic.ignored_at if user_topic.ignored?
+        ignored_at << user_topic_other.ignored_at if user_topic_other.
+          ignored?
+        user_topic.ignored_at = ignored_at.min if ignored_at.present? && 
+          !user_topic.followed_at
+
+         if user_topic.save!
+           user_topic_other.destroy
+         end
+      else
+        user_topic = user_topic_other
+        user_topic.topic = self
+        user_topic.save!
+      end
+
+    end
+
+    UserTopicInfo.query(:topic_id => self.id).each do |user_topic|
+     user_topic.update_counts
+    end
+
+    self.followers_count = UserTopicInfo.count(:topic_id => self.id,
+                                               :followed_at.ne => nil)
 
     # TODO: check whether this is actually safe.
     other.news_items.each do |item|
