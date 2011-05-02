@@ -47,7 +47,6 @@ function initTopicAutocompleteForReclassifying() {
       $(".reclassify .not-empty").show();
     }
     $(".retag").show();
-    $(".topic-title").removeClass("reduced");
   }
 
   // Shows the autocomplete.
@@ -57,7 +56,6 @@ function initTopicAutocompleteForReclassifying() {
     $(".add-topic").show();
     $(".cancel-reclassify").show();
     $(".retag").hide();
-    $(".topic-title").addClass("reduced");
   }
 
   turnOff();

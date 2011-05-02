@@ -9,7 +9,8 @@ module TopicsHelper
     classifiable = options[:classifiable]
     url = url_for(classifiable)
     class_name = classifiable.class.to_s.underscore
-    "<li><div class='topic'><span class='topic-title'>#{
+    "<li><div class='topic'><span class='topic-title'>#{link_to_topic(topic)}</span>
+    #{
       if options[:logged_in] or (self.respond_to?(:logged_in?) and logged_in?)
         if classifiable && options[:ajax_add]
           "<a class='remove' href='#{url}/unclassify?topic=#{h(topic.title)}'>✕</a>"
@@ -17,7 +18,7 @@ module TopicsHelper
           "<input type='hidden' name='#{class_name}[topics][]' value='#{topic.title}'/><span class='remove'>✕</span>"
         end
       end
-    }#{link_to_topic(topic)}</span></div></li>"
+    }</div></li>"
   end
 
   # this should be defined as

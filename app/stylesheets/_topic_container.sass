@@ -22,27 +22,20 @@
     font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
     .topic-title
       white-space: nowrap
-      display: block
-      float: left
-      max-width: 100%
       +ellipsis
-    .reduced
-      max-width: 95%
     .remove
       cursor: pointer
-      display: block
-      float: right
   .topic, .topic a
     color: #444444
     font-weight: normal
-    &:hover
-      background: lighten($link-color, 53%)
     a
       &:link, &:active, &:visited
         cursor: pointer
         text-align: center
       &:hover
         text-decoration: none
+  .topic:hover
+    background: lighten($link-color, 53%)
   .suggested-by
     color: #777777
     font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif
