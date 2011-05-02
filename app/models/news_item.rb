@@ -66,8 +66,13 @@ class NewsItem
                :origin => origin)
 
     if recipient.is_a? User
-      if news_update.entry.is_a? Question
-        news_update.entry.topic_ids.each do |topic_id|
+      if news_update.entry.is_a?(Question) || news_update.entry.is_a?(Answer)
+        if news_update.entry.is_a?(Question)
+          question = news_update.entry
+        else
+          question = news_update.entry.question
+        end
+        question.topic_ids.each do |topic_id|
           return if recipient.ignored_topic_ids.include?(topic_id)
         end
       end
