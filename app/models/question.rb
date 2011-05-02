@@ -411,52 +411,55 @@ class Question
 
       self.needs_to_update_search_index
 
-      # Notify followers of new topic and the topic itself. We give
-      # them the current timestamp so they will appear on top of the
-      # news feed.
-
-      # We need this to make sure that answers appear after question.
-      stamp = Time.zone.now
-
-      # Question updates
-      if news_update
-        # Users
-        topic.followers.each do |follower|
-          if NewsItem.query(:recipient_id => follower.id,
-                            :recipient_type => "User",
-                            :news_update_id => news_update.id).count == 0
-            NewsItem.notify!(news_update, follower, topic, stamp)
-          end
-        end
-        # Topic
-        if NewsItem.query(:recipient_id => topic.id,
-                          :recipient_type => "Topic",
-                          :news_update_id => news_update.id).count == 0
-          NewsItem.notify!(news_update, topic, topic, stamp)
-        end
-      end
-
-      if !banned
-        topic.increment_questions_count
-      end
-
-      ret = save!
-
-      # Ignorers
-      ignorer_ids = topic.ignorer_ids
-      self.news_update.news_items.each do |ni|
-        if ni.recipient_type == 'User' &&
-          ignorer_ids.include?(ni.recipient_id)
-
-          ni.hide! if ni.should_be_hidden?([topic.id])
-        end
-      end
-
-      ret
+      self.save!
+      self.delay.after_topic_inclusion_updates(topic)
+      true
     else
       false
     end
   end
+
+  # Notify users and topic about the inclusion of this question in
+  # topic. Increment topic's questions count. Hide question for topic
+  # ignorers.
+  def after_topic_inclusion_updates(topic)
+
+    # We need this to make sure that answers appear after question.
+    stamp = Time.zone.now
+
+    # Question updates
+    if news_update
+      # Users
+      topic.followers.each do |follower|
+        if NewsItem.query(:recipient_id => follower.id,
+                          :recipient_type => "User",
+                          :news_update_id => news_update.id).count == 0
+          NewsItem.notify!(news_update, follower, topic, stamp)
+        end
+      end
+      # Topic
+      if NewsItem.query(:recipient_id => topic.id,
+                        :recipient_type => "Topic",
+                        :news_update_id => news_update.id).count == 0
+        NewsItem.notify!(news_update, topic, topic, stamp)
+      end
+    end
+
+    if !banned
+      topic.increment_questions_count
+    end
+
+    # Ignorers
+    ignorer_ids = topic.ignorer_ids
+    self.news_update.news_items.each do |ni|
+      if ni.recipient_type == 'User' &&
+          ignorer_ids.include?(ni.recipient_id)
+
+        ni.hide! if ni.should_be_hidden?([topic.id])
+      end
+    end
+  end
+
 
   # Removes self from topic topic.
   def unclassify!(topic)
@@ -464,41 +467,46 @@ class Question
       self.topic_ids_will_change!
       self.topic_ids.delete topic.id
       self.needs_to_update_search_index
-      if !banned
-        topic.increment_questions_count -1
-      end
 
-      # Remove related news items
-      if self.news_update
-        NewsItem.query(:origin_id => topic.id,
-                       :origin_type => "Topic",
-                       :news_update_id => self.news_update.id).each &:delete
-      end
-
-      self.answers.each do |answer|
-        if answer.news_update
-          news_items = NewsItem.query(:origin_id => topic.id,
-                                      :origin_type => "Topic",
-                                      :news_update_id => answer.news_update.id)
-          news_items.each(&:delete)
-        end
-      end
-
-      ret = save!
-
-      # Ignorers
-      ignorer_ids = topic.ignorer_ids
-      self.news_update.news_items.each do |ni|
-        if ni.recipient_type == 'User' &&
-          ignorer_ids.include?(ni.recipient_id)
-
-          ni.show! unless ni.should_be_hidden?([topic.id])
-        end
-      end
-
-      ret
+      self.save!
+      self.delay.after_topic_removal_updates(topic)
+      true
     else
       false
+    end
+  end
+
+  # Remove topic notifications for users that followed the removed
+  # topic, and unhide news items for ignorerers of that topic.
+  def after_topic_removal_updates(topic)
+    # Remove related news items
+    if self.news_update
+      NewsItem.query(:origin_id => topic.id,
+                     :origin_type => "Topic",
+                     :news_update_id => self.news_update.id).each &:delete
+    end
+
+    self.answers.each do |answer|
+      if answer.news_update
+        news_items = NewsItem.query(:origin_id => topic.id,
+                                    :origin_type => "Topic",
+                                    :news_update_id => answer.news_update.id)
+        news_items.each(&:delete)
+      end
+    end
+
+    if !banned
+      topic.increment_questions_count -1
+    end
+
+    # Ignorers
+    ignorer_ids = topic.ignorer_ids
+    self.news_update.news_items.each do |ni|
+      if ni.recipient_type == 'User' &&
+          ignorer_ids.include?(ni.recipient_id)
+
+        ni.show! unless ni.should_be_hidden?([topic.id])
+      end
     end
   end
 
