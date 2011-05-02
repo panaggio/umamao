@@ -6,11 +6,15 @@ pt-BR:
     refuse:
       notice:
         "Sugestão recusada"
-    notification:
-      "%{user} sugeriu que você seguisse o tópico %{topic}"
+    notifications:
+      new_user_suggestion:
+        "%{user} sugeriu que você seguisse o tópico %{topic}"
+      accepted_user_suggestion:
+        "%{user} aceitou sua sugestão e seguiu o tópico %{topic}"
     suggested:
       user: Tópicos sugeridos
-      suggest: Sugira um tópico
+      suggest: Sugirir um tópico
+      suggest_to: Sugerir este tópico para alguém
     suggested_by:
       one: "Sugerido por %{user}"
       other: "Sugerido por %{user} e %{others}"

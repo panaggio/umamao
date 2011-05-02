@@ -26,9 +26,9 @@ module NotificationsHelper
              :user => link_to(h(short_name(origin)), user_path(origin)), 
              :question => link_to(h(question.title),
                                   question_path(question)))
-    when 'new_user_suggestion'
+    when 'new_user_suggestion', 'accepted_user_suggestion'
       topic = notification.topic
-      I18n.t('user_suggestions.notification',
+      I18n.t("user_suggestions.notifications.#{notification.event_type}",
              :user => link_to(h(short_name(origin)), user_path(origin)),
              :topic => link_to(h(topic.title), topic_path(topic)))
     end

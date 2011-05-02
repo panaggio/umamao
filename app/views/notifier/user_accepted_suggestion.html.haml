@@ -1,0 +1,9 @@
+- user_link = link_to h(@user.first_name), url_for(:host => @domain, :controller => "users", :action => "show", :id => @user.id)
+
+- entry_link = link_to h(@entry.title), url_for(:host => @domain, :controller => 'topics', :action => "show", :id => @entry.id)
+
+%p= t('notifier.global.hi', :user => h(@origin.first_name))
+
+%p= t('.message', :user => user_link, :entry => entry_link)
+
+%p= simple_format(t('notifier.global.signature'))

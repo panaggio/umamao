@@ -7,6 +7,13 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Generate notifications of accepted user suggestions"
+    task :generate_accepted_user_suggestions_notifications => :environment do
+      UserSuggestion.all(:accepted_at.ne => nil).each do |us|
+        us.send_accept_notification_to_origin
+      end
+    end
+
     desc "Denormalize Invitation/Student relation."
     task :associate_students_to_invitations => :environment do
       Student.find_each do |student|
