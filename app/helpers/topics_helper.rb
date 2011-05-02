@@ -45,7 +45,7 @@ module TopicsHelper
 
   def topic_tooltip(topic, options = {})
     options.reverse_merge! :render_follow_button => true
-    button_or_nothing = ""
+    button_or_nothing =
       if logged_in? && options[:render_follow_button]
         "<div class=\"follow-info\">#{follow_button topic}</div>"
       else
