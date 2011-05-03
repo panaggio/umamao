@@ -401,9 +401,10 @@ class TopicsController < ApplicationController
 
     if current_user
       user_suggestions = UserSuggestion.query(
-        :entry_id => BSON::ObjectId(params[:id]), :entry_type => 'Topic',
-       :rejected_at => nil, :accepted_at => nil,
-        :$or => [{:origin_id => current_user.id}, {:user_id => current_user.id }]
+        :entry_id => @topic.id, :entry_type => 'Topic',
+        :rejected_at => nil, :accepted_at => nil,
+        :$or => [{:origin_id => current_user.id},
+                 {:user_id => current_user.id }]
       ).all
 
       @users_suggested = user_suggestions.map(&:user).uniq
