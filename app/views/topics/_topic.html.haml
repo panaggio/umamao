@@ -21,9 +21,9 @@
 
     .title
       = link_to h(topic.title), topic_path(topic)
-      - if suggestion != 'friend'
+      - if suggestion != 'friend' && type == 'ignore'
         .controls
-          .button= render :partial => "topics/#{type}", :locals => {:topic => topic}
+          .button= render :partial => "topics/ignore", :locals => {:topic => topic}
 
     .info
       - if suggestion
@@ -37,5 +37,8 @@
         - count = topic.questions_count
         = format_number(count)
         = t(:question_count, :scope => "activerecord.models", :count => count)
+        - if logged_in? && suggestion != 'friend' && type != 'ignore'
+          \|
+          = follow_button topic
     .clear
 
