@@ -135,6 +135,20 @@ class ApplicationController < ActionController::Base
     }
   end
 
+  def get_file_from_raw_post_data
+    return if params[:qqfile].is_a?(ActionDispatch::Http::UploadedFile)
+    extension = params[:qqfile].split('.').last
+
+    # Creating a temp file
+    tempfile = Tempfile.new(["upload", ".#{extension}"], "#{Rails.root}/tmp")
+    tempfile.write  request.body.read
+    tempfile.close
+
+    params[:qqfile] =
+      ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile,
+                                             :filename => params[:qqfile])
+  end
+
   def current_group
     @current_group
   end
