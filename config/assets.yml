@@ -12,7 +12,6 @@ javascripts:
     - public/javascripts/jquery.hotkeys.js
     - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/jquery.poshytip.js
-    - public/javascripts/showdown.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
     - public/javascripts/application.js
