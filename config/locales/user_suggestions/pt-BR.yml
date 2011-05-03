@@ -13,12 +13,12 @@ pt-BR:
         "%{user} aceitou sua sugestão e seguiu o tópico %{topic}"
     suggested:
       user: Tópicos sugeridos
-      suggest: Sugirir um tópico
+      suggest: Sugerir um tópico
       suggest_to: Sugerir este tópico para alguém
     suggested_by:
       one: "Sugerido por %{user}"
       other: "Sugerido por %{user} e %{others}"
-    topic: Sugirir este tópico
+    topic: Sugerir este tópico
     user: Sugerir tópicos
     user_suggest:
       notice:
