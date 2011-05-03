@@ -1,0 +1,47 @@
+- content_for :js do
+  = include_javascripts :content_edit, :show_question_list, :topics_email_subscription
+  = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.min.js"
+  = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.mathjax.js"
+
+- content_for :css do
+  = stylesheet_link_tag "#{AppConfig.wmd_location}/wmd.css"
+  = include_stylesheets :question_list_print, :media => 'print'
+
+- content_for :head do
+  %meta{:name => "keywords", :content => clean_seo_keywords(@question_list.topics.map(&:title).dup, @question_list.title)}
+  - if @question_list.description.present?
+    %meta{:name => "description", :content => @question_list.description.gsub(/<\/?[^>]*>/, "")[0, 255] }
+  %link{:rel => "canonical", :href => question_list_url(@question_list_url) }
+
+#question-list
+
+  %h1.navtitle.title.entry-title.question-list-title-col
+    &= @question_list.title
+
+  .body-col
+    .description.markdown
+      = markdown(@question_list.description)
+
+    = render :partial => "shared/classify", :locals => {:classifiable => @question_list, :ajax_add => false}
+
+  - if @question_list.question_list_files.present?
+    .files
+      %h2= t(".files.title")
+      %ul
+        - @question_list.question_list_files.each do |question_list_file|
+          %li
+            = link_to question_list_file.original_filename, question_list_file.url
+            - if logged_in? && question_list_file.can_be_destroyed_by?(current_user)
+              = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post, :class => "remove"
+
+  %ul.items#questions
+    - if @questions.empty?
+      %li.empty
+        - if @question_list.question_list_files.present?
+          = t(".empty.transcribe")
+        - else
+          = t(".empty.basic")
+    - else
+      - @questions.each do |question|
+        = render :partial => "question", :object => question
+  .clear

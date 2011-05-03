@@ -47,6 +47,16 @@ class QuestionListsController < TopicsController
     @new_question = Question.new
   end
 
+  def print
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
+    set_page_title(@question_list.title)
+
+    @questions = @question_list.questions
+  end
+
   # GET /question_lists/1/unanswered
   def unanswered
     show_init('is_open' => true)
