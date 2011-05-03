@@ -39,6 +39,13 @@
             - if logged_in? && question_list_file.can_be_destroyed_by?(current_user)
               = link_to t("scaffold.destroy"), destroy_file_question_list_path(@question_list, :file => question_list_file.id), :method => :post, :class => "remove"
 
+  - if @questions.any?
+    .secondary-navigation
+      - tabs_tag :namespace => :question_list_show, :open_tabs => { :class => :tabs } do |tab|
+        = tab.all t('.all'), question_list_path(@question_list)
+        - unanswered_counter = @unanswered_questions_count > 0 ? " (#{@unanswered_questions_count})" : ""
+        = tab.unanswered t('.unanswered') << unanswered_counter, unanswered_question_list_path(@question_list)
+
   %ul.items#questions
     - if @questions.empty?
       %li.empty

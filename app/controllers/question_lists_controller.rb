@@ -39,19 +39,20 @@ class QuestionListsController < TopicsController
 
   # GET /question_lists/1
   def show
-    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+    show_init
+    set_tab :all, :question_list_show
 
-    raise Goalie::NotFound unless @question_list
-
-    set_page_title(@question_list.title)
-
-    @page = params[:page] || 1
-    options = {
-      :per_page => 20, :page => @page,
-      :order => [:votes, "created_at asc"], :banned => false
-    }
-    @questions = @question_list.questions.paginate(options)
     @new_question = Question.new
+  end
+
+  # GET /question_lists/1/unanswered
+  def unanswered
+    show_init('is_open' => true)
+    set_tab :unanswered, :question_list_show
+
+    respond_to do |format|
+      format.html { render 'show' }
+    end
   end
 
   # FIXME: Merge with QuestionsController#classify via a common module
@@ -152,6 +153,29 @@ class QuestionListsController < TopicsController
   end
 
   protected
+  def calculate_unanswered_count
+    @question_list.questions.count(:is_open => true)
+  end
+
+  def show_init(query = {})
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
+    @unanswered_questions_count = calculate_unanswered_count
+
+    set_page_title(@question_list.title)
+
+    @page = params[:page] || 1
+
+    options = {
+      :per_page => 20, :page => @page,
+      :order => [:votes, "created_at asc"], :banned => false
+    }
+
+    @questions = @question_list.questions.query(query).paginate(options)
+  end
+
   def main_topic_allow_question_lists
     @main_topic = Topic.find_by_slug_or_id(params[:main_topic] ||
                                            params[:question_list][:main_topic])
