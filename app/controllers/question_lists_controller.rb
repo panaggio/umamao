@@ -118,6 +118,22 @@ class QuestionListsController < TopicsController
     end
   end
 
+  def follow
+    super
+
+    @topic.questions.each do |q|
+      q.add_watcher(current_user)
+    end
+  end
+
+  def unfollow
+    super
+
+    @topic.questions.each do |q|
+      q.remove_watcher(current_user)
+    end
+  end
+
   def create_file
     @question_list = QuestionList.find_by_slug_or_id(params[:id])
 
