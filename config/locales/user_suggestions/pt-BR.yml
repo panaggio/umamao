@@ -18,7 +18,7 @@ pt-BR:
     suggested_by:
       one: "Sugerido por %{user}"
       other: "Sugerido por %{user} e %{others}"
-    topic: Sugira este tópico
+    topic: Sugirir este tópico
     user: Sugerir tópicos
     user_suggest:
       notice:
