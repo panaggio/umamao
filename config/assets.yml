@@ -73,3 +73,5 @@ stylesheets:
     - public/stylesheets/tip-twitter.css
   embedded:
     - public/stylesheets/embedded.css
+  question_list_print:
+    - public/stylesheets/compiled/question_list_print.css

@@ -1,0 +1,38 @@
+#header, #footer
+  display: none
+
+#container
+  &, & #wrapper
+    &, & #main
+      &, & #block-text
+        &, & #content
+          &, & #inner
+            &, & #question-list
+              width: auto
+              border: 0
+              margin: 0
+              padding: 0
+              float: none !important
+
+#question-list
+  .markdown
+    &, & > *
+      width: auto
+      font:
+        family: serif
+
+  a:link, a:visited
+    font:
+      family: serif
+    color: black
+    background: transparent
+    font-weight: bold
+    text-decoration: underline
+  
+  &:after
+    content: ' [' attr(href) '] '
+    font:
+      size: 0.75em
+
+  &[href^="/"]:after
+    content: " [http://umamao.com" attr(href) "] "
