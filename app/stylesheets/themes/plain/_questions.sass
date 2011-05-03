@@ -1,3 +1,4 @@
+@import compass/utilities/general/clearfix
 #question, #question-list, #topic
   .body-col, .controls
     .actions
@@ -199,3 +200,12 @@
 #invitation-message.request-answer
   textarea
     height: 100px
+
+#preview-command
+  #view
+    float: right
+    display: none
+  #hide
+    a
+      float: right
+  +clearfix
