@@ -1,4 +1,6 @@
-#header, #footer
+@import "compass/css3/box-shadow"
+
+#header, #footer, #uservoice-feedback, #MathJax_Message
   display: none
 
 #container
@@ -15,24 +17,49 @@
               float: none !important
 
 #question-list
-  .markdown
-    &, & > *
-      width: auto
-      font:
-        family: serif
-
-  a:link, a:visited
+  h1.navtitle, .markdown, .markdown > *
+    width: auto
     font:
       family: serif
-    color: black
-    background: transparent
-    font-weight: bold
-    text-decoration: underline
-  
-  &:after
-    content: ' [' attr(href) '] '
-    font:
-      size: 0.75em
 
-  &[href^="/"]:after
-    content: " [http://umamao.com" attr(href) "] "
+  h3
+    padding-bottom: 5px
+
+  img, table
+    margin: 0 auto
+  img
+    display: block
+  .MathJax img
+    display: inherit
+    margin: inherit
+
+  ul#classify-ul.topic-list
+    &:before
+      // FIXME: internationalize
+      content: "Tópicos: "
+      font:
+        family: serif
+        size: 1.25em
+
+    & li .topic
+      +box-shadow(0px 0px 0px white)
+      border: 0
+      background-color: white
+
+
+  a
+    &:link, &:visited
+      font:
+        family: serif
+      color: black
+      background: transparent
+      font-weight: bold
+  
+    &:after
+      content: ' [' attr(href) '] '
+      font:
+        size: 0.75em
+
+    // FIXME: umamao.com should be configurable
+    &[href^="/"]:after
+      content: " [http://umamao.com" attr(href) "] "
