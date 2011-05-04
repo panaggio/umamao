@@ -1,6 +1,8 @@
 - students = local_assigns[:students]
 - link_to_main = local_assigns[:link_to_main]
 
+= render :partial => 'shared/share_header', :locals => { :opts => { :content => topic, :class_name => Topic.to_s.underscore }, :content_url => topic_url(topic) }
+
 - content_for :sidebar do
   - if logged_in?
     .follow-info.block
@@ -34,3 +36,5 @@
 
   - if link_to_main
     = link_to(local_assigns[:main_title] || t(".main"), topic_path(topic))
+
+  = render :partial => 'shared/share_body', :locals => { :opts => { :content => topic.id, :class_name => Topic.to_s.underscore } }

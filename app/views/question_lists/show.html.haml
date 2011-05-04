@@ -6,6 +6,8 @@
 - content_for :css do
   = stylesheet_link_tag "#{AppConfig.wmd_location}/wmd.css"
 
+= render :partial => 'shared/share_header', :locals => { :opts => { :content => @question_list, :class_name => QuestionList.to_s.underscore }, :content_url => question_list_url(@question_list) }
+
 - content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question_list.topics.map(&:title).dup, @question_list.title)}
   - if @question_list.description.present?
@@ -79,3 +81,4 @@
   = render :partial => "topics/follow", :locals => {:topic => @question_list, :block => "block"}
   = render :partial => "topics/email_subscription", :locals => {:topic => @question_list, :block => "block"}
   = render_cell :users, :followers, :followed => @question_list
+  = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question_list.id, :class_name => QuestionList.to_s.underscore } }

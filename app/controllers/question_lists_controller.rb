@@ -42,6 +42,8 @@ class QuestionListsController < TopicsController
     show_init
     set_tab :all, :question_list_show
 
+    @open_sharing_widget = flash[:connected_to]
+
     @new_question = Question.new
   end
 

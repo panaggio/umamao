@@ -124,10 +124,10 @@ pt-BR:
       needs_connection:
         title: Conecte sua conta
         message: |
-          Para poder postar essa pergunta no %{site}, é necessário
-          conectar sua conta. Ao clicar no botão "Conectar" abaixo,
-          você será direcionado ao %{site} para autorizar o uso de
-          sua conta. Você retornará ao site ao final do processo de
+          Para poder compartilhar no %{site}, é necessário conectar
+          sua conta. Ao clicar no botão "Conectar" abaixo, você será
+          direcionado ao %{site} para autorizar o uso de sua
+          conta. Você retornará ao site ao final do processo de
           autorização.
       needs_permission: |
         Aparentemente, sua conta do %{site} não está conectada com
@@ -136,11 +136,8 @@ pt-BR:
       request_closing: Pedir para fechar
       request_closing_details: Pedir para fechar esta pergunta
       retract_request: Já colocou um pedido. Quer retirá-lo?
-      share: Compartilhar pergunta
       share_on: Compartilhar esta pergunta no %{site}
       share_success: Pergunta compartilhada com sucesso no %{site}.
-      post_on_facebook: Postar no Facebook
-      post_on_twitter: Postar no Twitter
       solution: Resposta aceita
       to_answer_question: para responder a esta pergunta
       unauthenticated_retag: Você precisa de uma conta para editar tópicos

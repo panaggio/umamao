@@ -226,6 +226,8 @@ Shapado::Application.routes.draw do
   resources :flags
   resources :share_question
   resources :share_answer
+  resources :share_topic
+  resources :share_question_list
 
   scope '/manage' do
     resources :widgets do
