@@ -264,18 +264,4 @@ $(document).ready(function() {
     $(this).closest(".commentable").find(".comments_wrapper").slideToggle("slow");
     return false;
   });
-
-  $(".show_preview_answer").live("click", function () {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "answer-preview"]);
-    $("#answer-preview-area").slideDown();
-    $("#preview-command #view").hide();
-    $("#preview-command #hide").show();
-    return false;
-  });
-  $(".hide_preview_answer").live("click", function () {
-    $("#answer-preview-area").slideUp();
-    $("#preview-command #view").show();
-    $("#preview-command #hide").hide();
-    return false;
-  });
 });

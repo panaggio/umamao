@@ -1,3 +1,4 @@
+= include_javascripts :content_edit, :show_question, :math_preview
 = f.error_messages
 .group
   = f.label :title, "#{t(:title, :scope => "activerecord.attributes.question")}*", :class => "label"
@@ -9,9 +10,14 @@
   .group
     = f.label :body, t("questions.form.details"), :class => "label"
     = f.text_area :body, :class => "editor-input", :id => "question-input", :rows => "auto", :cols => "auto"
-    %label.label
-      = t("global.preview")
-    #question-preview.markdown
+    #preview-command
+      %label.label
+        = t("global.preview")
+      #view
+        = "(#{link_to t("global.enable"), "#", :class => "show_preview_answer"})"
+      #hide
+        = "(#{link_to t("global.disable"), "#", :class => "hide_preview_answer"})"
+    #preview-area.markdown
 
   - if topics
     %hr
