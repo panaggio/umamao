@@ -9,7 +9,8 @@ class ContentImagesController < ApplicationController
       data = {
         :success => true,
         :html => render_to_string(:partial => "content_image",
-                                  :locals => {:content_image => @content_image})
+                                  :locals => {:content_image => @content_image}),
+        :url => @content_image.url
       }
     else
       data = {:success => false}

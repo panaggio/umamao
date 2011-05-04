@@ -1,0 +1,8 @@
+#image-prompt.modal
+  - form_for ContentImage.new, :multipart => true, :remote => true,
+    :html => { "data-type" => "json" } do |f|
+    = file_field_tag "image"
+    = text_field_tag :link
+    .controls
+      = link_to t("scaffold.cancel"), "#", :class => "close"
+      = f.submit
