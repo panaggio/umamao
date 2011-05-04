@@ -51,6 +51,10 @@ class QuestionListsController < TopicsController
     print_init
   end
 
+  def print
+    print_init
+  end
+
   # GET /question_lists/1/unanswered
   def unanswered
     show_init('is_open' => true)

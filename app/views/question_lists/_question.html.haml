@@ -1,11 +1,28 @@
-- render_answer_count = true if render_answer_count.nil?
+- options = { :render_answer_count => true, :render_answers => false,
+              :render_comments => false }.merge(options||={})
 
 %li.entry.item{:class => class_for_question(question)}
-  .summary
+  .summary.question
     %h3= link_to h(question.title), question_path(question)
     .body.markdown
       = markdown(question.body)
-    - if render_answer_count
+
+    - if options[:render_comments] && (comments = question.comments.all).size > 0
+      .comments
+        - comments.each do |comment|
+          = render :partial => 'comment', :locals => { :comment => comment }
+
+    - if options[:render_answer_count]
       .answers_count
         - link_text = t(".answers_count", :count => question.answers_count)
         = link_to link_text, question_path(question)
+
+    - if options[:render_answers] && (answers = question.answers.all).size > 0
+      .answers
+        - answers.each do |answer|
+          = render :partial => 'answer', :locals => { :answer => answer }
+
+          - if options[:render_comments] && (comments = answer.comments).size > 0
+            .comments
+              - comments.each do |comment|
+                = render :partial => 'comment', :locals => { :comment => comment }

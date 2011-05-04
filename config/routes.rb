@@ -19,6 +19,7 @@ Shapado::Application.routes.draw do
       get :unclassify
       get :unanswered
       get :questions_print
+      get :print
       post :create_file
       post :destroy_file
     end
