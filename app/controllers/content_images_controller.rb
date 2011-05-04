@@ -2,18 +2,21 @@ class ContentImagesController < ApplicationController
   before_filter :login_required
 
   def create
-    @content_image = ContentImage.new(:file => params[:image])
+    @content_image = ContentImage.new(:file => params[:image],
+                                      :user => current_user)
 
     if @content_image.save
-      render :json => {
+      data = {
         :success => true,
-        :html =>
-        render_to_string(:partial => "content_images/content_image",
-                         :locals => { :content_image => @content_image })
-      }.to_json
+        :html => render_to_string(:partial => "content_image",
+                                  :locals => {:content_image => @content_image})
+      }
     else
-      render :json => {:success => false}.to_json
+      data = {:success => false}
     end
+
+    render(:partial => "shared/remotipart_response.js",
+           :locals => { :data => data })
   end
 
   def destroy

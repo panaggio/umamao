@@ -11,7 +11,7 @@ $(document).ready(function() {
 
   $("#question-input").wmdMath({preview: "question-preview"});
 
-  $("#new_content_image").live("ajax:success", function (data) {
-    $("#new_question").after(data.html);
+  $("#new_content_image").bind("ajax:success", function (event, data) {
+    $("#ask_question").after(data.html);
   });
 });
