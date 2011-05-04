@@ -1147,8 +1147,11 @@ namespace :data do
 
     desc "Migrate topic's follower information to UserTopicInfo model"
     task :user_topic_info_migration => :environment do
-      Topic.query(:followers_count => {'$gt' => 0}).each do |topic|
-        next if !topic['follower_ids'] ||
+      Topic.query(:follower_ids=> {"$not" => {'$size' => 0}}).each do |topic|
+        if topic['follower_ids'].blank?
+          puts topic['follower_ids']
+        end
+        next if topic['follower_ids'].blank?
         topic['follower_ids'].each do |user_id|
           next if UserTopicInfo.count(:user_id => user_id,
                               :topic_id => topic.id) > 0
