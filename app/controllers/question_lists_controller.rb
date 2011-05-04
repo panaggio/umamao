@@ -47,14 +47,8 @@ class QuestionListsController < TopicsController
     @new_question = Question.new
   end
 
-  def print
-    @question_list = QuestionList.find_by_slug_or_id(params[:id])
-
-    raise Goalie::NotFound unless @question_list
-
-    set_page_title(@question_list.title)
-
-    @questions = @question_list.questions
+  def questions_print
+    print_init
   end
 
   # GET /question_lists/1/unanswered
@@ -186,6 +180,16 @@ class QuestionListsController < TopicsController
     }
 
     @questions = @question_list.questions.query(query).paginate(options)
+  end
+
+  def print_init
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
+    set_page_title(@question_list.title)
+
+    @questions = @question_list.questions
   end
 
   def main_topic_allow_question_lists
