@@ -1,8 +1,11 @@
+- render_answer_count = true if render_answer_count.nil?
+
 %li.entry.item{:class => class_for_question(question)}
   .summary
     %h3= link_to h(question.title), question_path(question)
     .body.markdown
       = markdown(question.body)
-    .answers_count
-      - link_text = t(".answers_count", :count => question.answers_count)
-      = link_to link_text, question_path(question)
+    - if render_answer_count
+      .answers_count
+        - link_text = t(".answers_count", :count => question.answers_count)
+        = link_to link_text, question_path(question)

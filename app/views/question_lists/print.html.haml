@@ -30,5 +30,6 @@
           = t(".empty.basic")
     - else
       - @questions.each do |question|
-        = render :partial => "question", :object => question
+        = render :partial => "question", :object => question,
+          :locals => { :render_answer_count => false }
   .clear
