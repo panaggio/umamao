@@ -19,8 +19,11 @@
 #question-list
   h1.navtitle, .markdown, .markdown > *
     width: auto
-    font:
-      family: serif
+    font-family: serif
+
+    a:after
+      content: ' [' attr(href) '] '
+      font-size: 0.5em
 
   h3
     padding-bottom: 5px
@@ -54,12 +57,3 @@
       color: black
       background: transparent
       font-weight: bold
-  
-    &:after
-      content: ' [' attr(href) '] '
-      font:
-        size: 0.75em
-
-    // FIXME: umamao.com should be configurable
-    &[href^="/"]:after
-      content: " [http://umamao.com" attr(href) "] "
