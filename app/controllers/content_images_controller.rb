@@ -1,23 +1,18 @@
 class ContentImagesController < ApplicationController
   before_filter :login_required
-  before_filter :get_file_from_raw_post_data, :only => :create
 
   def create
-    @content_image = ContentImage.new(:file => params[:qqfile])
+    @content_image = ContentImage.new(:file => params[:image])
 
     if @content_image.save
-      if request.xhr?
-        render :json => {
-          :success => true,
-          :html =>
-            render_to_string(:partial => "content_images/content_image",
-                             :locals => { :content_image => @content_image })
-        }.to_json
-      end
+      render :json => {
+        :success => true,
+        :html =>
+        render_to_string(:partial => "content_images/content_image",
+                         :locals => { :content_image => @content_image })
+      }.to_json
     else
-      if request.xhr?
-        render :json => {:success => false}.to_json
-      end
+      render :json => {:success => false}.to_json
     end
   end
 
@@ -32,5 +27,6 @@ class ContentImagesController < ApplicationController
   end
 
 end
+
 
 
