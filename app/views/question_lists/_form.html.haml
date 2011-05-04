@@ -8,10 +8,10 @@
     = f.label :title, "#{t('.new_question')}*", :class => "label"
     .example
       = t(".example", :list_title => question_list.title)
-    = f.text_field :title, :class => "text_field", :id => "question-title-input"
+    = f.text_field :title, :class => "text_field", :id => "question_title"
   .body
     = f.label :body, t(".details"), :class => "label"
-    = f.text_area :body, :class => "editor-input"
+    = f.text_area :body, :class => "editor-input", :id => "question-input"
   .preview
     %label.label
       = t("global.preview")

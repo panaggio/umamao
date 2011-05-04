@@ -20,7 +20,7 @@ $(document).ready(function () {
         $("#new_question_form .editor-input").val("");
         $("#questions .empty").remove();
         var prefix = $("#question-list h1.navtitle").text().trim();
-        var questionTitleInput = $("#question-title-input");
+        var questionTitleInput = $("#question_title");
         questionTitleInput.val(prefix + " - ");
         questionTitleInput.focus();
         window.location.hash = "form";
@@ -31,13 +31,13 @@ $(document).ready(function () {
   // Add new questions
   $("#question-list #add_content .add_questions").click(function () {
     var prefix = $("#question-list h1.navtitle").text().trim();
-    var questionTitleInput = $("#question-title-input");
+    var questionTitleInput = $("#question_title");
     $("#question-list #add_content").hide();
     $("#question-list #new_question_form").show();
     questionTitleInput.val(prefix + " - ");
     questionTitleInput.focus();
     if (!wmdInit) {
-      $("#question_body").wmdMath({preview: "question-preview"});
+      $("#question-input").wmdMath({preview: "question-preview"});
       wmdInit = true;
     }
   });
