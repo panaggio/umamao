@@ -2,7 +2,7 @@
   = include_javascripts :content_edit, :show_question_list, :topics_email_subscription
 
 - content_for :css do
-  = include_stylesheets :question_list_print, :media => 'print'
+  = include_stylesheets :question_list_print, :media => 'all'
 
 - content_for :head do
   %meta{:name => "keywords", :content => clean_seo_keywords(@question_list.topics.map(&:title).dup, @question_list.title)}
@@ -13,7 +13,7 @@
 #question-list
 
   %h1.navtitle.title.entry-title.question-list-title-col
-    &= @question_list.title
+    &= link_to @question_list.title, question_list_url(@question_list)
 
   .body-col
     .description.markdown
