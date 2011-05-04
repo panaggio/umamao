@@ -1,6 +1,10 @@
 - if @topics.count == 0
   %h2.title
-    = t("followable.topics.none")
+    - if params[:id] == current_user.id
+      = t("followable.topics.none")
+    - else
+      = t("user_suggestions.user_follows_nothing", :user => @user.name)
+      = "#{link_to t("user_suggestions.user"), @path, :class => 'suggestion-link'}."
 - else
   .block.followed-topics
     %h2.title
@@ -8,7 +12,7 @@
         = t("followable.topics.link", :count => @topics.count, :link => @path)
       - unless params[:id] == current_user.id
         %span
-          = link_to t("user_suggestions.user"), @path, :class => :'suggestion-link'
+          = link_to t("user_suggestions.user"), @path, :class => 'suggestion-link'
     %ul.topic-list
       - @topics.each do |topic|
         %li
