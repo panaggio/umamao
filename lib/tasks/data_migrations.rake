@@ -1124,18 +1124,18 @@ namespace :data do
       print "\n"
     end
 
-    def create_user_topic_info(user_id, topic_id, following=false,
-                               ignoring=false)
+    def create_user_topic_info(user_id, topic_id, opts = {})
       return if UserTopicInfo.count(:user_id => user_id,
                                     :topic_id => topic_id) > 0
       uti = UserTopicInfo.new(:user_id => user_id, :topic_id => topic_id)
 
-      if following
+      if opts[:following]
         uti.follow!
       end
-      if ignoring
+      if opts[:ignoring]
         uti.ignore!
       end
+      uti.save!
     end
 
     desc "Migrate topic's follower information to UserTopicInfo model"
@@ -1152,9 +1152,6 @@ namespace :data do
           print "-"
           create_user_topic_info(user_id, topic.id, :following => true)
         end
-        topic['old_follower_ids'] = topic['follower_ids']
-        topic['follower_ids'] = nil
-        topic.save(:validate => false)
       end
       print "\nIgnored\n"
       User.find_each(:ignored_topic_ids => {"$not" => {"$size" => 0}}) do |user|
