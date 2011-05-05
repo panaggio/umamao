@@ -30,6 +30,8 @@ class TopicsController < ApplicationController
       return
     end
 
+    @open_sharing_widget = flash[:connected_to]
+
     set_page_title(@topic.title)
 
     set_tab :all, :topic_show

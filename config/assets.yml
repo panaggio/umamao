@@ -25,6 +25,7 @@ javascripts:
     - public/javascripts/modules/topic_tooltip.js
     - public/javascripts/modules/user_suggestions.js
     - public/javascripts/modules/math_preview.js
+    - public/javascripts/modules/share_content.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:

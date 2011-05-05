@@ -1,6 +1,6 @@
 - if logged_in?
   .share.block
-    %h3= t("#{opts[:class_name].pluralize}.show.share")
+    %h3= t("share_content.share.#{opts[:class_name]}")
     - ["facebook", "twitter"].each do |site|
       = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
         send("new_share_#{opts[:class_name]}_path".to_sym,
