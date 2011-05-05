@@ -48,6 +48,9 @@
         - unanswered_counter = @unanswered_questions_count > 0 ? " (#{@unanswered_questions_count})" : ""
         = tab.unanswered t('.unanswered') << unanswered_counter, unanswered_question_list_path(@question_list)
 
+    - if current_tab(:question_list_show) == :unanswered
+      = render :partial => 'questions/unanswered_tip'
+
   %ul.items#questions
     - if @questions.empty?
       %li.empty
