@@ -3,6 +3,7 @@
     :html => { "data-type" => "json" } do |f|
     = file_field_tag "image"
     = text_field_tag :link
+    = hidden_field_tag "type", entry_type
     .controls
       = link_to t("scaffold.cancel"), "#", :class => "close"
       = f.submit t("scaffold.add")

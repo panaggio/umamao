@@ -228,5 +228,50 @@ window.Utils = {
       + "#question-list #classify-ul .topic").poshytip(
         $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
     );
+  },
+
+  enableImageUploadsOnEditor: function () {
+    $("#content-images .remove")
+      .live("ajax:success", function (event, data) {
+        $(this).closest(".content_image").slideUp("slow", function () {
+          $(this).remove();
+        });
+    });
+
+    return function (makeLinkMarkdown) {
+      Utils.modal({inline: true, href: "#image-prompt"});
+
+      $("#new_content_image").bind("ajax:remotipartSubmit",
+                                   function (event, xhr, settings) {
+        var link = $(this).find("input[name=link]").val();
+        settings.resetForm = true;
+        if (link != "") {
+          makeLinkMarkdown(link);
+          xhr.abort("aborted");
+          $.colorbox.close();
+          return false;
+        }
+        return true;
+      }).bind("ajax:success", function (event, data) {
+        $("#content-images").append(data.html);
+        makeLinkMarkdown(data.url);
+      }).bind("ajax:complete", function (event) {
+        $.colorbox.close();
+      });
+    };
+
+  },
+
+  enableEditor: function (selector, previewId) {
+    editorOptions = {
+      preview: previewId
+    };
+
+    if ($("#image-prompt").length > 0) {
+      editorOptions.imageDialogText = Utils.enableImageUploadsOnEditor();
+    }
+
+    $(selector).wmdMath(editorOptions);
   }
+
 };

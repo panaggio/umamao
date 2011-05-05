@@ -34,6 +34,9 @@ class Question
   key :closed, Boolean, :default => false
   key :closed_at, Time
 
+  key :content_image_ids, Array
+  has_many :content_images, :in => :content_image_ids
+
   key :parent_question_id, String, :index => true
   belongs_to :parent_question, :class_name => 'Question'
   scope :children_of, lambda { |question|

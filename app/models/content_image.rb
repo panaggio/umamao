@@ -2,10 +2,6 @@
 
 class ContentImage < UploadedFile
 
-  key :entry_id, String
-  key :entry_type, String
-  belongs_to :entry, :polymorphic => true
-
   def self.maxsize
     10 * 1024 * 1024
   end

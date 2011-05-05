@@ -17,3 +17,6 @@
       = f.submit t("scaffold.update"), :class => "buttton"
       = t("global.or")
       = link_to t('scaffold.cancel'), question_path(@question), :class => "button cancel"
+
+= render :partial => "shared/image_prompt",
+  :locals => { :entry_type => "answer" }

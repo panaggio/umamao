@@ -88,6 +88,9 @@
         = render :partial => "answers/form", :locals => {:f => f, :markdown => true}
         .group.navform
           = submit_tag t("answers.form.submit"), :class => "button"
+    -# Image upload prompt; hidden by default
+    = render :partial => "shared/image_prompt",
+      :locals => { :entry_type => "answer" }
   - else
     - if not logged_in?
       %p= t("answers.form.not_logged", :link => new_user_session_path)

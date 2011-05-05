@@ -1,3 +1,3 @@
-$(function () {
-  $("#question-input").wmdMath({preview: "question-preview"});
+$(document).ready(function () {
+  Utils.enableEditor("#question-input", "question-preview");
 });

@@ -19,6 +19,9 @@ class Answer < Comment
   key :question_id, String
   belongs_to :question
 
+  key :content_image_ids, Array
+  has_many :content_images, :in => :content_image_ids
+
   has_many :flags, :as => "flaggeable", :dependent => :destroy
 
   has_many :comments, :foreign_key => "commentable_id", :class_name => "Comment", :order => "created_at asc", :dependent => :destroy

@@ -1,13 +1,11 @@
 %label.label
   = t(".answer_label")
 = f.text_area :body, {:class => "editor-input", :rows => "auto", :cols => "auto", :id => "answer-input"}
-
+= render :partial => "content_images/content_images",
+  :locals => { :entry => @answer }
 %label.label
   = t("global.preview")
 #answer-preview.markdown
-
-%script{:type => "text/javascript", :charset => "utf-8"}
-  $().ready(function() { $("#answer-input").wmdMath({preview: "answer-preview"}); });
 
 - if !@answer.new?
   .group

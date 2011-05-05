@@ -9,7 +9,10 @@ class ContentImagesController < ApplicationController
       data = {
         :success => true,
         :html => render_to_string(:partial => "content_image",
-                                  :locals => {:content_image => @content_image}),
+                                  :locals => {
+                                    :content_image => @content_image,
+                                    :entry_type => params[:type]
+                                  }),
         :url => @content_image.url(:large)
       }
     else
@@ -25,7 +28,7 @@ class ContentImagesController < ApplicationController
 
     raise Goalie::NotFound if @content_image.blank?
 
-    @content_image.destroy
+    @content_image.delay.destroy
 
     if request.xhr?
       render :json => { :success => true }

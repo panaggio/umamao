@@ -37,7 +37,7 @@ $(document).ready(function () {
     questionTitleInput.val(prefix + " - ");
     questionTitleInput.focus();
     if (!wmdInit) {
-      $("#question_body").wmdMath({preview: "question-preview"});
+      Utils.enableEditor("#question_body", "question-preview");
       wmdInit = true;
     }
   });

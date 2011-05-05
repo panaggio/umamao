@@ -1,0 +1,5 @@
+#content-images
+  - entry.content_images.each do |content_image|
+    = render :partial => "content_images/content_image",
+      :locals => {:content_image => content_image,
+                  :entry_type => entry.class.to_s.underscore}

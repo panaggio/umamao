@@ -10,7 +10,7 @@ $(document).ready(function() {
     var description = $("#new_question_list .initially-hidden");
     description.slideDown("slow", function () {
       if (!wmdInit) {
-        $("#description-input").wmdMath({preview: "description-preview"});
+        Utils.enableEditor("#description-input", "description-preview");
         wmdInit = true;
       }
     });

@@ -13,7 +13,8 @@
     - details_class = "editor-input"
     - details_class += " shorter-details" if @question.new?
     = f.text_area :body, :class => details_class, :id => "question-input", :rows => "auto", :cols => "auto"
-    #content-images
+    = render :partial => "content_images/content_images",
+      :locals => { :entry => @question }
     %label.label
       = t("global.preview")
     #question-preview.markdown
