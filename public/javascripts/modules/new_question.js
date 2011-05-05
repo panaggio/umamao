@@ -18,10 +18,12 @@ $(document).ready(function() {
     var details = $("#question-details");
     details.slideDown("slow", function () {
       if (!wmdInit) {
-        $("#question-input").wmdMath({preview: "question-preview"});
+        $("#question-input").wmdMath({
+                    preview: "preview-area",
+                    needsMathRefresh: function(){
+                         return $("#preview-command #view").css('display') == 'none';}});
         wmdInit = true;
-      }
-    });
+      }});
     link.fadeOut("slow", function () { link.remove(); });
   });
 
