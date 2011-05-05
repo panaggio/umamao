@@ -9,5 +9,10 @@ $(document).ready(function() {
     highlightEffect($("#sidebar .help"));
   });
 
-  $("#question-input").wmdMath({preview: "question-preview"});
+  $("#question-input").wmdMath({
+    preview: "preview-area",
+    needsMathRefresh: function(){
+      return $("#preview-command #view").css('display') == 'none';
+    }
+  });
 });

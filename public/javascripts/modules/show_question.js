@@ -264,5 +264,4 @@ $(document).ready(function() {
     $(this).closest(".commentable").find(".comments_wrapper").slideToggle("slow");
     return false;
   });
-
 });

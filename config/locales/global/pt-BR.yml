@@ -42,6 +42,8 @@ pt-BR:
     edit:
       success: 'Alterações salvas.'
       error: 'Erro ao salvar alterações.'
+    enable: ativar
+    disable: desativar
   feeds:
     question: Seguir RSS desta pergunta
     questions: Seguir RSS de todas as perguntas
