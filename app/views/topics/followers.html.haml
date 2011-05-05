@@ -5,7 +5,7 @@
 #profile-display
   %input#topic_id{:type => 'hidden', :value => @topic.id}
 
-  %h2= t("followable.followers", :count => @followers.empty? ? 0 : @followers.total_entries)
+  %h2= t("followable.followers", :count => @user_topic_followers.empty? ? 0 : @user_topic_followers.total_entries)
 
   - if logged_in?
     %input.user_id{:type => 'hidden', :value => current_user.id}
@@ -20,12 +20,13 @@
           = render :partial => "users/user", :locals => { :user => user, :origins => origins, :suggestion => user == current_user ? 'self' : 'friend' }
 
   %ul#users.items
-    - @followers.each do |user|
-      = render :partial => "users/user", :locals => {:user => user}
+    - @user_topic_followers.each do |user_topic|
+      = render :partial => "users/user", :locals => {:user => user_topic.user}
 
-  - unless @followers.empty?
+  - unless @user_topic_followers.empty?
     #additional_info
-      = will_paginate @followers
+      = will_paginate @user_topic_followers
+
 
 - content_for :sidebar do
   = link_to t("topics.show.view"), topic_path(@topic)

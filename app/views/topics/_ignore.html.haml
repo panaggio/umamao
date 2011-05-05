@@ -2,7 +2,7 @@
 -# ignore/unignore topic link
 
 - if logged_in?
-  - follow = topic.follower_ids.include?(current_user.id)
+  - follow = current_user.following?(topic)
   - action_hash = { :unignore => { :text => t("ignorable.unignore"),
                                    :path => unignore_topic_path(topic, :format => :js),
                                    :cclass => "unignore_link" },
@@ -10,7 +10,7 @@
                                  :path => ignore_topic_path(topic, :format => :js),
                                  :cclass => "ignore_link" } }
   .ignore-info{:class => [block, (follow ? 'hidden' : '')]}
-    - if current_user.ignored_topic_ids.include?(topic.id)
+    - if current_user.ignores?(topic)
       - action, undo_action = action_hash[:unignore], action_hash[:ignore]
     - else
       - action, undo_action = action_hash[:ignore], action_hash[:unignore]

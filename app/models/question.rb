@@ -122,7 +122,10 @@ class Question
   before_save :update_autocomplete_keywords
   before_create :add_question_author_to_watchers
   after_create :create_news_update, :new_question_notification
-  after_create :update_topics_questions_count
+  after_create :update_topics_questions_count,
+    :increment_user_topic_questions_count
+
+  after_destroy :decrement_user_topic_questions_count
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
@@ -447,7 +450,9 @@ class Question
 
     if !banned
       topic.increment_questions_count
+      UserTopicInfo.question_classified!(self, topic)
     end
+
 
     # Ignorers
     ignorer_ids = topic.ignorer_ids
@@ -551,6 +556,14 @@ class Question
 
   def update_topics_questions_count
     self.topics.each(&:increment_questions_count)
+  end
+
+  def increment_user_topic_questions_count
+    UserTopicInfo.question_added!(self)
+  end
+
+  def decrement_user_topic_questions_count
+    UserTopicInfo.question_removed!(self)
   end
 
   protected

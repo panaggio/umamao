@@ -44,7 +44,7 @@ class SuggestionList
     # For some reason, the case statement wasn't working.
     if thing.is_a?(Topic)
       if !self.has_been_suggested?(thing) &&
-          !thing.follower_ids.include?(self.user_id) &&
+          !self.user.follows?(thing) &&
           !self.uninteresting_topic_ids.include?(thing.id)
         suggestion = Suggestion.new(:user => self.user,
                                     :entry_id => thing.id,
@@ -238,9 +238,11 @@ class SuggestionList
     end
 
     count = Hash.new(0) # Scores for suggestions
-    Topic.query(:follower_ids => self.user.id).each do |topic|
+    UserTopicInfo.find_each(:user_id => user.id, 
+                            :followed_at.net => nil) do |user_topic|
+      topic = user_topic.topic
       topic.related_topics.each do |related_topic|
-        next if related_topic.follower_ids.include?(self.user.id) ||
+        next if self.user.follows?(related_topic) ||
           self.uninteresting_topic_ids.include?(related_topic.id) ||
           kept_suggestions.any?{|suggestion| suggestion.entry == related_topic}
         count[related_topic.id] += 1

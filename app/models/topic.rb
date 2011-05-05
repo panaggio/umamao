@@ -17,8 +17,6 @@ class Topic
   key :updated_by_id, String
   belongs_to :updated_by, :class_name => "User"
 
-  key :follower_ids, Array, :index => true
-  has_many :followers, :class_name => 'User', :in => :follower_ids
   key :followers_count, :default => 0, :index => true
 
   slug_key :title, :unique => true, :min_length => 3
@@ -93,12 +91,14 @@ class Topic
   end
 
   def ignorers
-    User.all(:ignored_topic_ids => self.id)
+    UserTopicInfo.fields([:user_id]).
+      query(:topic_id => self.id, :ignored_at.ne => nil).map(&:user)
   end
 
   # FIXME: refactor
   def ignorer_ids
-    self.ignorers.map &:id
+    UserTopicInfo.fields([:user_id]).
+      query(:topic_id => self.id, :ignored_at.ne => nil).map(&:user_id)
   end
 
   def name
@@ -155,9 +155,17 @@ class Topic
 
   # Add a follower to topic.
   def add_follower!(user)
-    if !self.followers.include?(user)
-      self.followers << user
-      self.save!
+    if user_topic_info = UserTopicInfo.first(:topic_id => self.id,
+                                        :user_id => user.id)
+      unless user_topic_info.followed?
+        user_topic_info.follow!
+        user_topic_info.save!
+        self.increment(:followers_count => 1)
+        user.unignore_topic!(self)
+      end
+    else
+      UserTopicInfo.create(:topic_id => self.id, :user_id => user.id,
+                      :followed_at => Time.now)
       self.increment(:followers_count => 1)
       user.unignore_topic!(self)
     end
@@ -165,13 +173,16 @@ class Topic
 
   # Remove a follower from topic.
   def remove_follower!(user)
-    if self.followers.include?(user)
-      self.follower_ids.delete(user.id)
+    if user_topic_info = UserTopicInfo.first(:topic_id => self.id,
+                                        :user_id => user.id,
+                                        :followed_at.ne => nil)
+      user_topic_info.followed_at = nil
+      user_topic_info.save!
       if self.email_subscribers.include?(user)
         self.email_subscriber_ids.delete(user.id)
       end
-      self.save!
       self.increment(:followers_count => -1)
+      self.save!
     end
   end
 
@@ -179,12 +190,6 @@ class Topic
   # followers_count and news update from other. Destroys other. Cannot be undone.
   def merge_with!(other)
     return false if id == other.id
-
-    other.followers.each do |f|
-      self.add_follower!(f)
-    end
-
-    self.followers_count = self.follower_ids.size
 
     Question.query(:topic_ids => other.id).each do |q|
       q.classify! self
@@ -205,6 +210,40 @@ class Topic
       end
       q.save! if changed
     end
+
+    UserTopicInfo.find_each(:topic_id => other.id) do |user_topic_other|
+      if user_topic = UserTopicInfo.first(:topic_id => self.id, 
+                                          :user_id => user_topic_other.user.id)
+        followed_at = []
+        followed_at << user_topic.followed_at if user_topic.followed?
+        followed_at << user_topic_other.followed_at if user_topic_other.
+          followed?
+        user_topic.followed_at = followed_at.min if followed_at.present?
+
+        ignored_at = []
+        ignored_at << user_topic.ignored_at if user_topic.ignored?
+        ignored_at << user_topic_other.ignored_at if user_topic_other.
+          ignored?
+        user_topic.ignored_at = ignored_at.min if ignored_at.present? && 
+          !user_topic.followed_at
+
+         if user_topic.save!
+           user_topic_other.destroy
+         end
+      else
+        user_topic = user_topic_other
+        user_topic.topic = self
+        user_topic.save!
+      end
+
+    end
+
+    UserTopicInfo.find_each(:topic_id => self.id) do |user_topic|
+     user_topic.update_counts
+    end
+
+    self.followers_count = UserTopicInfo.count(:topic_id => self.id,
+                                               :followed_at.ne => nil)
 
     # TODO: check whether this is actually safe.
     other.news_items.each do |item|
@@ -312,4 +351,19 @@ class Topic
     end
   end
   handle_asynchronously :update_questions_search_entries
+
+  def follower_ids
+    UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
+                                           :followed_at.ne => nil).map(&:user_id)
+  end
+
+  def followers
+    UserTopicInfo.fields([:user_id]).query(:topic_id => self.id,
+                                           :followed_at.ne => nil).map(&:user)
+  end
+
+  def is_followed_by?(user)
+    UserTopicInfo.first(:user_id => user.id, :topic_id => self.id,
+                        :followed_at.ne => nil).present?
+  end
 end

@@ -1,5 +1,5 @@
 .title= link_to topic.title, topic_path(topic)
 .description Tópico
 .stats
-  .followers= t(".followers", :count => topic.followers.count)
+  .followers= t(".followers", :count => topic.followers_count)
   .questions= t(".questions", :count => topic.questions_count)

@@ -410,8 +410,9 @@ class UsersController < ApplicationController
 
     raise Goalie::NotFound unless @user
 
-    @topics = Topic.query(:follower_ids => @user.id).paginate(
-      :per_page => 15, :page => params[:page])
+    @user_topics = UserTopicInfo.query(:user_id => @user.id, 
+                                       :followed_at.ne => nil).
+      paginate(:per_page => 15, :page => params[:page])
 
     if current_user
       user_suggestions = UserSuggestion.all({

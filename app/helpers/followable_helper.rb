@@ -6,7 +6,6 @@ module FollowableHelper
     options = {:only_if_unfollowed => false}.merge(options)
 
     return "" if !logged_in? || current_user == followable
-
     if followable.is_a?(User)
       follow_path = follow_user_path(followable, :format => :js)
       unfollow_path = unfollow_user_path(followable, :format => :js)
@@ -15,7 +14,9 @@ module FollowableHelper
     elsif followable.is_a?(Topic)
       follow_path = follow_topic_path(followable, :format => :js)
       unfollow_path = unfollow_topic_path(followable, :format => :js)
-      following = followable.follower_ids.include?(current_user.id)
+      following = UserTopicInfo.first(:user_id => current_user.id,
+                                      :topic_id => followable.id,
+                                      :followed_at.ne => nil).present?
       entry_type = "topic"
     elsif followable.is_a?(Question)
       follow_path = watch_question_path(followable, :format => :js)
