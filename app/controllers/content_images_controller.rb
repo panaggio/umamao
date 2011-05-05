@@ -10,7 +10,7 @@ class ContentImagesController < ApplicationController
         :success => true,
         :html => render_to_string(:partial => "content_image",
                                   :locals => {:content_image => @content_image}),
-        :url => @content_image.url
+        :url => @content_image.url(:large)
       }
     else
       data = {:success => false}
@@ -22,6 +22,8 @@ class ContentImagesController < ApplicationController
 
   def destroy
     @content_image = ContentImage.find_by_id(params[:id])
+
+    raise Goalie::NotFound if @content_image.blank?
 
     @content_image.destroy
 

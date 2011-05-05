@@ -24,12 +24,19 @@ $(document).ready(function() {
       }
       return true;
     }).bind("ajax:success", function (event, data) {
-      $("#ask_question").after(data.html);
+      $("#content-images").append(data.html);
       makeLinkMarkdown(data.url);
     }).bind("ajax:complete", function (event) {
       $.colorbox.close();
     });
   };
+
+  $("#content-images .remove")
+    .live("ajax:success", function (event, data) {
+      $(this).closest(".content_image").slideUp("slow", function () {
+        $(this).remove();
+      });
+  });
 
   $("#question-input").wmdMath({preview: "question-preview",
                                 imageDialogText: imageDialogText});

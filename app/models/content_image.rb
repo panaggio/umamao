@@ -21,8 +21,8 @@ class ContentImage < UploadedFile
   def url(version = :original)
     # Return the thumbnail when told so.
     case version
-    when :thumb
-      self.mount.thumb.url
+    when :large
+      self.mount.large.url
     when :original
       self.mount.url
     end
