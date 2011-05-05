@@ -25,6 +25,7 @@ javascripts:
     - public/javascripts/modules/import_contacts.js
     - public/javascripts/modules/topic_tooltip.js
     - public/javascripts/modules/user_suggestions.js
+    - public/javascripts/modules/math_preview.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:
@@ -55,8 +56,6 @@ javascripts:
     - public/javascripts/modules/invite_course.js
   request_answer:
     - public/javascripts/modules/request_answer.js
-  math_preview:
-    - public/javascripts/modules/math_preview.js
 
 stylesheets:
   base:

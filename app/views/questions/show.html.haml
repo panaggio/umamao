@@ -9,7 +9,7 @@
 - source = question_path(@question)
 
 - content_for :js do
-  = include_javascripts :content_edit, :show_question, :math_preview
+  = include_javascripts :content_edit, :show_question
   = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.min.js"
   = javascript_include_tag "#{AppConfig.wmd_location}/jquery.wmd.mathjax.js"
 
