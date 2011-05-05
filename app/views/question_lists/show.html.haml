@@ -80,6 +80,7 @@
 - content_for :sidebar do
   = render :partial => "topics/follow", :locals => {:topic => @question_list, :block => "block"}
   = render :partial => "topics/email_subscription", :locals => {:topic => @question_list, :block => "block"}
+  = render_cell :users, :followers, :followed => @question_list
   .print.block
     %h3= t('question_lists.print_header')
     %ul
