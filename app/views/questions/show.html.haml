@@ -82,7 +82,7 @@
     #new-answer-wrapper
       = form_for @answer,
         :url => question_answers_path(@question.id, :format => :js),
-        :html => {:class => "form mainAnswerForm bp",
+        :html => {:class => "form mainAnswerForm bp editor",
                   :remote => true,
                   "data-type" => "json"} do |f|
         = render :partial => "answers/form", :locals => {:f => f, :markdown => true}

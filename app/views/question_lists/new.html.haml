@@ -10,7 +10,9 @@
   .navtitle
     = t(".title")
 
-- form_for(@question_list, :html => {:class => "form", :id => "new_question_list"}, :as => :question_list) do |f|
+- form_for(@question_list, :html => {:class => "form editor",
+                                     :id => "new_question_list"},
+  :as => :question_list) do |f|
   .title.group
     = f.label :title, "#{t('topics.edit.name')}*", :class => "label"
     .example= @sample_title

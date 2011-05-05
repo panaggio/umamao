@@ -1,4 +1,5 @@
-#content-images
+#content-images{:class => entry.content_images.blank? ? "empty" : ""}
+  %label.label= t(".title")
   - entry.content_images.each do |content_image|
     = render :partial => "content_images/content_image",
       :locals => {:content_image => content_image,

@@ -235,6 +235,9 @@ window.Utils = {
       .live("ajax:success", function (event, data) {
         $(this).closest(".content_image").slideUp("slow", function () {
           $(this).remove();
+          if ($("#content-images .content_image").length == 0) {
+            $("#content-images").addClass("empty");
+          }
         });
     });
 
@@ -253,7 +256,8 @@ window.Utils = {
         }
         return true;
       }).bind("ajax:success", function (event, data) {
-        $("#content-images").append(data.html);
+        $("#content-images").append(data.html).removeClass("empty");
+
         makeLinkMarkdown(data.url);
       }).bind("ajax:complete", function (event) {
         $.colorbox.close();

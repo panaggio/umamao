@@ -6,11 +6,12 @@
 - content_for :css do
   = stylesheet_link_tag "#{AppConfig.wmd_location}/wmd.css"
 
--content_for :subtabs do
+- content_for :subtabs do
   .navtitle
     = t(".title")
 
-- form_for(:answer, :url => question_answer_path(@question, @answer), :html => {:method => :put, :class => "form"}) do |f|
+- form_for(:answer, :url => question_answer_path(@question, @answer),
+  :html => {:method => :put, :class => "form editor"}) do |f|
   = render :partial => "form", :locals => {:f => f, :markdown => true}
   .group
     .group.navform
