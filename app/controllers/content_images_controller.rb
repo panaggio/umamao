@@ -21,7 +21,7 @@ class ContentImagesController < ApplicationController
   end
 
   def destroy
-    @content_image = ContentImage.find_by_id(params[:image_id])
+    @content_image = ContentImage.find_by_id(params[:id])
 
     @content_image.destroy
 
