@@ -16,7 +16,7 @@
       .featured
         float: right
 
-#question, #question-list
+#question, #question-list, .question
   position: relative
   margin-bottom: 3em
   +pie-clearfix
@@ -85,7 +85,7 @@
     .cancel-reclassify
       margin: 5px 0 4px
 
-#answers, #questions
+#answers, #questions, .answers
   clear: both
   .wiki_flag
     font-weight: bold
@@ -169,11 +169,12 @@
 .version_message
   background: #eeeeff
 
-#question, #answers
+#question, #answers, .question, .answers
   .comments
     margin-top: 10px
     +column(12, true)
     .comment
+      clear: both
       border-top: 1px solid #cccccc
       padding-top: 2px
       .comment-content

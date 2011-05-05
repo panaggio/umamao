@@ -12,6 +12,9 @@ pt-BR:
         existing_list: "Erro ao tentar criar a lista. Lista já existente."
         default: "Erro ao tentar criar a lista."
       topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
+    print_header: Versão para impressão
+    questions_print: Apenas exercícios
+    full_print: Respostas e comentários
     show:
       all: Todas as perguntas
       empty:

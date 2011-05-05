@@ -1,0 +1,6 @@
+.answer.body-col
+  .user_data
+    = link_to h(answer.user.name), user_path(answer.user)
+  .markdown.entry-content
+    = cache("rendered_answer_#{answer.id}_#{answer.updated_at}") do
+      = find_and_preserve(markdown(answer.body))
