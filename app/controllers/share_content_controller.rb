@@ -15,14 +15,14 @@ class ShareContentController < ApplicationController
 
   def new
     @content = content_class.find_by_id(params[:content])
-
     respond_to do |format|
       format.js do
         html = {
           :content => @content,
           :class_name => content_class_str,
           :body => default_body,
-          :where => params[:where]
+          :where => params[:where],
+          :show_tabs => true
         }
         if params[:where] == "twitter"
           bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])

@@ -1,5 +1,14 @@
 .modal.share-content-widget
   %h1= t("share_content.post_on_#{@where}")
+  - if @show_tabs
+    .secondary-navigation
+      %ul.tabs
+        %li{:class => @where == "twitter"? "current" : ""}
+          = link_to "Twitter", "#"
+        %li{:class => @where == "facebook" ? "current" : ""}
+          = link_to "Facebook", "#"
+
+  %h1= t("#{@class_name.pluralize}.show.post_on_#{@where}")
   - if [ "facebook", "twitter" ].include? @where
     .message
       = t("external_accounts.connected_to.success", :site => @where.capitalize)
