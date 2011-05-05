@@ -165,6 +165,11 @@ pt-BR:
       my_tags: Meus tópicos
       tags: Tópicos sem respostas
       title: Perguntas em aberto
+    tip:
+      explanation: Perguntas em aberto são perguntas que não têm nenhuma resposta com um número positivo de votos.
+      call_to_action: "Você pode ajudar:"
+      answer: resposdendo às peguntas;
+      vote: votando nas respostas existentes.
     unsolve:
       flash_notice: Resposta marcada como não aceita.
     unwatch:
