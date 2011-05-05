@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class QuestionListsController < TopicsController
-  before_filter :login_required, :except => [:show]
+  before_filter :login_required, :except => [:show, :print, :questions_print]
   before_filter :main_topic_allow_question_lists, :only => [:new, :create]
 
   # GET /question_lists/new
