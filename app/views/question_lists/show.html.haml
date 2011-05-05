@@ -86,6 +86,4 @@
     %ul
       %li= link_to t('question_lists.questions_print'), questions_print_question_list_url(@question_list), :class => 'print-link'
       %li= link_to t('question_lists.full_print'), print_question_list_url(@question_list), :class => 'print-link'
-
-  = render_cell :users, :followers, :followed => @question_list
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @question_list.id, :class_name => QuestionList.to_s.underscore } }
