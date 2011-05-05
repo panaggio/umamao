@@ -1,5 +1,8 @@
 = render :partial => "header"
 
+- if current_tab(:welcome_home) == :unanswered
+  = render :partial => 'questions/unanswered_tip'
+
 %ul.items#news_items
   = render :partial => "news_items"
 
