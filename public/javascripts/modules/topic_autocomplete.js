@@ -35,7 +35,7 @@ function initTopicAutocompleteForReclassifying() {
 
   // Hides the autocomplete.
   function turnOff() {
-    topicsUl.find(".remove").hide();
+    topicsUl.removeClass('editing');
     $("#topic-autocomplete-input").hide();
     $(".add-topic").hide();
     $(".cancel-reclassify").hide();
@@ -51,7 +51,7 @@ function initTopicAutocompleteForReclassifying() {
 
   // Shows the autocomplete.
   function turnOn() {
-    topicsUl.find(".remove").show();
+    topicsUl.addClass('editing');
     $("#topic-autocomplete-input").show();
     $(".add-topic").show();
     $(".cancel-reclassify").show();
