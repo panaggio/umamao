@@ -1124,8 +1124,7 @@ namespace :data do
       print "\n"
     end
 
-    def create_user_topic_info(user_id, topic_id, topics_answered_questions,
-                               topics_asked_questions, following=false,
+    def create_user_topic_info(user_id, topic_id, following=false,
                                ignoring=false)
       return if UserTopicInfo.count(:user_id => user_id,
                                     :topic_id => topic_id) > 0
@@ -1137,16 +1136,11 @@ namespace :data do
       if ignoring
         uti.ignore!
       end
-
-      uti.answers_count = topics_answered_questions.
-        select{|t| t.include?(topic_id)}.count
-      uti.questions_count = topics_asked_questions.
-        select{|t| t.include?(topic_id)}.count
-      uti.save!
     end
 
     desc "Migrate topic's follower information to UserTopicInfo model"
     task :user_topic_info_migration => :environment do
+      print "Followed\n"
       Topic.query(:follower_ids=> {"$not" => {'$size' => 0}}).each do |topic|
         if topic['follower_ids'].blank?
           puts topic['follower_ids']
@@ -1155,41 +1149,19 @@ namespace :data do
         topic['follower_ids'].each do |user_id|
           next if UserTopicInfo.count(:user_id => user_id,
                               :topic_id => topic.id) > 0
-          topics_answered_questions = Answer.all(:user_id => user_id).
-            select{|a| a.question}.map{|a| a.question.topic_ids}
-          topics_asked_questions = Question.all(:user_id => user_id).
-            map{|q| q.topic_ids}
-
           print "-"
-          create_user_topic_info(user_id, topic.id, topics_answered_questions,
-                                 topics_asked_questions, :following => true)
+          create_user_topic_info(user_id, topic.id, :following => true)
         end
         topic['old_follower_ids'] = topic['follower_ids']
         topic['follower_ids'] = nil
         topic.save(:validate => false)
       end
-
-      User.query.each do |user|
-        topics_answered_questions = Answer.all(:user_id => user.id).
-          select{|a| a.question}.map{|a| a.question.topic_ids}
-        topics_asked_questions = Question.all(:user_id => user.id).
-          map{|q| q.topic_ids}
-
-        puts user['ignored_topic_ids']
+      print "\nIgnored\n"
+      User.find_each(:ignored_topic_ids => {"$not" => {"$size" => 0}}) do |user|
+        print "-"
         user['ignored_topic_ids'].each do |topic_id|
-          create_user_topic_info(user.id, topic_id, topics_answered_questions,
-                                 topics_asked_questions, :ignoring => true)
+          create_user_topic_info(user.id, topic_id, :ignoring => true)
         end
-
-        (topics_answered_questions | topics_asked_questions).each do |topic_id|
-          unless Topic.find_by_id(topic_id)
-            puts "Problem with \"#{topic_id}\""
-            next
-          end
-          create_user_topic_info(user.id, topic_id, topics_answered_questions,
-                                 topics_asked_questions)
-        end
-
       end
     end
   end

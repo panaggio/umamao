@@ -67,8 +67,7 @@ class UserTopicInfo
     # Update questions and answers_count
     update_question_topic(question.user, topic)
 
-    Answer.fields([:user_id]).
-      query(:question_id => question.id).each do |answer|
+    Answer.fields([:user_id]).find_each(:question_id => question.id) do |answer|
       update_answer_topic(answer.user, topic)
     end
   end

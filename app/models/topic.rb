@@ -211,7 +211,7 @@ class Topic
       q.save! if changed
     end
 
-    UserTopicInfo.query(:topic_id => other.id).each do |user_topic_other|
+    UserTopicInfo.find_each(:topic_id => other.id) do |user_topic_other|
       if user_topic = UserTopicInfo.first(:topic_id => self.id, 
                                           :user_id => user_topic_other.user.id)
         followed_at = []
@@ -238,7 +238,7 @@ class Topic
 
     end
 
-    UserTopicInfo.query(:topic_id => self.id).each do |user_topic|
+    UserTopicInfo.find_each(:topic_id => self.id) do |user_topic|
      user_topic.update_counts
     end
 
