@@ -14,7 +14,7 @@ pt-BR:
       topic_does_not_allow: "Tópico %{title} não permite listas de exercícios."
     print_header: Versão para impressão
     questions_print: Apenas exercícios
-    full_print: Exercícios, respostas e comentários
+    full_print: Respostas e comentários
     show:
       all: Todas as perguntas
       empty:
