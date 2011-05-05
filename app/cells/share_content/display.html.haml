@@ -2,11 +2,15 @@
   %h1= t("share_content.post_on_#{@where}")
   - if @show_tabs
     .secondary-navigation
+      - opts = {:where => @where, :class_name => @class_name}
       %ul.tabs
-        %li{:class => @where == "twitter"? "current" : ""}
-          = link_to "Twitter", "#"
-        %li{:class => @where == "facebook" ? "current" : ""}
-          = link_to "Facebook", "#"
+        - ["facebook", "twitter"].each do |site|
+          %li{:class => @where == site? "current" : ""}
+            = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
+              send("new_share_#{opts[:class_name]}_path".to_sym,
+                (:where => site, :class_name => @class_name, 
+                :format => :js)),
+              :class => site, :remote => true, "data-type" => "json")
 
   %h1= t("#{@class_name.pluralize}.show.post_on_#{@where}")
   - if [ "facebook", "twitter" ].include? @where
