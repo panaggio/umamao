@@ -661,10 +661,8 @@ UserAutocomplete.prototype = {
 };
 
 TopicAutocompleteForUserSuggestion.prototype = {
-  addOnNoExactMatch: false,
-
   actionData: function (data) {
-    return data.id;
+    return (data.id != undefined) ? data.id : data.title;
   },
 
   returnDefault: null

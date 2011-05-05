@@ -243,7 +243,7 @@ class TopicsController < ApplicationController
   end
 
   def user_suggest
-    @topic = Topic.find_by_id(params[:id])
+    @topic = Topic.find_by_id(params[:id]) || Topic.find_by_title(params[:id])
     receiver = User.find_by_id(params[:user])
 
     begin
@@ -259,6 +259,11 @@ class TopicsController < ApplicationController
         when 'Validation failed: User and origin are the same'
           'user_suggestions.user_suggest.notice.user_is_origin'
         end, :user => receiver.name, :topic => @topic.title)
+    rescue RuntimeError => e
+      success = false
+      if @topic.nil?
+        notice = t('user_suggestions.user_suggest.notice.invalid_topic')
+      end
     else
       success = true
       notice = t('user_suggestions.user_suggest.notice.ok',

@@ -30,6 +30,8 @@ pt-BR:
           "Você já sugeriu o tópico %{topic} para %{user}"
         user_is_origin:
           "Você não pode sugerir um tópico a você"
+        invalid_topic:
+          "O tópico sugerido não existe"
       suggestion_box:
         friend: "Sugerido por você. Aguardando confirmação."
         self_html:
