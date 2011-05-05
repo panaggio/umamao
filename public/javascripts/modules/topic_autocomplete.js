@@ -16,7 +16,7 @@ function initTopicAutocompleteForForms(classifiable) {
 
   // Classifies the current content under topic named title.
   topicBox.action = function (title) {
-    var topicLi = '<li><div class="topic">' + 
+    var topicLi = '<li><div class="topic">' +
       '<span class="topic-title">${title}</span>' +
       '<a class="remove" href="#">✕</a></div><input type="hidden" ' +
       'name="${classifiable}[topics][]" value="${title}" /></li>';
