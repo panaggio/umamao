@@ -246,28 +246,28 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_id(params[:id]) || Topic.find_by_title(params[:id])
     receiver = User.find_by_id(params[:user])
 
-    begin
-      receiver.add_user_suggestion(current_user, @topic)
-    rescue MongoMapper::DocumentNotValid => e
+    if @topic.nil?
+      notice = t('user_suggestions.user_suggest.notice.invalid_topic')
       success = false
-      notice = t(
-        case e.message
-        when 'Validation failed: User already have been suggested that topic by origin'
-          'user_suggestions.user_suggest.notice.suggestion_exists'
-        when 'Validation failed: User already follows entry'
-          'user_suggestions.user_suggest.notice.already_follow'
-        when 'Validation failed: User and origin are the same'
-          'user_suggestions.user_suggest.notice.user_is_origin'
-        end, :user => receiver.name, :topic => @topic.title)
-    rescue RuntimeError => e
-      success = false
-      if @topic.nil?
-        notice = t('user_suggestions.user_suggest.notice.invalid_topic')
-      end
     else
-      success = true
-      notice = t('user_suggestions.user_suggest.notice.ok',
-                 :user => receiver.name, :topic => @topic.title)
+      begin
+        receiver.add_user_suggestion(current_user, @topic)
+      rescue MongoMapper::DocumentNotValid => e
+        success = false
+        notice = t(
+          case e.message
+          when 'Validation failed: User already have been suggested that topic by origin'
+            'user_suggestions.user_suggest.notice.suggestion_exists'
+          when 'Validation failed: User already follows entry'
+            'user_suggestions.user_suggest.notice.already_follow'
+          when 'Validation failed: User and origin are the same'
+            'user_suggestions.user_suggest.notice.user_is_origin'
+          end, :user => receiver.name, :topic => @topic.title)
+      else
+        success = true
+        notice = t('user_suggestions.user_suggest.notice.ok',
+                   :user => receiver.name, :topic => @topic.title)
+      end
     end
 
     track_event(:user_suggested_topic)
