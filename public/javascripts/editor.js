@@ -8,7 +8,9 @@ $(document).ready(function () {
   var initialized = false;
 
   var editorOptions = {
-    preview: editor.find(".markdown")[0]
+    preview: editor.find(".markdown")[0],
+    helpLink: "http://umamao.com/topics/4cbefdba79de4f58ea000116",
+    helpHoverTitle: "Ajuda na formatação do Umamão"
   };
 
   if ($("#image-prompt").length > 0) {
