@@ -17,17 +17,14 @@ class ShareContentController < ApplicationController
     @content = content_class.find_by_id(params[:content])
     respond_to do |format|
       format.js do
+        bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
         html = {
           :content => @content,
           :class_name => content_class_str,
           :body => default_body,
           :where => params[:where],
-          :show_tabs => true
+          :link => {'twitter' => bitly.shorten(content_url(@content)).short_url}
         }
-        if params[:where] == "twitter"
-          bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
-          html[:link] = bitly.shorten(content_url(@content)).short_url
-        end
         render :json => {
           :success => true,
           :html => (render_cell :share_content, :display, html)

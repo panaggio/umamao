@@ -1,31 +1,25 @@
 .modal.share-content-widget
-  %h1= t("share_content.post_on_#{@where}")
-  - if @show_tabs
-    .secondary-navigation
-      - opts = {:where => @where, :class_name => @class_name}
-      %ul.tabs
-        - ["facebook", "twitter"].each do |site|
-          %li{:class => @where == site? "current" : ""}
-            = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
-              send("new_share_#{opts[:class_name]}_path".to_sym,
-                (:where => site, :class_name => @class_name, 
-                :format => :js)),
-              :class => site, :remote => true, "data-type" => "json")
+  .secondary-navigation
+    %ul.tabs
+      - ["facebook", "twitter"].each do |site|
+        %li{:class => ((@where == site)? "current" : ""), :data => site}
+          = link_to(image_tag("#{site}.gif") + " #{site.capitalize}", send("new_share_#{@class_name}_path".to_sym, {:show_tabs => :false, :where => site, :class_name => @class_name, :format => :js, :content => @content.id}), :class => site, :remote => true, "data-type" => "json", :class => "tab-share-popup")
 
-  %h1= t("#{@class_name.pluralize}.show.post_on_#{@where}")
-  - if [ "facebook", "twitter" ].include? @where
-    .message
-      = t("external_accounts.connected_to.success", :site => @where.capitalize)
-  - form_tag "/share_#{@class_name}", :method => :post do
-    - body = "#{@body[@where]}#{' ' << @link if @link}"
-    = text_area_tag "body", body, :'data-maxlength' => @maxlength
-    - charsleft = @maxlength - body.mb_chars.size
-    .charcount{:class => ( charsleft < 0 ? 'negative-counter' : '' )}
-      %span(class="charsleft") #{charsleft.abs}
-      %span= (charsleft >= 0 ? t("characters_left", :count => charsleft) : t("characters_exceded", :count => -charsleft))
-    = hidden_field_tag :content, @content.id
-    = hidden_field_tag "where", @where
-    .controls
-      = link_to t("scaffold.cancel"), "#", :class => "close"
-      = submit_tag t("global.share"), :disabled => (charsleft < 0)
-    .clear
+  - ["facebook", "twitter"].each do |site|
+    .content-share{:id => "share_on_#{site}", :class => ((@where == site)? "current" : "")}
+      %h1= t("#{@class_name.pluralize}.show.post_on_#{site}")
+      .message
+        = t("external_accounts.connected_to.success", :site => site.capitalize)
+      - form_tag "/share_#{@class_name}", :method => :post do
+        - body = "#{@body[site]}#{' ' << @link[site] if @link[site]}"
+        = text_area_tag "body", body, :'data-maxlength' => @maxlength
+        - charsleft = @maxlength - body.mb_chars.size
+        .charcount{:class => ( charsleft < 0 ? 'negative-counter' : '' )}
+          %span(class="charsleft") #{charsleft.abs}
+          %span= (charsleft >= 0 ? t("characters_left", :count => charsleft) : t("characters_exceded", :count => -charsleft))
+        = hidden_field_tag :content, @content.id
+        = hidden_field_tag "where", site
+        .controls
+          = link_to t("scaffold.cancel"), "#", :class => "close"
+          = submit_tag t("global.share"), :disabled => (charsleft < 0)
+        .clear
