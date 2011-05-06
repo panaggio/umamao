@@ -1,6 +1,9 @@
 #topic
   = render :partial => "common", :locals => {:topic => @topic, :students => @students_course}
 
+  - if current_tab(:topic_show) == :unanswered
+    = render :partial => 'questions/unanswered_tip'
+
   %ul.items#questions
     - if @questions.blank?
       %li.highlight
