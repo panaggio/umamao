@@ -230,40 +230,18 @@ window.Utils = {
     );
   },
 
-  enableImageUploadsOnEditor: function () {
-    $("#content-images .remove")
-      .live("ajax:success", function (event, data) {
-        $(this).closest(".content_image").slideUp("slow", function () {
-          $(this).remove();
-          if ($("#content-images .content_image").length == 0) {
-            $("#content-images").addClass("empty");
-          }
-        });
-    });
+  // Fix common URL pasting errors. Stolen from WMD.
+  fixPastingErrors: function (text) {
+    text = text.replace('http://http://', 'http://');
+    text = text.replace('http://https://', 'https://');
+    text = text.replace('http://ftp://', 'ftp://');
 
-    return function (makeLinkMarkdown) {
-      Utils.modal({inline: true, href: "#image-prompt"});
+    if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1
+        && text.indexOf('https://') === -1) {
+      text = 'http://' + text;
+    }
 
-      $("#new_content_image").bind("ajax:beforeSend",
-                                   function (event, xhr, settings) {
-        $("#image-prompt .waiting").show();
-
-        // For some reason, this is not being done by rails.js
-        $("#image-prompt form input[type=submit]").attr("disabled", "disabled");
-
-        settings.resetForm = true;
-        return true;
-      }).bind("ajax:success", function (event, data) {
-        $("#content-images").append(data.html).removeClass("empty");
-
-        makeLinkMarkdown(data.url);
-      }).bind("ajax:complete", function (event) {
-        $("#image-prompt .waiting").hide();
-        $("#image-prompt form input[type=submit]").removeAttr("disabled");
-        $.colorbox.close();
-      });
-    };
-
+    return text;
   }
 
 };
