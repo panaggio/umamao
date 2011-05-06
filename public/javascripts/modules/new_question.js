@@ -9,6 +9,4 @@ $(document).ready(function() {
     highlightEffect($("#sidebar .help"));
   });
 
-  Utils.enableEditor("#question-input", "question-preview");
-
 });

@@ -264,18 +264,6 @@ window.Utils = {
       });
     };
 
-  },
-
-  enableEditor: function (selector, previewId) {
-    editorOptions = {
-      preview: previewId
-    };
-
-    if ($("#image-prompt").length > 0) {
-      editorOptions.imageDialogText = Utils.enableImageUploadsOnEditor();
-    }
-
-    $(selector).wmdMath(editorOptions);
   }
 
 };

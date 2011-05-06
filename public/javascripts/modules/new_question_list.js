@@ -8,16 +8,7 @@ $(document).ready(function() {
   $("#new_question_list #show-description").click(function () {
     var link = $(this);
     var description = $("#new_question_list .initially-hidden");
-    description.slideDown("slow", function () {
-      if (!wmdInit) {
-        Utils.enableEditor("#description-input", "description-preview");
-        wmdInit = true;
-      }
-    });
+    description.slideDown("slow");
     link.fadeOut("slow", function () { link.remove(); });
   });
-
-  // For some reason, WMD throws an exception if its target is hidden.
-  // Thus, we'll only initialize it the first time we display the form.
-  var wmdInit = false;
 });

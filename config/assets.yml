@@ -16,6 +16,7 @@ javascripts:
     - public/javascripts/jquery.remotipart.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
+    - public/javascripts/editor.js
     - public/javascripts/application.js
     - public/javascripts/modules/welcome.js
     - public/javascripts/modules/follow_link.js
@@ -26,15 +27,12 @@ javascripts:
     - public/javascripts/modules/import_contacts.js
     - public/javascripts/modules/topic_tooltip.js
     - public/javascripts/modules/user_suggestions.js
-    - public/javascripts/modules/edit_answer.js
   landing:
     - public/javascripts/modules/landing.js
   suggestions:
     - public/javascripts/modules/suggestions.js
   content_edit:
     - public/javascripts/modules/single/question.js
-  questions_edit_revert:
-    - public/javascripts/modules/edit_question.js
   signup_follow:
     - public/javascripts/modules/signup_follow.js
   new_question:
