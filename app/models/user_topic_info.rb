@@ -73,12 +73,12 @@ class UserTopicInfo
   end
 
   def update_counts
-     self.answers_count = Answer.query(
+     self.answers_count = Answer.fields([:question_id]).query(
        :user_id => user.id).select{|a| a.question &&
          a.question.topic_ids.include?(self.topic_id)}.size
      self.questions_count = Question.count(:user_id => self.user_id, 
-                                           :topic_id => self.topic_id)
-
+                                           :topic_ids => self.topic_id)
+     self.save!
   end
 
   private

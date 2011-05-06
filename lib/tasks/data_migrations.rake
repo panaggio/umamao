@@ -1161,5 +1161,16 @@ namespace :data do
         end
       end
     end
+
+    desc "Update UserTopicInfo counts"
+    task :update_user_topic_info_counts => :environment do
+      (Question.fields([:user_id]).query.map(&:user_id) | Answer.fields([:user_id]).query.map(&:user_id)).uniq.each do |user_id|
+        UserTopicInfo.find_each(:user_id => user_id) do |uti|
+          print "-"
+          uti.update_counts
+        end
+      end
+    end
+
   end
 end
