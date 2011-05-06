@@ -244,22 +244,22 @@ window.Utils = {
     return function (makeLinkMarkdown) {
       Utils.modal({inline: true, href: "#image-prompt"});
 
-      $("#new_content_image").bind("ajax:remotipartSubmit",
+      $("#new_content_image").bind("ajax:beforeSend",
                                    function (event, xhr, settings) {
-        var link = $(this).find("input[name=link]").val();
+        $("#image-prompt .waiting").show();
+
+        // For some reason, this is not being done by rails.js
+        $("#image-prompt form input[type=submit]").attr("disabled", "disabled");
+
         settings.resetForm = true;
-        if (link != "") {
-          makeLinkMarkdown(link);
-          xhr.abort("aborted");
-          $.colorbox.close();
-          return false;
-        }
         return true;
       }).bind("ajax:success", function (event, data) {
         $("#content-images").append(data.html).removeClass("empty");
 
         makeLinkMarkdown(data.url);
       }).bind("ajax:complete", function (event) {
+        $("#image-prompt .waiting").hide();
+        $("#image-prompt form input[type=submit]").removeAttr("disabled");
         $.colorbox.close();
       });
     };

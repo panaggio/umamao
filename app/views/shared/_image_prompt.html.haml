@@ -1,9 +1,13 @@
 #image-prompt.modal
+  %h1= t("editor.add_image.title")
   - form_for ContentImage.new, :multipart => true, :remote => true,
     :html => { "data-type" => "json" } do |f|
+    = t("editor.add_image.upload")
     = file_field_tag "image"
-    = text_field_tag :link
+    = t("editor.add_image.url")
+    = text_field_tag :link, "http://"
     = hidden_field_tag "type", entry_type
     .controls
+      = waiting_tag
       = link_to t("scaffold.cancel"), "#", :class => "close"
       = f.submit t("scaffold.add")

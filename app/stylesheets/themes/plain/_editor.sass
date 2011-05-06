@@ -2,6 +2,19 @@
 
 #image-prompt.modal
   display: none
+  input
+    display: block
+    margin: 20px 10px
+  input[type=text]
+    width: 250px
+  .controls
+    margin: 0px
+    height: 32px
+    a, input[type=submit]
+      margin-top: 3px
+      vertical-align: top
+  .waiting
+    display: none
 
 #colorbox
   #image-prompt.modal
@@ -10,5 +23,10 @@
 form.editor
   textarea, #content-images, .markdown
     margin-bottom: 13px
-  #content-images.empty
-    display: none
+  #content-images
+    .content_image
+      a:first-child:after
+        content: ' ·'
+        font-weight: bold
+    &.empty
+      display: none
