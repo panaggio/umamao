@@ -35,7 +35,7 @@
     - if @fetching_contacts
       .wait-notice{"data-fetch-contacts-url" => fetch_contacts_url, "data-error-message" => t(".error")}
         .loader
-          = image_tag "ajax-loader-big.gif"
+          = waiting_tag
         = t(".wait")
     - enable_autocomplete = @fetching_contacts || @has_contacts
     .controls{:class => @fetching_contacts ? "waiting" : ""}
