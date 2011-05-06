@@ -590,10 +590,8 @@ Time.zone.now ? 1 : 0)
   end
 
   def hide_ignored_news_items!(news_items = self.news_items)
-    ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
-      query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
     news_items.each do |ni|
-      if ni.should_be_hidden?(ignored_topic_ids)
+      if ni.should_be_hidden?(self.ignored_topic_ids)
         ni.hide!
       end
     end
@@ -601,10 +599,8 @@ Time.zone.now ? 1 : 0)
   handle_asynchronously :hide_ignored_news_items!
 
   def show_unignored_news_items!(news_items = self.news_items)
-    ignored_topic_ids = UserTopicInfo.fields([:topic_id]).
-      query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
     news_items.each do |ni|
-      unless ni.should_be_hidden?(ignored_topic_ids)
+      unless ni.should_be_hidden?(self.ignored_topic_ids)
         ni.show!
       end
     end
@@ -972,6 +968,11 @@ Time.zone.now ? 1 : 0)
   def can_invite?(n = 1)
     self.invitations_left == "unlimited" ||
       self.invitations_left >= n
+  end
+
+  def ignored_topic_ids
+    UserTopicInfo.fields([:topic_id]).
+      query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
   end
 
   protected
