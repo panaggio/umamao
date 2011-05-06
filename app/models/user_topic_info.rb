@@ -12,6 +12,8 @@ class UserTopicInfo
   key :answers_count, Integer, :default => 0
   key :questions_count, Integer, :default => 0
 
+  after_create :update_counts
+
   validates_uniqueness_of :user_id, :scope => [:topic_id]
   ensure_index([[:user_id, 1], [:topic_id, 1]])
 
