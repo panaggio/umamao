@@ -1,0 +1,12 @@
+.block.followers{"data-entry-type" => @type}
+  %h2.title
+    = t("followable.followers.top_answerers")
+    - if @total_followers > 0
+      %span.count
+        = t("followable.followers.link", :count => @total_followers, :link => @path)
+  - @user_topics.each do |user_topic|
+    - user = user_topic.user
+    %span{"data-user-id" => user.id, :style => "display: inline"}
+      = link_to avatar_for(user, :size => 24).html_safe, user_path(user)
+    %div= link_to h(user.name), user_path(user)
+    %div= t('searches.question.answers', :count => user_topic.answers_count)
