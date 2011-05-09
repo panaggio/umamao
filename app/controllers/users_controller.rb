@@ -410,8 +410,9 @@ class UsersController < ApplicationController
 
     raise Goalie::NotFound unless @user
 
-    @user_topics = UserTopicInfo.query(:user_id => @user.id, 
-                                       :followed_at.ne => nil).
+    @user_topics = UserTopicInfo.query(:user_id => @user.id,
+                                       :followed_at.ne => nil, 
+                                       :order => :answers_count.desc).
       paginate(:per_page => 15, :page => params[:page])
 
     if current_user
