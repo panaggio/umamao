@@ -11,7 +11,7 @@ Shapado::Application.routes.draw do
 
   resources :affiliations
 
-  resources :question_lists, :only => [:new, :create, :show, :edit, :update] do
+  resources :question_lists, :only => [:new, :create, :show, :edit, :update, :destroy] do
     member do
       # FIXME: classify and unclassify should be post
       get :classify

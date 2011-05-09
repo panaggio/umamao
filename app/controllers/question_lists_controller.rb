@@ -2,6 +2,7 @@
 class QuestionListsController < TopicsController
   before_filter :login_required, :except => [:show, :print, :questions_print]
   before_filter :main_topic_allow_question_lists, :only => [:new, :create]
+  before_filter :check_permissions, :only => [:destroy]
 
   # GET /question_lists/new
   def new
@@ -35,6 +36,12 @@ class QuestionListsController < TopicsController
       end
       render :action => "new"
     end
+  end
+
+  def destroy
+    topic = @question_list.main_topic
+    @question_list.destroy
+    redirect_to topic_path(topic)
   end
 
   # GET /question_lists/1
@@ -206,6 +213,17 @@ class QuestionListsController < TopicsController
                         :scope => "question_lists.create",
                         :title => @main_topic.title)
       redirect_to(topic_path(@main_topic))
+    end
+  end
+
+  def check_permissions
+    @question_list = QuestionList.find_by_slug_or_id(params[:id])
+
+    raise Goalie::NotFound unless @question_list
+
+    if @question_list.user != current_user && !current_user.admin?
+      flash[:error] = t("global.permission_denied")
+      redirect_to question_list_path(@question_list)
     end
   end
 end
