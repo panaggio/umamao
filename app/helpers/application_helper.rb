@@ -309,6 +309,11 @@ module ApplicationHelper
     end
   end
 
+  def waiting_tag
+    image_tag("ajax-loader-big.gif", :alt => t("global.waiting"),
+              :class => "waiting")
+  end
+
   private
 
   def find_link_to_method(object_class)

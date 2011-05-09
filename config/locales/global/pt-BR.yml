@@ -44,6 +44,7 @@ pt-BR:
       error: 'Erro ao salvar alterações.'
     enable: ativar
     disable: desativar
+    waiting: 'Aguarde...'
   feeds:
     question: Seguir RSS desta pergunta
     questions: Seguir RSS de todas as perguntas

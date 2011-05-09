@@ -12,8 +12,11 @@ javascripts:
     - public/javascripts/jquery.hotkeys.js
     - public/javascripts/jquery.colorbox-min.js
     - public/javascripts/jquery.poshytip.js
+    - public/javascripts/jquery.form.js
+    - public/javascripts/jquery.remotipart.js
     - public/javascripts/utils.js
     - public/javascripts/autocompleteBox.js
+    - public/javascripts/editor.js
     - public/javascripts/application.js
     - public/javascripts/modules/welcome.js
     - public/javascripts/modules/follow_link.js
@@ -32,8 +35,6 @@ javascripts:
     - public/javascripts/modules/suggestions.js
   content_edit:
     - public/javascripts/modules/single/question.js
-  questions_edit_revert:
-    - public/javascripts/modules/edit_question.js
   signup_follow:
     - public/javascripts/modules/signup_follow.js
   new_question:

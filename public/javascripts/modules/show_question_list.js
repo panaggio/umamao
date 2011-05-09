@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  var wmdInit = false;
-
   initTopicAutocompleteForReclassifying();
 
   // Question submit
@@ -36,10 +34,6 @@ $(document).ready(function () {
     $("#question-list #new_question_form").show();
     questionTitleInput.val(prefix + " - ");
     questionTitleInput.focus();
-    if (!wmdInit) {
-      $("#question-input").wmdMath({preview: "question-preview"});
-      wmdInit = true;
-    }
   });
 
   $("#new_question_form .cancel").click(function () {

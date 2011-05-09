@@ -7,8 +7,7 @@ Shapado::Application.routes.draw do
   match '/users/autocomplete_name' => 'users#autocomplete_name',
     :as => :autocomplete_name_users
 
-  resources :answer_requests, :only => [:new, :create] do
-  end
+  resources :answer_requests, :only => [:new, :create]
 
   resources :affiliations
 
@@ -210,6 +209,8 @@ Shapado::Application.routes.draw do
 
     resources :close_requests
   end
+
+  resources :content_images, :only => [:create, :destroy]
 
   match 'questions/tagged/:tags' => 'questions#index', :constraints => { :tags => /\S+/ }, :as => :tag
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'

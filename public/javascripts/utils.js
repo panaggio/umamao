@@ -228,5 +228,20 @@ window.Utils = {
       + "#question-list #classify-ul .topic").poshytip(
         $.extend(Utils.poshytip_question_options, Utils.poshytip_default_options)
     );
+  },
+
+  // Fix common URL pasting errors. Stolen from WMD.
+  fixPastingErrors: function (text) {
+    text = text.replace('http://http://', 'http://');
+    text = text.replace('http://https://', 'https://');
+    text = text.replace('http://ftp://', 'ftp://');
+
+    if (text.indexOf('http://') === -1 && text.indexOf('ftp://') === -1
+        && text.indexOf('https://') === -1) {
+      text = 'http://' + text;
+    }
+
+    return text;
   }
+
 };

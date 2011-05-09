@@ -2,6 +2,10 @@
   = t(".answer_label")
 = f.text_area :body, {:class => "editor-input", :rows => "auto", :cols => "auto", :id => "answer-input"}
 
+= render :partial => "content_images/content_images",
+  :locals => { :entry => @answer }
+
+
 #preview-command
   %label.label
     = t("global.preview")
@@ -11,10 +15,6 @@
     = "(#{link_to t("global.disable"), "#", :class => "hide_preview_answer"})"
 
 #preview-area.markdown
-
-  %script{:type => "text/javascript", :charset => "utf-8"}
-    var answerNeedsMathRefresh = function(){return $("#preview-command #view").css('display') == 'none';}
-    $().ready(function() { $("#answer-input").wmdMath({preview: "preview-area", needsMathRefresh: answerNeedsMathRefresh}); });
 
   - if !@answer.new?
     .group

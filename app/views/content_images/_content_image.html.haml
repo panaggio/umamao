@@ -1,0 +1,8 @@
+.content_image
+  %span
+    = link_to content_image.original_filename, content_image.url
+  %span
+    = link_to t("scaffold.destroy"), content_image_path(content_image),
+      :method => :delete, :remote => true, :class => "remove",
+      "data-type" => "json"
+  = hidden_field_tag "#{entry_type}[content_image_ids][]", content_image.id
