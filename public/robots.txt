@@ -36,6 +36,10 @@ Disallow: /questions/tags
 Disallow: /questions/tags/
 Disallow: /questions/*/answers/*
 Disallow: /questions/*/answers/*/
+Disallow: /question_lists/*/questions_print
+Disallow: /question_lists/*/questions_print/
+Disallow: /question_lists/*/print
+Disallow: /question_lists/*/print/
 Disallow: /search
 Disallow: /search/
 Disallow: /*?
