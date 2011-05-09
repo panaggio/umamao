@@ -52,4 +52,11 @@ $(document).ready(function() {
       }
     };
   });
+
+  $(".tab-share-popup").live("click", function(event) {
+    li = $(this).closest("li");
+    $('.modal .current').removeClass("current");
+    li.addClass("current");
+    $('#share_on_'+ li.attr('data')).addClass("current");
+    return false;  });
 });
