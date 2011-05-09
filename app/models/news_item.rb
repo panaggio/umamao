@@ -18,6 +18,8 @@ class NewsItem
 
   key :visible, Boolean, :default => true
 
+  validates_uniqueness_of :recipient_id, :scope => :news_update_id
+
   ensure_index([[:recipient_id, 1], [:created_at, -1]])
 
   timestamps!
