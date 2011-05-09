@@ -58,6 +58,8 @@ javascripts:
     - public/javascripts/modules/invite_course.js
   request_answer:
     - public/javascripts/modules/request_answer.js
+  print:
+    - public/javascripts/modules/print.js
 
 stylesheets:
   base:

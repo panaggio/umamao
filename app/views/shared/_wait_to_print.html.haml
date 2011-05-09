@@ -1,0 +1,7 @@
+- content_for :js do
+  = include_javascripts :print
+
+#wait-to-print.modal
+  %h1
+    = t('shared.wait_to_print')
+    %img{:src => "/images/ajax-loader-big.gif"}
