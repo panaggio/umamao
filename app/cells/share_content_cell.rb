@@ -9,12 +9,7 @@ class ShareContentCell < Cell::Rails
     @class_name = options[:class_name]
     @where = options[:where]
     @link = options[:link]
-    @maxlength = case @where
-    when"twitter"
-      140
-    when "facebook"
-      420
-    end
+    @maxlength = {"twitter" => 140, "facebook" => 420}
     render
   end
 

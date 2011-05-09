@@ -9,7 +9,7 @@ $(document).ready(function() {
     var t = $(this);
     var len = t.val().length;
     var maxlen = t.attr('data-maxlength');
-    var charcount = $('.charcount');
+    var charcount = t.closest("form").find('.charcount');
     var submit = $(".modal :submit");
     var charsleft = charcount.find('.charsleft');
     var charcount_text = charcount.find('span:last');

@@ -11,8 +11,8 @@
       .message
       - form_tag "/share_#{@class_name}", :method => :post do
         - body = "#{@body[site]}#{' ' << @link[site] if @link[site]}"
-        = text_area_tag "body", body, :'data-maxlength' => @maxlength
-        - charsleft = @maxlength - body.mb_chars.size
+        = text_area_tag "body", body, :'data-maxlength' => @maxlength[site]
+        - charsleft = @maxlength[site] - body.mb_chars.size
         .charcount{:class => ( charsleft < 0 ? 'negative-counter' : '' )}
           %span(class="charsleft") #{charsleft.abs}
           %span= (charsleft >= 0 ? t("characters_left", :count => charsleft) : t("characters_exceded", :count => -charsleft))
