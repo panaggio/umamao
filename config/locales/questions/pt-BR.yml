@@ -168,7 +168,7 @@ pt-BR:
     tip:
       explanation: Perguntas em aberto são perguntas que não têm nenhuma resposta com um número positivo de votos.
       call_to_action: "Você pode ajudar:"
-      answer: resposdendo às peguntas;
+      answer: respondendo às peguntas;
       vote: votando nas respostas existentes.
     unsolve:
       flash_notice: Resposta marcada como não aceita.
