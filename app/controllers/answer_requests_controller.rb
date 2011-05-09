@@ -5,6 +5,8 @@ class AnswerRequestsController < ApplicationController
     @question = Question.find_by_slug_or_id(params[:question_id])
     @exclude_user_ids = (@question.requested_users + [current_user]).map(&:id)
 
+    track_event(:ask_to_answer)
+
     respond_to do |format|
       format.js do
         render :json => {
@@ -24,6 +26,8 @@ class AnswerRequestsController < ApplicationController
                                   params[:answer_request])
       @answer_request.save
     end
+
+    track_event(:ask_to_answer)
 
     respond_to do |format|
       format.js do
