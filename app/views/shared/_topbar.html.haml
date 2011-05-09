@@ -24,4 +24,7 @@
 
     - else
       %li.menu-item
-        = link_to t("layouts.application.log_in"), root_path(:focus => "signup")
+        - if session[:group_invitation]
+          = link_to t("layouts.application.log_in"), new_user_path(:group_invitation => session[:group_invitation])
+        - else
+          = link_to t("layouts.application.log_in"), root_path(:focus => "signup")

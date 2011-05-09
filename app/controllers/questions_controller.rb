@@ -153,6 +153,10 @@ class QuestionsController < ApplicationController
       session[:user_return_to] = question_path(@question)
     end
 
+    if params[:group_invitation]
+      session[:group_invitation] = params[:group_invitation]
+    end
+
     @open_sharing_widget = flash[:connected_to]
 
     options = {:per_page => 25, :page => params[:page] || 1,

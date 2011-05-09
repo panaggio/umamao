@@ -23,6 +23,10 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find_by_slug_or_id(params[:id])
 
+    if params[:group_invitation]
+      session[:group_invitation] = params[:group_invitation]
+    end
+
     raise Goalie::NotFound unless @topic
 
     if @topic.is_a?(QuestionList)
@@ -437,6 +441,14 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by_slug_or_id(params[:id])
 
     raise Goalie::NotFound unless @topic
+
+    @group_invitation = GroupInvitation.find_by_slug(
+      "topic_#{@topic.slug}".downcase)
+    unless @group_invitation
+      @group_invitation = GroupInvitation.create(
+        :slug => "topic_#{@topic.slug}".downcase, 
+        :topics => [@topic], :message => t("topics.group_invitation.message", {:topic => @topic.title, :link_topic => topics_path(@topic)}))
+    end
 
     @title = params[:title]
 
