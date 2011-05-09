@@ -1,4 +1,5 @@
 .modal.share-content-widget
+  %h1= t("global.share")
   .secondary-navigation
     %ul.tabs
       - ["facebook", "twitter"].each do |site|
@@ -7,9 +8,7 @@
 
   - ["facebook", "twitter"].each do |site|
     .content-share{:id => "share_on_#{site}", :class => ((@where == site)? "current" : "")}
-      %h1= t("#{@class_name.pluralize}.show.post_on_#{site}")
       .message
-        = t("external_accounts.connected_to.success", :site => site.capitalize)
       - form_tag "/share_#{@class_name}", :method => :post do
         - body = "#{@body[site]}#{' ' << @link[site] if @link[site]}"
         = text_area_tag "body", body, :'data-maxlength' => @maxlength
