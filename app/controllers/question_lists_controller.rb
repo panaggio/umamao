@@ -49,10 +49,12 @@ class QuestionListsController < TopicsController
 
   def questions_print
     print_init
+    track_event(:print_questions)
   end
 
   def print
     print_init
+    track_event(:print_full_list)
   end
 
   # GET /question_lists/1/unanswered
