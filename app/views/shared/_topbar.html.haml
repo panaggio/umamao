@@ -24,4 +24,5 @@
 
     - else
       %li.menu-item
-        = link_to t("layouts.application.log_in"), root_path(:focus => "signup")
+        = link_to t("layouts.application.log_in"),
+          root_path(:focus => "signup", :return_to => request.url)
