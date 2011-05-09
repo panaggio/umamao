@@ -10,6 +10,8 @@ class QuestionList < Topic
 
   has_many :question_list_files, :dependent => :destroy
 
+  after_create :add_author_as_follower
+
   def initialize(options = {})
     if options[:topics].present?
       options[:topic_ids] = options[:topics].map(&:id)
@@ -48,5 +50,11 @@ class QuestionList < Topic
     else
       false
     end
+  end
+
+  protected
+
+  def add_author_as_follower
+    self.add_follower!(self.user)
   end
 end
