@@ -10,7 +10,7 @@ $(document).ready(function() {
 
       error: function (data) {
         if (data.status == "unauthenticate") {
-          window.location = "/users/login";
+          Utils.redirectToSignIn();
         }
       }
     };

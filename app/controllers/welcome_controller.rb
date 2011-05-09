@@ -16,6 +16,8 @@ class WelcomeController < ApplicationController
   end
 
   def landing
+    session[:user_return_to] = params[:return_to]
+
     @affiliation = Affiliation.new
 
     @signin_index, @signup_index =

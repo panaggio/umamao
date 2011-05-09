@@ -242,6 +242,10 @@ window.Utils = {
     }
 
     return text;
-  }
+  },
 
+  redirectToSignIn: function () {
+    window.onbeforeunload = null;
+    window.location = "/users/login";
+  }
 };
