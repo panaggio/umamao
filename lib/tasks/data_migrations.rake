@@ -7,6 +7,15 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Calculate UserTopicInfo's votes balance"
+    task :calculate_user_topic_info_votes_balance => :environment do
+      UserTopicInfo.reset_votes_balance!
+
+      Answer.find_each do |answer|
+        UserTopicInfo.update_vote_balance!(answer)
+      end
+    end
+
     desc "Generate notifications of accepted user suggestions"
     task :generate_accepted_user_suggestions_notifications => :environment do
       UserSuggestion.all(:accepted_at.ne => nil).each do |us|
