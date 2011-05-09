@@ -14,11 +14,11 @@ pt-BR:
     suggested:
       user: Tópicos sugeridos
       suggest: Sugerir um tópico
-      suggest_to: Sugerir este tópico para alguém
+      suggest_to: Convidar alguém para este tópico
     suggested_by:
       one: "Sugerido por %{user}"
       other: "Sugerido por %{user} e %{others}"
-    topic: Sugerir este tópico
+    topic: Convidar para tópico
     user: Sugerir tópicos
     user_suggest:
       notice:
