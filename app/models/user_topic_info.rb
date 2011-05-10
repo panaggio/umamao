@@ -17,6 +17,7 @@ class UserTopicInfo
 
   validates_uniqueness_of :user_id, :scope => [:topic_id]
   ensure_index([[:user_id, 1], [:topic_id, 1]])
+  ensure_index([[:topic_id, 1], [:votes_balance, -1]])
 
   def followed?
     self.followed_at.present?
