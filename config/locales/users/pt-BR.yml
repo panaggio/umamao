@@ -40,6 +40,7 @@ pt-BR:
         Li e concordo com a <a href="%{privacy}" target="_blank">política de
         privacidade</a> e com os <a href="%{tos}" target="_blank">termos de
         uso</a> do site.
+      already_registered: Já tem conta no Umamão? <a href="/users/login">Faça login</a> para entrar.
     news_update:
       question:
         user:
