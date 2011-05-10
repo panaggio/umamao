@@ -445,7 +445,6 @@ class Question
       end
       # Topic
       if NewsItem.query(:recipient_id => topic.id,
-                        :recipient_type => "Topic",
                         :news_update_id => news_update.id).count == 0
         NewsItem.notify!(news_update, topic, topic, stamp)
       end

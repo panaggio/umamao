@@ -22,6 +22,10 @@ class Topic
   slug_key :title, :unique => true, :min_length => 3
 
   has_many :news_items, :foreign_key => :recipient_id, :dependent => :destroy
+  has_many :generated_news_items, :class_name => "NewsItem",
+    :foreign_key => :origin_id, :dependent => :destroy
+
+  has_many :notifications, :dependent => :destroy
 
   key :related_topic_ids, :default => []
   has_many :related_topics, :class_name => "Topic",
@@ -150,7 +154,8 @@ class Topic
 
   # Return the question lists that are classified under this topic.
   def indirect_question_lists
-    QuestionList.query(:topic_ids => self.id)
+    QuestionList.query("$or" => [{:topic_ids => self.id},
+                                 {:main_topic_id => self.id}])
   end
 
   # Add a follower to topic.
@@ -165,7 +170,7 @@ class Topic
       end
     else
       UserTopicInfo.create(:topic_id => self.id, :user_id => user.id,
-                      :followed_at => Time.now)
+                           :followed_at => Time.now)
       self.increment(:followers_count => 1)
       user.unignore_topic!(self)
     end
@@ -189,14 +194,51 @@ class Topic
   # Merges other to self: self receives every question, questions_count, follower,
   # followers_count and news update from other. Destroys other. Cannot be undone.
   def merge_with!(other)
-    return false if id == other.id
+    if id == other.id
+      raise "Cannot merge topic into itself."
+    end
 
-    Question.query(:topic_ids => other.id).each do |q|
+    new_attributes = self.attributes
+
+    if (self.class != Topic || other.class != Topic) &&
+        !(self.class <= other.class)
+      # We shoudn't attempt to merge two topics of different
+      # specific classes.
+      raise("Cannot merge instance of #{other.class} " +
+            "into an instance of #{self.class}")
+    end
+
+    # Augment self's attributes with ones defined in other that aren't
+    # present in self. Note that this is slightly different from Hash#merge.
+    other.attributes.each do |k, v|
+      if v.present? && new_attributes[k].blank?
+        new_attributes[k] = v
+      end
+    end
+    self.update_attributes(new_attributes)
+
+    self.delay.merge_external_entities_from other
+
+    save
+  end
+
+  def merge_external_entities_from(other)
+    self.merge_questions_from other
+    self.merge_question_lists_from other
+    self.merge_invitations_from other
+    self.merge_group_invitations_from other
+    self.merge_user_info_from other
+    other.destroy
+    save
+  end
+
+  def merge_questions_from(other)
+    Question.find_each(:topic_ids => other.id) do |q|
       q.classify! self
     end
 
     # Update questions' history
-    Question.query.each do |q|
+    Question.find_each do |q|
       changed = false
       q.versions.each do |v|
         topic_ids = v.data[:topic_ids]
@@ -210,9 +252,34 @@ class Topic
       end
       q.save! if changed
     end
+  end
 
+  def merge_question_lists_from(other)
+    other.question_lists.each do |question_list|
+      question_list.main_topic_id = self.id
+      question_list.save!
+    end
+  end
+
+  def merge_invitations_from(other)
+    Invitation.query(:topic_ids => other.id) do |invitation|
+      invitation.topic_ids.delete other.id
+      invitation.topic_ids << self.id
+      invitation.save!
+    end
+  end
+
+  def merge_group_invitations_from(other)
+    GroupInvitation.query(:topic_ids => other.id) do |invitation|
+      invitation.topic_ids.delete other.id
+      invitation.topic_ids << self.id
+      invitation.save!
+    end
+  end
+
+  def merge_user_info_from(other)
     UserTopicInfo.find_each(:topic_id => other.id) do |user_topic_other|
-      if user_topic = UserTopicInfo.first(:topic_id => self.id, 
+      if user_topic = UserTopicInfo.first(:topic_id => self.id,
                                           :user_id => user_topic_other.user.id)
         followed_at = []
         followed_at << user_topic.followed_at if user_topic.followed?
@@ -224,7 +291,7 @@ class Topic
         ignored_at << user_topic.ignored_at if user_topic.ignored?
         ignored_at << user_topic_other.ignored_at if user_topic_other.
           ignored?
-        user_topic.ignored_at = ignored_at.min if ignored_at.present? && 
+        user_topic.ignored_at = ignored_at.min if ignored_at.present? &&
           !user_topic.followed_at
 
          if user_topic.save!
@@ -236,6 +303,8 @@ class Topic
         user_topic.save!
       end
 
+      return true
+
     end
 
     UserTopicInfo.find_each(:topic_id => self.id) do |user_topic|
@@ -245,23 +314,6 @@ class Topic
     self.followers_count = UserTopicInfo.count(:topic_id => self.id,
                                                :followed_at.ne => nil)
 
-    # TODO: check whether this is actually safe.
-    other.news_items.each do |item|
-      if NewsItem.query(:recipient_id => id,
-                         :recipient_type => "Topic",
-                         :news_update_id => item.id).count == 0
-        item.recipient = self
-        item.save
-      end
-    end
-
-    NewsItem.query(:origin_id => other.id, :origin_type => "Topic").each do |item|
-      item.origin = self
-      item.save
-    end
-
-    other.destroy
-    save
   end
 
   def remove_from_questions
@@ -294,8 +346,10 @@ class Topic
   def remove_from_suggestions
     Suggestion.query(:entry_id => self.id,
                      :entry_type => "Topic").each do |suggestion|
-      suggestion.user.remove_suggestion(suggestion)
-      suggestion.user.save
+      if suggestion.user.present?
+        suggestion.user.remove_suggestion(suggestion)
+        suggestion.user.save
+      end
     end
 
     # TODO: We should replace this with a better query, but this would
