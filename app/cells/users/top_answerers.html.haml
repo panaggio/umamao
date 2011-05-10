@@ -1,6 +1,6 @@
 .block.top-answerers{"data-entry-type" => @type}
   %h2.title
-    = t("followable.followers.top_answerers")
+    %span= t("followable.followers.top_answerers")
     - if @total_followers > 0
       %span.count
         = t("followable.followers.link", :count => @total_followers, :link => @path)
