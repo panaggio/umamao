@@ -7,6 +7,7 @@
     = t("wiki.history.version")
     %span.version
       &= number
+  %h3= t("wiki.history.author", :name => version.user.name)
   %h3.version_message
     = version.message
   .changes
