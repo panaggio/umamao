@@ -10,8 +10,10 @@ namespace :data do
     desc "Calculate UserTopicInfo's votes balance"
     task :calculate_user_topic_info_votes_balance => :environment do
       UserTopicInfo.reset_votes_balance!
+      UserTopicInfo.reset_answers_count!
 
       Answer.find_each do |answer|
+        UserTopicInfo.answer_added!(answer)
         UserTopicInfo.update_vote_balance!(answer)
       end
     end

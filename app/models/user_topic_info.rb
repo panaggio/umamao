@@ -55,6 +55,8 @@ class UserTopicInfo
   end
 
   def self.answer_added!(answer)
+    return if answer.question.nil?
+
     answer.question.topics.each do |topic|
       update_answer_topic(answer.user, topic)
     end
@@ -63,6 +65,13 @@ class UserTopicInfo
   def self.answer_removed!(answer)
     answer.question.topics.each do |topic|
       update_answer_topic(answer.user, topic, -1)
+    end
+  end
+
+  def self.reset_answers_count!
+    self.find_each do |user_topic|
+      user_topic.answers_count = 0
+      user_topic.save
     end
   end
 
