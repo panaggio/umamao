@@ -104,11 +104,12 @@ class UserTopicInfo
   end
 
   def self.question_classified!(question, topic)
-    # Update questions and answers_count
+    # Update questions and answers_count and votes_balance
     update_question_topic(question.user, topic)
 
     Answer.fields([:user_id]).find_each(:question_id => question.id) do |answer|
       update_answer_topic(answer.user, topic)
+      update_votes_balance(answer.user, topic, answer.votes_average)
     end
   end
 
