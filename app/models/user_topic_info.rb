@@ -124,7 +124,7 @@ class UserTopicInfo
   end
 
   def update_counts
-    self.answers = Answer.query(:user_id => user.id).fields([:question_id]).
+    answers = Answer.query(:user_id => user.id).fields([:question_id]).
       select do |a|
         a.question && a.question.topic_ids.include?(self.topic_id)
       end
