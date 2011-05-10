@@ -43,6 +43,16 @@ class UsersCell < Cell::Rails
     render
   end
 
+  def top_answerers
+    @topic = options[:topic]
+    @user_topics = UserTopicInfo.query(
+      :topic_id => @topic.id, :order => :votes_balance.desc, :limit => 3)
+    @total_followers = @topic.followers.count
+    @type = @topic.collection.name.singularize
+    @path = followers_topic_path @topic.id
+    render
+  end
+
   def following
     @follower = options[:follower]
     @users = @follower.following

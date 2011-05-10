@@ -8,7 +8,7 @@
     .follow-info.block
       = follow_button topic
   = render :partial => "email_subscription", :locals => {:topic => topic, :block => "block"}
-  = render_cell :users, :followers, :followed => topic
+  = render_cell :users, :top_answerers, :topic => topic
 
   - if students.present?
     %h3.title

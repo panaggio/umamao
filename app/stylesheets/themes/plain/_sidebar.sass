@@ -13,10 +13,10 @@
       font-size: 16px
       line-height: 20px
 
-  h2
-    margin-bottom: 15px
-
-  h3
+  h2, h3
+    font-size: 14px
+    font-weight: bold
+    padding-bottom: 10px
     clear: both
 
   .navigation
@@ -67,10 +67,10 @@
   .followers
     .count
       margin-top: 1em
-  .followers, .followed-topics, .profile
+  .followers, .followed-topics, .profile, .top-answerers
     .title
       > span:after
-        content: '·'
+        content: ' ·'
         font-weight: bold
       > span:last-of-type:after
         content: ''
@@ -80,3 +80,21 @@
       li:before
         padding-right: 0.5em
         content: url(/images/icons/printer.png)
+
+  .top-answerers
+    +pie-clearfix
+    list-style-type: none
+    padding-bottom: 10px
+    margin-bottom: 20px
+    color: #777777
+
+    .user-avatar-link
+      padding: 1px 2px
+
+    .user-data
+      +pie-clearfix
+      padding-bottom: 3px
+      & > *
+        float: left
+    .user-data, .answer-count
+      clear: both
