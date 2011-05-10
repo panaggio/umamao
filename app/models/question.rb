@@ -505,6 +505,7 @@ class Question
 
     if !banned
       topic.increment_questions_count -1
+      UserTopicInfo.question_unclassified!(self, topic)
     end
 
     # Ignorers
