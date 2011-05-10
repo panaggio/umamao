@@ -24,11 +24,7 @@ form.editor
   textarea, #content-images, .markdown
     margin-bottom: 13px
   #content-images
-    .content_image
-      span:after
-        content: ' ·'
-        font-weight: bold
-      span:last-of-type:after
-        content: ''
+    .content_image span
+      +cdot-separated
     &.empty
       display: none

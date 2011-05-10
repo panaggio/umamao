@@ -5,6 +5,9 @@
       - ["facebook", "twitter"].each do |site|
         %li{:class => ((@where == site)? "current" : ""), :data => site}
           = link_to(image_tag("#{site}.gif") + " #{site.capitalize}", send("new_share_#{@class_name}_path".to_sym, {:show_tabs => :false, :where => site, :class_name => @class_name, :format => :js, :content => @content.id}), :class => site, :remote => true, "data-type" => "json", :class => "tab-share-popup")
+      - if @content.is_a? Topic
+        %li{:class => (@where == "embed" ? "current" : ""), :data => "embed"}
+          = t("share_content.embed")
 
   - ["facebook", "twitter"].each do |site|
     .content-share{:id => "share_on_#{site}", :class => ((@where == site)? "current" : "")}
@@ -21,4 +24,8 @@
         .controls
           = link_to t("scaffold.cancel"), "#", :class => "close"
           = submit_tag t("global.share"), :disabled => (charsleft < 0)
-        .clear
+  - if @content.is_a? Topic
+    .content-share{:id => "share_on_embed",
+                   :class => (@where == "embed" ? "current" : "")}
+      = text_field_tag "", embed_topic_tag(@content, :js)
+      = text_field_tag "", embed_topic_tag(@content, :iframe)

@@ -1,5 +1,6 @@
 class ShareContentCell < Cell::Rails
   helper ApplicationHelper
+  helper TopicsHelper
 
   # Displays a dialog box to share content
   # (questions, answers, ...) on other site.
@@ -10,6 +11,7 @@ class ShareContentCell < Cell::Rails
     @where = options[:where]
     @link = options[:link]
     @maxlength = {"twitter" => 140, "facebook" => 420}
+    default_url_options[:host] = AppConfig.domain
     render
   end
 

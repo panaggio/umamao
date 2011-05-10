@@ -40,7 +40,8 @@ $(document).ready(function() {
   });
 
   // Open modal box to share content.
-  Utils.clickObject(".share .facebook, .share .twitter", function () {
+  Utils.clickObject(".share .facebook, .share .twitter, "
+                    + ".share .embed", function () {
     return {
       success: function (data) {
         Utils.modal({html: data.html});

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This controller is used to share content on other websites, such as
 # posting a question or an answer on Facebook or Twitter.
 
@@ -89,18 +90,7 @@ class ShareContentController < ApplicationController
   # Check whether the corresponding external account is actually present,
   # asking the user to connect it if it isn't.
   def check_connections
-    status = :success
-
-    case params[:where]
-    when "facebook"
-      if !current_user.facebook_account
-        status = :needs_connection
-      end
-    when "twitter"
-      status = :needs_connection if !current_user.twitter_client
-    else
-      status = :unknown_destination
-    end
+    status = connection_status
 
     if status != :success
       respond_to do |format|
@@ -124,6 +114,23 @@ class ShareContentController < ApplicationController
         end
       end
     end
+  end
+
+  def connection_status
+    status = :success
+
+    case params[:where]
+    when "facebook"
+      if !current_user.facebook_account
+        status = :needs_connection
+      end
+    when "twitter"
+      status = :needs_connection if !current_user.twitter_client
+    else
+      status = :unknown_destination
+    end
+
+    status
   end
 
   protected
