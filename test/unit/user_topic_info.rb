@@ -82,6 +82,16 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     assert_in_delta(ut.followed_at, Time.now, DELTA)
   end
 
+  test "should check if user ignores topic property" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
+    ut.ignore!
+
+    assert ut.ignored?
+    assert u.ignores?(t)
+  end
+
   test "should check if user unignores topic property" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
@@ -91,16 +101,6 @@ class UserTopicInfoTest < ActiveSupport::TestCase
 
     assert !ut.ignored?
     assert !u.ignores?(t)
-  end
-
-  test "should check if user ignores topic property" do
-    u = Factory.create(:user)
-    t = Factory.create(:topic)
-    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
-    ut.ignore!
-
-    assert ut.ignored?
-    assert u.ignores?(t)
   end
 
   test "should keep the correct date of ignore on ignore topic" do
