@@ -76,10 +76,8 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   end
 
   test "should keep the correct date of follow on follow topic" do
-    u = Factory.create(:user)
-    t = Factory.create(:topic)
-    t.add_follower!(u)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info)
+    ut.follow!
 
     assert_in_delta(ut.followed_at, Time.now, DELTA)
   end
@@ -106,10 +104,8 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   end
 
   test "should keep the correct date of ignore on ignore topic" do
-    u = Factory.create(:user)
-    t = Factory.create(:topic)
-    u.ignore_topic!(t)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info)
+    ut.ignore!
 
     assert_in_delta(ut.ignored_at, Time.now, DELTA)
   end
