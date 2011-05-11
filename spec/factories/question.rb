@@ -1,7 +1,7 @@
-FactoryGirl.define do
-  factory :question do
-    title
-    user_id
-    group Group.first
+Factory.define :question do |q|
+  q.sequence(:title) do |n|
+    "Question #{n}"
   end
+  q.association :user
+  q.group Group.first
 end
