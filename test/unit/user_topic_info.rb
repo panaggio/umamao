@@ -55,20 +55,22 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   test "should check if user follows topic properly" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
-    t.add_follower!(u)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
+    ut.follow!
 
-    assert_equal u.following?(t), ut.followed?
+    assert ut.followed?
+    assert u.following?(t)
   end
 
   test "should check if user unfollows topic properly" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
-    t.add_follower!(u)
-    t.remove_follower!(u)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
+    ut.follow!
+    ut.unfollow!
 
-    assert_equal u.following?(t), ut.followed?
+    assert !ut.followed?
+    assert !u.following?(t)
   end
 
   test "should keep the correct date of follow on follow topic" do
@@ -83,20 +85,22 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   test "should check if user unignores topic property" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
-    u.ignore_topic!(t)
-    u.unignore_topic!(t)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
+    ut.ignore!
+    ut.unignore!
 
-    assert_equal u.ignores?(t), ut.ignored?
+    assert !ut.ignored?
+    assert !u.ignores?(t)
   end
 
   test "should check if user ignores topic property" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
-    u.ignore_topic!(t)
-    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut = Factory.create(:user_topic_info, :user => u, :topic => t)
+    ut.ignore!
 
-    assert_equal u.ignores?(t), ut.ignored?
+    assert ut.ignored?
+    assert u.ignores?(t)
   end
 
   test "should keep the correct date of ignore on ignore topic" do
