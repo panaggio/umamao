@@ -34,6 +34,7 @@
       .method
         = label_tag "", t("share_content.embed.iframe")
         = text_field_tag "", embed_topic_tag(@content, :iframe)
-      = link_to t("share_content.embed.more"), "/questions/4dca8b8dffc334000100026a"
+      = link_to t("share_content.embed.more"),
+        "/questions/4dca8b8dffc334000100026a", :target => "_blank"
       .controls
         = link_to t("scaffold.close"), "#", :class => "close"
