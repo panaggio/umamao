@@ -135,6 +135,10 @@ class UserTopicInfo
       Question.count(:user_id => self.user_id, :topic_id => self.topic_id)
   end
 
+  def self.find_by_user_id_and_topic_id(user_id, topic_id)
+    UserTopicInfo.first(:user_id => user_id, :topic_id => topic_id)
+  end
+
   private
 
   def self.update_question_topic(user, topic, increment=1)
