@@ -30,6 +30,28 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     }
   end
 
+  test "should be able to create two instances for the same user" do
+    u = Factory.create(:user)
+    t1 = Factory.create(:topic)
+    t2 = Factory.create(:topic)
+
+    Factory.create(:user_topic_info, :user => u, :topic => t1)
+    assert_nothing_raised{
+      Factory.create(:user_topic_info, :user => u, :topic => t2)
+    }
+  end
+
+  test "should be able to create two instances for the same topic" do
+    u1 = Factory.create(:user)
+    u2 = Factory.create(:user)
+    t = Factory.create(:topic)
+
+    Factory.create(:user_topic_info, :user => u1, :topic => t)
+    assert_nothing_raised{
+      Factory.create(:user_topic_info, :user => u2, :topic => t)
+    }
+  end
+
   test "should check if user follows topic properly" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
@@ -66,4 +88,3 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     assert_in_delta(ut.ignored_at, Time.now, DELTA)
   end
 end
-
