@@ -1,7 +1,7 @@
 Factory.define :question do |q|
   q.sequence(:title) do |n|
-    "Question #{n}"
+    "Is this the #{n}th question?"
   end
   q.association :user
-  q.group Group.first
+  q.association :group
 end
