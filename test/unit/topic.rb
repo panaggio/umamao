@@ -2,16 +2,30 @@ require 'test_helper'
  
 class TopicTest < ActiveSupport::TestCase
   test "should not save with empty title" do
-    t = Factory.build(:topic, :title => '')
-    assert !t.save
-
-    assert_raise(MongoMapper::DocumentNotValid){ t.save! }
+    assert_raise(MongoMapper::DocumentNotValid){
+      Factory.create(:topic, :title => '')
+    }
   end
 
   test "should not save with nil title" do
-    t = Factory.build(:topic, :title => nil)
-    assert !t.save
+    assert_raise(MongoMapper::DocumentNotValid){
+      Factory.create(:topic, :title => nil)
+    }
+  end
 
-    assert_raise(MongoMapper::DocumentNotValid){ t.save! }
+  test 'should save a topic with title properly' do
+    assert Factory.create(:topic)
+  end
+
+  test 'should save two topics with different titles' do
+    assert Factory.create(:topic)
+    assert Factory.create(:topic)
+  end
+
+  test 'should not save a topic with duplicate title' do
+    Factory.create(:topic, :title => 'Title')
+    assert_raise(MongoMapper::DocumentNotValid){
+      Factory.create(:topic, :title => 'Title')
+    }
   end
 end
