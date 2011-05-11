@@ -25,10 +25,12 @@ class UserTopicInfo
 
   def follow!
     self.followed_at ||= Time.now
+    self.save!
   end
 
   def unfollow!
     self.followed_at = nil
+    self.save!
   end
 
   def ignored?
@@ -37,10 +39,12 @@ class UserTopicInfo
 
   def ignore!
     self.ignored_at ||= Time.now
+    self.save!
   end
 
   def unignore!
     self.ignored_at = nil
+    self.save!
   end
 
   def self.question_added!(question)
