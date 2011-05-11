@@ -9,6 +9,6 @@
           :class => site, :remote => true, "data-type" => "json")
     - if opts[:class_name] == "topic"
       %span
-        = link_to t("share_content.embed"),
+        = link_to t("share_content.embed.title"),
           new_share_topic_path(opts.merge(:where => "embed", :format => :js)),
           :class => "embed", :remote => true, "data-type" => "json"

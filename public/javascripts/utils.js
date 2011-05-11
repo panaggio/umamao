@@ -121,6 +121,7 @@ window.Utils = {
     // Default behavior for close button
     placedModal.find("a.close").click(function () {
       $.colorbox.close();
+      return false;
     });
 
     $.colorbox.resize({width: placedModal.outerWidth()});
@@ -128,7 +129,10 @@ window.Utils = {
 
   resizeModal : function(){
     var placedModal = $("#colorbox .modal");
-    $.colorbox.resize({width: placedModal.outerWidth()});
+    $.colorbox.resize({
+      width: placedModal.outerWidth(),
+      height: placedModal.outerHeight()
+    });
   },
 
   // Toggle a button state between "follow" and "unfollow"
