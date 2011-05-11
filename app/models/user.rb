@@ -64,7 +64,8 @@ class User
   has_many :answers, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
-  has_many :user_external_accounts, :dependent => :destroy
+  has_many :external_accounts, :class_name => "UserExternalAccount",
+    :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :sent_notifications, :foreign_key => "origin_id",
     :class_name => "Notification", :dependent => :destroy
