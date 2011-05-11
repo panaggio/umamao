@@ -7,8 +7,8 @@ class UserTopicInfo
   key :topic_id, ObjectId, :required => true, :index => true
   belongs_to :topic
 
-  key :followed_at, Date
-  key :ignored_at, Date
+  key :followed_at, Time
+  key :ignored_at, Time
   key :answers_count, Integer, :default => 0
   key :questions_count, Integer, :default => 0
   key :votes_balance, Integer, :default => 0
