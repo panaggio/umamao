@@ -4,9 +4,9 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   DELTA = 10.seconds
 
   def setup
-    User.find_each(&:destroy)
-    Topic.find_each(&:destroy)
-    UserTopicInfo.find_each(&:destroy)
+    User.destroy_all
+    Topic.destroy_all
+    UserTopicInfo.destroy_all
   end
 
   test "should not create a new user_topic_info with nil user" do
