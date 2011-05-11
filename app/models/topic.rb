@@ -49,6 +49,7 @@ class Topic
 
   key :allow_question_lists, Boolean, :default => false
 
+  has_many :topic_external_accounts, :dependent => :destroy
 
   timestamps!
 
