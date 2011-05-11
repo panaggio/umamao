@@ -61,6 +61,16 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     assert_equal u.following?(t), ut.followed?
   end
 
+  test "should check if user unfollows topic properly" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    t.add_follower!(u)
+    t.remove_follower!(u)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal u.following?(t), ut.followed?
+  end
+
   test "should keep the correct date of follow on follow topic" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
@@ -68,6 +78,16 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
 
     assert_in_delta(ut.followed_at, Time.now, DELTA)
+  end
+
+  test "should check if user unignores topic property" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    u.ignore_topic!(t)
+    u.unignore_topic!(t)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal u.ignores?(t), ut.ignored?
   end
 
   test "should check if user ignores topic property" do
