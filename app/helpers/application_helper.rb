@@ -88,9 +88,10 @@ module ApplicationHelper
     end
 
     if options[:keep_newlines]
-      # Translate \n to <br />. Extracted from GitHub Flavored Markdown.
-      txt.gsub!(/(\A|^$\n)(^\w[^\n]*\n)(^\w[^\n]*$)+/m) do |x|
-        x.gsub(/^(.+)$/, "\\1  ")
+      # Extracted from GitHub Flavored Markdown:
+      # in very clear cases, let newlines become <br /> tags
+      txt.gsub!(/^[\w\<][^\n]*\n+/) do |x|
+        x =~ /\n{2}/ ? x : (x.strip!; x << "  \n")
       end
     end
 

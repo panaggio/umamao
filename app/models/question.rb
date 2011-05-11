@@ -123,6 +123,7 @@ class Question
 
   before_save :update_activity_at
   before_save :update_autocomplete_keywords
+  before_save :adjust_newlines
   before_create :add_question_author_to_watchers
   after_create :create_news_update, :new_question_notification
   after_create :update_topics_questions_count,
@@ -604,5 +605,7 @@ class Question
     self.title_changed? || super
   end
 
+  def adjust_newlines
+    self.body = self.body.to_lf
+  end
 end
-
