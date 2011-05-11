@@ -4,9 +4,11 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   DELTA = 10.seconds
 
   def setup
+    Group.destroy_all
+    Question.destroy_all
+    UserTopicInfo.destroy_all
     User.destroy_all
     Topic.destroy_all
-    UserTopicInfo.destroy_all
   end
 
   test "should not create a new user_topic_info with nil user" do
@@ -110,5 +112,29 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
 
     assert_in_delta(ut.ignored_at, Time.now, DELTA)
+  end
+
+  test "questions count should be initially zero" do
+    ut = Factory.create(:user_topic_info)
+    assert_equal ut.questions_count, 0
+  end
+
+  test "should increment questions_count on question add" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :user => u, :topics => [t])
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal ut.questions_count, 1
+  end
+
+  test "should decrement questions_count on question remove" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :user => u, :topics => [t])
+    UserTopicInfo.question_removed!(q)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal ut.questions_count, 0
   end
 end
