@@ -128,7 +128,7 @@ class Question
   after_create :update_topics_questions_count,
     :increment_user_topic_questions_count
 
-  after_destroy :decrement_user_topic_questions_count
+  before_destroy :decrement_user_topic_questions_count
 
   validates_inclusion_of :language, :within => AVAILABLE_LANGUAGES
   validates_true_for :language, :logic => lambda { |q| q.group.language == q.language },
