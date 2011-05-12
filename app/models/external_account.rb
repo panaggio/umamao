@@ -19,6 +19,9 @@ class ExternalAccount
 
   after_save :update_search_index
   after_destroy :update_search_index
+  after_create :suggest, :if => lambda { |ext_account|
+    ["facebook", "twitter"].include? ext_account.provider
+  }
 
   def self.find_from_hash(hash)
     self.first(:provider => hash['provider'], :uid => hash['uid'])
@@ -38,4 +41,10 @@ class ExternalAccount
   def update_search_index
     self.user.update_search_index(true) if self.user
   end
+
+  def suggest
+    self.user.suggestion_list.suggest_from_outside({self.provider => true})
+    self.user.suggestion_list.save
+  end
+  handle_asynchronously :suggest
 end
