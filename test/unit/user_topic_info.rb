@@ -93,6 +93,22 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     assert u.ignores?(t)
   end
 
+  test "should unfollow if user ignores topic" do
+    ut = Factory.create(:user_topic_info)
+    ut.follow!
+    ut.ignore!
+
+    assert !ut.followed?
+  end
+
+  test "should unignore if user follows topic" do
+    ut = Factory.create(:user_topic_info)
+    ut.ignore!
+    ut.follow!
+
+    assert !ut.ignored?
+  end
+
   test "should check if user unignores topic property" do
     u = Factory.create(:user)
     t = Factory.create(:topic)
