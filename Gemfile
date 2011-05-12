@@ -37,7 +37,7 @@ gem 'hoptoad_notifier'
 gem 'koala', '~> 0.10.0'
 gem 'mechanize', :require => false
 gem 'nokogiri'
-gem 'omniauth', :git => 'git://github.com/umamao/omniauth.git'
+gem 'omniauth'
 gem 'postmark', '~>0.9.0'
 gem 'postmark-rails', '~>0.4.0'
 gem 'rdiscount', '~>1.6.3.1'

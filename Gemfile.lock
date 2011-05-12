@@ -46,40 +46,6 @@ GIT
       uuidtools (>= 2.0.0)
 
 GIT
-  remote: git://github.com/umamao/omniauth.git
-  revision: 381a77288ea49a0865bf413556da32e532e6dd92
-  specs:
-    oa-basic (0.2.0.beta1)
-      multi_json (~> 0.0.2)
-      nokogiri (~> 1.4.2)
-      oa-core (= 0.2.0.beta1)
-      rest-client (~> 1.6.0)
-    oa-core (0.2.0.beta1)
-      rack (~> 1.1)
-    oa-enterprise (0.2.0.beta1)
-      net-ldap (~> 0.1.1)
-      nokogiri (~> 1.4.2)
-      oa-core (= 0.2.0.beta1)
-      pyu-ruby-sasl (~> 0.0.3.1)
-      rubyntlm (~> 0.1.1)
-    oa-oauth (0.2.0.beta1)
-      multi_json (~> 0.0.2)
-      nokogiri (~> 1.4.2)
-      oa-core (= 0.2.0.beta1)
-      oauth (~> 0.4.0)
-      oauth2 (~> 0.1.0)
-    oa-openid (0.2.0.beta1)
-      oa-core (= 0.2.0.beta1)
-      rack-openid (~> 1.2.0)
-      ruby-openid-apps-discovery
-    omniauth (0.2.0.beta1)
-      oa-basic (= 0.2.0.beta1)
-      oa-core (= 0.2.0.beta1)
-      oa-enterprise (= 0.2.0.beta1)
-      oa-oauth (= 0.2.0.beta1)
-      oa-openid (= 0.2.0.beta1)
-
-GIT
   remote: git://github.com/umamao/rails.git
   revision: d8186734f48b39be7ed68790aa0e5aa0ef6a98ea
   branch: 3-0-7
@@ -281,10 +247,44 @@ GEM
     net-ldap (0.1.1)
     net-ssh (2.1.4)
     nokogiri (1.4.4)
+    oa-basic (0.2.0)
+      multi_json (~> 0.0.2)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.2.0)
+      rest-client (~> 1.6.0)
+    oa-core (0.2.0)
+      rack (~> 1.1)
+    oa-enterprise (0.2.0)
+      net-ldap (~> 0.1.1)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.2.0)
+      pyu-ruby-sasl (~> 0.0.3.1)
+      rubyntlm (~> 0.1.1)
+    oa-more (0.2.0)
+      multi_json (~> 0.0.2)
+      oa-core (= 0.2.0)
+      rest-client (~> 1.6.0)
+    oa-oauth (0.2.0)
+      multi_json (~> 0.0.2)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.2.0)
+      oauth (~> 0.4.0)
+      oauth2 (~> 0.1.1)
+    oa-openid (0.2.0)
+      oa-core (= 0.2.0)
+      rack-openid (~> 1.2.0)
+      ruby-openid-apps-discovery
     oauth (0.4.4)
     oauth2 (0.1.1)
       faraday (~> 0.5.0)
       multi_json (~> 0.0.4)
+    omniauth (0.2.0)
+      oa-basic (= 0.2.0)
+      oa-core (= 0.2.0)
+      oa-enterprise (= 0.2.0)
+      oa-more (= 0.2.0)
+      oa-oauth (= 0.2.0)
+      oa-openid (= 0.2.0)
     open4 (1.0.1)
     plucky (0.3.7)
       mongo (~> 1.1)
@@ -418,7 +418,7 @@ DEPENDENCIES
   mongo_mapper!
   mongomapper_ext!
   nokogiri
-  omniauth!
+  omniauth
   postmark (~> 0.9.0)
   postmark-rails (~> 0.4.0)
   rails!
