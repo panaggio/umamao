@@ -1,3 +1,6 @@
+# Used for associating a Twitter account with a Topic. For account
+# creation, see settings/external_accounts_controller.rb
+
 class TopicExternalAccountsController < ApplicationController
   before_filter :login_required, :admin_required
 

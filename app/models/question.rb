@@ -607,6 +607,7 @@ class Question
     self.title_changed? || super
   end
 
+  # Post this question on the Twitter accounts of every topic.
   def post_on_twitter
     self.topics.each do |topic|
       topic.delay.post_on_twitter(self) if topic.external_account.present?

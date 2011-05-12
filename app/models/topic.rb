@@ -118,6 +118,10 @@ class Topic
     title
   end
 
+  # Post a question on this topic's Twitter account.
+  #
+  # FIXME: Ideally this should be put on a mailer-like class outside
+  # the model.
   def post_on_twitter(question)
     Twitter.configure do |config|
       config.consumer_key = AppConfig.twitter['key']
