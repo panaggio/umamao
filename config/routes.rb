@@ -42,6 +42,9 @@ Shapado::Application.routes.draw do
       post :ignore
       post :user_suggest
     end
+
+    resources :external_accounts, :controller => "topic_external_accounts",
+      :only => [:new, :destroy]
   end
 
   match "/topics/:id/javascript_embedded" => "topics#embedded"

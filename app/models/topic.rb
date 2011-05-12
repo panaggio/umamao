@@ -49,8 +49,10 @@ class Topic
 
   key :allow_question_lists, Boolean, :default => false
 
+  # We need to pass the foreign key here to make this association work
+  # with topic subclasses.
   has_one :external_account, :class_name => "TopicExternalAccount",
-    :dependent => :destroy
+    :foreign_key => :topic_id, :dependent => :destroy
 
   timestamps!
 

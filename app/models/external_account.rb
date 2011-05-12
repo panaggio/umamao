@@ -13,17 +13,16 @@ class ExternalAccount
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
 
-  def self.find_from_hash(hash)
-    self.first(:provider => hash['provider'], :uid => hash['uid'])
-  end
-
-  def self.create_from_hash(hash, user = nil)
+  def initialize(options = {})
     # access_token comes from twitter and is not serializable by
     # mongomapper. We don't need it because it's already in
     # :credentials.
-    hash['extra'].delete('access_token')
+    options['extra'].delete('access_token')
+    super
+  end
 
-    self.create(hash.merge(:user => user))
+  def self.find_from_hash(hash)
+    self.first(:provider => hash['provider'], :uid => hash['uid'])
   end
 
 end
