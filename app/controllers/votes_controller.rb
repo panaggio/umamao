@@ -87,6 +87,7 @@ class VotesController < ApplicationController
     end
   end
 
+  # FIXME: add_vote and remove_vote should be done by the model
   def push_vote(vote)
     user_vote = current_user.vote_on(vote.voteable)
     voteable = vote.voteable
