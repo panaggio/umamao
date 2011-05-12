@@ -11,6 +11,8 @@ class ExternalAccount
   key :user_id, BSON::ObjectId
   belongs_to :user
 
+  timestamps!
+
   ensure_index([[:provider, 1], [:uid, 1]], :unique => true)
 
   validates_presence_of :user_id, :uid, :provider

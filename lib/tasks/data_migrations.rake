@@ -7,6 +7,26 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Fill created_at field for objects that don't have one."
+    task :fill_created_at_fields => :environment do
+      AnswerRequest.find_each(:created_at => nil) do |request|
+        request.created_at = request.updated_at = Time.now
+        request.save!
+      end
+      ExternalAccount.find_each(:created_at => nil) do |account|
+        account.created_at = account.updated_at = Time.now
+        account.save!
+      end
+      GroupInvitation.find_each(:created_at => nil) do |invitation|
+        invitation.created_at = invitation.updated_at = Time.now
+        invitation.save!
+      end
+      UserTopicInfo.find_each(:created_at => nil) do |info|
+        info.created_at = info.updated_at = Time.now
+        info.save!
+      end
+    end
+
     desc "Calculate UserTopicInfo's votes balance"
     task :calculate_user_topic_info_votes_balance => :environment do
       UserTopicInfo.reset_votes_balance!

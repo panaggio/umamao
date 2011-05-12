@@ -19,6 +19,8 @@ class UserTopicInfo
   ensure_index([[:user_id, 1], [:topic_id, 1]])
   ensure_index([[:topic_id, 1], [:votes_balance, -1]])
 
+  timestamps!
+
   def followed?
     self.followed_at.present?
   end
