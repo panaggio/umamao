@@ -1,5 +1,7 @@
 Factory.define :group do |g|
-  g.name 'default_group'
+  g.sequence :name do |n|
+    "group#{n}"
+  end
   g.sequence :subdomain do |n|
     "subdomain#{n}"
   end
