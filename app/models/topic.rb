@@ -66,6 +66,11 @@ class Topic
   after_destroy :remove_from_question_versions
   after_destroy :remove_from_suggestions
 
+  class Helper
+    include Singleton
+    include ActionView::Helpers::TextHelper
+  end
+
   # Wikipedia can be accessed by article_id using
   # http://pt.wikipedia.org/w/index.php?curid=#{wikipedia_pt_id}
   # and by article_name using
@@ -111,6 +116,26 @@ class Topic
 
   def name
     title
+  end
+
+  def post_on_twitter(question)
+    Twitter.configure do |config|
+      config.consumer_key = AppConfig.twitter['key']
+      config.consumer_secret = AppConfig.twitter['secret']
+      config.oauth_token = external_account.credentials['token']
+      config.oauth_token_secret = external_account.credentials['secret']
+    end
+
+    client = Twitter::Client.new
+    bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
+    url = Rails.application.routes.
+      url_helpers.question_url(question,
+                               :host => AppConfig.domain)
+    short_url = bitly.shorten(url).short_url
+    body = Helper.instance.truncate(question.title,
+                                    :length => 140 - short_url.size - 1)
+    client.update("#{body} #{short_url}")
+    true
   end
 
   def find_related_topics

@@ -126,7 +126,7 @@ class Question
   before_create :add_question_author_to_watchers
   after_create :create_news_update, :new_question_notification
   after_create :update_topics_questions_count,
-    :increment_user_topic_questions_count
+    :increment_user_topic_questions_count, :post_on_twitter
 
   after_destroy :decrement_user_topic_questions_count
 
@@ -465,6 +465,9 @@ class Question
         ni.hide! if ni.should_be_hidden?([topic.id])
       end
     end
+
+    # Post to Twitter
+    topic.post_on_twitter(self) if topic.external_account.present?
   end
 
 
@@ -602,6 +605,12 @@ class Question
 
   def needs_to_update_search_index?
     self.title_changed? || super
+  end
+
+  def post_on_twitter
+    self.topics.each do |topic|
+      topic.delay.post_on_twitter(self) if topic.external_account.present?
+    end
   end
 
 end
