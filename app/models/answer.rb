@@ -41,8 +41,7 @@ class Answer < Comment
 
   after_create :create_news_update, :new_answer_notification,
     :increment_user_topic_answers_count
-  before_destroy :unhide_news_update
-  after_destroy :decrement_user_topic_answers_count
+  before_destroy :unhide_news_update, :decrement_user_topic_answers_count
 
   ensure_index([[:user_id, 1], [:question_id, 1]])
 
