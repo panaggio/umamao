@@ -5,14 +5,7 @@
 = render :partial => "content_images/content_images",
   :locals => { :entry => @answer }
 
-
-#preview-command
-  %label.label
-    = t("global.preview")
-  #view
-    = "(#{link_to t("global.enable"), "#", :class => "show_preview_answer"})"
-  #hide
-    = "(#{link_to t("global.disable"), "#", :class => "hide_preview_answer"})"
+= render :partial => "shared/preview_pane"
 
 #preview-area.markdown
 
