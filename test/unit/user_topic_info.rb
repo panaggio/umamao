@@ -10,6 +10,7 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     UserTopicInfo.delete_all
     User.delete_all
     Topic.delete_all
+    Delayed::Job.delete_all
   end
 
   test "should not create a new user_topic_info with nil user" do
@@ -175,5 +176,99 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
 
     assert_equal ut.answers_count, 0
+  end
+
+  test "should set answers_count to zero on reset_answers_count!" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    UserTopicInfo.reset_answers_count!
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal ut.answers_count, 0
+  end
+
+  test "votes balance should be initially zero" do
+    ut = Factory.create(:user_topic_info)
+    assert_equal 0, ut.votes_balance
+  end
+
+  test "should increment votes_balance when upvote is added to answer" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    UserTopicInfo.vote_added!(a, 1)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal 1, ut.votes_balance
+  end
+
+  test "should decrement votes_balance when downvote is added to answer" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    UserTopicInfo.vote_added!(a, -1)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal -1, ut.votes_balance
+  end
+
+  test "should decrement votes_balance when upvote is removed from answer" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    UserTopicInfo.vote_added!(a, 1)
+    UserTopicInfo.vote_removed!(a, 1)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal 0, ut.votes_balance
+  end
+
+  test "should increment votes_balance when downvote is removed from answer" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    UserTopicInfo.vote_added!(a, -1)
+    UserTopicInfo.vote_removed!(a, -1)
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal 0, ut.votes_balance
+  end
+
+  test "should set votes_balance to zero on reset_votes_balance!" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    Factory.create(:upvote, :voteable => a)
+    UserTopicInfo.reset_votes_balance!
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+
+    assert_equal 0, ut.votes_balance
+  end
+
+  # Current implementation needs to be refactored to pass
+  test "should set vote balance to the correct value" do
+    u = Factory.create(:user)
+    t = Factory.create(:topic)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :user => u, :question => q)
+    v = Factory.create(:upvote, :voteable => a)
+    a.reload
+
+    ut = UserTopicInfo.find_by_user_id_and_topic_id(u.id, t.id)
+    ut.votes_balance = 0
+    ut.save!
+    Delayed::Worker.new.work_off
+
+    UserTopicInfo.update_vote_balance!(a)
+    ut.reload
+
+    assert_equal 1, ut.votes_balance
   end
 end
