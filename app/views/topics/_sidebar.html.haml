@@ -11,17 +11,18 @@
   = render_cell :users, :top_answerers, :topic => topic
 
   - if topic.external_account.present?
-    = t(".follow_on_twitter")
-    = link_to "@#{topic.external_account.user_info['nickname']}",
-      topic.external_account.user_info['urls']['Twitter'],
-      :target => "_blank"
+    .follow_on_twitter.block
+      = t(".follow_on_twitter")
+      = link_to "@#{topic.external_account.user_info['nickname']}",
+        topic.external_account.user_info['urls']['Twitter'],
+        :target => "_blank"
+      - if logged_in? && current_user.admin?
+        (#{link_to(t(".disconnect_from_twitter"), |
+           topic_external_account_path(topic, topic.external_account), |
+           :method => :delete)}) |
 
-  - if logged_in? && current_user.admin?
-    - if topic.external_account.present?
-      = link_to t(".disconnect_from_twitter"),
-        topic_external_account_path(topic, topic.external_account),
-        :method => :delete
-    - else
+  - elsif logged_in? && current_user.admin?
+    .follow_on_twitter.block
       = link_to t(".connect_to_twitter"),
         new_topic_external_account_path(topic)
 
