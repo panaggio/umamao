@@ -23,13 +23,22 @@ class UserTopicInfo
     self.followed_at.present?
   end
 
-  def follow!
+  def follow
+    self.unignore
     self.followed_at ||= Time.now
+  end
+
+  def follow!
+    self.follow
     self.save!
   end
 
-  def unfollow!
+  def unfollow
     self.followed_at = nil
+  end
+
+  def unfollow!
+    self.unfollow
     self.save!
   end
 
@@ -37,13 +46,22 @@ class UserTopicInfo
     self.ignored_at.present?
   end
 
-  def ignore!
+  def ignore
+    self.unfollow
     self.ignored_at ||= Time.now
+  end
+
+  def ignore!
+    self.ignore
     self.save!
   end
 
-  def unignore!
+  def unignore
     self.ignored_at = nil
+  end
+
+  def unignore!
+    self.unignore
     self.save!
   end
 
@@ -82,13 +100,13 @@ class UserTopicInfo
 
   def self.vote_added!(answer, vote)
     answer.question.topics.each do |topic|
-      update_votes_balance(answer.user, topic, vote)
+      increment_votes_balance(answer.user, topic, vote)
     end
   end
 
   def self.vote_removed!(answer, vote)
     answer.question.topics.each do |topic|
-      update_votes_balance(answer.user, topic, vote)
+      increment_votes_balance(answer.user, topic, -vote)
     end
   end
 
@@ -171,12 +189,25 @@ class UserTopicInfo
     end
   end
 
+  def self.increment_votes_balance(user, topic, increment)
+    user_topic = UserTopicInfo.first(:topic_id => topic.id,
+                                     :user_id => user.id)
+
+    if user_topic
+      user_topic.votes_balance += increment
+      user_topic.save
+    else
+      UserTopicInfo.create(
+        :topic_id => topic.id, :user_id => user.id, :votes_balance => vote)
+    end
+  end
+
   def self.update_votes_balance(user, topic, vote)
     user_topic = UserTopicInfo.first(:topic_id => topic.id,
                                      :user_id => user.id)
 
     if user_topic
-      user_topic.votes_balance += vote
+      user_topic.votes_balance = vote
       user_topic.save
     else
       UserTopicInfo.create(

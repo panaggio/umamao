@@ -93,7 +93,7 @@ class Answer < Comment
       self.question.on_answer_votes_balance_down self
     end
 
-    UserTopicInfo.vote_removed!(self, v)
+    UserTopicInfo.vote_added!(self, v)
     update_question_answered_with
   end
 
@@ -108,7 +108,7 @@ class Answer < Comment
       self.question.on_answer_votes_balance_up self
     end
 
-    UserTopicInfo.vote_added!(self, v)
+    UserTopicInfo.vote_removed!(self, v)
     update_question_answered_with
   end
 
