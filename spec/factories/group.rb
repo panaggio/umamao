@@ -9,4 +9,5 @@ Factory.define :group do |g|
   g.description "question-and-answer website"
   g.legend "question and answer website"
   g.state "active"
+  g.has_reputation_constrains false
 end
