@@ -13,7 +13,8 @@ class AnswerRequest
   key :message, String
   key :accepted_at, Time
   key :rejected, Boolean, :default => false
-  key :sent_at, Time
+
+  timestamps!
 
   # Send confirmation instructions by email
   def send_invitation
@@ -21,8 +22,8 @@ class AnswerRequest
   end
 
   def create_notification
-    Notification.create!(:user => self.invited, 
-                         :event_type => "new_answer_request", 
+    Notification.create!(:user => self.invited,
+                         :event_type => "new_answer_request",
                          :origin => self.senders[0],
                          :reason => self)
   end

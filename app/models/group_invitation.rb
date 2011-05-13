@@ -13,4 +13,7 @@ class GroupInvitation
   many :users, :in => :user_ids
   key :topic_ids, Array
   many :topics, :in => :topic_ids
+
+  timestamps!
+
 end
