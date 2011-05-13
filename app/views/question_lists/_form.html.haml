@@ -13,9 +13,7 @@
     = f.label :body, t(".details"), :class => "label"
     = f.text_area :body, :class => "editor-input", :id => "question-input"
   .preview
-    %label.label
-      = t("global.preview")
-    #question-preview.markdown
+    = render :partial => "shared/preview_pane"
   = f.hidden_field :question_list, :value => question_list.id
 
   .group.navform

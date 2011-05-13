@@ -21,9 +21,7 @@
   .group.initially-hidden
     = f.label :description, t('question_lists.new.description'), :class => "label"
     = f.text_area :description, :class => "editor-input", :id => "description-input", :rows => "auto", :cols => "auto"
-    %label.label
-      = t("global.preview")
-    #description-preview.markdown
+    = render :partial => "shared/preview_pane"
 
     %hr
 
