@@ -1,13 +1,15 @@
 - if !logged_in? || user.id != current_user.id
-  .user.info
-    = link_to avatar_for(user, :size => 32).html_safe, user
-    %ul
-      %li.user-name
-        = link_to user.name, user, :title => user.name
-      - if user.bio.present?
-        %li.user-description
-          = link_to user.bio, user, :title => user.bio
-  - if logged_in?
-    .controls
-      .follow-info{:id => "follow#{user.id}"}
-        = follow_button user
+  .suggested-user
+    .user.info
+      = link_to avatar_for(user, :size => 32).html_safe, user, :class => "user-avatar"
+      .user-block
+        .user-name
+          = link_to user.name, user, :title => user.name
+        - if user.bio.present?
+          .user-description
+            = link_to user.bio, user, :title => user.bio
+
+      - if logged_in?
+        .controls
+          .follow-info{:id => "follow#{user.id}"}
+            = follow_button user

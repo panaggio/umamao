@@ -24,6 +24,8 @@
     #user-suggestions.block.suggestions.student-suggestion
       %h3.title
         = "Alunos já cadastrados"
-      %ul
-        - @users.each do |user|
-          = render :partial => "users/suggestion", :locals =>  {:user => user}
+      %div
+        %ul
+          - @users.each do |user|
+            %li
+              = render :partial => "users/suggestion", :locals =>  {:user => user}
