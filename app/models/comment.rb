@@ -26,6 +26,7 @@ class Comment
 
   validate :disallow_spam
 
+  before_save :adjust_newlines
   after_create :new_comment_notification
 
   def ban
@@ -125,4 +126,7 @@ class Comment
   end
   handle_asynchronously :new_comment_notification
 
+  def adjust_newlines
+    self.body = self.body.to_lf
+  end
 end
