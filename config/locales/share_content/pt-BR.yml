@@ -1,11 +1,11 @@
 pt-BR:
   share_content:
     embed:
-      title: Incluir
+      title: Incorporar
       explanation: |
         Copie um dos trechos abaixo e o insira no código de sua página:
-      javascript: Inclusão por Javascript
-      iframe: Inclusão por iframe
+      javascript: Incorporar por Javascript
+      iframe: Incorporar por iframe
       more: Mais informações
     post_on_facebook: Postar no Facebook
     post_on_twitter: Postar no Twitter
