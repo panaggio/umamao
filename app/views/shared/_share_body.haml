@@ -2,7 +2,13 @@
   .share.block
     %h3= t("share_content.share.#{opts[:class_name]}")
     - ["facebook", "twitter"].each do |site|
-      = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
-        send("new_share_#{opts[:class_name]}_path".to_sym,
-             opts.merge(:where => site, :format => :js)),
-        :class => site, :remote => true, "data-type" => "json")
+      %span
+        = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
+          send("new_share_#{opts[:class_name]}_path".to_sym,
+          opts.merge(:where => site, :format => :js)),
+          :class => site, :remote => true, "data-type" => "json")
+    - if opts[:class_name] == "topic"
+      %span
+        = link_to t("share_content.embed.title"),
+          new_share_topic_path(opts.merge(:where => "embed", :format => :js)),
+          :class => "embed", :remote => true, "data-type" => "json"

@@ -77,6 +77,17 @@ module TopicsHelper
     end
   end
 
+  def embed_topic_tag(topic, method)
+    case method
+    when :js
+      "<script src=\"#{embedded_topic_url(topic)}\"></script>"
+    when :iframe
+      "<iframe src=\"#{embedded_topic_url(topic)}\" frameborder=\"0\"" +
+        "style=\"width: 500px; height: 210px;\"></iframe>"
+    else
+      raise "Invalid embedding method"
+    end
+  end
   private
 
   def remove_links(description)

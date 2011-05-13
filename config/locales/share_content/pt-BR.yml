@@ -1,5 +1,12 @@
 pt-BR:
   share_content:
+    embed:
+      title: Incluir
+      explanation: |
+        Copie um dos trechos abaixo e o insira no código de sua página:
+      javascript: Inclusão por Javascript
+      iframe: Inclusão por iframe
+      more: Mais informações
     post_on_facebook: Postar no Facebook
     post_on_twitter: Postar no Twitter
     share:

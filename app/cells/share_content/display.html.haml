@@ -4,11 +4,15 @@
     %ul.tabs
       - ["facebook", "twitter"].each do |site|
         %li{:class => ((@where == site)? "current" : ""), :data => site}
-          = link_to(image_tag("#{site}.gif") + " #{site.capitalize}", send("new_share_#{@class_name}_path".to_sym, {:show_tabs => :false, :where => site, :class_name => @class_name, :format => :js, :content => @content.id}), :class => site, :remote => true, "data-type" => "json", :class => "tab-share-popup")
+          = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
+            "#share_on_#{site}", :class => site, :class => "tab-share-popup")
+      - if @content.is_a? Topic
+        %li{:class => (@where == "embed" ? "current" : ""), :data => "embed"}
+          = link_to(t("share_content.embed.title"), "#share_on_embed",
+            :class => "tab-share-popup")
 
   - ["facebook", "twitter"].each do |site|
     .content-share{:id => "share_on_#{site}", :class => ((@where == site)? "current" : "")}
-      .message
       - form_tag "/share_#{@class_name}", :method => :post do
         - body = "#{@body[site]}#{' ' << @link[site] if @link[site]}"
         = text_area_tag "body", body, :'data-maxlength' => @maxlength[site]
@@ -21,4 +25,16 @@
         .controls
           = link_to t("scaffold.cancel"), "#", :class => "close"
           = submit_tag t("global.share"), :disabled => (charsleft < 0)
-        .clear
+  - if @content.is_a? Topic
+    #share_on_embed.content-share{:class => (@where == "embed" ? "current" : "")}
+      .explanation= t("share_content.embed.explanation")
+      .method
+        = label_tag "", t("share_content.embed.javascript")
+        = text_field_tag "", embed_topic_tag(@content, :js)
+      .method
+        = label_tag "", t("share_content.embed.iframe")
+        = text_field_tag "", embed_topic_tag(@content, :iframe)
+      = link_to t("share_content.embed.more"),
+        "/questions/4dca8b8dffc334000100026a", :target => "_blank"
+      .controls
+        = link_to t("scaffold.close"), "#", :class => "close"

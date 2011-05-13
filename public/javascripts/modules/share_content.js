@@ -1,10 +1,4 @@
 $(document).ready(function() {
-  // Close modal boxes.
-  $(".modal .close").live("click", function () {
-    $.colorbox.close();
-    return false;
-  });
-
   $("#body").live("keyup", function() {
     var t = $(this);
     var len = t.val().length;
@@ -40,7 +34,8 @@ $(document).ready(function() {
   });
 
   // Open modal box to share content.
-  Utils.clickObject(".share .facebook, .share .twitter", function () {
+  Utils.clickObject(".share .facebook, .share .twitter, "
+                    + ".share .embed", function () {
     return {
       success: function (data) {
         Utils.modal({html: data.html});
@@ -59,5 +54,7 @@ $(document).ready(function() {
     $('.modal .current').removeClass("current");
     li.addClass("current");
     $('#share_on_'+ li.attr('data')).addClass("current");
-    return false;  });
+    Utils.resizeModal();
+    return false;
+  });
 });

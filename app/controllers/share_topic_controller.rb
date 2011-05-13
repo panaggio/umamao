@@ -3,6 +3,10 @@
 class ShareTopicController < ShareContentController
   CONTENT_CLASS = Topic
 
+  def connection_status
+    params[:where] == "embed" ? :success : super
+  end
+
   def default_body
     args = {
       :site => AppConfig.application_name,
