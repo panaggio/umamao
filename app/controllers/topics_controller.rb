@@ -446,7 +446,7 @@ class TopicsController < ApplicationController
       "topic_#{@topic.slug}".downcase)
     unless @group_invitation
       @group_invitation = GroupInvitation.create(
-        :slug => "topic_#{@topic.slug}".downcase, 
+        :slug => "topic_#{@topic.slug}".downcase,
         :topics => [@topic], :message => t("topics.group_invitation.message", {:topic => @topic.title, :link_topic => topics_path(@topic)}))
     end
 

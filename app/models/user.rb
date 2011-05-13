@@ -64,7 +64,8 @@ class User
   has_many :answers, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
-  has_many :external_accounts, :dependent => :destroy
+  has_many :external_accounts, :class_name => "UserExternalAccount",
+    :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :sent_notifications, :foreign_key => "origin_id",
     :class_name => "Notification", :dependent => :destroy
@@ -619,7 +620,7 @@ Time.zone.now ? 1 : 0)
     if followable.is_a? User
       friend_list(:select => [:following_ids]).following_ids.include?(followable.id)
     elsif followable.is_a? Topic
-      UserTopicInfo.count(:user_id => self.id, 
+      UserTopicInfo.count(:user_id => self.id,
                                  :topic_id => followable.id,
                                  :followed_at.ne => nil) > 0
     else

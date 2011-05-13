@@ -27,6 +27,14 @@ namespace :data do
       end
     end
 
+    desc "Change the class of user external accounts"
+    task :specialize_user_external_accounts => :environment do
+      ExternalAccount.find_each do |ea|
+        ExternalAccount.set(ea.id, :_type => "UserExternalAccount",
+                            :user_id => ea.user_id.to_s)
+      end
+    end
+
     desc "Calculate UserTopicInfo's votes balance"
     task :calculate_user_topic_info_votes_balance => :environment do
       UserTopicInfo.reset_votes_balance!
