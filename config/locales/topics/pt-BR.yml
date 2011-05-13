@@ -35,7 +35,7 @@ pt-BR:
       title: Listas de exercícios
       main_topic: Ver tópico
     sidebar:
-      follow_on_twitter: Siga este tópico no Twitter:
+      follow_on_twitter: "Siga este tópico no Twitter:"
       connect_to_twitter: Conectar com o Twitter
       disconnect_from_twitter: Remover conta
       related_topics: Tópicos relacionados
