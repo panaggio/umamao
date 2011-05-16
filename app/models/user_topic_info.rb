@@ -7,8 +7,8 @@ class UserTopicInfo
   key :topic_id, ObjectId, :required => true, :index => true
   belongs_to :topic
 
-  key :followed_at, Date
-  key :ignored_at, Date
+  key :followed_at, Time
+  key :ignored_at, Time
   key :answers_count, Integer, :default => 0
   key :questions_count, Integer, :default => 0
   key :votes_balance, Integer, :default => 0
@@ -25,24 +25,46 @@ class UserTopicInfo
     self.followed_at.present?
   end
 
-  def follow!
+  def follow
+    self.unignore
     self.followed_at ||= Time.now
   end
 
-  def unfollow!
+  def follow!
+    self.follow
+    self.save!
+  end
+
+  def unfollow
     self.followed_at = nil
+  end
+
+  def unfollow!
+    self.unfollow
+    self.save!
   end
 
   def ignored?
     self.ignored_at.present?
   end
 
-  def ignore!
+  def ignore
+    self.unfollow
     self.ignored_at ||= Time.now
   end
 
-  def unignore!
+  def ignore!
+    self.ignore
+    self.save!
+  end
+
+  def unignore
     self.ignored_at = nil
+  end
+
+  def unignore!
+    self.unignore
+    self.save!
   end
 
   def self.question_added!(question)
@@ -80,13 +102,13 @@ class UserTopicInfo
 
   def self.vote_added!(answer, vote)
     answer.question.topics.each do |topic|
-      update_votes_balance(answer.user, topic, vote)
+      increment_votes_balance(answer.user, topic, vote)
     end
   end
 
   def self.vote_removed!(answer, vote)
     answer.question.topics.each do |topic|
-      update_votes_balance(answer.user, topic, vote)
+      increment_votes_balance(answer.user, topic, -vote)
     end
   end
 
@@ -137,6 +159,10 @@ class UserTopicInfo
       Question.count(:user_id => self.user_id, :topic_id => self.topic_id)
   end
 
+  def self.find_by_user_id_and_topic_id(user_id, topic_id)
+    UserTopicInfo.first(:user_id => user_id, :topic_id => topic_id)
+  end
+
   private
 
   def self.update_question_topic(user, topic, increment=1)
@@ -165,12 +191,25 @@ class UserTopicInfo
     end
   end
 
+  def self.increment_votes_balance(user, topic, increment)
+    user_topic = UserTopicInfo.first(:topic_id => topic.id,
+                                     :user_id => user.id)
+
+    if user_topic
+      user_topic.votes_balance += increment
+      user_topic.save
+    else
+      UserTopicInfo.create(
+        :topic_id => topic.id, :user_id => user.id, :votes_balance => vote)
+    end
+  end
+
   def self.update_votes_balance(user, topic, vote)
     user_topic = UserTopicInfo.first(:topic_id => topic.id,
                                      :user_id => user.id)
 
     if user_topic
-      user_topic.votes_balance += vote
+      user_topic.votes_balance = vote
       user_topic.save
     else
       UserTopicInfo.create(

@@ -1,10 +1,13 @@
-FactoryGirl.define do
-  factory :group do
-    name 'default_group'
-    subdomain 'default'
-    domain AppConfig.domain
-    description "question-and-answer website"
-    legend "question and answer website"
-    state "active"
+Factory.define :group do |g|
+  g.sequence :name do |n|
+    "group#{n}"
   end
+  g.sequence :subdomain do |n|
+    "subdomain#{n}"
+  end
+  g.domain AppConfig.domain
+  g.description "question-and-answer website"
+  g.legend "question and answer website"
+  g.state "active"
+  g.has_reputation_constrains false
 end

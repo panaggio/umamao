@@ -197,7 +197,6 @@ class Topic
                                         :user_id => user.id)
       unless user_topic_info.followed?
         user_topic_info.follow!
-        user_topic_info.save!
         self.increment(:followers_count => 1)
         user.unignore_topic!(self)
       end
@@ -215,7 +214,6 @@ class Topic
                                         :user_id => user.id,
                                         :followed_at.ne => nil)
       user_topic_info.followed_at = nil
-      user_topic_info.save!
       if self.email_subscribers.include?(user)
         self.email_subscriber_ids.delete(user.id)
       end

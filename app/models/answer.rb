@@ -41,8 +41,7 @@ class Answer < Comment
 
   after_create :create_news_update, :new_answer_notification,
     :increment_user_topic_answers_count
-  before_destroy :unhide_news_update
-  after_destroy :decrement_user_topic_answers_count
+  before_destroy :unhide_news_update, :decrement_user_topic_answers_count
 
   ensure_index([[:user_id, 1], [:question_id, 1]])
 
@@ -94,7 +93,7 @@ class Answer < Comment
       self.question.on_answer_votes_balance_down self
     end
 
-    UserTopicInfo.vote_removed!(self, v)
+    UserTopicInfo.vote_added!(self, v)
     update_question_answered_with
   end
 
@@ -109,7 +108,7 @@ class Answer < Comment
       self.question.on_answer_votes_balance_up self
     end
 
-    UserTopicInfo.vote_added!(self, v)
+    UserTopicInfo.vote_removed!(self, v)
     update_question_answered_with
   end
 

@@ -564,7 +564,6 @@ Time.zone.now ? 1 : 0)
 
     if user_topic
       user_topic.ignore!
-      user_topic.save
       topic.remove_follower!(self)
     else
       UserTopicInfo.create(:user_id => self.id, :topic_id => topic.id,
@@ -579,7 +578,6 @@ Time.zone.now ? 1 : 0)
                                          :topic_id => topic.id,
                                          :ignored_at.ne => nil)
       user_topic.unignore!
-      user_topic.save
       self.increment(:ignored_topics_count => -1)
       self.show_unignored_news_items!
     end
