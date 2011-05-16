@@ -16,6 +16,13 @@ class ShareContentController < ApplicationController
 
   def new
     @content = content_class.find_by_id(params[:content])
+
+    connections = []
+    connections << "twitter" if current_user.twitter_account
+    connections << "facebook" if current_user.facebook_account
+
+    group_invitation = GroupInvitation.shared_content(@content, "twitter", 
+                                                      current_user)
     respond_to do |format|
       format.js do
         bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
@@ -25,6 +32,7 @@ class ShareContentController < ApplicationController
           :body => default_body,
           :where => params[:where],
           :link => {'twitter' => bitly.shorten(content_url(@content)).short_url}
+          :connections => connections
         }
         render :json => {
           :success => true,
