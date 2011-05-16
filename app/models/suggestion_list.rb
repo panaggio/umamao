@@ -128,9 +128,17 @@ class SuggestionList
   end
 
   # Find suggestions from the user's external accounts.
-  def suggest_from_outside
-    self.suggest(self.user.find_external_contacts, :reason => "external") +
-      self.suggest(self.user.find_external_topics, :reason => "external")
+  def suggest_from_outside(from = {})
+    self.suggest_users_from_outside(from)
+    self.suggest_topics_from_outside(from)
+  end
+
+  def suggest_users_from_outside(from = {})
+    self.suggest(self.user.find_external_contacts(from), :reason => "external")
+  end
+
+  def suggest_topics_from_outside(from = {})
+    self.suggest(self.user.find_external_topics(from), :reason => "external")
   end
 
   # Suggest the 20 most followed topics.
@@ -208,7 +216,7 @@ class SuggestionList
         self.user_suggestions.blank?
       self.suggest_from_group_invitation
       self.suggest_university_topics
-      self.suggest_from_outside
+      self.suggest_users_from_outside
       self.suggest_from_dac
       if self.topic_suggestion_ids.size < 20
         self.suggest_popular_topics(20 - self.topic_suggestion_ids.size)

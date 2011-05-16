@@ -776,52 +776,62 @@ Time.zone.now ? 1 : 0)
 
   # Find users using self's external accounts. We simply ignore errors
   # when we stumble upon them.
-  def find_external_contacts
+  def find_external_contacts(from = {})
+    from.reverse_merge!({'facebook' => true, 'twitter' => true})
+
     external_contacts = Set.new
 
-    # Look in Facebook
-    begin
-      if account = self.facebook_account
-        graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
-        ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
-        external_contacts += ExternalAccount.query(:provider => "facebook",
-                                                   :uid.in => ids).map(&:user)
+    if from['facebook']
+      # Look in Facebook
+      begin
+        if account = self.facebook_account
+          graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
+          ids = graph.get_connections("me", "friends").map {|friend| friend["id"]}
+          external_contacts += ExternalAccount.query(:provider => "facebook",
+                                                     :uid.in => ids).map(&:user)
+        end
+      rescue Koala::Facebook::APIError
+        # Ignore
       end
-    rescue Koala::Facebook::APIError
-      # Ignore
     end
 
-    # Look in Twitter
-    begin
-      if client = self.twitter_client
-        ids = client.friends.users.map {|friend| friend.id.to_s}
-        external_contacts += ExternalAccount.query(:provider => "twitter",
-                                                   :uid.in => ids).map(&:user)
+    if from['twitter']
+      # Look in Twitter
+      begin
+        if client = self.twitter_client
+          ids = client.friends.users.map {|friend| friend.id.to_s}
+          external_contacts += ExternalAccount.query(:provider => "twitter",
+                                                     :uid.in => ids).map(&:user)
+        end
+      rescue Twitter::Error
+        # Ignore
       end
-    rescue Twitter::Error
-      # Ignore
     end
 
     external_contacts.to_a
   end
 
   # Find interesting topics using self's external accounts.
-  def find_external_topics
+  def find_external_topics(from = {})
+    from.reverse_merge!({'facebook' => true})
+
     topics = Set.new
 
-    begin
-      if account = self.facebook_account
-        graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
-        likes = graph.get_connections("me", "likes")
-        likes.each do |like|
-          topic = Topic.first(:title => [/^#{Regexp.escape like["name"]}/i])
-          if topic
-            topics << topic
+    if from['twitter']
+      begin
+        if account = self.facebook_account
+          graph = Koala::Facebook::GraphAPI.new(account.credentials["token"])
+          likes = graph.get_connections("me", "likes")
+          likes.each do |like|
+            topic = Topic.first(:title => [/^#{Regexp.escape like["name"]}/i])
+            if topic
+              topics << topic
+            end
           end
         end
+      rescue Koala::Facebook::APIError
+        # Ignore
       end
-    rescue Koala::Facebook::APIError
-      # Ignore
     end
 
     topics
