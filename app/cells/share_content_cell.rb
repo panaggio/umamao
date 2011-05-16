@@ -11,6 +11,7 @@ class ShareContentCell < Cell::Rails
     @where = options[:where]
     @link = options[:link]
     @maxlength = {"twitter" => 140, "facebook" => 420}
+    @connections = options[:connections]
     default_url_options[:host] = AppConfig.domain
     render
   end

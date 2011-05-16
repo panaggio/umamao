@@ -4,8 +4,8 @@ class ShareAnswerController < ShareContentController
   CONTENT_CLASS = Answer
 
   protected
-  def content_url(answer)
-    question_answer_url(answer.question, answer)
+  def content_url(answer, options={})
+    question_answer_url(answer.question,answer, options)
   end
 
   def content_path(answer)

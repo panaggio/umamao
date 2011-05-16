@@ -49,6 +49,11 @@ class QuestionListsController < TopicsController
     show_init
     set_tab :all, :question_list_show
 
+    if params[:group_invitation]
+      session[:group_invitation] = params[:group_invitation]
+    end
+
+
     @open_sharing_widget = flash[:connected_to]
 
     @new_question = Question.new
