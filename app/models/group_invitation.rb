@@ -24,13 +24,12 @@ class GroupInvitation
 
   timestamps!
 
-  def self.shared_content(content, share_type, user=nil)
+  def self.shared_content(content, share_type, message=nil, user=nil)
     user_id = user && user.id
     gi =  GroupInvitation.first(:entry_id => content.id,
                                 :share_type => share_type,
                                 :sharer_id => user_id)
     return gi if gi
-
 
     topic_ids = case content
                 when Topic then [content.id]
@@ -42,7 +41,7 @@ class GroupInvitation
                                   :share_type => share_type,
                                   :slug => "#{share_type}_#{content.id}_#{user_id}",
                                   :sharer => user,
-                                  :message => "",
+                                  :message => message,
                                   :topic_ids => topic_ids)
   end
 end

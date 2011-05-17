@@ -50,7 +50,7 @@ pt-BR:
       all_tab: Todas as perguntas
       unanswered_tab: Perguntas em aberto
     group_invitation:
-      message: Você está a um passo de discutir, aprender e ensinar sobre <a href="%{link_topic}">%{topic}</a>, basta preencher os dados abaixo.
+      message: Você está a um passo de discutir, aprender e ensinar sobre <a href="%{link_topic}">%{topic}</a> e muito mais, basta preencher os dados abaixo.
     embedded:
       empty: Não há perguntas sobre este tópico
   activerecord:

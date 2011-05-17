@@ -14,6 +14,8 @@ class ShareContentController < ApplicationController
   before_filter :login_required
   before_filter :check_connections
 
+  include ShareContentsHelper
+
   def new
     @content = content_class.find_by_id(params[:content])
 
@@ -21,8 +23,10 @@ class ShareContentController < ApplicationController
     connections << "twitter" if current_user.twitter_account
     connections << "facebook" if current_user.facebook_account
 
-    group_invitation = GroupInvitation.shared_content(@content, "twitter", 
-                                                      current_user)
+    group_invitation = GroupInvitation.shared_content(
+      @content, "twitter", default_message_group_invitation(@content),
+      current_user)
+
     respond_to do |format|
       format.js do
         bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])

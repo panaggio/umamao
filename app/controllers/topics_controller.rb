@@ -6,6 +6,7 @@ class TopicsController < ApplicationController
   respond_to :html
 
   tabs :default => :topics
+  include ShareContentsHelper
 
   def index
     set_page_title(t("layouts.application.tags"))
@@ -442,13 +443,8 @@ class TopicsController < ApplicationController
 
     raise Goalie::NotFound unless @topic
 
-    @group_invitation = GroupInvitation.find_by_slug(
-      "topic_#{@topic.slug}".downcase)
-    unless @group_invitation
-      @group_invitation = GroupInvitation.create(
-        :slug => "topic_#{@topic.slug}".downcase,
-        :topics => [@topic], :message => t("topics.group_invitation.message", {:topic => @topic.title, :link_topic => topics_path(@topic)}))
-    end
+    @group_invitation = GroupInvitation.shared_content(
+      @topic, "embedded", default_message_group_invitation(@topic))
 
     @title = params[:title]
 
