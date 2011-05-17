@@ -1,5 +1,6 @@
 .group
   = hidden_field_tag "source", source, :id => "source_#{commentable.id}"
 
-  = text_area_tag "body", @comment.body, :class => "comment_text_area markdown_editor", :id => "comment_#{commentable.id}", :rows => 'auto', :cols => 'auto'
+  = text_area_tag "body", @comment.body, :class => "comment_text_area markdown_editor", :id => "comment_#{commentable.id}", :rows => 'auto', :cols => 'auto', "data-autocomplete-url" => autocomplete_url
+  %ul.autocomplete-list{:id => "comment_#{commentable.id}_list"}
   %br.clear
