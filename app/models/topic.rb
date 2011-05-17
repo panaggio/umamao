@@ -86,6 +86,7 @@ class Topic
   # Removes spaces from the beginning, the end and inbetween words
   # from the title
   def trim_spaces
+    return if self.title.blank?
     self.title.strip!
     self.title.gsub!(/\s+/, " ")
   end

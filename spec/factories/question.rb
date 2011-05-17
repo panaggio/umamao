@@ -4,4 +4,5 @@ Factory.define :question do |q|
   end
   q.association :user
   q.association :group
+  q.topics{ |topics| [topics.association(:topic)] }
 end
