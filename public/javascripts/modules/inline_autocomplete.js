@@ -181,9 +181,13 @@ InlineAutocomplete.prototype = {
 Utils.extend(InlineAutocomplete, AutocompleteBox);
 
 function initInlineAutocomplete() {
-  var inlineAutocompleteBox = new InlineAutocomplete(
+  new InlineAutocomplete(
     $("form.editor textarea"), $("#inline-autocomplete-list")
   );
+
+  $(".comment_text_area").each( function () {
+    new InlineAutocomplete($(this), $("#" + this.id + "_list"));
+  });
 }
 
 $(document).ready( function () {
