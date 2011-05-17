@@ -11,7 +11,8 @@
     = f.text_field :title, :class => "text_field", :id => "question_title"
   .body
     = f.label :body, t(".details"), :class => "label"
-    = f.text_area :body, :class => "editor-input", :id => "question-input"
+    = f.text_area :body, :class => "editor-input", :id => "question-input", "data-autocomplete-url" => autocomplete_url
+    %ul#inline-autocomplete-list.autocomplete-list
   .preview
     = render :partial => "shared/preview_pane"
   = f.hidden_field :question_list, :value => question_list.id
