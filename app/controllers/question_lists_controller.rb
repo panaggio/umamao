@@ -202,7 +202,8 @@ class QuestionListsController < TopicsController
 
     set_page_title(@question_list.title)
 
-    @questions = @question_list.questions
+    @questions = Question.query(:topic_ids => @question_list.id,
+                                :order => :created_at)
   end
 
   def main_topic_allow_question_lists
