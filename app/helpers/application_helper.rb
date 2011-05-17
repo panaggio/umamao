@@ -88,9 +88,8 @@ module ApplicationHelper
     end
 
     if options[:keep_newlines]
-      # Extracted from GitHub Flavored Markdown:
       # in very clear cases, let newlines become <br /> tags
-      txt.gsub!(/^[\w\<][^\n]*\n+/) do |x|
+      txt.gsub!(/^[ ]{0,3}\S[^\n]*\n+/) do |x|
         x =~ /\n{2}/ ? x : (x.strip!; x << "  \n")
       end
     end
