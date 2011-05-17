@@ -22,5 +22,5 @@
 
 .secondary-navigation
   - tabs_tag :namespace => :topic_show, :open_tabs => {:class => :tabs} do |tab|
-    = tab.all t('.all_tab'), @topic
+    = tab.all "#{t('.all_tab')} (#{@topic.questions_count.to_s})", @topic
     = tab.unanswered "#{t('.unanswered_tab')} (#{@topic.unanswered_questions_count.to_s})" , unanswered_topic_path(@topic)
