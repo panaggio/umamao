@@ -230,8 +230,8 @@ AutocompleteBox.prototype = {
         }
         if (!box.interval && box.url) {
           box.interval = setInterval(function () {
-                                       box.fetchData(box.input.val());
-                                     }, box.delay);
+            box.fetchData(box.input.val());
+          }, box.delay);
         }
     }).blur(function () {
       if ($(this).val() == "") {
@@ -695,8 +695,8 @@ QuestionAutocomplete.prototype = {
         }
         if (!box.interval && box.url) {
           box.interval = setInterval(function () {
-                                       box.fetchData(box.input.val());
-                                     }, box.delay);
+            box.fetchData(box.input.val());
+          }, box.delay);
         }
     }).blur(function () {
       if ($(this).val() == "") {
@@ -909,7 +909,6 @@ function initUserAutocompleteForUserSuggesting() {
   userBox.filterDocs = function(docs) {
     var filteredDocs = [];
 
-    console.log(docs.length);
     var docsSize = docs.length;
     for (var i=0; i<docsSize; i++) {
       shouldAdd = true;
