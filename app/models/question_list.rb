@@ -28,24 +28,30 @@ class QuestionList < Topic
     :created_at
   end
 
-  # Classifies self under topic topic.
+  # Classifies +self+ under topic +topic+.
   def classify!(topic)
     if !topic_ids.include? topic.id
       self.topic_ids_will_change!
       self.topic_ids << topic.id
       self.needs_to_update_search_index
+      self.questions.each do |question|
+        question.classify! topic
+      end
       save!
     else
       false
     end
   end
 
-  # Removes self from topic topic.
+  # Removes +self+ from topic +topic+.
   def unclassify!(topic)
     if topic_ids.include? topic.id
       self.topic_ids_will_change!
       self.topic_ids.delete topic.id
       self.needs_to_update_search_index
+      self.questions.each do |question|
+        question.unclassify! topic
+      end
       save!
     else
       false
