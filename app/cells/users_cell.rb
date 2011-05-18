@@ -3,6 +3,12 @@ class UsersCell < Cell::Rails
   helper ApplicationHelper
   helper UsersHelper
 
+  before_filter :define_domain
+
+  def define_domain
+    default_url_options[:host] = request.host_with_port
+  end
+
   cache :followers do |cell, options|
     followed = cell.options[:followed]
     "#{followed.class.to_s.downcase}/#{followed.id}" +

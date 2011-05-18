@@ -498,4 +498,15 @@ class TopicsController < ApplicationController
     end.paginate(:per_page => 10, :page => params[:page] || 1)
   end
 
+  def user_questions
+    @topic = Topic.find_by_slug_or_id(params[:id])
+    @user  = User.find_by_id(params[:user_id])
+
+    raise Goalie::NotFound unless @topic
+
+    @questions = Question.query(
+      :user_id => params[:user_id], :topic_ids => @topic.id
+    ).paginate(:per_page => 10, :page => params[:page] || 1)
+  end
+
 end
