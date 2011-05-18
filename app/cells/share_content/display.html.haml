@@ -2,7 +2,7 @@
   %h1= t("global.share")
   .secondary-navigation
     %ul.tabs
-      - ["facebook", "twitter"].each do |site|
+      - @connections.each do |site|
         %li{:class => ((@where == site)? "current" : ""), :data => site}
           = link_to(image_tag("#{site}.gif") + " #{site.capitalize}",
             "#share_on_#{site}", :class => site, :class => "tab-share-popup")
@@ -11,7 +11,7 @@
           = link_to(t("share_content.embed.title"), "#share_on_embed",
             :class => "tab-share-popup")
 
-  - ["facebook", "twitter"].each do |site|
+  - @connections.each do |site|
     .content-share{:id => "share_on_#{site}", :class => ((@where == site)? "current" : "")}
       - form_tag "/share_#{@class_name}", :method => :post do
         - body = "#{@body[site]}#{' ' << @link[site] if @link[site]}"

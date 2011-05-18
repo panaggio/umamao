@@ -14,8 +14,19 @@ class ShareContentController < ApplicationController
   before_filter :login_required
   before_filter :check_connections
 
+  include ShareContentsHelper
+
   def new
     @content = content_class.find_by_id(params[:content])
+
+    connections = []
+    connections << "twitter" if current_user.twitter_account
+    connections << "facebook" if current_user.facebook_account
+
+    group_invitation = GroupInvitation.shared_content(
+      @content, "twitter", default_message_group_invitation(@content),
+      current_user)
+
     respond_to do |format|
       format.js do
         bitly = Bitly.new(AppConfig.bitly[:username], AppConfig.bitly[:apikey])
@@ -24,7 +35,9 @@ class ShareContentController < ApplicationController
           :class_name => content_class_str,
           :body => default_body,
           :where => params[:where],
-          :link => {'twitter' => bitly.shorten(content_url(@content)).short_url}
+          :link => {'twitter' => bitly.shorten(content_url(
+            @content, :group_invitation => group_invitation.slug)).short_url},
+          :connections => connections
         }
         render :json => {
           :success => true,
@@ -37,7 +50,9 @@ class ShareContentController < ApplicationController
   def create
     @body = params[:body]
     @content = content_class.find_by_id(params[:content])
-    @link = content_url(@content)
+
+    @link = content_url(@content, :group_invitation => GroupInvitation.shared_content( @content, "facebook",
+                                                                                      current_user).slug)
     status = :success
 
     case params[:where]
@@ -146,8 +161,8 @@ class ShareContentController < ApplicationController
     content_class_str.to_sym
   end
 
-  def content_url(content)
-    self.send("#{content_class_str}_url".to_sym, content)
+  def content_url(content, options={})
+    self.send("#{content_class_str}_url".to_sym, content, options)
   end
 
   def content_path(content)

@@ -56,6 +56,10 @@ class AnswersController < ApplicationController
 
     raise Goalie::NotFound unless @answer
 
+    if params[:group_invitation]
+      session[:group_invitation] = params[:group_invitation]
+    end
+
     @question = @answer.question
     set_page_title(@question.title)
     respond_to do |format|
