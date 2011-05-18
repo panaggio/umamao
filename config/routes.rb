@@ -277,6 +277,7 @@ Shapado::Application.routes.draw do
     end
   end
   get '/topics/:id/:user_id/answers' => 'topics#user_answers', :as => 'topic_user_answers'
+  get '/topics/:id/:user_id/questions' => 'topics#user_questions', :as => 'topic_user_questions'
 
   [:universities, :course_offers,
    :academic_programs, :academic_program_classes].each do |submodel|
