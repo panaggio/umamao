@@ -29,41 +29,21 @@ class Vote
   validate :check_voteable
 
   before_validation :add_to_group
+  before_validation :check_previous_vote
 
-  after_destroy :remove_vote
+  after_create :add_to_voteable
+  after_create :set_creation_status
 
-  def add
-    user_vote = self.user.vote_on(self.voteable)
-    voteable = self.voteable
+  after_destroy :remove_from_voteable
 
-    return :exists if self == user_vote
+  # FIXME: This attribute tracks whether creating this vote changed
+  # previous votes' states or not. This is only used so we can move
+  # the logic from the controller into the model without changing the
+  # controller and views too much.
+  attr_accessor :creation_status
 
-    if user_vote.nil?
-      if self.save
-        self.voteable.add_vote!(self.value, self.user)
-        return :created
-      else
-        return :error
-      end
-    elsif user_vote.valid?
-      if(user_vote.value != self.value)
-        voteable.remove_vote!(user_vote.value, self.user)
-        voteable.add_vote!(self.value, self.user)
-
-        user_vote.value = self.value
-        user_vote.save
-        if self.value == 1
-          return :changed_downvote_to_upvote
-        else
-          return :changed_upvote_to_downvote
-        end
-      else
-        user_vote.destroy
-        return :deleted
-      end
-    else
-      return :error
-    end
+  def valid?
+    super && creation_status != :deleted
   end
 
   protected
@@ -102,26 +82,26 @@ class Vote
     valid = true
     error_message = ""
     case self.voteable_type
-      when "Question"
-        valid = !self.voteable.closed
-        error_message = I18n.t("votes.model.messages.closed_question")
-      when "Answer"
-        valid = !self.voteable.question.closed
-        error_message = I18n.t("votes.model.messages.closed_question")
-      when "Comment"
-        valid = self.value > 0
-        unless valid
-          error_message = I18n.t("votes.model.messages.vote_down_comment")
-        else
-          case self.voteable.commentable_type
-            when "Question"
-              valid = !self.voteable.commentable.closed
-              error_message = I18n.t("votes.model.messages.closed_question")
-            when "Answer"
-              valid = !self.voteable.commentable.question.closed
-              error_message = I18n.t("votes.model.messages.closed_question")
-          end
+    when "Question"
+      valid = !self.voteable.closed
+      error_message = I18n.t("votes.model.messages.closed_question")
+    when "Answer"
+      valid = !self.voteable.question.closed
+      error_message = I18n.t("votes.model.messages.closed_question")
+    when "Comment"
+      valid = self.value > 0
+      unless valid
+        error_message = I18n.t("votes.model.messages.vote_down_comment")
+      else
+        case self.voteable.commentable_type
+        when "Question"
+          valid = !self.voteable.commentable.closed
+          error_message = I18n.t("votes.model.messages.closed_question")
+        when "Answer"
+          valid = !self.voteable.commentable.question.closed
+          error_message = I18n.t("votes.model.messages.closed_question")
         end
+      end
     end
     if !valid
       self.errors.add(self.voteable_type.tableize.singularize, error_message)
@@ -134,8 +114,33 @@ class Vote
     self.group = self.voteable.group
   end
 
+  def check_previous_vote
+    user_vote = self.user.vote_on(self.voteable)
+
+    return if user_vote.nil?
+
+    user_vote.destroy
+    self.creation_status =
+      if user_vote.value == self.value
+        :deleted
+      elsif self.value == 1
+        :changed_downvote_to_upvote
+      else
+        :changed_upvote_to_downvote
+      end
+
+  end
+
+  def add_to_voteable
+    voteable.add_vote!(value, user)
+  end
+
+  def set_creation_status
+    creation_status ||= :created
+  end
+
   # Ensures the vote is removed from the voted entity.
-  def remove_vote
+  def remove_from_voteable
     voteable.remove_vote!(value, user) if voteable
   end
 
