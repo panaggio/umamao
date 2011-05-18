@@ -53,6 +53,8 @@ pt-BR:
       message: Você está a um passo de discutir, aprender e ensinar sobre <a href="%{link_topic}">%{topic}</a> e muito mais, basta preencher os dados abaixo.
     embedded:
       empty: Não há perguntas sobre este tópico
+    user_answers:
+      title: "Respostas de %{user} no tópico %{topic}"
   activerecord:
     models:
       topic: Tópico
