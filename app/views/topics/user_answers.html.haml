@@ -1,0 +1,24 @@
+- content_for :js do
+  = include_javascripts :show_question
+
+%h1.navtitle.title.entry-title
+  =t(".title",
+    :topic => link_to(@topic.title, @topic),
+    :user => link_to(@user.first_name, @user))
+%hr
+
+#answers-list
+  - @answers.each do |answer|
+    - question = answer.question
+    .question
+      %h1.navtitle.title.entry-title
+        &= link_to question.title, question
+      #question-body.markdown
+        = markdown(question.body)
+      .body-col
+        = render :partial => "shared/classify", :locals => {:classifiable => question, :ajax_add => false}
+    .answers
+      = render :partial=> "questions/answer", :locals=> {:question => question, :answer => answer, :comment => Answer.new}
+    %hr
+
+= will_paginate @answers
