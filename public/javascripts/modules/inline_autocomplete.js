@@ -149,7 +149,7 @@ InlineAutocomplete.prototype = {
           }
         }
       }).keyup(function (e) {
-        if (input.attr("autocomplete") == "off" && e.keyCode == 50) { // @
+        if (input.attr("autocomplete") == "off" && e.keyCode == 50 && e.shiftKey == true) { // @
           if (!box.isActive) {
             box.isActive = true;
             $(this).removeClass("inactive");
