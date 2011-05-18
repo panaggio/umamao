@@ -28,6 +28,44 @@ class Vote
   validate :check_owner
   validate :check_voteable
 
+  before_validation :add_to_group
+
+  after_destroy :remove_vote
+
+  def add
+    user_vote = self.user.vote_on(self.voteable)
+    voteable = self.voteable
+
+    return :exists if self == user_vote
+
+    if user_vote.nil?
+      if self.save
+        self.voteable.add_vote!(self.value, self.user)
+        return :created
+      else
+        return :error
+      end
+    elsif user_vote.valid?
+      if(user_vote.value != self.value)
+        voteable.remove_vote!(user_vote.value, self.user)
+        voteable.add_vote!(self.value, self.user)
+
+        user_vote.value = self.value
+        user_vote.save
+        if self.value == 1
+          return :changed_downvote_to_upvote
+        else
+          return :changed_upvote_to_downvote
+        end
+      else
+        user_vote.destroy
+        return :deleted
+      end
+    else
+      return :error
+    end
+  end
+
   protected
   def check_reputation
     if self.value > 0
@@ -91,8 +129,12 @@ class Vote
     return valid
   end
 
+  # Include the vote on the group of the voted entity.
+  def add_to_group
+    self.group = self.voteable.group
+  end
+
   # Ensures the vote is removed from the voted entity.
-  after_destroy :remove_vote
   def remove_vote
     voteable.remove_vote!(value, user) if voteable
   end

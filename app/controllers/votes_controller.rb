@@ -19,9 +19,24 @@ class VotesController < ApplicationController
       vote_type = "vote_down"
       vote.value = -1
     end
-    vote.group = vote.voteable.group
 
-    vote_state = push_vote(vote)
+    vote_state = vote.add
+    voteable_class = vote.voteable.class.name.downcase
+
+    case vote_state
+    when :created
+      @notice = t("votes.create.flash_notice")
+      track_event("#{vote.value == 1 ? "up" : "down"}voted".to_sym,
+                  :voteable => voteable_class)
+    when :changed_downvote_to_upvote, :changed_upvote_to_downvote
+      @notice = t("votes.create.flash_notice")
+      track_event(vote_state, :voteable => voteable_class)
+    when :deleted
+      @notice = t("votes.destroy.flash_notice")
+      track_event(:removed_vote, :voteable => voteable_class)
+    when :error
+      @error_message = vote.errors.full_messages.join(", ")
+    end
 
     respond_to do |format|
       format.html{redirect_to params[:source]}
@@ -85,53 +100,5 @@ class VotesController < ApplicationController
         end
       end
     end
-  end
-
-  # FIXME: add_vote and remove_vote should be done by the model
-  def push_vote(vote)
-    user_vote = current_user.vote_on(vote.voteable)
-    voteable = vote.voteable
-
-    state = :error
-    if user_vote.nil?
-      if vote.save
-        track_event("#{vote.value == 1 ? 'up' : 'down'}voted".to_sym,
-                    :voteable => voteable.class.name.downcase)
-        vote.voteable.add_vote!(vote.value, current_user)
-        @notice = t("votes.create.flash_notice")
-        state = :created
-      else
-        @error_message = vote.errors.full_messages.join(", ")
-      end
-    elsif(user_vote.valid?)
-      if(user_vote.value != vote.value)
-        voteable.remove_vote!(user_vote.value, current_user)
-        voteable.add_vote!(vote.value, current_user)
-
-        user_vote.value = vote.value
-        user_vote.save
-        if vote.value == 1
-          track_event(:changed_downvote_to_upvote,
-                      :voteable => voteable.class.name.downcase)
-        else
-          track_event(:changed_upvote_to_downvote,
-                      :voteable => voteable.class.name.downcase)
-        end
-        @notice = t("votes.create.flash_notice")
-        state = :updated
-      else
-        value = vote.value
-        user_vote.destroy
-        track_event(:removed_vote, :voteable => voteable.class.name.downcase)
-
-        @notice = t("votes.destroy.flash_notice")
-        state = :deleted
-      end
-    else
-      @error_message = user_vote.errors.full_messages.join(", ")
-      state = :error
-    end
-
-    state
   end
 end
