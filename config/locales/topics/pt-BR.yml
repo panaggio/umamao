@@ -55,6 +55,8 @@ pt-BR:
       empty: Não há perguntas sobre este tópico
     user_answers:
       title: "Respostas de %{user} no tópico %{topic}"
+    user_questions:
+      title: "Perguntas de %{user} no tópico %{topic}"
   activerecord:
     models:
       topic: Tópico
