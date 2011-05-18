@@ -419,7 +419,7 @@ class Question
       self.needs_to_update_search_index
 
       self.save!
-      self.delay.after_topic_inclusion_updates(topic)
+      self.after_topic_inclusion_updates(topic)
       true
     else
       false
