@@ -271,4 +271,63 @@ class UserTopicInfoTest < ActiveSupport::TestCase
 
     assert_equal 1, ut.votes_balance
   end
+
+  test "should update user topic infos on classify for unexistent user topic info" do
+    u = Factory.create(:user)
+    q = Factory.create(:question, :user => u)
+
+    u2 = Factory.create(:user)
+    a = Factory.create(:answer, :user => u2, :question => q)
+
+    t = Factory.create(:topic)
+    q.classify! t
+    Delayed::Worker.new.work_off
+
+    ut_q = UserTopicInfo.first(:topic_id => t.id, :user_id => u.id)
+    ut_a = UserTopicInfo.first(:topic_id => t.id, :user_id => u.id)
+    assert ut_q && ut_q.questions_count == 1 && ut_a && ut_a.answers_count == 1
+  end
+
+  test "should update user topic infos on classify for existent user topic info" do
+    u = Factory.create(:user)
+    q = Factory.create(:question, :user => u)
+
+    u2 = Factory.create(:user)
+    a = Factory.create(:answer, :user => u2, :question => q)
+
+    ut_q = Factoru.create(:user_topic_info, :user_id => u.id,
+                          :topic_id => t.id, :questions_count => 1)
+    ut_a = Factoru.create(:user_topic_info, :user_id => u2.id,
+                          :topic_id => t.id, :answers_count => 1)
+
+    t = Factory.create(:topic)
+    q.classify! t
+    Delayed::Worker.new.work_off
+
+    ut_q.reload
+    ut_a.reload
+    assert ut_q.questions_count == 2 && ut_a.answers_count == 2
+  end
+
+  test "should update user topic infos on unclassify" do
+    t = Factory.create(:topic)
+
+    u = Factory.create(:user)
+    q = Factory.create(:question, :topics => [t], :user => u)
+
+    u2 = Factory.create(:user)
+    a = Factory.create(:answer, :user => u2, :question => q)
+
+    ut_q = Factoru.create(:user_topic_info, :user_id => u.id,
+                          :topic_id => t.id, :questions_count => 1)
+    ut_a = Factoru.create(:user_topic_info, :user_id => u2.id,
+                          :topic_id => t.id, :answers_count => 1)
+
+    q.unclassify! t
+    Delayed::Worker.new.work_off
+
+    ut_q.reload
+    ut_a.reload
+    assert ut_q.questions_count == 0 && ut_a && ut_a.answers_count == 0
+  end
 end
