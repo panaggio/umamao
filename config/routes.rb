@@ -11,7 +11,8 @@ Shapado::Application.routes.draw do
 
   resources :affiliations
 
-  resources :question_lists, :only => [:new, :create, :show, :edit, :update, :destroy] do
+  resources :question_lists,
+    :only => [:new, :create, :show, :edit, :update, :destroy] do
     member do
       # FIXME: classify and unclassify should be post
       get :classify
@@ -73,8 +74,10 @@ Shapado::Application.routes.draw do
   devise_for(:users,
              :path_names => {:sign_in => 'login', :sign_out => 'logout'},
              :controllers => {:registrations => 'users'})
-  match 'confirm_age_welcome' => 'welcome#confirm_age', :as => :confirm_age_welcome
-  match '/change_language_filter' => 'welcome#change_language_filter', :as => :change_language_filter
+  match 'confirm_age_welcome' => 'welcome#confirm_age',
+    :as => :confirm_age_welcome
+  match '/change_language_filter' => 'welcome#change_language_filter',
+    :as => :change_language_filter
   match '/register' => 'users#create', :as => :register
   match '/signup' => 'users#new', :as => :signup
   match '/resend_confirmation_email' => 'users#resend_confirmation_email',
@@ -170,7 +173,8 @@ Shapado::Application.routes.draw do
     end
   end
 
-  match '/questions/:id/:slug' => 'questions#show', :as => :se_url, :id => /\d+/
+  match '/questions/:id/:slug' => 'questions#show', :as => :se_url,
+    :id => /\d+/
 
   resources :questions do
     collection do
@@ -215,7 +219,8 @@ Shapado::Application.routes.draw do
 
   resources :content_images, :only => [:create, :destroy]
 
-  match 'questions/tagged/:tags' => 'questions#index', :constraints => { :tags => /\S+/ }, :as => :tag
+  match 'questions/tagged/:tags' => 'questions#index',
+    :constraints => { :tags => /\S+/ }, :as => :tag
   match 'questions/unanswered/tags/:tags' => 'questions#unanswered'
 
   resources :groups do
@@ -276,8 +281,10 @@ Shapado::Application.routes.draw do
       post :follow
     end
   end
-  get '/topics/:id/:user_id/answers' => 'topics#user_answers', :as => 'topic_user_answers'
-  get '/topics/:id/:user_id/questions' => 'topics#user_questions', :as => 'topic_user_questions'
+  get '/topics/:id/:user_id/answers' => 'topics#user_answers',
+    :as => 'topic_user_answers'
+  get '/topics/:id/:user_id/questions' => 'topics#user_questions',
+    :as => 'topic_user_questions'
 
   [:universities, :course_offers,
    :academic_programs, :academic_program_classes].each do |submodel|
