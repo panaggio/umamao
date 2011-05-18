@@ -9,9 +9,10 @@
     %ul.top-answerer-list
     - @user_topics.each do |user_topic|
       - user = user_topic.user
+      - topic = user_topic.topic
       %li.user-data
         .user-avatar-link{"data-user-id" => user.id, :style => "display: inline"}
           = link_to avatar_for(user, :size => 24).html_safe, user_path(user)
         .user-links
           .name-link= link_to h(user.name), user_path(user)
-          .answer-count= t('searches.question.answers', :count => user_topic.answers_count)
+          .answer-count= link_to(t('searches.question.answers', :count => user_topic.answers_count), topic_user_answers_url(topic, user))
