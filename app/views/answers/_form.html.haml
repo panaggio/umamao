@@ -1,6 +1,9 @@
 %label.label
   = t(".answer_label")
-= f.text_area :body, {:class => "editor-input", :rows => "auto", :cols => "auto", :id => "answer-input"}
+= f.text_area :body, {:class => "editor-input", :rows => "auto",
+  :cols => "auto", :id => "answer-input",
+  "data-autocomplete-url" => autocomplete_url}
+%ul#inline-autocomplete-list.autocomplete-list
 
 = render :partial => "content_images/content_images",
   :locals => { :entry => @answer }
