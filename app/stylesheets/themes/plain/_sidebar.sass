@@ -91,7 +91,9 @@
     color: #777777
 
     .user-avatar-link
-      padding: 1px 2px
+      padding: 3px 2px
+      width: 24px
+      height: 24px
 
     .user-data
       +pie-clearfix
@@ -100,8 +102,11 @@
         float: left
     .user-data, .answer-count
       clear: both
-    .answer-count
+    .answer-count, .question-count
       font-size: 10px
+      display: inline
+    .answer-count:after
+      content: ', '
 
   .share span
     +cdot-separated
