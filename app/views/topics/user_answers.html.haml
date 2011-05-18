@@ -1,6 +1,8 @@
 - content_for :js do
   = include_javascripts :show_question
 
+= render :partial => "sidebar", :locals => {:topic => @topic, :students => @students_course}
+
 %h1.navtitle.title.entry-title
   =t(".title",
     :topic => link_to(@topic.title, @topic),
