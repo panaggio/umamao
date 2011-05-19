@@ -311,23 +311,15 @@ class UserTopicInfoTest < ActiveSupport::TestCase
 
   test "should update user topic infos on unclassify" do
     t = Factory.create(:topic)
-
-    u = Factory.create(:user)
-    q = Factory.create(:question, :topics => [t], :user => u)
-
-    u2 = Factory.create(:user)
-    a = Factory.create(:answer, :user => u2, :question => q)
-
-    ut_q = Factory.create(:user_topic_info, :user_id => u.id,
-                          :topic_id => t.id, :questions_count => 1)
-    ut_a = Factory.create(:user_topic_info, :user_id => u2.id,
-                          :topic_id => t.id, :answers_count => 1)
+    q = Factory.create(:question, :topics => [t])
+    a = Factory.create(:answer, :question => q)
 
     q.unclassify! t
     Delayed::Worker.new.work_off
 
-    ut_q.reload
-    ut_a.reload
-    assert ut_q.questions_count == 0 && ut_a && ut_a.answers_count == 0
+    assert_equal 0, UserTopicInfo.find_by_user_id_and_topic_id(q.user.id, t.id).
+      questions_count
+    assert_equal 0, UserTopicInfo.find_by_user_id_and_topic_id(a.user.id, t.id).
+      answers_count
   end
 end
