@@ -295,9 +295,9 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     u2 = Factory.create(:user)
     a = Factory.create(:answer, :user => u2, :question => q)
 
-    ut_q = Factoru.create(:user_topic_info, :user_id => u.id,
+    ut_q = Factory.create(:user_topic_info, :user_id => u.id,
                           :topic_id => t.id, :questions_count => 1)
-    ut_a = Factoru.create(:user_topic_info, :user_id => u2.id,
+    ut_a = Factory.create(:user_topic_info, :user_id => u2.id,
                           :topic_id => t.id, :answers_count => 1)
 
     t = Factory.create(:topic)
@@ -318,9 +318,9 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     u2 = Factory.create(:user)
     a = Factory.create(:answer, :user => u2, :question => q)
 
-    ut_q = Factoru.create(:user_topic_info, :user_id => u.id,
+    ut_q = Factory.create(:user_topic_info, :user_id => u.id,
                           :topic_id => t.id, :questions_count => 1)
-    ut_a = Factoru.create(:user_topic_info, :user_id => u2.id,
+    ut_a = Factory.create(:user_topic_info, :user_id => u2.id,
                           :topic_id => t.id, :answers_count => 1)
 
     q.unclassify! t
