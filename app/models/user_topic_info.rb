@@ -141,7 +141,7 @@ class UserTopicInfo
     # Update questions and answers_count and votes_balance
     update_question_topic(question.user, topic, -1)
 
-    questions.answers.each do |answer|
+    question.answers.each do |answer|
       update_answer_topic(answer.user, topic, -1)
       update_votes_balance(answer.user, topic, -answer.votes_average)
     end
