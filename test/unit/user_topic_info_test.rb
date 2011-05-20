@@ -273,40 +273,39 @@ class UserTopicInfoTest < ActiveSupport::TestCase
   end
 
   test "should update user topic infos on classify for unexistent user topic info" do
-    u = Factory.create(:user)
-    q = Factory.create(:question, :user => u)
 
-    u2 = Factory.create(:user)
-    a = Factory.create(:answer, :user => u2, :question => q)
+    q = Factory.create(:question)
+    a = Factory.create(:answer, :question => q)
 
     t = Factory.create(:topic)
     q.classify! t
     Delayed::Worker.new.work_off
 
-    ut_q = UserTopicInfo.first(:topic_id => t.id, :user_id => u.id)
-    ut_a = UserTopicInfo.first(:topic_id => t.id, :user_id => u.id)
-    assert ut_q && ut_q.questions_count == 1 && ut_a && ut_a.answers_count == 1
+    ut_q = UserTopicInfo.first(:topic_id => t.id, :user_id => q.user.id)
+    ut_a = UserTopicInfo.first(:topic_id => t.id, :user_id => a.user.id)
+    assert_not_nil ut_q
+    assert_equal 1, ut_q.questions_count
+    assert_not_nil ut_a
+    assert_equal 1, ut_a.answers_count
   end
 
   test "should update user topic infos on classify for existent user topic info" do
-    u = Factory.create(:user)
-    q = Factory.create(:question, :user => u)
-
-    u2 = Factory.create(:user)
-    a = Factory.create(:answer, :user => u2, :question => q)
-
-    ut_q = Factory.create(:user_topic_info, :user_id => u.id,
-                          :topic_id => t.id, :questions_count => 1)
-    ut_a = Factory.create(:user_topic_info, :user_id => u2.id,
-                          :topic_id => t.id, :answers_count => 1)
-
+    q = Factory.create(:question)
+    a = Factory.create(:answer, :question => q)
     t = Factory.create(:topic)
+
+    ut_q = Factory.create(:user_topic_info, :user => q.user,
+                          :topic => t, :questions_count => 1)
+    ut_a = Factory.create(:user_topic_info, :user => a.user,
+                          :topic => t, :answers_count => 1)
+
     q.classify! t
     Delayed::Worker.new.work_off
 
     ut_q.reload
     ut_a.reload
-    assert ut_q.questions_count == 2 && ut_a.answers_count == 2
+    assert_equal 2, ut_q.questions_count
+    assert_equal 2, ut_a.answers_count
   end
 
   test "should update user topic infos on unclassify" do
