@@ -52,7 +52,7 @@
           - else
             = link_to t(".flag"), flag_question_path(@question), :class => "flag-link", :id => "question_flag_link", :rel => 'nofollow'
 
-          - if (current_user.can_modify?(@question) || current_user.owner_of?(@question.group))
+          - if current_user.mod_of?(@question.group)
             = link_to t("scaffold.destroy"), question_path(@question.id), :confirm => "are you sure?", :method => :delete
 
           - if current_user.mod_of?(@question.group)
