@@ -19,12 +19,30 @@
 
     #header
       = current_group.head
+      #top-bar
+        #top-bar-links
+          - AppConfig.top_bar.each do |group_of_links|
+            %ul
+              - group_of_links.each do |link|
+                %li
+                  = link_to link[0], link[1]
       #main-bar{:class => @active_tab}
         #logo
-          = link_to image_tag("default_logo.png", :class => "group_logo", :width => 150, :height => 75, :alt => "Umamão"), domain_url(:custom => current_group.domain)
-
+          = link_to image_tag("shorter_logo.png", :class => "group_logo", :height => 42, :alt => AppConfig.application_name), domain_url(:custom => current_group.domain)
         = render :partial => "shared/search"
-        = render :partial => "shared/topbar"
+        .vertical-bar
+        #home-link
+          = link_to t('.home'), root_path
+
+        #main-right
+          = render :partial => "shared/other_actions"
+          .vertical-bar
+          #ask-question
+            = link_to t('.ask_question'), new_question_path
+
+        -# Removed
+          = render :partial => "shared/search"
+          = render :partial => "shared/topbar"
 
         -announcements = current_announcements(session[:announcement_hide_time])
         -unless announcements.empty?
@@ -33,7 +51,6 @@
               -announcements.each do |announcement|
                 =markdown(announcement.message)
             = link_to t('announcements.close'), hide_announcements_path, :id => "hide_announcement", :style => 'float: right'
-            .clear
 
         -if !logged_in?
           -if AppConfig.twitter["activate"] && request.referrer =~ %r{^https?://(www\.){0,1}twitter\.com}

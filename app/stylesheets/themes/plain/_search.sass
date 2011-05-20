@@ -1,35 +1,18 @@
 // Autocomplete box style
 
 #search
-  +column(9)
-  margin-top: 13px
   .search-form-wrap
     border: 1px solid black
     position: relative
-    margin-top: 0.75em
     padding: 0.25em
     height: 1.5em
     background-color: white
   #search-field
     border: none
-    width: 100%
+    width: 318px
     background-color: white
     font-size: 1.2em
-  #search-submit
-    background-color: darken(#f84249, 20%)
-    color: white
-    border: medium none
-    padding: 3px 0
-    position: absolute
-    right: -80px
-    top: -1px
-    width: 80px
-    font-size: 1.2em
-    height: 1.8em
-    font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif
-    cursor: pointer
-    &:hover
-      background-color: #f84249
+    vertical-align: top
   #search-results
     +column(12)
     +no-bullets
@@ -54,6 +37,13 @@
       .desc
         font-size: 0.8em
         color: #777777
+  .search-vertical-bar
+    display: inline
+    padding-left: 3px
+    padding-top: 4px
+    height: 24px
+    border-left: 1px solid #ccc
+    margin-top: 11px
 
 .inactive
   color: #999999
