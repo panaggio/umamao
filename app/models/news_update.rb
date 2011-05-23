@@ -10,6 +10,8 @@ class NewsUpdate
 
   has_many :news_items, :dependent => :destroy
 
+  validates_uniqueness_of :entry_id
+
   key :action, String, :required => true, :in => %w[created upvoted]
 
   timestamps!
