@@ -1,7 +1,7 @@
 = render :partial => 'shared/share_header', :locals => { :opts => { :content => @answer, :class_name => Answer.to_s.underscore }, :content_url => question_answer_url(@answer.question, @answer) }
 
 - content_for :js do
-  = include_javascripts :content_edit
+  = include_javascripts :content_edit, :show_question
 
 - content_for :sidebar do
   = render :partial => 'shared/share_body', :locals => { :opts => { :content => @answer.id, :class_name => Answer.to_s.underscore } }

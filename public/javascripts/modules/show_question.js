@@ -1,7 +1,6 @@
 $(document).ready(function() {
   initTopicAutocompleteForReclassifying();
   $("#close_question_form").hide();
-  $('.comments_wrapper').hide();
   $('input#question_title').focus();
 
   Utils.clickObject(".comment .comment-votes form.vote-up-comment-form", function () {
@@ -33,7 +32,6 @@ $(document).ready(function() {
         window.onbeforeunload = null;
         var answer = $(data.html);
         var content = answer.find(".entry-content");
-        answer.find(".comments_wrapper").hide();
         answers.append(answer);
         highlightEffect(answer);
         $('#new-answer-wrapper').html(data.form_message);
