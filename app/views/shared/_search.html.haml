@@ -1,6 +1,11 @@
 #search
   .search-form-wrap
-    = form_tag new_question_path, :id => "search-form", :method => :get do
-      = text_field_tag "question[title]", t("searches.form.search_all"), :id => "search-field", :class => "inactive", "data-autocomplete-url" => autocomplete_url
-      = submit_tag 'Perguntar', :id => "search-submit"
+    = form_tag search_path, :id => "search-form", :method => :get do
+      = text_field_tag "q", t("searches.form.search_all"), :id => "search-field", :class => "inactive", "data-autocomplete-url" => autocomplete_url
+      .search-vertical-bar
+      %input{:type => "image", :src => "/images/search-icon.png", :alt => t('searches.index.form.send')}
       %ul#search-results.autocomplete-list
+
+
+
+

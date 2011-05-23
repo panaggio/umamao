@@ -18,6 +18,7 @@ javascripts:
     - public/javascripts/autocompleteBox.js
     - public/javascripts/editor.js
     - public/javascripts/application.js
+    - public/javascripts/topbar.js
     - public/javascripts/modules/welcome.js
     - public/javascripts/modules/follow_link.js
     - public/javascripts/modules/ignore_link.js

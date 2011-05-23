@@ -53,37 +53,89 @@
   overflow: visible
   background: url(/images/bgheader.png) repeat-x 0 0 #f5f5f5
   border-bottom: 1pt solid #cccccc
-  margin: 0 0 2em
+
+#top-bar
+  width: 100%
+  border-bottom: 1px solid #ccc
   padding-bottom: 0.5em
   padding-top: 0.5em
+  height: 15px
+
+#top-bar-links
+  +column(24, true)
+  float: none
+  margin: 0 auto
+  display: block
+  li
+    a
+      color: #333
+    a:hover
+      text-decoration: underline
+    width: 0px
+    display: inline
+  li:after
+    color: #ccc
+    content: " ·"
+    font-weight: bold
+  li:last-of-type:after
+    content: ""
+  ul
+    display: inline
+  ul:after
+    color: #ccc
+    content: " |"
+    font-weight: bold
+  ul:last-of-type:after
+    content: ""
 
 #main-bar
+  clear: both
   +container
   +pie-clearfix
   overflow: visible
+  padding-bottom: 0.5em
+  padding-top: 0.5em
+  .vertical-bar
+    display: inline
+    height: 24px
+    margin-left: 12px
+    border-left: 1px solid #ccc
+    padding-left: 12px
+    margin-top: 11px
+    float: left
 
 #logo
-  +column(4)
-  +append(1)
+  +column(3)
 
-#top-bar
+#search
+  +prepend(1)
+  +column(9)
+  margin-top: 9px
+  margin-bottom: 9px
+  margin-right: 0px
+
+#home-link
+  +column(1)
+  margin-top: 15px
+  margin-bottom: 15px
+
+#main-right
   +column(8, true)
-  +prepend(2)
-  margin-top: 13px
-  .menu
-    +no-bullets
-    +inline-block-list
-    text-align: right
-    a
-      +hover-link
-      font-size: 1.167em
-      line-height: 3em
-      vertical-align: middle
-      padding: 0 0.25em
-      img
-        background-color: white
-        vertical-align: middle
-        padding: 0.25em
+  float: right
+  #ask-question, .vertical-bar, #other-actions
+    float: right
+
+#ask-question
+  display: inline
+  +ask-button
+  margin-top: 11px
+  a
+    font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif
+    font-weight: normal
+    color: white
+
+#other-actions
+  margin-top: 5px
 
 #container
   +pie-clearfix
