@@ -18,3 +18,4 @@ dump
 vendor/cache
 public/stylesheets/compiled
 public/assets
+.rvmrc
