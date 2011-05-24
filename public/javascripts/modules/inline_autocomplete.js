@@ -27,12 +27,13 @@ function updateAutocompleteText(element, str, url) {
   var e = el.attr("data-e");
 
   $(element).val(
-    val.substring(0,s-1) + "[" + str + "]" + "(" + url + ") " +
+    val.substring(0,s-1) + "[" + str + "]" +
+    "(http://umamao.com" + url + ") " +
     val.substring(e,val.length)
   );
 
-  //HACK (initial substring + str + url + '[]' + '()')
-  var pos = parseInt(s) + str.length + url.length + 4;
+  //HACK (initial substring + str + umamao.com + url + '[]' + '()')
+  var pos = parseInt(s) + str.length + 17 + url.length + 4;
   element.focus();
   element.setSelectionRange(pos, pos); 
 }
