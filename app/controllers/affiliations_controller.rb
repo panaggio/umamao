@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 class AffiliationsController < ApplicationController
   def create
-    email = params[:affiliation][:email].try(:strip)
+    # FIXME: This is a workaround that should solve #13963009
+    email = params.try(:[], :affiliation).try(:[], :email).try(:strip)
     status = nil
 
     if @affiliation = Affiliation.find_by_email(email)
