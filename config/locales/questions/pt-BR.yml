@@ -18,6 +18,9 @@ pt-BR:
         views: Visitas
         votes: Votos
     models:
+      file_count:
+        one: arquivo
+        other: arquivos
       questions: Perguntas
       question: Pergunta
       question_count:

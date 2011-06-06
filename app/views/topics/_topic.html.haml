@@ -34,11 +34,18 @@
             &= t("user_suggestions.user_suggest.suggestion_box.friend")
 
       .metadata
-        - count = topic.questions_count
-        = format_number(count)
-        = t(:question_count, :scope => "activerecord.models", :count => count)
+        - if topic.respond_to? :question_list_files
+          - if (file_count = topic.question_list_files.count) > 0
+            %span
+              = format_number(file_count)
+              = t('activerecord.models.file_count', :count => file_count)
+        -else
+          - if (count = topic.questions_count) > 0
+            %span
+              = format_number(count)
+              = t('activerecord.models.question_count', :count => count)
+
         - if logged_in? && suggestion != 'friend' && type != 'ignore'
-          \|
           = follow_button topic
     .clear
 
