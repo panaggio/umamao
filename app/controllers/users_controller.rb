@@ -52,7 +52,7 @@ class UsersController < ApplicationController
                                          Regexp::IGNORECASE)
       @group_invitation = GroupInvitation.first(:slug => case_insensitive_slug)
       unless @group_invitation && @group_invitation.active?
-        redirect_to(root_path) && return
+        redirect_to(root_path(:focus => "signup")) && return
       end
     end
 
@@ -108,7 +108,7 @@ class UsersController < ApplicationController
       @user.timezone = AppConfig.default_timezone
       render 'new', :layout => 'welcome'
     else
-      return redirect_to(:root)
+      return redirect_to(root_path(:focus => "signup"))
     end
   end
 
