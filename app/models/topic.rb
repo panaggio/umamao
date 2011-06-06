@@ -26,6 +26,7 @@ class Topic
     :foreign_key => :origin_id, :dependent => :destroy
 
   has_many :notifications, :dependent => :destroy
+  has_many :user_topic_info, :dependent => :destroy
 
   key :related_topic_ids, :default => []
   has_many :related_topics, :class_name => "Topic",
