@@ -397,7 +397,7 @@ class Question
   end
 
   def can_be_deleted_by?(user)
-    (self.user_id == user.id) || (self.closed && user.can_delete_closed_questions_on?(self.group))
+    user.present? && user.admin?
   end
 
   def close_reason

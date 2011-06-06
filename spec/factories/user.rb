@@ -9,3 +9,7 @@ Factory.define :user do |u|
     "r#{n}@example.com"
   end
 end
+
+Factory.define :admin, :parent => :user do |a|
+  a.role 'admin'
+end
