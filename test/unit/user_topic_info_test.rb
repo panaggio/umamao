@@ -321,4 +321,12 @@ class UserTopicInfoTest < ActiveSupport::TestCase
     assert_equal 0, UserTopicInfo.find_by_user_id_and_topic_id(a.user.id, t.id).
       answers_count
   end
+ 
+  test "should destroy user topic info on topic destroy" do
+    ut = Factory.create(:user_topic_info)
+    ut.topic.destroy
+
+    ut = UserTopicInfo.find_by_id(ut.id)
+    assert_nil ut
+  end
 end
