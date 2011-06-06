@@ -8,7 +8,21 @@ namespace :deploy do
 
   task :environment do
     require 'grit'
+    require 'yaml'
     Repo = Grit::Repo.new '.'
+
+    CloudfilesConfig =
+      YAML.load_file(Rails.root + "config/shapado.yml")[Rails.env]["rackspace"]["cloudfiles"]
+
+    storage = Fog::Storage.new(
+      :provider => 'Rackspace',
+      :rackspace_username => CloudfilesConfig['username'],
+      :rackspace_api_key => CloudfilesConfig['api_key']
+    )
+
+    Assets = storage.directories.get(
+      CloudfilesConfig['containers']['assets']
+    )
   end
 
   desc "Prepare production branch with latest changes in master."
@@ -30,18 +44,25 @@ namespace :deploy do
     idx = Grit::Index.new(Repo)
     idx.current_tree = master.tree
 
+    # Check whether asset bundles have changed
+    if last_commit.nil? ||
+        Repo.diff(last_commit, master,
+                  "config/assets.yml", "public/javascripts",
+                  "public/stylesheets").size > 0
+      puts "Compressed assets changed, update required."
+      `compass compile`
+      Rake::Task["generate_assets"].invoke
+      Dir["public/assets/**"].each do |file|
+        idx.add(file, File.read(file))
+      end
+    else
+      puts "Skip asset update."
+    end
+
     # Add config files to the repository.
     puts "Config files."
     idx.add("config/shapado.yml", File.read("config/shapado.yml"))
     idx.add("config/database.yml", File.read("config/database.yml"))
-
-    # Add assets
-    puts "Assets."
-    `compass compile`
-    Rake::Task["generate_assets"].invoke
-    Dir["public/assets/**"].each do |file|
-      idx.add(file, File.read(file))
-    end
 
     # Fill base commit number
     idx.add("COMMIT", master.id)
@@ -56,5 +77,44 @@ namespace :deploy do
     `git push -f heroku production:master`
   end
 
+  namespace :assets do
+
+    task :mathjax => :environment do
+      mathjax_dir = "public/javascripts/MathJax"
+
+      Dir["#{mathjax_dir}/**/*"].each do |path|
+        next if File.directory? path
+        file = File.new path
+        relative_path = file.path.match(Regexp.new("#{Regexp.escape mathjax_dir}\/?(.*)"))[1]
+        puts relative_path
+        Assets.files.create(
+          :key => "MathJax/#{relative_path}",
+          :body => file,
+          :public => true
+        )
+      end
+    end
+
+    task :wmd => :environment do
+      wmd_dir = 'public/javascripts/wmd'
+
+      wmd_files =
+        %w(showdown.js
+           jquery.wmd.min.js
+           wmd.css
+           jquery.wmd.mathjax.js
+           jquery.wmd.js
+           images/wmd-buttons.png)
+
+      wmd_files.each do |path|
+        Assets.files.create(
+          :key => "wmd/#{path}",
+          :body => File.new("#{wmd_dir}/#{path}"),
+          :public => true
+        )
+      end
+
+    end
+  end
 end
 
