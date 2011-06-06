@@ -1,7 +1,8 @@
 #other-actions
   - if logged_in?
     .actions-header
-      = link_to "", "#", :class => "down-arrow"
+      %span
+        = link_to "", "#", :class => "down-arrow"
       = link_to(truncate(h(short_name(current_user)), :length => 16), user_path(current_user), :class => "user-name")
       = link_to(avatar_for(current_user, :size => 32).html_safe, user_path(current_user), :class => "user-avatar")
     %ul.hidden-menu
