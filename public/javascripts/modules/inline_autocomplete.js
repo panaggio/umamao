@@ -10,6 +10,8 @@ function findAutocompleteText(element) {
   for (s=e+1; s>1 && val[s-1] != '@'; s--);
   $(element).attr("data-s", s);
   $(element).attr("data-e", e);
+
+  return val[s-1];
 }
 
 function matchAutocompleteText(element) {
@@ -151,7 +153,7 @@ InlineAutocomplete.prototype = {
         }
       }).keyup(function (e) {
         if (input.attr("autocomplete") == "off" && e.keyCode == 50 &&
-          matchAutocompleteText(input[0]) == "@") { // @
+          findAutocompleteText(input[0]) == "@") { // @
 
           if (!box.isActive) {
             box.isActive = true;
