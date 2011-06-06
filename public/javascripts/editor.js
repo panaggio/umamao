@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
   var editor = $("form.editor");
-  if (editor.length == 0) return true;
+  if (editor.length == 0 || true) return true;
 
   function removeImage(address) {
     address = address.replace(/([^/]*)$/, "large_$1");
