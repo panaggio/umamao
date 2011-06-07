@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
       session[:group_invitation] = params[:group_invitation]
     end
 
-    unless @topic && params[:id].include?("%")
+    if @topic.nil? && params[:id].include?("%")
       @topic = Topic.find_by_slug(CGI::unescape(params[:id]))    
     end
 
