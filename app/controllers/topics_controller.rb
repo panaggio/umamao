@@ -28,6 +28,10 @@ class TopicsController < ApplicationController
       session[:group_invitation] = params[:group_invitation]
     end
 
+    unless @topic && params[:id].include?("%")
+      @topic = Topic.find_by_slug(CGI::unescape(params[:id]))    
+    end
+
     raise Goalie::NotFound unless @topic
 
     if @topic.is_a?(QuestionList)
