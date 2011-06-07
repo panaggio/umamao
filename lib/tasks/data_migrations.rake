@@ -7,6 +7,21 @@ require 'lib/wikipedia_fillin'
 
 namespace :data do
   namespace :migrate do
+    desc "Associate waiting users with existing users."
+    task :associate_waiting_users => :environment do
+      WaitingUser.find_each do |waiting_user|
+        if user = User.find_by_email(waiting_user.email)
+          waiting_user.user = user
+          waiting_user.save!
+          puts "Created for user #{waiting_user.email}"
+        elsif affiliation = Affiliation.find_by_email(waiting_user.email)
+          waiting_user.user = affiliation.user
+          waiting_user.save!
+          puts "Created for affiliation #{waiting_user.email}"
+        end
+      end
+    end
+
     desc "Fill created_at field for objects that don't have one."
     task :fill_created_at_fields => :environment do
       AnswerRequest.find_each(:created_at => nil) do |request|

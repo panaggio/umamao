@@ -6,6 +6,8 @@ class WaitingUser
   key :university, String
   key :confirmation_token, String, :index => true
 
+  belongs_to :user
+
   timestamps!
 
   validates_format_of :email, :with => Devise::email_regexp
