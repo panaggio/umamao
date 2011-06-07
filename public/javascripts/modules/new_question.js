@@ -9,4 +9,6 @@ $(document).ready(function() {
     highlightEffect($("#sidebar .help"));
   });
 
+  $("input[tabindex=1]").focus();
+
 });
