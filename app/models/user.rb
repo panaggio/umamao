@@ -141,6 +141,7 @@ class User
   after_create :accept_invitation
   after_create :create_suggestion_list
   after_create :create_contact_references
+  after_create :associate_with_waiting_users
 
   scope :confirmed, where(:confirmed_at.ne => nil)
   scope :unconfirmed, where(:confirmed_at => nil)
@@ -982,6 +983,19 @@ Time.zone.now ? 1 : 0)
   def ignored_topic_ids
     UserTopicInfo.fields([:topic_id]).
       query(:user_id => self.id, :ignored_at.ne => nil).map(&:topic_id)
+  end
+
+  def associate_with_waiting_users
+    emails = [self.email]
+    if self.affiliations.present?
+      emails += self.affiliations.map(&:email)
+      emails = emails.uniq
+    end
+
+    WaitingUser.find_each(:email.in => emails) do |wu|
+      wu.user = self
+      wu.save!
+    end
   end
 
   protected

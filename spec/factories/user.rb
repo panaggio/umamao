@@ -10,6 +10,10 @@ Factory.define :user do |u|
   end
 end
 
+Factory.define :affiliated_user, :parent => :user do |u|
+  u.association :affiliations
+end
+
 Factory.define :admin, :parent => :user do |a|
   a.role 'admin'
 end
