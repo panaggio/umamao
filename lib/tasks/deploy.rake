@@ -57,6 +57,11 @@ namespace :deploy do
       end
     else
       puts "Skip asset update."
+      path = "public/assets"
+      (production.tree / path).contents.each do |blob|
+        name = "#{path}/#{blob.name}"
+        idx.add(name, blob.data)
+      end
     end
 
     # Add config files to the repository.
